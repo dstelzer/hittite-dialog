@@ -9,6 +9,15 @@ function add_text(parent, text){
 	parent.appendChild(inner);
 }
 
+function make_cleanup_regexes(){ // Take the sign_cleanup dictionary and turn it into a list of regexes for speed purposes
+	var cleanup_regexes = [];
+	for(let [key, value] of Object.entries(sign_cleanup)){
+		cleanup_regexes.push([new RegExp(key, "i"), value]);
+	}
+}
+
+const NON_WORD_CHARACTERS = /([^aeiouāēīōūâêîôûbcdfghjklmnpqrstvwxyzšḫṣṭḳśŋĝř\-\.=\^]|\.\b)/gui;
+
 // Create the element representing a sign: a "sign" span containing a "glyph" span (Unicode) and a "read" span (reading)
 function make_sign_element(reading, unicode){
 	let sign = make_span("sign");
@@ -23,12 +32,28 @@ function make_sign_element(reading, unicode){
 
 // Take a reading and convert it to Unicode characters
 function get_unicode_for(reading){
-	return "U"+reading; // Placeholder
+	if(!cleanup_regexes) make_cleanup_regexes();
+	
+	reading = reading.toUpperCase();
+	for(let [key, value] of cleanup_regexes){ // H to Ḫ etc
+		reading = reading.replace(key, value);
+	}
+	
+	if(!(reading in name_hzl)){
+		console.error("Unrecognized sign name " + reading);
+		return "??";
+	}
+	let hzl = name_hzl[reading];
+	if(!(hzl in hzl_unicode)){
+		console.error("Unrecognized HZL index " + hzl + " (for " + reading + ")");
+		return "??";
+	}
+	return hzl_unicode[hzl];
 }
 
 // Take a word and split it up into signs, returning an array of readings
 function divide_signs(word){
-	return word.split(/([aeiou])/g); // Placeholder
+	return word_to_signs(word); // See signbreak.js
 }
 
 // Take a word, split it into signs, then make an element for each one and return an array of them
@@ -46,7 +71,8 @@ function shatter_whitespace(word){
 
 // Take a text element and return an array of nodes to replace it with in the translit version
 function shatter_text(text){
-	let segments = text.split(/([^\w\.\-]+)/g); // Anything that comes between words, so 0, 2, 4, etc will be the words and 1, 3, 5, etc will be the in-between parts
+	let segments = text.split(NON_WORD_CHARACTERS); // Anything that comes between words, so 0, 2, 4, etc will be the words and 1, 3, 5, etc will be the in-between parts
+	console.log("Segments: "+segments);
 	let out = [];
 	segments.forEach(function(word, index){
 		if(!word) ;
@@ -90,7 +116,7 @@ function process_element(element){
 			}
 		}
 	}
-	console.log("Text nodes: " + textnodes);
+	console.log("Text nodes: " + textnodes.map(node => node.textContent));
 	
 	textnodes.forEach(node => node.replaceWith(... shatter_text(node.textContent)) );
 }

@@ -1,0 +1,28 @@
+Sumerian:
+mir "north"
+kur "east, mountain"
+ulu2/ulu3 "south"
+mar-tu "west"
+
+Akkadian:
+ištānum "north"
+šadûm "east, mountain"
+šūtum "south"
+amurrum "west"
+
+Hittite:
+
+dUTU "east"
+ōpp-zi "(sun) rise"
+šeš-zi "lie down"
+ḫaliye/a-zi "kneel down"
+ḫuwant- "wind"
+ḫašter(a)- "star"
+dLAMMA "Vega" (north star)
+
+ḫapa- "river"
+takšatar "plain"
+giš tiyeššar "forest"
+warḫu(wa)i- "leafy"
+na4 peru "cliff"
+na4 perunant- "rocky"

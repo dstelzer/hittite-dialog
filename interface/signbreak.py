@@ -1,6 +1,6 @@
 import re
 
-SEPARATOR = set('.-=')
+SEPARATOR = set('.-=^')
 VOWEL = set('aeiouāēīōūâêîôû')
 CONSONANT = set('bcdfghjklmnpqrstvwxyzšḫṣṭḳśŋĝř')
 FIXED = {'pát', 'kán'} # Words always written with single signs that should not be broken down
@@ -18,14 +18,24 @@ LONG2SHORT = {
 	'û' : 'u',
 }
 
+REPLACE = { # Sometimes the sign used in Hittite isn't the one with the most obvious name; for example, PI isn't used in Hittite (it's Hittite /wa/) and PÍ is used instead
+	'pi' : 'pí',
+	'bi' : 'bí',
+	'pe' : 'pé',
+	'be' : 'bé',
+	'wi' : 'wi₅',
+}
+
 def regexify(s): return '[' + ''.join(s) + ']'
 
-SEP = r'[\.\-=]'
+SEP = r'[\.\-=\^]'
 V = regexify(VOWEL)
 C = regexify(CONSONANT)
 
 # Turn a word into a list of syllables
 def syllabify(s):
+	s = s.lower() # Precaution, though sumerograms should never get here
+	
 	# First, we draw the syllable boundaries
 	# If a vowel has one or more consonants before it, put a boundary before the first one
 	s = re.sub(fr'({C}{V})', r'.\1', s)
@@ -55,7 +65,13 @@ def breakdown(s):
 	print(sylls)
 	
 	# And now, just break down each syllable
-	return sum((breakdown_syll(syll) for syll in sylls), start=[])
+	out = sum((breakdown_syll(syll) for syll in sylls), start=[])
+	
+	# And run the replacements just to be safe
+	for i in range(len(out)):
+		if out[i] in REPLACE: out[i] = REPLACE[out[i]]
+	
+	return out
 
 def breakdown_syll(s):
 	pieces = re.split(fr'({V})', s)
@@ -65,11 +81,11 @@ def breakdown_syll(s):
 	onset, nucleus, coda = pieces
 	if nucleus in LONG2SHORT:
 		nucleus = LONG2SHORT[nucleus]
-		length = True
+		plene = True
 	else:
-		length = False
+		plene = False
 	if not onset and not coda: # Gotta include the vowel as its own unit if it wouldn't be included in a CV or VC sign
-		length = True
+		plene = True
 	
 	# There are no separate Co and oC signs in Hittite, if o even exists
 	if nucleus == 'o':
@@ -80,8 +96,17 @@ def breakdown_syll(s):
 	
 	out = []
 	if onset:
-		out.append(onset + nucleus) # Can't be more than one consonant in Hittite
-	if length:
+		# A couple defects in the Hittite spelling system require us to be circumspect here
+		# Transcriptions generally shouldn't include spellings like "we" but sometimes they do and we should be prepared
+		if onset == 'w' and nucleus not in {'a', 'i'}:
+			out.append('ú')
+			plene = True
+		elif onset == 'y' and nucleus != 'a':
+			out.append('i')
+			plene = True
+		else:
+			out.append(onset + nucleus) # Can't be more than one consonant in Hittite
+	if plene:
 		if nucleus == 'u' and not o:
 			out.append('ú') # Use the ú sign for /u/ and the u sign for /o/
 		else:
