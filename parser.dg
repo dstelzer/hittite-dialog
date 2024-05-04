@@ -1,0 +1,171 @@
+(extension version)
+	(line)Hittite Parser version 0.1 by Daniel Stelzer
+
+%% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
+
+(rewrite $Input into $Output)
+	(separate clitics from $Input into $Middle)
+	(transpose verb from $Middle into $Output)
+
+%% Separate clitics from the first word
+(separate clitics from [$First | $Other] into $Out)
+	($First splits into base $Base and clitic chain $Chain)
+	(if) (sentence connective $Base) (then) %% No need to preserve sentence connectives
+		($Out = [$Chain $Other])
+	(else)
+		($Out = [$Chain $Base $Other])
+	(endif)
+
+(separate clitics from $In into $Out) %% Fallback if that fails
+	($In = $Out)
+
+%% How do we know if something contains clitics?
+($Word splits into base $Base and clitic chain $Chain)
+	(split word $Word into $List)
+	($List divides by letters into base $Base and clitic chain $Chain)
+
+($List divides by letters into base $Base and clitic chain $Chain)
+	(split $List by @= into $Left and $Right)
+	(join words $Left into $Base)
+	{
+		($Right divides by letters into base $First and clitic chain $Rest)
+		($Chain = [$First | $Rest])
+	(or)
+		%% If the first branch failed, that means we couldn't find any more clitics to split off
+		(join words $Right into $First)
+		($Chain = [$First])
+	}
+
+%% Take the last element and move it to the front
+(transpose verb from $Input into $Output)
+	(length of $Input into $Length)
+	(nth $Input $Length $Verb) %% Verb is the last element
+	($Length minus 1 into $Penultimate)
+	(take $Penultimate from $Input into $Remaining)
+	($Output = [$Verb | $Remaining])
+
+%% Noun list parsing: Hittite sentences tend to go
+%% Conn=Clitics [Noun phrases...] Verb
+%% So this is to parse a sequence of noun phrases into something like
+%% [ [#accusative #Obj1] [#dative Obj2] ]
+
+%% Base case: a single noun
+(parse $Words into noun list $Nouns)
+	(parse $Words into single noun $Noun)
+	($Nouns = [$Noun])
+
+%% Recursive case: multiple nouns
+~(parse [] into noun list $)
+
+(parse $Words into noun list $Nouns)
+	*(split $Words anywhere into $Left and $Right)
+	*(parse $Left into single noun $Noun)
+	*(parse $Right into noun list [$First | $Other])
+	~($Noun = $First) %% Make sure not to split in the middle of a noun phrase!
+	($Nouns = [$Noun $First | $Other])
+
+%% Now how do we recognize a single noun?
+~(parse [] into single noun $)
+
+(parse $Words into single noun $Noun)
+	*(grammatical case $Case)
+	*(parse $Words as $Case $Obj)
+	($Noun = [$Case $Obj])
+
+(grammatical case #accusative)
+(grammatical case #dative)
+(grammatical case #ablative)
+(grammatical case #bare)
+
+%% We include adverbs in the noun list, with the tag #adverb
+%% Because they can be interspersed with noun phrases
+(parse [$Word] as #adverb $Word)
+	(adverb $Word)
+
+(adverb @appa)
+
+(parse [ana/ina/pani | $Words] as #dative $Obj)
+	{
+		(parse $Words as #bare $Obj)
+	(or)
+		(parse $Words as #dative $Obj)
+	}
+
+(parse [ictu/itti/qadu | $Words] as #ablative $Obj)
+	{
+		(parse $Words as #bare $Obj)
+	(or)
+		(parse $Words as #dative $Obj)
+	}
+
+(parse $Words as $Case $Obj)
+	(determine object $Obj)
+		*(object $Obj)
+	(from words)
+		(dict $Obj in $Case)
+	(matching all of $Words)
+
+%% And now, to test it all out!
+(program entry point)
+	*(repeat forever)
+	> (get input $Raw)
+	Input: $Raw (line)
+	(rewrite $Raw into [$Verb $Clitics | $Rest])
+	Rewritten: [$Verb $Clitics | $Rest] (line)
+	*(parse $Rest into noun list $Nouns)
+	Parsed: [$Verb $Clitics | $Nouns] (line)
+	(fail)
+
+#lalac %% "tongue"
+(dict * in #accusative)
+	lalan
+(dict * in #dative)
+	lali
+(dict * in #ablative)
+	lalaz
+(dict * in #bare)
+	lala
+
+#halkic %% "grain"
+(dict * in #accusative)
+	halkin
+(dict * in #dative)
+	halki
+(dict * in #ablative)
+	halkiz
+(dict * in #bare)
+	halki
+
+#attac %% "father"
+(dict * in #accusative)
+	attan
+(dict * in #dative)
+	atti
+(dict * in #ablative)
+	attaz
+(dict * in #bare)
+	atta
+
+(sentence connective @nu)
+(sentence connective @na)
+
+%% Utilities
+
+(interface (length of $List into $>Number))
+
+(length of [] into 0)
+(length of [$ | $More] into $Np1)
+	(length of $More into $N)
+	($N plus 1 into $Np1)
+
+(interface (nth $List $<Index $Element))
+
+(nth [$Head | $] 1 $Head)
+(nth [$ | $Tail] $N $Result)
+	($N minus 1 into $Nm1)
+	(nth $Tail $Nm1 $Result)
+
+(take 0 from $ into [])
+(take $N from [$Head | $MoreIn] into [$Head | $MoreOut])
+	($N minus 1 into $Nm1)
+	(take $Nm1 from $MoreIn into $MoreOut)
