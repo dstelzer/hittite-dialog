@@ -1,19 +1,22 @@
 (extension version)
-	(line)Hittite Parser version 0.1 by Daniel Stelzer
+	(line) Hittite Parser version 0.1 by Daniel Stelzer
 
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
 (rewrite $Input into $Output)
+	(line) Input: $Input
 	(separate clitics from $Input into $Middle)
+	(line) Middle: $Middle
 	(transpose verb from $Middle into $Output)
+	(line) Output: $Output
 
 %% Separate clitics from the first word
 (separate clitics from [$First | $Other] into $Out)
 	($First splits into base $Base and clitic chain $Chain)
 	(if) (sentence connective $Base) (then) %% No need to preserve sentence connectives
-		($Out = [$Chain $Other])
+		($Out = [$Chain | $Other])
 	(else)
-		($Out = [$Chain $Base $Other])
+		($Out = [$Chain $Base | $Other])
 	(endif)
 
 (separate clitics from $In into $Out) %% Fallback if that fails
@@ -59,10 +62,10 @@
 
 (parse $Words into noun list $Nouns)
 	*(split $Words anywhere into $Left and $Right)
-	*(parse $Left into single noun $Noun)
+	*(parse $Left into single noun $Single)
 	*(parse $Right into noun list [$First | $Other])
-	~($Noun = $First) %% Make sure not to split in the middle of a noun phrase!
-	($Nouns = [$Noun $First | $Other])
+	~($Single = $First) %% Make sure not to split in the middle of a noun phrase!
+	($Nouns = [$Single $First | $Other])
 
 %% Now how do we recognize a single noun?
 ~(parse [] into single noun $)
@@ -76,11 +79,16 @@
 (grammatical case #dative)
 (grammatical case #ablative)
 (grammatical case #bare)
+(grammatical case #adverb)
 
 %% We include adverbs in the noun list, with the tag #adverb
 %% Because they can be interspersed with noun phrases
 (parse [$Word] as #adverb $Word)
 	(adverb $Word)
+
+(noun list [[$Case $Noun] | $] contains $Noun in case $Case)
+(noun list [$ | $Rest] contains $Noun in case $Case)
+	*(noun list $Rest contains $Noun in case $Case)
 
 (adverb @appa)
 
@@ -146,6 +154,10 @@
 (dict * in #bare)
 	atta
 
+#É %% "house"
+(dict * in #accusative/#dative/#ablative/#bare)
+	É
+
 (sentence connective @nu)
 (sentence connective @na)
 
@@ -169,3 +181,7 @@
 (take $N from [$Head | $MoreIn] into [$Head | $MoreOut])
 	($N minus 1 into $Nm1)
 	(take $Nm1 from $MoreIn into $MoreOut)
+
+(split [$First $Second | $Tail] anywhere into [$First] and [$Second | $Tail])
+(split [$First | $More] anywhere into [$First | $Left] and $Right)
+	*(split $More anywhere into $Left and $Right)
