@@ -1,5 +1,5 @@
-(total number of people 3)
-(number of knaves 2)
+(global variable (total number of people 3))
+(global variable (number of knaves 2))
 (number of knights $Knights)
 	(total number of people $Total)
 	(number of knaves $Knaves)
@@ -7,7 +7,7 @@
 (total number of people squared $Square)
 	(total number of people $Total)
 	($Total times $Total into $Square)
-(number of statements 4)
+(global variable (number of statements 4))
 
 %% In the simplest form of a knights and knaves puzzle, the only statements are in the form of "X is a knave" (an accusation) or "X is a knight" an affirmation
 %% If X accuses Y, then X and Y must be of different types; if X affirms Y, then X and Y must be of the same type
@@ -40,10 +40,22 @@
 		($In = $Out)
 	(endif)
 
+%% We don't quite want a complete graph though: we want to remove the diagonal elements, the ones where "Alice says Alice is innocent" or whatever
+
+(remove diagonals from $In into $Out)
+	(total number of people $Total)
+	(remove $Total diagonals from $In into $Out)
+(remove 0 diagonals from $In into $In) %% We're done
+(remove $N diagonals from $In into $Out)
+	($N minus 1 into $Nm1)
+	(convert [$Nm1 $Nm1] to index $Index)
+	(change entry $Index of $In to 0 into $Tmp)
+	(remove $Nm1 diagonals from $Tmp into $Out)
+
 %% These are the "replace nth" and "nth" predicates from stdlib with more readable names
 %% (Also I implemented them myself before realizing the stdlib already had them oops)
 
-(change entry 1 of $Tail to $Value into [$Value|$Tail])
+(change entry 1 of [$|$Tail] to $Value into [$Value|$Tail])
 (change entry $N of [$Head|$Tail] to $Value into [$Head|$NewTail])
 	($N minus 1 into $Nm1)
 	(change entry $Nm1 of $Tail to $Value into $NewTail)
@@ -113,7 +125,7 @@
 %% We also want to make sure that everyone makes at least one statement
 
 (drop 0 from $List into $List)
-(drop $N from [$Head|$OldTail] into $NewTail)
+(drop $N from [$|$OldTail] into $NewTail)
 	($N minus 1 into $Nm1)
 	(drop $Nm1 from $OldTail into $NewTail)
 
@@ -167,8 +179,109 @@
 
 (generate puzzle $G)
 	(complete graph $Start)
+	(remove diagonals from $Start into $Next)
 	(number of statements $N)
-	(trim $Start to $N connections into $G)
+	(trim $Next to $N connections into $G)
+
+%% Now we need to choose the knaves
+
+(select knaves into $Knaves)
+	(collect $Index)
+		*(person index $Index)
+	(into $Options)
+	(number of knaves $N)
+	(randomly select $N from $Options without replacement into $Knaves)
+
+(randomly select 0 from $ without replacement into [])
+(randomly select $N from $List without replacement into [$Chosen|$MoreChosen])
+	(randomly select $Chosen from $List)
+	(split $List by $Chosen into $Left and $Right)
+	(append $Left $Right $Shrunken)
+	($N minus 1 into $Nm1)
+	(randomly select $Nm1 from $Shrunken without replacement into $MoreChosen)
+
+%% And make the statements!
+
+(name for index $Index)
+	($Index plus 1 into $Ip1) %% Our person indices go from zero, Dialog lists go from one
+	(entry $Ip1 of [Alice Bob Claire Dave Emma Fred Gwen Harry Isabelle Jake Kyra Liam Mary Nick Olivia Pedro] into $Name)
+	(uppercase) $Name
+
+%% If they're both knights, or both knaves, it's an affirmation; otherwise, it's an accusation
+(statement from $Source about $Target with knaves $Knaves)
+	(if) ($Source is one of $Knaves) (then)
+		($SourceGuilty = 1)
+	(else)
+		($SourceGuilty = 0)
+	(endif)
+	
+	(if) ($Target is one of $Knaves) (then)
+		($TargetGuilty = 1)
+	(else)
+		($TargetGuilty = 0)
+	(endif)
+	
+	(if) ($SourceGuilty = $TargetGuilty) (then)
+		($Source affirms $Target)
+	(else)
+		($Source accuses $Target)
+	(endif)
+
+($Source affirms $Target)
+	(name for index $Source) says: "(no space)(name for index $Target) is innocent!"
+($Source accuses $Target)
+	(name for index $Source) says: "(no space)(name for index $Target) is guilty!"
+
+(present puzzle $G with knaves $Knaves)
+	(total number of people $Total)
+	(number of knaves $Guilty)
+	$Total people have been accused of a crime! $Guilty of them (if) ($Guilty = 1) (then) is (else) are (endif) actually guilty. The innocent will tell the truth, the guilty will lie.
+	(exhaust) {
+		*(person index $Source)
+		*(person index $Target)
+		(convert [$Source $Target] to index $Index)
+		(entry $Index of $G into 1)
+		(line) (statement from $Source about $Target with knaves $Knaves)
+	}
+	(if) ($Total divided by $Guilty into 2) ($Total modulo $Guilty into 0) (then) %% This is the only case where there's a legitimate ambiguity
+		(par) You also have conclusive evidence that (name for index 0) is
+		(if) (0 is one of $Knaves) (then) guilty (else) innocent (endif)
+		.
+	(endif)
+
+%% Now, putting it all together!
+
+(program entry point)
+	How many knights should there be in the puzzle?
+	(get number $Knights)
+	(par) How many knaves should there be in the puzzle?
+	(get number $Knaves)
+	(now) (number of knaves $Knaves)
+	($Knights plus $Knaves into $Total)
+	(now) (total number of people $Total)
+	(par) How many statements should there be?
+	(get number $Evidence)
+	(if) ($Evidence < $Total) (then) Error: evidence cannot be < knights + knaves! (fail) (endif) %% Avoid a crash if this happens
+	(now) (number of statements $Evidence)
+	(generate puzzle $G)
+	(select knaves into $KnaveList)
+	(par) (present puzzle $G with knaves $KnaveList)
+	(par) Press ENTER to see the solution.
+	(get input $)
+	Knaves:
+	(exhaust) {
+		*($Knave is one of $KnaveList)
+		(name for index $Knave)
+	}
+
+(get number $N)
+	*(repeat forever)
+	> (get input $Words)
+	{
+		($Words = [$N]) (number $N)
+	(or)
+		That is not a number. (line) (fail)
+	}
 
 %% From stdlib for now
 
