@@ -1,0 +1,210 @@
+(total number of people 3)
+(number of knaves 2)
+(number of knights $Knights)
+	(total number of people $Total)
+	(number of knaves $Knaves)
+	($Total minus $Knaves into $Knights)
+(total number of people squared $Square)
+	(total number of people $Total)
+	($Total times $Total into $Square)
+(number of statements 4)
+
+%% In the simplest form of a knights and knaves puzzle, the only statements are in the form of "X is a knave" (an accusation) or "X is a knight" an affirmation
+%% If X accuses Y, then X and Y must be of different types; if X affirms Y, then X and Y must be of the same type
+%% If we make a graph where the vertices are people and the edges are statements, then the puzzle is solvable iff the graph is connected
+%% Therefore, we can generate a puzzle by generating a complete graph, then removing edges from it while ensuring that it remains connected
+%% The fewer edges remain, the more difficult the puzzle is—culminating in a tree, where there's no confirmation possible for any of your deductions
+
+%% This is an unweighted undirected graph, which could be represented as an N×N matrix
+%% But there aren't really matrices in Dialog, so we use a list instead, where index N×X+Y is a statement from X about Y
+%% (We actually represent it as a directed graph, for the sake of figuring out the statements, but we treat it as undirected when calculating connectedness)
+
+%% Each value in the matrix is either 1 or 0, for now, since I can't think of a more elegant way to do it at the moment
+
+(complete graph $G)
+	(total number of people squared $N)
+	($N instances of 1 into $G)
+
+(0 instances of $ into [])
+($N instances of $Value into [$Value|$Tail])
+	($N minus 1 into $Nm1)
+	($Nm1 instances of $Value into $Tail)
+
+(convert $In to index $Out) %% Convenience predicate for coordinate conversion
+	(if) ($In = [$X $Y]) (then) %% Coordinates are 0-indexed to make the math easier
+		(total number of people $N)
+		($X times $N into $Tmp)
+		($Tmp plus $Y into $Tmp2)
+		($Tmp2 plus 1 into $Out) %% Add 1 because lists in Dialog are 1-indexed
+	(else)
+		($In = $Out)
+	(endif)
+
+%% These are the "replace nth" and "nth" predicates from stdlib with more readable names
+%% (Also I implemented them myself before realizing the stdlib already had them oops)
+
+(change entry 1 of $Tail to $Value into [$Value|$Tail])
+(change entry $N of [$Head|$Tail] to $Value into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(change entry $Nm1 of $Tail to $Value into $NewTail)
+
+(entry 1 of [$Head | $] into $Head)
+(entry $N of [$ | $Tail] into $Value)
+	($N minus 1 into $Nm1)
+	(entry $Nm1 of $Tail into $Value)
+
+%% Add a way to iterate over person-indices with a multiquery
+
+(have $N count up from $Low to $High)
+		($N = $Low)
+	(or)
+		($Low plus 1 into $Lp1)
+		~($Lp1 > $High)
+		*(have $N count up from $Lp1 to $High)
+
+(person index $N)
+	(total number of people $Total)
+	($Total minus 1 into $Tm1)
+	*(have $N count up from 0 to $Tm1)
+
+%% When we check the connectivity of the graph, we need to check both entries, because we're treating it as undirected for this part
+
+(connection between $X and $Y in $G)
+	(if) ~(fully bound $Y) (then) %% Make sure it iterates over the right range if it's unbound
+		*(person index $Y)
+		(internal connection between $X and $Y in $G)
+	(else)
+		(internal connection between $X and $Y in $G)
+	(endif)
+
+(internal connection between $X and $Y in $G)
+		(convert [$X $Y] to index $Idx1)
+		(entry $Idx1 of $G into 1)
+	(or)
+		(convert [$Y $X] to index $Idx2)
+		(entry $Idx2 of $G into 1)
+
+%% Now, we can do the connectivity check!
+%% It's basically just a floodfill/complete BFS
+
+($List contains all people)
+	(length of $List into $N)
+	(total number of people $N)
+
+(flood $ from $LastGen) %% End recursion in success when we've hit everything
+	($LastGen contains all people)
+
+(flood $G from $LastGen)
+	(collect $NextStep)
+		*($LastStep is one of $LastGen)
+		*(connection between $LastStep and $NextStep in $G)
+	(into $NextSteps)
+	(fully bound $NextSteps)
+	(append $LastGen $NextSteps $NextGenRaw)
+	(remove duplicates $NextGenRaw $NextGen)
+	(length of $LastGen into $Old)
+	(length of $NextGen into $New)
+	~($Old = $New) %% If we've made no progress, fail
+	(flood $G from $NextGen)
+
+(connected $G)
+	(flood $G from [0]) %% Arbitrary starting point
+
+%% We also want to make sure that everyone makes at least one statement
+
+(drop 0 from $List into $List)
+(drop $N from [$Head|$OldTail] into $NewTail)
+	($N minus 1 into $Nm1)
+	(drop $Nm1 from $OldTail into $NewTail)
+
+($Person gives no testimony in $G)
+	(total number of people $Total)
+	($Total times $Person into $Prefix)
+	%% Now $Prefix is the number of entries to discard before our person's row
+	(drop $Prefix from $G into $Tmp)
+	%% And $Total is the number of entries in this person's row
+	(take $Total from $Tmp into $Row)
+	%% Now we need to check if $Row contains anything
+	(accumulate $Entry)
+		*($Entry is one of $Row)
+	(into 0) %% If it contains nothing at all, then they give no testimony
+
+(someone gives no testimony in $G)
+	*(person index $Person)
+	($Person gives no testimony in $G)
+
+@(valid testimony $G)
+	~(someone gives no testimony in $G)
+
+%% Now we can start removing connections at random!
+
+(count connections from $G into $Count)
+	(accumulate $Conn)
+		*($Conn is one of $G)
+	(into $Count)
+
+(remove one connection from [0 | $OldRest] into [0 | $NewRest])
+	*(remove one connection from $OldRest into $NewRest)
+(remove one connection from [1 | $OldRest] into [0 | $OldRest])
+(remove one connection from [1 | $OldRest] into [1 | $NewRest])
+	*(remove one connection from $OldRest into $NewRest)
+
+(randomly remove one connection from $G into $G2)
+	(collect $New)
+		*(remove one connection from $G into $New)
+		(connected $New)
+		(valid testimony $New)
+	(into $Options)
+	(randomly select $G2 from $Options)
+
+%% And putting it all together...
+
+(trim $G to $N connections into $G)
+	(count connections from $G into $N)
+(trim $G to $N connections into $G2)
+	(randomly remove one connection from $G into $Tmp)
+	(trim $Tmp to $N connections into $G2)
+
+(generate puzzle $G)
+	(complete graph $Start)
+	(number of statements $N)
+	(trim $Start to $N connections into $G)
+
+%% From stdlib for now
+
+(interface (remove duplicates $<Input $>Output))
+
+(remove duplicates [] [])
+	(just)
+(remove duplicates [$Head | $MoreIn] $MoreOut)
+	($Head is one of $MoreIn)
+	(just)
+	(remove duplicates $MoreIn $MoreOut)
+(remove duplicates [$Head | $MoreIn] [$Head | $MoreOut])
+	(remove duplicates $MoreIn $MoreOut)
+
+(interface (length of $List into $>Number))
+
+(length of [] into 0)
+(length of [$ | $More] into $Np1)
+	(length of $More into $N)
+	($N plus 1 into $Np1)
+
+(interface (nth $List $<Index $Element))
+
+(nth [$Head | $] 1 $Head)
+(nth [$ | $Tail] $N $Result)
+	($N minus 1 into $Nm1)
+	(nth $Tail $Nm1 $Result)
+
+(interface (randomly select $>Element from $<List))
+
+(randomly select $Element from $List)
+	(length of $List into $N)
+	(random from 1 to $N into $Index)
+	(nth $List $Index $Element)
+
+(take 0 from $ into [])
+(take $N from [$Head | $MoreIn] into [$Head | $MoreOut])
+	($N minus 1 into $Nm1)
+	(take $Nm1 from $MoreIn into $MoreOut)
