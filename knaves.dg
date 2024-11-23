@@ -243,7 +243,7 @@
 		(entry $Index of $G into 1)
 		(line) (statement from $Source about $Target with knaves $Knaves)
 	}
-	(if) ($Total divided by $Guilty into 2) ($Total modulo $Guilty into 0) (then) %% This is the only case where there's a legitimate ambiguity
+	(if) (number of knights $N) (number of knaves $N) (then) %% This is the only case where there's a legitimate ambiguity
 		(par) You also have conclusive evidence that (name for index 0) is
 		(if) (0 is one of $Knaves) (then) guilty (else) innocent (endif)
 		.
