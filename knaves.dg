@@ -1,3 +1,9 @@
+%% I guess if I'm making a zblorb I should actually give some metadata
+(story title) Knights and Knaves Demo
+(story author) Daniel M. Stelzer
+(story release 0)
+(story ifid) D3C48B73-ED75-4CB4-B6E9-EE64959ADBBC
+
 (global variable (total number of people 3))
 (global variable (number of knaves 2))
 (number of knights $Knights)
@@ -30,15 +36,12 @@
 	($N minus 1 into $Nm1)
 	($Nm1 instances of $Value into $Tail)
 
-(convert $In to index $Out) %% Convenience predicate for coordinate conversion
-	(if) ($In = [$X $Y]) (then) %% Coordinates are 0-indexed to make the math easier
-		(total number of people $N)
-		($X times $N into $Tmp)
-		($Tmp plus $Y into $Tmp2)
-		($Tmp2 plus 1 into $Out) %% Add 1 because lists in Dialog are 1-indexed
-	(else)
-		($In = $Out)
-	(endif)
+(convert coordinates $X $Y to index $Out) %% Convenience predicate for coordinate conversion
+	%% Coordinates are 0-indexed to make the math easier
+	(total number of people $N)
+	($X times $N into $Tmp)
+	($Tmp plus $Y into $Tmp2)
+	($Tmp2 plus 1 into $Out) %% Add 1 because lists in Dialog are 1-indexed
 
 %% We don't quite want a complete graph though: we want to remove the diagonal elements, the ones where "Alice says Alice is innocent" or whatever
 
@@ -48,7 +51,7 @@
 (remove 0 diagonals from $In into $In) %% We're done
 (remove $N diagonals from $In into $Out)
 	($N minus 1 into $Nm1)
-	(convert [$Nm1 $Nm1] to index $Index)
+	(convert coordinates $Nm1 $Nm1 to index $Index)
 	(change entry $Index of $In to 0 into $Tmp)
 	(remove $Nm1 diagonals from $Tmp into $Out)
 
@@ -82,19 +85,14 @@
 %% When we check the connectivity of the graph, we need to check both entries, because we're treating it as undirected for this part
 
 (connection between $X and $Y in $G)
-	(if) ~(fully bound $Y) (then) %% Make sure it iterates over the right range if it's unbound
-		*(person index $Y)
-		(internal connection between $X and $Y in $G)
-	(else)
-		(internal connection between $X and $Y in $G)
-	(endif)
-
-(internal connection between $X and $Y in $G)
-		(convert [$X $Y] to index $Idx1)
+	*(person index $Y) %% Make sure it iterates over the right range if it's unbound - if it is bound, this should do nothing
+	{
+		(convert coordinates $X $Y to index $Idx1)
 		(entry $Idx1 of $G into 1)
 	(or)
-		(convert [$Y $X] to index $Idx2)
+		(convert coordinates $Y $X to index $Idx2)
 		(entry $Idx2 of $G into 1)
+	}
 
 %% Now, we can do the connectivity check!
 %% It's basically just a floodfill/complete BFS
@@ -124,10 +122,12 @@
 
 %% We also want to make sure that everyone makes at least one statement
 
-(drop 0 from $List into $List)
+(drop 0 from $List into $List) %% Utility predicate: opposite of (take $N from $List into $Result)
 (drop $N from [$|$OldTail] into $NewTail)
 	($N minus 1 into $Nm1)
 	(drop $Nm1 from $OldTail into $NewTail)
+
+%% Why do we define these in a negative way ("gives no testimony" instead of "gives testimony")? Because multiqueries make it very convenient to test "any" but very difficult to test "all", so "any row gives no testimony" is much easier to check than "all rows give some testimony".
 
 ($Person gives no testimony in $G)
 	(total number of people $Total)
@@ -155,13 +155,32 @@
 		*($Conn is one of $G)
 	(into $Count)
 
+($List has connection at position $N)
+	*($List has connection at position $N counting from 1) %% The "counting from" ensures all our indices are on the same scale
+([1 | $] has connection at position $N counting from $N)
+([$ | $Tail] has connection at position $N counting from $Current)
+	($Current plus 1 into $Cp1)
+	*($Tail has connection at position $N counting from $Cp1)
+
+(randomly remove one connection from $G into $G2) %% New version only takes O(n²) space but O(n⁴) time
+	(collect $Index)
+		*($G has connection at position $Index)
+		(change entry $Index of $G to 0 into $New)
+		(connected $New)
+		(valid testimony $New)
+	(into $Options)
+	(randomly select $Choice from $Options)
+	(change entry $Choice of $G to 0 into $G2)
+
+%% Old implementation preserved for reference - runs in O(n²) time but O(n⁴) space which is too much memory for the Z-machine
+
 (remove one connection from [0 | $OldRest] into [0 | $NewRest])
 	*(remove one connection from $OldRest into $NewRest)
 (remove one connection from [1 | $OldRest] into [0 | $OldRest])
 (remove one connection from [1 | $OldRest] into [1 | $NewRest])
 	*(remove one connection from $OldRest into $NewRest)
 
-(randomly remove one connection from $G into $G2)
+(randomly remove one connection from $G into $G2 old version)
 	(collect $New)
 		*(remove one connection from $G into $New)
 		(connected $New)
@@ -239,7 +258,7 @@
 	(exhaust) {
 		*(person index $Source)
 		*(person index $Target)
-		(convert [$Source $Target] to index $Index)
+		(convert coordinates $Source $Target to index $Index)
 		(entry $Index of $G into 1)
 		(line) (statement from $Source about $Target with knaves $Knaves)
 	}
@@ -252,6 +271,8 @@
 %% Now, putting it all together!
 
 (program entry point)
+	*(repeat forever)
+	
 	How many knights should there be in the puzzle?
 	(get number $Knights)
 	(par) How many knaves should there be in the puzzle?
@@ -261,7 +282,8 @@
 	(now) (total number of people $Total)
 	(par) How many statements should there be?
 	(get number $Evidence)
-	(if) ($Evidence < $Total) (then) Error: evidence cannot be < knights + knaves! (fail) (endif) %% Avoid a crash if this happens
+	($Total minus 1 into $MinEvidence)
+	(if) ($Evidence < $MinEvidence) (then) Error: insufficient evidence to establish all suspects! (fail) (endif) %% Avoid a crash if this happens
 	(now) (number of statements $Evidence)
 	(generate puzzle $G)
 	(select knaves into $KnaveList)
@@ -273,6 +295,8 @@
 		*($Knave is one of $KnaveList)
 		(name for index $Knave)
 	}
+	
+	(par) (fail)
 
 (get number $N)
 	*(repeat forever)
@@ -282,6 +306,17 @@
 	(or)
 		That is not a number. (line) (fail)
 	}
+
+(error $Code entry point)
+	(par) Fatal error, code $Code: (report fatal error $Code) (line) (display memory statistics)
+(report fatal error 1)	Heap space exhausted.
+(report fatal error 2)	Auxiliary heap space exhausted.
+(report fatal error 3)	Type error: Expected object.
+(report fatal error 4)	Type error: Expected bound value.
+(report fatal error 5)	Invalid dynamic operation.
+(report fatal error 6)	Long-term heap space exhausted.
+(report fatal error 7)	Invalid output state.
+(report fatal error $)	Invalid error code!
 
 %% From stdlib for now
 
