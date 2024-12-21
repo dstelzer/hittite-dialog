@@ -1,0 +1,419 @@
+%% Rewriting knaves.dg to start from a tree and add edges, instead of starting from a complete graph and removing edges
+
+(global variable (total number of people 5))
+(global variable (number of knaves 2))
+(number of knights $Knights)
+	(total number of people $Total)
+	(number of knaves $Knaves)
+	($Total minus $Knaves into $Knights)
+(global variable (number of statements 8))
+
+%% In the simplest form of a knights and knaves puzzle, the only statements are in the form of "X is a knave" (an accusation) or "X is a knight" an affirmation
+%% If X accuses Y, then X and Y must be of different types; if X affirms Y, then X and Y must be of the same type
+%% If we make a graph where the vertices are people and the edges are statements, then the puzzle is solvable iff the graph is connected
+%% Therefore, we can generate a puzzle by generating a tree, then adding as many edges as we want
+%% The fewer edges we add, the more difficult the puzzle is—culminating in a tree, where there's no confirmation possible for any of your deductions
+
+%% We're representing the graph as an adjacency list, where G[i] is a list containing the nodes connected to i
+
+(empty graph $G)
+	(total number of people $N)
+	($N instances of [] into $G)
+
+(0 instances of $ into [])
+($N instances of $Value into [$Value|$Tail])
+	($N minus 1 into $Nm1)
+	($Nm1 instances of $Value into $Tail)
+
+%% These are the "replace nth" and "nth" predicates from stdlib with more readable names
+%% (Also I implemented them myself before realizing the stdlib already had them oops)
+
+(change entry 1 of [$|$Tail] to $Value into [$Value|$Tail])
+(change entry $N of [$Head|$Tail] to $Value into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(change entry $Nm1 of $Tail to $Value into $NewTail)
+
+(entry 1 of [$Head | $] into $Head)
+(entry $N of [$ | $Tail] into $Value)
+	($N minus 1 into $Nm1)
+	(entry $Nm1 of $Tail into $Value)
+
+%% These ones are new, at least!
+
+(increment entry 1 of [$Old|$Tail] into [$New|$Tail])
+	($Old plus 1 into $New)
+(increment entry $N of [$Head|$Tail] into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(increment entry $Nm1 of $Tail into $NewTail)
+
+(decrement entry 1 of [$Old|$Tail] into [$New|$Tail])
+	($Old minus 1 into $New)
+(decrement entry $N of [$Head|$Tail] into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(decrement entry $Nm1 of $Tail into $NewTail)
+
+(prepend $Value to entry 1 of [$Head|$Tail] into [ [$Value|$Head] | $Tail])
+(prepend $Value to entry $N of [$Head|$Tail] into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(prepend $Value to entry $Nm1 of $Tail into $NewTail)
+
+(delete $Value from entry 1 of [$Old|$Tail] into [$New|$Tail])
+	(delete $Value from $Old into $New)
+(delete $Value from entry $N of [$Head|$Tail] into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(delete $Value from entry $Nm1 of $Tail into $NewTail)
+
+%% Remove the first instance of a value from a list
+(delete $Value from [$Value|$Tail] into $Tail)
+(delete $Value from [$Head|$Tail] into [$Head|$NewTail])
+	(delete $Value from $Tail into $NewTail)
+
+%% Now, time to actually generate the Prüfer sequence!
+
+(0 random values between $ and $ into [])
+($N random values between $Low and $High into [$Random|$Tail])
+	(random from $Low to $High into $Random)
+	($N minus 1 into $Nm1)
+	($Nm1 random values between $Low and $High into $Tail)
+
+(random Prüfer sequence $Prüfer)
+	(total number of people $N)
+	($N minus 2 into $Length)
+	($Length random values between 1 and $N into $Prüfer)
+
+%% And the hardest part: converting it into a tree
+
+(convert Prüfer sequence $Prüfer into tree $G)
+	(total number of people $N)
+	(empty graph $Empty)
+	($N instances of 1 into $InitialDegrees)
+	(update degrees $InitialDegrees from sequence $Prüfer into $Degrees)
+	
+	(use Prüfer sequence $Prüfer on $Empty and $Degrees to make $NewTree and $NewDegrees)
+	(use degrees $NewDegrees to add final connection to $NewTree to make $G)
+
+(update degrees $Degrees from sequence [] into $Degrees)
+(update degrees $Degrees from sequence [$Head|$Tail] into $Updated)
+	(increment entry $Head of $Degrees into $Intermediate)
+	(update degrees $Intermediate from sequence $Tail into $Updated)
+
+(use Prüfer sequence [] on $Tree and $Degrees to make $Tree and $Degrees)
+(use Prüfer sequence [$I|$Tail] on $OldTree and $OldDegrees to make $NewTree and $NewDegrees)
+	(first index of 1 in $OldDegrees is $J)
+	(decrement entry $I of $OldDegrees into $Tmp)
+	(decrement entry $J of $Tmp into $Degrees)
+	(prepend $J to entry $I of $OldTree into $Tree)
+	(use Prüfer sequence $Tail on $Tree and $Degrees to make $NewTree and $NewDegrees)
+
+(use degrees $Degrees to add final connection to $OldTree to make $NewTree)
+	(first index of 1 in $Degrees is $U)
+	(decrement entry $U of $Degrees into $NewDegrees)
+	(first index of 1 in $NewDegrees is $V)
+	(prepend $V to entry $U of $OldTree into $NewTree)
+
+%% This predicate is implemented a bit awkwardly to ensure all recursion is in tail position
+%% The more elegant way to do it (without the "counting from") requires addition after the recursive call
+(first index of $Value in [$Value|$] counting from $N is $N)
+(first index of $Value in [$|$Tail] counting from $N is $Result)
+	($N plus 1 into $Np1)
+	(first index of $Value in $Tail counting from $Np1 is $Result)
+
+%% So we have a convenience predicate for the standard case
+(first index of $Value in $List is $N)
+	(first index of $Value in $List counting from 1 is $N)
+
+%% Of course, this makes a randomly-directed tree, and we have an additional constraint on our puzzle: we want everyone to give testimony
+%% So next we go through and flip edges as needed to ensure every node has an outgoing edge
+%% If we can't, we add new random edges
+
+(ensure testimony from $Tree into $G by adding $E edges)
+	(total number of people $N)
+	(improve node $N of $Tree into $G by adding $E edges counting from 0)
+
+(improve node $I of $Tree into $G by adding $ENew edges counting from $EOld) %% $EOld is how many we already added; we need to pass it in for tail recursion purposes
+	(total number of people $N)
+	(if) (entry $I of $Tree into $List) ~(empty $List) (then) %% No need to add anything, there's already an edge here
+		($ETmp = $EOld)
+		($New = $Tree)
+	(elseif) *(have $J count up from 1 to $N) (node $J of $Tree has redundant edge to $I) (then) %% We can flip an edge
+		(delete $I from entry $J of $Tree into $Tmp)
+		(prepend $J to entry $I of $Tmp into $New)
+		($ETmp = $EOld)
+	(else) %% We have to insert a new edge
+		%% We want to pick a random entry that's NOT this node
+		(random from 1 to $N excluding $I into $J)
+		(prepend $J to entry $I of $Tree into $New)
+		($EOld plus 1 into $ETmp)
+	(endif)
+	
+	%% Now, potentially recurse (counting down because it's a bit easier that way)
+	(if) ($I > 1) (then)
+		($I minus 1 into $Next)
+		(improve node $Next of $New into $G by adding $ENew edges counting from $ETmp)
+	(else)
+		($G = $New)
+		($ENew = $ETmp)
+	(endif)
+
+(node $J of $Tree has redundant edge to $I)
+	(entry $J of $Tree into $List)
+	(length of $List into $Length)
+	($Length > 1)
+	($I is one of $List)
+
+(random from $Low to $High excluding $Exclude into $Result)
+	($High minus 1 into $NewHigh)
+	(random from $Low to $NewHigh into $Random) %% Generate a random number in [Low..High-1]
+	(if) ($Random < $Exclude) (then) %% If it's less than Exclude, use it directly
+		($Result = $Random)
+	(else) %% Otherwise, bump it up by 1 to skip over Exclude
+		($Random plus 1 into $Result)
+	(endif)
+
+%% Once that process is done, add random statements if necessary to get up to the right number
+
+(flesh out $Tree into $G)
+	(number of statements $Goal)
+	(total number of people $N)
+	($N minus 1 into $Edges)
+	
+	(ensure testimony from $Tree into $Tmp by adding $E edges)
+	(log) {Improved: $Tmp}
+	(if) ($Goal minus $Edges into $Add) ($Add minus $E into $Remaining) (then)
+		(add $Remaining random edges to $Tmp into $G)
+	(else)
+		($G = $Tmp)
+	(endif)
+
+(add 0 random edges to $G into $G)
+(add $K random edges to $In into $Out)
+	(total number of people $N)
+	(random from 1 to $N into $I)
+	(entry $I of $In into $Existing)
+	(collect $Choice)
+		*(have $Choice count up from 1 to $N)
+	(into $RawChoices)
+	(remove from $RawChoices matching [$I | $Existing] into $Choices)
+	(randomly select $J from $Choices)
+	(prepend $J to entry $I of $In into $Tmp)
+	($K minus 1 into $Km1)
+	(add $Km1 random edges to $Tmp into $Out)
+
+%% And now, put it all together!
+
+(generate random puzzle $G)
+	(random Prüfer sequence $Prüfer)
+	(log) { Sequence: $Prüfer }
+	(convert Prüfer sequence $Prüfer into tree $Tree)
+	(log) { Tree: $Tree }
+	(flesh out $Tree into $G)
+	(log) { G: $G }
+
+%% Boilerplate to turn this from a graph into an actual *game*
+
+%% First we need to choose the knaves
+
+(select knaves into $Knaves)
+	(total number of people $N)
+	(collect $Index)
+		*(have $Index count up from 1 to $N)
+	(into $Options)
+	(number of knaves $K)
+	(randomly select $K from $Options without replacement into $Knaves)
+
+(randomly select 0 from $ without replacement into [])
+(randomly select $N from $List without replacement into [$Chosen|$MoreChosen])
+	(randomly select $Chosen from $List)
+	(split $List by $Chosen into $Left and $Right)
+	(append $Left $Right $Shrunken)
+	($N minus 1 into $Nm1)
+	(randomly select $Nm1 from $Shrunken without replacement into $MoreChosen)
+
+%% And make the statements!
+
+(name for index $Index) %% Automatically generated with regexes
+	(if) ($Index = 1) (then)
+		Alice
+ 	(elseif) ($Index = 2) (then)
+		Bob
+ 	(elseif) ($Index = 3) (then)
+		Claire
+ 	(elseif) ($Index = 4) (then)
+		Dave
+ 	(elseif) ($Index = 5) (then)
+		Emma
+ 	(elseif) ($Index = 6) (then)
+		Fred
+ 	(elseif) ($Index = 7) (then)
+		Gwen
+ 	(elseif) ($Index = 8) (then)
+		Harry
+ 	(elseif) ($Index = 9) (then)
+		Isabelle
+ 	(elseif) ($Index = 10) (then)
+		Jake
+ 	(elseif) ($Index = 11) (then)
+		Kyra
+ 	(elseif) ($Index = 12) (then)
+		Liam
+ 	(elseif) ($Index = 13) (then)
+		Mary
+ 	(elseif) ($Index = 14) (then)
+		Nick
+ 	(elseif) ($Index = 15) (then)
+		Olivia
+ 	(elseif) ($Index = 16) (then)
+		Pedro
+ 	(elseif) ($Index = 17) (then)
+		Qilin
+ 	(elseif) ($Index = 18) (then)
+		Randall
+ 	(elseif) ($Index = 19) (then)
+		Samantha
+ 	(elseif) ($Index = 20) (then)
+		Thomas
+ 	(elseif) ($Index = 21) (then)
+		Ursula
+ 	(elseif) ($Index = 22) (then)
+		Victor
+ 	(elseif) ($Index = 23) (then)
+		Wynn
+ 	(elseif) ($Index = 24) (then)
+		Xavier
+ 	(elseif) ($Index = 25) (then)
+		Yasmine
+ 	(elseif) ($Index = 26) (then)
+		Zen
+	(else)
+		Person \#(no space)$Index
+	(endif)
+
+%% If they're both knights, or both knaves, it's an affirmation; otherwise, it's an accusation
+(statement from $Source about $Target with knaves $Knaves)
+	(if) ($Source is one of $Knaves) (then)
+		($SourceGuilty = 1)
+	(else)
+		($SourceGuilty = 0)
+	(endif)
+	
+	(if) ($Target is one of $Knaves) (then)
+		($TargetGuilty = 1)
+	(else)
+		($TargetGuilty = 0)
+	(endif)
+	
+	(if) ($SourceGuilty = $TargetGuilty) (then)
+		($Source affirms $Target)
+	(else)
+		($Source accuses $Target)
+	(endif)
+
+($Source affirms $Target)
+	(name for index $Source) says: "(no space)(name for index $Target) is innocent!"
+($Source accuses $Target)
+	(name for index $Source) says: "(no space)(name for index $Target) is guilty!"
+
+(present puzzle $G with knaves $Knaves)
+	(total number of people $Total)
+	(number of knaves $Guilty)
+	$Total people have been accused of a crime! $Guilty of them (if) ($Guilty = 1) (then) is (else) are (endif) actually guilty. The innocent will tell the truth, the guilty will lie.
+	(exhaust) {
+		*(have $Source count up from 1 to $Total)
+		(entry $Source of $G into $Adjacency)
+		*($Target is one of $Adjacency)
+		(line) (statement from $Source about $Target with knaves $Knaves)
+	}
+	(if) (number of knights $X) (number of knaves $X) (then) %% This is the only case where there's a legitimate ambiguity
+		(par) You also have conclusive evidence that (name for index 1) is
+		(if) (1 is one of $Knaves) (then) guilty (else) innocent (endif)
+		.
+	(endif)
+
+%% Now, putting it all together!
+
+(program entry point)
+	*(repeat forever)
+	
+	How many knights should there be in the puzzle?
+	(get number $Knights)
+	(par) How many knaves should there be in the puzzle?
+	(get number $Knaves)
+	(now) (number of knaves $Knaves)
+	($Knights plus $Knaves into $Total)
+	(now) (total number of people $Total)
+	(par) How many statements should there be?
+	(get number $Evidence)
+	(if) ($Evidence < $Total) (then)
+		That's not enough evidence! Changing that to $Total.
+		(now) (number of statements $Total)
+	(else)
+		(now) (number of statements $Evidence)
+	(endif)
+	(generate random puzzle $G)
+	(select knaves into $KnaveList)
+	(log) {Knaves: $KnaveList}
+	(par) (present puzzle $G with knaves $KnaveList)
+	(par) Press ENTER to see the solution.
+	(get input $)
+	Knaves:
+	(exhaust) {
+		*($Knave is one of $KnaveList)
+		(name for index $Knave)
+	}
+	
+	(par) (fail)
+
+(get number $N)
+	*(repeat forever)
+	(get input $Words)
+	{
+		($Words = [$N]) (number $N)
+	(or)
+		Please enter a number. (fail)
+	}
+
+(error $Code entry point)
+	(par) Fatal error, code $Code: (report fatal error $Code) (line) (display memory statistics)
+(report fatal error 1)	Heap space exhausted.
+(report fatal error 2)	Auxiliary heap space exhausted.
+(report fatal error 3)	Type error: Expected object.
+(report fatal error 4)	Type error: Expected bound value.
+(report fatal error 5)	Invalid dynamic operation.
+(report fatal error 6)	Long-term heap space exhausted.
+(report fatal error 7)	Invalid output state.
+(report fatal error $)	Invalid error code!
+
+%% Various utilities from the previous implementation
+
+(have $N count up from $Low to $High)
+		($N = $Low)
+	(or)
+		($Low plus 1 into $Lp1)
+		~($Lp1 > $High)
+		*(have $N count up from $Lp1 to $High)
+
+%% Various utilities from stdlib
+
+(interface (length of $List into $>Number))
+
+(length of [] into 0)
+(length of [$ | $More] into $Np1)
+	(length of $More into $N)
+	($N plus 1 into $Np1)
+
+(remove from [] matching $ into [])
+	(just)
+(remove from [$In | $MoreIn] matching $Keys into $MoreOut)
+	($In is one of $Keys)
+	(just)
+	(remove from $MoreIn matching $Keys into $MoreOut)
+(remove from [$In | $MoreIn] matching $Keys into [$In | $MoreOut])
+	(remove from $MoreIn matching $Keys into $MoreOut)
+
+(interface (randomly select $>Element from $<List))
+
+(randomly select $Element from $List)
+	(length of $List into $N)
+	(random from 1 to $N into $Index)
+%%	(nth $List $Index $Element)
+	(entry $Index of $List into $Element)
