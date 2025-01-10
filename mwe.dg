@@ -14,7 +14,7 @@
 (program entry point)
 	(stoppable) {
 		(collect $List)
-			*(convert list [blue turquoise scarlet pink green] into $List)
+			*(convert list [blue turquoise scarlet green] into $List)
 		(into $ListList)
 		$ListList
 	}

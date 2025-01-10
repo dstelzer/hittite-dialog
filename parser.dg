@@ -66,6 +66,12 @@
 	~($Single = $First) %% Make sure not to split in the middle of a noun phrase!
 	($Nouns = [$Single $First | $Other])
 
+%% We can't report this from within (parse $ into noun list $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
+(find first broken noun from $Nouns and report it)
+	*(split $Nouns anywhere into $Left and $Right)
+	(parse $Left into single noun $)
+	{ (find first broken noun from $Right and report it) (or) The nouns in this line are obscure, and it's unclear what "(no space)(print words $Right)(no space)" means. (stop) }
+
 %% Now how do we recognize a single noun?
 ~(parse [] into single noun $)
 
@@ -162,8 +168,14 @@
 (interface (convert clitics $<Input into noun phrases $>Output))
 (convert clitics [] into noun phrases [])
 (convert clitics [$First|$Rest] into noun phrases [$NewFirst|$NewRest])
-	{ *(convert clitic $First into noun phrase $NewFirst) (or) (uppercase) (show parser error 31 for action $First) (stop) }
+	*(convert clitic $First into noun phrase $NewFirst)
 	*(convert clitics $Rest into noun phrases $NewRest)
+
+%% We can't report this from within (convert clitics $ into noun phrases $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
+(find first broken clitic from $Clitics and report it)
+	*($This is one of $Clitics)
+	~(convert clitic $This into noun phrase $)
+	The clitic $This is not found elsewhere on the tablet. Its interpretation is unclear. (stop)
 
 (interface (deduplicate $<Input into $>Output))
 %% Remove duplicates in case they appear
@@ -182,19 +194,7 @@
 	*(add noun phrases $ExtraNouns to action $Second into $Third)
 	(deduplicate $Third into $Action)
 
-%% And now, to test it all out!
-(old program entry point)
-	*(repeat forever)
-	> (get input $Raw)
-	Input: $Raw (line)
-	(rewrite $Raw into [$Verb $Clitics | $Rest])
-	Rewritten: [$Verb $Clitics | $Rest] (line)
-	*(parse $Rest into noun list $Nouns)
-	Parsed: [$Verb $Clitics | $Nouns] (line)
-	*(convert parsed line [$Verb $Clitics | $Nouns] into $Action)
-	Action: $Action (line)
-	(fail)
-
+%% Some test nouns
 #lalac %% "tongue"
 (dict * in #accusative)
 	lalan
@@ -286,7 +286,7 @@
 (listing $List $Closure $Conjunction) %% Convenience predicates
 	(listing $List $Closure $Conjunction 0)
 (listing $List $Closure)
-	(listing $List $Closure @and 0)
+	(listing $List $Closure @and)
 
 %% Now, the parser!
 
@@ -319,10 +319,6 @@
 %%	14	Missing ablative
 %%	24	Excess ablative
 %%
-%%	30	Unrecognized verb (not handled here)
-%%	31	Unrecognized clitic (not handled here)
-%%	32	Unrecognized noun (not handled here)
-%%	33	Recognized noun but not in scope (not handled here)
 %%	36	Too many multiple objects
 
 (noun list [$Adv $ $ $] and case list $Cases produce error 11)
@@ -386,14 +382,6 @@
 	there should be an ablative/instrumental noun
 (show parser error 24 for action $)
 	there should not be an ablative/instrumental noun
-(show parser error 30 for action $Verb)
-	$Verb is not a verb found elsewhere on the tablet
-(show parser error 31 for action $Clitic)
-	$Clitic is not a clitic found elsewhere on the tablet
-(show parser error 32 for action $Noun)
-	$Noun is not a noun found elsewhere on the tablet
-(show parser error 33 for action $Noun)
-	it's unclear what "(no space)(print words $Noun)(no space)" is meant to refer to here
 (show parser error 36 for action [$ $ $Acc $Dat $Abl])
 	there are multiple nouns in
 	(if) (more than one $Acc) (more than one $Dat) (more than one $Abl) (then)
@@ -414,7 +402,7 @@
 
 (parse commandline $Words)
 	(if) (save undo 1) (then)
-		The previous lines, starting with "(no space)(print words $Words)(no space)", are crossed out on the tablet.
+		The previous lines, starting with "(no space)(print words $Words)(no space)", are crossed out on the tablet and should be disregarded.
 		(stop)
 	(endif)
 	(now) ~(allowing parse errors)
@@ -427,7 +415,7 @@
 	
 	(rewrite $Raw into [$Verb $Clitics | $Rest])
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
-		(uppercase) (show parser error 30 for action $Verb) . (stop)
+		The verb "$Verb" is not found elsewhere on the tablet, and its interpretation is obscure.
 	(endif)
 	(collect $Action)
 		*(parse $Rest into noun list $Nouns)
@@ -448,13 +436,13 @@
 (report errors in $Words)
 	(now) (allowing parse errors) %% Tell the parsing predicates that they should show their errors instead of just silently failing
 	(if) %% Multiqueries here not really necessary because if-conditions discard choice points, but it helps optimization according to the stdlib comments
-		{ (rewrite $Words into [$Verb $Clitics | $Rest]) (or) Could not split off clitics! TODO (stop) }
-		{ *(parse $Rest into noun list $Nouns) (or) Could not parse nouns! TODO (stop) }
-		{ *(convert parsed line [$Verb $Clitics | $Nouns] into $Action) (or) Could not convert! TODO (stop) }
+		{ (rewrite $Words into [$Verb $Clitics | $Rest]) (or) ERROR: Clitic-splitting failed. Why? (stop) }
+		{ *(parse $Rest into noun list $Nouns) (or) (find first broken noun from $Rest and report it) (stop) }
+		{ *(convert parsed line [$Verb $Clitics | $Nouns] into $Action) (or) (find first broken clitic from $Clitics and report it) (stop) }
 	(then)
 		(show parser errors for $Action)
 	(else)
-		This line cannot be parsed, and we're not sure why. Sorry!
+		ERROR: This line can't be parsed, but no other routine handled it. Why?
 	(endif)
 	(stop)
 
@@ -481,13 +469,13 @@
 		(length of $List into $N)
 		This line could be interpreted in multiple ways:
 		(enumerate possible actions $List 1)
-		(line) Which of these is intended? 
+		(line) Which of these is intended?
 		(get input $Words)
 		(if) ($Words = [$Number]) (number $Number) ($Number > 1) ~($Number > $N) (then)
 			(nth $List $Number $Result)
 			(try-complex $Result)
 		(else)
-			The previous line may be a scribal error. Ignoring it, we continue on to...
+			The previous concerns may be a scribal error. Ignoring that, we continue on to...
 			(now) (deferred commandline $Words)
 			(stop)
 		(endif)
@@ -537,7 +525,7 @@
 
 (enumerate possible actions [] $)
 (enumerate possible actions [$Head|$Tail] $N)
-	(space 4) $N : (describe action $Head) (line)
+	(line) (space 4) $N : (describe action $Head)
 	($N plus 1 into $Np1)
 	(enumerate possible actions $Tail $Np1)
 
