@@ -4,11 +4,11 @@
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
 (rewrite $Input into $Output)
-	(line) Input: $Input
+	Input: $Input (line)
 	(separate clitics from $Input into $Middle)
-	(line) Middle: $Middle
+	Middle: $Middle (line)
 	(transpose verb from $Middle into $Output)
-	(line) Output: $Output
+	Output: $Output (line)
 
 %% Separate clitics from the first word
 (separate clitics from [$First | $Other] into $Out)
@@ -19,8 +19,7 @@
 		($Out = [$Chain $Base | $Other])
 	(endif)
 
-(separate clitics from $In into $Out) %% Fallback if that fails
-	($In = $Out)
+(separate clitics from $In into [[]|$In]) %% Fallback if that fails: empty clitic list
 
 %% How do we know if something contains clitics?
 ($Word splits into base $Base and clitic chain $Chain)
@@ -50,7 +49,7 @@
 %% Noun list parsing: Hittite sentences tend to go
 %% Conn=Clitics [Noun phrases...] Verb
 %% So this is to parse a sequence of noun phrases into something like
-%% [ [#accusative #Obj1] [#dative Obj2] ]
+%% [ [#accusative #Obj1] [#dative #Obj2] ]
 
 %% Base case: a single noun
 (parse $Words into noun list $Nouns)
@@ -113,6 +112,77 @@
 		(dict $Obj in $Case)
 	(matching all of $Words)
 
+%% Our representation of an action is [verb [adv] [acc] [dat] [abl]], so now we need to convert a noun list into that
+(empty action with verb $Verb is [$Verb [] [] [] []])
+
+%% Noun phrases
+(add noun phrases [] to action $Act into $Act)
+(add noun phrases [[#adverb/#bare $Adv] | $Rest] to action [$Verb $Advs $Acc $Dat $Abl] into $Out)
+	(add noun phrases $Rest to action [$Verb [$Adv|$Advs] $Acc $Dat $Abl] into $Out)
+(add noun phrases [[#accusative/#bare $Acc] | $Rest] to action [$Verb $Adv $Accs $Dat $Abl] into $Out)
+	(add noun phrases $Rest to action [$Verb $Adv [$Acc|$Accs] $Dat $Abl] into $Out)
+(add noun phrases [[#dative/#bare $Dat] | $Rest] to action [$Verb $Adv $Acc $Dats $Abl] into $Out)
+	(add noun phrases $Rest to action [$Verb $Adv $Acc [$Dat|$Dats] $Abl] into $Out)
+(add noun phrases [[#ablative/#bare $Abl] | $Rest] to action [$Verb $Adv $Acc $Dat $Abls] into $Out)
+	(add noun phrases $Rest to action [$Verb $Adv $Acc $Dat [$Abl|$Abls]] into $Out)
+
+%% Change some of these to variables or whatever eventually - this is how the pronouns should be handled
+(first person singular #1s)
+(second person singular #2s)
+(third person singular common #3sc)
+(third person singular neuter #3sn)
+(third person singular $Which)
+	(third person singular common $Which) (or) (third person singular neuter $Which)
+(first person plural #1p)
+(second person plural #2p)
+(third person plural common #3pc)
+(third person plural neuter #3pn)
+(third person plural $Which)
+	(third person plural common $Which) (or) (third person plural neuter $Which)
+(reflexive #reflexive)
+
+(sentence particle @kan)
+
+%% Clitics
+(convert clitic @mu into noun phrase [#accusative (first person singular $)])
+(convert clitic @mu into noun phrase [#dative (first person singular $)])
+(convert clitic @nac into noun phrase [#accusative (first person plural $)])
+(convert clitic @nac into noun phrase [#dative (first person plural $)])
+(convert clitic @ta/@du into noun phrase [#accusative (second person singular $)])
+(convert clitic @ta/@du into noun phrase [#dative (second person singular $)])
+(convert clitic @cmac into noun phrase [#accusative (second person plural $)])
+(convert clitic @cmac into noun phrase [#dative (second person plural $)])
+(convert clitic @cmac into noun phrase [#dative (third person plural $)])
+(convert clitic @ci into noun phrase [#dative (third person singular $)])
+(convert clitic @an into noun phrase [#accusative (third person singular common $)])
+(convert clitic @at into noun phrase [#accusative (third person singular neuter $)])
+(convert clitic @at into noun phrase [#accusative (third person plural neuter $)])
+(convert clitic @e/@i into noun phrase [#accusative (third person plural neuter $)])
+(convert clitic @uc/@ac into noun phrase [#accusative (third person plural common $)])
+(convert clitic @z/@za into noun phrase [#accusative (reflexive $)])
+(convert clitic @z/@za into noun phrase [#dative (reflexive $)])
+(convert clitic (sentence particle $Part) into noun phrase [#adverb $Part]) %% Sentence particles work kind of like adverbs, so we deal with them there
+
+(convert clitics [] into noun phrases [])
+(convert clitics [$First|$Rest] into noun phrases [$NewFirst|$NewRest])
+	*(convert clitic $First into noun phrase $NewFirst)
+	*(convert clitics $Rest into noun phrases $NewRest)
+
+%% Remove duplicates in case they appear
+(deduplicate [$Verb $Advs $Accs $Dats $Abls] into [$Verb $NewAdvs $NewAccs $NewDats $NewAbls])
+	(remove duplicates from $Advs into $NewAdvs)
+	(remove duplicates from $Accs into $NewAccs)
+	(remove duplicates from $Dats into $NewDats)
+	(remove duplicates from $Abls into $NewAbls)
+
+%% Now put it together
+(convert parsed line [$Verb $Clitics | $Nouns] into $Action)
+	(empty action with verb $Verb is $First)
+	*(add noun phrases $Nouns to action $First into $Second)
+	*(convert clitics $Clitics into noun phrases $ExtraNouns)
+	*(add noun phrases $ExtraNouns to action $Second into $Third)
+	(deduplicate $Third into $Action)
+
 %% And now, to test it all out!
 (program entry point)
 	*(repeat forever)
@@ -122,6 +192,8 @@
 	Rewritten: [$Verb $Clitics | $Rest] (line)
 	*(parse $Rest into noun list $Nouns)
 	Parsed: [$Verb $Clitics | $Nouns] (line)
+	*(convert parsed line [$Verb $Clitics | $Nouns] into $Action)
+	Action: $Action (line)
 	(fail)
 
 #lalac %% "tongue"
@@ -155,11 +227,11 @@
 	atta
 
 #É %% "house"
-(dict * in #accusative/#dative/#ablative/#bare)
+(dict * in $)
 	É
 
 (sentence connective @nu)
-(sentence connective @na)
+(sentence connective @na) %% Form that's used before clitics starting with /a/
 
 %% Utilities
 
@@ -185,3 +257,34 @@
 (split [$First $Second | $Tail] anywhere into [$First] and [$Second | $Tail])
 (split [$First | $More] anywhere into [$First | $Left] and $Right)
 	*(split $More anywhere into $Left and $Right)
+
+(interface (remove duplicates from $<Input into $>Output))
+
+(remove duplicates from [] into [])
+	(just)
+(remove duplicates from [$Head | $MoreIn] into $MoreOut)
+	($Head is one of $MoreIn)
+	(just)
+	(remove duplicates from $MoreIn into $MoreOut)
+(remove duplicates from [$Head | $MoreIn] into [$Head | $MoreOut])
+	(remove duplicates from $MoreIn into $MoreOut)
+
+(listing [] $ $ 0)
+	nothing
+(listing [$Head | $Rest] $PrintClosure $Conjunction $NPrinted)
+	(if) (empty $Rest) (or) (empty $Conjunction) (then)
+		(if) ($NPrinted > 1) (then) , (endif)
+		(if) ($NPrinted > 0) (then) $Conjunction (endif)
+	(else)
+		(if) ($NPrinted > 0) (then) , (endif)
+	(endif)
+	(query $PrintClosure $Head)
+	($NPrinted plus 1 into $NPp1)
+	(if) (nonempty $Rest) (then)
+		(listing $Rest $PrintClosure $Conjunction $NPp1)
+	(endif)
+
+(listing $List $Closure $Conjunction) %% Convenience predicates
+	(listing $List $Closure $Conjunction 0)
+(listing $List $Closure)
+	(listing $List $Closure @and 0)
