@@ -1,0 +1,20 @@
+(convert @red into @red)
+(convert @scarlet into @red)
+(convert @crimson into @red)
+(convert @blue into @blue)
+(convert @green into @green)
+(convert @turquoise into @green)
+(convert @turquoise into @blue)
+
+(convert list [] into [])
+(convert list [$First|$Rest] into [$NewFirst|$NewRest])
+	{ *(convert $First into $NewFirst) (or) Error: $First! (stop) }
+	*(convert list $Rest into $NewRest)
+
+(program entry point)
+	(stoppable) {
+		(collect $List)
+			*(convert list [blue turquoise scarlet pink green] into $List)
+		(into $ListList)
+		$ListList
+	}
