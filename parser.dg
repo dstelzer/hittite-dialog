@@ -1,14 +1,14 @@
 (extension version)
-	(line) Hittite Parser version 0.1 by Daniel Stelzer
+	(line) Hittite parser version 0.5 by Daniel Stelzer
 
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
 (rewrite $Input into $Output)
-	Input: $Input (line)
+	(log) { Input: $Input }
 	(separate clitics from $Input into $Middle)
-	Middle: $Middle (line)
+	(log) { Middle: $Middle }
 	(transpose verb from $Middle into $Output)
-	Output: $Output (line)
+	(log) { Rewritten: $Output }
 
 %% Separate clitics from the first word
 (separate clitics from [$First | $Other] into $Out)
@@ -80,6 +80,8 @@
 	*(parse $Words as $Case $Obj)
 	($Noun = [$Case $Obj])
 
+(grammatical case #nominative)
+(grammatical case #genitive)
 (grammatical case #accusative)
 (grammatical case #dative)
 (grammatical case #ablative)
@@ -104,9 +106,10 @@
 	{
 		(parse $Words as #bare $Obj)
 	(or)
-		(parse $Words as #dative $Obj)
+		(parse $Words as #ablative $Obj)
 	}
 
+~(parse [] as $ $) %% Avoid edge cases - require a single word at least
 (parse $Words as $Case $Obj)
 	(determine object $Obj)
 		*(object $Obj)
@@ -170,12 +173,13 @@
 (convert clitics [$First|$Rest] into noun phrases [$NewFirst|$NewRest])
 	*(convert clitic $First into noun phrase $NewFirst)
 	*(convert clitics $Rest into noun phrases $NewRest)
+%% TODO - How to handle quotatives (wa/war)?
 
 %% We can't report this from within (convert clitics $ into noun phrases $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
 (find first broken clitic from $Clitics and report it)
 	*($This is one of $Clitics)
 	~(convert clitic $This into noun phrase $)
-	The clitic $This is not found elsewhere on the tablet. Its interpretation is unclear. (stop)
+	(div @error) { The clitic $This is not found elsewhere on the tablet. Its interpretation is unclear. } (stop)
 
 (interface (deduplicate $<Input into $>Output))
 %% Remove duplicates in case they appear
@@ -194,40 +198,47 @@
 	*(add noun phrases $ExtraNouns to action $Second into $Third)
 	(deduplicate $Third into $Action)
 
+(name (neuter $Obj) in #accusative)
+	(name $Obj in #nominative)
+(dict (neuter $Obj) in #accusative)
+	*(dict $Obj in #nominative)
+(dict $Obj in $Case)
+	(name $Obj in $Case)
+
 %% Some test nouns
 #lalac %% "tongue"
-(dict * in #accusative)
+(name * in #accusative)
 	lalan
-(dict * in #dative)
+(name * in #dative)
 	lali
-(dict * in #ablative)
+(name * in #ablative)
 	lalaz
-(dict * in #bare)
+(name * in #bare)
 	lala
 
 #halkic %% "grain"
-(dict * in #accusative)
+(name * in #accusative)
 	halkin
-(dict * in #dative)
+(name * in #dative)
 	halki
-(dict * in #ablative)
+(name * in #ablative)
 	halkiz
-(dict * in #bare)
+(name * in #bare)
 	halki
 
 #attac %% "father"
-(dict * in #accusative)
+(name * in #accusative)
 	attan
-(dict * in #dative)
+(name * in #dative)
 	atti
-(dict * in #ablative)
+(name * in #ablative)
 	attaz
-(dict * in #bare)
+(name * in #bare)
 	atta
 
 #É %% "house"
-(dict * in $)
-	É
+(name * in $)
+	É E2
 
 (sentence connective @nu)
 (sentence connective @na) %% Form that's used before clitics starting with /a/
@@ -304,14 +315,9 @@
 	(show parser errors $ErrorList for action [$Verb | $Nouns])
 
 %% Error codes:
-%%	1$	Missing element
-%%	2$	Excess element
-%%	3$	Other
-%%
-%%	00	All good (not handled here)
 %%
 %%	11	Missing adverb
-%%	21	Excess adverb (currently not raised)
+%%	21	Excess adverb (currently not raised - excess adverbs are just ignored)
 %%	12	Missing accusative
 %%	22	Excess accusative
 %%	13	Missing dative
@@ -356,16 +362,18 @@
 (more than one [$ $ | $]) %% Succeeds if the argument is a list with more than one element
 
 (show parser errors [] for action $)
-	ERROR: there's an error, but no error code was returned!
+	(div @error) { ERROR: there's an error, but no error code was returned! }
 (show parser errors [$Single] for action $Action)
-	This sentence is difficult to interpret.
-	(uppercase) (show parser error $Single for action $Action).
+	(div @error) {
+		This sentence is difficult to interpret.
+		(uppercase) (show parser error $Single for action $Action).
+	}
 (show parser errors $List for action $Action)
-	This sentence is difficult to interpret, for multiple reasons.
-	(uppercase) (listing $List {(show parser error $_ for action $Action)}) .
+	(div @error) {
+		This sentence is difficult to interpret, for multiple reasons.
+		(uppercase) (listing $List {(show parser error $_ for action $Action)}).
+	}
 
-(show parser error  0 for action $)
-	ERROR: this error code should not be used!
 (show parser error 11 for action $)
 	there should be an adverb or sentence particle
 (show parser error 21 for action $)
@@ -402,7 +410,7 @@
 
 (parse commandline $Words)
 	(if) (save undo 1) (then)
-		The previous lines, starting with "(no space)(print words $Words)(no space)", are crossed out on the tablet and should be disregarded.
+		(div @error) { The previous lines, starting with "(no space)(print words $Words)(no space)", are crossed out on the tablet and should be considered a scribal error. }
 		(stop)
 	(endif)
 	(now) ~(allowing parse errors)
@@ -415,12 +423,13 @@
 	
 	(rewrite $Raw into [$Verb $Clitics | $Rest])
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
-		The verb "$Verb" is not found elsewhere on the tablet, and its interpretation is obscure.
+		(div @error) { The verb "$Verb" is not found elsewhere on the tablet, and it is difficult to interpret here. }
 	(endif)
 	(collect $Action)
 		*(parse $Rest into noun list $Nouns)
+		(log) { Noun list: $Nouns }
 		*(convert parsed line [$Verb $Clitics | $Nouns] into $Action)
-		Considering: $Action (line)
+		(log) { Considering: $Action }
 		(valid sentence $Action) %% Only include ones in the final result that don't cause parse errors
 	(into $RawOptions)
 	(remove duplicates from $RawOptions into $Options)
@@ -436,13 +445,28 @@
 (report errors in $Words)
 	(now) (allowing parse errors) %% Tell the parsing predicates that they should show their errors instead of just silently failing
 	(if) %% Multiqueries here not really necessary because if-conditions discard choice points, but it helps optimization according to the stdlib comments
-		{ (rewrite $Words into [$Verb $Clitics | $Rest]) (or) ERROR: Clitic-splitting failed. Why? (stop) }
-		{ *(parse $Rest into noun list $Nouns) (or) (find first broken noun from $Rest and report it) (stop) }
-		{ *(convert parsed line [$Verb $Clitics | $Nouns] into $Action) (or) (find first broken clitic from $Clitics and report it) (stop) }
+		{
+		(rewrite $Words into [$Verb $Clitics | $Rest])
+			(or)
+			(div @realerror) { ERROR: Cannot get verb and clitics. What happened? }
+			(stop)
+		}
+		{
+		*(parse $Rest into noun list $Nouns)
+			(or)
+			(find first broken noun from $Rest and report it)
+			(stop)
+		}
+		{
+		*(convert parsed line [$Verb $Clitics | $Nouns] into $Action)
+			(or)
+			(find first broken clitic from $Clitics and report it)
+			(stop)
+		}
 	(then)
 		(show parser errors for $Action)
 	(else)
-		ERROR: This line can't be parsed, but no other routine handled it. Why?
+		(div @realerror) { ERROR: This line can't be parsed, but no other routine handled it. Why? }
 	(endif)
 	(stop)
 
@@ -467,15 +491,19 @@
 		(try-complex $Only)
 	(else)
 		(length of $List into $N)
-		This line could be interpreted in multiple ways:
-		(enumerate possible actions $List 1)
-		(line) Which of these is intended?
+		(div @error) {
+			This line could be interpreted in multiple ways:
+			(enumerate possible actions $List 1)
+			(line) It seems the intended one is...
+		}
 		(get input $Words)
 		(if) ($Words = [$Number]) (number $Number) ($Number > 1) ~($Number > $N) (then)
 			(nth $List $Number $Result)
 			(try-complex $Result)
 		(else)
-			The previous concerns may be a scribal error. Ignoring that, we continue on to...
+			(div @error) {
+				The previous concerns may be a scribal error. Ignoring that, we continue on to...
+			}
 			(now) (deferred commandline $Words)
 			(stop)
 		(endif)
@@ -510,11 +538,9 @@
 
 (rebuild scope)
 (redraw status bar)
-(try-complex $Action)
-	Trying: $Action (line)
 (unlikely $ $) (fail)
 (describe action $Action)
-	Action: $Action (line)
+	Action: $Action
 (print words [])
 (print words [$Head|$Tail])
 	$Head (print words $Tail)
@@ -531,3 +557,24 @@
 
 (program entry point)
 	(new program entry point)
+
+%% If given [a [b c] d], this returns [a b d] and [a c d]
+%% If given [[a b] [c d]], returns [a c] [a d] [b c] [b d] (in some order)
+(expand groupings from [] into [])
+(expand groupings from [$HeadIn|$TailIn] into [$HeadOut|$TailOut])
+	(if) (nonempty $HeadIn) (then)
+		*($HeadOut is one of $HeadIn)
+	(else)
+		($HeadOut = $HeadIn)
+	(endif)
+	*(expand groupings from $TailIn into $TailOut)
+
+%% (try-complex $) will take an action with multiple nouns in a certain case and turn it into several individual actions with a single noun in that case
+%% This actually works with any number of nouns in any number of cases; the parser just limits it to a single multiple object per action to avoid combinatorial headaches (PUT ALL ON ALL is unlikely to do anything good)
+(try-complex [$Verb | $Nouns])
+	*(expand groupings from $Nouns into $NounCombo)
+	(try [$Verb | $NounCombo])
+
+%% (try $) then handles those single-noun actions
+(try $Action)
+	(log) { Trying: $Action }
