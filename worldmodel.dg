@@ -94,7 +94,6 @@
 (animate $Obj)			*(female $Obj)
 (animate $Obj)			*(male $Obj)
 (item $Obj)			*(wearable $Obj)
-(excluded from all $Obj)	*(not here $Obj)
 (excluded from all $Obj)	*(room $Obj)
 (opaque $Obj)			*(openable $Obj)
 
@@ -109,6 +108,7 @@
 %% program, but they prevent warnings about undefined predicates. They have
 %% zero impact on performance.
 
+(animate $)		(fail)
 (door $)		(fail)
 (edible $)		(fail)
 (female $)		(fail)
@@ -116,6 +116,7 @@
 (inherently dark $)	(fail)
 (item $)		(fail)
 (male $)		(fail)
+(neuter $)		(fail)
 (openable $)		(fail)
 (out of reach $)	(fail)
 (potable $)		(fail)
@@ -123,8 +124,6 @@
 (your $)		(fail)
 
 ($ provides light)	(fail)
-
-(neuter $)		(fail)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Rooms and doors
@@ -385,18 +384,13 @@
 
 (scope)
 	(rebuild scope)
-	The current scope is: (line)
-	(exhaust) {
-		*($Obj is in scope)
-		$Obj:
-		%% Prevent (the $) from revealing hidden objects
-		(if) ($Obj is hidden) (then)
-			(the $Obj)
-			(now) ($Obj is hidden)
-		(else)
-			(the $Obj)
-		(endif)
-		(line)
+	(div @meta) {
+		The current scope is: (line)
+		(exhaust) {
+			*($Obj is in scope)
+			$Obj: (name $Obj in #nominative)
+			(line)
+		}
 	}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -445,15 +439,14 @@
 
 (narrate entering (room $))
 	(par)
-	(try [look]) TODO
+	(update description)
 
 (narrate entering $Obj)
-	You get into (the $Obj). TODO
+	You enter the (name $Obj in #dative). TODO
 
 (interface (prevent entering $<Obj))
 
-(prevent entering $Obj)
-	(when $Obj won't accept actor #in)
+(prevent entering $) TODO (fail)
 
 (interface (narrate failing to leave $<Obj $<Dir))
 
@@ -595,14 +588,14 @@
 	(current room $Room)
 	*(on every tick in $Room)
 
-(on every tick)
-	(if) (narrator's it is protected) (then)
-		(now) ~(narrator's it is protected)
-	(elseif) (player's it refers to $) (then)
-		%% The narrator's it is short-lived, except when
-		%% 'it' unambiguously refers to it.
-		(now) ~(narrator's it refers to $)
-	(endif)
+(on every tick) TODO
+%%	(if) (narrator's it is protected) (then)
+%%		(now) ~(narrator's it is protected)
+%%	(elseif) (player's it refers to $) (then)
+%%		%% The narrator's it is short-lived, except when
+%%		%% 'it' unambiguously refers to it.
+%%		(now) ~(narrator's it refers to $)
+%%	(endif)
 
 (on every tick in $)		(fail)
 
@@ -612,7 +605,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Setting the pronouns from an object
 
-%% TODO rewrite (notice $) and (notice player's $)
+(notice $) TODO
+(notice player's $) TODO
+(forget pronouns out of scope) TODO
+(clear all pronouns) TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common complaints and prevent-checks
@@ -694,18 +690,7 @@
 
 (game over)
 	(par)
-	(game over status bar)
-	(if) (scoring enabled) (then)
-		(current score $Score)
-		Game over. You scored $Score
-		(if) ($Score = 1) (then) point (else) points (endif)
-		(if) (maximum score $Max) (then)
-			out of $Max
-		(endif)
-		.
-		(par)
-	(endif)
-	*(repeat forever) (game over menu) (fail)
+	(quit)
 
 (interface (game over $<Closure))
 
@@ -714,90 +699,6 @@
 	(space 5)
 	(span @bold) { \*\*\* (query $Message) \*\*\* }
 	(game over)
-
-(game over status bar)
-	(status bar @status) {
-		(score headline)
-		Game Over
-	}
-
-(game over menu)
-	(line)
-	Would you like to:
-	(if) (interpreter supports undo) (then)
-		(line) (space 5)
-		(if) (library links enabled) (then)
-			(link) UNDO
-		(else)
-			UNDO
-		(endif)
-		the last move,
-	(endif)
-	(line) (space 5)
-	(if) (library links enabled) (then)
-		(link) RESTORE a saved position,
-	(else)
-		RESTORE a saved position,
-	(endif)
-	(line) (space 5)
-	(exhaust) {
-		*(game over option)
-		(line) (space 5)
-	}
-	(if) (interpreter supports quit) (then)
-		(if) (library links enabled) (then)
-			(link) QUIT
-		(else)
-			QUIT
-		(endif)
-		the program,
-		(line) (space 5)
-	(endif)
-	or
-	(if) (library links enabled) (then)
-		(link) RESTART
-	(else)
-		RESTART
-	(endif)
-	from the beginning?
-	(line)
-	(prompt and input $Words)
-	(stoppable) (parse game over $Words)
-
-(game over option)
-	(amusing enabled)
-	see a list of
-	(if) (library links enabled) (then)
-		(link) AMUSING
-	(else)
-		AMUSING
-	(endif)
-	things to do,
-
-(interface (parse game over $<Words))
-
-(parse game over [restart])
-	(restart)
-
-(parse game over [restore])
-	(try [restore])
-
-(parse game over [undo])
-	(if) (undo) (or) (then)
-		Failed to undo last turn.
-	(endif)
-
-(parse game over [amusing])
-	(amusing enabled)
-	(amusing)
-
-(parse game over [quit/q])
-	(display quit message)
-	(line)
-	(quit)
-
-(parse game over $)
-	Please type one of the given words.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Finding the shortest path from one room to another, using obvious exits.
@@ -986,14 +887,6 @@
 		(first try [take $Obj])
 	(endif)
 
-(recursively leave non-vehicles)
-	(current player $Actor)
-	($Actor has parent $Obj)
-	~(room $Obj)
-	~(vehicle $Obj)
-	(first try [leave $Obj])
-	(recursively leave non-vehicles)
-
 (recursively leave descendants of $Obj)
 	(current player $Actor)
 	($Actor has parent $FirstObj)
@@ -1013,16 +906,16 @@
 (remove from [$In | $MoreIn] matching $Keys into [$In | $MoreOut])
 	(remove from $MoreIn matching $Keys into $MoreOut)
 
-(interface (remove duplicates $<Input $>Output))
+(interface (remove duplicates from $<Input into $>Output))
 
-(remove duplicates [] [])
+(remove duplicates from [] into [])
 	(just)
-(remove duplicates [$Head | $MoreIn] $MoreOut)
+(remove duplicates from [$Head | $MoreIn] into $MoreOut)
 	($Head is one of $MoreIn)
 	(just)
-	(remove duplicates $MoreIn $MoreOut)
-(remove duplicates [$Head | $MoreIn] [$Head | $MoreOut])
-	(remove duplicates $MoreIn $MoreOut)
+	(remove duplicates from $MoreIn into $MoreOut)
+(remove duplicates from [$Head | $MoreIn] into [$Head | $MoreOut])
+	(remove duplicates from $MoreIn into $MoreOut)
 
 (interface (length of $List into $>Number))
 
@@ -1068,7 +961,9 @@
 		($Obj recursively contains $Element)
 	}
 
-(reverse $Input $Output)
+(interface (reverse $<Input into $>Output))
+
+(reverse $Input into $Output)
 	(reverse-sub $Input $Output [])
 
 (reverse-sub [] $Output $Output)
@@ -1105,18 +1000,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Get rid of some compiler warnings
 
-(plural name $)			(fail)
 (from $ go $ to $)		(fail)
-($ unlocks $)			(fail)
 (from $ through $ to $)		(fail)
-(topic keyword $)		(fail)
-(scoring enabled)		(fail)
-(maximum score $)		(fail)
-(amusing enabled)		(fail)
-(amusing)			(fail)
-(library links enabled)		(fail)
-(default actions enabled)	(fail)
-(heads $)			(fail)
 (room $)			(fail)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

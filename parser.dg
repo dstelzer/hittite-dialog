@@ -19,7 +19,9 @@
 		($Out = [$Chain $Base | $Other])
 	(endif)
 
-(separate clitics from $In into [[]|$In]) %% Fallback if that fails: empty clitic list
+(separate clitics from [(sentence connective $) | $Rest] into [ [] | $Rest]) %% Fallback 1: empty clitic list, removing sentence connective
+
+(separate clitics from $In into [[]|$In]) %% Fallback 2: empty clitic list, preserving a word that's not a sentence connective
 
 %% How do we know if something contains clitics?
 ($Word splits into base $Base and clitic chain $Chain)
@@ -244,40 +246,6 @@
 (sentence connective @na) %% Form that's used before clitics starting with /a/
 
 %% Utilities
-
-(interface (length of $List into $>Number))
-
-(length of [] into 0)
-(length of [$ | $More] into $Np1)
-	(length of $More into $N)
-	($N plus 1 into $Np1)
-
-(interface (nth $List $<Index $Element))
-
-(nth [$Head | $] 1 $Head)
-(nth [$ | $Tail] $N $Result)
-	($N minus 1 into $Nm1)
-	(nth $Tail $Nm1 $Result)
-
-(take 0 from $ into [])
-(take $N from [$Head | $MoreIn] into [$Head | $MoreOut])
-	($N minus 1 into $Nm1)
-	(take $Nm1 from $MoreIn into $MoreOut)
-
-(split [$First $Second | $Tail] anywhere into [$First] and [$Second | $Tail])
-(split [$First | $More] anywhere into [$First | $Left] and $Right)
-	*(split $More anywhere into $Left and $Right)
-
-(interface (remove duplicates from $<Input into $>Output))
-
-(remove duplicates from [] into [])
-	(just)
-(remove duplicates from [$Head | $MoreIn] into $MoreOut)
-	($Head is one of $MoreIn)
-	(just)
-	(remove duplicates from $MoreIn into $MoreOut)
-(remove duplicates from [$Head | $MoreIn] into [$Head | $MoreOut])
-	(remove duplicates from $MoreIn into $MoreOut)
 
 (listing [] $ $ 0)
 	nothing

@@ -1,2 +1,2 @@
-debug: parser.dg
-	dgdebug parser.dg
+debug: parser.dg worldmodel.dg
+	dgdebug parser.dg worldmodel.dg
