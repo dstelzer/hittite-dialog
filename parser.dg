@@ -582,9 +582,7 @@
 (style class @akk) %% TODO FORMALIZE THIS
 	font-style: italic;
 
-(@dahhun wants cases [#accusative])
 (@tehhun wants cases [#accusative #dative])
-(@paun wants cases [#dative])
 
 %% Some test nouns
 #lalac %% "tongue"

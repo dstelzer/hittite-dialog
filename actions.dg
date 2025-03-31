@@ -1,13 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Look: not really an action, but we implement it as one for now
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(update description)
+	%% We'll eventually do this in a status area instead
+	(describe environment)
 
 (describe environment)
 	%% First line: nu LOCATION-D econ.
+	%% Compare: d^IŠKUR-ta [a]tta⸗šu[mmi] kuwapi ēšta URU^Liḫzini⸗w[a ]ešu[n] "Storm-god, our father, where were you?—I was in Lihzina"
+	%% But we might want anda ec- instead of just ec- TODO
 	(current room $Loc)
 	(log) {Current room: $Loc}
 	Nu (name $Loc in #dative) econ.
 	
 	%% Second line: nu maninkuwan ("near") ROOM-N ēcta/ecer.
-	%% TODO - do we want a compass rose instead?
+	%% TODO - do we want a compass rose instead? It would be better to have these names be in the dative, since that's what the player needs to use to go to them. But I can't think of a good phrasing that uses the dative.
 	(collect $Room)
 		*(from $Loc go $ to room $Room)
 	(into $RoomList)
@@ -36,6 +44,7 @@
 	(endif)
 	
 	%% Subsequent lines: Nu CONTAINER-DAT anda OBJECT-NOM ēcta/ecer
+	%% Or should we use ecat/ecantat "to sit"?
 	(collect $Obj)
 		*($Obj is #in $Loc)
 		($ has parent $Obj)
@@ -76,8 +85,55 @@
 		wēccon.
 	(endif)
 
-(@look/@ohhun/@ōhhun wants cases [])
-(translate [$ look/ohhun/ōhhun | $] into [look])
+(@look/@ohhon/@ōhhon wants cases [])
+(translate [$ look/ohhon/ōhhon | $] into [look])
 (perform [[look] $])
 	(log) {Describing environment}
 	(describe environment)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% GO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(@go/@paon wants cases [#dative])
+(translate [$ go/paon [] $ $Dat | $] into [go $Dat])
+(prevent [[go $Dest] $Details])
+	(current room $Source)
+	(from $Source through $Door to $Dest)
+	($Door is closed)
+	(describe negative action [[go $Dest] $Details])
+	Nu (name $Door in nominative) ictapanza ēcta. %% "The DOOR was closed."
+
+(prevent [[go (current room $Dest)] $Details])
+	(describe negative action [[go $Dest] $Details])
+	Nu=ci karū econ. %% "I was already there."
+
+(prevent [[go $Dest] $Details])
+	(current room $Source)
+	~{ (from $Source go $ to $Dest) (or) (from $Source through $ to $Dest) }
+	(div @error) {ERROR: no path from source $Source to destination $Dest! This is a bug!}
+
+(perform [[go $Dest] $])
+	(enter $Dest)
+	(describe environment)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TAKE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(@take/@dahhun wants cases [#accusative])
+(translate [$ take/dahhun [] $Acc | $] into [take $Acc])
+(prevent [[take $Obj] $Details])
+	~(item $Obj)
+	(describe negative action [[take $Obj] $Details])
+	N=an harkanna (span @akk) {ŪL} tarhon. %% "I was not able to hold it"
+
+(prevent [[take $Obj] $Details])
+	(current player $Player)
+	($Obj is #heldby $Player)
+	(describe negative action [[take $Obj] $Details])
+	N=an karū harkon. %% "I already held it"
+
+(perform [[take $Obj] $Details])
+	(current player $Player)
+	(now) ($Obj is #heldby $Player)

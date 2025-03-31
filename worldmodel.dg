@@ -442,7 +442,7 @@
 	(update description)
 
 (narrate entering $Obj)
-	You enter the (name $Obj in #dative). TODO
+	%% Nothing, for now
 
 (interface (prevent entering $<Obj))
 

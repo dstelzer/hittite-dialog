@@ -13,6 +13,7 @@
 (name * in #accusative) wappun
 (name * in #ablative) wappuwaz
 (name * in #bare) wappu
+(from * go #north to #watchtower)
 
 #river
 (name * in #nominative/#genitive) hapac
@@ -25,3 +26,12 @@
 (dict * in #dative) witeni
 (dict * in #ablative) wetenaz
 (* is #in #riverbank)
+
+#watchtower
+(room *)
+(name * in #nominative) awaric
+(name * in #genitive/#dative) awariyac
+(name * in #accusative) awarin
+(name * in #ablative) awariyaz
+(name * in #bare) awari
+(from * go #south to #riverbank)
