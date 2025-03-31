@@ -336,15 +336,15 @@
 
 (show parser errors [] for action $)
 	(div @error) { ERROR: there's an error, but no error code was returned! }
-(show parser errors [$Single] for action $Action)
+(show parser errors [$Single] for action [$Raw|$Action])
 	(div @error) {
-		This sentence is difficult to interpret.
-		(uppercase) (show parser error $Single for action $Action).
+		This sentence, $Raw, is difficult to interpret.
+		(uppercase) (show parser error $Single for action [$Raw|$Action]).
 	}
-(show parser errors $List for action $Action)
+(show parser errors $List for action [$Raw|$Action])
 	(div @error) {
-		This sentence is difficult to interpret, for multiple reasons.
-		(uppercase) (listing $List {(show parser error $_ for action $Action)}).
+		This sentence, $Raw, is difficult to interpret, for multiple reasons.
+		(uppercase) (listing $List {(show parser error $_ for action [$Raw|$Action])}).
 	}
 
 (show parser error 11 for action $)
@@ -394,7 +394,11 @@
 	%% TODO - handle English commands here
 	($Words = $Raw)
 	
-	(rewrite $Raw into [$Verb $Clitics | $Rest])
+	{
+		(rewrite $Raw into [$Verb $Clitics | $Rest])
+	(or)
+		(report errors in $Raw) %% In case the above fails
+	}
 	(log) { Rewritten: $Verb $Clitics $Rest }
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
 		(div @error) { The verb "$Verb" is not found elsewhere on the tablet, and it is difficult to interpret here. }
@@ -423,31 +427,40 @@
 
 (report errors in $Words)
 	(now) (allowing parse errors) %% Tell the parsing predicates that they should show their errors instead of just silently failing
-	(if) %% Multiqueries here not really necessary because if-conditions discard choice points, but it helps optimization according to the stdlib comments
-		{
+	%% Multiqueries here are not really necessary because if-conditions discard choice points, but it helps optimization according to the stdlib comments
+	(if)
 		(rewrite $Words into [$Verb $Clitics | $Rest])
-			(or)
-			(div @realerror) { ERROR: Cannot get verb and clitics. What happened? }
-			(stop)
-		}
-		{
-		*(parse top-level $Rest into noun list $Nouns)
-			(or)
+	(then)
+	
+		(if)
+			*(parse top-level $Rest into noun list $Nouns)
+		(then)
+		
+			(if)
+				*(convert parsed line [$Verb $Clitics | $Nouns] from raw $Words into $Action)
+			(then)
+			
+				(log) { Parsed into action $Action, showing errors for that }
+				(show parser errors for $Action)
+				(stop)
+			
+			(else)
+				(log) { Reporting first broken clitic from $Clitics }
+				(find first broken clitic from $Clitics and report it)
+				(stop)
+			(endif)
+		
+		(else)
+			(log) { Reporting first broken noun from $Rest }
 			(find first broken noun from $Rest and report it)
 			(stop)
-		}
-		{
-		*(convert parsed line [$Verb $Clitics | $Nouns] into $Action)
-			(or)
-			(find first broken clitic from $Clitics and report it)
-			(stop)
-		}
-	(then)
-		(show parser errors for $Action)
+		(endif)
+	
 	(else)
-		(div @realerror) { ERROR: This line can't be parsed, but no other routine handled it. Why? }
+		(log) { Very high-level parsing failure }
+		(div @realerror) { ERROR: Cannot get verb and clitics. What happened? }
+		(stop)
 	(endif)
-	(stop)
 
 (sieve action candidates $All at level $Level) %% Level is how unlikely of actions we should consider
 	(if) ($Level = 3) (then)
