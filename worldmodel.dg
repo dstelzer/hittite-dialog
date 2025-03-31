@@ -541,8 +541,7 @@
 	(tick)
 	(par)
 
-%% TODO rewrite for our new action representation
-(refuse $Action)
+(refuse [$Action $])
 	*($Obj is one of $Action)
 	(object $Obj)
 	~(direction $Obj)
@@ -556,13 +555,14 @@
 
 (instead of $Action)
 	~{ (prevent $Action) (tick) (stop) }
+	(describe action $Action)
 	(perform $Action)
 	(exhaust) *(after $Action)
 
 (prevent $)	(fail)
 
 (perform $Action)
-	You can't (describe action $Action).
+	(describe negative action $Action)
 	(tick) (stop)
 
 (after $)	(fail)

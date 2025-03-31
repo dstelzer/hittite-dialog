@@ -97,8 +97,15 @@
 
 %% We include adverbs in the noun list, with the tag #adverb
 %% Because they can be interspersed with noun phrases
+%% However, they shouldn't be printed like nouns, with conjunctions and all
 (parse [$Word] as #adverb $Word)
 	(adverb $Word)
+(name [] in #adverb)
+(name $Word in #adverb)
+	$Word
+(name [$Head | $Rest] in #adverb)
+	$Head
+	(name $Rest in #adverb)
 
 (adverb @appa)
 
@@ -119,12 +126,12 @@
 ~(parse [] as $ $) %% Avoid edge cases - require a single word at least
 (parse $Words as $Case $Obj)
 	(determine object $Obj)
-		*(object $Obj)
+		*($Obj is in scope)
 	(from words)
 		(dict $Obj in $Case)
 	(matching all of $Words)
 
-%% Our representation of an action is [verb [adv] [acc] [dat] [abl]], so now we need to convert a noun list into that
+%% Our representation of a complex action is [verb [adv] [acc] [dat] [abl]] (eventually with the raw wording preposed), so now we need to convert a noun list into that
 (empty action with verb $Verb is [$Verb [] [] [] []])
 
 %% Noun phrases
@@ -196,7 +203,7 @@
 	(remove duplicates from $Dats into $NewDats)
 	(remove duplicates from $Abls into $NewAbls)
 
-(interface (convert parsed line $<Input into $>Output))
+(interface (convert parsed line $<Input from raw $<Raw into $>Output))
 %% Now put it together
 (convert parsed line [$Verb $Clitics | $Nouns] from raw $Raw into [$Raw | $Action])
 	(empty action with verb $Verb is $First)
@@ -211,41 +218,6 @@
 	*(dict $Obj in #nominative)
 (dict $Obj in $Case)
 	(name $Obj in $Case)
-
-%% Some test nouns
-#lalac %% "tongue"
-(name * in #accusative)
-	lalan
-(name * in #dative)
-	lali
-(name * in #ablative)
-	lalaz
-(name * in #bare)
-	lala
-
-#halkic %% "grain"
-(name * in #accusative)
-	halkin
-(name * in #dative)
-	halki
-(name * in #ablative)
-	halkiz
-(name * in #bare)
-	halki
-
-#attac %% "father"
-(name * in #accusative)
-	attan
-(name * in #dative)
-	atti
-(name * in #ablative)
-	attaz
-(name * in #bare)
-	atta
-
-#É %% "house"
-(name * in $)
-	É E2
 
 (sentence connective @nu)
 (sentence connective @na) %% Form that's used before clitics starting with /a/
@@ -303,7 +275,7 @@
 (noun list [$Adv $ $ $] and case list $Cases produce error 11)
 	(empty $Adv)
 	(#adverb is one of $Cases)
-%% We do *not* check for excess adverbs at the moment
+%% We do *not* check for excess adverbs at the moment, but that would be error 21 if we did
 (noun list [$ $Acc $ $] and case list $Cases produce error 12)
 	(empty $Acc)
 	(#accusative is one of $Cases)
@@ -389,6 +361,7 @@
 	(now) ~(allowing parse errors)
 	(parse action $Words)
 
+(interface (parse action $<Words))
 (parse action $Words)
 	%% TODO - handle AGAIN and OOPS here if desired
 	%% TODO - handle English commands here
@@ -398,6 +371,7 @@
 		(rewrite $Raw into [$Verb $Clitics | $Rest])
 	(or)
 		(report errors in $Raw) %% In case the above fails
+		(stop) %% (report errors in $) will always (stop) but this helps the optimizer by reassuring it that $Verb, $Clitics, $Rest will always be bound by the previous branch
 	}
 	(log) { Rewritten: $Verb $Clitics $Rest }
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
@@ -458,7 +432,11 @@
 	
 	(else)
 		(log) { Very high-level parsing failure }
-		(div @realerror) { ERROR: Cannot get verb and clitics. What happened? }
+		(if) (empty $Words) (then)
+			(stop)
+		(else)
+			(div @error) { This sentence seems to be incomplete. The tablet may be damaged at this point. }
+		(endif)
 		(stop)
 	(endif)
 
@@ -531,15 +509,34 @@
 (rebuild scope)
 (redraw status bar)
 (unlikely $ $) (fail)
+(describe action [$English [$Raw $Verb $Adv $Acc $Dat $Abl]])
+	English: $English (line)
+	Raw: $Raw (line)
+	Hittite:
+		Nu
+		(name $Acc in #accusative)
+		(name $Dat in #dative)
+		(name $Abl in #ablative)
+		(name $Adv in #adverb)
+		$Verb
+	. (line)
 (describe action $Action)
-	Action: $Action
+	Improper action: $Action
+(describe negative action [$English [$Raw $Verb $Adv $Acc $Dat $Abl]])
+	English: not $English (line)
+	Raw: (span @akk) {ŪL} $Raw (line)
+	Hittite:
+		Nu
+		(name $Acc in #accusative)
+		(name $Dat in #dative)
+		(name $Abl in #ablative)
+		(name $Adv in #adverb)
+		(span @akk) {ŪL}
+		$Verb
+	. (line)
 (print words [])
 (print words [$Head|$Tail])
 	$Head (print words $Tail)
-
-(@dahhun wants cases [#accusative])
-(@tehhun wants cases [#accusative #dative])
-(@paun wants cases [#dative])
 
 (enumerate possible actions [] $)
 (enumerate possible actions [$Head|$Tail] $N)
@@ -565,7 +562,61 @@
 %% This actually works with any number of nouns in any number of cases; the parser just limits it to a single multiple object per action to avoid combinatorial headaches (PUT ALL ON ALL is unlikely to do anything good)
 (try-complex [$Raw $Verb | $Nouns])
 	*(expand groupings from $Nouns into $NounCombo)
-	(try [$Raw $Verb | $NounCombo])
+	(if) (translate [$Raw $Verb | $NounCombo] into $EnglishAction) (then)
+		(log) { English action: $EnglishAction }
+		(log) (describe action [$EnglishAction [$Raw $Verb | $Nouns]])
+		(try [$EnglishAction [$Raw $Verb | $Nouns]])
+	(else)
+		(div @error) { ERROR: The sentence $Raw was parsed as $Verb and $NounCombo, but this could not be translated. }
+	(endif)
 
 %% (try $) then handles those single-noun actions
 %% Implemented in worldmodel.dg
+
+(name [] in $Case)
+(name [$Single] in $Case)
+	(name $Single in $Case)
+(name [$Head|$Rest] in $Case)
+	(name $Head in $Case)
+	(span @akk) { Ù }
+(style class @akk) %% TODO FORMALIZE THIS
+	font-style: italic;
+
+(@dahhun wants cases [#accusative])
+(@tehhun wants cases [#accusative #dative])
+(@paun wants cases [#dative])
+
+%% Some test nouns
+#lalac %% "tongue"
+(name * in #accusative)
+	lalan
+(name * in #dative)
+	lali
+(name * in #ablative)
+	lalaz
+(name * in #bare)
+	lala
+
+#halkic %% "grain"
+(name * in #accusative)
+	halkin
+(name * in #dative)
+	halki
+(name * in #ablative)
+	halkiz
+(name * in #bare)
+	halki
+
+#attac %% "father"
+(name * in #accusative)
+	attan
+(name * in #dative)
+	atti
+(name * in #ablative)
+	attaz
+(name * in #bare)
+	atta
+
+#É %% "house"
+(name * in $)
+	É E2

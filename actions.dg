@@ -3,13 +3,15 @@
 (describe environment)
 	%% First line: nu LOCATION-D econ.
 	(current room $Loc)
+	(log) {Current room: $Loc}
 	Nu (name $Loc in #dative) econ.
 	
 	%% Second line: nu maninkuwan ("near") ROOM-N ēcta/ecer.
 	%% TODO - do we want a compass rose instead?
 	(collect $Room)
-		(from $Loc go $ to room $Room)
+		*(from $Loc go $ to room $Room)
 	(into $RoomList)
+	(log) {Room list: $RoomList}
 	(if) (nonempty $RoomList) (then)
 		(line) Nu maninkuwan
 		(name $RoomList in #nominative)
@@ -23,9 +25,10 @@
 	
 	%% Second paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōhhon.
 	(collect $Obj)
-		($Obj is #in $Loc)
+		*($Obj is #in $Loc)
 		~(current player $Obj)
 	(into $HereList)
+	(log) {Here: $HereList}
 	(if) (nonempty $HereList) (then)
 		(par) Nu apiya
 		(name $HereList in #accusative)
@@ -34,10 +37,11 @@
 	
 	%% Subsequent lines: Nu CONTAINER-DAT anda OBJECT-NOM ēcta/ecer
 	(collect $Obj)
-		($Obj is #in $Loc)
+		*($Obj is #in $Loc)
 		($ has parent $Obj)
 		~(current player $Obj)
 	(into $ContainerList)
+	(log) {Containers: $ContainerList}
 	(exhaust) {
 		*($Container is one of $ContainerList)
 		(collect $Obj)
@@ -52,8 +56,9 @@
 	%% Third paragraph: Nu INVENTORY-ACC harkon.
 	(current player $Player)
 	(collect $Obj)
-		($Obj is #heldby $Player)
+		*($Obj is #heldby $Player)
 	(into $HeldList)
+	(log) {Held: $HeldList}
 	(if) (nonempty $HeldList) (then)
 		(par) Nu
 		(name $HeldList in #accusative)
@@ -62,21 +67,17 @@
 	
 	%% Fourth paragraph: Nu CLOTHES-ACC wēccon.
 	(collect $Obj)
-		($Obj is #wornby $Player)
+		*($Obj is #wornby $Player)
 	(into $WornList)
+	(log) {Worn: $WornList}
 	(if) (nonempty $WornList) (then)
 		(par) Nu
 		(name $WornList in #accusative)
 		wēccon.
 	(endif)
 
-(@look wants cases [])
-(perform [$ look | $])
+(@look/@ohhun/@ōhhun wants cases [])
+(translate [$ look/ohhun/ōhhun | $] into [look])
+(perform [[look] $])
 	(log) {Describing environment}
 	(describe environment)
-
-%% For testing it out
-(current player #me)
-(#me is #in #place)
-(room #place)
-(name #place in $) Place
