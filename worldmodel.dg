@@ -541,6 +541,7 @@
 	(tick)
 	(par)
 
+%% TODO rewrite for our new action representation
 (refuse $Action)
 	*($Obj is one of $Action)
 	(object $Obj)

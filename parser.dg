@@ -53,6 +53,11 @@
 %% So this is to parse a sequence of noun phrases into something like
 %% [ [#accusative #Obj1] [#dative #Obj2] ]
 
+%% At top level we want to allow [], but in the recursive case we don't
+(parse top-level [] into noun list [])
+(parse top-level $Words into noun list $Nouns)
+	(parse $Words into noun list $Nouns)
+
 %% Base case: a single noun
 (parse $Words into noun list $Nouns)
 	(parse $Words into single noun $Noun)
@@ -193,7 +198,7 @@
 
 (interface (convert parsed line $<Input into $>Output))
 %% Now put it together
-(convert parsed line [$Verb $Clitics | $Nouns] into $Action)
+(convert parsed line [$Verb $Clitics | $Nouns] from raw $Raw into [$Raw | $Action])
 	(empty action with verb $Verb is $First)
 	*(add noun phrases $Nouns to action $First into $Second)
 	*(convert clitics $Clitics into noun phrases $ExtraNouns)
@@ -269,18 +274,18 @@
 
 %% Now, the parser!
 
-(valid sentence [$Verb | $Nouns])
+(valid sentence [$ $Verb | $Nouns])
 	*($Verb wants cases $Cases)
 	~(noun list $Nouns and case list $Cases produce error $)
 
-(show parser errors for [$Verb | $Nouns])
+(show parser errors for [$Raw $Verb | $Nouns])
 	*($Verb wants cases $Cases)
 	%% Collect all the errors that happen in this particular instance
 	(collect $Error)
 		*(noun list $Nouns and case list $Cases produce error $Error)
 	(into $ErrorList)
 	%% If we're displaying errors, and we *have* errors, we should show them first
-	(show parser errors $ErrorList for action [$Verb | $Nouns])
+	(show parser errors $ErrorList for action [$Raw $Verb | $Nouns])
 
 %% Error codes:
 %%
@@ -390,23 +395,29 @@
 	($Words = $Raw)
 	
 	(rewrite $Raw into [$Verb $Clitics | $Rest])
+	(log) { Rewritten: $Verb $Clitics $Rest }
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
 		(div @error) { The verb "$Verb" is not found elsewhere on the tablet, and it is difficult to interpret here. }
 	(endif)
 	(collect $Action)
-		*(parse $Rest into noun list $Nouns)
+		*(parse top-level $Rest into noun list $Nouns)
 		(log) { Noun list: $Nouns }
-		*(convert parsed line [$Verb $Clitics | $Nouns] into $Action)
+		*(convert parsed line [$Verb $Clitics | $Nouns] from raw $Raw into $Action)
 		(log) { Considering: $Action }
 		(valid sentence $Action) %% Only include ones in the final result that don't cause parse errors
 	(into $RawOptions)
+	(log) { Raw options: $RawOptions }
 	(remove duplicates from $RawOptions into $Options)
+	(log) { Options: $Options }
 	
 	(if) ($Options = [$Only]) (then) %% Optimize the common case
+		(log) { Trying: $Only }
 		(try-complex $Only)
 	(elseif) (empty $Options) (then) %% No successful parse, try to give a useful error
+		(log) { Running again to report errors }
 		(report errors in $Raw)
 	(else)
+		(log) { Sieving }
 		(sieve action candidates $Options at level 0)
 	(endif)
 
@@ -420,7 +431,7 @@
 			(stop)
 		}
 		{
-		*(parse $Rest into noun list $Nouns)
+		*(parse top-level $Rest into noun list $Nouns)
 			(or)
 			(find first broken noun from $Rest and report it)
 			(stop)
@@ -539,10 +550,9 @@
 
 %% (try-complex $) will take an action with multiple nouns in a certain case and turn it into several individual actions with a single noun in that case
 %% This actually works with any number of nouns in any number of cases; the parser just limits it to a single multiple object per action to avoid combinatorial headaches (PUT ALL ON ALL is unlikely to do anything good)
-(try-complex [$Verb | $Nouns])
+(try-complex [$Raw $Verb | $Nouns])
 	*(expand groupings from $Nouns into $NounCombo)
-	(try [$Verb | $NounCombo])
+	(try [$Raw $Verb | $NounCombo])
 
 %% (try $) then handles those single-noun actions
-(try $Action)
-	(log) { Trying: $Action }
+%% Implemented in worldmodel.dg
