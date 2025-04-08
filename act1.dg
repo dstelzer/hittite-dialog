@@ -45,7 +45,7 @@
 (name * in #accusative) palcan
 (name * in #ablative) palcaz
 (name * in #bare) palca
-(from # go #east to #watchtower)
+(from * go #east to #watchtower)
 
 #ladder
 (item *)

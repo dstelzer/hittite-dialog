@@ -31,6 +31,8 @@
 		.
 	(endif)
 	
+	(compass rose) %% Experiment
+	
 	%% Second paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōhhon.
 	(collect $Obj)
 		*($Obj is #in $Loc)
@@ -89,6 +91,37 @@
 		wēccon.
 	(endif)
 
+(compass rose)
+	(current room $Loc)
+	{ (from $Loc go #north to room $North) (or) ($North = []) }
+	{ (from $Loc go #east to room $East) (or) ($East = []) }
+	{ (from $Loc go #south to room $South) (or) ($South = []) }
+	{ (from $Loc go #west to room $West) (or) ($West = []) }
+	{ (from $Loc go #up to room $Up) (or) ($Up = []) }
+	{ (from $Loc go #down to room $Down) (or) ($Down = []) }
+	
+	(div @compass) {
+		(div @compassline) {
+			(room name []) (room name $North) (room name $Up)
+		}
+		(div @compassline) {
+			(room name $West) (space 3) <> (space 3) (room name $East)
+		}
+		(div @compassline) {
+			(room name $Down) (room name $South) (room name [])
+		}
+	}
+
+(style class @compass)
+	margin-top: 1em;
+	margin-bottom: 1em;
+(style class @compassline)
+	width: 100\%;
+	text-align: center;
+
+(room name []) (space 8)
+(room name $Obj) (name $Obj in #dative)
+
 (@look/@ohhon/@ōhhon wants cases [])
 (translate [$ look/ohhon/ōhhon | $] into [look])
 (perform [[look] $])
@@ -119,7 +152,6 @@
 
 (perform [[go $Dest] $])
 	(enter $Dest)
-	(describe environment)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TAKE

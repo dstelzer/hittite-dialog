@@ -56,11 +56,11 @@
 %% At top level we want to allow [], but in the recursive case we don't
 (parse top-level [] into noun list [])
 (parse top-level $Words into noun list $Nouns)
-	(parse $Words into noun list $Nouns)
+	*(parse $Words into noun list $Nouns)
 
 %% Base case: a single noun
 (parse $Words into noun list $Nouns)
-	(parse $Words into single noun $Noun)
+	*(parse $Words into single noun $Noun)
 	($Nouns = [$Noun])
 
 %% Recursive case: multiple nouns
@@ -573,12 +573,13 @@
 %% (try $) then handles those single-noun actions
 %% Implemented in worldmodel.dg
 
-(name [] in $Case)
+(name [] in $)
 (name [$Single] in $Case)
 	(name $Single in $Case)
 (name [$Head|$Rest] in $Case)
 	(name $Head in $Case)
 	(span @akk) { Ù }
+	(name $Rest in $Case)
 (style class @akk) %% TODO FORMALIZE THIS
 	font-style: italic;
 
