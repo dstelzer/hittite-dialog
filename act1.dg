@@ -35,3 +35,44 @@
 (name * in #ablative) awariyaz
 (name * in #bare) awari
 (from * go #south to #riverbank)
+(from * go #west to #street)
+(from * go #east to #wall)
+
+#street
+(room *)
+(name * in #nominative/#genitive) palcac
+(name * in #dative) palci
+(name * in #accusative) palcan
+(name * in #ablative) palcaz
+(name * in #bare) palca
+(from # go #east to #watchtower)
+
+#ladder
+(item *)
+(name * in #nominative/#genitive) ilac
+(name * in #dative) ili
+(name * in #accusative) ilan
+(name * in #ablative) ilaz
+(name * in #bare) ila
+(* is #in #street)
+
+#wall
+(room *)
+(name * in #nominative) kuz
+(name * in #genitive) kuttac
+(name * in #dative) kutti
+(name * in #accusative) kuttan
+(name * in #ablative) kuttaz
+(name * in #bare) kut
+(from * go #west to #watchtower)
+(from * go #north to #corner)
+
+#corner
+(room *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) halhaltumar
+(name * in #genitive) halhaltumanac
+(name * in #dative) halhaltumani
+(name * in #ablative) halhaltumanaz
+(from * go #south to #wall)
+(from * go #west to #gatehouse)

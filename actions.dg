@@ -45,6 +45,10 @@
 	
 	%% Subsequent lines: Nu CONTAINER-DAT anda OBJECT-NOM ēcta/ecer
 	%% Or should we use ecat/ecantat "to sit"?
+	%% Solution: use forms of kitta "it lies"
+		%% kittat(i) sg, kīyantat(i) pl
+		%% Used for on, in, on top of...
+		%% Anda(n) not necessary
 	(collect $Obj)
 		*($Obj is #in $Loc)
 		($ has parent $Obj)
