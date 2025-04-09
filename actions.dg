@@ -23,16 +23,16 @@
 		*(from $Loc go $ to room $Room)
 	(into $RoomList)
 	(log) {Room list: $RoomList}
-	(if) (nonempty $RoomList) (then)
-		(line) Nu maninkuwan
-		(name $RoomList in #nominative)
-		(if) ($RoomList = [$]) (then)
-			ēcta
-		(else)
-			ecer
-		(endif)
-		.
-	(endif)
+%%	(if) (nonempty $RoomList) (then)
+%%		(line) Nu maninkuwan
+%%		(name $RoomList in #nominative)
+%%		(if) ($RoomList = [$]) (then)
+%%			ēcta
+%%		(else)
+%%			ecer
+%%		(endif)
+%%		.
+%%	(endif)
 	
 	(compass rose) %% Experiment
 	
