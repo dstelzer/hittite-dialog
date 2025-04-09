@@ -66,6 +66,9 @@
 %% Recursive case: multiple nouns
 ~(parse [] into noun list $)
 
+(parse [ù/u3 | $Rest] into noun list $Nouns) %% Handle explicit "and"s
+	(parse $Rest into noun list $Nouns) %% We don't currently handle =ya etc though
+
 (parse $Words into noun list $Nouns)
 	*(split $Words anywhere into $Left and $Right)
 	*(parse $Left into single noun $Single)
@@ -74,10 +77,23 @@
 	($Nouns = [$Single $First | $Other])
 
 %% We can't report this from within (parse $ into noun list $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
+(find first broken noun from [] and report it)
+(find first broken noun from [$Noun] and report it)
+	The noun in this line is obscure, and it's unclear what "(no space)$Noun(no space)" means.
+	(stop)
 (find first broken noun from $Nouns and report it)
 	*(split $Nouns anywhere into $Left and $Right)
-	(parse $Left into single noun $)
-	{ (find first broken noun from $Right and report it) (or) The nouns in this line are obscure, and it's unclear what "(no space)(print words $Right)(no space)" means. (stop) }
+	(log) { Split: $Left $Right }
+	{
+		*(parse $Left into single noun $)
+		(find first broken noun from $Right and report it)
+	(or)
+		*(parse $Left as not-here object $)
+		It's unclear what "(no space)(print words $Left)(no space)" is meant to refer to; these words (emph {are}) used on the tablet, but what they describe is not currently near our protagonist.
+	(or)
+		The nouns in this line are obscure, and it's unclear what "(no space)(print words $Right)(no space)" means.
+		(stop)
+	}
 
 %% Now how do we recognize a single noun?
 ~(parse [] into single noun $)
@@ -128,7 +144,16 @@
 	(determine object $Obj)
 		*($Obj is in scope)
 	(from words)
-		(dict $Obj in $Case)
+		*(dict $Obj in $Case)
+	(matching all of $Words)
+
+(parse $Words as not-here object $Obj)
+	*(grammatical case $Case)
+	(determine object $Obj)
+		*(object $Obj)
+		~($Obj is in scope)
+	(from words)
+		*(dict $Obj in $Case)
 	(matching all of $Words)
 
 %% Our representation of a complex action is [verb [adv] [acc] [dat] [abl]] (eventually with the raw wording preposed), so now we need to convert a noun list into that
@@ -510,22 +535,23 @@
 (redraw status bar)
 (unlikely $ $) (fail)
 (describe action [$English [$Raw $Verb $Adv $Acc $Dat $Abl]])
-	English: $English (line)
-	Raw: $Raw (line)
-	Hittite:
+%%	English: $English (line)
+%%	Raw: $Raw (line)
+%%	Hittite:
 		Nu
 		(name $Acc in #accusative)
 		(name $Dat in #dative)
 		(name $Abl in #ablative)
 		(name $Adv in #adverb)
 		$Verb
-	. (line)
+	.
+%%	(line)
 (describe action $Action)
 	Improper action: $Action
 (describe negative action [$English [$Raw $Verb $Adv $Acc $Dat $Abl]])
-	English: not $English (line)
-	Raw: (span @akk) {ŪL} $Raw (line)
-	Hittite:
+%%	English: not $English (line)
+%%	Raw: (span @akk) {ŪL} $Raw (line)
+%%	Hittite:
 		Nu
 		(name $Acc in #accusative)
 		(name $Dat in #dative)
@@ -533,7 +559,8 @@
 		(name $Adv in #adverb)
 		(span @akk) {ŪL}
 		$Verb
-	. (line)
+	.
+%%	(line)
 (print words [])
 (print words [$Head|$Tail])
 	$Head (print words $Tail)

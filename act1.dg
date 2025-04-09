@@ -21,7 +21,7 @@
 (name * in #accusative) hapan
 (name * in #ablative) hapaz
 (name * in #bare) hapa
-(dict * in #nominative/#accusative) wātar %% "water"
+(dict * in #nominative/#accusative) wātar watar %% "water"
 (dict * in #genitive) witenac
 (dict * in #dative) witeni
 (dict * in #ablative) wetenaz
@@ -37,6 +37,16 @@
 (from * go #south to #riverbank)
 (from * go #west to #street)
 (from * go #east to #wall)
+(from * go #north through #gate to #gatehouse)
+
+#gate
+(door *)
+(* is closed)
+(name * in #nominative/#genitive) ackac
+(name * in #dative) acki
+(name * in #accusative) ackan
+(name * in #ablative) ackaz
+(name * in #bare) acka
 
 #street
 (room *)
@@ -58,21 +68,54 @@
 
 #wall
 (room *)
+(header *) Nu kutti kattan econ. %% I was below the wall
 (name * in #nominative) kuz
 (name * in #genitive) kuttac
 (name * in #dative) kutti
 (name * in #accusative) kuttan
 (name * in #ablative) kuttaz
 (name * in #bare) kut
+(dict * in *(grammatical case $)) kattan
 (from * go #west to #watchtower)
 (from * go #north to #corner)
 
 #corner
 (room *)
 (neuter *)
-(name * in #nominative/#accusative/#bare) halhaltumar
-(name * in #genitive) halhaltumanac
-(name * in #dative) halhaltumani
-(name * in #ablative) halhaltumanaz
+(header *) Nu kuttac halhaltomari econ. %% I was at the corner of the wall
+(name * in #nominative/#accusative/#bare) halhaltomar
+(name * in #genitive) halhaltomarac
+(name * in #dative) halhaltomari
+(name * in #ablative) halhaltomaraz
+(dict * in *(grammatical case $)) kuttac
 (from * go #south to #wall)
-(from * go #west to #gatehouse)
+(from * go #west through #window to #gatehouse)
+
+#window
+(door *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) luttāi
+(name * in #genitive) luttiyac
+(name * in #dative) luttiya
+(name * in #ablative) luttanza
+
+(prevent [[go #gatehouse] $Details])
+	(current room #corner)
+	~(#ladder is #in #corner)
+	(describe negative action [[go #gatehouse] $Details])
+	Nu luttāi parku ēcta. %% "The window is high up"
+(prevent [[go #corner] $Details])
+	(current room #gatehouse)
+	~(#ladder is #in #gatehouse)
+	(describe negative action [[go #corner] $Details])
+	Nu luttāi parku ēcta. %% "The window is high up"
+
+#gatehouse
+(room *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) hilammar
+(name * in #genitive) hilamnac
+(name * in #dative) hilamna
+(name * in #ablative) hilamnaz
+(from * go #east through #window to #corner)
+(from * go #south through #gate to #watchtower)

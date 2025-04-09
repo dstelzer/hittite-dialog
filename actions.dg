@@ -4,7 +4,10 @@
 
 (update description)
 	%% We'll eventually do this in a status area instead
+	(update environment around player)
 	(describe environment)
+
+(header (room $Room)) Nu (name $Room in #dative) econ.
 
 (describe environment)
 	%% First line: nu LOCATION-D econ.
@@ -12,7 +15,7 @@
 	%% But we might want anda ec- instead of just ec- TODO
 	(current room $Loc)
 	(log) {Current room: $Loc}
-	Nu (name $Loc in #dative) econ.
+	(header $Loc)
 	
 	%% Second line: nu maninkuwan ("near") ROOM-N ēcta/ecer.
 	%% TODO - do we want a compass rose instead? It would be better to have these names be in the dative, since that's what the player needs to use to go to them. But I can't think of a good phrasing that uses the dative.
@@ -77,7 +80,7 @@
 	(if) (nonempty $HeldList) (then)
 		(par) Nu
 		(name $HeldList in #accusative)
-		wēccon.
+		harkon.
 	(endif)
 	
 	%% Fourth paragraph: Nu CLOTHES-ACC wēccon.
@@ -91,14 +94,20 @@
 		wēccon.
 	(endif)
 
-(compass rose)
+(interface ($<Dir on the compass rose is $>Obj))
+($Dir on the compass rose is $Obj)
 	(current room $Loc)
-	{ (from $Loc go #north to room $North) (or) ($North = []) }
-	{ (from $Loc go #east to room $East) (or) ($East = []) }
-	{ (from $Loc go #south to room $South) (or) ($South = []) }
-	{ (from $Loc go #west to room $West) (or) ($West = []) }
-	{ (from $Loc go #up to room $Up) (or) ($Up = []) }
-	{ (from $Loc go #down to room $Down) (or) ($Down = []) }
+	(from $Loc go $Dir to $Obj)
+	{ (room $Obj) (or) (door $Obj) }
+($ on the compass rose is []) %% Use [] if there's no room that way
+
+(compass rose)
+	(#north on the compass rose is $North)
+	(#east on the compass rose is $East)
+	(#south on the compass rose is $South)
+	(#west on the compass rose is $West)
+	(#up on the compass rose is $Up)
+	(#down on the compass rose is $Down)
 	
 	(div @compass) {
 		(div @compassline) {
@@ -134,6 +143,7 @@
 
 (@go/@paon wants cases [#dative])
 (translate [$ go/paon [] $ $Dat | $] into [go $Dat])
+
 (prevent [[go $Dest] $Details])
 	(current room $Source)
 	(from $Source through $Door to $Dest)
@@ -146,9 +156,29 @@
 	Nu=ci karū econ. %% "I was already there."
 
 (prevent [[go $Dest] $Details])
+	~(room $Dest)
+	~(door $Dest)
+	~(enterable $Dest)
+	(describe negative action [[go $Dest] $Details])
+	(div @error) { It's not clear what the verb "paon" would mean for something that can't be entered. It's primarily used for locations, or doors. }
+
+(instead of [[go (door $Dest)] $Details])
+	(current room $Loc)
+	(log) { Tried to go a door; translating this action }
+	(if) (from $Loc through $Dest to $RealDest) (then) %% Put the door in the ablative, and the destination room in the dative
+		($Details = [$Raw $Verb $Adv $Acc $ $Abl])
+		($NewDetails = [$Raw $Verb $Adv $Acc [$RealDest] [$Dest|$Abl]])
+		(log) { New action: [[go $RealDest] $NewDetails] }
+		(try [[go $RealDest] $NewDetails])
+	(else)
+		(describe negative action [[go $Dest] $Details]) %% This should never happen since a non-adjacent door shouldn't be in scope
+		(div @realerror) { ERROR: Tried to enter a door \( $Dest \) but it is not adjacent! }
+	(endif)
+
+(prevent [[go (room $Dest)] $])
 	(current room $Source)
 	~{ (from $Source go $ to $Dest) (or) (from $Source through $ to $Dest) }
-	(div @error) {ERROR: no path from source $Source to destination $Dest! This is a bug!}
+	(div @realerror) { ERROR: no path from source $Source to destination $Dest! }
 
 (perform [[go $Dest] $])
 	(enter $Dest)
@@ -157,12 +187,24 @@
 %% TAKE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(@take/@dahhun wants cases [#accusative])
-(translate [$ take/dahhun [] $Acc | $] into [take $Acc])
+(@take/@dahhon wants cases [#accusative])
+(translate [$ take/dahhon [] $Acc | $] into [take $Acc])
+
 (prevent [[take $Obj] $Details])
 	~(item $Obj)
 	(describe negative action [[take $Obj] $Details])
 	N=an harkanna (span @akk) {ŪL} tarhon. %% "I was not able to hold it"
+
+(prevent [[take $Obj] $Details]) %% Or is this message better?
+	~(item $Obj)
+	(describe negative action [[take $Obj] $Details])
+	N=an mekki
+	(if) (neuter $Obj) (then)
+		calli
+	(else)
+		callic
+	(endif)
+	ēcta. %% "It was very large."
 
 (prevent [[take $Obj] $Details])
 	(current player $Player)
@@ -170,6 +212,23 @@
 	(describe negative action [[take $Obj] $Details])
 	N=an karū harkon. %% "I already held it"
 
-(perform [[take $Obj] $Details])
+(perform [[take $Obj] $])
 	(current player $Player)
 	(now) ($Obj is #heldby $Player)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DROP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(@drop/@dalahhon/@dālahhon wants cases [#accusative])
+(translate [$ drop/dalahhon/dālahhon [] $Acc | $] into [drop $Acc])
+
+(prevent [[drop $Obj] $Details])
+	(current player $Player)
+	~($Obj has ancestor $Player)
+	(describe negative action [[drop $Obj] $Details])
+	N=an (span @akk) {ŪL} harkon. %% "I did not hold it"
+
+(perform [[drop $Obj] $])
+	(current room $Room)
+	(now) ($Obj is #in $Room)

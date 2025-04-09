@@ -441,7 +441,7 @@
 	(par)
 	(update description)
 
-(narrate entering $Obj)
+(narrate entering $)
 	%% Nothing, for now
 
 (interface (prevent entering $<Obj))
@@ -589,7 +589,7 @@
 	(current room $Room)
 	*(on every tick in $Room)
 
-(on every tick) TODO
+(on every tick) %% TODO
 %%	(if) (narrator's it is protected) (then)
 %%		(now) ~(narrator's it is protected)
 %%	(elseif) (player's it refers to $) (then)
@@ -627,7 +627,7 @@
 
 (intro)
 	(banner)
-	(try [look])
+	(update description)
 
 %% Most of this has been moved to parser.dg
 
@@ -636,6 +636,8 @@
 
 %% There is no formal requirement to print the banner, but it's appreciated
 %% and useful to the community and yourself.
+
+(banner) %% TODO temporarily disabled
 
 (banner)
 	(par)
