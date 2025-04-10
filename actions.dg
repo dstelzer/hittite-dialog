@@ -18,8 +18,8 @@
 	(update environment around player)
 	(if) (interpreter supports inline status bar) (then)
 		(inline status bar @inline) (describe environment)
-	(elseif) (interpreter supports status bar) (then)
-		(status bar @status) (describe environment)
+%%	(elseif) (interpreter supports status bar) (then)
+%%		(status bar @status) (describe environment)
 	(else)
 		(div @inline) (describe environment)
 	(endif)
@@ -62,7 +62,7 @@
 	(if) (nonempty $HereList) (then)
 		(par) Nu apiya
 		(name $HereList in #accusative)
-		ōhhon.
+		oohhon.
 	(endif)
 	
 	%% Subsequent lines: Nu CONTAINER-DAT anda OBJECT-NOM ēcta/ecer
@@ -155,13 +155,13 @@
 (room name []) (space 8)
 (room name $Obj) (name $Obj in #dative)
 
-(@look/@ohhon/@ōhhon wants cases [])
-(translate [$ look/ohhon/ōhhon | $] into [look])
+(@look/@ohhon/@oohhon wants cases [])
+(translate [$ look/ohhon/oohhon | $] into [look])
 (perform [[look] $])
 	(action log {Describing environment} )
 	(describe environment)
 
-(verb @ōhhon unlocked)
+(verb @ohhon unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GO
@@ -287,7 +287,6 @@
 	N=an (span @akk) {ūl} harkon. %% "I did not hold it"
 
 (prevent [[put $Obj $Dest] $Details])
-	(current player $Player)
 	~(holder $Dest)
 	(describe negative action [[put $Obj $Dest] $Details])
 	N=an (name $Dest in #nominative) (span @akk) {ūl} harkon. %% "The DEST did not hold it"

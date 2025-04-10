@@ -1,6 +1,6 @@
 #me
 (current player *)
-(name * in #nominative/#bare) ūk
+(name * in #nominative/#bare) uuk
 (name * in #genitive) ammel
 (name * in #dative/#accusative/#ablative) ammuk
 (* is #in #riverbank)
@@ -21,7 +21,7 @@
 (name * in #accusative) hapan
 (name * in #ablative) hapaz
 (name * in #bare) hapa
-(dict * in #nominative/#accusative) wātar watar %% "water"
+(dict * in #nominative/#accusative) waatar watar %% "water"
 (dict * in #genitive) witenac
 (dict * in #dative) witeni
 (dict * in #ablative) wetenaz
@@ -94,7 +94,8 @@
 #window
 (door *)
 (neuter *)
-(name * in #nominative/#accusative/#bare) luttāi
+(name * in #nominative/#accusative/#bare) luttaai
+(dict * in #nominative/#accusative/#bare) luttai
 (name * in #genitive) luttiyac
 (name * in #dative) luttiya
 (name * in #ablative) luttanza

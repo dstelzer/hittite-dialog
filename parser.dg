@@ -393,11 +393,17 @@
 	(now) ~(allowing parse errors)
 	(parse action $Words)
 
+(metacommand [quit]) (quit)
+(metacommand [undo]) (undo)
+(metacommand [save]) (save $)
+(metacommand [restore]) (restore)
+
 (interface (parse action $<Words))
 (parse action $Words)
 	%% TODO - handle AGAIN and OOPS here if desired
-	%% TODO - handle English commands here
 	($Words = $Raw)
+	
+	(if) (metacommand $Words) (then) (stop) (endif) %% Check if it's an English metacommand
 	
 	{
 		(rewrite $Raw into [$Verb $Clitics | $Rest])
