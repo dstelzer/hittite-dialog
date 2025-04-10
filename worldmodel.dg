@@ -120,6 +120,7 @@
 (edible $)		(fail)
 (female $)		(fail)
 (fine where it is $)	(fail)
+(holder $)		(fail)
 (inherently dark $)	(fail)
 (item $)		(fail)
 (male $)		(fail)
@@ -140,9 +141,6 @@
 (name (room $) in #dative)		pedi
 (name (room $) in #ablative)	pedaz
 (name (room $) in #bare)		peda
-
-(room header (room $Place))
-	Nu (name $Place in #dative) econ.
 
 (interface (from $<Room go $>Dir to room $>Obj))
 

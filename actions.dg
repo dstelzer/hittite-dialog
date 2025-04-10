@@ -1,4 +1,7 @@
-(action logging)
+(extension version)
+	(line) Hittite action processing version 0.1 by Daniel Stelzer
+
+(action logging) (fail)
 
 (action log $Closure)
 	(action logging)
@@ -13,7 +16,13 @@
 (update description)
 	%% We'll eventually do this in a status area instead
 	(update environment around player)
-	(describe environment)
+	(if) (interpreter supports inline status bar) (then)
+		(inline status bar @inline) (describe environment)
+	(elseif) (interpreter supports status bar) (then)
+		(status bar @status) (describe environment)
+	(else)
+		(div @inline) (describe environment)
+	(endif)
 
 (header (room $Room)) Nu (name $Room in #dative) econ.
 
@@ -22,7 +31,7 @@
 	%% Compare: d^IŠKUR-ta [a]tta⸗šu[mmi] kuwapi ēšta URU^Liḫzini⸗w[a ]ešu[n] "Storm-god, our father, where were you?—I was in Lihzina"
 	%% But we might want anda ec- instead of just ec- TODO
 	(current room $Loc)
-	(log) {Current room: $Loc}
+	(action log {Current room: $Loc} )
 	(header $Loc)
 	
 	%% Second line: nu maninkuwan ("near") ROOM-N ēcta/ecer.
@@ -30,7 +39,7 @@
 	(collect $Room)
 		*(from $Loc go $ to room $Room)
 	(into $RoomList)
-	(log) {Room list: $RoomList}
+	(action log {Room list: $RoomList} )
 %%	(if) (nonempty $RoomList) (then)
 %%		(line) Nu maninkuwan
 %%		(name $RoomList in #nominative)
@@ -49,7 +58,7 @@
 		*($Obj is #in $Loc)
 		~(current player $Obj)
 	(into $HereList)
-	(log) {Here: $HereList}
+	(action log {Here: $HereList} )
 	(if) (nonempty $HereList) (then)
 		(par) Nu apiya
 		(name $HereList in #accusative)
@@ -67,7 +76,7 @@
 		($ has parent $Obj)
 		~(current player $Obj)
 	(into $ContainerList)
-	(log) {Containers: $ContainerList}
+	(action log {Containers: $ContainerList} )
 	(exhaust) {
 		*($Container is one of $ContainerList)
 		(collect $Obj)
@@ -84,7 +93,7 @@
 	(collect $Obj)
 		*($Obj is #heldby $Player)
 	(into $HeldList)
-	(log) {Held: $HeldList}
+	(action log {Held: $HeldList} )
 	(if) (nonempty $HeldList) (then)
 		(par) Nu
 		(name $HeldList in #accusative)
@@ -95,7 +104,7 @@
 	(collect $Obj)
 		*($Obj is #wornby $Player)
 	(into $WornList)
-	(log) {Worn: $WornList}
+	(action log {Worn: $WornList} )
 	(if) (nonempty $WornList) (then)
 		(par) Nu
 		(name $WornList in #accusative)
@@ -149,7 +158,7 @@
 (@look/@ohhon/@ōhhon wants cases [])
 (translate [$ look/ohhon/ōhhon | $] into [look])
 (perform [[look] $])
-	(log) {Describing environment}
+	(action log {Describing environment} )
 	(describe environment)
 
 (verb @ōhhon unlocked)
@@ -182,11 +191,11 @@
 
 (instead of [[go (door $Dest)] $Details])
 	(current room $Loc)
-	(log) { Tried to go a door; translating this action }
+	(action log { Tried to go a door; translating this action } )
 	(if) (from $Loc through $Dest to $RealDest) (then) %% Put the door in the ablative, and the destination room in the dative
 		($Details = [$Raw $Verb $Adv $Acc $ $Abl])
 		($NewDetails = [$Raw $Verb $Adv $Acc [$RealDest] [$Dest|$Abl]])
-		(log) { New action: [[go $RealDest] $NewDetails] }
+		(action log { New action: [[go $RealDest] $NewDetails] } )
 		(try [[go $RealDest] $NewDetails])
 	(else)
 		(describe negative action [[go $Dest] $Details]) %% This should never happen since a non-adjacent door shouldn't be in scope
@@ -236,6 +245,7 @@
 	(current player $Player)
 	(now) ($Obj is #heldby $Player)
 	(now) ($Obj is handled)
+	(update description)
 
 (verb @dahhon unlocked)
 	(#street is visited)
@@ -246,8 +256,8 @@
 
 (adverb @kattan/@katta/@down means @katta)
 
-(@put/@tehhun wants cases [#accusative #adverb])
-(translate [$ put/tehhun katta $Acc | $] into [drop $Acc])
+(@put/@tehhon wants cases [#accusative #adverb])
+(translate [$ put/tehhon katta $Acc | $] into [drop $Acc])
 
 (prevent [[drop $Obj] $Details])
 	(current player $Player)
@@ -258,6 +268,33 @@
 (perform [[drop $Obj] $])
 	(current room $Room)
 	(now) ($Obj is #in $Room)
+	(update description)
 
-(verb @katta-tehhun unlocked)
+(verb @katta-tehhon unlocked)
 	(#ladder is handled)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(@put/@tehhon wants cases [#accusative #dative])
+(translate [$ put/tehhon [] $Acc $Dat | $] into [put $Acc $Dat])
+
+(prevent [[put $Obj $Dest] $Details])
+	(current player $Player)
+	~($Obj has ancestor $Player)
+	(describe negative action [[put $Obj $Dest] $Details])
+	N=an (span @akk) {ūl} harkon. %% "I did not hold it"
+
+(prevent [[put $Obj $Dest] $Details])
+	(current player $Player)
+	~(holder $Dest)
+	(describe negative action [[put $Obj $Dest] $Details])
+	N=an (name $Dest in #nominative) (span @akk) {ūl} harkon. %% "The DEST did not hold it"
+
+(perform [[put $Obj $Dest] $])
+	(now) ($Obj is #in $Dest)
+	(update description)
+
+(verb @tehhon unlocked)
+	(#gatehouse is visited)
