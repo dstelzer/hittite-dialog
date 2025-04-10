@@ -1,14 +1,23 @@
 (extension version)
 	(line) Hittite parser version 0.5 by Daniel Stelzer
 
+(parser logging) (fail)
+
+(parser log $Closure)
+	(parser logging)
+	(log) (query $Closure)
+(parser log $) %% Always succeed
+(style class @log)
+
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
 (rewrite $Input into $Output)
-	(log) { Input: $Input }
+	(parser log {Rewriting})
+	(parser log { Input: $Input } )
 	(separate clitics from $Input into $Middle)
-	(log) { Middle: $Middle }
+	(parser log { Middle: $Middle } )
 	(transpose verb from $Middle into $Output)
-	(log) { Rewritten: $Output }
+	(parser log { Rewritten: $Output } )
 
 %% Separate clitics from the first word
 (separate clitics from [$First | $Other] into $Out)
@@ -83,7 +92,7 @@
 	(stop)
 (find first broken noun from $Nouns and report it)
 	*(split $Nouns anywhere into $Left and $Right)
-	(log) { Split: $Left $Right }
+	(parser log { Split: $Left $Right } )
 	{
 		*(parse $Left into single noun $)
 		(find first broken noun from $Right and report it)
@@ -114,16 +123,14 @@
 %% We include adverbs in the noun list, with the tag #adverb
 %% Because they can be interspersed with noun phrases
 %% However, they shouldn't be printed like nouns, with conjunctions and all
-(parse [$Word] as #adverb $Word)
-	(adverb $Word)
+(parse [$Word] as #adverb $Meaning)
+	(adverb $Word means $Meaning)
 (name [] in #adverb)
-(name $Word in #adverb)
+(name (word $Word) in #adverb)
 	$Word
 (name [$Head | $Rest] in #adverb)
 	$Head
 	(name $Rest in #adverb)
-
-(adverb @appa)
 
 (parse [ana/ina/pani | $Words] as #dative $Obj)
 	{
@@ -398,29 +405,29 @@
 		(report errors in $Raw) %% In case the above fails
 		(stop) %% (report errors in $) will always (stop) but this helps the optimizer by reassuring it that $Verb, $Clitics, $Rest will always be bound by the previous branch
 	}
-	(log) { Rewritten: $Verb $Clitics $Rest }
+	(parser log { Rewritten: $Verb $Clitics $Rest } )
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
 		(div @error) { The verb "$Verb" is not found elsewhere on the tablet, and it is difficult to interpret here. }
 	(endif)
 	(collect $Action)
 		*(parse top-level $Rest into noun list $Nouns)
-		(log) { Noun list: $Nouns }
+		(parser log { Noun list: $Nouns } )
 		*(convert parsed line [$Verb $Clitics | $Nouns] from raw $Raw into $Action)
-		(log) { Considering: $Action }
+		(parser log { Considering: $Action } )
 		(valid sentence $Action) %% Only include ones in the final result that don't cause parse errors
 	(into $RawOptions)
-	(log) { Raw options: $RawOptions }
+	(parser log { Raw options: $RawOptions } )
 	(remove duplicates from $RawOptions into $Options)
-	(log) { Options: $Options }
+	(parser log { Options: $Options } )
 	
 	(if) ($Options = [$Only]) (then) %% Optimize the common case
-		(log) { Trying: $Only }
+		(parser log { Trying: $Only } )
 		(try-complex $Only)
 	(elseif) (empty $Options) (then) %% No successful parse, try to give a useful error
-		(log) { Running again to report errors }
+		(parser log { Running again to report errors } )
 		(report errors in $Raw)
 	(else)
-		(log) { Sieving }
+		(parser log { Sieving } )
 		(sieve action candidates $Options at level 0)
 	(endif)
 
@@ -439,24 +446,24 @@
 				*(convert parsed line [$Verb $Clitics | $Nouns] from raw $Words into $Action)
 			(then)
 			
-				(log) { Parsed into action $Action, showing errors for that }
+				(parser log { Parsed into action $Action, showing errors for that } )
 				(show parser errors for $Action)
 				(stop)
 			
 			(else)
-				(log) { Reporting first broken clitic from $Clitics }
+				(parser log { Reporting first broken clitic from $Clitics } )
 				(find first broken clitic from $Clitics and report it)
 				(stop)
 			(endif)
 		
 		(else)
-			(log) { Reporting first broken noun from $Rest }
+			(parser log { Reporting first broken noun from $Rest } )
 			(find first broken noun from $Rest and report it)
 			(stop)
 		(endif)
 	
 	(else)
-		(log) { Very high-level parsing failure }
+		(parser log { Very high-level parsing failure } )
 		(if) (empty $Words) (then)
 			(stop)
 		(else)
@@ -526,15 +533,10 @@
 	> (get input $Words)
 	~($Words = [\* | $]) %% Ignore lines starting with stars, for transcript comments
 
-(new program entry point)
-	*(repeat forever)
-	(read-parse-act)
-	(fail)
-
 (rebuild scope)
 (redraw status bar)
 (unlikely $ $) (fail)
-(describe action [$English [$Raw $Verb $Adv $Acc $Dat $Abl]])
+(describe action [$English [$ $Verb $Adv $Acc $Dat $Abl]])
 %%	English: $English (line)
 %%	Raw: $Raw (line)
 %%	Hittite:
@@ -548,7 +550,7 @@
 %%	(line)
 (describe action $Action)
 	Improper action: $Action
-(describe negative action [$English [$Raw $Verb $Adv $Acc $Dat $Abl]])
+(describe negative action [$English [$ $Verb $Adv $Acc $Dat $Abl]])
 %%	English: not $English (line)
 %%	Raw: (span @akk) {ŪL} $Raw (line)
 %%	Hittite:
@@ -557,7 +559,7 @@
 		(name $Dat in #dative)
 		(name $Abl in #ablative)
 		(name $Adv in #adverb)
-		(span @akk) {ŪL}
+		(span @akk) {ūl}
 		$Verb
 	.
 %%	(line)
@@ -570,9 +572,6 @@
 	(line) (space 4) $N : (describe action $Head)
 	($N plus 1 into $Np1)
 	(enumerate possible actions $Tail $Np1)
-
-(program entry point)
-	(new program entry point)
 
 %% If given [a [b c] d], this returns [a b d] and [a c d]
 %% If given [[a b] [c d]], returns [a c] [a d] [b c] [b d] (in some order)
@@ -590,8 +589,8 @@
 (try-complex [$Raw $Verb | $Nouns])
 	*(expand groupings from $Nouns into $NounCombo)
 	(if) (translate [$Raw $Verb | $NounCombo] into $EnglishAction) (then)
-		(log) { English action: $EnglishAction }
-		(log) (describe action [$EnglishAction [$Raw $Verb | $Nouns]])
+		(parser log { English action: $EnglishAction } )
+		(parser log { (describe action [$EnglishAction [$Raw $Verb | $Nouns]]) } )
 		(try [$EnglishAction [$Raw $Verb | $Nouns]])
 	(else)
 		(div @error) { ERROR: The sentence $Raw was parsed as $Verb and $NounCombo, but this could not be translated. }

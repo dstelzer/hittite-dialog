@@ -1,6 +1,13 @@
 (library version)
 	Hittite world model version 0.5.
 
+(world logging)
+
+(world log $Closure)
+	(world logging)
+	(log) (query $Closure)
+(world log $) %% Always succeed
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Global variables
 
@@ -626,7 +633,9 @@
 	*(repeat forever) (read-parse-act) (fail)
 
 (intro)
+	(world log {Banner})
 	(banner)
+	(world log {Updating})
 	(update description)
 
 %% Most of this has been moved to parser.dg

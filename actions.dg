@@ -1,3 +1,11 @@
+(action logging)
+
+(action log $Closure)
+	(action logging)
+	(log) (query $Closure)
+(action log $) %% Always succeed
+(style class @log)
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Look: not really an action, but we implement it as one for now
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,6 +101,13 @@
 		(name $WornList in #accusative)
 		wēccon.
 	(endif)
+	
+	%% Fifth paragraph: verbs. TODO how to phrase this?
+	(par) Verbs:
+	(exhaust) {
+		*(verb $Verb unlocked)
+		$Verb
+	}
 
 (interface ($<Dir on the compass rose is $>Obj))
 ($Dir on the compass rose is $Obj)
@@ -137,6 +152,8 @@
 	(log) {Describing environment}
 	(describe environment)
 
+(verb @ōhhon unlocked)
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -147,9 +164,10 @@
 (prevent [[go $Dest] $Details])
 	(current room $Source)
 	(from $Source through $Door to $Dest)
+	(action log {Found door $Door})
 	($Door is closed)
 	(describe negative action [[go $Dest] $Details])
-	Nu (name $Door in nominative) ictapanza ēcta. %% "The DOOR was closed."
+	Nu (name $Door in #nominative) ictapanza ēcta. %% "The DOOR was closed."
 
 (prevent [[go (current room $Dest)] $Details])
 	(describe negative action [[go $Dest] $Details])
@@ -183,6 +201,8 @@
 (perform [[go $Dest] $])
 	(enter $Dest)
 
+(verb @paon unlocked)
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TAKE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -193,7 +213,7 @@
 (prevent [[take $Obj] $Details])
 	~(item $Obj)
 	(describe negative action [[take $Obj] $Details])
-	N=an harkanna (span @akk) {ŪL} tarhon. %% "I was not able to hold it"
+	N=an harkanna (span @akk) {ūl} tarhon. %% "I was not able to hold it"
 
 (prevent [[take $Obj] $Details]) %% Or is this message better?
 	~(item $Obj)
@@ -215,20 +235,29 @@
 (perform [[take $Obj] $])
 	(current player $Player)
 	(now) ($Obj is #heldby $Player)
+	(now) ($Obj is handled)
+
+(verb @dahhon unlocked)
+	(#street is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DROP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(@drop/@dalahhon/@dālahhon wants cases [#accusative])
-(translate [$ drop/dalahhon/dālahhon [] $Acc | $] into [drop $Acc])
+(adverb @kattan/@katta/@down means @katta)
+
+(@put/@tehhun wants cases [#accusative #adverb])
+(translate [$ put/tehhun katta $Acc | $] into [drop $Acc])
 
 (prevent [[drop $Obj] $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
 	(describe negative action [[drop $Obj] $Details])
-	N=an (span @akk) {ŪL} harkon. %% "I did not hold it"
+	N=an (span @akk) {ūl} harkon. %% "I did not hold it"
 
 (perform [[drop $Obj] $])
 	(current room $Room)
 	(now) ($Obj is #in $Room)
+
+(verb @katta-tehhun unlocked)
+	(#ladder is handled)
