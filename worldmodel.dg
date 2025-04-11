@@ -98,14 +98,6 @@
 @($Obj is pristine)		~($Obj is handled)
 @($Obj is unvisited)		~($Obj is visited)
 
-(animate $Obj)			*(female $Obj)
-(animate $Obj)			*(male $Obj)
-(item $Obj)			*(wearable $Obj)
-(excluded from all $Obj)	*(room $Obj)
-(opaque $Obj)			*(openable $Obj)
-
-((openable $) is closed)
-
 @(common $Obj)	~(neuter $Obj)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -117,19 +109,12 @@
 
 (animate $)		(fail)
 (door $)		(fail)
-(edible $)		(fail)
-(female $)		(fail)
-(fine where it is $)	(fail)
 (holder $)		(fail)
 (inherently dark $)	(fail)
 (item $)		(fail)
-(male $)		(fail)
 (neuter $)		(fail)
-(openable $)		(fail)
 (out of reach $)	(fail)
-(potable $)		(fail)
 (wearable $)		(fail)
-(your $)		(fail)
 
 ($ provides light)	(fail)
 
@@ -189,7 +174,7 @@
 ($Door blocks passage)
 	($Door is closed)
 
-((opaque $Door) blocks light)
+($Door blocks light)
 	($Door is closed)
 
 @(from $Room go $Dir through $Door to $Target)
@@ -204,7 +189,7 @@
 (visibility ceiling of $Obj is $Ceil)
 	(if) ($Obj has parent $Parent) (then)
 		(if)
-			(opaque $Parent)
+	%%		(opaque $Parent)
 			($Obj has relation #in)
 			($Parent is closed)
 		(then)
@@ -442,16 +427,12 @@
 		(endif)
 	(endif)
 
-(narrate entering (room $))
-	(par)
-	(update description)
-
 (narrate entering $)
-	%% Nothing, for now
+	(now) (update needed)
 
 (interface (prevent entering $<Obj))
 
-(prevent entering $) TODO (fail)
+(prevent entering $) (fail) %% TODO
 
 (interface (narrate failing to leave $<Obj $<Dir))
 
@@ -551,10 +532,11 @@
 	(object $Obj)
 	~(direction $Obj)
 	~(relation $Obj)
-	{
-		(when $Obj is not here)
-		(or) (when $Obj is out of reach)
-	}
+%%	{
+%%		(when $Obj is not here)
+%%		(or) (when $Obj is out of reach)
+%%	}
+	(fail)
 
 (before $)	(fail)
 
@@ -611,10 +593,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Setting the pronouns from an object
 
-(notice $) TODO
-(notice player's $) TODO
-(forget pronouns out of scope) TODO
-(clear all pronouns) TODO
+(notice $) %% TODO
+(notice player's $) %% TODO
+(forget pronouns out of scope) %% TODO
+(clear all pronouns) %% TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common complaints and prevent-checks

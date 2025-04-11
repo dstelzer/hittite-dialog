@@ -25,6 +25,22 @@
 	(endif)
 
 (header (room $Room)) Nu (name $Room in #dative) econ.
+(short name (inherently dark $Room))
+	(current player $Player)
+	~($Player has a light source)
+	~($Room has a light source)
+	dankui %% "Dark"
+(short name (logogram $Room)) (name $Room in #bare)
+(short name (object $Room)) (name $Room in #dative)
+
+#darkness
+(add * to scope)
+(inherently dark *) %% Make the "go to a dark room" rules apply to this
+(name * in #dative) dankui
+(refuse [$Action $]) %% Prevent any interaction with this noun
+	(* is one of $Action)
+	~($Action = [go *])
+	(div @error) { Since the "darkness" is insubstantial, it's unclear what this action would entail. }
 
 (describe environment)
 	%% First line: nu LOCATION-D econ.
@@ -84,7 +100,7 @@
 		(into $ContentsList)
 		(line) Nu (name $Container in #dative)
 		(name $ContentsList in #nominative)
-		(if) ($ContentsList = [$]) (then) ēcta (else) ecer (endif) %% Agreement
+		(if) ($ContentsList = [$]) (then) kittat (else) kīyantat (endif) %% Agreement
 		.
 	}
 	
@@ -135,13 +151,13 @@
 	
 	(div @compass) {
 		(div @compassline) {
-			(room name []) (room name $North) (room name $Up)
+			(short name []) (short name $North) (short name $Up)
 		}
 		(div @compassline) {
-			(room name $West) (space 3) <> (space 3) (room name $East)
+			(short name $West) (space 3) <> (space 3) (short name $East)
 		}
 		(div @compassline) {
-			(room name $Down) (room name $South) (room name [])
+			(short name $Down) (short name $South) (short name [])
 		}
 	}
 
@@ -152,14 +168,12 @@
 	width: 100\%;
 	text-align: center;
 
-(room name []) (space 8)
-(room name $Obj) (name $Obj in #dative)
+(short name []) (space 8)
 
 (@look/@ohhon/@oohhon wants cases [])
 (translate [$ look/ohhon/oohhon | $] into [look])
 (perform [[look] $])
-	(action log {Describing environment} )
-	(describe environment)
+	(now) (update needed)
 
 (verb @ohhon unlocked)
 
@@ -168,15 +182,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 (@go/@paon wants cases [#dative])
-(translate [$ go/paon [] $ $Dat | $] into [go $Dat])
+(translate [$ go/paon $ $ $Dat | $] into [go $Dat])
 
 (prevent [[go $Dest] $Details])
 	(current room $Source)
 	(from $Source through $Door to $Dest)
 	(action log {Found door $Door})
-	($Door is closed)
+	($Door blocks passage)
 	(describe negative action [[go $Dest] $Details])
+	(describe $Door blocking passage)
+
+(describe $Door blocking passage)
 	Nu (name $Door in #nominative) ictapanza ēcta. %% "The DOOR was closed."
+(($Door is closed) blocks passage)
+
+(prevent [[go (inherently dark $Dest)] $Details])
+	(current player $Player)
+	~($Player has a light source)
+	~($Dest has a light source)
+	(describe negative action [[go $Dest] $Details])
+	Nu pedan dankuecta. %% "The place was dark."
+
+($Parent has a light source)
+	*($Obj has ancestor $Parent)
+	($Obj provides light)
 
 (prevent [[go (current room $Dest)] $Details])
 	(describe negative action [[go $Dest] $Details])
@@ -185,7 +214,6 @@
 (prevent [[go $Dest] $Details])
 	~(room $Dest)
 	~(door $Dest)
-	~(enterable $Dest)
 	(describe negative action [[go $Dest] $Details])
 	(div @error) { It's not clear what the verb "paon" would mean for something that can't be entered. It's primarily used for locations, or doors. }
 
@@ -217,14 +245,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 (@take/@dahhon wants cases [#accusative])
-(translate [$ take/dahhon [] $Acc | $] into [take $Acc])
+(@take/@dahhon wants cases [#ablative])
+(translate [$ take/dahhon $ $Acc $ []] into [take $Acc])
+(translate [$ take/dahhon $ $Acc $ $Abl] into [take $Acc from $Abl])
 
-(prevent [[take $Obj] $Details])
+(instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
+	($Obj is #in $Holder)
+	~(room $Holder)
+	~(current player $Holder)
+	(action log {Redirecting to take from $Holder})
+	($Details = [$Raw $Verb $Adv [$Obj] [] []])
+	(try [[take $Obj from $Holder] [$Raw $Verb $Adv [$Obj] [] [$Holder]]])
+
+(prevent [[take $Obj from $Holder] $Details])
+	~($Obj is #in $Holder)
+	(describe negative action [[take $Obj from $Holder] $Details])
+	Nu (name $Obj in #nominative) (name $Holder in #dative) (span @akk) {ūl} kittat. %% "The OBJ was not in the HOLDER."
+
+(prevent [[take $Obj | $] $Details])
 	~(item $Obj)
 	(describe negative action [[take $Obj] $Details])
 	N=an harkanna (span @akk) {ūl} tarhon. %% "I was not able to hold it"
 
-(prevent [[take $Obj] $Details]) %% Or is this message better?
+(prevent [[take $Obj | $] $Details]) %% Or is this message better?
 	~(item $Obj)
 	(describe negative action [[take $Obj] $Details])
 	N=an mekki
@@ -235,17 +278,20 @@
 	(endif)
 	ēcta. %% "It was very large."
 
-(prevent [[take $Obj] $Details])
+(prevent [[take $Obj | $] $Details])
 	(current player $Player)
 	($Obj is #heldby $Player)
 	(describe negative action [[take $Obj] $Details])
 	N=an karū harkon. %% "I already held it"
 
-(perform [[take $Obj] $])
+(perform [[take $Obj | $] $])
+	(narrate taking $Obj)
 	(current player $Player)
 	(now) ($Obj is #heldby $Player)
 	(now) ($Obj is handled)
-	(update description)
+	(now) (update needed)
+
+(narrate taking $) %% Nothing by default
 
 (verb @dahhon unlocked)
 	(#street is visited)
@@ -259,7 +305,7 @@
 (@put/@tehhon wants cases [#accusative #adverb])
 (translate [$ put/tehhon katta $Acc | $] into [drop $Acc])
 
-(prevent [[drop $Obj] $Details])
+(refuse [[drop $Obj] $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
 	(describe negative action [[drop $Obj] $Details])
@@ -268,7 +314,7 @@
 (perform [[drop $Obj] $])
 	(current room $Room)
 	(now) ($Obj is #in $Room)
-	(update description)
+	(now) (update needed)
 
 (verb @katta-tehhon unlocked)
 	(#ladder is handled)
@@ -278,9 +324,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 (@put/@tehhon wants cases [#accusative #dative])
-(translate [$ put/tehhon [] $Acc $Dat | $] into [put $Acc $Dat])
+(translate [$ put/tehhon $ $Acc $Dat | $] into [put $Acc $Dat])
 
-(prevent [[put $Obj $Dest] $Details])
+(refuse [[put $Obj $Dest] $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
 	(describe negative action [[put $Obj $Dest] $Details])
@@ -293,7 +339,7 @@
 
 (perform [[put $Obj $Dest] $])
 	(now) ($Obj is #in $Dest)
-	(update description)
+	(now) (update needed)
 
 (verb @tehhon unlocked)
 	(#gatehouse is visited)

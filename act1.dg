@@ -41,11 +41,21 @@
 
 #gate
 (door *)
-(* is closed)
-(name * in #nominative/#genitive) ackac
-(name * in #dative) acki
-(name * in #accusative) ackan
-(name * in #ablative) ackaz
+(* blocks passage)
+	{ (#bolt is #in *) (or) (#bolt is pristine) }
+(describe * blocking passage)
+	Nu ackac ciyanza ēcta. %% The gate was sealed.
+(short name *) acki
+(name * in #nominative)
+	ackac (if) (* blocks passage) (then) ciyanza (else) haccanza (endif)
+(name * in #genitive)
+	ackac (if) (* blocks passage) (then) ciyandac (else) haccantac (endif)
+(name * in #dative)
+	acki (if) (* blocks passage) (then) ciyanti (else) haccanti (endif)
+(name * in #accusative)
+	ackan (if) (* blocks passage) (then) ciyantan (else) haccantan (endif)
+(name * in #ablative)
+	ackaz (if) (* blocks passage) (then) ciyantaz (else) haccantaz (endif)
 (name * in #bare) acka
 
 #street
@@ -82,41 +92,151 @@
 #corner
 (room *)
 (neuter *)
-(header *) Nu kuttac halhaltomari econ. %% I was at the corner of the wall
-(name * in #nominative/#accusative/#bare) halhaltomar
-(name * in #genitive) halhaltomarac
-(name * in #dative) halhaltomari
-(name * in #ablative) halhaltomaraz
-(dict * in *(grammatical case $)) kuttac
+(short name *) halhaltomari
+(name * in #nominative/#accusative/#bare) kuttac halhaltomar
+(name * in #genitive) kuttac halhaltomarac
+(name * in #dative) kuttac halhaltomari
+(name * in #ablative) kuttac halhaltomaraz
 (from * go #south to #wall)
 (from * go #west through #window to #gatehouse)
 
 #window
 (door *)
 (neuter *)
-(name * in #nominative/#accusative/#bare) luttaai
-(dict * in #nominative/#accusative/#bare) luttai
-(name * in #genitive) luttiyac
-(name * in #dative) luttiya
-(name * in #ablative) luttanza
-
-(prevent [[go #gatehouse] $Details])
-	(current room #corner)
-	~(#ladder is #in #corner)
-	(describe negative action [[go #gatehouse] $Details])
-	Nu luttāi parku ēcta. %% "The window is high up"
-(prevent [[go #corner] $Details])
-	(current room #gatehouse)
-	~(#ladder is #in #gatehouse)
-	(describe negative action [[go #corner] $Details])
-	Nu luttāi parku ēcta. %% "The window is high up"
+(* blocks passage)
+	(current room $Room)
+	~(#ladder is #in $Room)
+(describe * blocking passage) Nu luttāi parku ēcta. %% "The window is high up"
+(short name *) luttiya
+(name * in #nominative/#accusative/#bare)
+	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttaai
+(dict * in #nominative/#accusative/#bare)
+	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttai
+(name * in #genitive)
+	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttiyac
+(name * in #dative)
+	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttiya
+(name * in #ablative)
+	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttanza
 
 #gatehouse
 (room *)
 (neuter *)
 (name * in #nominative/#accusative/#bare) hilammar
 (name * in #genitive) hilamnac
-(name * in #dative) hilamna
+(name * in #dative) hilamni
 (name * in #ablative) hilamnaz
 (from * go #east through #window to #corner)
 (from * go #south through #gate to #watchtower)
+(from * go #west to #otherroom)
+
+#bolt
+(item *)
+(neuter *)
+(name * in #nominative/#accusative/#bare)
+	(if) (bolt is burning) (then) warān (endif)
+	GIC hattalu
+(name * in #genitive)
+	(if) (bolt is burning) (then) warantac (endif)
+	GIC hattaluwac
+(name * in #dative)
+	(if) (bolt is burning) (then) waranti (endif)
+	GIC hattaluwi
+(name * in #ablative)
+	(if) (bolt is burning) (then) warantaz (endif)
+	GIC hattaluwaz
+
+(after [[go #gatehouse] $]) %% Only describe it on the inside
+	(* is pristine)
+	(now) (* is #in #gate)
+
+(narrate taking *)
+	(* is pristine)
+	Nu ackan hachon. %% "I opened the gate."
+	(now) (update needed)
+
+(instead of [[put * #hearth/#fire] $Details])
+	(#fire is #in #hearth)
+	(describe action [[put * #fire] $Details])
+	Nu GIC hattalu lukket. %% "The bolt ignited."
+	(now) (bolt is burning)
+	(now) (update needed)
+
+(instead of [[put * #river] $Details])
+	(describe action [[put * #river] $Details])
+	(now) ~(bolt is burning)
+	(now) (update needed)
+
+(* provides light)
+	(bolt is burning)
+
+#otherroom
+(room *)
+(name * in #nominative/#genitive) antalac
+(name * in #dative) antali
+(name * in #accusative) antalan
+(name * in #ablative) antalaz
+(name * in #bare) antala
+(from * go #east to #gatehouse)
+(from * go #north to #storeroom)
+
+#hearth
+(holder *)
+(name * in #nominative/#genitive) haccac
+(name * in #dative) hacci
+(name * in #accusative) haccan
+(name * in #ablative) haccaz
+(name * in #bare) hacca
+(* is #in #otherroom)
+
+#fire
+(neuter *)
+(name * in #nominative/#accusative/#bare) pahhur
+(name * in #genitive) pahhuenac
+(name * in #dative) pahhueni
+(name * in #ablative) pahhuenaz
+(* is #in #hearth)
+
+(prevent [[take $Obj from #hearth] $Details])
+	(* is #in #hearth)
+	(describe negative action [[take $Obj from #hearth] $Details])
+	Nu pahhur ayyanza ēcta. %% "The fire was hot."
+
+#cup
+%% TODO CONFIRM GENDER
+(item *)
+(name * in #nominative) DUG zēric
+(name * in #genitive/#dative) DUG zēriyac
+(name * in #accusative) DUG zērin
+(name * in #ablative) DUG zēriyaz
+(name * in #bare) DUG zēri
+(* is #in #hearth)
+
+#watchman
+(animate *)
+(name * in #nominative) techallic LÚ halliyatallac %% Sleeping watchman
+(name * in #genitive) techalliyac LÚ halliyatallac
+(name * in #dative) techalliya LÚ halliyatalli
+(name * in #accusative) techallin LÚ halliyatallan
+(name * in #ablative) techalliyaz LÚ halliyatallaz
+(name * in #bare) techalli LÚ halliyatalla
+(* is #in #otherroom)
+
+#storeroom
+(room *)
+(logogram *)
+(name * in #bare) ARAH3
+(inherently dark *)
+(from * go #south to #otherroom)
+
+#urn
+(item *)
+(logogram *)
+(name * in #bare) DUG
+(* is #in #storeroom)
+
+(metacommand [test watchtower])
+	(now) (#ladder is #in #corner)
+	(now) (#ladder is handled)
+	(now) (#street is visited)
+	(enter #gatehouse)

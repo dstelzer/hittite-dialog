@@ -172,9 +172,9 @@
 	(add noun phrases $Rest to action [$Verb [$Adv|$Advs] $Acc $Dat $Abl] into $Out)
 (add noun phrases [[#accusative/#bare $Acc] | $Rest] to action [$Verb $Adv $Accs $Dat $Abl] into $Out)
 	(add noun phrases $Rest to action [$Verb $Adv [$Acc|$Accs] $Dat $Abl] into $Out)
-(add noun phrases [[#dative/#bare $Dat] | $Rest] to action [$Verb $Adv $Acc $Dats $Abl] into $Out)
+(add noun phrases [[#dative $Dat] | $Rest] to action [$Verb $Adv $Acc $Dats $Abl] into $Out) %% Don't consider bare nouns as datives, it has too many false positives
 	(add noun phrases $Rest to action [$Verb $Adv $Acc [$Dat|$Dats] $Abl] into $Out)
-(add noun phrases [[#ablative/#bare $Abl] | $Rest] to action [$Verb $Adv $Acc $Dat $Abls] into $Out)
+(add noun phrases [[#ablative $Abl] | $Rest] to action [$Verb $Adv $Acc $Dat $Abls] into $Out) %% Don't consider bare nouns as ablatives, it has too many false positives
 	(add noun phrases $Rest to action [$Verb $Adv $Acc $Dat [$Abl|$Abls]] into $Out)
 
 %% Change some of these to variables or whatever eventually - this is how the pronouns should be handled
@@ -505,7 +505,7 @@
 			(line) It seems the intended one is...
 		}
 		(get input $Words)
-		(if) ($Words = [$Number]) (number $Number) ($Number > 1) ~($Number > $N) (then)
+		(if) ($Words = [$Number]) (number $Number) ($Number > 0) ~($Number > $N) (then)
 			(nth $List $Number $Result)
 			(try-complex $Result)
 		(else)
@@ -539,8 +539,12 @@
 	> (get input $Words)
 	~($Words = [\* | $]) %% Ignore lines starting with stars, for transcript comments
 
-(rebuild scope)
 (redraw status bar)
+	(update needed)
+	(now) ~(update needed)
+	(update description)
+(redraw status bar) %% Don't fail
+
 (unlikely $ $) (fail)
 (describe action [$English [$ $Verb $Adv $Acc $Dat $Abl]])
 %%	English: $English (line)
@@ -575,7 +579,7 @@
 
 (enumerate possible actions [] $)
 (enumerate possible actions [$Head|$Tail] $N)
-	(line) (space 4) $N : (describe action $Head)
+	(line) (space 4) $N : (describe action [[unknown] $Head])
 	($N plus 1 into $Np1)
 	(enumerate possible actions $Tail $Np1)
 
@@ -615,39 +619,7 @@
 (style class @akk) %% TODO FORMALIZE THIS
 	font-style: italic;
 
-(@tehhun wants cases [#accusative #dative])
-
-%% Some test nouns
-#lalac %% "tongue"
-(name * in #accusative)
-	lalan
-(name * in #dative)
-	lali
-(name * in #ablative)
-	lalaz
-(name * in #bare)
-	lala
-
-#halkic %% "grain"
-(name * in #accusative)
-	halkin
-(name * in #dative)
-	halki
-(name * in #ablative)
-	halkiz
-(name * in #bare)
-	halki
-
-#attac %% "father"
-(name * in #accusative)
-	attan
-(name * in #dative)
-	atti
-(name * in #ablative)
-	attaz
-(name * in #bare)
-	atta
-
-#É %% "house"
-(name * in $)
-	É E2
+(name (logogram $Obj) in #nominative/#accusative) (name $Obj in #bare)
+(name (logogram $Obj) in #dative) (span @akk) ana (name $Obj in #bare)
+(name (logogram $Obj) in #genitive) (span @akk) ca (name $Obj in #bare)
+(name (logogram $Obj) in #ablative) (span @akk) istu (name $Obj in #bare)
