@@ -1,4 +1,4 @@
-FILES = act1.dg actions.dg parser.dg worldmodel.dg
+FILES = act1.dg actions.dg interface.dg parser.dg worldmodel.dg
 
 debug: $(FILES)
 	dgdebug $(FILES)
@@ -8,3 +8,6 @@ hittite.z5: $(FILES)
 
 play: hittite.z5
 	frotz hittite.z5
+
+vvv.log: $(FILES)
+	dgdebug -vvv $(FILES) > vvv.log

@@ -1,0 +1,31 @@
+%% Style definitions and related predicates go here
+
+%% The compass rose
+(style class @compass)
+	margin-top: 1em;
+	margin-bottom: 1em;
+(style class @compassline)
+	width: 100\%;
+	text-align: center;
+
+%% Akkadograms
+(style class @akk)
+	font-style: italic;
+
+%% Emphasis
+(style class @italic)
+	font-style: italic;
+	aria-role: emphasis;
+(style class @emphemph)
+	font-style: normal;
+	aria-role: emphasis;
+(emph $Closure)
+	(if) (currently italic) (then)
+		(now) ~(currently italic)
+		(span @emphemph) (query $Closure)
+		(now) (currently italic)
+	(else)
+		(now) (currently italic)
+		(span @italic) (query $Closure)
+		(now) ~(currently italic)
+	(endif)

@@ -1,13 +1,12 @@
 (extension version)
 	(line) Hittite parser version 0.5 by Daniel Stelzer
 
-(parser logging) (fail)
+(parser logging)
 
 (parser log $Closure)
 	(parser logging)
 	(log) (query $Closure)
 (parser log $) %% Always succeed
-(style class @log)
 
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
@@ -108,7 +107,7 @@
 ~(parse [] into single noun $)
 
 (parse $Words into single noun $Noun)
-	*(grammatical case $Case)
+	*(parser case $Case)
 	*(parse $Words as $Case $Obj)
 	($Noun = [$Case $Obj])
 
@@ -117,18 +116,22 @@
 (grammatical case #accusative)
 (grammatical case #dative)
 (grammatical case #ablative)
-(grammatical case #bare)
 (grammatical case #adverb)
+(grammatical case #locative)
+(grammatical case #bare)
+
+(parser case #accusative/#dative/#ablative/#adverb)
 
 %% We include adverbs in the noun list, with the tag #adverb
 %% Because they can be interspersed with noun phrases
 %% However, they shouldn't be printed like nouns, with conjunctions and all
 (parse [$Word] as #adverb $Meaning)
-	(adverb $Word means $Meaning)
+	(just) (adverb $Word means $Meaning)
+~(name (object $) in #adverb) %% This is only for dictionary words, not objects
 (name [] in #adverb)
 (name (word $Word) in #adverb)
 	$Word
-(name [$Head | $Rest] in #adverb)
+(name [(word $Head) | $Rest] in #adverb)
 	$Head
 	(name $Rest in #adverb)
 
@@ -155,7 +158,7 @@
 	(matching all of $Words)
 
 (parse $Words as not-here object $Obj)
-	*(grammatical case $Case)
+	*(parser case $Case)
 	(determine object $Obj)
 		*(object $Obj)
 		~($Obj is in scope)
@@ -168,7 +171,7 @@
 
 %% Noun phrases
 (add noun phrases [] to action $Act into $Act)
-(add noun phrases [[#adverb/#bare $Adv] | $Rest] to action [$Verb $Advs $Acc $Dat $Abl] into $Out)
+(add noun phrases [[#adverb $Adv] | $Rest] to action [$Verb $Advs $Acc $Dat $Abl] into $Out)
 	(add noun phrases $Rest to action [$Verb [$Adv|$Advs] $Acc $Dat $Abl] into $Out)
 (add noun phrases [[#accusative/#bare $Acc] | $Rest] to action [$Verb $Adv $Accs $Dat $Abl] into $Out)
 	(add noun phrases $Rest to action [$Verb $Adv [$Acc|$Accs] $Dat $Abl] into $Out)
@@ -249,7 +252,7 @@
 (dict (neuter $Obj) in #accusative)
 	*(dict $Obj in #nominative)
 (dict $Obj in $Case)
-	(name $Obj in $Case)
+	($Case $Obj)
 
 (sentence connective @nu)
 (sentence connective @na) %% Form that's used before clitics starting with /a/
@@ -356,27 +359,27 @@
 (show parser error 21 for action $)
 	there should not be an adverb or sentence particle
 (show parser error 12 for action $)
-	there should be an accusative/absolutive noun
+	there should be an accusative noun
 (show parser error 22 for action $)
-	there should not be an accusative/absolutive noun
+	there should not be an accusative noun
 (show parser error 13 for action $)
-	there should be a dative/locative noun
+	there should be a dative noun
 (show parser error 23 for action $)
-	there should not be a dative/locative noun
+	there should not be a dative noun
 (show parser error 14 for action $)
-	there should be an ablative/instrumental noun
+	there should be an ablative noun
 (show parser error 24 for action $)
-	there should not be an ablative/instrumental noun
+	there should not be an ablative noun
 (show parser error 36 for action [$ $ $Acc $Dat $Abl])
 	there are multiple nouns in
 	(if) (more than one $Acc) (more than one $Dat) (more than one $Abl) (then)
 		several different cases
 	(elseif) (more than one $Acc) (more than one $Dat) (then)
-		the accusative/absolutive and dative/locative cases
+		the accusative and dative cases
 	(elseif) (more than one $Acc) (more than one $Abl) (then)
-		the accusative/absolutive and ablative/instrumental cases
+		the accusative and ablative cases
 	(elseif) (more than one $Dat) (more than one $Abl) (then)
-		the dative/locative and ablative/instrumental cases
+		the dative and ablative cases
 	(else)
 		ERROR: What cases??
 	(endif)
@@ -437,33 +440,41 @@
 		(sieve action candidates $Options at level 0)
 	(endif)
 
+%% TODO - this currently fails if given a noun list consisting of a single bare logogram and I'm not sure why
+
 (report errors in $Words)
 	(now) (allowing parse errors) %% Tell the parsing predicates that they should show their errors instead of just silently failing
 	%% Multiqueries here are not really necessary because if-conditions discard choice points, but it helps optimization according to the stdlib comments
 	(if)
 		(rewrite $Words into [$Verb $Clitics | $Rest])
+		(parser log {Reporting errors: Rewrote into $Verb $Clitics $Rest})
 	(then)
 	
 		(if)
 			*(parse top-level $Rest into noun list $Nouns)
+			(parser log {Reporting errors: Got noun list $Nouns})
 		(then)
 		
 			(if)
 				*(convert parsed line [$Verb $Clitics | $Nouns] from raw $Words into $Action)
 			(then)
 			
-				(parser log { Parsed into action $Action, showing errors for that } )
+				(parser log { Reporting errors: Parsed into action $Action, showing errors for that } )
 				(show parser errors for $Action)
 				(stop)
 			
+			(elseif) (empty $Clitics) (then)
+				(parser log { Reporting errors: Noun list worked, but no clitics?? } )
+				(div @realerror) { Could not parse, unsure why! }
+			
 			(else)
-				(parser log { Reporting first broken clitic from $Clitics } )
+				(parser log { Reporting errors: Reporting first broken clitic from $Clitics } )
 				(find first broken clitic from $Clitics and report it)
 				(stop)
 			(endif)
 		
 		(else)
-			(parser log { Reporting first broken noun from $Rest } )
+			(parser log { Reporting errors: Reporting first broken noun from $Rest } )
 			(find first broken noun from $Rest and report it)
 			(stop)
 		(endif)
@@ -546,29 +557,29 @@
 (redraw status bar) %% Don't fail
 
 (unlikely $ $) (fail)
-(describe action [$English [$ $Verb $Adv $Acc $Dat $Abl]])
+(describe action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
 %%	English: $English (line)
 %%	Raw: $Raw (line)
 %%	Hittite:
 		Nu
-		(name $Acc in #accusative)
-		(name $Dat in #dative)
-		(name $Abl in #ablative)
-		(name $Adv in #adverb)
+		(#accusative $Acc)
+		(#dative $Dat)
+		(#ablative $Abl)
+		(#adverb $Adv)
 		$Verb
 	.
 %%	(line)
 (describe action $Action)
 	Improper action: $Action
-(describe negative action [$English [$ $Verb $Adv $Acc $Dat $Abl]])
+(describe negative action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
 %%	English: not $English (line)
 %%	Raw: (span @akk) {ŪL} $Raw (line)
 %%	Hittite:
 		Nu
-		(name $Acc in #accusative)
-		(name $Dat in #dative)
-		(name $Abl in #ablative)
-		(name $Adv in #adverb)
+		(#accusative $Acc)
+		(#dative $Dat)
+		(#ablative $Abl)
+		(#adverb $Adv)
 		(span @akk) {ūl}
 		$Verb
 	.
@@ -609,17 +620,30 @@
 %% (try $) then handles those single-noun actions
 %% Implemented in worldmodel.dg
 
-(name [] in $)
-(name [$Single] in $Case)
-	(name $Single in $Case)
-(name [$Head|$Rest] in $Case)
-	(name $Head in $Case)
+($ [])
+($Case [$Single])
+	($Case $Single)
+($Case [$Head|$Rest])
+	($Case $Head)
 	(span @akk) { Ù }
-	(name $Rest in $Case)
-(style class @akk) %% TODO FORMALIZE THIS
-	font-style: italic;
+	($Case $Rest)
 
 (name (logogram $Obj) in #nominative/#accusative) (name $Obj in #bare)
 (name (logogram $Obj) in #dative) (span @akk) ana (name $Obj in #bare)
+(name (logogram $Obj) in #locative) (span @akk) ina (name $Obj in #bare)
 (name (logogram $Obj) in #genitive) (span @akk) ca (name $Obj in #bare)
-(name (logogram $Obj) in #ablative) (span @akk) istu (name $Obj in #bare)
+(name (logogram $Obj) in #ablative) (span @akk) ictu (name $Obj in #bare)
+
+(name $Obj in #locative) %% For non-logograms, these are always identical; the locative isn't really treated as a case of its own
+	(name $Obj in #dative)
+
+(interface ($>Case $>Obj))
+($Case $Obj) %% Adds modifiers as needed
+	(if) ($Obj has modifier $Mod) (then)
+		(if) (object $Mod) (then)
+			(#genitive $Mod)
+		(else) %% Dictionary word
+			$Mod
+		(endif)
+	(endif)
+	(name $Obj in $Case)

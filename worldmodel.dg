@@ -1,7 +1,7 @@
 (library version)
 	Hittite world model version 0.5.
 
-(world logging)
+(world logging) (fail)
 
 (world log $Closure)
 	(world logging)
@@ -113,6 +113,7 @@
 (inherently dark $)	(fail)
 (item $)		(fail)
 (neuter $)		(fail)
+(opaque $)		(fail)
 (out of reach $)	(fail)
 (wearable $)		(fail)
 

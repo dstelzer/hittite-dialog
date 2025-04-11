@@ -21,11 +21,24 @@
 (name * in #accusative) hapan
 (name * in #ablative) hapaz
 (name * in #bare) hapa
-(dict * in #nominative/#accusative) waatar watar %% "water"
-(dict * in #genitive) witenac
-(dict * in #dative) witeni
-(dict * in #ablative) wetenaz
+(dict * in $Case)
+	*(dict #water in $Case)
 (* is #in #riverbank)
+
+(instead of [[take *] $])
+	(current player $Player)
+	(if) (#cup is #heldby $Player) ~(cup has water) (then)
+		($Dest = #cup)
+		(now) (cup has water)
+	(elseif) (#urn is #heldby $Player) ~(urn has water) (then)
+		($Dest = #urn)
+		(now) (urn has water)
+	(else)
+		(fail) %% Fall back to the usual "I can't hold the water" message
+	(endif)
+	Nu (#accusative $Dest) (#ablative #water) cunnahon. %% "I filled the DEST with water."
+	(now) (update needed)
+	(tick)
 
 #watchtower
 (room *)
@@ -92,11 +105,11 @@
 #corner
 (room *)
 (neuter *)
-(short name *) halhaltomari
-(name * in #nominative/#accusative/#bare) kuttac halhaltomar
-(name * in #genitive) kuttac halhaltomarac
-(name * in #dative) kuttac halhaltomari
-(name * in #ablative) kuttac halhaltomaraz
+(name * in #nominative/#accusative/#bare) halhaltomar
+(name * in #genitive) halhaltomarac
+(name * in #dative) halhaltomari
+(name * in #ablative) halhaltomaraz
+(* has modifier #wall)
 (from * go #south to #wall)
 (from * go #west through #window to #gatehouse)
 
@@ -118,6 +131,8 @@
 	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttiya
 (name * in #ablative)
 	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttanza
+(* has modifier #gatehouse)
+	~(current room #gatehouse)
 
 #gatehouse
 (room *)
@@ -161,11 +176,13 @@
 	Nu GIC hattalu lukket. %% "The bolt ignited."
 	(now) (bolt is burning)
 	(now) (update needed)
+	(tick)
 
 (instead of [[put * #river] $Details])
 	(describe action [[put * #river] $Details])
 	(now) ~(bolt is burning)
 	(now) (update needed)
+	(tick)
 
 (* provides light)
 	(bolt is burning)
@@ -203,13 +220,17 @@
 	Nu pahhur ayyanza ēcta. %% "The fire was hot."
 
 #cup
-%% TODO CONFIRM GENDER
 (item *)
-(name * in #nominative) DUG zēric
-(name * in #genitive/#dative) DUG zēriyac
-(name * in #accusative) DUG zērin
+(neuter *)
+(name * in #nominative/#accusative/#bare) DUG zēri
+(name * in #genitive) DUG zēriyac
+(name * in #dative) DUG zēriya
 (name * in #ablative) DUG zēriyaz
-(name * in #bare) DUG zēri
+(* has modifier #water)
+	(cup has water)
+(dict * in $Case)
+	(cup has water)
+	*(dict #water in $Case)
 (* is #in #hearth)
 
 #watchman
@@ -233,10 +254,34 @@
 (item *)
 (logogram *)
 (name * in #bare) DUG
+(dict * in $Case)
+	(urn has water)
+	*(dict #water in $Case)
+(* has modifier #water)
+	(urn has water)
 (* is #in #storeroom)
+
+(instead of [[put * #hearth/#fire] $])
+	(#fire is #in #hearth)
+	(urn has water)
+	(now) (#fire is nowhere)
+	(now) ~(urn has water)
+	Nu waatar pahheni tehhon. %% "I put the water on the fire..."
+	N=an kictanunun. %% "...and extinguished it."
+	(now) (update needed)
+
+%% Never on-stage, but used by the parser
+#water
+(name * in #nominative/#accusative) waatar
+(dict * in #nominative/#accusative) watar
+(name * in #genitive) witenac
+(name * in #dative) witeni
+(name * in #ablative) wetenaz
 
 (metacommand [test watchtower])
 	(now) (#ladder is #in #corner)
 	(now) (#ladder is handled)
 	(now) (#street is visited)
+	(now) (#bolt is pristine)
+	(now) (#bolt is #in #gate)
 	(enter #gatehouse)

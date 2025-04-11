@@ -7,7 +7,6 @@
 	(action logging)
 	(log) (query $Closure)
 (action log $) %% Always succeed
-(style class @log)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Look: not really an action, but we implement it as one for now
@@ -18,13 +17,53 @@
 	(update environment around player)
 	(if) (interpreter supports inline status bar) (then)
 		(inline status bar @inline) (describe environment)
-%%	(elseif) (interpreter supports status bar) (then)
-%%		(status bar @status) (describe environment)
+%%	(elseif) (interpreter supports status bar) ($Lines lines needed for status bar) (then)
+%%		(status bar @status with height $Lines) (describe environment)
 	(else)
 		(div @inline) (describe environment)
 	(endif)
 
-(header (room $Room)) Nu (name $Room in #dative) econ.
+($Lines lines needed for status bar)
+	%% 1 header
+	%% 1 line break
+	%% 3 compass rose
+	%% 1 line break
+	%% If objects:
+		%% 1 general
+		%% 1 per container
+		%% 1 line break
+	%% If inventory:
+		%% 1 inventory
+		%% 1 line break
+	%% If worn:
+		%% 1 worn
+		%% 1 line break
+	%% 1 verbs
+	
+	%% Which means:
+	%% Base 7
+	%% +2 if objects
+	%% +1 per container
+	%% +2 if inventory
+	%% +2 if worn
+	
+	(current player $Player)
+	(current room $Room)
+	
+	(accumulate $N)
+		($N = 7) (or)
+		{ (something in the room) ($N = 2) } (or)
+		{ *($Obj is #in $Room) ($ is #in $Obj) ($N = 1) } (or)
+		{ ($ is #heldby $Player) ($N = 2) } (or)
+		{ ($ is #wornby $Player) ($N = 2) }
+	(into $Lines)
+
+(something in the room)
+	(current room $Room)
+	*($Obj is #in $Room)
+	~(current player $Obj)
+
+(header (room $Room)) Nu (#locative $Room) econ.
 (short name (inherently dark $Room))
 	(current player $Player)
 	~($Player has a light source)
@@ -58,7 +97,7 @@
 	(action log {Room list: $RoomList} )
 %%	(if) (nonempty $RoomList) (then)
 %%		(line) Nu maninkuwan
-%%		(name $RoomList in #nominative)
+%%		(#nominative $RoomList)
 %%		(if) ($RoomList = [$]) (then)
 %%			ēcta
 %%		(else)
@@ -77,7 +116,7 @@
 	(action log {Here: $HereList} )
 	(if) (nonempty $HereList) (then)
 		(par) Nu apiya
-		(name $HereList in #accusative)
+		(#accusative $HereList)
 		oohhon.
 	(endif)
 	
@@ -89,17 +128,16 @@
 		%% Anda(n) not necessary
 	(collect $Obj)
 		*($Obj is #in $Loc)
-		($ has parent $Obj)
-		~(current player $Obj)
+		($ is #in $Obj)
 	(into $ContainerList)
 	(action log {Containers: $ContainerList} )
 	(exhaust) {
 		*($Container is one of $ContainerList)
 		(collect $Obj)
-			*($Obj has parent $Container)
+			*($Obj is #in $Container)
 		(into $ContentsList)
-		(line) Nu (name $Container in #dative)
-		(name $ContentsList in #nominative)
+		(line) Nu (#dative $Container)
+		(#nominative $ContentsList)
 		(if) ($ContentsList = [$]) (then) kittat (else) kīyantat (endif) %% Agreement
 		.
 	}
@@ -112,7 +150,7 @@
 	(action log {Held: $HeldList} )
 	(if) (nonempty $HeldList) (then)
 		(par) Nu
-		(name $HeldList in #accusative)
+		(#accusative $HeldList)
 		harkon.
 	(endif)
 	
@@ -123,7 +161,7 @@
 	(action log {Worn: $WornList} )
 	(if) (nonempty $WornList) (then)
 		(par) Nu
-		(name $WornList in #accusative)
+		(#accusative $WornList)
 		wēccon.
 	(endif)
 	
@@ -161,13 +199,6 @@
 		}
 	}
 
-(style class @compass)
-	margin-top: 1em;
-	margin-bottom: 1em;
-(style class @compassline)
-	width: 100\%;
-	text-align: center;
-
 (short name []) (space 8)
 
 (@look/@ohhon/@oohhon wants cases [])
@@ -193,7 +224,7 @@
 	(describe $Door blocking passage)
 
 (describe $Door blocking passage)
-	Nu (name $Door in #nominative) ictapanza ēcta. %% "The DOOR was closed."
+	Nu (#nominative $Door) ictapanza ēcta. %% "The DOOR was closed."
 (($Door is closed) blocks passage)
 
 (prevent [[go (inherently dark $Dest)] $Details])
@@ -245,7 +276,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 (@take/@dahhon wants cases [#accusative])
-(@take/@dahhon wants cases [#ablative])
+(@take/@dahhon wants cases [#accusative #ablative])
 (translate [$ take/dahhon $ $Acc $ []] into [take $Acc])
 (translate [$ take/dahhon $ $Acc $ $Abl] into [take $Acc from $Abl])
 
@@ -260,7 +291,7 @@
 (prevent [[take $Obj from $Holder] $Details])
 	~($Obj is #in $Holder)
 	(describe negative action [[take $Obj from $Holder] $Details])
-	Nu (name $Obj in #nominative) (name $Holder in #dative) (span @akk) {ūl} kittat. %% "The OBJ was not in the HOLDER."
+	Nu (#nominative $Obj) (#dative $Holder) (span @akk) {ūl} kittat. %% "The OBJ was not in the HOLDER."
 
 (prevent [[take $Obj | $] $Details])
 	~(item $Obj)
@@ -335,7 +366,7 @@
 (prevent [[put $Obj $Dest] $Details])
 	~(holder $Dest)
 	(describe negative action [[put $Obj $Dest] $Details])
-	N=an (name $Dest in #nominative) (span @akk) {ūl} harkon. %% "The DEST did not hold it"
+	N=an (#nominative $Dest) (span @akk) {ūl} harta. %% "The DEST did not hold it"
 
 (perform [[put $Obj $Dest] $])
 	(now) ($Obj is #in $Dest)
