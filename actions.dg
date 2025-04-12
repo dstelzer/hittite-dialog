@@ -78,7 +78,7 @@
 (name * in #dative) dankui
 (refuse [$Action $]) %% Prevent any interaction with this noun
 	(* is one of $Action)
-	~($Action = [go *])
+	~{ ($Action = [go *]) (or) ($Action = [travel *]) }
 	(div @error) { Since the "darkness" is insubstantial, it's unclear what this action would entail. }
 
 (describe environment)
@@ -214,6 +214,19 @@
 
 (@go/@paon wants cases [#dative])
 (translate [$ go/paon $ $ $Dat | $] into [go $Dat])
+	(adjacent $Dat)
+(translate [$ go/paon $ $ $Dat | $] into [travel $Dat])
+	~(adjacent $Dat)
+
+(adjacent $Room)
+	(current room $Loc)
+	{ (from $Loc go $ to $Room) (or) (from $Loc through $ to $Room) }
+(adjacent (current room $Room))
+(adjacent #darkness)
+
+%% For these specific actions, don't require targets to be in the same room
+~(refuse [[go $] $])
+~(refuse [[travel $] $])
 
 (prevent [[go $Dest] $Details])
 	(current room $Source)
@@ -268,6 +281,31 @@
 
 (perform [[go $Dest] $])
 	(enter $Dest)
+
+%% "Travel" is the action invoked when the room isn't adjacent; it plots out a route and tries to move along it
+
+(prevent [[travel $Dest] $Details])
+	(current room $Source)
+	~(first step from $Source to $Dest is $)
+	(describe negative action [[travel $Dest] $Details])
+	(div @error) { The author provided no further details, but it seems there was no easy route between those locations. }
+
+(perform [[travel $Dest] $])
+	(current room $Source)
+	(shortest path from $Source to $Dest is $Path)
+	(action log {Path: $Path})
+	(attempt to travel along $Path)
+
+(attempt to travel along [])
+	(action log {Travel finished!})
+	(now) (update needed)
+(attempt to travel along [$Head|$Rest])
+	(current room $Source)
+	(action log {Direction: $Head})
+	(from $Source go $Head to $Dest)
+	(action log {From $Source go $Head to $Dest})
+	(try [[go $Dest] [[] paon [] [] [$Dest] []]])
+	(attempt to travel along $Rest) %% Recurse
 
 (verb @paon unlocked)
 

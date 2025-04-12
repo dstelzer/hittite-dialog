@@ -529,16 +529,16 @@
 	(tick)
 	(par)
 
-(refuse [$Action $])
+(refuse [$Action $Details])
 	*($Obj is one of $Action)
 	(object $Obj)
 	~(direction $Obj)
 	~(relation $Obj)
-%%	{
-%%		(when $Obj is not here)
-%%		(or) (when $Obj is out of reach)
-%%	}
-	(fail)
+	(current room $Room)
+	~($Obj is in room $Room)
+	
+	(describe negative action [$Action $Details])
+	Nu (#accusative $Obj) (span @akk) ūl ōhhon.
 
 (before $)	(fail)
 
