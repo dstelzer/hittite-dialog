@@ -1,7 +1,7 @@
 (extension version)
 	(line) Hittite parser version 0.5 by Daniel Stelzer
 
-(parser logging)
+(parser logging) (fail)
 
 (parser log $Closure)
 	(parser logging)
@@ -86,18 +86,21 @@
 
 %% We can't report this from within (parse $ into noun list $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
 (find first broken noun from [] and report it)
-(find first broken noun from [$Noun] and report it)
-	The noun in this line is obscure, and it's unclear what "(no space)$Noun(no space)" means.
-	(stop)
+	(div @realerror) { ERROR: failed to find any broken nouns! }
 (find first broken noun from $Nouns and report it)
-	*(split $Nouns anywhere into $Left and $Right)
+	{ *(split $Nouns anywhere into $Left and $Right) (or) ($Left = $Nouns) ($Right = []) }
 	(parser log { Split: $Left $Right } )
 	{
 		*(parse $Left into single noun $)
 		(find first broken noun from $Right and report it)
 	(or)
+		*(parse $Left as invalid case $ of $)
+		"(no space)(uppercase)(print words $Left)(no space)" is likely a scribal error; this is a valid noun, but its grammatical case doesn't make sense in this sentence.
+		(stop)
+	(or)
 		*(parse $Left as not-here object $)
 		It's unclear what "(no space)(print words $Left)(no space)" is meant to refer to; these words (emph {are}) used on the tablet, but what they describe is not currently near our protagonist.
+		(stop)
 	(or)
 		The nouns in this line are obscure, and it's unclear what "(no space)(print words $Right)(no space)" means.
 		(stop)
@@ -151,6 +154,15 @@
 
 ~(parse [] as $ $) %% Avoid edge cases - require a single word at least
 (parse $Words as $Case $Obj)
+	(determine object $Obj)
+		*($Obj is in scope)
+	(from words)
+		*(dict $Obj in $Case)
+	(matching all of $Words)
+
+(parse $Words as invalid case $Case of $Obj)
+	*(grammatical case $Case)
+	~(parser case $Case)
 	(determine object $Obj)
 		*($Obj is in scope)
 	(from words)
@@ -417,6 +429,7 @@
 	(parser log { Rewritten: $Verb $Clitics $Rest } )
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
 		(div @error) { The verb "$Verb" is not found elsewhere on the tablet, and it is difficult to interpret here. }
+		(stop)
 	(endif)
 	(collect $Action)
 		*(parse top-level $Rest into noun list $Nouns)
@@ -642,8 +655,10 @@
 	(if) ($Obj has modifier $Mod) (then)
 		(if) (object $Mod) (then)
 			(#genitive $Mod)
-		(else) %% Dictionary word
+		(elseif) (word $Mod) (then)
 			$Mod
+		(else)
+			(query $Mod)
 		(endif)
 	(endif)
 	(name $Obj in $Case)

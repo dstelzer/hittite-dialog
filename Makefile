@@ -11,3 +11,7 @@ play: hittite.z5
 
 vvv.log: $(FILES)
 	dgdebug -vvv $(FILES) > vvv.log
+
+regress: $(FILES)
+	dgdebug -s 1234 $(FILES) <regress.in >regress.out
+	meld regress.out regress.gold

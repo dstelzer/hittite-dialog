@@ -112,6 +112,7 @@
 (holder $)		(fail)
 (inherently dark $)	(fail)
 (item $)		(fail)
+(logogram $)		(fail)
 (neuter $)		(fail)
 (opaque $)		(fail)
 (out of reach $)	(fail)

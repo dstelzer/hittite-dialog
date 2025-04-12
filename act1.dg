@@ -30,9 +30,9 @@
 	(if) (#cup is #heldby $Player) ~(cup has water) (then)
 		($Dest = #cup)
 		(now) (cup has water)
-	(elseif) (#urn is #heldby $Player) ~(urn has water) (then)
-		($Dest = #urn)
-		(now) (urn has water)
+	(elseif) (#amphora is #heldby $Player) ~(amphora has water) (then)
+		($Dest = #amphora)
+		(now) (amphora has water)
 	(else)
 		(fail) %% Fall back to the usual "I can't hold the water" message
 	(endif)
@@ -42,11 +42,13 @@
 
 #watchtower
 (room *)
-(name * in #nominative) awaric
-(name * in #genitive/#dative) awariyac
-(name * in #accusative) awarin
-(name * in #ablative) awariyaz
-(name * in #bare) awari
+(name * in #nominative) auric
+(name * in #genitive) auriyac
+(name * in #dative) auriya
+(name * in #accusative) aurin
+(name * in #ablative) auriyaz
+(name * in #bare) auri
+(* has modifier $Mod) ($Mod = {E2})
 (from * go #south to #riverbank)
 (from * go #west to #street)
 (from * go #east to #wall)
@@ -82,17 +84,30 @@
 
 #ladder
 (item *)
-(name * in #nominative/#genitive) ilac
-(name * in #dative) ili
+(name * in #nominative) ilac
+(name * in #genitive) ilanac
+(name * in #dative) ilani
 (name * in #accusative) ilan
-(name * in #ablative) ilaz
+(name * in #ablative) ilanaz
 (name * in #bare) ila
 (* is #in #street)
+
+(instead of [[go *] $Details])
+	($Details = [$Raw $Verb $Adv $Acc $ $Abl])
+	(if) (current room #corner) (or) (current room #gatehouse) (then)
+		(try [[go #window] [$Raw $Verb $Adv $Acc [#window] $Abl]])
+	(elseif) (current room #backroom) (then)
+		(try [[go #roof] [$Raw $Verb $Adv $Acc [#roof] $Abl]])
+	(else)
+		(describe negative action [[go *] $Details])
+		Nu (span @akk) ūl kuitki parku ēcta. %% "Nothing was high up."
+		(tick) (stop)
+	(endif)
 
 #wall
 (room *)
 (header *) Nu kutti kattan econ. %% I was below the wall
-(name * in #nominative) kuz
+(name * in #nominative) kuzza
 (name * in #genitive) kuttac
 (name * in #dative) kutti
 (name * in #accusative) kuttan
@@ -120,17 +135,11 @@
 	(current room $Room)
 	~(#ladder is #in $Room)
 (describe * blocking passage) Nu luttāi parku ēcta. %% "The window is high up"
-(short name *) luttiya
-(name * in #nominative/#accusative/#bare)
-	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttaai
-(dict * in #nominative/#accusative/#bare)
-	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttai
-(name * in #genitive)
-	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttiyac
-(name * in #dative)
-	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttiya
-(name * in #ablative)
-	(if) ~(current room #gatehouse) (then) hilamnac (endif) luttanza
+(name * in #nominative/#accusative/#bare) luttaai
+(dict * in #nominative/#accusative/#bare) luttai
+(name * in #genitive) luttiyac
+(name * in #dative) luttiya
+(name * in #ablative) luttiyaz
 (* has modifier #gatehouse)
 	~(current room #gatehouse)
 
@@ -141,9 +150,11 @@
 (name * in #genitive) hilamnac
 (name * in #dative) hilamni
 (name * in #ablative) hilamnaz
+(* has modifier $Mod) ($Mod = {E2})
 (from * go #east through #window to #corner)
 (from * go #south through #gate to #watchtower)
-(from * go #west to #otherroom)
+(from * go #west to #foyer)
+(from * go #north to #backroom)
 
 #bolt
 (item *)
@@ -187,13 +198,15 @@
 (* provides light)
 	(bolt is burning)
 
-#otherroom
+#foyer
 (room *)
-(name * in #nominative/#genitive) antalac
-(name * in #dative) antali
-(name * in #accusative) antalan
-(name * in #ablative) antalaz
-(name * in #bare) antala
+(name * in #nominative) arkiwic
+(name * in #genitive) arkiwac
+(name * in #dative) arkiwi
+(name * in #accusative) arkiwin
+(name * in #ablative) arkiwaz
+(* has modifier $Mod) ($Mod = {E2})
+
 (from * go #east to #gatehouse)
 (from * go #north to #storeroom)
 
@@ -204,7 +217,7 @@
 (name * in #accusative) haccan
 (name * in #ablative) haccaz
 (name * in #bare) hacca
-(* is #in #otherroom)
+(* is #in #foyer)
 
 #fire
 (neuter *)
@@ -221,11 +234,11 @@
 
 #cup
 (item *)
-(neuter *)
-(name * in #nominative/#accusative/#bare) DUG zēri
-(name * in #genitive) DUG zēriyac
-(name * in #dative) DUG zēriya
-(name * in #ablative) DUG zēriyaz
+(name * in #nominative) DUG agannic
+(name * in #genitive) DUG aganniyac
+(name * in #dative) DUG aganniya
+(name * in #accusative) DUG agannin
+(name * in #ablative) DUG aganniyaz
 (* has modifier #water)
 	(cup has water)
 (dict * in $Case)
@@ -241,31 +254,37 @@
 (name * in #accusative) techallin LÚ halliyatallan
 (name * in #ablative) techalliyaz LÚ halliyatallaz
 (name * in #bare) techalli LÚ halliyatalla
-(* is #in #otherroom)
+(* is #in #foyer)
 
 #storeroom
 (room *)
-(logogram *)
-(name * in #bare) ARAH3
+(name * in #nominative/#genitive) antakac
+(name * in #dative) antaki
+(name * in #accusative) antakan
+(name * in #ablative) antakaz
+(name * in #bare) antaka
 (inherently dark *)
-(from * go #south to #otherroom)
+(from * go #south to #foyer)
 
-#urn
+#amphora
 (item *)
-(logogram *)
-(name * in #bare) DUG
+(name * in #nominative) DUG palhic
+(name * in #accusative) DUG palhin
+(name * in #genitive) DUG palhac
+(name * in #dative) DUG palhi
+(name * in #ablative) DUG palhaz
 (dict * in $Case)
-	(urn has water)
+	(amphora has water)
 	*(dict #water in $Case)
 (* has modifier #water)
-	(urn has water)
+	(amphora has water)
 (* is #in #storeroom)
 
 (instead of [[put * #hearth/#fire] $])
 	(#fire is #in #hearth)
-	(urn has water)
+	(amphora has water)
 	(now) (#fire is nowhere)
-	(now) ~(urn has water)
+	(now) ~(amphora has water)
 	Nu waatar pahheni tehhon. %% "I put the water on the fire..."
 	N=an kictanunun. %% "...and extinguished it."
 	(now) (update needed)
@@ -276,7 +295,68 @@
 (dict * in #nominative/#accusative) watar
 (name * in #genitive) witenac
 (name * in #dative) witeni
-(name * in #ablative) wetenaz
+(name * in #ablative) witenaz
+
+#backroom
+(room *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) ickica
+(name * in #genitive) ickicac
+(name * in #dative) ickici
+(name * in #ablative) ickicaz
+(* has modifier #watchtower)
+(from * go #south to #gatehouse)
+(from * go #up to #roof)
+(from * go #north to #hattuca)
+
+(prevent [[go #roof] $Details])
+	(current room *)
+	~(#ladder is #in *)
+	(describe negative action [[go #roof] $Details])
+	Nu cuhha parku ēcta. %% "The roof is high up"
+
+%% TODO - prevent going while carrying the amphora
+
+#roof
+(room *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) cuhha
+(name * in #genitive) cuhhac
+(name * in #dative) cuhhi
+(name * in #ablative) cuhhaz
+(from * go #down to #backroom)
+(from * go #north to #precinct)
+
+#precinct
+(room *)
+(neuter *)
+(name * in #nominative/#accusative/#dative/#bare) hali
+(name * in #genitive) haliyac
+(name * in #ablative) haliyaz
+(* has modifier @karimnac)
+
+%% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
+
+(instead of [[go *] $Details])
+	(current player $Player)
+	(if) (#cup is #heldby $Player) (cup has water) (then)
+		(describe action [[go *] $Details])
+		(div @narration) { The tablet breaks off here, as the soldier finally enters the temple precinct. }
+		(game over { To be continued... } )
+	(else)
+		(describe negative action [[go *] $Details])
+		Nu caknuwanza econ. Nu waatar (span @akk) uul harkon. %% "I was impure. I did not have water."
+	(endif)
+
+#hattuca
+(room *)
+(name * in #nominative/#genitive) Hattucac
+(name * in #dative) Hattuci
+(name * in #accusative) Hattucan
+(name * in #ablative) Hattucaz
+(* has modifier $Mod) ($Mod = {URU})
+
+%% TODO - prevent going here
 
 (metacommand [test watchtower])
 	(now) (#ladder is #in #corner)
@@ -285,3 +365,8 @@
 	(now) (#bolt is pristine)
 	(now) (#bolt is #in #gate)
 	(enter #gatehouse)
+
+(metacommand [test roof])
+	(now) (#bolt is #heldby #player)
+	(now) (bolt is burning)
+	(now) (amphora has water)
