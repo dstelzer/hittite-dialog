@@ -1,0 +1,669 @@
+Warning: act1.dg, line 250: Possible typo: A rule is defined for '(animate $)',
+but this predicate is never queried and has no interface definition.
+Warning: actions.dg, line 26: Possible typo: A rule is defined for '($ lines
+needed for status bar)', but this predicate is never queried and has no
+interface definition.
+Warning: Possible typo: A query is made to '($ is closed)', but there is no
+matching rule or interface definition.
+Warning: worldmodel.dg, line 562: Possible typo: A rule is defined for
+'(inhibit next tick)', but this predicate is never queried and has no interface
+definition.
+Warning: worldmodel.dg, line 598: Possible typo: A rule is defined for '(notice
+$)', but this predicate is never queried and has no interface definition.
+Warning: worldmodel.dg, line 599: Possible typo: A rule is defined for '(notice
+player's $)', but this predicate is never queried and has no interface
+definition.
+Nu wappi econ.
+
+        auriya        
+           <>           
+                        
+
+Nu apiya hapan oohhon.
+
+Verbs: ohhon paon
+> * Starting out
+> nu auriya paon
+Nu E2 auriya paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan ciyantan oohhon.
+
+Verbs: ohhon paon
+> acki paon
+Nu E2 hilamni ackaz ciyantaz ūl paon. Nu ackac ciyanza ēcta.
+> acki ohhon
+This sentence, [acki ohhon], is difficult to interpret. There should not be a
+dative noun.
+> palci paon
+Nu palci paon.
+Nu palci econ.
+
+                        
+           <>   auriya
+                        
+
+Nu apiya ilan oohhon.
+
+Verbs: ohhon paon dahhon
+> ilan dahhon
+Nu ilan dahhon.
+Nu palci econ.
+
+                        
+           <>   auriya
+                        
+
+Nu ilan harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon
+> auriya paon
+Nu E2 auriya paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan ciyantan oohhon.
+
+Nu ilan harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon
+> acki ohhon
+This sentence, [acki ohhon], is difficult to interpret. There should not be a
+dative noun.
+> nu ackan paon
+This sentence, [nu ackan paon], is difficult to interpret, for multiple
+reasons. There should not be an accusative noun and there should be a dative
+noun.
+> nu ackan dahhon
+Nu ackan ciyantan ūl dahhon. N=an harkanna ūl tarhon.
+> kutti paon
+Nu kutti paon.
+Nu kutti kattan econ.
+
+        halhaltomari        
+auriya   <>           
+                        
+
+Nu ilan harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon
+> halhaltomari paon
+Nu kuttac halhaltomari paon.
+Nu kuttac halhaltomari econ.
+
+                        
+luttiya   <>           
+        kutti        
+
+Nu apiya E2 hilamnac luttaai oohhon.
+
+Nu ilan harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon
+> luttiya paon
+Nu E2 hilamni E2 hilamnac luttiyaz ūl paon. Nu luttāi parku ēcta.
+> ilan tehhon
+This sentence, [ilan tehhon], is difficult to interpret. There should be an
+adverb or sentence particle.
+> ilan katta tehhon
+Nu ilan katta tehhon.
+Nu kuttac halhaltomari econ.
+
+                        
+luttiya   <>           
+        kutti        
+
+Nu apiya E2 hilamnac luttaai Ù ilan oohhon.
+
+Verbs: ohhon paon dahhon katta-tehhon
+> luttiya paon
+Nu E2 hilamni E2 hilamnac luttiyaz paon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan ciyantan Ù luttaai oohhon.
+Nu acki ciyanti GIC hattalu kittat.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> * In the watchtower
+> acki paon
+Nu E2 auriya ackaz ciyantaz ūl paon. Nu ackac ciyanza ēcta.
+> hattalu dahhon
+Nu GIC hattalu ackaz ciyantaz dahhon. Nu ackan hachon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan haccantan Ù luttaai oohhon.
+
+Nu GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> acki paon
+Nu E2 auriya ackaz haccantaz paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan haccantan oohhon.
+
+Nu GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> acki paon
+Nu E2 hilamni ackaz haccantaz paon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan haccantan Ù luttaai oohhon.
+
+Nu GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> arkiwi paon
+Nu E2 arkiwi paon.
+Nu E2 arkiwi econ.
+
+        dankui        
+           <>   hilamni
+                        
+
+Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
+Nu hacci pahhur Ù DUG agannic kīyantat.
+
+Nu GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> nu dankui paon
+Nu dankui ūl paon. Nu pedan dankuecta.
+> agannic dahhon
+"Agannic" is likely a scribal error; this is a valid noun, but its grammatical
+case doesn't make sense in this sentence.
+> agannin dahhon
+Nu DUG agannin haccaz ūl dahhon. Nu pahhur ayyanza ēcta.
+> pahhur dahhon
+Nu pahhur haccaz ūl dahhon. Nu pahhur ayyanza ēcta.
+> hattalu hacci tehhon
+Nu GIC hattalu hacci tehhon. Nu GIC hattalu lukket.
+Nu E2 arkiwi econ.
+
+        antaki        
+           <>   hilamni
+                        
+
+Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
+Nu hacci pahhur Ù DUG agannic kīyantat.
+
+Nu warān GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> antaki paon
+Nu antaki paon.
+Nu antaki econ.
+
+                        
+           <>           
+        arkiwi        
+
+Nu apiya DUG palhin oohhon.
+
+Nu warān GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> palhin dahhon
+Nu DUG palhin dahhon.
+Nu antaki econ.
+
+                        
+           <>           
+        arkiwi        
+
+Nu DUG palhin Ù warān GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> arkiwi paon
+Nu E2 arkiwi paon.
+Nu E2 arkiwi econ.
+
+        antaki        
+           <>   hilamni
+                        
+
+Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
+Nu hacci pahhur Ù DUG agannic kīyantat.
+
+Nu DUG palhin Ù warān GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> hilamni paon
+Nu E2 hilamni paon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan haccantan Ù luttaai oohhon.
+
+Nu DUG palhin Ù warān GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> acki paon
+Nu E2 auriya ackaz haccantaz paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan haccantan oohhon.
+
+Nu DUG palhin Ù warān GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> wappi paon
+Nu wappi paon.
+Nu wappi econ.
+
+        auriya        
+           <>           
+                        
+
+Nu apiya hapan oohhon.
+
+Nu DUG palhin Ù warān GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> hattalu hapi tehhon
+Nu warān GIC hattalu hapi tehhon.
+Nu wappi econ.
+
+        auriya        
+           <>           
+                        
+
+Nu apiya hapan oohhon.
+
+Nu DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> watar dahhon
+Nu witenac DUG palhin witenaz cunnahon.
+Nu wappi econ.
+
+        auriya        
+           <>           
+                        
+
+Nu apiya hapan oohhon.
+
+Nu witenac DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> auriya paon
+Nu E2 auriya paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan haccantan oohhon.
+
+Nu witenac DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> acki paon
+Nu E2 hilamni ackaz haccantaz paon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan haccantan Ù luttaai oohhon.
+
+Nu witenac DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> arkiwi paon
+Nu E2 arkiwi paon.
+Nu E2 arkiwi econ.
+
+        dankui        
+           <>   hilamni
+                        
+
+Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
+Nu hacci pahhur Ù DUG agannic kīyantat.
+
+Nu witenac DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> watar hacci tehhon
+Nu waatar pahheni tehhon. N=an kictanunun.
+Nu E2 arkiwi econ.
+
+        dankui        
+           <>   hilamni
+                        
+
+Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
+Nu hacci DUG agannic kittat.
+
+Nu DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> agannin dahhon
+Nu DUG agannin haccaz dahhon.
+Nu E2 arkiwi econ.
+
+        dankui        
+           <>   hilamni
+                        
+
+Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
+
+Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> * To the roof!
+> hilamni paon
+Nu E2 hilamni paon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan haccantan Ù luttaai oohhon.
+
+Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> acki paon
+Nu E2 auriya ackaz haccantaz paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan haccantan oohhon.
+
+Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> kutti paon
+Nu kutti paon.
+Nu kutti kattan econ.
+
+        halhaltomari        
+auriya   <>           
+                        
+
+Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> halhaltomari paon
+Nu kuttac halhaltomari paon.
+Nu kuttac halhaltomari econ.
+
+                        
+luttiya   <>           
+        kutti        
+
+Nu apiya E2 hilamnac luttaai Ù ilan oohhon.
+
+Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> ilan dahhon
+Nu ilan dahhon.
+Nu kuttac halhaltomari econ.
+
+                        
+luttiya   <>           
+        kutti        
+
+Nu apiya E2 hilamnac luttaai oohhon.
+
+Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> kutti paon
+Nu kutti paon.
+Nu kutti kattan econ.
+
+        halhaltomari        
+auriya   <>           
+                        
+
+Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> auriya paon
+Nu E2 auriya paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan haccantan oohhon.
+
+Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> acki paon
+Nu E2 hilamni ackaz haccantaz paon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan haccantan Ù luttaai oohhon.
+
+Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> ickici paon
+Nu E2 auriyac ickici paon.
+Nu E2 auriyac ickici econ.
+
+        Hattuci cuhhi
+           <>           
+        hilamni        
+
+Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> cuhhi paon
+Nu cuhhi ūl paon. Nu cuhha parku ēcta.
+> ilan katta tehhon
+Nu ilan katta tehhon.
+Nu E2 auriyac ickici econ.
+
+        Hattuci cuhhi
+           <>           
+        hilamni        
+
+Nu apiya ilan oohhon.
+
+Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> cuhhi paon
+Nu cuhhi ūl paon. Nu palhic nakkic ēcta.
+> palhin katta tehhon
+Nu DUG palhin katta tehhon.
+Nu E2 auriyac ickici econ.
+
+        Hattuci cuhhi
+           <>           
+        hilamni        
+
+Nu apiya DUG palhin Ù ilan oohhon.
+
+Nu DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> cuhhi paon
+Nu cuhhi paon.
+Nu cuhhi econ.
+
+        hali        
+           <>           
+ickici                
+
+Nu DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> hali paon
+Nu karimnac hali ūl paon. Nu caknuwanza econ. Nu waatar uul harkon.
+> ickici paon
+Nu E2 auriyac ickici paon.
+Nu E2 auriyac ickici econ.
+
+        Hattuci cuhhi
+           <>           
+        hilamni        
+
+Nu apiya DUG palhin Ù ilan oohhon.
+
+Nu DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> hattuci paon
+Nu URU Hattuci ūl paon. Nu Hattucac ina KUR LU2 KUR2 ēcta.
+> hilamni paon
+Nu E2 hilamni paon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan haccantan Ù luttaai oohhon.
+
+Nu DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> acki paon
+Nu E2 auriya ackaz haccantaz paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan haccantan oohhon.
+
+Nu DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> wappi paon
+Nu wappi paon.
+Nu wappi econ.
+
+        auriya        
+           <>           
+                        
+
+Nu apiya hapan oohhon.
+
+Nu DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> watar dahhon
+Nu witenac DUG agannin witenaz cunnahon.
+Nu wappi econ.
+
+        auriya        
+           <>           
+                        
+
+Nu apiya hapan oohhon.
+
+Nu witenac DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> auriya paon
+Nu E2 auriya paon.
+Nu E2 auriya econ.
+
+        acki        
+palci   <>   kutti
+        wappi        
+
+Nu apiya ackan haccantan oohhon.
+
+Nu witenac DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> acki paon
+Nu E2 hilamni ackaz haccantaz paon.
+Nu E2 hilamni econ.
+
+        ickici        
+arkiwi   <>   luttiya
+        acki        
+
+Nu apiya ackan haccantan Ù luttaai oohhon.
+
+Nu witenac DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> ickici paon
+Nu E2 auriyac ickici paon.
+Nu E2 auriyac ickici econ.
+
+        Hattuci cuhhi
+           <>           
+        hilamni        
+
+Nu apiya DUG palhin Ù ilan oohhon.
+
+Nu witenac DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> cuhhi paon
+Nu cuhhi paon.
+Nu cuhhi econ.
+
+        hali        
+           <>           
+ickici                
+
+Nu witenac DUG agannin Ù GIC hattalu harkon.
+
+Verbs: ohhon paon dahhon katta-tehhon tehhon
+> hali paon
+Nu karimnac hali paon.
+The tablet breaks off here, as the soldier finally enters the temple precinct.
+
+     *** To be continued... ***
+
+Program terminated.
+You can still enter debugging commands such as @help or @quit, as well as
+arbitrary queries, including (restart) and (undo).
+You may also press ^D to quit the debugger.
+suspended> 

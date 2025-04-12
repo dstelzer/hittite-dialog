@@ -315,7 +315,11 @@
 	(describe negative action [[go #roof] $Details])
 	Nu cuhha parku ēcta. %% "The roof is high up"
 
-%% TODO - prevent going while carrying the amphora
+(prevent [[go #roof] $Details])
+	(current player $Player)
+	(#amphora is #heldby $Player)
+	(describe negative action [[go #roof] $Details])
+	Nu palhic nakkic ēcta. %% "The amphora is heavy."
 
 #roof
 (room *)
@@ -356,7 +360,9 @@
 (name * in #ablative) Hattucaz
 (* has modifier $Mod) ($Mod = {URU})
 
-%% TODO - prevent going here
+(instead of [[go *] $Details])
+	(describe negative action [[go *] $Details])
+	Nu Hattucac (span @akk) ina KUR LU2 KUR2 ēcta. %% "Hattuca is within enemy land."
 
 (metacommand [test watchtower])
 	(now) (#ladder is #in #corner)
