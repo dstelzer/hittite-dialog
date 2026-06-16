@@ -167,10 +167,10 @@
 	
 	%% Fifth paragraph: verbs. TODO how to phrase this?
 	(par) Verbs:
-	(exhaust) {
+	(collect $Verb)
 		*(verb $Verb unlocked)
-		$Verb
-	}
+	(into $VerbList)
+	(listing $VerbList {(name $_)} @, 0)
 
 (interface ($<Dir on the compass rose is $>Obj))
 ($Dir on the compass rose is $Obj)
@@ -206,16 +206,19 @@
 (perform [[look] $])
 	(now) (update needed)
 
-(verb @ohhon unlocked)
+#v-look
+(verb *)
+(name *) ōhhon
+(verb * unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 (@go/@paon wants cases [#dative])
-(translate [$ go/paon $ $ $Dat | $] into [go $Dat])
+(translate [$ go/paon/pāon $ $ $Dat | $] into [go $Dat])
 	(adjacent $Dat)
-(translate [$ go/paon $ $ $Dat | $] into [travel $Dat])
+(translate [$ go/paon/pāon $ $ $Dat | $] into [travel $Dat])
 	~(adjacent $Dat)
 
 (adjacent $Room)
@@ -307,7 +310,10 @@
 	(try [[go $Dest] [[] paon [] [] [$Dest] []]])
 	(attempt to travel along $Rest) %% Recurse
 
-(verb @paon unlocked)
+#v-go
+(verb *)
+(name *) pāon
+(verb * unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TAKE
@@ -362,7 +368,10 @@
 
 (narrate taking $) %% Nothing by default
 
-(verb @dahhon unlocked)
+#v-take
+(verb *)
+(name *) dahhon
+(verb * unlocked)
 	(#street is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -385,7 +394,10 @@
 	(now) ($Obj is #in $Room)
 	(now) (update needed)
 
-(verb @katta-tehhon unlocked)
+#v-drop
+(verb *)
+(name *) katta tehhon
+(verb * unlocked)
 	(#ladder is handled)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -410,5 +422,8 @@
 	(now) ($Obj is #in $Dest)
 	(now) (update needed)
 
-(verb @tehhon unlocked)
+#v-put
+(verb *)
+(name *) tehhon
+(verb * unlocked)
 	(#gatehouse is visited)

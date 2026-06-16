@@ -57,10 +57,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Relations
 
-(relation #in)
-(relation #heldby)
-(relation #wornby)
-(relation #partof)
+#in
+(relation *)
+
+#heldby
+(relation *)
+
+#wornby
+(relation *)
+
+#partof
+(relation *)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Directions

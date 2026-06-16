@@ -114,16 +114,33 @@
 	*(parse $Words as $Case $Obj)
 	($Noun = [$Case $Obj])
 
-(grammatical case #nominative)
-(grammatical case #genitive)
-(grammatical case #accusative)
-(grammatical case #dative)
-(grammatical case #ablative)
-(grammatical case #adverb)
-(grammatical case #locative)
-(grammatical case #bare)
+#nominative
+(grammatical case *)
 
-(parser case #accusative/#dative/#ablative/#adverb)
+#genitive
+(grammatical case *)
+
+#accusative
+(grammatical case *)
+(parser case *)
+
+#dative
+(grammatical case *)
+(parser case *)
+
+#ablative
+(grammatical case *)
+(parser case *)
+
+#adverb
+(grammatical case *)
+(parser case *)
+
+#locative %% Only used to print ANA vs INA for logograms; not used in parsing
+(grammatical case *)
+
+#bare %% Stem form, for use with Akkadian prepositions
+(grammatical case *)
 
 %% We include adverbs in the noun list, with the tag #adverb
 %% Because they can be interspersed with noun phrases
@@ -182,15 +199,31 @@
 (empty action with verb $Verb is [$Verb [] [] [] []])
 
 %% Noun phrases
+
 (add noun phrases [] to action $Act into $Act)
+
 (add noun phrases [[#adverb $Adv] | $Rest] to action [$Verb $Advs $Acc $Dat $Abl] into $Out)
 	(add noun phrases $Rest to action [$Verb [$Adv|$Advs] $Acc $Dat $Abl] into $Out)
+
 (add noun phrases [[#accusative/#bare $Acc] | $Rest] to action [$Verb $Adv $Accs $Dat $Abl] into $Out)
 	(add noun phrases $Rest to action [$Verb $Adv [$Acc|$Accs] $Dat $Abl] into $Out)
+
 (add noun phrases [[#dative $Dat] | $Rest] to action [$Verb $Adv $Acc $Dats $Abl] into $Out) %% Don't consider bare nouns as datives, it has too many false positives
 	(add noun phrases $Rest to action [$Verb $Adv $Acc [$Dat|$Dats] $Abl] into $Out)
+
 (add noun phrases [[#ablative $Abl] | $Rest] to action [$Verb $Adv $Acc $Dat $Abls] into $Out) %% Don't consider bare nouns as ablatives, it has too many false positives
 	(add noun phrases $Rest to action [$Verb $Adv $Acc $Dat [$Abl|$Abls]] into $Out)
+
+%% Silence compiler warnings
+#1s
+#2s
+#3sc
+#3sn
+#1p
+#2p
+#3pc
+#3pn
+#reflexive
 
 %% Change some of these to variables or whatever eventually - this is how the pronouns should be handled
 (first person singular #1s)
@@ -214,10 +247,12 @@
 (convert clitic @mu into noun phrase [#dative (first person singular $)])
 (convert clitic @nac into noun phrase [#accusative (first person plural $)])
 (convert clitic @nac into noun phrase [#dative (first person plural $)])
+
 (convert clitic @ta/@du into noun phrase [#accusative (second person singular $)])
 (convert clitic @ta/@du into noun phrase [#dative (second person singular $)])
 (convert clitic @cmac into noun phrase [#accusative (second person plural $)])
 (convert clitic @cmac into noun phrase [#dative (second person plural $)])
+
 (convert clitic @cmac into noun phrase [#dative (third person plural $)])
 (convert clitic @ci into noun phrase [#dative (third person singular $)])
 (convert clitic @an into noun phrase [#accusative (third person singular common $)])
@@ -225,8 +260,10 @@
 (convert clitic @at into noun phrase [#accusative (third person plural neuter $)])
 (convert clitic @e/@i into noun phrase [#accusative (third person plural neuter $)])
 (convert clitic @uc/@ac into noun phrase [#accusative (third person plural common $)])
+
 (convert clitic @z/@za into noun phrase [#accusative (reflexive $)])
 (convert clitic @z/@za into noun phrase [#dative (reflexive $)])
+
 (convert clitic (sentence particle $Part) into noun phrase [#adverb $Part]) %% Sentence particles work kind of like adverbs, so we deal with them there
 
 (interface (convert clitics $<Input into noun phrases $>Output))
@@ -259,6 +296,7 @@
 	*(add noun phrases $ExtraNouns to action $Second into $Third)
 	(deduplicate $Third into $Action)
 
+%% A couple special rules for predictable grammatical cases
 (name (neuter $Obj) in #accusative)
 	(name $Obj in #nominative)
 (dict (neuter $Obj) in #accusative)
@@ -274,7 +312,7 @@
 (listing [] $ $ 0)
 	nothing
 (listing [$Head | $Rest] $PrintClosure $Conjunction $NPrinted)
-	(if) (empty $Rest) (or) (empty $Conjunction) (then)
+	(if) (empty $Rest) ~($Conjunction = @,) (then)
 		(if) ($NPrinted > 1) (then) , (endif)
 		(if) ($NPrinted > 0) (then) $Conjunction (endif)
 	(else)
@@ -408,6 +446,7 @@
 	(now) ~(allowing parse errors)
 	(parse action $Words)
 
+%% TODO these need some better handling
 (metacommand [quit]) (quit)
 (metacommand [undo]) (undo)
 (metacommand [save]) (save $)
@@ -633,6 +672,7 @@
 %% (try $) then handles those single-noun actions
 %% Implemented in worldmodel.dg
 
+%% Replacement for (name $) for a cased language
 ($ [])
 ($Case [$Single])
 	($Case $Single)
@@ -650,7 +690,7 @@
 (name $Obj in #locative) %% For non-logograms, these are always identical; the locative isn't really treated as a case of its own
 	(name $Obj in #dative)
 
-(interface ($>Case $>Obj))
+(interface ($<Case $<Obj))
 ($Case $Obj) %% Adds modifiers as needed
 	(if) ($Obj has modifier $Mod) (then)
 		(if) (object $Mod) (then)
