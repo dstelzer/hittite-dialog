@@ -1,14 +1,17 @@
 #me
 (current player *)
-(name * in #nominative/#bare) uuk
+(name * in #nominative/#bare) ūk
 (name * in #genitive) ammel
 (name * in #dative/#accusative/#ablative) ammuk
 (* is #in #riverbank)
 
 #riverbank
 (room *)
-(name * in #nominative) wappuc
-(name * in #genitive) wappawac
+(* uses preverb #at)
+(name * in #nominative) wappuš
+(dict * in #nominative) wappuc
+(name * in #genitive) wappawaš
+(dict * in #genitive) wappawac
 (name * in #dative) wappi
 (name * in #accusative) wappun
 (name * in #ablative) wappuwaz
@@ -16,11 +19,16 @@
 (from * go #north to #watchtower)
 
 #river
-(name * in #nominative/#genitive) hapac
-(name * in #dative) hapi
-(name * in #accusative) hapan
-(name * in #ablative) hapaz
-(name * in #bare) hapa
+(name * in #nominative/#genitive) ḫapaš
+(dict * in #nominative/#genitive) hapac
+(name * in #dative) ḫapi
+(dict * in #dative) hapi
+(name * in #accusative) ḫapan
+(dict * in #accusative) hapan
+(name * in #ablative) ḫapaz
+(dict * in #ablative) hapaz
+(name * in #bare) ḫapa
+(dict * in #bare) hapa
 (dict * in $Case)
 	*(dict #water in $Case)
 (* is #in #riverbank)
@@ -40,10 +48,17 @@
 	(now) (update needed)
 	(tick)
 
+(prevent [[take *] $Details])
+	(describe failed action [[take *] $Details])
+	Nu wātar natta taruḫḫon ḫarkon. %% "I was not able to hold the water."
+
 #watchtower
 (room *)
-(name * in #nominative) auric
-(name * in #genitive) auriyac
+(* uses preverb #infront)
+(name * in #nominative) auriš
+(dict * in #nominative) auric
+(name * in #genitive) auriyaš
+(dict * in #genitive) auriyac
 (name * in #dative) auriya
 (name * in #accusative) aurin
 (name * in #ablative) auriyaz
@@ -58,72 +73,89 @@
 (door *)
 (* blocks passage)
 	{ (#bolt is #in *) (or) (#bolt is pristine) }
-(describe * blocking passage)
-	Nu ackac ciyanza ēcta. %% The gate was sealed.
-(short name *) acki
-(name * in #nominative)
-	ackac (if) (* blocks passage) (then) ciyanza (else) haccanza (endif)
-(name * in #genitive)
-	ackac (if) (* blocks passage) (then) ciyandac (else) haccantac (endif)
+(describe * blocking passage) %% No extra description, "it's blocked" is in the adjective already
+(short name *) aški
+(name * in #nominative/#genitive)
+	aškaš (if) (* blocks passage) (then) ḫattalwantaš (endif)
+(dict * in #nominative/#genitive)
+	ackac (if) (* blocks passage) (then) hattalwantac (endif)
 (name * in #dative)
-	acki (if) (* blocks passage) (then) ciyanti (else) haccanti (endif)
+	aški (if) (* blocks passage) (then) ḫattalwanti (endif)
+(dict * in #dative)
+	acki (if) (* blocks passage) (then) hattalwanti (endif)
 (name * in #accusative)
-	ackan (if) (* blocks passage) (then) ciyantan (else) haccantan (endif)
+	aškan (if) (* blocks passage) (then) ḫattalwantan (endif)
+(dict * in #accusative)
+	ackan (if) (* blocks passage) (then) hattalwantan (endif)
 (name * in #ablative)
-	ackaz (if) (* blocks passage) (then) ciyantaz (else) haccantaz (endif)
-(name * in #bare) acka
+	aškaz (if) (* blocks passage) (then) ḫattalwantaz (endif)
+(dict * in #ablative)
+	ackaz (if) (* blocks passage) (then) hattalwantaz (endif)
+(name * in #bare) aška
+(dict * in #bare) acka
 
 #street
 (room *)
-(name * in #nominative/#genitive) palcac
-(name * in #dative) palci
-(name * in #accusative) palcan
-(name * in #ablative) palcaz
-(name * in #bare) palca
+(* uses preverb #at)
+(name * in #nominative/#genitive) palšaš
+(dict * in #nominative/#genitive) palcac
+(name * in #dative) palši
+(dict * in #dative) palci
+(name * in #accusative) palšan
+(dict * in #accusative) palcan
+(name * in #ablative) palšaz
+(dict * in #ablative) palcaz
+(name * in #bare) palša
+(dict * in #bare) palca
 (from * go #east to #watchtower)
 
 #ladder
 (item *)
-(name * in #nominative) ilac
-(name * in #genitive) ilanac
+(name * in #nominative) ilaš
+(dict * in #nominative) ilac
+(name * in #genitive) ilanaš
+(dict * in #genitive) ilanac
 (name * in #dative) ilani
 (name * in #accusative) ilan
 (name * in #ablative) ilanaz
 (name * in #bare) ila
 (* is #in #street)
 
-(instead of [[go *] $Details])
-	($Details = [$Raw $Verb $Adv $Acc $ $Abl])
+(instead of [[cross *] $Details])
+	($Details = [$Raw $Verb $Adv $ $Dat $Abl])
 	(if) (current room #corner) (or) (current room #gatehouse) (then)
-		(try [[go #window] [$Raw $Verb $Adv $Acc [#window] $Abl]])
+		(try [[cross #window] [$Raw $Verb $Adv #window $Dat $Abl]])
 	(elseif) (current room #backroom) (then)
-		(try [[go #roof] [$Raw $Verb $Adv $Acc [#roof] $Abl]])
+		(try [[cross #roof] [$Raw $Verb $Adv #roof $Dat $Abl]])
 	(else)
-		(describe negative action [[go *] $Details])
-		Nu (span @akk) ūl kuitki parku ēcta. %% "Nothing was high up."
-		(tick) (stop)
+		(fail) %% Default message will say that non-doors can't be crossed
 	(endif)
 
 #wall
 (room *)
-(header *) Nu kutti kattan econ. %% I was below the wall
+(* uses preverb #under)
 (name * in #nominative) kuzza
-(name * in #genitive) kuttac
+(name * in #genitive) kuttaš
+(dict * in #genitive) kuttac
 (name * in #dative) kutti
 (name * in #accusative) kuttan
 (name * in #ablative) kuttaz
 (name * in #bare) kut
-(dict * in *(grammatical case $)) kattan
 (from * go #west to #watchtower)
 (from * go #north to #corner)
 
 #corner
 (room *)
 (neuter *)
-(name * in #nominative/#accusative/#bare) halhaltomar
-(name * in #genitive) halhaltomarac
-(name * in #dative) halhaltomari
-(name * in #ablative) halhaltomaraz
+(* uses preverb #nextto)
+(name * in #nominative/#accusative/#bare) ḫalḫaltomar
+(dict * in #nominative/#accusative/#bare) ḫalḫaltomar
+(name * in #genitive) ḫalḫaltomaraš
+(dict * in #genitive) halhaltomarac
+(name * in #dative) ḫalḫaltomari
+(dict * in #dative) halhaltomari
+(name * in #ablative) ḫalḫaltomaraz
+(dict * in #ablative) halhaltomaraz
 (* has modifier #wall)
 (from * go #south to #wall)
 (from * go #west through #window to #gatehouse)
@@ -134,10 +166,11 @@
 (* blocks passage)
 	(current room $Room)
 	~(#ladder is #in $Room)
-(describe * blocking passage) Nu luttāi parku ēcta. %% "The window is high up"
-(name * in #nominative/#accusative/#bare) luttaai
+(describe * blocking passage) N=at parku ēšta. %% "The window is high up"
+(name * in #nominative/#accusative/#bare) luttāi
 (dict * in #nominative/#accusative/#bare) luttai
-(name * in #genitive) luttiyac
+(name * in #genitive) luttiyaš
+(dict * in #genitive) luttiyac
 (name * in #dative) luttiya
 (name * in #ablative) luttiyaz
 (* has modifier #gatehouse)
@@ -145,11 +178,16 @@
 
 #gatehouse
 (room *)
+(* uses preverb #in)
 (neuter *)
-(name * in #nominative/#accusative/#bare) hilammar
-(name * in #genitive) hilamnac
-(name * in #dative) hilamni
-(name * in #ablative) hilamnaz
+(name * in #nominative/#accusative/#bare) ḫilammar
+(dict * in #nominative/#accusative/#bare) hilammar
+(name * in #genitive) ḫilamnaš
+(dict * in #genitive) hilamnac
+(name * in #dative) ḫilamni
+(dict * in #dative) hilamni
+(name * in #ablative) ḫilamnaz
+(dict * in #ablative) hilamnaz
 (* has modifier $Mod) ($Mod = {E2})
 (from * go #east through #window to #corner)
 (from * go #south through #gate to #watchtower)
@@ -161,30 +199,38 @@
 (neuter *)
 (name * in #nominative/#accusative/#bare)
 	(if) (bolt is burning) (then) warān (endif)
-	GIC hattalu
+	GIŠ ḫattalu
+(dict * in #nominative)
+	(if) (bolt is burning) (then) waran (endif)
+	GIŠ hattalu
 (name * in #genitive)
+	(if) (bolt is burning) (then) warantaš (endif)
+	GIŠ ḫattaluwaš
+(dict * in #genitive)
 	(if) (bolt is burning) (then) warantac (endif)
-	GIC hattaluwac
+	GIŠ hattaluwac
 (name * in #dative)
 	(if) (bolt is burning) (then) waranti (endif)
-	GIC hattaluwi
+	GIŠ ḫattaluwi
+(dict * in #dative) hattaluwi
 (name * in #ablative)
 	(if) (bolt is burning) (then) warantaz (endif)
-	GIC hattaluwaz
+	GIŠ ḫattaluwaz
+(dict * in #dative) hattaluwaz
 
-(after [[go #gatehouse] $]) %% Only describe it on the inside
+(after [[go #gatehouse] | $]) %% Only describe it on the inside
 	(* is pristine)
 	(now) (* is #in #gate)
 
 (narrate taking *)
 	(* is pristine)
-	Nu ackan hachon. %% "I opened the gate."
+	Nu aškan ḫašḫon. %% "I opened the gate."
 	(now) (update needed)
 
 (instead of [[put * #hearth/#fire] $Details])
 	(#fire is #in #hearth)
 	(describe action [[put * #fire] $Details])
-	Nu GIC hattalu lukket. %% "The bolt ignited."
+	Nu GIŠ ḫattalu lukket. %% "The bolt ignited."
 	(now) (bolt is burning)
 	(now) (update needed)
 	(tick)
@@ -200,11 +246,15 @@
 
 #foyer
 (room *)
-(name * in #nominative) arkiwic
-(name * in #genitive) arkiwac
+(* uses preverb #in)
+(name * in #nominative) arkiwiš
+(dict * in #nominative) arkiwic
+(name * in #genitive) arkiwaš
+(dict * in #genitive) arkiwac
 (name * in #dative) arkiwi
 (name * in #accusative) arkiwin
 (name * in #ablative) arkiwaz
+(name * in #bare) arkiwi
 (* has modifier $Mod) ($Mod = {E2})
 
 (from * go #east to #gatehouse)
@@ -212,30 +262,42 @@
 
 #hearth
 (holder *)
-(name * in #nominative/#genitive) haccac
-(name * in #dative) hacci
-(name * in #accusative) haccan
-(name * in #ablative) haccaz
-(name * in #bare) hacca
+(* wants relation #in)
+(name * in #nominative/#genitive) haššaš
+(dict * in #nominative/#genitive) haccac
+(name * in #dative) hašši
+(dict * in #dative) hacci
+(name * in #accusative) haššan
+(dict * in #accusative) haccan
+(name * in #ablative) haššaz
+(dict * in #ablative) haccaz
+(name * in #bare) hašša
+(dict * in #bare) hacca
 (* is #in #foyer)
 
 #fire
 (neuter *)
-(name * in #nominative/#accusative/#bare) pahhur
-(name * in #genitive) pahhuenac
-(name * in #dative) pahhueni
-(name * in #ablative) pahhuenaz
+(name * in #nominative/#accusative/#bare) paḫḫur
+(dict * in #nominative/#accusative/#bare) pahhur
+(name * in #genitive) paḫḫuenaš
+(dict * in #genitive) pahhuenac
+(name * in #dative) paḫḫueni
+(dict * in #dative) pahhueni
+(name * in #ablative) paḫḫuenaz
+(dict * in #ablative) pahhuenaz
 (* is #in #hearth)
 
 (prevent [[take $Obj from #hearth] $Details])
 	(* is #in #hearth)
-	(describe negative action [[take $Obj from #hearth] $Details])
-	Nu pahhur ayyanza ēcta. %% "The fire was hot."
+	(describe failed action [[take $Obj from #hearth] $Details])
+	Nu paḫḫur ayyanza ēšta. %% "The fire was hot."
 
 #cup
 (item *)
-(name * in #nominative) DUG agannic
-(name * in #genitive) DUG aganniyac
+(name * in #nominative) DUG aganniš
+(dict * in #nominative) DUG agannic
+(name * in #genitive) DUG aganniyaš
+(dict * in #genitive) DUG aganniyac
 (name * in #dative) DUG aganniya
 (name * in #accusative) DUG agannin
 (name * in #ablative) DUG aganniyaz
@@ -248,17 +310,25 @@
 
 #watchman
 (animate *)
-(name * in #nominative) techallic LÚ halliyatallac %% Sleeping watchman
-(name * in #genitive) techalliyac LÚ halliyatallac
-(name * in #dative) techalliya LÚ halliyatalli
-(name * in #accusative) techallin LÚ halliyatallan
-(name * in #ablative) techalliyaz LÚ halliyatallaz
-(name * in #bare) techalli LÚ halliyatalla
+(name * in #nominative) tešḫalliš LÚ ḫalliyatallaš %% Sleeping watchman
+(dict * in #nominative) techallic LU2 halliyatallac
+(name * in #genitive) tešḫalliyaš LÚ halliyatallaš
+(dict * in #genitive) techalliyac LU2 halliyatallac
+(name * in #dative) tešḫalliya LÚ ḫalliyatalli
+(dict * in #dative) techalliya LU2 halliyatalli
+(name * in #accusative) tešḫallin LÚ ḫalliyatallan
+(dict * in #accusative) techallin LU2 halliyatallan
+(name * in #ablative) tešḫalliyaz LÚ ḫalliyatallaz
+(dict * in #ablative) techalliyaz LU2 halliyatallaz
+(name * in #bare) tešḫalli LÚ ḫalliyatalla
+(dict * in #bare) techalli LU2 halliyatalla
 (* is #in #foyer)
 
 #storeroom
 (room *)
-(name * in #nominative/#genitive) antakac
+(* uses preverb #in)
+(name * in #nominative/#genitive) antakaš
+(dict * in #nominative/#genitive) antakac
 (name * in #dative) antaki
 (name * in #accusative) antakan
 (name * in #ablative) antakaz
@@ -268,9 +338,11 @@
 
 #amphora
 (item *)
-(name * in #nominative) DUG palhic
+(name * in #nominative) DUG palhiš
+(dict * in #nominative) DUG palhic
 (name * in #accusative) DUG palhin
-(name * in #genitive) DUG palhac
+(name * in #genitive) DUG palhaš
+(dict * in #genitive) DUG palhac
 (name * in #dative) DUG palhi
 (name * in #ablative) DUG palhaz
 (dict * in $Case)
@@ -285,59 +357,74 @@
 	(amphora has water)
 	(now) (#fire is nowhere)
 	(now) ~(amphora has water)
-	Nu waatar pahheni tehhon. %% "I put the water on the fire..."
-	N=an kictanunun. %% "...and extinguished it."
+	Nu wātar paḫḫeni tēḫḫon. %% "I put the water on the fire..."
+	N=an kištanunun. %% "...and extinguished it."
 	(now) (update needed)
 
 %% Never on-stage, but used by the parser
 #water
-(name * in #nominative/#accusative) waatar
+(name * in #nominative/#accusative) wātar
 (dict * in #nominative/#accusative) watar
-(name * in #genitive) witenac
+(name * in #genitive) witenaš
+(dict * in #genitive) witenac
 (name * in #dative) witeni
 (name * in #ablative) witenaz
 
 #backroom
 (room *)
 (neuter *)
-(name * in #nominative/#accusative/#bare) ickica
-(name * in #genitive) ickicac
-(name * in #dative) ickici
-(name * in #ablative) ickicaz
+(* uses preverb #in)
+(name * in #nominative/#accusative/#bare) iškiša
+(dict * in #nominative/#accusative/#bare) ickica
+(name * in #genitive) iškišaš
+(dict * in #genitive) ickicac
+(name * in #dative) iškiši
+(dict * in #dative) ickici
+(name * in #ablative) iškišaz
+(dict * in #ablative) ickicaz
 (* has modifier #watchtower)
 (from * go #south to #gatehouse)
 (from * go #up to #roof)
-(from * go #north to #hattuca)
+(from * go #north to #enemyland)
 
-(prevent [[go #roof] $Details])
+(prevent [[cross #roof] $Details])
 	(current room *)
 	~(#ladder is #in *)
-	(describe negative action [[go #roof] $Details])
-	Nu cuhha parku ēcta. %% "The roof is high up"
+	(describe failed action [[cross #roof] $Details])
+	Nu šuḫḫa parku ēšta. %% "The roof is high up"
 
-(prevent [[go #roof] $Details])
+(prevent [[cross #roof] $Details])
 	(current player $Player)
 	(#amphora is #heldby $Player)
-	(describe negative action [[go #roof] $Details])
-	Nu palhic nakkic ēcta. %% "The amphora is heavy."
+	(describe failed action [[cross #roof] $Details])
+	Nu palḫiš nakkiš ēšta. %% "The amphora is heavy."
 
 #roof
 (room *)
 (neuter *)
-(name * in #nominative/#accusative/#bare) cuhha
-(name * in #genitive) cuhhac
-(name * in #dative) cuhhi
-(name * in #ablative) cuhhaz
+(* uses preverb #on)
+(name * in #nominative/#accusative/#bare) šuḫḫa
+(dict * in #nominative/#accusative/#bare) cuhha
+(name * in #genitive) šuḫḫaš
+(dict * in #genitive) cuhhac
+(name * in #dative) šuḫḫi
+(dict * in #dative) cuhhi
+(name * in #ablative) šuḫḫaz
+(dict * in #ablative) cuhhaz
 (from * go #down to #backroom)
 (from * go #north to #precinct)
 
 #precinct
 (room *)
 (neuter *)
-(name * in #nominative/#accusative/#dative/#bare) hali
-(name * in #genitive) haliyac
-(name * in #ablative) haliyaz
-(* has modifier @karimnac)
+(name * in #nominative/#accusative/#dative/#bare) ḫali
+(dict * in #nominative/#accusative/#dative/#bare) hali
+(name * in #genitive) ḫaliyaš
+(dict * in #genitive) haliyac
+(name * in #ablative) ḫaliyaz
+(dict * in #ablative) haliyaz
+(* has modifier @karimnaš)
+(dict * in $) karimnac
 
 %% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
 
@@ -348,23 +435,23 @@
 		(div @narration) { The tablet breaks off here, as the soldier finally enters the temple precinct. }
 		(game over { To be continued... } )
 	(else)
-		(describe negative action [[go *] $Details])
-		Nu caknuwanza econ. Nu waatar (span @akk) uul harkon. %% "I was impure. I did not have water."
+		(describe failed action [[go *] $Details])
+		Nu=za šaknuwanza ešon. Nu wātar natta ḫarkon. %% "I was impure. I did not have water."
 	(endif)
 
-#hattuca
+#enemyland
 (room *)
-(name * in #nominative/#genitive) Hattucac
-(name * in #dative) Hattuci
-(name * in #accusative) Hattucan
-(name * in #ablative) Hattucaz
-(* has modifier $Mod) ($Mod = {URU})
+(* uses preverb #at)
+(short name *) KÚR
+(name * in #bare) URU LÚ KÚR
+(logogram *)
+(dict * in $) LU2 KUR2
 
-(instead of [[go *] $Details])
-	(describe negative action [[go *] $Details])
-	Nu Hattucac (span @akk) ina KUR LU2 KUR2 ēcta. %% "Hattuca is within enemy land."
+(prevent [[go *] | $Details])
+	(describe failed action [[go *] | $Details])
+	%% Basic failure message should be enough, given the definitions of the words
 
-(metacommand [test watchtower])
+(parse metacommand [\/test watchtower])
 	(now) (#ladder is #in #corner)
 	(now) (#ladder is handled)
 	(now) (#street is visited)
@@ -372,7 +459,7 @@
 	(now) (#bolt is #in #gate)
 	(enter #gatehouse)
 
-(metacommand [test roof])
-	(now) (#bolt is #heldby #player)
+(parse metacommand [\/test roof])
+	(now) (#bolt is #heldby #me)
 	(now) (bolt is burning)
 	(now) (amphora has water)

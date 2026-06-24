@@ -1,0 +1,68 @@
+n(u)	nu na n	Then (a mostly-meaningless word used to introduce a new sentence in Hittite. It's known as the "sentence connective".)
+=za		=za =z	Self (as in "myself", "yourself", etc; in Hittite, this word is also used any time the main verb in a sentence is "I am" or "you are")
+=kan	=kan =kkan	[A particle that affects the meaning of the verb in subtle ways. Usually left untranslated.]
+ešon	ešon ēšta ešer	Be (at a location: dative)
+dankui	dankui	Dark(ness)
+apiya	apiya	There, at that place
+ōḫḫon	ōḫḫon	See, look around, look at, examine (something: accusative)
+ḫarkon	ḫarkon	Have, hold (something: accusative)
+waššiyanon	waššiyanon	Wear, have on (something: accusative)
+pāon	pāon	Go (to a place: dative)
+ḫattalwantaš	ḫattalwantaš	Closed
+pēda	pēdan pēdaš pēdi pēdaz pēda	Place, location
+kuit	kuit	Because
+apēdani	apēdani TODO	That
+karū	karū	Already
+šarraḫḫon	šarraḫḫon	Pass through, cross (something: accusative)
+dāḫḫon	dāḫḫon	Take (something: accusative; optionally from somewhere: ablative)
+natta	natta	Not
+=an	=an =at	It
+mekki	mekki	Very
+nakkiš	nakkiš nakki	Heavy
+katta	katta	Down (as in katta tēḫḫon, "put (something) down")
+tēḫḫon	tēḫḫon	Put (something: accusative; somewhere: dative)
+anda	anda	In
+šēr	šēr	On (top of)
+āppa	āppa	Back, behind
+peran	peran	In front of
+kattan	kattan	Underneath
+tapusža	tapusža	Next to
+ammuk	ūk ammuk ammel	I, me
+wappu	wappuš wappawaš wappi wappun wappuwaz wappu	Riverbank
+ḫapa	ḫapaš ḫapi ḫapan ḫapaz ḫapa	River
+wātar	wātar witenaš witeni witenaz	Water
+auri	auriš auriyaš auriya aurin auriyaz auri	Watchtower
+aška	aškaš aški aškan aškaz aška	Door, gate
+ḫattalwanta	ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz ḫattalwanta	Closed, latched, bolted
+palša	palšaš palši palšan palšaz palša	Street
+ila	ilaš ili ilan ilaz ila	Ladder
+kut	kuzza kuttaš kutti kuttan kuttaz kut	Wall
+ḫalḫaltomar	ḫalḫaltomar ḫalḫaltomaraš ḫalḫaltomari ḫalḫaltomaraz	Corner
+parku	parku	High
+luttāi	luttāi luttiyaš luttiya luttiyaz	Window
+ḫilammar	ḫilammar ḫilamnaš ḫilamni ḫilamnaz	Gatehouse
+É	É	[Building]
+warān	warān warantaš waranti warantaz	Burning, aflame
+GIŠ	GIŠ	[Made of wood]
+ḫattalu	ḫattalu ḫattaluwaš ḫattaluwi ḫattaluwaz	Bar (put across a door to block it)
+ḫašḫon	ḫašḫon	Open (something: accusative)
+lukket	lukket	Ignited, caught fire
+arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer
+hašša	haššaš hašši haššan haššaz hašša	Hearth
+paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire
+ayyanza	ayyanza	Hot
+DUG	DUG	[vessel]
+aganni	aganniš aganniyaš aganniya agannin aganniyaz aganni	Cup
+LÚ	LÚ	[man]
+tešḫalli	tešḫalliš tešḫalliyaš tešḫalliya tešḫallin tešḫalliyaz tešḫalli	Sleeping, asleep, unconscious
+ḫalliyatalla	ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz ḫalliyatalla	Watchman, guard
+antaka	antakaš antaki antakan antakaz antaka	Storeroom
+palhi	palhiš palhaš palhi palhin palhaz palhi	Pithos (large clay jar)
+kištanunun	kištanunun	Extinguished (something: accusative)
+iškiša	iškiša iškišaš iškiši iškišaz	Back room
+šuḫḫa	šuḫḫa šuḫḫaš šuḫḫi šuḫḫaz	Roof
+ḫali	ḫali ḫaliyaš ḫaliyaz	Precinct (for a temple, this is a marked-out area consecrated to a deity)
+karimmi	karimmi karimnaš karimni karimnaz	Temple
+šaknuwanza	šaknuwanza	Impure, defiled, not ritually pure
+URU	URU	[city]
+KÚR	KÚR	Enemy

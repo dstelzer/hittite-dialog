@@ -13,12 +13,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 (update description)
-	%% We'll eventually do this in a status area instead
 	(update environment around player)
+	%% Do this in a status area if at all possible, either inline or top
 	(if) (interpreter supports inline status bar) (then)
 		(inline status bar @inline) (describe environment)
-%%	(elseif) (interpreter supports status bar) ($Lines lines needed for status bar) (then)
-%%		(status bar @status with height $Lines) (describe environment)
+	(elseif) (interpreter supports status bar) ($Lines lines needed for status bar) (then)
+		(status bar @status with height $Lines) (describe environment)
 	(else)
 		(div @inline) (describe environment)
 	(endif)
@@ -63,7 +63,15 @@
 	*($Obj is #in $Room)
 	~(current player $Obj)
 
-(header (room $Room)) Nu (#locative $Room) econ.
+(header (room $Room))
+	($Room uses preverb $Prep)
+	Nu=za
+	(if) ($Prep is one of [#in #on #behind]) (then) %% anda, šēr, appa
+		(no space) =kan
+	(endif)
+	(#dative $Room)
+	(preverb $Prep)
+	ešon.
 (short name (inherently dark $Room))
 	(current player $Player)
 	~($Player has a light source)
@@ -82,33 +90,15 @@
 	(div @error) { Since the "darkness" is insubstantial, it's unclear what this action would entail. }
 
 (describe environment)
-	%% First line: nu LOCATION-D econ.
-	%% Compare: d^IŠKUR-ta [a]tta⸗šu[mmi] kuwapi ēšta URU^Liḫzini⸗w[a ]ešu[n] "Storm-god, our father, where were you?—I was in Lihzina"
-	%% But we might want anda ec- instead of just ec- TODO
+	%% First paragraph: "I was at [location]."
 	(current room $Loc)
 	(action log {Current room: $Loc} )
 	(header $Loc)
 	
-	%% Second line: nu maninkuwan ("near") ROOM-N ēcta/ecer.
-	%% TODO - do we want a compass rose instead? It would be better to have these names be in the dative, since that's what the player needs to use to go to them. But I can't think of a good phrasing that uses the dative.
-	(collect $Room)
-		*(from $Loc go $ to room $Room)
-	(into $RoomList)
-	(action log {Room list: $RoomList} )
-%%	(if) (nonempty $RoomList) (then)
-%%		(line) Nu maninkuwan
-%%		(#nominative $RoomList)
-%%		(if) ($RoomList = [$]) (then)
-%%			ēcta
-%%		(else)
-%%			ecer
-%%		(endif)
-%%		.
-%%	(endif)
-	
+	%% Second "paragraph" (block): compass rose with dative for each direction
 	(compass rose) %% Experiment
 	
-	%% Second paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōhhon.
+	%% Third paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōḫḫon.
 	(collect $Obj)
 		*($Obj is #in $Loc)
 		~(current player $Obj)
@@ -117,32 +107,30 @@
 	(if) (nonempty $HereList) (then)
 		(par) Nu apiya
 		(#accusative $HereList)
-		oohhon.
+		ōḫḫon.
 	(endif)
 	
-	%% Subsequent lines: Nu CONTAINER-DAT anda OBJECT-NOM ēcta/ecer
-	%% Or should we use ecat/ecantat "to sit"?
-	%% Solution: use forms of kitta "it lies"
-		%% kittat(i) sg, kīyantat(i) pl
-		%% Used for on, in, on top of...
-		%% Anda(n) not necessary
+	%% Subsequent lines: Nu OBJECT-NOM CONTAINER-DAT anda ēšta/ešer
 	(collect $Obj)
 		*($Obj is #in $Loc)
-		($ is #in $Obj)
+		($ is $ $Obj)
 	(into $ContainerList)
 	(action log {Containers: $ContainerList} )
 	(exhaust) {
 		*($Container is one of $ContainerList)
+		($Container wants relation $Rel)
 		(collect $Obj)
 			*($Obj is #in $Container)
 		(into $ContentsList)
-		(line) Nu (#dative $Container)
+		(line) Nu
 		(#nominative $ContentsList)
-		(if) ($ContentsList = [$]) (then) kittat (else) kīyantat (endif) %% Agreement
+		(#dative $Container)
+		(preverb $Rel)
+		(if) ($ContentsList = [$]) (then) ēšta (else) ešer (endif)
 		.
 	}
 	
-	%% Third paragraph: Nu INVENTORY-ACC harkon.
+	%% Third paragraph: Nu INVENTORY-ACC ḫarkon.
 	(current player $Player)
 	(collect $Obj)
 		*($Obj is #heldby $Player)
@@ -151,10 +139,10 @@
 	(if) (nonempty $HeldList) (then)
 		(par) Nu
 		(#accusative $HeldList)
-		harkon.
+		ḫarkon.
 	(endif)
 	
-	%% Fourth paragraph: Nu CLOTHES-ACC wēccon.
+	%% Fourth paragraph: Nu CLOTHES-ACC waššiyanon.
 	(collect $Obj)
 		*($Obj is #wornby $Player)
 	(into $WornList)
@@ -162,15 +150,19 @@
 	(if) (nonempty $WornList) (then)
 		(par) Nu
 		(#accusative $WornList)
-		wēccon.
+		waššiyanon.
 	(endif)
 	
 	%% Fifth paragraph: verbs. TODO how to phrase this?
-	(par) Verbs:
-	(collect $Verb)
-		*(verb $Verb unlocked)
-	(into $VerbList)
-	(listing $VerbList {(name $_)} @, 0)
+	(div @error) {
+		(par) Verbs:
+		(collect $Verb)
+			*(verb $Verb unlocked)
+		(into $VerbList)
+		(listing $VerbList {(name $_)} @, 0)
+	}
+
+(interface (verb $<Object)) %% Not currently used
 
 (interface ($<Dir on the compass rose is $>Obj))
 ($Dir on the compass rose is $Obj)
@@ -201,24 +193,30 @@
 
 (short name []) (space 8)
 
-(@look/@ohhon/@oohhon wants cases [])
-(translate [$ look/ohhon/oohhon | $] into [look])
-(perform [[look] $])
+(verb @look/@oḫḫon/@ōḫḫon/@ohhon means @ōḫḫon)
+(@ōḫḫon wants cases [])
+(@ōḫḫon wants cases [#accusative])
+(translate [$ ōḫḫon $ [] | $] into [look])
+(translate [$ ōḫḫon $ $Acc | $] into [examine $Acc])
+(perform [[look] | $])
+	(now) (update needed)
+(perform [[examine $] | $]) %% Not a useful action in this game
 	(now) (update needed)
 
 #v-look
 (verb *)
-(name *) ōhhon
+(name *) ōḫḫon
 (verb * unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% GO
+%% GO (and TRAVEL)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(@go/@paon wants cases [#dative])
-(translate [$ go/paon/pāon $ $ $Dat | $] into [go $Dat])
+(verb @go/@paon/@pāon means @pāon)
+(@pāon wants cases [#dative])
+(translate [$ pāon $ $ $Dat | $] into [go $Dat])
 	(adjacent $Dat)
-(translate [$ go/paon/pāon $ $ $Dat | $] into [travel $Dat])
+(translate [$ pāon $ $ $Dat | $] into [travel $Dat])
 	~(adjacent $Dat)
 
 (adjacent $Room)
@@ -236,51 +234,38 @@
 	(from $Source through $Door to $Dest)
 	(action log {Found door $Door})
 	($Door blocks passage)
-	(describe negative action [[go $Dest] $Details])
+	(describe failed action [[go $Dest] $Details])
 	(describe $Door blocking passage)
 
-(describe $Door blocking passage)
-	Nu (#nominative $Door) ictapanza ēcta. %% "The DOOR was closed."
+(describe $Door blocking passage) %% This should be overridden for each door if possible
+	Nu (#nominative $Door) ḫattalwantaš ēšta. %% "The DOOR was closed."
 (($Door is closed) blocks passage)
+($ is closed) (fail) %% TODO do we even want this in the world model?
 
-(prevent [[go (inherently dark $Dest)] $Details])
+(prevent [[go (inherently dark $Dest)] $Details]) %% See also under CROSS
 	(current player $Player)
 	~($Player has a light source)
 	~($Dest has a light source)
-	(describe negative action [[go $Dest] $Details])
-	Nu pedan dankuecta. %% "The place was dark."
+	Nu pēdan kuit dankui ēšta, %% "Because the place was dark..."
+	(describe raw failed action [[go $Dest] $Details]) %% "raw" = no connective, caps, or punctuation
+	.
 
 ($Parent has a light source)
 	*($Obj has ancestor $Parent)
 	($Obj provides light)
 
 (prevent [[go (current room $Dest)] $Details])
-	(describe negative action [[go $Dest] $Details])
-	Nu=ci karū econ. %% "I was already there."
+	(describe failed action [[go $Dest] $Details])
+	Nu=za apēdani pēdi karū ešon. %% "I was already in that place."
 
-(prevent [[go $Dest] $Details])
+(prevent [[go $Dest] $])
 	~(room $Dest)
-	~(door $Dest)
-	(describe negative action [[go $Dest] $Details])
-	(div @error) { It's not clear what the verb "paon" would mean for something that can't be entered. It's primarily used for locations, or doors. }
+	(div @error) { This line is likely a scribal error. The verb (span @hittite) pāon "go" is generally used with locations, not objects; for things like doors and thresholds, the verb (span @hittite) šarraḫḫon "pass through" is used instead. }
 
-(instead of [[go (door $Dest)] $Details])
-	(current room $Loc)
-	(action log { Tried to go a door; translating this action } )
-	(if) (from $Loc through $Dest to $RealDest) (then) %% Put the door in the ablative, and the destination room in the dative
-		($Details = [$Raw $Verb $Adv $Acc $ $Abl])
-		($NewDetails = [$Raw $Verb $Adv $Acc [$RealDest] [$Dest|$Abl]])
-		(action log { New action: [[go $RealDest] $NewDetails] } )
-		(try [[go $RealDest] $NewDetails])
-	(else)
-		(describe negative action [[go $Dest] $Details]) %% This should never happen since a non-adjacent door shouldn't be in scope
-		(div @realerror) { ERROR: Tried to enter a door \( $Dest \) but it is not adjacent! }
-	(endif)
-
-(prevent [[go (room $Dest)] $])
+(prevent [[go $Dest] $])
 	(current room $Source)
 	~{ (from $Source go $ to $Dest) (or) (from $Source through $ to $Dest) }
-	(div @realerror) { ERROR: no path from source $Source to destination $Dest! }
+	(div @realerror) { ERROR: no immediate connection from source $Source to destination $Dest! How was this action created? }
 
 (perform [[go $Dest] $])
 	(enter $Dest)
@@ -290,8 +275,8 @@
 (prevent [[travel $Dest] $Details])
 	(current room $Source)
 	~(first step from $Source to $Dest is $)
-	(describe negative action [[travel $Dest] $Details])
-	(div @error) { The author provided no further details, but it seems there was no easy route between those locations. }
+	(describe failed action [[travel $Dest] $Details])
+	(div @error) { It seems there was no easy route between those locations, since the narrator states it as a simple fact that he could not travel from one to the other. }
 
 (perform [[travel $Dest] $])
 	(current room $Source)
@@ -307,7 +292,7 @@
 	(action log {Direction: $Head})
 	(from $Source go $Head to $Dest)
 	(action log {From $Source go $Head to $Dest})
-	(try [[go $Dest] [[] paon [] [] [$Dest] []]])
+	(try [[go $Dest] [[] pāon [] [] $Dest []]])
 	(attempt to travel along $Rest) %% Recurse
 
 #v-go
@@ -316,48 +301,97 @@
 (verb * unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CROSS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Default Dialog uses the same verb for going a direction and entering a room, but in Hittite there are separate verbs for them
+
+(verb @cross/@šarraḫḫon/@carrahhon means @šarraḫḫon)
+(@šarraḫḫon wants cases [#accusative])
+(translate [$ šarraḫḫon $ $Acc | $] into [cross $Acc])
+
+(prevent [[cross $Door] $])
+	~(door $Door)
+	(div @error) { This line is likely a scribal error. The verb (span @hittite) šaraḫḫon "pass through" is generally used with things like doors and thresholds. For going to a place, the verb (span @hittite) pāon is used instead. }
+
+(prevent [[cross $Door] $Details])
+	($Door blocks passage) %% See above under GO for details
+	(describe failed action [[cross $Door] $Details])
+	(describe $Door blocking passage)
+
+(prevent [[cross $Door] $Details]) %% Copied from GO
+	(current room $Room)
+	(from $Room through $Door to $Dest)
+	(inherently dark $Dest)
+	(current player $Player)
+	~($Player has a light source)
+	~($Dest has a light source)
+	Nu pēdan kuit dankui ēšta, %% "Because the place was dark..."
+	(describe raw failed action [[cross $Door] $Details]) %% "raw" = no connective, caps, or punctuation
+	.
+
+(prevent [[cross $Door] $])
+	~{ (current room $Room) (from $Room through $Door to $Dest) (room $Dest) }
+	(div @realerror) { ERROR: Cannot go through $Door ! What's going on? }
+
+(perform [[cross $Door] $])
+	(current room $Room)
+	(from $Room through $Door to $Dest)
+	(enter $Dest)
+
+#v-cross
+(verb *)
+(name *) šarraḫḫon
+(verb * unlocked)
+	(#watchtower is visited)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TAKE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(@take/@dahhon wants cases [#accusative])
-(@take/@dahhon wants cases [#accusative #ablative])
-(translate [$ take/dahhon $ $Acc $ []] into [take $Acc])
-(translate [$ take/dahhon $ $Acc $ $Abl] into [take $Acc from $Abl])
+(verb @take/@dāḫḫon/@dahhon means @dāḫḫon)
+(@dāḫḫon wants cases [#accusative])
+(@dāḫḫon wants cases [#accusative #ablative])
+(translate [$ dāḫḫon $ $Acc $ []] into [take $Acc])
+(translate [$ dāḫḫon $ $Acc $ $Abl] into [take $Acc from $Abl])
 
 (instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
 	($Obj is #in $Holder)
 	~(room $Holder)
 	~(current player $Holder)
-	(action log {Redirecting to take from $Holder})
-	($Details = [$Raw $Verb $Adv [$Obj] [] []])
-	(try [[take $Obj from $Holder] [$Raw $Verb $Adv [$Obj] [] [$Holder]]])
+	(action log {Redirecting TAKE $Obj to TAKE $Obj FROM $Holder})
+	(if) ($Details = [$Raw $Verb $Adv $Obj [] []]) (then) %% Last two should always be empty
+		(try [[take $Obj from $Holder] [$Raw $Verb $Adv $Obj [] $Holder]])
+	(else)
+		(div @realerror) { ERROR: Something went wrong converting TAKE to TAKE FROM. Details are $Details . }
+	(endif)
 
 (prevent [[take $Obj from $Holder] $Details])
-	~($Obj is #in $Holder)
-	(describe negative action [[take $Obj from $Holder] $Details])
-	Nu (#nominative $Obj) (#dative $Holder) (span @akk) {ūl} kittat. %% "The OBJ was not in the HOLDER."
+	~($Obj is $ $Holder)
+	($Holder wants relation $Rel)
+	(describe failed action [[take $Obj from $Holder] $Details])
+	Nu (#nominative $Obj) natta (#dative $Holder) (preverb $Rel) ēšta. %% "The OBJ was not REL the HOLDER."
 
-(prevent [[take $Obj | $] $Details])
+(prevent [[take $Obj | $From] $Details]) %% Or is this message better?
 	~(item $Obj)
-	(describe negative action [[take $Obj] $Details])
-	N=an harkanna (span @akk) {ūl} tarhon. %% "I was not able to hold it"
-
-(prevent [[take $Obj | $] $Details]) %% Or is this message better?
-	~(item $Obj)
-	(describe negative action [[take $Obj] $Details])
-	N=an mekki
+	(describe failed action [[take $Obj | $From] $Details])
 	(if) (neuter $Obj) (then)
-		calli
+		N=at mekki nakki
 	(else)
-		callic
+		N=an mekki nakkiš
 	(endif)
-	ēcta. %% "It was very large."
+	ēšta. %% "It was very heavy."
 
 (prevent [[take $Obj | $] $Details])
 	(current player $Player)
 	($Obj is #heldby $Player)
-	(describe negative action [[take $Obj] $Details])
-	N=an karū harkon. %% "I already held it"
+	(describe failed action [[take $Obj] $Details])
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=an
+	(endif)
+	karū ḫarkon. %% "I already held it"
 
 (perform [[take $Obj | $] $])
 	(narrate taking $Obj)
@@ -370,7 +404,7 @@
 
 #v-take
 (verb *)
-(name *) dahhon
+(name *) dāḫḫon
 (verb * unlocked)
 	(#street is visited)
 
@@ -380,14 +414,20 @@
 
 (adverb @kattan/@katta/@down means @katta)
 
-(@put/@tehhon wants cases [#accusative #adverb])
-(translate [$ put/tehhon katta $Acc | $] into [drop $Acc])
+(verb @put/@tēḫḫon/@tehhon means @tēḫḫon)
+(@tēḫḫon wants cases [#accusative #adverb])
+(translate [$ tēḫḫon katta $Acc | $] into [drop $Acc])
 
 (refuse [[drop $Obj] $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
-	(describe negative action [[drop $Obj] $Details])
-	N=an (span @akk) {ūl} harkon. %% "I did not hold it"
+	(describe failed action [[drop $Obj] $Details])
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=an
+	(endif)
+	natta ḫarkon. %% "I did not hold it."
 
 (perform [[drop $Obj] $])
 	(current room $Room)
@@ -396,7 +436,7 @@
 
 #v-drop
 (verb *)
-(name *) katta tehhon
+(name *) katta tēḫḫon
 (verb * unlocked)
 	(#ladder is handled)
 
@@ -404,26 +444,34 @@
 %% PUT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(@put/@tehhon wants cases [#accusative #dative])
-(translate [$ put/tehhon $ $Acc $Dat | $] into [put $Acc $Dat])
+(@tēḫḫon wants cases [#accusative #dative])
+(@tēḫḫon wants cases [#adverb #accusative #dative]) %% Optional preverb (currently ignored)
+(translate [$ tēḫḫon $ $Acc $Dat | $] into [put $Acc $Dat])
+
+%% TODO: consider the preverb/postposition
 
 (refuse [[put $Obj $Dest] $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
-	(describe negative action [[put $Obj $Dest] $Details])
-	N=an (span @akk) {ūl} harkon. %% "I did not hold it"
+	(describe failed action [[put $Obj $Dest] $Details])
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=an
+	(endif)
+	natta ḫarkon. %% "I did not hold it."
 
 (prevent [[put $Obj $Dest] $Details])
 	~(holder $Dest)
-	(describe negative action [[put $Obj $Dest] $Details])
-	N=an (#nominative $Dest) (span @akk) {ūl} harta. %% "The DEST did not hold it"
+	(describe failed action [[put $Obj $Dest] $Details])
+	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
 
 (perform [[put $Obj $Dest] $])
-	(now) ($Obj is #in $Dest)
+	(now) ($Obj is #in $Dest) %% TODO always #in?
 	(now) (update needed)
 
 #v-put
 (verb *)
-(name *) tehhon
+(name *) tēḫḫon
 (verb * unlocked)
 	(#gatehouse is visited)

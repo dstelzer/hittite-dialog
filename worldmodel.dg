@@ -1,5 +1,5 @@
 (library version)
-	Hittite world model version 0.5.
+	Hittite world model version 0.6.
 
 (world logging) (fail)
 
@@ -59,15 +59,43 @@
 
 #in
 (relation *)
+(preverb *) anda %% (preverb $) is currently used both for preverb ("X is Rel Y") and preposition ("you put the X Rel Y"). Do those ever disagree? TODO
+
+#on
+(relation *)
+(preverb *) šēr
 
 #heldby
 (relation *)
+(preverb *) %% None, just a dative
 
 #wornby
 (relation *)
+(preverb *) TODO
 
 #partof
 (relation *)
+(preverb *) TODO
+
+#behind
+(relation *)
+(preverb *) āppa
+
+#infront
+(relation *)
+(preverb *) peran
+
+#under
+(relation *)
+(preverb *) kattan
+
+#nextto
+(relation *)
+(preverb *) tapušza
+
+#at
+(relation *)
+(preverb *) %% None, this is just like #heldby but for rooms
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Directions
@@ -130,8 +158,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Rooms and doors
 
-(name (room $) in #nominative/#accusative)	pedan
-(name (room $) in #genitive)	pedac
+(name (room $) in #nominative/#accusative)	pēdan
+(name (room $) in #genitive)	pēdaš
 (name (room $) in #dative)		pedi
 (name (room $) in #ablative)	pedaz
 (name (room $) in #bare)		peda
@@ -544,8 +572,8 @@
 	(current room $Room)
 	~($Obj is in room $Room)
 	
-	(describe negative action [$Action $Details])
-	Nu (#accusative $Obj) (span @akk) ūl ōhhon.
+	(describe failed action [$Action $Details])
+	Nu (#accusative $Obj) natta ōḫḫon.
 
 (before $)	(fail)
 
@@ -557,8 +585,8 @@
 
 (prevent $)	(fail)
 
-(perform $Action)
-	(describe negative action $Action)
+(perform $Action) %% TODO this looks weird after the previous message
+	(describe failed action $Action)
 	(tick) (stop)
 
 (after $)	(fail)

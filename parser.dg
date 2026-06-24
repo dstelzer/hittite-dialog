@@ -1,7 +1,7 @@
 (extension version)
-	(line) Hittite parser version 0.5 by Daniel Stelzer
+	(line) Hittite parser version 0.6.
 
-(parser logging) (fail)
+(parser logging) %%(fail)
 
 (parser log $Closure)
 	(parser logging)
@@ -10,56 +10,58 @@
 
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
-(rewrite $Input into $Output)
+(rewrite $Input into $Output) %% Input: [na = an witeni dahhon]
 	(parser log {Rewriting})
 	(parser log { Input: $Input } )
-	(separate clitics from $Input into $Middle)
-	(parser log { Middle: $Middle } )
-	(transpose verb from $Middle into $Output)
-	(parser log { Rewritten: $Output } )
+	(separate clitics from $Input into $Two) %% Two: [[an] witeni dahhon]
+	(parser log { Two: $Two } )
+	(transpose verb from $Two into $Three) %% Three: [dahhon an witeni]
+	(parser log { Three: $Three } )
+	(purify verb from $Three into $Output) %% Output: [daḫḫon an witeni]
+	(parser log { Output: $Output } )
 
-%% Separate clitics from the first word
-(separate clitics from [$First | $Other] into $Out)
-	($First splits into base $Base and clitic chain $Chain)
-	(if) (sentence connective $Base) (then) %% No need to preserve sentence connectives
-		($Out = [$Chain | $Other])
-	(else)
-		($Out = [$Chain $Base | $Other])
-	(endif)
+%% Sentence connectives can be discarded
+(separate clitics from [(sentence connective $First) | $Rest] into [$Clitics | $Sentence])
+	(separate clitics internal from $Rest into $Clitics and $Sentence)
 
-(separate clitics from [(sentence connective $) | $Rest] into [ [] | $Rest]) %% Fallback 1: empty clitic list, removing sentence connective
+%% Otherwise we need to preserve the first word (e.g. a noun that's been topicalized)
+(separate clitics from [$First | $Rest] into [$Clitics $First | $Sentence])
+	(separate clitics internal from $Rest into $Clitics and $Sentence)
 
-(separate clitics from $In into [[]|$In]) %% Fallback 2: empty clitic list, preserving a word that's not a sentence connective
+%% For the "internal" predicate, we take an equals sign as marking a clitic
+(separate clitics internal from [= $Clitic | $Rest] into [$Clitic | $Others] and $Sentence)
+	(separate clitics internal from $Rest into $Others and $Sentence)
 
-%% How do we know if something contains clitics?
-($Word splits into base $Base and clitic chain $Chain)
-	(split word $Word into $List)
-	($List divides by letters into base $Base and clitic chain $Chain)
+%% Anything else means no more clitics, we're done
+%% If any clitics appear *after* this point, they must have been attached to other words (like nouns), rather than the start of the sentence - and we ignore that sort of clitic entirely
+(separate clitics internal from $Sentence into [] and $Purged)
+	(purge all clitics from $Sentence into $Purged)
 
-($List divides by letters into base $Base and clitic chain $Chain)
-	(split $List by @= into $Left and $Right)
-	(join words $Left into $Base)
-	{
-		($Right divides by letters into base $First and clitic chain $Rest)
-		($Chain = [$First | $Rest])
-	(or)
-		%% If the first branch failed, that means we couldn't find any more clitics to split off
-		(join words $Right into $First)
-		($Chain = [$First])
-	}
+%% Take the last element (which should always be the verb) and move it to the front
+(transpose verb from $Input into [$Verb | $Remaining])
+	(split last element from $Input into $Verb and $Remaining)
 
-%% Take the last element and move it to the front
-(transpose verb from $Input into $Output)
-	(length of $Input into $Length)
-	(nth $Input $Length $Verb) %% Verb is the last element
-	($Length minus 1 into $Penultimate)
-	(take $Penultimate from $Input into $Remaining)
-	($Output = [$Verb | $Remaining])
+%% Utility to enable this
+(split last element from [$Last] into $Last and [])
+(split last element from [$Head | $Tail] into $Last and [$Head | $NewTail])
+	(split last element from $Tail into $Last and $NewTail)
+
+%% Purifying verbs is the easy part
+(purify verb from [$RawVerb | $Rest] into [$PureVerb | $Rest])
+	(verb $RawVerb means $PureVerb)
+(purify verb from $Unrecognized into $Unrecognized) %% If it's not a recognized verb, the error will be reported later; we don't have to deal with it now
 
 %% Noun list parsing: Hittite sentences tend to go
 %% Conn=Clitics [Noun phrases...] Verb
 %% So this is to parse a sequence of noun phrases into something like
 %% [ [#accusative #Obj1] [#dative #Obj2] ]
+
+%% Get rid of any clitics in the middle of the noun phrase, such as the emphasizing =pát or the conjunction =ya
+(purge all clitics from [] into [])
+(purge all clitics from [= $ | $Rest] into $NewRest)
+	(purge all clitics from $Rest into $NewRest)
+(purge all clitics from [$Head | $Rest] into [$Head | $NewRest])
+	(purge all clitics from $Rest into $NewRest)
 
 %% At top level we want to allow [], but in the recursive case we don't
 (parse top-level [] into noun list [])
@@ -67,42 +69,45 @@
 	*(parse $Words into noun list $Nouns)
 
 %% Base case: a single noun
-(parse $Words into noun list $Nouns)
+(parse $Words into noun list [$Noun])
 	*(parse $Words into single noun $Noun)
-	($Nouns = [$Noun])
 
-%% Recursive case: multiple nouns
+%% Recursive case: more than one noun
 ~(parse [] into noun list $)
 
-(parse [ù/u3 | $Rest] into noun list $Nouns) %% Handle explicit "and"s
-	(parse $Rest into noun list $Nouns) %% We don't currently handle =ya etc though
+(parse [ù/u3/& | $Rest] into noun list $Nouns) %% Handle explicit "and"s
+	(parse $Rest into noun list $Nouns) %% =ya etc will be purged already
 
 (parse $Words into noun list $Nouns)
 	*(split $Words anywhere into $Left and $Right)
 	*(parse $Left into single noun $Single)
-	*(parse $Right into noun list [$First | $Other])
+	*(parse $Right into noun list [$First | $Other]) %% We split off $First to make sure we're not breaking a single noun phrase in half, but this also guarantees that the right noun list is nonempty
 	~($Single = $First) %% Make sure not to split in the middle of a noun phrase!
 	($Nouns = [$Single $First | $Other])
 
-%% We can't report this from within (parse $ into noun list $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
+%% We can't report errors from within (parse $ into noun list $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
 (find first broken noun from [] and report it)
 	(div @realerror) { ERROR: failed to find any broken nouns! }
 (find first broken noun from $Nouns and report it)
-	{ *(split $Nouns anywhere into $Left and $Right) (or) ($Left = $Nouns) ($Right = []) }
+	{
+		*(split $Nouns anywhere into $Left and $Right)
+	(or)
+		($Left = $Nouns) ($Right = []) %% We also want to allow a "split" where everything is on the left and nothing is on the right
+	}
 	(parser log { Split: $Left $Right } )
 	{
 		*(parse $Left into single noun $)
 		(find first broken noun from $Right and report it)
 	(or)
-		*(parse $Left as invalid case $ of $)
-		"(no space)(uppercase)(print words $Left)(no space)" is likely a scribal error; this is a valid noun, but its grammatical case doesn't make sense in this sentence.
+		*(parse $Left as invalid case $Case of $)
+		"(no space)(uppercase)(print words $Left)(no space)" is likely a scribal error; this is a valid noun, but the (name $Case) case doesn't make sense in this context.
 		(stop)
 	(or)
 		*(parse $Left as not-here object $)
-		It's unclear what "(no space)(print words $Left)(no space)" is meant to refer to; these words (emph {are}) used on the tablet, but what they describe is not currently near our protagonist.
+		It's unclear what (print quoted $Left) is meant to refer to; these words (emph {are}) used on the tablet, but what they describe is not currently near our protagonist.
 		(stop)
 	(or)
-		The nouns in this line are obscure, and it's unclear what "(no space)(print words $Right)(no space)" means.
+		The nouns in this line are obscure, and it's unclear what (print quoted $Right) means.
 		(stop)
 	}
 
@@ -115,45 +120,48 @@
 	($Noun = [$Case $Obj])
 
 #nominative
-(grammatical case *)
+(grammatical case *) %% Only used in printing, not parsing
+(name *) nominative
 
 #genitive
-(grammatical case *)
+(grammatical case *) %% Only used in printing, not parsing
+(name *) genitive
 
 #accusative
 (grammatical case *)
 (parser case *)
+(name *) accusative
 
 #dative
 (grammatical case *)
 (parser case *)
+(name *) dative/locative
 
 #ablative
 (grammatical case *)
 (parser case *)
+(name *) ablative/instrumental
 
 #adverb
 (grammatical case *)
 (parser case *)
-
-#locative %% Only used to print ANA vs INA for logograms; not used in parsing
-(grammatical case *)
+%% This one has no name
 
 #bare %% Stem form, for use with Akkadian prepositions
-(grammatical case *)
+(grammatical case *) %% Only used in printing, not parsing
+(name *) bare stem
 
-%% We include adverbs in the noun list, with the tag #adverb
-%% Because they can be interspersed with noun phrases
-%% However, they shouldn't be printed like nouns, with conjunctions and all
+%% We include adverbs in the noun list, with the tag #adverb, because they can be interspersed with noun phrases
+%% This also includes sentence particles like =kán and preverbs like anda
+%% However, they shouldn't be printed like nouns (i.e. with conjunctions between them)
 (parse [$Word] as #adverb $Meaning)
 	(just) (adverb $Word means $Meaning)
 ~(name (object $) in #adverb) %% This is only for dictionary words, not objects
 (name [] in #adverb)
 (name (word $Word) in #adverb)
 	$Word
-(name [(word $Head) | $Rest] in #adverb)
-	$Head
-	(name $Rest in #adverb)
+(name (nonempty $List) in #adverb)
+	(exhaust) { *($Word is one of $List) (name $Word in #adverb) }
 
 (parse [ana/ina/pani | $Words] as #dative $Obj)
 	{
@@ -162,7 +170,7 @@
 		(parse $Words as #dative $Obj)
 	}
 
-(parse [ictu/itti/qadu | $Words] as #ablative $Obj)
+(parse [ištu/itti/qadu | $Words] as #ablative $Obj)
 	{
 		(parse $Words as #bare $Obj)
 	(or)
@@ -215,29 +223,48 @@
 	(add noun phrases $Rest to action [$Verb $Adv $Acc $Dat [$Abl|$Abls]] into $Out)
 
 %% Silence compiler warnings
-#1s
-#2s
-#3sc
-#3sn
-#1p
-#2p
-#3pc
-#3pn
-#reflexive
+(interface (pronoun $<Word)) %% Not currently used
 
-%% Change some of these to variables or whatever eventually - this is how the pronouns should be handled
+#1s
+(pronoun *)
+
+#2s
+(pronoun *)
+
+#3sc
+(pronoun *)
+
+#3sn
+(pronoun *)
+
+#1p
+(pronoun *)
+
+#2p
+(pronoun *)
+
+#3pc
+(pronoun *)
+
+#3pn
+(pronoun *)
+
+#reflexive
+(pronoun *)
+
+%% Change some of these to variables or whatever eventually TODO
 (first person singular #1s)
 (second person singular #2s)
 (third person singular common #3sc)
 (third person singular neuter #3sn)
 (third person singular $Which)
-	(third person singular common $Which) (or) (third person singular neuter $Which)
+	*(third person singular common $Which) (or) *(third person singular neuter $Which)
 (first person plural #1p)
 (second person plural #2p)
 (third person plural common #3pc)
 (third person plural neuter #3pn)
 (third person plural $Which)
-	(third person plural common $Which) (or) (third person plural neuter $Which)
+	*(third person plural common $Which) (or) *(third person plural neuter $Which)
 (reflexive #reflexive)
 
 (sentence particle @kan)
@@ -266,12 +293,13 @@
 
 (convert clitic (sentence particle $Part) into noun phrase [#adverb $Part]) %% Sentence particles work kind of like adverbs, so we deal with them there
 
-(interface (convert clitics $<Input into noun phrases $>Output))
-(convert clitics [] into noun phrases [])
-(convert clitics [$First|$Rest] into noun phrases [$NewFirst|$NewRest])
+(convert clitic @wa/@war into noun phrase [#adverb @war]) %% Causes an error if it appears
+
+(interface (convert clitics $<Input into noun phrase list $>Output))
+(convert clitics [] into noun phrase list [])
+(convert clitics [$First|$Rest] into noun phrase list [$NewFirst|$NewRest])
 	*(convert clitic $First into noun phrase $NewFirst)
-	*(convert clitics $Rest into noun phrases $NewRest)
-%% TODO - How to handle quotatives (wa/war)?
+	*(convert clitics $Rest into noun phrase list $NewRest)
 
 %% We can't report this from within (convert clitics $ into noun phrases $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
 (find first broken clitic from $Clitics and report it)
@@ -292,7 +320,7 @@
 (convert parsed line [$Verb $Clitics | $Nouns] from raw $Raw into [$Raw | $Action])
 	(empty action with verb $Verb is $First)
 	*(add noun phrases $Nouns to action $First into $Second)
-	*(convert clitics $Clitics into noun phrases $ExtraNouns)
+	*(convert clitics $Clitics into noun phrase list $ExtraNouns)
 	*(add noun phrases $ExtraNouns to action $Second into $Third)
 	(deduplicate $Third into $Action)
 
@@ -306,6 +334,7 @@
 
 (sentence connective @nu)
 (sentence connective @na) %% Form that's used before clitics starting with /a/
+(sentence connective @n) %% Some people transcribe n=an instead of na=an
 
 %% Utilities
 
@@ -355,6 +384,7 @@
 %%	14	Missing ablative
 %%	24	Excess ablative
 %%
+%%	31	Should not have quotative =wa(r)
 %%	36	Too many multiple objects
 
 (noun list [$Adv $ $ $] and case list $Cases produce error 11)
@@ -379,6 +409,9 @@
 (noun list [$ $ $ $Abl] and case list $Cases produce error 24)
 	(nonempty $Abl)
 	~(#ablative is one of $Cases)
+
+(noun list [$Adv $ $ $] and case list $ produce error 31)
+	(@war is one of $Adv)
 
 (noun list [$|$Nouns] and case list $ produce error 36)
 	%% Check if there are multiple nouns in multiple cases - we only want to deal with a single multiple object list at a time, to avoid combinatorics
@@ -420,6 +453,8 @@
 	there should be an ablative noun
 (show parser error 24 for action $)
 	there should not be an ablative noun
+(show parser error 31 for action $)
+	the clitic =wa\(r\) marks a quotation \( which this sentence should not be \)
 (show parser error 36 for action [$ $ $Acc $Dat $Abl])
 	there are multiple nouns in
 	(if) (more than one $Acc) (more than one $Dat) (more than one $Abl) (then)
@@ -440,24 +475,65 @@
 
 (parse commandline $Words)
 	(if) (save undo 1) (then)
-		(div @error) { The previous lines, starting with "(no space)(print words $Words)(no space)", are crossed out on the tablet and should be considered a scribal error. }
+		(div @error) { The previous lines, starting with (print words $Words), are crossed out on the tablet and should be considered a scribal error. }
 		(stop)
 	(endif)
 	(now) ~(allowing parse errors)
 	(parse action $Words)
 
-%% TODO these need some better handling
-(metacommand [quit]) (quit)
-(metacommand [undo]) (undo)
-(metacommand [save]) (save $)
-(metacommand [restore]) (restore)
+(parse metacommand [\/quit])
+	~(interpreter supports quit)
+	(div @meta) { To quit the game, close the browser tab or window. }
+(parse metacommand [\/quit])
+	(div @meta) { Thanks for playing! }
+	(quit)
+
+(parse metacommand [\/undo])
+	~(interpreter supports undo)
+	(div @meta) { Unfortunately, this interpreter does not support UNDO. }
+(parse metacommand [\/undo])
+	(undo)
+	(div @realerror) { Undo failed! }
+
+(parse metacommand [\/save])
+	(if) (save $ComingBack) (then)
+		(if) ($ComingBack = 0) (then)
+			(div @meta) { Game state saved. Use /restore to come back to this point at any time. }
+		(else)
+			(div @meta) { Game state restored. }
+		(endif)
+	(else)
+		(div @realerror) { Save failed! }
+	(endif)
+
+(parse metacommand [\/restore])
+	(restore)
+	(div @realerror) { Restore failed! }
+
+(parse metacommand [\/again/\/g])
+	(previous command $Words)
+	(parse action $Words)
+(parse metacommand [\/again/\/g])
+	(div @realerror) { No previous command to repeat! }
+
+(parse metacommand [\/help])
+	TODO
+
+(parse metacommand $Words)
+	(div @meta) { The meta command (print quoted $Words) was not recognized. Try /help for more information. }
+
+(global variable (previous command $))
 
 (interface (parse action $<Words))
 (parse action $Words)
-	%% TODO - handle AGAIN and OOPS here if desired
-	($Words = $Raw)
+	($Raw = $Words)
 	
-	(if) (metacommand $Words) (then) (stop) (endif) %% Check if it's an English metacommand
+	(if) ($Words = [$First | $]) (split word $First into [\/ | $]) (then) %% First word starts with `/` so it's an English metacommand
+		(parse metacommand $Words)
+		(stop)
+	(else)
+		(now) (previous command $Words)
+	(endif)
 	
 	{
 		(rewrite $Raw into [$Verb $Clitics | $Rest])
@@ -541,6 +617,8 @@
 		(stop)
 	(endif)
 
+(sieve action candidates [] at level $)
+	(div @realerror) { Tried to sieve an empty list! } %% For safety
 (sieve action candidates $All at level $Level) %% Level is how unlikely of actions we should consider
 	(if) ($Level = 3) (then)
 		($Options = $All)
@@ -565,7 +643,7 @@
 		(div @error) {
 			This line could be interpreted in multiple ways:
 			(enumerate possible actions $List 1)
-			(line) It seems the intended one is...
+			(line) It seems the intended interpretation is number...
 		}
 		(get input $Words)
 		(if) ($Words = [$Number]) (number $Number) ($Number > 0) ~($Number > $N) (then)
@@ -609,36 +687,35 @@
 (redraw status bar) %% Don't fail
 
 (unlikely $ $) (fail)
+
+%% Action format: [[english version] [[raw words] verb [advs] acc dat abl]]
 (describe action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
-%%	English: $English (line)
-%%	Raw: $Raw (line)
-%%	Hittite:
-		Nu
-		(#accusative $Acc)
-		(#dative $Dat)
-		(#ablative $Abl)
-		(#adverb $Adv)
-		$Verb
+	Nu
+	(#accusative $Acc)
+	(#dative $Dat)
+	(#ablative $Abl)
+	(#adverb $Adv)
+	$Verb
 	.
-%%	(line)
 (describe action $Action)
-	Improper action: $Action
-(describe negative action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
-%%	English: not $English (line)
-%%	Raw: (span @akk) {ŪL} $Raw (line)
-%%	Hittite:
-		Nu
-		(#accusative $Acc)
-		(#dative $Dat)
-		(#ablative $Abl)
-		(#adverb $Adv)
-		(span @akk) {ūl}
-		$Verb
-	.
-%%	(line)
-(print words [])
-(print words [$Head|$Tail])
-	$Head (print words $Tail)
+	(span @realerror) { Improper action: $Action }
+(describe failed action $Action)
+	Nu (describe raw failed action $Action) .
+(describe raw failed action [$ [$ $Verb $Adv $Acc $Dat $Abl]]) %% No connective, capital, or punctuation, for embedding in a larger context
+	(#accusative $Acc)
+	(#dative $Dat)
+	(#ablative $Abl)
+	(#adverb $Adv)
+	natta %% Used in place of ŪL to avoid explaining heterograms too early
+	taruḫḫon %% "able to" in asyndetic construction
+	$Verb
+(describe raw failed action $Action)
+	(span @realerror) { Improper action: $Action }
+
+(print words $Words)
+	(exhaust) { *($Word is one of $Words) $Word }
+(print quoted $Words)
+	"(no space) (print words $Words) (no space)"
 
 (enumerate possible actions [] $)
 (enumerate possible actions [$Head|$Tail] $N)
@@ -666,7 +743,7 @@
 		(parser log { (describe action [$EnglishAction [$Raw $Verb | $Nouns]]) } )
 		(try [$EnglishAction [$Raw $Verb | $Nouns]])
 	(else)
-		(div @error) { ERROR: The sentence $Raw was parsed as $Verb and $NounCombo, but this could not be translated. }
+		(div @realerror) { ERROR: The Hittite sentence (print quoted $Raw) was parsed as $Verb and $NounCombo, but this could not be translated into an English action. Why not? }
 	(endif)
 
 %% (try $) then handles those single-noun actions
@@ -676,28 +753,24 @@
 ($ [])
 ($Case [$Single])
 	($Case $Single)
-($Case [$Head|$Rest])
+($Case [$Head | $Rest])
 	($Case $Head)
-	(span @akk) { Ù }
+	(span @akk) { Ù } %% Using the "Akkadian ampersand" instead of the clitic =ya because the clitic does messy things with the last consonant of the word
 	($Case $Rest)
 
 (name (logogram $Obj) in #nominative/#accusative) (name $Obj in #bare)
 (name (logogram $Obj) in #dative) (span @akk) ana (name $Obj in #bare)
-(name (logogram $Obj) in #locative) (span @akk) ina (name $Obj in #bare)
 (name (logogram $Obj) in #genitive) (span @akk) ca (name $Obj in #bare)
 (name (logogram $Obj) in #ablative) (span @akk) ictu (name $Obj in #bare)
 
-(name $Obj in #locative) %% For non-logograms, these are always identical; the locative isn't really treated as a case of its own
-	(name $Obj in #dative)
-
 (interface ($<Case $<Obj))
-($Case $Obj) %% Adds modifiers as needed
+($Case $Obj) %% Adds modifiers as needed; these can be objects, dict words, or closures
 	(if) ($Obj has modifier $Mod) (then)
 		(if) (object $Mod) (then)
 			(#genitive $Mod)
 		(elseif) (word $Mod) (then)
 			$Mod
-		(else)
+		(elseif) (nonempty $Mod) (then)
 			(query $Mod)
 		(endif)
 	(endif)
