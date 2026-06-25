@@ -1,16 +1,29 @@
 %% Style definitions and related predicates go here
 
-%% The compass rose
-(style class @compass)
-	margin-top: 1em;
-	margin-bottom: 1em;
-(style class @compassline)
-	width: 100\%;
-	text-align: center;
-
 %% Akkadograms
 (style class @akk)
 	font-style: italic;
+
+%% Tutorial
+(style class @tutorial)
+	color: cyan;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	language: en;
+
+%% "Errors" in the player's input
+(style class @error)
+	color: yellow;
+	language: en;
+
+%% Actual errors in the game's programming
+(style class @realerror)
+	color: red;
+	font-weight: bold;
+	language: en;
+
+(style class @status)
+	background-color: black;
 
 %% Emphasis
 (style class @italic)

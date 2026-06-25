@@ -1,26 +1,25 @@
 n(u)	nu na n	Then (a mostly-meaningless word used to introduce a new sentence in Hittite. It's known as the "sentence connective".)
 =za		=za =z	Self (as in "myself", "yourself", etc; in Hittite, this word is also used any time the main verb in a sentence is "I am" or "you are")
 =kan	=kan =kkan	[A particle that affects the meaning of the verb in subtle ways. Usually left untranslated.]
-ešon	ešon ēšta ešer	Be (at a location: dative)
+ešun	ešun ēšta ešer	Be (at a location: dative)
 dankui	dankui	Dark(ness)
 apiya	apiya	There, at that place
-ōḫḫon	ōḫḫon	See, look around, look at, examine (something: accusative)
-ḫarkon	ḫarkon	Have, hold (something: accusative)
+ōḫḫun	ōḫḫun	Look around, see (something: accusative)
+ḫarkun	ḫarkun	Have, hold (something: accusative)
 waššiyanon	waššiyanon	Wear, have on (something: accusative)
-pāon	pāon	Go (to a place: dative)
-ḫattalwantaš	ḫattalwantaš	Closed
+pāun	pāun	Go (to a place: dative)
 pēda	pēdan pēdaš pēdi pēdaz pēda	Place, location
 kuit	kuit	Because
 apēdani	apēdani TODO	That
 karū	karū	Already
-šarraḫḫon	šarraḫḫon	Pass through, cross (something: accusative)
-dāḫḫon	dāḫḫon	Take (something: accusative; optionally from somewhere: ablative)
+šarraḫḫun	šarraḫḫun	Pass through, cross (something: accusative)
+dāḫḫun	dāḫḫun	Take (something: accusative; from somewhere: ablative)
 natta	natta	Not
 =an	=an =at	It
 mekki	mekki	Very
 nakkiš	nakkiš nakki	Heavy
 katta	katta	Down (as in katta tēḫḫon, "put (something) down")
-tēḫḫon	tēḫḫon	Put (something: accusative; somewhere: dative)
+tēḫḫun	tēḫḫun	Put (something: accusative; somewhere: dative)
 anda	anda	In
 šēr	šēr	On (top of)
 āppa	āppa	Back, behind
@@ -33,8 +32,8 @@ wappu	wappuš wappawaš wappi wappun wappuwaz wappu	Riverbank
 wātar	wātar witenaš witeni witenaz	Water
 auri	auriš auriyaš auriya aurin auriyaz auri	Watchtower
 aška	aškaš aški aškan aškaz aška	Door, gate
-ḫattalwanta	ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz ḫattalwanta	Closed, latched, bolted
-palša	palšaš palši palšan palšaz palša	Street
+ḫattalwanta	ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz ḫattalwanta	Locked, bolted, held shut by something
+palša	palšaš palši palšan palšaz palša	Road, street, path, journey
 ila	ilaš ili ilan ilaz ila	Ladder
 kut	kuzza kuttaš kutti kuttan kuttaz kut	Wall
 ḫalḫaltomar	ḫalḫaltomar ḫalḫaltomaraš ḫalḫaltomari ḫalḫaltomaraz	Corner
@@ -44,25 +43,30 @@ luttāi	luttāi luttiyaš luttiya luttiyaz	Window
 É	É	[Building]
 warān	warān warantaš waranti warantaz	Burning, aflame
 GIŠ	GIŠ	[Made of wood]
-ḫattalu	ḫattalu ḫattaluwaš ḫattaluwi ḫattaluwaz	Bar (put across a door to block it)
-ḫašḫon	ḫašḫon	Open (something: accusative)
-lukket	lukket	Ignited, caught fire
+ḫattalu	ḫattalu ḫattaluwaš ḫattaluwi ḫattaluwaz	Door bar (piece of wood put across a door to keep it from opening)
+ḫašḫun	ḫašḫun	Open (something: accusative)
+lukket	lukket	Ignite, catch fire
 arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer
 hašša	haššaš hašši haššan haššaz hašša	Hearth
 paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire
 ayyanza	ayyanza	Hot
-DUG	DUG	[vessel]
+DUG	DUG	[Vessel]
 aganni	aganniš aganniyaš aganniya agannin aganniyaz aganni	Cup
-LÚ	LÚ	[man]
+LÚ	LÚ	[Man]
 tešḫalli	tešḫalliš tešḫalliyaš tešḫalliya tešḫallin tešḫalliyaz tešḫalli	Sleeping, asleep, unconscious
 ḫalliyatalla	ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz ḫalliyatalla	Watchman, guard
 antaka	antakaš antaki antakan antakaz antaka	Storeroom
 palhi	palhiš palhaš palhi palhin palhaz palhi	Pithos (large clay jar)
-kištanunun	kištanunun	Extinguished (something: accusative)
+kištanunun	kištanunun	Extinguish (something: accusative)
 iškiša	iškiša iškišaš iškiši iškišaz	Back room
 šuḫḫa	šuḫḫa šuḫḫaš šuḫḫi šuḫḫaz	Roof
-ḫali	ḫali ḫaliyaš ḫaliyaz	Precinct (for a temple, this is a marked-out area consecrated to a deity)
+ḫali	ḫali ḫaliyaš ḫaliyaz	Precinct, marked-out area (for a temple, this is the land dedicated to a particular god)
 karimmi	karimmi karimnaš karimni karimnaz	Temple
-šaknuwanza	šaknuwanza	Impure, defiled, not ritually pure
+šaknuwanza	šaknuwanza	Unclean, not ritually pure
 URU	URU	[city]
 KÚR	KÚR	Enemy
+Ù	Ù	And (Ù is an abbreviation akin to "&" in English)
+IM	IM	[direction, wind]
+antuḫša	antuḫšaš antuḫši antuḫšan antuḫšaz antuḫša	Person, human being
+kuenun	kuenun	Slay (someone: accusative; with something: ablative)
+1	1 2 3 4 5 6	[Numbers]

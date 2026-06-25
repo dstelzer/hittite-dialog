@@ -16,17 +16,15 @@
 	(update environment around player)
 	%% Do this in a status area if at all possible, either inline or top
 	(if) (interpreter supports inline status bar) (then)
-		(inline status bar @inline) (describe environment)
+		(inline status bar @status) (describe environment)
 	(elseif) (interpreter supports status bar) ($Lines lines needed for status bar) (then)
 		(status bar @status with height $Lines) (describe environment)
 	(else)
-		(div @inline) (describe environment)
+		(div @status) (describe environment)
 	(endif)
 
 ($Lines lines needed for status bar)
 	%% 1 header
-	%% 1 line break
-	%% 3 compass rose
 	%% 1 line break
 	%% If objects:
 		%% 1 general
@@ -41,7 +39,7 @@
 	%% 1 verbs
 	
 	%% Which means:
-	%% Base 7
+	%% Base 3
 	%% +2 if objects
 	%% +1 per container
 	%% +2 if inventory
@@ -51,7 +49,7 @@
 	(current room $Room)
 	
 	(accumulate $N)
-		($N = 7) (or)
+		($N = 3) (or)
 		{ (something in the room) ($N = 2) } (or)
 		{ *($Obj is #in $Room) ($ is #in $Obj) ($N = 1) } (or)
 		{ ($ is #heldby $Player) ($N = 2) } (or)
@@ -71,7 +69,7 @@
 	(endif)
 	(#dative $Room)
 	(preverb $Prep)
-	ešon.
+	ešun.
 (short name (inherently dark $Room))
 	(current player $Player)
 	~($Player has a light source)
@@ -90,15 +88,18 @@
 	(div @error) { Since the "darkness" is insubstantial, it's unclear what this action would entail. }
 
 (describe environment)
+	
+	%% Compass rose belongs off to one side, but in debugger it has to be inline
+	(if) (interpreter supports status bar) (then)
+		(compass rose)
+	(endif)
+	
 	%% First paragraph: "I was at [location]."
 	(current room $Loc)
 	(action log {Current room: $Loc} )
 	(header $Loc)
 	
-	%% Second "paragraph" (block): compass rose with dative for each direction
-	(compass rose) %% Experiment
-	
-	%% Third paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōḫḫon.
+	%% Second paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōḫḫun.
 	(collect $Obj)
 		*($Obj is #in $Loc)
 		~(current player $Obj)
@@ -107,7 +108,7 @@
 	(if) (nonempty $HereList) (then)
 		(par) Nu apiya
 		(#accusative $HereList)
-		ōḫḫon.
+		ōḫḫun.
 	(endif)
 	
 	%% Subsequent lines: Nu OBJECT-NOM CONTAINER-DAT anda ēšta/ešer
@@ -130,7 +131,7 @@
 		.
 	}
 	
-	%% Third paragraph: Nu INVENTORY-ACC ḫarkon.
+	%% Third paragraph: Nu INVENTORY-ACC ḫarkun.
 	(current player $Player)
 	(collect $Obj)
 		*($Obj is #heldby $Player)
@@ -139,10 +140,10 @@
 	(if) (nonempty $HeldList) (then)
 		(par) Nu
 		(#accusative $HeldList)
-		ḫarkon.
+		ḫarkun.
 	(endif)
 	
-	%% Fourth paragraph: Nu CLOTHES-ACC waššiyanon.
+	%% Fourth paragraph: Nu CLOTHES-ACC waššiyanun.
 	(collect $Obj)
 		*($Obj is #wornby $Player)
 	(into $WornList)
@@ -150,10 +151,10 @@
 	(if) (nonempty $WornList) (then)
 		(par) Nu
 		(#accusative $WornList)
-		waššiyanon.
+		waššiyanun.
 	(endif)
 	
-	%% Fifth paragraph: verbs. TODO how to phrase this?
+	%% Final paragraph: verbs. TODO how to phrase this?
 	(div @error) {
 		(par) Verbs:
 		(collect $Verb)
@@ -161,6 +162,11 @@
 		(into $VerbList)
 		(listing $VerbList {(name $_)} @, 0)
 	}
+	
+	%% Compass rose belongs off to one side, but in debugger it has to be inline
+	(if) ~(interpreter supports status bar) (then)
+		(compass rose)
+	(endif)
 
 (interface (verb $<Object)) %% Not currently used
 
@@ -171,6 +177,51 @@
 	{ (room $Obj) (or) (door $Obj) }
 ($ on the compass rose is []) %% Use [] if there's no room that way
 
+(length of single word $Word is $Length)
+	(split word $Word into $List)
+	(accumulate 1) *($ is one of $List) (into $Length)
+(short name of $Obj needs $Num characters)
+	(collect words) (short name $Obj) (into $Name)
+	(if) ($Name = [$Word]) (then)
+		(length of single word $Word is $Intermediate)
+	(endif)
+	(if) (direction numbers enabled) (then)
+		($Intermediate plus 2 into $Num) %% 1 for digit 1 for space
+	(else)
+		($Intermediate = $Num)
+	(endif)
+
+(print name of [] number $ with alignment $ in $Width characters) %% Empty space
+	(space $Width)
+(print name of $Obj number $N with alignment $Align in $Width characters)
+	
+	%% First, figure out the alignment needed
+	(short name of $Obj needs $Needed characters)
+	(if) ($Needed > $Width) (then)
+		(div @realerror) { $Obj too long! } (fail)
+	(endif)
+	($Width minus $Needed into $Excess)
+	(if) ($Align = @l) (then) %% Left
+		($Left = 0)
+		($Right = $Excess)
+	(elseif) ($Align = @r) (then) %% Right
+		($Left = $Excess)
+		($Right = 0)
+	(elseif) ($Align = @u) (then) %% Center, top (offset left if odd)
+		($Excess divided by 2 into $Right)
+		($Excess minus $Right into $Left)
+	(else) %% Center, bottom (offset right if odd)
+		($Excess divided by 2 into $Left)
+		($Excess minus $Left into $Right)
+	(endif)
+	
+	%% Then, do the actual printing
+	%% This should only be done in a fixed-width div or span, for obvious reasons
+	(space $Left)
+	(if) (direction numbers enabled) (then) $N (space 1) (endif)
+	(short name $Obj)
+	(space $Right)
+
 (compass rose)
 	(#north on the compass rose is $North)
 	(#east on the compass rose is $East)
@@ -180,24 +231,53 @@
 	(#down on the compass rose is $Down)
 	
 	(div @compass) {
-		(div @compassline) {
-			(short name []) (short name $North) (short name $Up)
+		(div @compassline) { %% Line 1: north and up
+			(if) (empty $Up) (then) %% Give more space to north
+				(space 9)
+				(print name of $North number 2 with alignment @u in 15 characters)
+				(space 9)
+			(else)
+				(space 10)
+				(space 1)
+				(print name of $North number 2 with alignment @u in 10 characters)
+				(space 1)
+				(print name of $Up number 5 with alignment @r in 10 characters)
+			(endif)
 		}
-		(div @compassline) {
-			(short name $West) (space 3) <> (space 3) (short name $East)
+		(div @compassline) { %% Line 2: west, rose, east
+			(print name of $West number 4 with alignment @r in 15 characters)
+			(space 1) (rose star) (space 1)
+			(print name of $East number 3 with alignment @l in 15 characters)
 		}
-		(div @compassline) {
-			(short name $Down) (short name $South) (short name [])
+		(div @compassline) { %% Line 3: down, south
+			(if) (empty $Down) (then) %% As above with up
+				(space 9)
+				(print name of $South number 1 with alignment @d in 15 characters)
+				(space 9)
+			(else)
+				(print name of $Down number 6 with alignment @l in 10 characters)
+				(space 1)
+				(print name of $South number 1 with alignment @d in 10 characters)
+				(space 1)
+				(space 10)
+			(endif)
 		}
 	}
 
-(short name []) (space 8)
+(rose star) ✧ %% U+2727 WHITE FOUR POINTED STAR
+(style class @compass)
+	width: 33ch; %% 15 3 15, or 9 15 9, or 10 1 10 2 10
+	float: right;
+(style class @compassline)
+	font-family: monospace, monospace;
+	width: 100\%;
+	height: 1em;
 
-(verb @look/@oḫḫon/@ōḫḫon/@ohhon means @ōḫḫon)
-(@ōḫḫon wants cases [])
-(@ōḫḫon wants cases [#accusative])
-(translate [$ ōḫḫon $ [] | $] into [look])
-(translate [$ ōḫḫon $ $Acc | $] into [examine $Acc])
+(verb @look/@oḫḫun/@ōḫḫun/@uḫḫun/@ūḫḫun means @ōḫḫun)
+(@ōḫḫun wants cases [])
+(@ōḫḫun wants cases [#accusative])
+(translate [$ ōḫḫun $ [] | $] into [look])
+(translate [$ ōḫḫun $ $Acc | $] into [examine $Acc])
 (perform [[look] | $])
 	(now) (update needed)
 (perform [[examine $] | $]) %% Not a useful action in this game
@@ -205,18 +285,18 @@
 
 #v-look
 (verb *)
-(name *) ōḫḫon
+(name *) ōḫḫun
 (verb * unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GO (and TRAVEL)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(verb @go/@paon/@pāon means @pāon)
-(@pāon wants cases [#dative])
-(translate [$ pāon $ $ $Dat | $] into [go $Dat])
+(verb @go/@paun/@pāun means @pāun)
+(@pāun wants cases [#dative])
+(translate [$ pāun $ $ $Dat | $] into [go $Dat])
 	(adjacent $Dat)
-(translate [$ pāon $ $ $Dat | $] into [travel $Dat])
+(translate [$ pāun $ $ $Dat | $] into [travel $Dat])
 	~(adjacent $Dat)
 
 (adjacent $Room)
@@ -256,11 +336,11 @@
 
 (prevent [[go (current room $Dest)] $Details])
 	(describe failed action [[go $Dest] $Details])
-	Nu=za apēdani pēdi karū ešon. %% "I was already in that place."
+	Nu=za apēdani pēdi karū ešun. %% "I was already in that place."
 
 (prevent [[go $Dest] $])
 	~(room $Dest)
-	(div @error) { This line is likely a scribal error. The verb (span @hittite) pāon "go" is generally used with locations, not objects; for things like doors and thresholds, the verb (span @hittite) šarraḫḫon "pass through" is used instead. }
+	(div @error) { This line is likely a scribal error. The verb (span @hittite) pāun "go" is generally used with locations, not objects; for things like doors and thresholds, the verb (span @hittite) šarraḫḫun "pass through" is used instead. }
 
 (prevent [[go $Dest] $])
 	(current room $Source)
@@ -286,6 +366,7 @@
 
 (attempt to travel along [])
 	(action log {Travel finished!})
+	(inhibit next tick)
 	(now) (update needed)
 (attempt to travel along [$Head|$Rest])
 	(current room $Source)
@@ -293,26 +374,27 @@
 	(from $Source go $Head to $Dest)
 	(action log {From $Source go $Head to $Dest})
 	(try [[go $Dest] [[] pāon [] [] $Dest []]])
+	(tick)
 	(attempt to travel along $Rest) %% Recurse
 
 #v-go
 (verb *)
-(name *) pāon
+(name *) pāun
 (verb * unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CROSS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Default Dialog uses the same verb for going a direction and entering a room, but in Hittite there are separate verbs for them
+%% Default Dialog uses the same verb for going to a room and going through a door, but in Hittite there are separate verbs for them
 
-(verb @cross/@šarraḫḫon/@carrahhon means @šarraḫḫon)
-(@šarraḫḫon wants cases [#accusative])
-(translate [$ šarraḫḫon $ $Acc | $] into [cross $Acc])
+(verb @cross/@šarraḫḫun means @šarraḫḫun)
+(@šarraḫḫun wants cases [#accusative])
+(translate [$ šarraḫḫun $ $Acc | $] into [cross $Acc])
 
 (prevent [[cross $Door] $])
 	~(door $Door)
-	(div @error) { This line is likely a scribal error. The verb (span @hittite) šaraḫḫon "pass through" is generally used with things like doors and thresholds. For going to a place, the verb (span @hittite) pāon is used instead. }
+	(div @error) { This line is likely a scribal error. The verb (span @hittite) šaraḫḫun "pass through" is generally used with things like doors and thresholds. For going to a place, the verb (span @hittite) pāun is used instead. }
 
 (prevent [[cross $Door] $Details])
 	($Door blocks passage) %% See above under GO for details
@@ -341,19 +423,73 @@
 
 #v-cross
 (verb *)
-(name *) šarraḫḫon
+(name *) šarraḫḫun
 (verb * unlocked)
 	(#watchtower is visited)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% GO shorthand: raw numbers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% 1: south
+%% 2: north
+%% 3: east
+%% 4: west
+%% 5: up (not attested)
+%% 6: down (not attested)
+
+(parse number list $Numbers)
+	(stoppable) {
+		(exhaust) {
+			*($Num is one of $Numbers)
+			(use direction number $Num)
+		}
+	}
+
+(use direction number ~(number $Num))
+	(div @realerror) { ERROR: How did non-number $Num get into the direction list? }
+	(stop)
+(use direction number $Num)
+	{ ($Num < 1) (or) ($Num > 6) }
+	(div @error) { Only the numbers 1 through 4 were used as shorthand for directions \( plus 5 and 6 in this particular text \) , so it's not clear what $Num would mean. }
+	(stop)
+
+(use direction number $Num)
+	(number $Num means direction $Dir)
+	(current room $Room)
+	(if) (from $Room go $Dir to $Next) (then)
+		$Num (space 3)
+		(if) (room $Next) (then)
+			(try [[go $Next] pāun [] [] $Next []])
+		(elseif) (door $Next) (then)
+			(try [[cross $Next] šarraḫḫun [] $Next [] []])
+		(else)
+			(div @realerror) { ERROR: $Dir from $Room is $Next which is neither room nor door! }
+			(stop)
+		(endif)
+	(else)
+		(div @error) {
+			The number $Num here presumably means going (name $Dir)(no space)ward, but it's unclear what would be in that direction.
+		}
+		(stop)
+	(endif)
+
+(number 1 means direction #south)
+(number 2 means direction #north)
+(number 3 means direction #east)
+(number 4 means direction #west)
+(number 5 means direction #up)
+(number 6 means direction #down)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TAKE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(verb @take/@dāḫḫon/@dahhon means @dāḫḫon)
-(@dāḫḫon wants cases [#accusative])
-(@dāḫḫon wants cases [#accusative #ablative])
-(translate [$ dāḫḫon $ $Acc $ []] into [take $Acc])
-(translate [$ dāḫḫon $ $Acc $ $Abl] into [take $Acc from $Abl])
+(verb @take/@dāḫḫun/@daḫḫun means @dāḫḫun)
+(@dāḫḫun wants cases [#accusative])
+(@dāḫḫun wants cases [#accusative #ablative])
+(translate [$ dāḫḫun $ $Acc $ []] into [take $Acc])
+(translate [$ dāḫḫun $ $Acc $ $Abl] into [take $Acc from $Abl])
 
 (instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
 	($Obj is #in $Holder)
@@ -391,7 +527,7 @@
 	(else)
 		N=an
 	(endif)
-	karū ḫarkon. %% "I already held it"
+	karū ḫarkun. %% "I already held it"
 
 (perform [[take $Obj | $] $])
 	(narrate taking $Obj)
@@ -404,7 +540,7 @@
 
 #v-take
 (verb *)
-(name *) dāḫḫon
+(name *) dāḫḫun
 (verb * unlocked)
 	(#street is visited)
 
@@ -414,9 +550,9 @@
 
 (adverb @kattan/@katta/@down means @katta)
 
-(verb @put/@tēḫḫon/@tehhon means @tēḫḫon)
-(@tēḫḫon wants cases [#accusative #adverb])
-(translate [$ tēḫḫon katta $Acc | $] into [drop $Acc])
+(verb @put/@tēḫḫun/@teḫḫun means @tēḫḫun)
+(@tēḫḫun wants cases [#accusative #adverb])
+(translate [$ tēḫḫun katta $Acc | $] into [drop $Acc])
 
 (refuse [[drop $Obj] $Details])
 	(current player $Player)
@@ -427,7 +563,7 @@
 	(else)
 		N=an
 	(endif)
-	natta ḫarkon. %% "I did not hold it."
+	natta ḫarkun. %% "I did not hold it."
 
 (perform [[drop $Obj] $])
 	(current room $Room)
@@ -436,7 +572,7 @@
 
 #v-drop
 (verb *)
-(name *) katta tēḫḫon
+(name *) katta tēḫḫun
 (verb * unlocked)
 	(#ladder is handled)
 
@@ -444,9 +580,10 @@
 %% PUT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(@tēḫḫon wants cases [#accusative #dative])
-(@tēḫḫon wants cases [#adverb #accusative #dative]) %% Optional preverb (currently ignored)
-(translate [$ tēḫḫon $ $Acc $Dat | $] into [put $Acc $Dat])
+%% (verb $ means $) already done above
+(@tēḫḫun wants cases [#accusative #dative])
+(@tēḫḫun wants cases [#adverb #accusative #dative]) %% Optional preverb (currently ignored)
+(translate [$ tēḫḫun $ $Acc $Dat | $] into [put $Acc $Dat])
 
 %% TODO: consider the preverb/postposition
 
@@ -459,7 +596,7 @@
 	(else)
 		N=an
 	(endif)
-	natta ḫarkon. %% "I did not hold it."
+	natta ḫarkun. %% "I did not hold it."
 
 (prevent [[put $Obj $Dest] $Details])
 	~(holder $Dest)
@@ -472,6 +609,38 @@
 
 #v-put
 (verb *)
-(name *) tēḫḫon
+(name *) tēḫḫun
 (verb * unlocked)
 	(#gatehouse is visited)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SMITE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(verb @kuenun means @kuenun)
+(@kuenun wants cases [#accusative #ablative])
+(@kuenun wants cases [#adverb #accusative #ablative]) %% needs =kkan
+(translate [$ kuenun $ $Acc | $] into [smite $Acc])
+
+(prevent [[smite $] $ $Advs | $])
+	~(@kan is one of $Advs)
+	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "smite" requires the sentence particle =kan to be attached to the first word of the sentence. }
+
+(prevent [[smite ~(animate $Obj)] | $Details])
+	(describe negative action [[smite $Obj] | $Details]) %% negative, not failed: "did not" instead of "could not"
+	(if) (neuter $Obj) (then)
+		Na=at
+	(else)
+		Na=aš
+	(endif)
+	antuḫšaš natta ēšta. %% It was not a person.
+
+(perform [[smite $Obj] | $]) %% Remove a person from the game; prevent this if someone should be un-smiteable
+	(now) ($Obj is nowhere)
+	(now) (update needed)
+
+#v-smite
+(verb *)
+(name *) kuenun
+(verb * unlocked)
+	(#foyer is visited)

@@ -105,26 +105,32 @@
 #north
 (direction *)
 (opposite of * is #south)
+(name *) north %% Only ever appears in English messages, not Hittite
 
 #south
 (direction *)
 (opposite of * is #north)
+(name *) south
 
 #east
 (direction *)
 (opposite of * is #west)
+(name *) east
 
 #west
 (direction *)
 (opposite of * is #east)
+(name *) west
 
 #up
 (direction *)
 (opposite of * is #down)
+(name *) down
 
 #down
 (direction *)
 (opposite of * is #up)
+(name *) up
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common traits and per-object flags
@@ -573,7 +579,7 @@
 	~($Obj is in room $Room)
 	
 	(describe failed action [$Action $Details])
-	Nu (#accusative $Obj) natta ōḫḫon.
+	Nu (#accusative $Obj) natta ōḫḫun.
 
 (before $)	(fail)
 
@@ -630,8 +636,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Setting the pronouns from an object
 
-(notice $) %% TODO
-(notice player's $) %% TODO
+%% (notice $) %% TODO
+%% (notice player's $) %% TODO
 (forget pronouns out of scope) %% TODO
 (clear all pronouns) %% TODO
 

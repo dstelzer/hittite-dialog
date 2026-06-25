@@ -1,7 +1,7 @@
 (extension version)
 	(line) Hittite parser version 0.6.
 
-(parser logging) %%(fail)
+(parser logging) (fail)
 
 (parser log $Closure)
 	(parser logging)
@@ -10,15 +10,40 @@
 
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
-(rewrite $Input into $Output) %% Input: [na = an witeni dahhon]
+(rewrite $Input into $Output) %% Input: [na = an witeni dahhun]
 	(parser log {Rewriting})
 	(parser log { Input: $Input } )
-	(separate clitics from $Input into $Two) %% Two: [[an] witeni dahhon]
+	(convert $Input into normalized transcription $One) %% One: [na = an witeni daḫḫun]
+	(parser log { One: $One } )
+	(separate clitics from $One into $Two) %% Two: [[an] witeni dahhun]
 	(parser log { Two: $Two } )
-	(transpose verb from $Two into $Three) %% Three: [dahhon an witeni]
+	(transpose verb from $Two into $Three) %% Three: [dahhun an witeni]
 	(parser log { Three: $Three } )
-	(purify verb from $Three into $Output) %% Output: [daḫḫon an witeni]
+	(purify verb from $Three into $Output) %% Output: [daḫḫun an witeni]
 	(parser log { Output: $Output } )
+
+%% This block of code should be discarded once we can handle it in the frontend, it's horribly inefficient to do this kind of text processing in Dialog itself
+(convert [] into normalized transcription [])
+(convert [$Head | $Tail] into normalized transcription [$NewHead | $NewTail])
+	(convert single word $Head into normalized transcription $NewHead)
+	(convert $Tail into normalized transcription $NewTail)
+
+(convert single word $Old into normalized transcription $New)
+	(split word $Old into $OldLetters)
+	(convert letters $OldLetters into $NewLetters)
+	(join words $NewLetters into $New)
+
+(convert letters [] into [])
+(convert letters [$Head | $Tail] into [$NewHead | $NewTail])
+	(replace letter $Head with $NewHead)
+	(convert letters $Tail into $NewTail)
+
+(replace letter @c with @š)
+(replace letter @h with @ḫ)
+(replace letter @j with @ŋ)
+(replace letter @s with @š) %% TODO - this should change if we have logograms with S, then it will have to be dealt with on the front end
+(replace letter $X with $X) %% Everything else gets passed through
+%% Notably this does not handle long vowels, those have to be handled via synonyms
 
 %% Sentence connectives can be discarded
 (separate clitics from [(sentence connective $First) | $Rest] into [$Clitics | $Sentence])
@@ -88,9 +113,14 @@
 %% We can't report errors from within (parse $ into noun list $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
 (find first broken noun from [] and report it)
 	(div @realerror) { ERROR: failed to find any broken nouns! }
+(find first broken noun from [$First | $] and report it)
+	(verb $First means $)
+	This sentence's structure is unclear: (span @hittite) $First is a verb, and the verb should always be the last word in a Hittite sentence.
+	(stop)
 (find first broken noun from $Nouns and report it)
 	{
 		*(split $Nouns anywhere into $Left and $Right)
+		(nonempty $Left) %% Forbid the split where everything is on the right
 	(or)
 		($Left = $Nouns) ($Right = []) %% We also want to allow a "split" where everything is on the left and nothing is on the right
 	}
@@ -107,7 +137,7 @@
 		It's unclear what (print quoted $Left) is meant to refer to; these words (emph {are}) used on the tablet, but what they describe is not currently near our protagonist.
 		(stop)
 	(or)
-		The nouns in this line are obscure, and it's unclear what (print quoted $Right) means.
+		The nouns in this line are obscure, and it's unclear what (print quoted $Left) means.
 		(stop)
 	}
 
@@ -473,13 +503,33 @@
 
 %% Main parser structure begins here
 
+(global variable (previous command $)) %% For /again purposes
+
 (parse commandline $Words)
+	(if) ($Words = [$First | $]) (split word $First into [\/ | $]) (then) %% First word starts with `/` so it's an English metacommand
+		(parse metacommand $Words)
+		(stop)
+	(else)
+		(now) (previous command $Words)
+	(endif)
+	
 	(if) (save undo 1) (then)
 		(div @error) { The previous lines, starting with (print words $Words), are crossed out on the tablet and should be considered a scribal error. }
 		(stop)
 	(endif)
+	
+	(if) ($Words are direction list $Dirs) (then) %% Only IM, dots, and numbers
+		(stoppable) (parse number list $Dirs)
+		(stop)
+	(endif)
+	
 	(now) ~(allowing parse errors)
 	(parse action $Words)
+
+([(number $Head) | $Rest] are direction list [$Head | $NewRest])
+	($Rest are direction list $NewRest)
+([@im/@./@- | $Rest] are direction list $NewRest)
+	($Rest are direction list $NewRest)
 
 (parse metacommand [\/quit])
 	~(interpreter supports quit)
@@ -522,18 +572,9 @@
 (parse metacommand $Words)
 	(div @meta) { The meta command (print quoted $Words) was not recognized. Try /help for more information. }
 
-(global variable (previous command $))
-
 (interface (parse action $<Words))
 (parse action $Words)
 	($Raw = $Words)
-	
-	(if) ($Words = [$First | $]) (split word $First into [\/ | $]) (then) %% First word starts with `/` so it's an English metacommand
-		(parse metacommand $Words)
-		(stop)
-	(else)
-		(now) (previous command $Words)
-	(endif)
 	
 	{
 		(rewrite $Raw into [$Verb $Clitics | $Rest])
@@ -543,7 +584,7 @@
 	}
 	(parser log { Rewritten: $Verb $Clitics $Rest } )
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
-		(div @error) { The verb "$Verb" is not found elsewhere on the tablet, and it is difficult to interpret here. }
+		(div @error) { The verb "(no space)$Verb(no space)" is not found elsewhere on the tablet, and it is difficult to interpret here. }
 		(stop)
 	(endif)
 	(collect $Action)
@@ -567,8 +608,6 @@
 		(parser log { Sieving } )
 		(sieve action candidates $Options at level 0)
 	(endif)
-
-%% TODO - this currently fails if given a noun list consisting of a single bare logogram and I'm not sure why
 
 (report errors in $Words)
 	(now) (allowing parse errors) %% Tell the parsing predicates that they should show their errors instead of just silently failing
@@ -666,12 +705,15 @@
 		(stoppable) {
 			(parse commandline $Words)
 		}
+		(par)
 	(else)
 		(redraw status bar)
+		(tutorial)
 		(prompt and input $Words)
 		(stoppable) {
 			(parse commandline $Words)
 		}
+		(par)
 	(endif)
 
 (prompt and input $Words)
@@ -707,9 +749,20 @@
 	(#ablative $Abl)
 	(#adverb $Adv)
 	natta %% Used in place of ŪL to avoid explaining heterograms too early
-	taruḫḫon %% "able to" in asyndetic construction
+	taruḫḫun %% "able to" in asyndetic construction
 	$Verb
 (describe raw failed action $Action)
+	(span @realerror) { Improper action: $Action }
+(describe negative action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
+	Nu
+	(#accusative $Acc)
+	(#dative $Dat)
+	(#ablative $Abl)
+	(#adverb $Adv)
+	natta
+	$Verb
+	.
+(describe negative action $Action)
 	(span @realerror) { Improper action: $Action }
 
 (print words $Words)
@@ -736,14 +789,14 @@
 
 %% (try-complex $) will take an action with multiple nouns in a certain case and turn it into several individual actions with a single noun in that case
 %% This actually works with any number of nouns in any number of cases; the parser just limits it to a single multiple object per action to avoid combinatorial headaches (PUT ALL ON ALL is unlikely to do anything good)
-(try-complex [$Raw $Verb | $Nouns])
+(try-complex [$Raw $Verb $Advs | $Nouns])
 	*(expand groupings from $Nouns into $NounCombo)
-	(if) (translate [$Raw $Verb | $NounCombo] into $EnglishAction) (then)
+	(if) (translate [$Raw $Verb $Advs | $NounCombo] into $EnglishAction) (then)
 		(parser log { English action: $EnglishAction } )
-		(parser log { (describe action [$EnglishAction [$Raw $Verb | $Nouns]]) } )
-		(try [$EnglishAction [$Raw $Verb | $Nouns]])
+		(parser log { (describe action [$EnglishAction [$Raw $Verb $Advs | $Nouns]]) } )
+		(try [$EnglishAction [$Raw $Verb $Advs | $Nouns]])
 	(else)
-		(div @realerror) { ERROR: The Hittite sentence (print quoted $Raw) was parsed as $Verb and $NounCombo, but this could not be translated into an English action. Why not? }
+		(div @realerror) { ERROR: The Hittite sentence (print quoted $Raw) was parsed as $Verb, $Advs, and $NounCombo, but this could not be translated into an English action. Why not? }
 	(endif)
 
 %% (try $) then handles those single-noun actions
@@ -756,6 +809,7 @@
 ($Case [$Head | $Rest])
 	($Case $Head)
 	(span @akk) { Ù } %% Using the "Akkadian ampersand" instead of the clitic =ya because the clitic does messy things with the last consonant of the word
+	(now) (heterograms used) %% Give a tutorial the first time this happens
 	($Case $Rest)
 
 (name (logogram $Obj) in #nominative/#accusative) (name $Obj in #bare)
