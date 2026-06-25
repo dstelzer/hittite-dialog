@@ -15,6 +15,8 @@
 	(parser log { Input: $Input } )
 	(convert $Input into normalized transcription $One) %% One: [na = an witeni daḫḫun]
 	(parser log { One: $One } )
+	(apply optional replacements to $One into $OnePointFive) %% Try to fix invalid words if possible; does nothing to already-valid words
+	(parser log { 1.5: $OnePointFive } )
 	(separate clitics from $One into $Two) %% Two: [[an] witeni dahhun]
 	(parser log { Two: $Two } )
 	(transpose verb from $Two into $Three) %% Three: [dahhun an witeni]
@@ -41,9 +43,37 @@
 (replace letter @c with @š)
 (replace letter @h with @ḫ)
 (replace letter @j with @ŋ)
-(replace letter @s with @š) %% TODO - this should change if we have logograms with S, then it will have to be dealt with on the front end
 (replace letter $X with $X) %% Everything else gets passed through
-%% Notably this does not handle long vowels, those have to be handled via synonyms
+
+%% Likewise this one, which is even worse optimization-wise
+(apply optional replacements to [] into [])
+(apply optional replacements to [$Head | $Tail] into [$NewHead | $NewTail])
+	(unknown word $Head) %% Don't try optional replacements if a word is already valid (TODO: does this ever make false positives?)
+	(optional replacements turn $Head into valid word $NewHead)
+	(apply optional replacements to $Tail into $NewTail)
+(apply optional replacements to [$Head | $Tail] into [$Head | $NewTail])
+	%% If it's not an unknown word, or it is but none of the substitutions worked, just pass it along and let the parser errors handle it
+	(apply optional replacements to $Tail into $NewTail)
+
+(optional replacements turn $Old into valid word $New)
+	(split word $Old into $Letters)
+	*(do optional letter replacements on $Letters into $NewLetters)
+	(join words $NewLetters into $New)
+	~(unknown word $New)
+(do optional letter replacements on [] into [])
+(do optional letter replacements on [$Head|$Tail] into [$NewHead|$NewTail])
+	*(optionally replace $Head with $NewHead)
+	*(do optional letter replacements on $Tail into $NewTail)
+
+(optionally replace $X with $X) %% "No change" is always valid
+(optionally replace @s with @š) %% Make this optional since the distinction could possibly matter: SU 'entrails' vs ŠU 'hand'. But proper S is rare.
+(optionally replace @a with @ā)
+(optionally replace @e with @ē)
+(optionally replace @i with @ī)
+(optionally replace @o with @ō)
+(optionally replace @u with @ū)
+(optionally replace @u with @o)
+(optionally replace @u with @ō)
 
 %% Sentence connectives can be discarded
 (separate clitics from [(sentence connective $First) | $Rest] into [$Clitics | $Sentence])

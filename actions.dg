@@ -333,7 +333,7 @@
 (($Door is closed) blocks passage)
 ($ is closed) (fail) %% TODO do we even want this in the world model?
 
-(prevent [[go (inherently dark $Dest)] $Details]) %% See also under CROSS
+(prevent [[go (inherently dark $Dest)] $]) %% See also under CROSS
 	(current player $Player)
 	~($Player has a light source)
 	~($Dest has a light source)
@@ -605,7 +605,7 @@
 		This sentence seems to be incomplete. The verb (span @hittite) tēḫḫun should include a destination: either a noun in the dative, or an adverb like (span @hittite) katta "down" \( on the ground \) .
 	}
 
-(refuse [[put $Obj $Dest] | $Details])
+(refuse [[put $Obj $Dest] $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
 	(describe failed action [[put $Obj $Dest] $Details])
@@ -616,7 +616,7 @@
 	(endif)
 	natta ḫarkun. %% "I did not hold it."
 
-(prevent [[put $Obj $Dest] | $Details])
+(prevent [[put $Obj $Dest] $Details])
 	~(holder $Dest)
 	(describe failed action [[put $Obj $Dest] $Details])
 	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
@@ -640,12 +640,12 @@
 (@kuenun wants cases [#adverb #accusative #ablative]) %% needs =kkan
 (translate [$ kuenun $ $Acc | $] into [smite $Acc])
 
-(prevent [[smite $] $ $Advs | $])
+(prevent [[smite $] [$ $Advs | $]])
 	~(@kan is one of $Advs)
 	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "smite" requires the sentence particle =kan to be attached to the first word of the sentence. }
 
-(prevent [[smite ~(animate $Obj)] | $Details])
-	(describe negative action [[smite $Obj] | $Details]) %% negative, not failed: "did not" instead of "could not"
+(prevent [[smite ~(animate $Obj)] $Details])
+	(describe negative action [[smite $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
 	(if) (neuter $Obj) (then)
 		Na=at
 	(else)
@@ -653,7 +653,7 @@
 	(endif)
 	antuḫšaš natta ēšta. %% It was not a person.
 
-(perform [[smite $Obj] | $]) %% Remove a person from the game; prevent this if someone should be un-smiteable
+(perform [[smite $Obj] $]) %% Remove a person from the game; prevent this if someone should be un-smiteable
 	(now) ($Obj is nowhere)
 	(now) (update needed)
 
