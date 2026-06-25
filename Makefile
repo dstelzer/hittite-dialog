@@ -14,5 +14,5 @@ vvv.log: $(FILES)
 	dgdebug -vvv $(OPTIONS) $(FILES) > vvv.log
 
 regress: $(FILES)
-	dgdebug -s 1234 $(OPTIONS) $(FILES) <regress.in >regress.out
+	dgdebug -qD -s 1234 $(OPTIONS) $(FILES) <regress.in >regress.out
 	meld regress.out regress.gold

@@ -134,7 +134,13 @@
 		(stop)
 	(or)
 		*(parse $Left as not-here object $)
-		It's unclear what (print quoted $Left) is meant to refer to; these words (emph {are}) used on the tablet, but what they describe is not currently near our protagonist.
+		It's unclear what (print quoted $Left) is meant to refer to;
+		(if) ($Left = [$]) (then) %% Single word
+			this noun (emph {is}) used on the tablet, but what it describes
+		(else)
+			these words (emph {are}) used on the tablet, but what they describe
+		(endif)
+		is not currently near our protagonist.
 		(stop)
 	(or)
 		The nouns in this line are obscure, and it's unclear what (print quoted $Left) means.
@@ -456,16 +462,36 @@
 
 (show parser errors [] for action $)
 	(div @error) { ERROR: there's an error, but no error code was returned! }
-(show parser errors [$Single] for action [$Raw|$Action])
+(show parser errors [$Single] for action [$Raw | $Action])
 	(div @error) {
-		This sentence, $Raw, is difficult to interpret.
-		(uppercase) (show parser error $Single for action [$Raw|$Action]).
+		This sentence, (print quoted $Raw), is difficult to interpret.
+		(uppercase) (show parser error $Single for action [$Raw | $Action]).
 	}
-(show parser errors $List for action [$Raw|$Action])
+(show parser errors [$A $B] for action [$Raw $Verb | $]) %% Exactly two errors might be a noun in the wrong case
+	{
+		($A is one of [12 13 14])
+		($B is one of [22 23 24])
+		($A modulo 10 into $Missing)
+		($B modulo 10 into $Excess)
+	(or)
+		($A is one of [22 23 24])
+		($B is one of [12 13 14])
+		($A modulo 10 into $Excess)
+		($B modulo 10 into $Missing)
+	}
+	(div @error) {
+		This sentence, (print quoted $Raw), is likely a scribal error: the verb $Verb expects a noun in the (case of error $Missing), not the (case of error $Excess) .
+	}
+(show parser errors $List for action [$Raw | $Action])
 	(div @error) {
 		This sentence, $Raw, is difficult to interpret, for multiple reasons.
-		(uppercase) (listing $List {(show parser error $_ for action [$Raw|$Action])}).
+		(uppercase) (listing $List {(show parser error $_ for action [$Raw | $Action])}).
 	}
+
+(case of error 2) accusative
+(case of error 3) dative
+(case of error 4) ablative
+(case of error $N) ERR: $N
 
 (show parser error 11 for action $)
 	there should be an adverb or sentence particle
@@ -526,6 +552,7 @@
 	(now) ~(allowing parse errors)
 	(parse action $Words)
 
+([] are direction list [])
 ([(number $Head) | $Rest] are direction list [$Head | $NewRest])
 	($Rest are direction list $NewRest)
 ([@im/@./@- | $Rest] are direction list $NewRest)
@@ -584,7 +611,22 @@
 	}
 	(parser log { Rewritten: $Verb $Clitics $Rest } )
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
-		(div @error) { The verb "(no space)$Verb(no space)" is not found elsewhere on the tablet, and it is difficult to interpret here. }
+		%% Is there a verb somewhere else in the sentence? That would mean the player messed up the sentence structure rather than using an invalid verb.
+		(if) *($Alt is one of $Rest) (verb $Alt means $) (then)
+			(div @error) {
+				The structure of this sentence is unusual. "(no space)(uppercase)$Alt(no space)" is a verb, and the verb should always be at the end of a Hittite sentence.
+			}
+		(else)
+			(div @error) {
+				From its position in the sentence, we would expect "(no space)$Verb(no space)" to be the main verb. But this
+				(if) (unknown word $Verb) (then)
+					verb is not used for the protagonist's actions
+				(else)
+					word is not used as a verb
+				(endif)
+				elsewhere on the tablet, and it is difficult to interpret here.
+			}
+		(endif)
 		(stop)
 	(endif)
 	(collect $Action)
@@ -791,10 +833,12 @@
 %% This actually works with any number of nouns in any number of cases; the parser just limits it to a single multiple object per action to avoid combinatorial headaches (PUT ALL ON ALL is unlikely to do anything good)
 (try-complex [$Raw $Verb $Advs | $Nouns])
 	*(expand groupings from $Nouns into $NounCombo)
+	%% TODO: This should be (exhaust) but that breaks everything. Why?
 	(if) (translate [$Raw $Verb $Advs | $NounCombo] into $EnglishAction) (then)
 		(parser log { English action: $EnglishAction } )
-		(parser log { (describe action [$EnglishAction [$Raw $Verb $Advs | $Nouns]]) } )
-		(try [$EnglishAction [$Raw $Verb $Advs | $Nouns]])
+		(parser log { (describe action [$EnglishAction [$Raw $Verb $Advs | $NounCombo]]) } )
+		(try [$EnglishAction [$Raw $Verb $Advs | $NounCombo]])
+		(tick)
 	(else)
 		(div @realerror) { ERROR: The Hittite sentence (print quoted $Raw) was parsed as $Verb, $Advs, and $NounCombo, but this could not be translated into an English action. Why not? }
 	(endif)

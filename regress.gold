@@ -1,672 +1,544 @@
-Warning: act1.dg, line 250: Possible typo: A rule is defined for '(animate $)',
-but this predicate is never queried and has no interface definition.
-Warning: actions.dg, line 26: Possible typo: A rule is defined for '($ lines
-needed for status bar)', but this predicate is never queried and has no
-interface definition.
-Warning: Possible typo: A query is made to '($ is closed)', but there is no
-matching rule or interface definition.
-Warning: worldmodel.dg, line 562: Possible typo: A rule is defined for
-'(inhibit next tick)', but this predicate is never queried and has no interface
-definition.
-Warning: worldmodel.dg, line 598: Possible typo: A rule is defined for '(notice
-$)', but this predicate is never queried and has no interface definition.
-Warning: worldmodel.dg, line 599: Possible typo: A rule is defined for '(notice
-player's $)', but this predicate is never queried and has no interface
-definition.
-Nu wappi econ.
+Warning: actions.dg, line 336: Possible typo: Local variable $Details only
+appears once.
+Nu=za wappi ešun.
 
-        auriya        
-           <>           
-                        
+Nu apiya ḫapan ōḫḫun.
 
-Nu apiya hapan oohhon.
+Welcome to TODO GAME NAME! This game is presented entirely in the ancient
+Hittite language, which is probably a bit intimidating at first. But don't
+panic; just take it slow.
 
-Verbs: ohhon paon
+Clicking a word will show you its definition. See if you can use that to figure
+out the meaning of the two sentences at the top left. When you think you
+understand them, click next to the > symbol and press ENTER.
+
+> 
+Nu=za wappi ešun.
+
+Nu apiya ḫapan ōḫḫun.
+
+Verbs: ōḫḫun, pāun
+              auriya             
+                ✧                
+                                 
+
+You probably came up with something like "I was at the riverbank. I saw a river
+there." Most Hittite sentences start with a meaningless "connective" word, then
+have a series of nouns, and finish off with a verb. The case of those nouns
+indicates their purpose: a "dative" noun like wappi indicates a location or
+destination, while an "accusative" noun like ḫapan indicates the object of the
+verb.
+
+Now it's time to construct a sentence of your own. The compass rose at the top
+right indicates nearby locations, and the "verbs" bar suggests some relevant
+verbs. Try to use those to move to a new location.
+
 > * Starting out
-> nu auriya paon
-Nu E2 auriya paon.
-Nu E2 auriya econ.
+> nu auriya paun
+Nu auriya pāun.
 
-        acki        
-palci   <>   kutti
-        wappi        
+Nu=za auriya peran ešun.
 
-Nu apiya ackan ciyantan oohhon.
+Nu apiya aškan ḫattalwantan ōḫḫun.
 
-Verbs: ohhon paon
-> acki paon
-Nu E2 hilamni ackaz ciyantaz ūl paon. Nu ackac ciyanza ēcta.
-> acki ohhon
-This sentence, [acki ohhon], is difficult to interpret. There should not be a
-dative noun.
-> palci paon
-Nu palci paon.
-Nu palci econ.
+Verbs: ōḫḫun, pāun, šarraḫḫun
+              aškan              
+          palši ✧ kutti          
+              wappi              
 
-                        
-           <>   auriya
-                        
+There we go! You'll encounter many more verbs and nouns as you go along, but
+all the relevant ones will be shown at the top of the screen: what you can see
+and where you can go. Double-click any of these words to insert them into your
+sentence. (You can also leave off the sentence connectives if you want.)
 
-Nu apiya ilan oohhon.
+> acki paun
+This line is likely a scribal error. The verb pāun "go" is generally used with
+locations, not objects; for things like doors and thresholds, the verb 
+šarraḫḫun "pass through" is used instead.
 
-Verbs: ohhon paon dahhon
-> ilan dahhon
-Nu ilan dahhon.
-Nu palci econ.
+> carrahhun acki
+The structure of this sentence is unusual. "Šarraḫḫun" is a verb, and the verb
+should always be at the end of a Hittite sentence.
 
-                        
-           <>   auriya
-                        
+> acki carrahhun
+This sentence, "acki carrahhun", is likely a scribal error: the verb šarraḫḫun
+expects a noun in the accusative, not the dative.
 
-Nu ilan harkon.
+> ackan carrahhun
+Nu aškan ḫattalwantan natta taruḫḫun šarraḫḫun.
 
-Verbs: ohhon paon dahhon katta-tehhon
-> auriya paon
-Nu E2 auriya paon.
-Nu E2 auriya econ.
+> palci paun
+Nu palši pāun.
 
-        acki        
-palci   <>   kutti
-        wappi        
+Nu=za palši ešun.
 
-Nu apiya ackan ciyantan oohhon.
+Nu apiya ilan ōḫḫun.
 
-Nu ilan harkon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun
+                                 
+                ✧ auriya         
+                                 
+> ilan dahhun
+Nu ilan dāḫḫun.
 
-Verbs: ohhon paon dahhon katta-tehhon
-> acki ohhon
-This sentence, [acki ohhon], is difficult to interpret. There should not be a
-dative noun.
-> nu ackan paon
-This sentence, [nu ackan paon], is difficult to interpret, for multiple
-reasons. There should not be an accusative noun and there should be a dative
-noun.
-> nu ackan dahhon
-Nu ackan ciyantan ūl dahhon. N=an harkanna ūl tarhon.
-> halhaltomari paon
-It's unclear what "halhaltomari" is meant to refer to; these words are used on
-the tablet, but what they describe is not currently near our protagonist.
-> kutti paon
-Nu kutti paon.
-Nu kutti kattan econ.
+Nu=za palši ešun.
 
-        halhaltomari        
-auriya   <>           
-                        
+Nu ilan ḫarkun.
 
-Nu ilan harkon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
+                                 
+                ✧ auriya         
+                                 
+> auriya paun
+Nu auriya pāun.
 
-Verbs: ohhon paon dahhon katta-tehhon
-> halhaltomari paon
-Nu kuttac halhaltomari paon.
-Nu kuttac halhaltomari econ.
+Nu=za auriya peran ešun.
 
-                        
-luttiya   <>           
-        kutti        
+Nu apiya aškan ḫattalwantan ōḫḫun.
 
-Nu apiya E2 hilamnac luttaai oohhon.
+Nu ilan ḫarkun.
 
-Nu ilan harkon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
+              aškan              
+          palši ✧ kutti          
+              wappi              
+> nu ackan dahhun
+Nu aškan ḫattalwantan natta taruḫḫun dāḫḫun. N=an mekki nakkiš ēšta.
 
-Verbs: ohhon paon dahhon katta-tehhon
-> luttiya paon
-Nu E2 hilamni E2 hilamnac luttiyaz ūl paon. Nu luttāi parku ēcta.
-> ilan tehhon
-This sentence, [ilan tehhon], is difficult to interpret. There should be an
-adverb or sentence particle.
-> ilan katta tehhon
-Nu ilan katta tehhon.
-Nu kuttac halhaltomari econ.
+> halhaltomari paun
+It's unclear what "ḫalḫaltomari" is meant to refer to; this noun is used on the
+tablet, but what it describes is not currently near our protagonist.
 
-                        
-luttiya   <>           
-        kutti        
+> kutti paun
+Nu kutti pāun.
 
-Nu apiya E2 hilamnac luttaai Ù ilan oohhon.
+Nu=za kutti kattan ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon
-> luttiya paon
-Nu E2 hilamni E2 hilamnac luttiyaz paon.
-Nu E2 hilamni econ.
+Nu ilan ḫarkun.
 
-        ickici        
-arkiwi   <>   luttiya
-        acki        
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
+           ḫalḫaltomari          
+         auriya ✧                
+                                 
+> halhaltomari paun
+Nu kuttaš ḫalḫaltomari pāun.
 
-Nu apiya ackan ciyantan Ù luttaai oohhon.
-Nu acki ciyanti GIC hattalu kittat.
+Nu=za kuttaš ḫalḫaltomari tapušza ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
+Nu apiya ḫilamnaš luttāi ōḫḫun.
+
+Nu ilan ḫarkun.
+
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
+                                 
+         luttāi ✧                
+              kutti              
+> luttai carrahhun
+Nu ḫilamnaš luttāi natta taruḫḫun šarraḫḫun. N=at parku ēšta.
+
+> ilan tehhun
+This sentence seems to be incomplete. The verb tēḫḫun should include a
+destination: either a noun in the dative, or an adverb like katta "down" (on
+the ground).
+
+> ilan katta tehhun
+Nu ilan katta tēḫḫun.
+
+Nu=za kuttaš ḫalḫaltomari tapušza ešun.
+
+Nu apiya ḫilamnaš luttāi Ù ilan ōḫḫun.
+
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
+                                 
+         luttāi ✧                
+              kutti              
+
+Certain cuneiform signs were used as shorthand for entire words, like how "7"
+is short for "seven", or "&" short for "and". These signs are written in
+CAPITALS to make it clear that they're not conveying the actual Hittite
+pronunciation.
+
+> ilan carrahhun
+Nu ḫilamnaš luttāi šarraḫḫun.
+
+Nu=za=kan ḫilamni anda ešun.
+
+Nu apiya aškan ḫattalwantan Ù luttāi ōḫḫun.
+Nu GIŠ ḫattalu aški ḫattalwanti ēšta.
+
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun
+              iškiši             
+         arkiwi ✧ luttāi         
+              aškan              
+
+Hittite nouns were sometimes written with a special sign in front, called a
+"determinative". These weren't pronounced, but indicated something about the
+noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example,
+marks that something is made of wood. TODO they will eventually be superscript
+but that's still a work in progress
+
 > * In the watchtower
-> acki paon
-Nu E2 auriya ackaz ciyantaz ūl paon. Nu ackac ciyanza ēcta.
-> hattalu dahhon
-Nu GIC hattalu ackaz ciyantaz dahhon. Nu ackan hachon.
-Nu E2 hilamni econ.
+> ackan carrahhun
+Nu aškan ḫattalwantan natta taruḫḫun šarraḫḫun.
 
-        ickici        
-arkiwi   <>   luttiya
-        acki        
+> hattalu dahhun
+Nu GIŠ ḫattalu aškaz ḫattalwantaz dāḫḫun. Nu aškan ḫašḫun.
 
-Nu apiya ackan haccantan Ù luttaai oohhon.
+Nu=za=kan ḫilamni anda ešun.
 
-Nu GIC hattalu harkon.
+Nu apiya aškan Ù luttāi ōḫḫun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> acki paon
-Nu E2 auriya ackaz haccantaz paon.
-Nu E2 auriya econ.
+Nu GIŠ ḫattalu ḫarkun.
 
-        acki        
-palci   <>   kutti
-        wappi        
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun
+             2 iškiši            
+       4 arkiwi ✧ 3 luttāi       
+             1 aškan             
 
-Nu apiya ackan haccantan oohhon.
+You're getting the hang of this now! Since you'll be moving around a lot in
+this game, there's a shorter way to get from place to place: the Babylonians
+sometimes numbered their compass directions, so you can type "1 3 2" to go
+south, then east, then north. These numbers will be shown on the compass rose
+in the top right.
 
-Nu GIC hattalu harkon.
+(There's no evidence that the Hittites actually did this, and adding numbers
+for "up" and "down" is completely non-historical. But the Hittites imitating
+Babylonian writing isn't much of a stretch, and typing a full sentence every
+time gets tedious very fast.)
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> acki paon
-Nu E2 hilamni ackaz haccantaz paon.
-Nu E2 hilamni econ.
+> ackan carrahhun
+Nu aškan šarraḫḫun.
 
-        ickici        
-arkiwi   <>   luttiya
-        acki        
+Nu=za auriya peran ešun.
 
-Nu apiya ackan haccantan Ù luttaai oohhon.
+Nu apiya aškan ōḫḫun.
 
-Nu GIC hattalu harkon.
+Nu GIŠ ḫattalu ḫarkun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> arkiwi paon
-Nu E2 arkiwi paon.
-Nu E2 arkiwi econ.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun
+             2 aškan             
+        4 palši ✧ 3 kutti        
+             1 wappi             
+> ackan carrahhun
+Nu aškan šarraḫḫun.
 
-        dankui        
-           <>   hilamni
-                        
+Nu=za=kan ḫilamni anda ešun.
 
-Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
-Nu hacci pahhur Ù DUG agannic kīyantat.
+Nu apiya aškan Ù luttāi ōḫḫun.
 
-Nu GIC hattalu harkon.
+Nu GIŠ ḫattalu ḫarkun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> nu dankui paon
-Nu dankui ūl paon. Nu pedan dankuecta.
-> agannic dahhon
-"Agannic" is likely a scribal error; this is a valid noun, but its grammatical
-case doesn't make sense in this sentence.
-> agannin dahhon
-Nu DUG agannin haccaz ūl dahhon. Nu pahhur ayyanza ēcta.
-> pahhur dahhon
-Nu pahhur haccaz ūl dahhon. Nu pahhur ayyanza ēcta.
-> hattalu hacci tehhon
-Nu GIC hattalu hacci tehhon. Nu GIC hattalu lukket.
-Nu E2 arkiwi econ.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun
+             2 iškiši            
+       4 arkiwi ✧ 3 luttāi       
+             1 aškan             
+> arkiwi paun
+Nu E2 arkiwi pāun.
 
-        antaki        
-           <>   hilamni
-                        
+Nu=za=kan E2 arkiwi anda ešun.
 
-Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
-Nu hacci pahhur Ù DUG agannic kīyantat.
+Nu apiya ḫaššan Ù tešḫallin LÚ ḫalliyatallan ōḫḫun.
+Nu paḫḫur Ù DUG aganniš ḫašši anda ešer.
 
-Nu warān GIC hattalu harkon.
+Nu GIŠ ḫattalu ḫarkun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> antaki paon
-Nu antaki paon.
-Nu antaki econ.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 dankui            
+                ✧ 3 ḫilamni      
+                                 
 
-                        
-           <>           
-        arkiwi        
+Most of the sentences you've seen so far have only one noun, but this doesn't
+have to be the case. To put one thing into or onto another, for example, you'll
+need both an accusative noun and a dative noun.
 
-Nu apiya DUG palhin oohhon.
+> nu dankui paun
+Nu pēdan kuit dankui ēšta, parā natta taruḫḫun pāun.
 
-Nu warān GIC hattalu harkon.
+> agannic dahhun
+"Aganniš" is likely a scribal error; this is a valid noun, but the nominative
+case doesn't make sense in this context.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> palhin dahhon
-Nu DUG palhin dahhon.
-Nu antaki econ.
+> agannin dahhun
+Nu DUG agannin ḫaššaz natta taruḫḫun dāḫḫun. Nu paḫḫur ayyanza ēšta.
 
-                        
-           <>           
-        arkiwi        
+> pahhur dahhun
+Nu paḫḫur ḫaššaz natta taruḫḫun dāḫḫun. Nu paḫḫur ayyanza ēšta.
 
-Nu DUG palhin Ù warān GIC hattalu harkon.
+> hattalu hacci tehhun
+Nu GIŠ ḫattalu ḫašši tēḫḫun. Nu GIŠ ḫattalu lukket.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> arkiwi paon
-Nu E2 arkiwi paon.
-Nu E2 arkiwi econ.
+Nu=za=kan E2 arkiwi anda ešun.
 
-        antaki        
-           <>   hilamni
-                        
+Nu apiya ḫaššan Ù tešḫallin LÚ ḫalliyatallan ōḫḫun.
+Nu paḫḫur Ù DUG aganniš ḫašši anda ešer.
 
-Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
-Nu hacci pahhur Ù DUG agannic kīyantat.
+Nu warān GIŠ ḫattalu ḫarkun.
 
-Nu DUG palhin Ù warān GIC hattalu harkon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 antaki            
+                ✧ 3 ḫilamni      
+                                 
+> antaki paun
+Nu antaki pāun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> hilamni paon
-Nu E2 hilamni paon.
-Nu E2 hilamni econ.
+Nu=za=kan antaki anda ešun.
 
-        ickici        
-arkiwi   <>   luttiya
-        acki        
+Nu apiya DUG palḫin ōḫḫun.
 
-Nu apiya ackan haccantan Ù luttaai oohhon.
+Nu warān GIŠ ḫattalu ḫarkun.
 
-Nu DUG palhin Ù warān GIC hattalu harkon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+                                 
+                ✧                
+            1 arkiwi             
+> palhin dahhun
+Nu DUG palḫin dāḫḫun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> acki paon
-Nu E2 auriya ackaz haccantaz paon.
-Nu E2 auriya econ.
+Nu=za=kan antaki anda ešun.
 
-        acki        
-palci   <>   kutti
-        wappi        
+Nu DUG palḫin Ù warān GIŠ ḫattalu ḫarkun.
 
-Nu apiya ackan haccantan oohhon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+                                 
+                ✧                
+            1 arkiwi             
+> 1 3 1 1
+1   Nu E2 arkiwi pāun.
+3   Nu ḫilamni pāun.
+1   Nu aškan šarraḫḫun.
+1   Nu wappi pāun.
 
-Nu DUG palhin Ù warān GIC hattalu harkon.
+Nu=za wappi ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> wappi paon
-Nu wappi paon.
-Nu wappi econ.
+Nu apiya ḫapan ōḫḫun.
 
-        auriya        
-           <>           
-                        
+Nu DUG palḫin Ù warān GIŠ ḫattalu ḫarkun.
 
-Nu apiya hapan oohhon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 auriya            
+                ✧                
+                                 
+> hattalu hapi tehhun
+Nu warān GIŠ ḫattalu ḫapi tēḫḫun.
 
-Nu DUG palhin Ù warān GIC hattalu harkon.
+Nu=za wappi ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> hattalu hapi tehhon
-Nu warān GIC hattalu hapi tehhon.
-Nu wappi econ.
+Nu apiya ḫapan ōḫḫun.
 
-        auriya        
-           <>           
-                        
+Nu DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-Nu apiya hapan oohhon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 auriya            
+                ✧                
+                                 
+> watar dahhun
+Nu wātar witenaš DUG palḫi tēḫḫun.
 
-Nu DUG palhin Ù GIC hattalu harkon.
+Nu=za wappi ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> watar dahhon
-Nu witenac DUG palhin witenaz cunnahon.
-Nu wappi econ.
+Nu apiya ḫapan ōḫḫun.
 
-        auriya        
-           <>           
-                        
+Nu witenaš DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-Nu apiya hapan oohhon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 auriya            
+                ✧                
+                                 
+> 2 2 4
+2   Nu auriya pāun.
+2   Nu aškan šarraḫḫun.
+4   Nu E2 arkiwi pāun.
 
-Nu witenac DUG palhin Ù GIC hattalu harkon.
+Nu=za=kan E2 arkiwi anda ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> auriya paon
-Nu E2 auriya paon.
-Nu E2 auriya econ.
+Nu apiya ḫaššan Ù tešḫallin LÚ ḫalliyatallan ōḫḫun.
+Nu paḫḫur Ù DUG aganniš ḫašši anda ešer.
 
-        acki        
-palci   <>   kutti
-        wappi        
+Nu witenaš DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-Nu apiya ackan haccantan oohhon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 dankui            
+                ✧ 3 ḫilamni      
+                                 
+> watar hacci tehhun
+Nu wātar paḫḫeni tēḫḫun. N=an kištanunun.
 
-Nu witenac DUG palhin Ù GIC hattalu harkon.
+Nu=za=kan E2 arkiwi anda ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> acki paon
-Nu E2 hilamni ackaz haccantaz paon.
-Nu E2 hilamni econ.
+Nu apiya ḫaššan Ù tešḫallin LÚ ḫalliyatallan ōḫḫun.
+Nu DUG aganniš ḫašši anda ēšta.
 
-        ickici        
-arkiwi   <>   luttiya
-        acki        
+Nu DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-Nu apiya ackan haccantan Ù luttaai oohhon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 dankui            
+                ✧ 3 ḫilamni      
+                                 
+> agannin dahhun
+Nu DUG agannin ḫaššaz dāḫḫun.
 
-Nu witenac DUG palhin Ù GIC hattalu harkon.
+Nu=za=kan E2 arkiwi anda ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> arkiwi paon
-Nu E2 arkiwi paon.
-Nu E2 arkiwi econ.
+Nu apiya ḫaššan Ù tešḫallin LÚ ḫalliyatallan ōḫḫun.
 
-        dankui        
-           <>   hilamni
-                        
+Nu DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
-Nu hacci pahhur Ù DUG agannic kīyantat.
-
-Nu witenac DUG palhin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> watar hacci tehhon
-Nu waatar pahheni tehhon. N=an kictanunun.
-Nu E2 arkiwi econ.
-
-        dankui        
-           <>   hilamni
-                        
-
-Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
-Nu hacci DUG agannic kittat.
-
-Nu DUG palhin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> agannin dahhon
-Nu DUG agannin haccaz dahhon.
-Nu E2 arkiwi econ.
-
-        dankui        
-           <>   hilamni
-                        
-
-Nu apiya haccan Ù techallin LÚ halliyatallan oohhon.
-
-Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 dankui            
+                ✧ 3 ḫilamni      
+                                 
 > * To the roof!
-> hilamni paon
-Nu E2 hilamni paon.
-Nu E2 hilamni econ.
+> 3 1 3 2
+3   Nu ḫilamni pāun.
+1   Nu aškan šarraḫḫun.
+3   Nu kutti pāun.
+2   Nu kuttaš ḫalḫaltomari pāun.
 
-        ickici        
-arkiwi   <>   luttiya
-        acki        
+Nu=za kuttaš ḫalḫaltomari tapušza ešun.
 
-Nu apiya ackan haccantan Ù luttaai oohhon.
+Nu apiya ḫilamnaš luttāi Ù ilan ōḫḫun.
 
-Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+Nu DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> acki paon
-Nu E2 auriya ackaz haccantaz paon.
-Nu E2 auriya econ.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+                                 
+       4 luttāi ✧                
+             1 kutti             
+> ilan dahhun
+Nu ilan dāḫḫun.
 
-        acki        
-palci   <>   kutti
-        wappi        
+Nu=za kuttaš ḫalḫaltomari tapušza ešun.
 
-Nu apiya ackan haccantan oohhon.
+Nu apiya ḫilamnaš luttāi ōḫḫun.
 
-Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+Nu ilan Ù DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> kutti paon
-Nu kutti paon.
-Nu kutti kattan econ.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+                                 
+       4 luttāi ✧                
+             1 kutti             
+> 1 4 2 2
+1   Nu kutti pāun.
+4   Nu auriya pāun.
+2   Nu aškan šarraḫḫun.
+2   Nu auriyaš iškiši pāun.
 
-        halhaltomari        
-auriya   <>           
-                        
+Nu=za=kan auriyaš iškiši anda ešun.
 
-Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+Nu ilan Ù DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> halhaltomari paon
-Nu kuttac halhaltomari paon.
-Nu kuttac halhaltomari econ.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+              2 KÚR       5 šuḫḫi
+                ✧                
+            1 ḫilamni            
+> cuhhi paun
+Nu šuḫḫi natta taruḫḫun pāun. Nu šuḫḫa parku ēšta.
 
-                        
-luttiya   <>           
-        kutti        
+> ilan katta tehhun
+Nu ilan katta tēḫḫun.
 
-Nu apiya E2 hilamnac luttaai Ù ilan oohhon.
+Nu=za=kan auriyaš iškiši anda ešun.
 
-Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+Nu apiya ilan ōḫḫun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> ilan dahhon
-Nu ilan dahhon.
-Nu kuttac halhaltomari econ.
+Nu DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
-                        
-luttiya   <>           
-        kutti        
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+              2 KÚR       5 šuḫḫi
+                ✧                
+            1 ḫilamni            
+> cuhhi paun
+Nu šuḫḫi natta taruḫḫun pāun. Nu palḫiš nakkiš ēšta.
 
-Nu apiya E2 hilamnac luttaai oohhon.
+> palhin katta tehhun
+Nu DUG palḫin katta tēḫḫun.
 
-Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+Nu=za=kan auriyaš iškiši anda ešun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> kutti paon
-Nu kutti paon.
-Nu kutti kattan econ.
+Nu apiya DUG palḫin Ù ilan ōḫḫun.
 
-        halhaltomari        
-auriya   <>           
-                        
+Nu DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
-Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+              2 KÚR       5 šuḫḫi
+                ✧                
+            1 ḫilamni            
+> cuhhi paun
+Nu šuḫḫi pāun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> auriya paon
-Nu E2 auriya paon.
-Nu E2 auriya econ.
+Nu=za=kan šuḫḫi šēr ešun.
 
-        acki        
-palci   <>   kutti
-        wappi        
+Nu DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
-Nu apiya ackan haccantan oohhon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+              2 ḫali             
+                ✧                
+6 iškiši                         
+> hali paun
+Nu karimnaš ḫali natta taruḫḫun pāun. Nu=za šaknuwanza ešun. Nu wātar natta
+ḫarkun.
 
-Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
+> 6
+6   Nu auriyaš iškiši pāun.
 
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> acki paon
-Nu E2 hilamni ackaz haccantaz paon.
-Nu E2 hilamni econ.
+Nu=za=kan auriyaš iškiši anda ešun.
 
-        ickici        
-arkiwi   <>   luttiya
-        acki        
+Nu apiya DUG palḫin Ù ilan ōḫḫun.
 
-Nu apiya ackan haccantan Ù luttaai oohhon.
+Nu DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
-Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> ickici paon
-Nu E2 auriyac ickici paon.
-Nu E2 auriyac ickici econ.
-
-        Hattuci cuhhi
-           <>           
-        hilamni        
-
-Nu ilan Ù DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> cuhhi paon
-Nu cuhhi ūl paon. Nu cuhha parku ēcta.
-> ilan katta tehhon
-Nu ilan katta tehhon.
-Nu E2 auriyac ickici econ.
-
-        Hattuci cuhhi
-           <>           
-        hilamni        
-
-Nu apiya ilan oohhon.
-
-Nu DUG agannin Ù DUG palhin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> cuhhi paon
-Nu cuhhi ūl paon. Nu palhic nakkic ēcta.
-> palhin katta tehhon
-Nu DUG palhin katta tehhon.
-Nu E2 auriyac ickici econ.
-
-        Hattuci cuhhi
-           <>           
-        hilamni        
-
-Nu apiya DUG palhin Ù ilan oohhon.
-
-Nu DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> cuhhi paon
-Nu cuhhi paon.
-Nu cuhhi econ.
-
-        hali        
-           <>           
-ickici                
-
-Nu DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> hali paon
-Nu karimnac hali ūl paon. Nu caknuwanza econ. Nu waatar uul harkon.
-> ickici paon
-Nu E2 auriyac ickici paon.
-Nu E2 auriyac ickici econ.
-
-        Hattuci cuhhi
-           <>           
-        hilamni        
-
-Nu apiya DUG palhin Ù ilan oohhon.
-
-Nu DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> hattuci paon
-Nu URU Hattuci ūl paon. Nu Hattucac ina KUR LU2 KUR2 ēcta.
-> hilamni paon
-Nu E2 hilamni paon.
-Nu E2 hilamni econ.
-
-        ickici        
-arkiwi   <>   luttiya
-        acki        
-
-Nu apiya ackan haccantan Ù luttaai oohhon.
-
-Nu DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> acki paon
-Nu E2 auriya ackaz haccantaz paon.
-Nu E2 auriya econ.
-
-        acki        
-palci   <>   kutti
-        wappi        
-
-Nu apiya ackan haccantan oohhon.
-
-Nu DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> wappi paon
-Nu wappi paon.
-Nu wappi econ.
-
-        auriya        
-           <>           
-                        
-
-Nu apiya hapan oohhon.
-
-Nu DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> watar dahhon
-Nu witenac DUG agannin witenaz cunnahon.
-Nu wappi econ.
-
-        auriya        
-           <>           
-                        
-
-Nu apiya hapan oohhon.
-
-Nu witenac DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> auriya paon
-Nu E2 auriya paon.
-Nu E2 auriya econ.
-
-        acki        
-palci   <>   kutti
-        wappi        
-
-Nu apiya ackan haccantan oohhon.
-
-Nu witenac DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> acki paon
-Nu E2 hilamni ackaz haccantaz paon.
-Nu E2 hilamni econ.
-
-        ickici        
-arkiwi   <>   luttiya
-        acki        
-
-Nu apiya ackan haccantan Ù luttaai oohhon.
-
-Nu witenac DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> ickici paon
-Nu E2 auriyac ickici paon.
-Nu E2 auriyac ickici econ.
-
-        Hattuci cuhhi
-           <>           
-        hilamni        
-
-Nu apiya DUG palhin Ù ilan oohhon.
-
-Nu witenac DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> cuhhi paon
-Nu cuhhi paon.
-Nu cuhhi econ.
-
-        hali        
-           <>           
-ickici                
-
-Nu witenac DUG agannin Ù GIC hattalu harkon.
-
-Verbs: ohhon paon dahhon katta-tehhon tehhon
-> hali paon
-Nu karimnac hali paon.
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+              2 KÚR       5 šuḫḫi
+                ✧                
+            1 ḫilamni            
+> 2
+2   Nu ana URU LÚ KÚR natta taruḫḫun pāun.
+
+> 1 1 1
+1   Nu ḫilamni pāun.
+1   Nu aškan šarraḫḫun.
+1   Nu wappi pāun.
+
+Nu=za wappi ešun.
+
+Nu apiya ḫapan ōḫḫun.
+
+Nu DUG agannin Ù GIŠ ḫattalu ḫarkun.
+
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 auriya            
+                ✧                
+                                 
+> watar dahhun
+Nu wātar witenaš DUG aganniya tēḫḫun.
+
+Nu=za wappi ešun.
+
+Nu apiya ḫapan ōḫḫun.
+
+Nu witenaš DUG agannin Ù GIŠ ḫattalu ḫarkun.
+
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+             2 auriya            
+                ✧                
+                                 
+> 2 2 2 5
+2   Nu auriya pāun.
+2   Nu aškan šarraḫḫun.
+2   Nu auriyaš iškiši pāun.
+5   Nu šuḫḫi pāun.
+
+Nu=za=kan šuḫḫi šēr ešun.
+
+Nu witenaš DUG agannin Ù GIŠ ḫattalu ḫarkun.
+
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
+              2 ḫali             
+                ✧                
+6 iškiši                         
+> hali paun
+Nu karimnaš ḫali pāun.
 The tablet breaks off here, as the soldier finally enters the temple precinct.
 
      *** To be continued... ***
 
-Program terminated.
-You can still enter debugging commands such as @help or @quit, as well as
-arbitrary queries, including (restart) and (undo).
-You may also press ^D to quit the debugger.
-suspended> 

@@ -76,7 +76,9 @@
 	~($Room has a light source)
 	dankui %% "Dark"
 (short name (logogram $Room)) (name $Room in #bare)
-(short name (object $Room)) (name $Room in #dative)
+(short name (room $Room)) (name $Room in #dative)
+(short name (door $Door)) (name $Door in #accusative)
+(short name $Obj) $Obj %% Don't crash
 
 #darkness
 (add * to scope)
@@ -90,9 +92,12 @@
 (describe environment)
 	
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
-	(if) (interpreter supports status bar) (then)
-		(compass rose)
-	(endif)
+	(select) %% Nothing until the first tutorial has passed
+	(or)
+		(if) (interpreter supports status bar) (then)
+			(compass rose)
+		(endif)
+	(stopping)
 	
 	%% First paragraph: "I was at [location]."
 	(current room $Loc)
@@ -121,7 +126,7 @@
 		*($Container is one of $ContainerList)
 		($Container wants relation $Rel)
 		(collect $Obj)
-			*($Obj is #in $Container)
+			*($Obj is $ $Container)
 		(into $ContentsList)
 		(line) Nu
 		(#nominative $ContentsList)
@@ -154,19 +159,25 @@
 		waššiyanun.
 	(endif)
 	
-	%% Final paragraph: verbs. TODO how to phrase this?
-	(div @error) {
-		(par) Verbs:
-		(collect $Verb)
-			*(verb $Verb unlocked)
-		(into $VerbList)
-		(listing $VerbList {(name $_)} @, 0)
-	}
+	%% Final paragraph: verbs
+	(select) %% Nothing until the first tutorial has passed
+	(or)
+		(div @error) {
+			(par) Verbs:
+			(collect $Verb)
+				*(verb $Verb unlocked)
+			(into $VerbList)
+			(listing $VerbList {(name $_)} @, 0)
+		}
+	(stopping)
 	
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
-	(if) ~(interpreter supports status bar) (then)
-		(compass rose)
-	(endif)
+	(select)
+	(or) %% Nothing until the first tutorial has passed
+		(if) ~(interpreter supports status bar) (then)
+			(compass rose)
+		(endif)
+	(stopping)
 
 (interface (verb $<Object)) %% Not currently used
 
@@ -240,7 +251,7 @@
 				(space 10)
 				(space 1)
 				(print name of $North number 2 with alignment @u in 10 characters)
-				(space 1)
+				(space 2)
 				(print name of $Up number 5 with alignment @r in 10 characters)
 			(endif)
 		}
@@ -256,7 +267,7 @@
 				(space 9)
 			(else)
 				(print name of $Down number 6 with alignment @l in 10 characters)
-				(space 1)
+				(space 2)
 				(print name of $South number 1 with alignment @d in 10 characters)
 				(space 1)
 				(space 10)
@@ -327,8 +338,7 @@
 	~($Player has a light source)
 	~($Dest has a light source)
 	Nu pēdan kuit dankui ēšta, %% "Because the place was dark..."
-	(describe raw failed action [[go $Dest] $Details]) %% "raw" = no connective, caps, or punctuation
-	.
+	parā natta taruḫḫun pāun. %% "...I was not able to go onward."
 
 ($Parent has a light source)
 	*($Obj has ancestor $Parent)
@@ -458,11 +468,11 @@
 	(number $Num means direction $Dir)
 	(current room $Room)
 	(if) (from $Room go $Dir to $Next) (then)
-		$Num (space 3)
+		(line) $Num (space 3)
 		(if) (room $Next) (then)
-			(try [[go $Next] pāun [] [] $Next []])
+			(try [[go $Next] [[$Num] pāun [] [] $Next []]])
 		(elseif) (door $Next) (then)
-			(try [[cross $Next] šarraḫḫun [] $Next [] []])
+			(try [[cross $Next] [[$Num] šarraḫḫun [] $Next [] []]])
 		(else)
 			(div @realerror) { ERROR: $Dir from $Room is $Next which is neither room nor door! }
 			(stop)
@@ -492,7 +502,7 @@
 (translate [$ dāḫḫun $ $Acc $ $Abl] into [take $Acc from $Abl])
 
 (instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
-	($Obj is #in $Holder)
+	($Obj is $ $Holder)
 	~(room $Holder)
 	~(current player $Holder)
 	(action log {Redirecting TAKE $Obj to TAKE $Obj FROM $Holder})
@@ -552,7 +562,7 @@
 
 (verb @put/@tēḫḫun/@teḫḫun means @tēḫḫun)
 (@tēḫḫun wants cases [#accusative #adverb])
-(translate [$ tēḫḫun katta $Acc | $] into [drop $Acc])
+(translate [$ tēḫḫun $Advs $Acc | $] into [drop $Acc]) (@katta is one of $Advs)
 
 (refuse [[drop $Obj] $Details])
 	(current player $Player)
@@ -583,11 +593,19 @@
 %% (verb $ means $) already done above
 (@tēḫḫun wants cases [#accusative #dative])
 (@tēḫḫun wants cases [#adverb #accusative #dative]) %% Optional preverb (currently ignored)
-(translate [$ tēḫḫun $ $Acc $Dat | $] into [put $Acc $Dat])
+(translate [$ tēḫḫun $ $Acc (object $Dat) | $] into [put $Acc $Dat])
 
 %% TODO: consider the preverb/postposition
 
-(refuse [[put $Obj $Dest] $Details])
+%% We also handle tēḫḫun without dat or adv here, but only to give an error message
+(@tēḫḫun wants cases [#accusative])
+(translate [$ tēḫḫun [] $Acc [] | $] into [put $Acc])
+(refuse [[put $] | $])
+	(div @error) {
+		This sentence seems to be incomplete. The verb (span @hittite) tēḫḫun should include a destination: either a noun in the dative, or an adverb like (span @hittite) katta "down" \( on the ground \) .
+	}
+
+(refuse [[put $Obj $Dest] | $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
 	(describe failed action [[put $Obj $Dest] $Details])
@@ -598,12 +616,12 @@
 	(endif)
 	natta ḫarkun. %% "I did not hold it."
 
-(prevent [[put $Obj $Dest] $Details])
+(prevent [[put $Obj $Dest] | $Details])
 	~(holder $Dest)
 	(describe failed action [[put $Obj $Dest] $Details])
 	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
 
-(perform [[put $Obj $Dest] $])
+(perform [[put $Obj $Dest] | $])
 	(now) ($Obj is #in $Dest) %% TODO always #in?
 	(now) (update needed)
 
