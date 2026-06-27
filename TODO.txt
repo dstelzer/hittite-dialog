@@ -1,0 +1,10 @@
+paragraph break after metacommand
+redisplay status bar after metacommand
+cuneiform in compass rose is too big
+arrangement of status bar is not ideal
+title is in italics in translit
+dictionary entries always display phonemic not bound forms
+overall settings layout
+metacommand links
+automap in left panel
+enter button is one line too low
