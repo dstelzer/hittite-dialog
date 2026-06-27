@@ -1,29 +1,48 @@
+%% Metadata
+
+(story title) Ḫattušumna Laḫḫa
+(story ifid) 58715A25-1E91-4BAC-ACED-F1E534F9C33D
+(story author) Daniel Stelzer, Tim Leonard, and Daniel Gaskell
+
 %% Style definitions and related predicates go here
+%% See also platform_*.dg
 
 %% Akkadograms
 (style class @akk)
 	font-style: italic;
+	text-transform: uppercase;
 
-%% Tutorial
-(style class @tutorial)
-	color: cyan;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	language: en;
+%% Styling for determiners needs to be handled in the interpreter CSS, since it needs to be superscript only in transcription, not in cuneiform
+%% So this is an empty style class
+(style class @dtm)
+
+(dtm $Closure) %% Make sure of no space on the right
+	(span @dtm) { (query $Closure) (no space) } (no space)
+(dtm2 $Closure) %% For determiners on the right side
+	(no space) (span @dtm) { (no space) (query $Closure) }
 
 %% "Errors" in the player's input
 (style class @error)
-	color: yellow;
-	language: en;
+	data-language: en;
+
+%% Meta messages
+(style class @meta)
+	data-language: en;
+	font-family: sans-serif;
 
 %% Actual errors in the game's programming
 (style class @realerror)
 	color: red;
 	font-weight: bold;
-	language: en;
+	data-language: en;
 
-(style class @status)
-	background-color: black;
+(style class @hittite)
+	data-language: ht;
+
+%% Rarely but occasionally needed
+(style class @bold)
+	font-weight: bold;
+	aria-role: strong;
 
 %% Emphasis
 (style class @italic)

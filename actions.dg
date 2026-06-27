@@ -14,12 +14,12 @@
 
 (update description)
 	(update environment around player)
-	%% Do this in a status area if at all possible, either inline or top
-	(if) (interpreter supports inline status bar) (then)
-		(inline status bar @status) (describe environment)
-	(elseif) (interpreter supports status bar) ($Lines lines needed for status bar) (then)
+	%% Do this in a status area if at all possible, either top or inline
+	(if) (interpreter supports status bar) ($Lines lines needed for status bar) (then)
 		(status bar @status with height $Lines) (describe environment)
-	(else)
+	(elseif) (interpreter supports inline status bar) (then)
+		(inline status bar @status) (describe environment)
+	(else) %% Otherwise fall back to a div
 		(div @status) (describe environment)
 	(endif)
 
@@ -162,12 +162,12 @@
 	%% Final paragraph: verbs
 	(select) %% Nothing until the first tutorial has passed
 	(or)
-		(div @error) {
+		(div @verbs) {
 			(par) Verbs:
 			(collect $Verb)
 				*(verb $Verb unlocked)
 			(into $VerbList)
-			(listing $VerbList {(name $_)} @, 0)
+			(listing $VerbList {(hittite name $_)} @, 0)
 		}
 	(stopping)
 	
@@ -178,6 +178,13 @@
 			(compass rose)
 		(endif)
 	(stopping)
+
+(hittite name $Obj) (span @hittite) (name $Obj) %% TODO workaround for Dialog bug
+(style class @verbs)
+	width: 100\%;
+	text-align: center;
+	font-style: italic;
+	data-language: en;
 
 (interface (verb $<Object)) %% Not currently used
 
@@ -229,7 +236,7 @@
 	%% Then, do the actual printing
 	%% This should only be done in a fixed-width div or span, for obvious reasons
 	(space $Left)
-	(if) (direction numbers enabled) (then) $N (space 1) (endif)
+	(if) (direction numbers enabled) (then) (link) $N (space 1) (endif)
 	(short name $Obj)
 	(space $Right)
 

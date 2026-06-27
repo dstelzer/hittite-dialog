@@ -42,7 +42,8 @@
 
 (replace letter @c with @š)
 (replace letter @h with @ḫ)
-(replace letter @j with @ŋ)
+(replace letter @j with @ŋ) %% Does this ever come up?
+(replace letter @⸗ with @=) %% Note that either both of these must be word separators, or neither must be!
 (replace letter $X with $X) %% Everything else gets passed through
 
 %% Likewise this one, which is even worse optimization-wise
@@ -65,14 +66,14 @@
 	*(optionally replace $Head with $NewHead)
 	*(do optional letter replacements on $Tail into $NewTail)
 
-(optionally replace $X with $X) %% "No change" is always valid
+(optionally replace $X with $X) %% "No change" is always valid and should be the first default
 (optionally replace @s with @š) %% Make this optional since the distinction could possibly matter: SU 'entrails' vs ŠU 'hand'. But proper S is rare.
-(optionally replace @a with @ā)
+(optionally replace @a with @ā) %% Likewise this could matter but usually doesn't
 (optionally replace @e with @ē)
 (optionally replace @i with @ī)
 (optionally replace @o with @ō)
 (optionally replace @u with @ū)
-(optionally replace @u with @o)
+(optionally replace @u with @o) %% Since the output system replaces our phonemic transcription with standard bound transcription, people will be seeing U in the output, so they're likely to type it too
 (optionally replace @u with @ō)
 
 %% Sentence connectives can be discarded
@@ -338,21 +339,21 @@
 %% Clitics
 (convert clitic @mu into noun phrase [#accusative (first person singular $)])
 (convert clitic @mu into noun phrase [#dative (first person singular $)])
-(convert clitic @nac into noun phrase [#accusative (first person plural $)])
-(convert clitic @nac into noun phrase [#dative (first person plural $)])
+(convert clitic @naš into noun phrase [#accusative (first person plural $)])
+(convert clitic @naš into noun phrase [#dative (first person plural $)])
 
 (convert clitic @ta/@du into noun phrase [#accusative (second person singular $)])
 (convert clitic @ta/@du into noun phrase [#dative (second person singular $)])
-(convert clitic @cmac into noun phrase [#accusative (second person plural $)])
-(convert clitic @cmac into noun phrase [#dative (second person plural $)])
+(convert clitic @šmaš into noun phrase [#accusative (second person plural $)])
+(convert clitic @šmaš into noun phrase [#dative (second person plural $)])
 
-(convert clitic @cmac into noun phrase [#dative (third person plural $)])
-(convert clitic @ci into noun phrase [#dative (third person singular $)])
+(convert clitic @šmaš into noun phrase [#dative (third person plural $)])
+(convert clitic @ši into noun phrase [#dative (third person singular $)])
 (convert clitic @an into noun phrase [#accusative (third person singular common $)])
 (convert clitic @at into noun phrase [#accusative (third person singular neuter $)])
 (convert clitic @at into noun phrase [#accusative (third person plural neuter $)])
 (convert clitic @e/@i into noun phrase [#accusative (third person plural neuter $)])
-(convert clitic @uc/@ac into noun phrase [#accusative (third person plural common $)])
+(convert clitic @uš/@aš into noun phrase [#accusative (third person plural common $)])
 
 (convert clitic @z/@za into noun phrase [#accusative (reflexive $)])
 (convert clitic @z/@za into noun phrase [#dative (reflexive $)])
@@ -371,7 +372,8 @@
 (find first broken clitic from $Clitics and report it)
 	*($This is one of $Clitics)
 	~(convert clitic $This into noun phrase $)
-	(div @error) { The clitic $This is not found elsewhere on the tablet. Its interpretation is unclear. } (stop)
+	The clitic $This is not found elsewhere on the tablet. Its interpretation is unclear.
+	(stop)
 
 (interface (deduplicate $<Input into $>Output))
 %% Remove duplicates in case they appear
@@ -491,12 +493,10 @@
 (more than one [$ $ | $]) %% Succeeds if the argument is a list with more than one element
 
 (show parser errors [] for action $)
-	(div @error) { ERROR: there's an error, but no error code was returned! }
+	(div @realerror) { ERROR: there's an error, but no error code was returned! }
 (show parser errors [$Single] for action [$Raw | $Action])
-	(div @error) {
-		This sentence, (print quoted $Raw), is difficult to interpret.
-		(uppercase) (show parser error $Single for action [$Raw | $Action]).
-	}
+	This sentence, (print quoted $Raw), is difficult to interpret.
+	(uppercase) (show parser error $Single for action [$Raw | $Action]).
 (show parser errors [$A $B] for action [$Raw $Verb | $]) %% Exactly two errors might be a noun in the wrong case
 	{
 		($A is one of [12 13 14])
@@ -509,14 +509,10 @@
 		($A modulo 10 into $Excess)
 		($B modulo 10 into $Missing)
 	}
-	(div @error) {
-		This sentence, (print quoted $Raw), is likely a scribal error: the verb $Verb expects a noun in the (case of error $Missing), not the (case of error $Excess) .
-	}
+	This sentence, (print quoted $Raw), is likely a scribal error: the verb $Verb expects a noun in the (case of error $Missing), not the (case of error $Excess) .
 (show parser errors $List for action [$Raw | $Action])
-	(div @error) {
-		This sentence, $Raw, is difficult to interpret, for multiple reasons.
-		(uppercase) (listing $List {(show parser error $_ for action [$Raw | $Action])}).
-	}
+	This sentence, $Raw, is difficult to interpret, for multiple reasons.
+	(uppercase) (listing $List {(show parser error $_ for action [$Raw | $Action])}).
 
 (case of error 2) accusative
 (case of error 3) dative
@@ -699,7 +695,7 @@
 			(then)
 			
 				(parser log { Reporting errors: Parsed into action $Action, showing errors for that } )
-				(show parser errors for $Action)
+				(div @error) (show parser errors for $Action)
 				(stop)
 			
 			(elseif) (empty $Clitics) (then)
@@ -708,13 +704,13 @@
 			
 			(else)
 				(parser log { Reporting errors: Reporting first broken clitic from $Clitics } )
-				(find first broken clitic from $Clitics and report it)
+				(div @error) (find first broken clitic from $Clitics and report it)
 				(stop)
 			(endif)
 		
 		(else)
 			(parser log { Reporting errors: Reporting first broken noun from $Rest } )
-			(find first broken noun from $Rest and report it)
+			(div @error) (find first broken noun from $Rest and report it)
 			(stop)
 		(endif)
 	

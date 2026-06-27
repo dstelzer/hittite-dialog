@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>&Aring;-machine Web Interpreter: Hittite Edition</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="resources/jquery.js"></script>
+	<script src="resources/aaengine.js"></script>
+	<script src="resources/frontend.js"></script>
+	<script src="resources/story.js"></script>
+	<link rel="stylesheet" type="text/css" href="resources/style.css" />
+	
+	<script language="javascript" src="interface/hzl.js"></script>
+	<script language="javascript" src="interface/signbreak.js"></script>
+	<script language="javascript" src="interface/cuneiform.js"></script>
+	<link rel="stylesheet" href="interface/aa_cuneiform.css" />
+	<script language="javascript" src="interface/dictionary.js"></script>
+	<script language="javascript" src="interface/dictshow.js"></script>
+	
+	<script>
+		$(function(){
+			run_game(aastory, {
+				aaLogServerPath: undefined,
+				aaLogTag: undefined,
+			});
+			aastory = null;
+		});
+	</script>
+</head>
+<body> <!-- Where "night" and "enlarge" classes attach -->
+<div id="aabody1"> <!-- Where (body style $) attaches, part 1 -->
+	<div id="aadefaults"> <!-- Where default values of CSS properties are evaluated -->
+		<div id="aabody2"> <!-- Where (body style $) attaches, part 2 -->
+			<div id="aadefaults2"> <!-- Where secondary values of CSS properties are evaluated -->
+				<div id="aabody3"> <!-- Third verse, same as the first two -->
+					
+					<!-- Hittite presentation settings -->
+					<div class="header">
+						Hittite shown as:
+						<select class="settings" id="modesel">
+							<option value="hidebound" selected>Signs</option>
+							<option value="showbound">Bound transcription</option>
+						</select>
+						&nbsp;
+						Cuneiform font:
+						<select class="settings" id="fontsel">
+							<option value="font-ink" selected>Ink</option>
+							<option value="font-publish">Published</option>
+							<option value="font-write">Handwritten</option>
+							<option value="font-linear">Linear</option>
+						</select>
+						&nbsp;
+						Sign size:
+						<select class="settings" id="sizesel">
+							<option value="size-small">Small</option>
+							<option value="size-medium" selected>Medium</option>
+							<option value="size-large">Large</option>
+						</select>
+					</div>
+					
+					<div id="aacontainer"> <!-- Central (width-limited) column -->
+						<div id="maincolumn">
+							<div id="aaouterstatus"> <!-- Top bar -->
+								<div id="aamenubutton"> <!-- Menu bottom (top right) -->
+									<div id="aamenulines"></div> <!-- Graphic -->
+									<div id="aamenu"> <!-- The menu itself -->
+										<div id="aamenulist"> <!-- List of options and links -->
+											<div id="aacheckboxes"></div> <!-- Filled in by JS -->
+											<hr /> <!-- Onclick for all of these is added by JS -->
+											<div id="aaviewscript" class="aamenuoption">View transcript</div>
+											<div id="aasavescript" class="aamenuoption">Save transcript</div>
+											<div id="aarestart" class="aamenuoption">Restart game</div>
+											<div id="aasavestory" class="aamenuoption">Download story file</div>
+											<hr />
+											<div id="aaaboutopen" class="aamenuoption">About</div>
+										</div>
+									</div>
+								</div>
+								<div id="aastatus"></div> <!-- Filled in by game -->
+							</div>
+							<div id="aastatusborder"></div> <!-- Bar between status and game -->
+							<div id="aaaboutouter"> <!-- "About" overlay -->
+								<div id="aaaboutinner">
+									<div id="aaaboutmeta" class="aaaboutline"></div> <!-- Filled in by JS -->
+									<hr />
+									<div class="aaaboutline">
+										<a id="aaaboutlink" target="_blank" href="https://github.com/Dialog-IF/aamachine/">&Aring;-machine web interpreter v1.0.3</a>
+									</div>
+									<hr />
+									<div class="aaaboutline">
+										<div id="aaaboutclose" class="aailink">Close</div>
+									</div>
+								</div>
+							</div>
+							<form id="aaform" autocomplete="off"> <!-- To handle keypresses etc -->
+								<div id="aamain" aria-live="polite"> <!-- Main body of the game -->
+									<div id="aainputblock">
+										<input id="aainput" type="text" value="" autocomplete="off" spellcheck="false" autocorrect="off" aria-live="off" />
+										<input id="aasubmit" type="submit" value="↩" />
+									</div>
+								</div>
+								<div id="aascriptouter"> <!-- Transcript -->
+									<textarea id="aascriptinner" readonly></textarea>
+									<div id="aascriptclose">Close transcript</div>
+								</div>
+							</form>
+							<div id="aaerrorouter"> <!-- Error messages -->
+								<div id="aaerrorinner">
+									<div id="aaerrorlog"></div> <!-- Filled with .aaerrorline divs when an error happens -->
+									<div class="aaaboutline">
+										<div id="aaerrorclose" class="aailink">Close</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Dictionary column on the right -->
+						<div id="dictionary">
+							<i>Dictionary entries will appear here.</i>
+						</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

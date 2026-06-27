@@ -397,7 +397,7 @@
 (tutorial)
 	~(given first message)
 	(div @tutorial) {
-		Welcome to TODO GAME NAME! This game is presented entirely in the ancient Hittite language, which is probably a bit intimidating at first. But don't panic; just take it slow. (par)
+		Welcome to (span @bold) (span @hittite) { ḪATTUŠUMNA LAḪḪA }! This game is presented entirely in the ancient Hittite language, which is probably a bit intimidating at first. But don't panic; just take it slow. (par)
 		Clicking a word will show you its definition. See if you can use that to figure out the meaning of the two sentences at the top left. When you think you understand them, click next to the (space) > symbol and press ENTER.
 	}
 	(now) (given first message)
@@ -443,7 +443,8 @@
 
 (on every tick) %% Make sure this comes BEFORE redrawing the status bar
 	~(direction numbers enabled)
-	(#bolt is handled)
+	(current room #watchtower)
+	(#ladder is handled)
 	(now) (direction numbers enabled)
 
 (tutorial)
