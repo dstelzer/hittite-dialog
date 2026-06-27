@@ -44,6 +44,13 @@
 	font-weight: bold;
 	aria-role: strong;
 
+%% Title
+(style class @title)
+	data-language: ht;
+	text-transform: uppercase;
+	font-weight: bold;
+	aria-role: strong;
+
 %% Emphasis
 (style class @italic)
 	font-style: italic;

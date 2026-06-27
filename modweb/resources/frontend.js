@@ -1452,6 +1452,10 @@ window.run_game = function(story64, options) {
 	$(window).resize(function() {
 		io.adjust_size();
 	});
+	// Because the Hittite style changers can affect the size of the text
+	$(document).on("change", ".settings", function() {
+		io.adjust_size();
+	});
 
 	update_globalstyle();
 

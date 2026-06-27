@@ -397,8 +397,8 @@
 (tutorial)
 	~(given first message)
 	(div @tutorial) {
-		Welcome to (span @bold) (span @hittite) { ḪATTUŠUMNA LAḪḪA }! This game is presented entirely in the ancient Hittite language, which is probably a bit intimidating at first. But don't panic; just take it slow. (par)
-		Clicking a word will show you its definition. See if you can use that to figure out the meaning of the two sentences at the top left. When you think you understand them, click next to the (space) > symbol and press ENTER.
+		Welcome to (span @title) { Ḫattušumna Laḫḫa }! This game is presented entirely in the ancient Hittite language, which is probably a bit intimidating at first. But don't panic; just take it slow. (par)
+		Clicking a word will show you its definition. See if you can use that to figure out the meaning of the two sentences at the top left. When you think you understand them, press ↩ to continue.
 	}
 	(now) (given first message)
 	(now) (update needed) %% Redraw the status bar to include verbs next time

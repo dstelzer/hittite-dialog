@@ -19,7 +19,7 @@ hittite.aastory: $(FILES) platform_web.dg
 web: hittite.aastory
 	rm -rf web
 	aambundle -t web hittite.aastory -o web
-	cp -r interface web/
+	cp -r ishamai web/
 	rm web/play.html
 	cp -r modweb/* web/
 
