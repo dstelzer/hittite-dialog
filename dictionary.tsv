@@ -19,7 +19,7 @@ natta	natta	Not
 =an	=an =at	It	"Common gender" =an "Neuter gender" =at
 mekki	mekki	Very
 nakkiš	nakkiš nakki	Heavy	"Common gender" nakkiš "Neuter gender" nakki
-katta	katta	Down (as in katta tēḫḫon, "put (something) down")
+katta	katta	Down (as in katta tēḫḫun, "I put (something) down")
 tēḫḫun	tēḫḫun	I put (something: accusative; somewhere: dative)
 anda	anda	In(side)
 šēr	šēr	On (top of)
@@ -50,7 +50,7 @@ lukket	lukket	It ignited, caught fire
 arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer	NOUN arkiwiš arkiwaš arkiwi arkiwin arkiwaz
 ḫašša	ḫaššaš ḫašši ḫaššan ḫaššaz ḫašša	Hearth	NOUN ḫaššaš ḫaššaš ḫašši ḫaššan ḫaššaz
 paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire	NOUN paḫḫur paḫḫuenaš paḫḫueni paḫḫur paḫḫuenaz
-ayyanza	ayyanza	Hot
+ayyanza	ayyanza/ānza	Hot
 DUG	DUG	[Vessel]	DTM
 aganni	aganniš aganniyaš aganniya agannin aganniyaz aganni	Cup	NOUN aganniš aganniyaš aganniya agannin aganniyaz
 LÚ	LÚ	[Man]	DTM
@@ -74,3 +74,6 @@ kuenun	kuenun	I slew (someone: accusative; with something: ablative)
 parā	parā	Onward, forth, forward
 laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN laḫḫaš laḫḫaš laḫḫi laḫḫan laḫḫaz
 Ḫattušumna	Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz Ḫattušumna	Hittite (literally, "person/thing from Hattusa")	NOUN Ḫattušumnaš Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz
+<i>ANA</i>	ANA	To, toward (shorthand for the dative case)
+<i>ŠA</i>	ŠA	Of (shorthand for the genitive case)
+<i>IŠTU</i>	IŠTU	From (shorthand for the ablative case)

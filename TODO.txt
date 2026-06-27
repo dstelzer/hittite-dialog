@@ -8,3 +8,6 @@ overall settings layout
 metacommand links
 automap in left panel
 enter button is one line too low
+lack of determinatives?
+lack of proper intro?
+links in Hittite only work in signs, not bound transcription

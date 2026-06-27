@@ -1,8 +1,9 @@
 %% Metadata
 
-(story title) Ḫattušumna Laḫḫa
+(story title) Ḫattušumna Laḫḫa \( Hittite Adventure \)
 (story ifid) 58715A25-1E91-4BAC-ACED-F1E534F9C33D
 (story author) Daniel Stelzer, Tim Leonard, and Daniel Gaskell
+(story release 0)
 
 %% Style definitions and related predicates go here
 %% See also platform_*.dg
@@ -16,8 +17,11 @@
 %% So this is an empty style class
 (style class @dtm)
 
+%% TODO keep this from interfering with parsing
+(interface (dtm $<Closure))
 (dtm $Closure) %% Make sure of no space on the right
 	(span @dtm) { (query $Closure) (no space) } (no space)
+(interface (dtm2 $<Closure))
 (dtm2 $Closure) %% For determiners on the right side
 	(no space) (span @dtm) { (no space) (query $Closure) }
 

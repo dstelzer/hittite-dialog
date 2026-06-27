@@ -1099,11 +1099,11 @@ window.run_game = function(story64, options) {
 				}
 			}
 			this.ensure_par();
-			this.adjust_size();
 			
 			// NEW for cuneiform
 			cuneiform.process_paragraphs();
 			
+			this.adjust_size();
 			this.current.appendChild(this.aainputblock);
 			$(this.aainput).val("");
 			this.protected_inp = "";
@@ -1297,10 +1297,11 @@ window.run_game = function(story64, options) {
 	$("#aamain").on("click", function() {
 		var inp;
 		document.getElementById("aamenu").style.display = "none";
-		if(!document.getSelection().toString()) {
-			inp = document.getElementById("aainput");
-			if(inp) inp.focus();
-		}
+// TODO: this interferes with the dictionary lookup
+//		if(!document.getSelection().toString()) {
+//			inp = document.getElementById("aainput");
+//			if(inp) inp.focus();
+//		}
 	});
 
 	function update_globalstyle() {

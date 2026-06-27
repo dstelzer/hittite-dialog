@@ -408,7 +408,7 @@
 	(div @tutorial) {
 		You probably came up with something like "I was at the riverbank. I saw a river there." Most Hittite sentences start with a meaningless "connective" word, then have a series of nouns, and finish off with a verb. The (span @italic) case of those nouns indicates their purpose: a "dative" noun like (span @hittite) wappi indicates a location or destination, while an "accusative" noun like (span @hittite) ḫapan indicates the object of the verb.
 		(if) (#watchtower is unvisited) (then)
-			(par) Now it's time to construct a sentence of your own. The compass rose at the top right indicates nearby locations, and the "verbs" bar suggests some relevant verbs. Try to use those to move to a new location.
+			(par) Now it's time to construct a sentence of your own. The compass rose at the top right indicates nearby locations, and the "verbs" bar suggests some relevant verbs. Double-click any of these words to insert them into your sentence; see if you can use them to move to a new location.
 			(now) (prompted movement specifically)
 		(endif)
 	}
@@ -421,7 +421,7 @@
 		(if) (prompted movement specifically) (then)
 			There we go!
 		(endif)
-		You'll encounter many more verbs and nouns as you go along, but all the relevant ones will be shown at the top of the screen: what you can see and where you can go. Double-click any of these words to insert them into your sentence. \( You can also leave off the sentence connectives if you want. \)
+		You'll encounter many more verbs and nouns as you go along, but all the relevant ones will be shown at the top of the screen: what you can see and where you can go. \( You can also leave off the sentence connectives if you want. \)
 	}
 	(now) (taught objects)
 
@@ -429,7 +429,7 @@
 	~(taught determinatives)
 	(#gatehouse is visited)
 	(div @tutorial) {
-		Hittite nouns were sometimes written with a special sign in front, called a "determinative". These weren't pronounced, but indicated something about the noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example, marks that something is made of wood. TODO they will eventually be superscript but that's still a work in progress
+		Hittite nouns were sometimes written with a special sign in front, called a "determinative". These weren't pronounced, but indicated something about the noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example, marks that something is made of wood.
 	}
 	(now) (taught determinatives)
 

@@ -884,8 +884,8 @@
 
 (name (logogram $Obj) in #nominative/#accusative) (name $Obj in #bare)
 (name (logogram $Obj) in #dative) (span @akk) ana (name $Obj in #bare)
-(name (logogram $Obj) in #genitive) (span @akk) ca (name $Obj in #bare)
-(name (logogram $Obj) in #ablative) (span @akk) ictu (name $Obj in #bare)
+(name (logogram $Obj) in #genitive) (span @akk) ša (name $Obj in #bare)
+(name (logogram $Obj) in #ablative) (span @akk) ištu (name $Obj in #bare)
 
 (interface ($<Case $<Obj))
 ($Case $Obj) %% Adds modifiers as needed; these can be objects, dict words, or closures

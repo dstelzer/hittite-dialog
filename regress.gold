@@ -2,13 +2,13 @@ Nu=za wappi ešun.
 
 Nu apiya ḫapan ōḫḫun.
 
-Welcome to TODO GAME NAME! This game is presented entirely in the ancient
+Welcome to Ḫattušumna Laḫḫa! This game is presented entirely in the ancient
 Hittite language, which is probably a bit intimidating at first. But don't
 panic; just take it slow.
 
 Clicking a word will show you its definition. See if you can use that to figure
 out the meaning of the two sentences at the top left. When you think you
-understand them, click next to the > symbol and press ENTER.
+understand them, press ↩ to continue.
 
 > 
 Nu=za wappi ešun.
@@ -29,7 +29,8 @@ verb.
 
 Now it's time to construct a sentence of your own. The compass rose at the top
 right indicates nearby locations, and the "verbs" bar suggests some relevant
-verbs. Try to use those to move to a new location.
+verbs. Double-click any of these words to insert them into your sentence; see
+if you can use them to move to a new location.
 
 > * Starting out
 > nu auriya paun
@@ -46,8 +47,8 @@ Verbs: ōḫḫun, pāun, šarraḫḫun
 
 There we go! You'll encounter many more verbs and nouns as you go along, but
 all the relevant ones will be shown at the top of the screen: what you can see
-and where you can go. Double-click any of these words to insert them into your
-sentence. (You can also leave off the sentence connectives if you want.)
+and where you can go. (You can also leave off the sentence connectives if you
+want.)
 
 > acki paun
 This line is likely a scribal error. The verb pāun "go" is generally used with
@@ -97,9 +98,21 @@ Nu apiya aškan ḫattalwantan ōḫḫun.
 Nu ilan ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
-              aškan              
-          palši ✧ kutti          
-              wappi              
+             <2> aškan             
+        <4> palši ✧ <3> kutti        
+             <1> wappi             
+
+You're getting the hang of this now! Since you'll be moving around a lot in
+this game, there's a shorter way to get from place to place: the Babylonians
+sometimes numbered their compass directions, so you can type "1 3 2" to go
+south, then east, then north. These numbers will be shown on the compass rose
+in the top right.
+
+(There's no evidence that the Hittites actually did this, and adding numbers
+for "up" and "down" is completely non-historical. But the Hittites imitating
+Babylonian writing isn't much of a stretch, and typing a full sentence every
+time gets tedious very fast.)
+
 > nu ackan dahhun
 Nu aškan ḫattalwantan natta taruḫḫun dāḫḫun. N=an mekki nakkiš ēšta.
 
@@ -115,8 +128,8 @@ Nu=za kutti kattan ešun.
 Nu ilan ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
-           ḫalḫaltomari          
-         auriya ✧                
+          <2> ḫalḫaltomari         
+       <4> auriya ✧                
                                  
 > halhaltomari paun
 Nu kuttaš ḫalḫaltomari pāun.
@@ -129,8 +142,8 @@ Nu ilan ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
                                  
-         luttāi ✧                
-              kutti              
+       <4> luttāi ✧                
+             <1> kutti             
 > luttai carrahhun
 Nu ḫilamnaš luttāi natta taruḫḫun šarraḫḫun. N=at parku ēšta.
 
@@ -148,8 +161,8 @@ Nu apiya ḫilamnaš luttāi Ù ilan ōḫḫun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
                                  
-         luttāi ✧                
-              kutti              
+       <4> luttāi ✧                
+             <1> kutti             
 
 Certain cuneiform signs were used as shorthand for entire words, like how "7"
 is short for "seven", or "&" short for "and". These signs are written in
@@ -165,15 +178,14 @@ Nu apiya aškan ḫattalwantan Ù luttāi ōḫḫun.
 Nu GIŠ ḫattalu aški ḫattalwanti ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun
-              iškiši             
-         arkiwi ✧ luttāi         
-              aškan              
+             <2> iškiši            
+       <4> arkiwi ✧ <3> luttāi       
+             <1> aškan             
 
 Hittite nouns were sometimes written with a special sign in front, called a
 "determinative". These weren't pronounced, but indicated something about the
 noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example,
-marks that something is made of wood. TODO they will eventually be superscript
-but that's still a work in progress
+marks that something is made of wood.
 
 > * In the watchtower
 > ackan carrahhun
@@ -189,21 +201,9 @@ Nu apiya aškan Ù luttāi ōḫḫun.
 Nu GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun
-             2 iškiši            
-       4 arkiwi ✧ 3 luttāi       
-             1 aškan             
-
-You're getting the hang of this now! Since you'll be moving around a lot in
-this game, there's a shorter way to get from place to place: the Babylonians
-sometimes numbered their compass directions, so you can type "1 3 2" to go
-south, then east, then north. These numbers will be shown on the compass rose
-in the top right.
-
-(There's no evidence that the Hittites actually did this, and adding numbers
-for "up" and "down" is completely non-historical. But the Hittites imitating
-Babylonian writing isn't much of a stretch, and typing a full sentence every
-time gets tedious very fast.)
-
+             <2> iškiši            
+       <4> arkiwi ✧ <3> luttāi       
+             <1> aškan             
 > ackan carrahhun
 Nu aškan šarraḫḫun.
 
@@ -214,9 +214,9 @@ Nu apiya aškan ōḫḫun.
 Nu GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun
-             2 aškan             
-        4 palši ✧ 3 kutti        
-             1 wappi             
+             <2> aškan             
+        <4> palši ✧ <3> kutti        
+             <1> wappi             
 > ackan carrahhun
 Nu aškan šarraḫḫun.
 
@@ -227,9 +227,9 @@ Nu apiya aškan Ù luttāi ōḫḫun.
 Nu GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun
-             2 iškiši            
-       4 arkiwi ✧ 3 luttāi       
-             1 aškan             
+             <2> iškiši            
+       <4> arkiwi ✧ <3> luttāi       
+             <1> aškan             
 > arkiwi paun
 Nu E2 arkiwi pāun.
 
@@ -241,8 +241,8 @@ Nu paḫḫur Ù DUG aganniš ḫašši anda ešer.
 Nu GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 dankui            
-                ✧ 3 ḫilamni      
+             <2> dankui            
+                ✧ <3> ḫilamni      
                                  
 
 Most of the sentences you've seen so far have only one noun, but this doesn't
@@ -273,8 +273,8 @@ Nu paḫḫur Ù DUG aganniš ḫašši anda ešer.
 Nu warān GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 antaki            
-                ✧ 3 ḫilamni      
+             <2> antaki            
+                ✧ <3> ḫilamni      
                                  
 > antaki paun
 Nu antaki pāun.
@@ -288,7 +288,7 @@ Nu warān GIŠ ḫattalu ḫarkun.
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
                                  
                 ✧                
-            1 arkiwi             
+            <1> arkiwi             
 > palhin dahhun
 Nu DUG palḫin dāḫḫun.
 
@@ -299,7 +299,7 @@ Nu DUG palḫin Ù warān GIŠ ḫattalu ḫarkun.
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
                                  
                 ✧                
-            1 arkiwi             
+            <1> arkiwi             
 > 1 3 1 1
 1   Nu E2 arkiwi pāun.
 3   Nu ḫilamni pāun.
@@ -313,7 +313,7 @@ Nu apiya ḫapan ōḫḫun.
 Nu DUG palḫin Ù warān GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 auriya            
+             <2> auriya            
                 ✧                
                                  
 > hattalu hapi tehhun
@@ -326,7 +326,7 @@ Nu apiya ḫapan ōḫḫun.
 Nu DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 auriya            
+             <2> auriya            
                 ✧                
                                  
 > watar dahhun
@@ -339,7 +339,7 @@ Nu apiya ḫapan ōḫḫun.
 Nu witenaš DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 auriya            
+             <2> auriya            
                 ✧                
                                  
 > 2 2 4
@@ -355,8 +355,8 @@ Nu paḫḫur Ù DUG aganniš ḫašši anda ešer.
 Nu witenaš DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 dankui            
-                ✧ 3 ḫilamni      
+             <2> dankui            
+                ✧ <3> ḫilamni      
                                  
 > watar hacci tehhun
 Nu wātar paḫḫeni tēḫḫun. N=an kištanunun.
@@ -369,8 +369,8 @@ Nu DUG aganniš ḫašši anda ēšta.
 Nu DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 dankui            
-                ✧ 3 ḫilamni      
+             <2> dankui            
+                ✧ <3> ḫilamni      
                                  
 > agannin dahhun
 Nu DUG agannin ḫaššaz dāḫḫun.
@@ -382,8 +382,8 @@ Nu apiya ḫaššan Ù tešḫallin LÚ ḫalliyatallan ōḫḫun.
 Nu DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 dankui            
-                ✧ 3 ḫilamni      
+             <2> dankui            
+                ✧ <3> ḫilamni      
                                  
 > * To the roof!
 > 3 1 3 2
@@ -400,8 +400,8 @@ Nu DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
                                  
-       4 luttāi ✧                
-             1 kutti             
+       <4> luttāi ✧                
+             <1> kutti             
 > ilan dahhun
 Nu ilan dāḫḫun.
 
@@ -413,8 +413,8 @@ Nu ilan Ù DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
                                  
-       4 luttāi ✧                
-             1 kutti             
+       <4> luttāi ✧                
+             <1> kutti             
 > 1 4 2 2
 1   Nu kutti pāun.
 4   Nu auriya pāun.
@@ -426,9 +426,9 @@ Nu=za=kan auriyaš iškiši anda ešun.
 Nu ilan Ù DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-              2 KÚR       5 šuḫḫi
+              <2> KÚR       <5> šuḫḫi
                 ✧                
-            1 ḫilamni            
+            <1> ḫilamni            
 > cuhhi paun
 Nu šuḫḫi natta taruḫḫun pāun. Nu šuḫḫa parku ēšta.
 
@@ -442,9 +442,9 @@ Nu apiya ilan ōḫḫun.
 Nu DUG agannin Ù DUG palḫin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-              2 KÚR       5 šuḫḫi
+              <2> KÚR       <5> šuḫḫi
                 ✧                
-            1 ḫilamni            
+            <1> ḫilamni            
 > cuhhi paun
 Nu šuḫḫi natta taruḫḫun pāun. Nu palḫiš nakkiš ēšta.
 
@@ -458,9 +458,9 @@ Nu apiya DUG palḫin Ù ilan ōḫḫun.
 Nu DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-              2 KÚR       5 šuḫḫi
+              <2> KÚR       <5> šuḫḫi
                 ✧                
-            1 ḫilamni            
+            <1> ḫilamni            
 > cuhhi paun
 Nu šuḫḫi pāun.
 
@@ -469,9 +469,9 @@ Nu=za=kan šuḫḫi šēr ešun.
 Nu DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-              2 ḫali             
+              <2> ḫali             
                 ✧                
-6 iškiši                         
+<6> iškiši                         
 > hali paun
 Nu karimnaš ḫali natta taruḫḫun pāun. Nu=za šaknuwanza ešun. Nu wātar natta
 ḫarkun.
@@ -486,9 +486,9 @@ Nu apiya DUG palḫin Ù ilan ōḫḫun.
 Nu DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-              2 KÚR       5 šuḫḫi
+              <2> KÚR       <5> šuḫḫi
                 ✧                
-            1 ḫilamni            
+            <1> ḫilamni            
 > 2
 2   Nu ana URU LÚ KÚR natta taruḫḫun pāun.
 
@@ -504,7 +504,7 @@ Nu apiya ḫapan ōḫḫun.
 Nu DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 auriya            
+             <2> auriya            
                 ✧                
                                  
 > watar dahhun
@@ -517,7 +517,7 @@ Nu apiya ḫapan ōḫḫun.
 Nu witenaš DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-             2 auriya            
+             <2> auriya            
                 ✧                
                                  
 > 2 2 2 5
@@ -531,9 +531,9 @@ Nu=za=kan šuḫḫi šēr ešun.
 Nu witenaš DUG agannin Ù GIŠ ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun, tēḫḫun, kuenun
-              2 ḫali             
+              <2> ḫali             
                 ✧                
-6 iškiši                         
+<6> iškiši                         
 > hali paun
 Nu karimnaš ḫali pāun.
 The tablet breaks off here, as the soldier finally enters the temple precinct.
