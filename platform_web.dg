@@ -8,3 +8,5 @@
 	margin-bottom: 1em;
 	data-language: en;
 	font-style: italic;
+
+(superscripts supported)

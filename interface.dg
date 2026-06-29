@@ -21,8 +21,10 @@
 (interface (dtm $<Closure))
 (dtm $Closure) %% Make sure of no space on the right
 	(span @dtm) { (query $Closure) (no space) } (no space)
+	(if) ~(superscripts supported) (then) ^ (no space) (endif)
 (interface (dtm2 $<Closure))
 (dtm2 $Closure) %% For determiners on the right side
+	(if) ~(superscripts supported) (then) (no space) ^ (endif)
 	(no space) (span @dtm) { (no space) (query $Closure) }
 
 %% "Errors" in the player's input

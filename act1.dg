@@ -30,14 +30,17 @@
 	(current player $Player)
 	(if) (#cup is #heldby $Player) ~(cup has water) (then)
 		($Dest = #cup)
-		(now) (cup has water)
 	(elseif) (#amphora is #heldby $Player) ~(amphora has water) (then)
 		($Dest = #amphora)
-		(now) (amphora has water)
 	(else)
 		(fail) %% Fall back to the usual "I can't hold the water" message
 	(endif)
 	Nu (#accusative #water) (#dative $Dest) tēḫḫun. %% "I put the water in the DEST."
+	(if) ($Dest = #cup) (then) %% Gotta fill the vessel after printing the message, otherwise it'll look wrong ("I put the water in the cup of water")
+		(now) (cup has water)
+	(elseif) ($Dest = #amphora) (then)
+		(now) (amphora has water)
+	(endif)
 	(now) (update needed)
 	(tick)
 
@@ -65,19 +68,30 @@
 (* wants relation #at)
 (* blocks passage)
 	{ (#bolt is #in *) (or) (#bolt is pristine) }
-(describe * blocking passage) %% No extra description, "it's blocked" is in the adjective already
+(describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
+(room description *) (* blocks passage) ḫattalwantan āškan %% "closed door"
 (short name *) āškan
-(name * in #nominative)
-	āškaš (if) (* blocks passage) (then) ḫattalwanza (endif)
-(name * in #genitive)
-	āškaš (if) (* blocks passage) (then) ḫattalwantaš (endif)
-(name * in #dative)
-	āški (if) (* blocks passage) (then) ḫattalwanti (endif)
-(name * in #accusative)
-	āškan (if) (* blocks passage) (then) ḫattalwantan (endif)
-(name * in #ablative)
-	āškaz (if) (* blocks passage) (then) ḫattalwantaz (endif)
+(name * in #nominative) āškaš
+(name * in #genitive) āškaš
+(name * in #dative) āški
+(name * in #accusative) āškan
+(name * in #ablative) āškaz
 (name * in #bare) āška
+(dict * in #nominative/#bare) %% Adjective "closed" currently not displayed outside of the error message and room description
+	(* blocks passage)
+	ḫattalwanza
+(dict * in #genitive)
+	(* blocks passage)
+	ḫattalwantaš
+(dict * in #dative)
+	(* blocks passage)
+	ḫattalwanti
+(dict * in #accusative)
+	(* blocks passage)
+	ḫattalwantan
+(dict * in #ablative)
+	(* blocks passage)
+	ḫattalwantaz
 
 #street
 (room *)
@@ -156,30 +170,27 @@
 (name * in #genitive) ḫilamnaš
 (name * in #dative) ḫilamni
 (name * in #ablative) ḫilamnaz
-%% (* has modifier $Mod) ($Mod = {E2})
 (from * go #east through #window to #corner)
 (from * go #south through #gate to #watchtower)
 (from * go #west to #foyer)
 (from * go #north to #backroom)
 
+#burning %% See below, only used for #bolt currently and thus has neuter declension
+(adjective *)
+(name * in #nominative/#accusative/#bare) warān
+(name * in #genitive) warantaš
+(name * in #dative) waranti
+(name * in #ablative) warantaz
+
 #bolt
 (item *)
 (neuter *)
-(name * in #nominative/#accusative/#bare)
-	(if) (bolt is burning) (then) warān (endif)
-	GIŠ ḫattalu
-(dict * in #nominative/#accusative/#bare)
-	(bolt is burning)
-	waran %% Macron
-(name * in #genitive)
-	(if) (bolt is burning) (then) warantaš (endif)
-	GIŠ ḫattaluwaš
-(name * in #dative)
-	(if) (bolt is burning) (then) waranti (endif)
-	GIŠ ḫattaluwi
-(name * in #ablative)
-	(if) (bolt is burning) (then) warantaz (endif)
-	GIŠ ḫattaluwaz
+(determiner *) GIŠ
+(* has modifier #burning) (bolt is burning)
+(name * in #nominative/#accusative/#bare) ḫattalu
+(name * in #genitive) ḫattaluwaš
+(name * in #dative) ḫattaluwi
+(name * in #ablative) ḫattaluwaz
 
 (after [[cross #window] | $]) %% Only describe it on the inside
 	(* is pristine)
@@ -216,7 +227,8 @@
 (name * in #accusative) arkiwin
 (name * in #ablative) arkiwaz
 (name * in #bare) arkiwi
-(* has modifier $Mod) ($Mod = {E2})
+(determiner *) É
+(dict * in $) E2
 
 (from * go #east to #gatehouse)
 (from * go #north to #storeroom)
@@ -246,11 +258,12 @@
 
 #cup
 (item *)
-(name * in #nominative) DUG aganniš
-(name * in #genitive) DUG aganniyaš
-(name * in #dative) DUG aganniya
-(name * in #accusative) DUG agannin
-(name * in #ablative) DUG aganniyaz
+(name * in #nominative) aganniš
+(name * in #genitive) aganniyaš
+(name * in #dative) aganniya
+(name * in #accusative) agannin
+(name * in #ablative) aganniyaz
+(determiner *) DUG
 (* has modifier #water)
 	(cup has water)
 (dict * in $Case)
@@ -282,11 +295,12 @@
 
 #amphora
 (item *)
-(name * in #nominative) DUG palḫiš
-(name * in #accusative) DUG palḫin
-(name * in #genitive) DUG palḫaš
-(name * in #dative) DUG palḫi
-(name * in #ablative) DUG palḫaz
+(name * in #nominative) palḫiš
+(name * in #accusative) palḫin
+(name * in #genitive) palḫaš
+(name * in #dative) palḫi
+(name * in #ablative) palḫaz
+(determiner *) DUG
 (dict * in $Case)
 	(amphora has water)
 	*(dict #water in $Case)

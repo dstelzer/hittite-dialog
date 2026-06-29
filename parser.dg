@@ -888,9 +888,11 @@
 (name (logogram $Obj) in #ablative) (span @akk) ištu (name $Obj in #bare)
 
 (interface ($<Case $<Obj))
-($Case $Obj) %% Adds modifiers as needed; these can be objects, dict words, or closures
+($Case $Obj) %% Adds modifiers as needed; these can be adjectives, nouns, dict words, or closures. Determiners come after modifiers.
 	(if) ($Obj has modifier $Mod) (then)
-		(if) (object $Mod) (then)
+		(if) (adjective $Mod) (then)
+			(name $Mod in $Case)
+		(elseif) (object $Mod) (then)
 			(#genitive $Mod)
 		(elseif) (word $Mod) (then)
 			$Mod
@@ -898,4 +900,13 @@
 			(query $Mod)
 		(endif)
 	(endif)
+	(if) ($Obj has determiner) (then)
+		(dtm {(determiner $Obj)})
+	(endif)
 	(name $Obj in $Case)
+
+($Obj has determiner) %% Not super efficient, but (determiner $) is going to be called inside a (collect words) anyway for dictionary purposes
+	(collect words) (determiner $Obj) (into $List)
+	(nonempty $List)
+(dict $Obj in $) %% Namely, right here
+	(determiner $Obj)

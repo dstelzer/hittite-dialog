@@ -112,7 +112,7 @@
 	(action log {Here: $HereList} )
 	(if) (nonempty $HereList) (then)
 		(par) Nu apiya
-		(#accusative $HereList)
+		(room description $HereList)
 		ōḫḫun.
 	(endif)
 	
@@ -178,6 +178,10 @@
 			(compass rose)
 		(endif)
 	(stopping)
+
+%% Some objects override this to add more detail if (and only if) they're on their own
+(room description [$Single]) (room description $Single)
+(room description $Whatever) (#accusative $Whatever)
 
 (hittite name $Obj) (span @hittite) (name $Obj) %% TODO workaround for Dialog bug
 (style class @verbs)
