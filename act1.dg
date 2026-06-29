@@ -9,8 +9,8 @@
 (room *)
 (* uses preverb #at)
 (name * in #nominative) wappuš
-(name * in #genitive) wappawaš
-(name * in #dative) wappi
+(name * in #genitive) wappuwaš
+(name * in #dative) wappui
 (name * in #accusative) wappun
 (name * in #ablative) wappuwaz
 (name * in #bare) wappu
@@ -66,16 +66,18 @@
 (* blocks passage)
 	{ (#bolt is #in *) (or) (#bolt is pristine) }
 (describe * blocking passage) %% No extra description, "it's blocked" is in the adjective already
-(short name *) aškan
-(name * in #nominative/#genitive)
-	aškaš (if) (* blocks passage) (then) ḫattalwantaš (endif)
+(short name *) āškan
+(name * in #nominative)
+	āškaš (if) (* blocks passage) (then) ḫattalwanza (endif)
+(name * in #genitive)
+	āškaš (if) (* blocks passage) (then) ḫattalwantaš (endif)
 (name * in #dative)
-	aški (if) (* blocks passage) (then) ḫattalwanti (endif)
+	āški (if) (* blocks passage) (then) ḫattalwanti (endif)
 (name * in #accusative)
-	aškan (if) (* blocks passage) (then) ḫattalwantan (endif)
+	āškan (if) (* blocks passage) (then) ḫattalwantan (endif)
 (name * in #ablative)
-	aškaz (if) (* blocks passage) (then) ḫattalwantaz (endif)
-(name * in #bare) aška
+	āškaz (if) (* blocks passage) (then) ḫattalwantaz (endif)
+(name * in #bare) āška
 
 #street
 (room *)
@@ -89,7 +91,7 @@
 
 #ladder
 (item *)
-(name * in #nominative) ilaš
+(name * in #nominative) ilan
 (name * in #genitive) ilanaš
 (name * in #dative) ilani
 (name * in #accusative) ilan
@@ -185,13 +187,13 @@
 
 (narrate taking *)
 	(* is pristine)
-	Nu aškan ḫašḫun. %% "I opened the gate."
+	Nu āškan ḫašḫun. %% "I opened the gate."
 	(now) (update needed)
 
 (instead of [[put * #hearth/#fire] $Details])
 	(#fire is #in #hearth)
 	(describe action [[put * #fire] $Details])
-	Nu GIŠ ḫattalu lukket. %% "The bolt ignited."
+	Nu (#nominative *) lukket. %% "The bolt ignited."
 	(now) (bolt is burning)
 	(now) (update needed)
 	(tick)
@@ -258,12 +260,12 @@
 
 #watchman
 (animate *)
-(name * in #nominative) tešḫalliš LÚ ḫalliyatallaš %% Sleeping watchman
-(name * in #genitive) tešḫalliyaš LÚ halliyatallaš
-(name * in #dative) tešḫalliya LÚ ḫalliyatalli
-(name * in #accusative) tešḫallin LÚ ḫalliyatallan
-(name * in #ablative) tešḫalliyaz LÚ ḫalliyatallaz
-(name * in #bare) tešḫalli LÚ ḫalliyatalla
+(name * in #nominative) šuppanza LÚ ḫalliyatallaš %% Sleeping watchman
+(name * in #genitive) šuppandaš LÚ halliyatallaš
+(name * in #dative) šuppandi LÚ ḫalliyatalli
+(name * in #accusative) šuppandan LÚ ḫalliyatallan
+(name * in #ablative) šuppandaz LÚ ḫalliyatallaz
+(name * in #bare) šuppanza LÚ ḫalliyatalla
 (dict * in $) LU2
 (* is #in #foyer)
 
@@ -338,10 +340,11 @@
 (room *)
 (neuter *)
 (* uses preverb #on)
-(name * in #nominative/#accusative/#bare) šuḫḫa
+(name * in #nominative/#accusative) šuḫḫan
 (name * in #genitive) šuḫḫaš
 (name * in #dative) šuḫḫi
 (name * in #ablative) šuḫḫaz
+(name * in #bare) šuḫḫa
 (from * go #down to #backroom)
 (from * go #north to #precinct)
 
@@ -444,12 +447,12 @@
 (on every tick) %% Make sure this comes BEFORE redrawing the status bar
 	~(direction numbers enabled)
 	(current room #watchtower)
-	(#ladder is handled)
+	{ (#ladder is handled) (or) (#corner is visited) }
 	(now) (direction numbers enabled)
 
 (tutorial)
-	(direction numbers enabled)
 	~(taught numbers)
+	(direction numbers enabled)
 	(div @tutorial) {
 		You're getting the hang of this now! Since you'll be moving around a lot in this game, there's a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, so you can type "1 3 2" to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
 		\( There's no evidence that the Hittites actually did this, and adding numbers for "up" and "down" is completely non-historical. But the Hittites imitating Babylonian writing isn't much of a stretch, and typing a full sentence every time gets tedious very fast. \)
