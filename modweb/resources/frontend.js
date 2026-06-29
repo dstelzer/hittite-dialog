@@ -782,6 +782,14 @@ window.run_game = function(story64, options) {
 					for(let attr in this.style_data[id].attrs) {
 						div.setAttribute(attr, this.style_data[id].attrs[attr]);
 					}
+					
+					// HACK: we clone and re-insert it to make its animation run again
+					div.style["animation-name"] = "flare";
+					div.style["animation-duration"] = ".9s";
+					div.style["animation-delay"] = ".1s";
+					$(div).replaceWith($(div).clone(true));
+					div = document.getElementById("aastatus");
+					
 					this.current = div;
 					this.in_status = 1;
 					this.statusarray = [{t: "est", i: id}];

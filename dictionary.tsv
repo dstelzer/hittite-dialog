@@ -50,7 +50,7 @@ lukket	lukket	It ignited, caught fire
 arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer	NOUN arkiwiš arkiwaš arkiwi arkiwin arkiwaz
 ḫašša	ḫaššaš ḫašši ḫaššan ḫaššaz ḫašša	Hearth	NOUN ḫaššaš ḫaššaš ḫašši ḫaššan ḫaššaz
 paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire	NOUN paḫḫur paḫḫuenaš paḫḫueni paḫḫur paḫḫuenaz
-ayyanza	ayyanza/ānza	Hot
+änza	änza	Hot
 DUG	DUG	[Vessel]	DTM
 aganni	aganniš aganniyaš aganniya agannin aganniyaz aganni	Cup	NOUN aganniš aganniyaš aganniya agannin aganniyaz
 LÚ	LÚ	[Man]	DTM
@@ -61,7 +61,7 @@ palhi	palhiš palhaš palhi palhin palhaz palhi	Pithos (large clay jar)	NOUN pal
 kištanunun	kištanunun	I extinguished (something: accusative)
 iškiša	iškiša iškišaš iškiši iškišaz	Back room	NOUN iškiša iškišaš iškiši iškiša iškišaz
 šuḫḫa	šuḫḫan šuḫḫaš šuḫḫi šuḫḫaz šuḫḫa	Roof	NOUN šuḫḫan šuḫḫaš šuḫḫi šuḫḫan šuḫḫaz
-ḫali	ḫali ḫaliyaš ḫaliyaz	Precinct, marked-out area (for a temple, this is the land dedicated to a particular god)	NOUN ḫali ḫaliyaš ḫali ḫali ḫaliyaz
+ḫali	ḫali ḫaliyaš ḫaliyaz	Precinct, marked-out area (for a temple, this is the land dedicated to a particular god) - TODO REPLACE	NOUN ḫali ḫaliyaš ḫali ḫali ḫaliyaz
 karimmi	karimmi karimnaš karimni karimnaz	Temple	NOUN karimmi karimnaš karimni karimmi karimnaz
 šaknuwanza	šaknuwanza	Unclean, not ritually pure
 URU	URU	[city]	DTM

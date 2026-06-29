@@ -890,7 +890,7 @@
 (interface ($<Case $<Obj))
 ($Case $Obj) %% Adds modifiers as needed; these can be adjectives, nouns, dict words, or closures. Determiners come after modifiers.
 	(if) ($Obj has modifier $Mod) (then)
-		(if) (adjective $Mod) (then)
+		(if) (adjective $Mod) (then) %% Note: this does NOT currently consider gender! Adjective objects are expected to have the same inherent gender as the noun
 			(name $Mod in $Case)
 		(elseif) (object $Mod) (then)
 			(#genitive $Mod)
