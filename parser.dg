@@ -17,7 +17,7 @@
 	(parser log { One: $One } )
 	(apply optional replacements to $One into $OnePointFive) %% Try to fix invalid words if possible; does nothing to already-valid words
 	(parser log { 1.5: $OnePointFive } )
-	(separate clitics from $One into $Two) %% Two: [[an] witeni dahhun]
+	(separate clitics from $OnePointFive into $Two) %% Two: [[an] witeni dahhun]
 	(parser log { Two: $Two } )
 	(transpose verb from $Two into $Three) %% Three: [dahhun an witeni]
 	(parser log { Three: $Three } )

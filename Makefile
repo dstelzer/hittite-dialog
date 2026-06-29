@@ -5,7 +5,7 @@ OPTIONS_DBG = --word-seps='=.,;"()*'
 
 
 debug: $(FILES)
-	dgdebug $(OPTIONS) platform_debug.dg $(FILES)
+	dgdebug $(OPTIONS_DBG) platform_debug.dg $(FILES)
 
 hittite.z5: $(FILES)
 	dialogc -t z5 -o hittite.z5 $(OPTIONS) platform_z.dg $(FILES)
