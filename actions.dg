@@ -22,6 +22,10 @@
 	(else) %% Otherwise fall back to a div
 		(div @status) (describe environment)
 	(endif)
+	(if) (using separate panels) (then)
+		(compass rose panel)
+		(verbs list panel)
+	(endif)
 
 ($Lines lines needed for status bar)
 	%% 1 header
@@ -92,12 +96,9 @@
 (describe environment)
 	
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
-	(select) %% Nothing until the first tutorial has passed
-	(or)
-		(if) (interpreter supports status bar) (then)
-			(compass rose)
-		(endif)
-	(stopping)
+	(if) (interpreter supports status bar) ~(using separate panels) (then)
+		(compass rose)
+	(endif)
 	
 	%% First paragraph: "I was at [location]."
 	(current room $Loc)
@@ -160,30 +161,38 @@
 	(endif)
 	
 	%% Final paragraph: verbs
-	(select) %% Nothing until the first tutorial has passed
-	(or)
-		(div @verbs) {
-			(par) Verbs:
-			(collect $Verb)
-				*(verb $Verb unlocked)
-			(into $VerbList)
-			(listing $VerbList {(hittite name $_)} @, 0)
-		}
-	(stopping)
+	(if) ~(using separate panels) (then)
+		(div @verbs) (verbs list)
+	(endif)
 	
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
-	(select)
-	(or) %% Nothing until the first tutorial has passed
-		(if) ~(interpreter supports status bar) (then)
-			(compass rose)
-		(endif)
-	(stopping)
+	(if) ~(interpreter supports status bar) ~(using separate panels) (then)
+		(compass rose)
+	(endif)
 
 %% Some objects override this to add more detail if (and only if) they're on their own
 (room description [$Single]) (room description $Single)
 (room description $Whatever) (#accusative $Whatever)
 
+(using separate panels) %% Only do this if it won't interfere with the normal stuff
+	(interpreter supports status bar) (interpreter supports inline status bar)
+
+(verbs list) ~(given first message)
+(verbs list)
+	(span @bold) { Verbs: }
+	(collect $Verb)
+		*(verb $Verb unlocked)
+	(into $VerbList)
+	(listing $VerbList {(hittite name $_)} @, 0)
+
 (hittite name $Obj) (span @hittite) (name $Obj) %% TODO workaround for Dialog bug
+
+(verbs list panel)
+	(inline status bar @p-verbs) (verbs list)
+(style class @p-verbs)
+	margin-left: 2em;
+	text-indent: -2em;
+
 (style class @verbs)
 	width: 100\%;
 	text-align: center;
@@ -240,10 +249,54 @@
 	%% Then, do the actual printing
 	%% This should only be done in a fixed-width div or span, for obvious reasons
 	(space $Left)
-	(if) (direction numbers enabled) (then) (link) $N (space 1) (endif)
-	(short name $Obj)
+	(print name of $Obj number $N)
 	(space $Right)
 
+%% If the interpreter supports text alignment, we can also do a simpler thing
+(print name of [] number $)
+	(space 1)
+(print name of $Obj number $N)
+	(if) (direction numbers enabled) (then) (link) $N (space 1) (endif)
+	(short name $Obj)
+
+(style class @c-north)
+	text-align: center;
+(style class @c-up)
+	text-align: right;
+(style class @c-west)
+	text-align: right;
+(style class @c-rose)
+	text-align: center;
+	font-size: 2em;
+(style class @c-east)
+	text-align: left;
+(style class @c-down)
+	text-align: left;
+(style class @c-south)
+	text-align: center;
+
+%% Fancy one involving injecting into specific HTML elements
+%% This should be changed to use (status panel $) when I get that proposal through
+%% Right now it's using a hacked interpreter that makes (inline status bar $) act like (status panel $) eventually will
+(compass rose panel) ~(given first message)
+(compass rose panel)
+	(#north on the compass rose is $North)
+	(#east on the compass rose is $East)
+	(#south on the compass rose is $South)
+	(#west on the compass rose is $West)
+	(#up on the compass rose is $Up)
+	(#down on the compass rose is $Down)
+	
+	(inline status bar @c-north) (print name of $North number 2)
+	(inline status bar @c-up) (print name of $Up number 5)
+	(inline status bar @c-west) (print name of $West number 4)
+	(inline status bar @c-rose) (rose star)
+	(inline status bar @c-east) (print name of $East number 3)
+	(inline status bar @c-down) (print name of $Down number 6)
+	(inline status bar @c-south) (print name of $South number 1)
+
+%% Normal one that works on any backend
+(compass rose) ~(given first message)
 (compass rose)
 	(#north on the compass rose is $North)
 	(#east on the compass rose is $East)

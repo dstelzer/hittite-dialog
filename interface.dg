@@ -17,7 +17,6 @@
 %% So this is an empty style class
 (style class @dtm)
 
-%% TODO keep this from interfering with parsing
 (interface (dtm $<Closure))
 (dtm $Closure) %% Make sure of no space on the right
 	(span @dtm) { (query $Closure) (no space) } (no space)

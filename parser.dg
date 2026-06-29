@@ -567,6 +567,7 @@
 	
 	(if) (save undo 1) (then)
 		(div @error) { The previous lines, starting with (print words $Words), are crossed out on the tablet and should be considered a scribal error. }
+		(now) (update needed)
 		(stop)
 	(endif)
 	
@@ -604,6 +605,7 @@
 			(div @meta) { Game state saved. Use /restore to come back to this point at any time. }
 		(else)
 			(div @meta) { Game state restored. }
+			(now) (update needed)
 		(endif)
 	(else)
 		(div @realerror) { Save failed! }
@@ -910,3 +912,4 @@
 	(nonempty $List)
 (dict $Obj in $) %% Namely, right here
 	(determiner $Obj)
+(dict $ in $) ^ %% Can sometimes end up in stray inputs, should be ignored

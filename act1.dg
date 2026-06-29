@@ -424,7 +424,7 @@
 (tutorial)
 	~(taught syntax)
 	(div @tutorial) {
-		You probably came up with something like "I was at the riverbank. I saw a river there." Most Hittite sentences start with a meaningless "connective" word, then have a series of nouns, and finish off with a verb. The (span @italic) case of those nouns indicates their purpose: a "dative" noun like (span @hittite) wappi indicates a location or destination, while an "accusative" noun like (span @hittite) ḫapan indicates the object of the verb.
+		You probably came up with something like "I was at the riverbank. I saw a river there." Most Hittite sentences start with a meaningless "connective" word, then have a series of nouns, and finish off with a verb. The (span @italic) case of those nouns indicates their purpose: a "dative" noun like (span @hittite) wappui indicates a location or destination, while an "accusative" noun like (span @hittite) ḫapan indicates the object of the verb.
 		(if) (#watchtower is unvisited) (then)
 			(par) Now it's time to construct a sentence of your own. The compass rose at the top right indicates nearby locations, and the "verbs" bar suggests some relevant verbs. Double-click any of these words to insert them into your sentence; see if you can use them to move to a new location.
 			(now) (prompted movement specifically)

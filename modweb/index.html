@@ -33,31 +33,6 @@
 		<div id="aabody2"> <!-- Where (body style $) attaches, part 2 -->
 			<div id="aadefaults2"> <!-- Where secondary values of CSS properties are evaluated -->
 				<div id="aabody3"> <!-- Third verse, same as the first two -->
-					
-					<!-- Hittite presentation settings -->
-					<div class="header">
-						Hittite shown as:
-						<select class="settings" id="modesel">
-							<option value="hidebound">Signs</option>
-							<option value="showbound" selected>Bound transcription</option>
-						</select>
-						&nbsp;
-						Cuneiform font:
-						<select class="settings" id="fontsel">
-							<option value="font-ink" selected>Ink</option>
-							<option value="font-publish">Published</option>
-							<option value="font-write">Handwritten</option>
-							<option value="font-linear">Linear</option>
-						</select>
-						&nbsp;
-						Sign size:
-						<select class="settings" id="sizesel">
-							<option value="size-small">Small</option>
-							<option value="size-medium" selected>Medium</option>
-							<option value="size-large">Large</option>
-						</select>
-					</div>
-					
 					<div id="aacontainer"> <!-- Central (width-limited) column -->
 						<div id="maincolumn">
 							<div id="aaouterstatus"> <!-- Top bar -->
@@ -65,6 +40,24 @@
 									<div id="aamenulines"></div> <!-- Graphic -->
 									<div id="aamenu"> <!-- The menu itself -->
 										<div id="aamenulist"> <!-- List of options and links -->
+											
+											<!-- Hittite-specific cuneiform settings -->
+											<select class="settings" id="modesel">
+												<option value="hidebound">Cuneiform signs</option>
+												<option value="showbound" selected>Bound transcription</option>
+											</select>
+											<select class="settings" id="fontsel">
+												<option value="font-ink" selected>Ink font</option>
+												<option value="font-publish">Published</option>
+												<option value="font-write">Handwritten</option>
+												<option value="font-linear">Linear</option>
+											</select>
+											<select class="settings" id="sizesel">
+												<option value="size-small">Small signs</option>
+												<option value="size-medium" selected>Medium signs</option>
+												<option value="size-large">Large signs</option>
+											</select>
+											
 											<div id="aacheckboxes"></div> <!-- Filled in by JS -->
 											<hr /> <!-- Onclick for all of these is added by JS -->
 											<div id="aaviewscript" class="aamenuoption">View transcript</div>
@@ -115,8 +108,30 @@
 						</div>
 						
 						<!-- Dictionary column on the right -->
-						<div id="dictionary">
-							<i>Dictionary entries will appear here.</i>
+						<div id="rightcol">
+							<div id="compass" class="panel">
+								<table>
+									<tr><td></td> <td id="c-north"></td> <td id="c-up"></td></tr>
+									<tr><td id="c-west"></td> <td id="c-rose"></td> <td id="c-east"></td></tr>
+									<tr><td id="c-down"></td> <td id="c-south"></td> <td></td></tr>
+								</table>
+							</div>
+							
+							<div id="verbs" class="panel">
+								<div id="p-verbs"></div>
+							</div>
+							
+							<div id="dictionary" class="panel">
+								Pronunciation: <!-- Start with pronunciation guide; this will be overwritten by definitions in play -->
+								<ul>
+									<li>A, E, I, U as in f<b>a</b>ther, fort<b>e</b>, mach<b>i</b>ne, t<b>u</b>be</li>
+									<li>Vowels with a bar on top are longer and/or more stressed</li>
+									<li>Š is a normal S, like in <b>s</b>ide</li>
+									<li>Ḫ is a rough KH, like in lo<b>ch</b></li>
+									<li>Equals signs aren't pronounced</li>
+									<li>Everything else is like in English</li>
+								</ul>
+							</div>
 						</div>
 					
 					</div>

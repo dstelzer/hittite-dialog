@@ -1,6 +1,6 @@
 FILES = act1.dg actions.dg interface.dg parser.dg worldmodel.dg
-OPTIONS = --word-seps='⸗=.,;"()*'
-OPTIONS_DBG = --word-seps='=.,;"()*'
+OPTIONS = --word-seps='^⸗=.,;"()*'
+OPTIONS_DBG = --word-seps='^=.,;"()*'
 # Debugger can't handle non-ASCII word separators yet
 
 

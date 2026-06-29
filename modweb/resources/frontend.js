@@ -794,7 +794,23 @@ window.run_game = function(story64, options) {
 					this.in_status = 1;
 					this.statusarray = [{t: "est", i: id}];
 					this.currarray = this.statusarray;
-				} else {
+				} else { // This will eventually be moved to (status panel $), that is ENTER_STATUS 2, if I have my way
+					var name = this.style_data[id].name.substring(3); // remove aa-
+					div = document.getElementById(name);
+					if(!div) { // Not found; shove this content somewhere invisible where it can't hurt anything
+						console.warn('Tried to enter status panel "'+name+'" which does not exist');
+						div = document.createElement("div");
+						div.style["display"] = "none"; // The fact that it's not attached to anything will keep it from being displayed anyway, but better safe than sorry in case something interacts weirdly with this.current
+					}
+					$(div).empty();
+					div.className = this.style_data[id].name; // In case Dialog wants to format it specially
+					for(let attr in this.style_data[id].attrs) {
+						div.setAttribute(attr, this.style_data[id].attrs[attr]);
+					}
+					this.current = div;
+					this.in_status = 2;
+					this.currarray.push({t: "eis", i: id});
+	/*			} else { // Normal inline status implementation; we're replacing it with a "status panel" implementation
 					div = document.createElement("div");
 					div.className = this.style_data[id].name;
 					for(let attr in this.style_data[id].attrs) {
@@ -807,7 +823,7 @@ window.run_game = function(story64, options) {
 					if(this.old_inline) {
 						$(this.old_inline).detach();
 					}
-					this.old_inline = div;
+					this.old_inline = div;	*/
 				}
 			}
 		},
@@ -1301,7 +1317,10 @@ window.run_game = function(story64, options) {
 		document.getElementById("aamenu").style.display = "none";
 		document.getElementById("aaaboutouter").style.display = "none";
 	});
-
+	
+	// Don't close the menu if the click was on the menu
+	$("#aamenu").on("click", function(e) { e.stopPropagation(); } );
+	
 	$("#aamain").on("click", function() {
 		var inp;
 		document.getElementById("aamenu").style.display = "none";

@@ -1043,11 +1043,13 @@
 %% Fatal runtime errors
 
 (error $Code entry point)
-	(roman) \( Technical trouble:
-	(report fatal error $Code)
-	Attempting to recover with UNDO. \) (line)
+	(div @realerror) {
+		\( Technical trouble:
+		(report fatal error $Code)
+		Attempting to recover with UNDO. \)
+	}
 	(if) (undo) (or) (then)
-		Undo failed!
+		(div @realerror) { Undo failed! }
 	(endif)
 
 (report fatal error 1)	Heap space exhausted.
