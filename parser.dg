@@ -13,7 +13,11 @@
 (rewrite $Input into $Output) %% Input: [na = an witeni dahhun]
 	(parser log {Rewriting})
 	(parser log { Input: $Input } )
-	(convert $Input into normalized transcription $One) %% One: [na = an witeni daḫḫun]
+	(collect $Word) %% Get rid of ^ determinative markers
+		*($Word is one of $Input)
+		~($Word = @^)
+	(into $ZeroPointFive)
+	(convert $ZeroPointFive into normalized transcription $One) %% One: [na = an witeni dahhun]
 	(parser log { One: $One } )
 	(apply optional replacements to $One into $OnePointFive) %% Try to fix invalid words if possible; does nothing to already-valid words
 	(parser log { 1.5: $OnePointFive } )
@@ -21,7 +25,7 @@
 	(parser log { Two: $Two } )
 	(transpose verb from $Two into $Three) %% Three: [dahhun an witeni]
 	(parser log { Three: $Three } )
-	(purify verb from $Three into $Output) %% Output: [daḫḫun an witeni]
+	(purify verb from $Three into $Output) %% Output: [dāḫḫun an witeni]
 	(parser log { Output: $Output } )
 
 %% This block of code should be discarded once we can handle it in the frontend, it's horribly inefficient to do this kind of text processing in Dialog itself
@@ -49,7 +53,7 @@
 %% Likewise this one, which is even worse optimization-wise
 (apply optional replacements to [] into [])
 (apply optional replacements to [$Head | $Tail] into [$NewHead | $NewTail])
-	(unknown word $Head) %% Don't try optional replacements if a word is already valid (TODO: does this ever make false positives?)
+	(unknown word $Head) %% Don't try optional replacements if a word is already valid
 	(optional replacements turn $Head into valid word $NewHead)
 	(apply optional replacements to $Tail into $NewTail)
 (apply optional replacements to [$Head | $Tail] into [$Head | $NewTail])
@@ -453,6 +457,7 @@
 %%	24	Excess ablative
 %%
 %%	31	Should not have quotative =wa(r)
+%%	32	Should not have ability taruḫḫun
 %%	36	Too many multiple objects
 
 (noun list [$Adv $ $ $] and case list $Cases produce error 11)
@@ -480,6 +485,8 @@
 
 (noun list [$Adv $ $ $] and case list $ produce error 31)
 	(@war is one of $Adv)
+(noun list [$Adv $ $ $] and case list $ produce error 32)
+	(@taruḫḫun is one of $Adv)
 
 (noun list [$|$Nouns] and case list $ produce error 36)
 	%% Check if there are multiple nouns in multiple cases - we only want to deal with a single multiple object list at a time, to avoid combinatorics
@@ -545,7 +552,9 @@
 (show parser error 24 for action $)
 	there should not be an ablative noun
 (show parser error 31 for action $)
-	the clitic =wa\(r\) marks a quotation \( which this sentence should not be \)
+	the clitic (span @hittite) { =wa\(r\) } marks a quotation \( which this sentence should not be \)
+(show parser error 32 for action $)
+	the verb (span @hittite) { taruḫḫun } marks ability or possibility \( when this sentence should indicate an action \)
 (show parser error 36 for action [$ $ $Acc $Dat $Abl])
 	there are multiple nouns in
 	(if) (more than one $Acc) (more than one $Dat) (more than one $Abl) (then)
@@ -648,8 +657,15 @@
 	}
 	(parser log { Rewritten: $Verb $Clitics $Rest } )
 	(if) ~($Verb wants cases $) (then) %% Not a recognized verb
-		%% Is there a verb somewhere else in the sentence? That would mean the player messed up the sentence structure rather than using an invalid verb.
-		(if) *($Alt is one of $Rest) (verb $Alt means $) (then)
+		
+		(if) (third person verb $Verb) (then)
+			(div @error) {
+				This sentence is difficult to interpret. From context, we would expect a description of the narrator's actions, but the verb form (span @hittite) $Verb refers to someone or something else.
+			}
+		(elseif) %% Is there a verb somewhere else in the sentence? That would mean the player messed up the sentence structure rather than using an invalid verb.
+			*($Alt is one of $Rest)
+			{ (verb $Alt means $) (or) (third person verb $Verb) }
+		(then)
 			(div @error) {
 				The structure of this sentence is unusual. "(no space)(uppercase)$Alt(no space)" is a verb, and the verb should always be at the end of a Hittite sentence.
 			}
@@ -753,6 +769,18 @@
 		(sieve action candidates $All at level $Lp1)
 	(endif)
 
+%% NOTE: Input to these is a complex action, not an action yet!
+(unlikely $Action 0)
+	(unlikely $Action) (or) (very unlikely $Action) (or) (very very unlikely $Action)
+(unlikely $Action 1)
+	(very unlikely $Action) (or) (very very unlikely $Action)
+(unlikely $Action 2)
+	(very very unlikely $Action)
+
+(interface (unlikely $<Complex))
+(interface (very unlikely $<Complex))
+(interface (very very unlikely $<Complex))
+
 (consider action candidates $List)
 	(if) ($List = [$Only]) (then) %% Optimize the common case
 		(try-complex $Only)
@@ -809,13 +837,28 @@
 
 (unlikely $ $) (fail)
 
+(divide adverbs $Advs into clitics $Clit and non-clitics $NClit)
+	(collect $C)
+		*($C is one of $Advs)
+		(sentence particle $C)
+	(into $Clit)
+	(collect $N)
+		*($N is one of $Advs)
+		~($N is one of $Clit)
+	(into $NClit)
+
 %% Action format: [[english version] [[raw words] verb [advs] acc dat abl]]
 (describe action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
+	(divide adverbs $Adv into clitics $Clit and non-clitics $NClit)
 	Nu
+	(exhaust) {
+		*($C is one of $Clit)
+		(no space) = (no space) $C
+	}
 	(#accusative $Acc)
 	(#dative $Dat)
 	(#ablative $Abl)
-	(#adverb $Adv)
+	(#adverb $NClit)
 	$Verb
 	.
 (describe action $Action)
@@ -823,21 +866,31 @@
 (describe failed action $Action)
 	Nu (describe raw failed action $Action) .
 (describe raw failed action [$ [$ $Verb $Adv $Acc $Dat $Abl]]) %% No connective, capital, or punctuation, for embedding in a larger context
+	(divide adverbs $Adv into clitics $Clit and non-clitics $NClit)
+	(exhaust) {
+		*($C is one of $Clit)
+		(no space) = (no space) $C
+	}
 	(#accusative $Acc)
 	(#dative $Dat)
 	(#ablative $Abl)
-	(#adverb $Adv)
+	(#adverb $NClit)
 	natta %% Used in place of ŪL to avoid explaining heterograms too early
 	taruḫḫun %% "able to" in asyndetic construction
 	$Verb
 (describe raw failed action $Action)
 	(span @realerror) { Improper action: $Action }
 (describe negative action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
+	(divide adverbs $Adv into clitics $Clit and non-clitics $NClit)
 	Nu
+	(exhaust) {
+		*($C is one of $Clit)
+		(no space) = (no space) $C
+	}
 	(#accusative $Acc)
 	(#dative $Dat)
 	(#ablative $Abl)
-	(#adverb $Adv)
+	(#adverb $NClit)
 	natta
 	$Verb
 	.
@@ -921,4 +974,3 @@
 	(nonempty $List)
 (dict $Obj in $) %% Namely, right here
 	(determiner $Obj)
-(dict $ in $) ^ %% Can sometimes end up in stray inputs, should be ignored

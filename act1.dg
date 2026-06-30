@@ -26,6 +26,19 @@
 	*(dict #water in $Case)
 (* is #in #riverbank)
 
+(player has water source *) (current room #riverbank)
+
+(instead of [[put $Dest *] $])
+	($Dest is one of [#cup #amphora])
+	Nu (#accusative #water) (#dative $Dest) tēḫḫun.
+	(if) ($Dest = #cup) (then)
+		(now) (cup has water)
+	(elseif) ($Dest = #amphora) (then)
+		(now) (amphora has water)
+	(endif)
+	(now) (update needed)
+	(tick)
+
 (instead of [[take *] $])
 	(current player $Player)
 	(if) (#cup is #heldby $Player) ~(cup has water) (then)
@@ -105,6 +118,7 @@
 
 #ladder
 (item *)
+(neuter *)
 (name * in #nominative) ilan
 (name * in #genitive) ilanaš
 (name * in #dative) ilani
@@ -219,6 +233,16 @@
 (* provides light)
 	(bolt is burning)
 
+(instead of [[extinguish *] $Details])
+	(bolt is burning)
+	(if) (player has water source $) (then)
+		(describe action [[extinguish *] $Details])
+		(now) ~(bolt is burning)
+	(else)
+		(describe failed action [[extinguish *] $Details])
+		Nu wātar natta ḫarkun. %% I did not have water.
+	(endif)
+
 #foyer
 (room *)
 (* uses preverb #in)
@@ -244,6 +268,15 @@
 (name * in #bare) ḫašša
 (* is #in #foyer)
 
+(instead of [[extinguish $Obj] $Details])
+	{ ($Obj = *) (or) ($Obj is #in *) }
+	(if) (player has water source $Source) (then)
+		(try [[put $Source *] $Details])
+	(else)
+		(describe failed action [[extinguish $Obj] $Details])
+		Nu wātar natta ḫarkun. %% I did not have water.
+	(endif)
+
 #fire
 (neuter *)
 (name * in #nominative/#accusative/#bare) paḫḫur
@@ -255,7 +288,8 @@
 (prevent [[take $Obj from #hearth] $Details])
 	(* is #in #hearth)
 	(describe failed action [[take $Obj from #hearth] $Details])
-	Nu paḫḫur ayyanza ēšta. %% "The fire was hot."
+	Nu paḫḫur änza ēšta. %% "The fire was hot."
+	%% ä = a-a-a°
 
 #cup
 (item *)
@@ -272,14 +306,30 @@
 	*(dict #water in $Case)
 (* is #in #hearth)
 
+(player has water source *)
+	(current player $Player)
+	(* is #heldby $Player)
+	(cup has water)
+
+#sleeping
+(adjective *)
+(name * in #nominative) šuppanza
+(name * in #genitive) šuppandaš
+(name * in #dative) šuppandi
+(name * in #accusative) šuppandan
+(name * in #ablative) šuppandaz
+(name * in #bare) šuppanza
+
 #watchman
 (animate *)
-(name * in #nominative) šuppanza LÚ ḫalliyatallaš %% Sleeping watchman
-(name * in #genitive) šuppandaš LÚ halliyatallaš
-(name * in #dative) šuppandi LÚ ḫalliyatalli
-(name * in #accusative) šuppandan LÚ ḫalliyatallan
-(name * in #ablative) šuppandaz LÚ ḫalliyatallaz
-(name * in #bare) šuppanza LÚ ḫalliyatalla
+(name * in #nominative) ḫalliyatallaš %% Sleeping watchman
+(name * in #genitive) halliyatallaš
+(name * in #dative) ḫalliyatalli
+(name * in #accusative) ḫalliyatallan
+(name * in #ablative) ḫalliyatallaz
+(name * in #bare) ḫalliyatalla
+(* has modifier #sleeping)
+(determiner *) LÚ
 (dict * in $) LU2
 (* is #in #foyer)
 
@@ -308,6 +358,11 @@
 (* has modifier #water)
 	(amphora has water)
 (* is #in #storeroom)
+
+(player has water source *)
+	(current player $Player)
+	(* is #heldby $Player)
+	(amphora has water)
 
 (instead of [[put * #hearth/#fire] $])
 	(#fire is #in #hearth)
@@ -375,8 +430,7 @@
 %% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
 
 (instead of [[go *] $Details])
-	(current player $Player)
-	(if) (#cup is #heldby $Player) (cup has water) (then)
+	(if) (player has water source $) (then)
 		(describe action [[go *] $Details])
 		(div @narration) { The tablet breaks off here, as the soldier finally enters the temple precinct. }
 		(game over { To be continued... } )
@@ -388,14 +442,19 @@
 #enemyland
 (room *)
 (* uses preverb #at)
-(short name *) KÚR
-(name * in #bare) URU LÚ KÚR
+(short name *) URU
+(name * in #bare) URU LÚ KÚR %% Will not actually be printed, see below
 (logogram *)
 (dict * in $) LU2 KUR2
 
+(#nominative/#accusative/#bare *) URU (dtm {LÚ}) KÚR
+(#genitive *) (span @akk) ša (#bare *)
+(#dative *) (span @akk) ana (#bare *)
+(#ablative *) (span @akk) ištu (#bare *)
+
 (prevent [[go *] | $Details])
-	(describe failed action [[go *] | $Details])
-	%% Basic failure message should be enough, given the definitions of the words
+	(describe negative action [[go *] | $Details]) %% did not rather than could not
+	%% Basic message should be enough, given the definitions of the words
 
 (parse metacommand [\/test watchtower])
 	(now) (#ladder is #in #corner)

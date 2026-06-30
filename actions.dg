@@ -566,6 +566,11 @@
 (translate [$ dāḫḫun $ $Acc $ []] into [take $Acc])
 (translate [$ dāḫḫun $ $Acc $ $Abl] into [take $Acc from $Abl])
 
+(unlikely [$ $ $ $Accs $ $Abls]) %% Note: input is complex action, not action!
+	*($Acc is one of $Accs)
+	*($Abl is one of $Abls)
+	~($Acc has parent $Abl)
+
 (instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
 	($Obj is $ $Holder)
 	~(room $Holder)
@@ -699,33 +704,100 @@
 	(#gatehouse is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% SMITE
+%% SLAY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(verb @kuenun means @kuenun)
+(verb @kuenun/@slay means @kuenun)
 (@kuenun wants cases [#accusative #ablative])
 (@kuenun wants cases [#adverb #accusative #ablative]) %% needs =kkan
-(translate [$ kuenun $ $Acc | $] into [smite $Acc])
+(translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl])
 
-(prevent [[smite $] [$ $Advs | $]])
+(prevent [[slay $ with $] [$ $ $Advs | $]])
 	~(@kan is one of $Advs)
-	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "smite" requires the sentence particle =kan to be attached to the first word of the sentence. }
+	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "slay" requires the sentence particle =kan to be attached to the first word of the sentence. }
 
-(prevent [[smite ~(animate $Obj)] $Details])
-	(describe negative action [[smite $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+(prevent [[slay ~(animate $Obj) with $] $Details])
+	(describe negative action [[slay $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
 	(if) (neuter $Obj) (then)
-		Na=at
+		N=at
 	(else)
-		Na=aš
+		N=aš
 	(endif)
 	antuḫšaš natta ēšta. %% It was not a person.
 
-(perform [[smite $Obj] $]) %% Remove a person from the game; prevent this if someone should be un-smiteable
+(prevent [[slay $Target with $Obj] $Details])
+	(current player $Player)
+	~($Obj is #heldby $Player)
+	(describe failed action [[slay $Target with $Obj] $Details])
+	Nu (#accusative $Obj) natta ḫarkun. %% I did not hold the $Obj.
+
+(perform [[slay $Obj with $] $]) %% Remove a person from the game; prevent this if someone should be un-slayable
 	(now) ($Obj is nowhere)
 	(now) (update needed)
 
-#v-smite
+#v-slay
 (verb *)
-(name *) kuenun
-(verb * unlocked)
+(name *) =kan kuenun
+(verb * unlocked) %% TODO should this be unlocked at all in act 1? It needs an ablative which is otherwise not featured
 	(#foyer is visited)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Miscellaneous verbs used in the text
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(third person verb @ēšta/@ešer)
+
+(verb @ešun/@be means @ešun)
+(@ešun wants cases [#dative])
+(@ešun wants cases [#accusative #dative]) %% =za is usually [#accusative #reflexive]
+(@ešun wants cases [#accusative]) %% in case of incomplete sentence
+(translate [$ ešun | $] into [be])
+(prevent [[be] $])
+	(div @error) {
+		It is unclear why this sentence was included. In this context, we expect a description of what the narrator was doing, rather than just where he was.
+	}
+
+(verb @taruḫḫun/@can means @taruḫḫun)
+(@taruḫḫun wants cases [#accusative #ablative])
+(translate [$ taruḫḫun $ $Acc $ $Abl] into [overpower $Acc with $Abl]) %% On its own, make it a synonym for "slay"
+(instead of [[overpower $Obj with $Tool] [$Raw | $]])
+	(try [[slay $Obj with $Tool] [$Raw kuenun [kan] $Obj [] $Tool]])
+
+(adverb @taruḫḫun/@can means @taruḫḫun) %% Triggers an error in parser.dg
+
+(verb @ḫarkun/@hold means @ḫarkun)
+(@ḫarkun wants cases [#accusative])
+(translate [$ ḫarkun $ $Acc | $] into [hold $Acc])
+
+(instead of [[hold $Obj] [$Raw | $]]) %% Reinterpret as TAKE if not held
+	(current player $Player)
+	~($Obj is #heldby $Player)
+	(try [[take $Obj] [$Raw dāḫḫun [] $Obj [] []]]) %% But with ḫarkun as the verb
+
+(perform [[hold $] $]) %% If already held, no special behavior
+
+%% TODO waššiyanun "wear"
+
+(verb @ḫašḫun/@open means @ḫašḫun)
+(@ḫašḫun wants cases [#accusative])
+(translate [$ ḫašḫun $ $Acc | $] into [open $Acc])
+
+(prevent [[open $Obj] $Details]) %% Just fail with default message
+	(describe failed action [[open $Obj] $Details])
+
+(verb @kištanunun means @kištanunun)
+(@kištanunun wants cases [#accusative])
+(translate [$ kištanunun $ $Acc | $] into [extinguish $Acc])
+
+%% Success handled in (instead of $) redirects in act1.dg
+
+(prevent [[extinguish $Obj] $Details])
+	(describe negative action [[extinguish $Obj] $Details])
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=aš
+	(endif)
+	warān natta ēšta. %% It was not burning.
+
+(third person verb @lukket)
