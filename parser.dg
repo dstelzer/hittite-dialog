@@ -202,12 +202,12 @@
 #dative
 (grammatical case *)
 (parser case *)
-(name *) dative/locative
+(name *) dative %% /locative
 
 #ablative
 (grammatical case *)
 (parser case *)
-(name *) ablative/instrumental
+(name *) ablative %% /instrumental
 
 #adverb
 (grammatical case *)
@@ -497,7 +497,7 @@
 (show parser errors [$Single] for action [$Raw | $Action])
 	This sentence, (print quoted $Raw), is difficult to interpret.
 	(uppercase) (show parser error $Single for action [$Raw | $Action]).
-(show parser errors [$A $B] for action [$Raw $Verb | $]) %% Exactly two errors might be a noun in the wrong case
+(show parser errors [$A $B] for action [$Raw $Verb $ $Acc $Dat $Abl]) %% Exactly two errors might be a noun in the wrong case
 	{
 		($A is one of [12 13 14])
 		($B is one of [22 23 24])
@@ -509,15 +509,24 @@
 		($A modulo 10 into $Excess)
 		($B modulo 10 into $Missing)
 	}
-	This sentence, (print quoted $Raw), is likely a scribal error: the verb $Verb expects a noun in the (case of error $Missing), not the (case of error $Excess) .
+	
+	(if) ($Excess = 2) (then) ($ExcessNoun = $Acc) ($ExcessCase = #accusative)
+	(elseif) ($Excess = 3) (then) ($ExcessNoun = $Dat) ($ExcessCase = #dative)
+	(elseif) ($Excess = 4) (then) ($ExcessNoun = $Abl) ($ExcessCase = #ablative)
+	(else) (div @realerror) { Excess $N ! } (fail)
+	(endif)
+	
+	(if) ($Missing = 2) (then) ($MissingCase = #accusative)
+	(elseif) ($Missing = 3) (then) ($MissingCase = #dative)
+	(elseif) ($Missing = 4) (then) ($MissingCase = #ablative)
+	(else) (div @realerror) { Missing $N ! } (fail)
+	(endif)
+	
+	This sentence, (print quoted $Raw), is likely a scribal error. The verb $Verb expects a noun in the (name $MissingCase), not the (name $ExcessCase): (span @hittite) ($MissingCase $ExcessNoun) rather than (span @hittite) ($ExcessCase $ExcessNoun) .
+	
 (show parser errors $List for action [$Raw | $Action])
 	This sentence, $Raw, is difficult to interpret, for multiple reasons.
 	(uppercase) (listing $List {(show parser error $_ for action [$Raw | $Action])}).
-
-(case of error 2) accusative
-(case of error 3) dative
-(case of error 4) ablative
-(case of error $N) ERR: $N
 
 (show parser error 11 for action $)
 	there should be an adverb or sentence particle

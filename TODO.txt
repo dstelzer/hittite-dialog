@@ -1,8 +1,6 @@
 paragraph break after metacommand
-redisplay status bar after metacommand
 cuneiform in compass rose is too big
 title is in italics in translit
-dictionary entries always display phonemic not bound forms
 metacommand links
 automap in left panel
-enter button is one line too low
+make $Raw show words that have been sanitized

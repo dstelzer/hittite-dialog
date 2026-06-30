@@ -29,6 +29,7 @@
 %% "Errors" in the player's input
 (style class @error)
 	data-language: en;
+	font-family: sans-serif;
 
 %% Meta messages
 (style class @meta)
@@ -39,6 +40,7 @@
 (style class @realerror)
 	color: red;
 	font-weight: bold;
+	font-family: sans-serif;
 	data-language: en;
 
 (style class @hittite)

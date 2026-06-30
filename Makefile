@@ -1,13 +1,14 @@
 FILES = act1.dg actions.dg interface.dg parser.dg worldmodel.dg
 OPTIONS = --word-seps='^⸗=.,;"()*'
+# ^ for determiners, ⸗ for proper clitics, = for ASCII clitics; the rest are default
 OPTIONS_DBG = --word-seps='^=.,;"()*'
 # Debugger can't handle non-ASCII word separators yet
 
 
-debug: $(FILES)
+debug: $(FILES) platform_debug.dg
 	dgdebug $(OPTIONS_DBG) platform_debug.dg $(FILES)
 
-hittite.z5: $(FILES)
+hittite.z5: $(FILES) platform_z.dg
 	dialogc -t z5 -o hittite.z5 $(OPTIONS) platform_z.dg $(FILES)
 
 play: hittite.z5
@@ -16,7 +17,10 @@ play: hittite.z5
 hittite.aastory: $(FILES) platform_web.dg
 	dialogc -t aa -o hittite.aastory $(OPTIONS) platform_web.dg $(FILES)
 
-web: hittite.aastory ishamai modweb
+dictionary.js: dictionary.tsv dictionarify.py
+	python dictionarify.py
+
+web: hittite.aastory ishamai modweb dictionary.js
 	rm -rf web
 	aambundle -t web hittite.aastory -o web
 	cp -r ishamai web/

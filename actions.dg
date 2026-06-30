@@ -162,7 +162,7 @@
 	
 	%% Final paragraph: verbs
 	(if) ~(using separate panels) (then)
-		(div @verbs) (verbs list)
+		(par) (div @verbs) (verbs list)
 	(endif)
 	
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
@@ -181,7 +181,8 @@
 (verbs list)
 	(span @bold) { Verbs: }
 	(collect $Verb)
-		*(verb $Verb unlocked)
+		*(verb $Verb)
+		(verb $Verb unlocked)
 	(into $VerbList)
 	(listing $VerbList {(hittite name $_)} @, 0)
 
@@ -192,14 +193,13 @@
 (style class @p-verbs)
 	margin-left: 2em;
 	text-indent: -2em;
+	data-language: en; %% Verbs are in @hittite spans inside this
 
 (style class @verbs)
 	width: 100\%;
 	text-align: center;
 	font-style: italic;
 	data-language: en;
-
-(interface (verb $<Object)) %% Not currently used
 
 (interface ($<Dir on the compass rose is $>Obj))
 ($Dir on the compass rose is $Obj)
@@ -254,26 +254,10 @@
 
 %% If the interpreter supports text alignment, we can also do a simpler thing
 (print name of [] number $)
-	(space 1)
+	(space 1) %% Keep alignment roughly consistent by ensuring the divs are never entirely empty
 (print name of $Obj number $N)
 	(if) (direction numbers enabled) (then) (link) $N (space 1) (endif)
 	(short name $Obj)
-
-(style class @c-north)
-	text-align: center;
-(style class @c-up)
-	text-align: right;
-(style class @c-west)
-	text-align: right;
-(style class @c-rose)
-	text-align: center;
-	font-size: 2em;
-(style class @c-east)
-	text-align: left;
-(style class @c-down)
-	text-align: left;
-(style class @c-south)
-	text-align: center;
 
 %% Fancy one involving injecting into specific HTML elements
 %% This should be changed to use (status panel $) when I get that proposal through
@@ -294,6 +278,23 @@
 	(inline status bar @c-east) (print name of $East number 3)
 	(inline status bar @c-down) (print name of $Down number 6)
 	(inline status bar @c-south) (print name of $South number 1)
+
+%% Set alignment for all the individual boxes
+(style class @c-north)
+	text-align: center;
+(style class @c-up)
+	text-align: right;
+(style class @c-west)
+	text-align: right;
+(style class @c-rose)
+	text-align: center;
+	font-size: 2em;
+(style class @c-east)
+	text-align: left;
+(style class @c-down)
+	text-align: left;
+(style class @c-south)
+	text-align: center;
 
 %% Normal one that works on any backend
 (compass rose) ~(given first message)
@@ -644,6 +645,8 @@
 	(now) ($Obj is #in $Room)
 	(now) (update needed)
 
+(verb #v-put) %% Ensure PUT is listed before DROP when both are unlocked
+
 #v-drop
 (verb *)
 (name *) katta tēḫḫun
@@ -690,7 +693,7 @@
 	(now) (update needed)
 
 #v-put
-(verb *)
+%% (verb *)
 (name *) tēḫḫun
 (verb * unlocked)
 	(#gatehouse is visited)

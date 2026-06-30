@@ -2,11 +2,13 @@
 	height: auto;
 	line-height: 1.35em;
 	margin-bottom: 0.35em;
+	font-family: Georgia, serif !important; %% Override the web terp's styling
 
 (style class @tutorial)
 	margin-top: 1em;
 	margin-bottom: 1em;
 	data-language: en;
 	font-style: italic;
+	font-family: sans-serif;
 
-(superscripts supported)
+(superscripts supported) %% No need to use ^ for determinatives

@@ -1131,10 +1131,14 @@ window.run_game = function(story64, options) {
 			this.current.appendChild(this.aainputblock);
 			$(this.aainput).val("");
 			this.protected_inp = "";
-			this.aainputblock.style.maxWidth = "100px";
+			this.aainputblock.style.maxWidth = "100px"; // Should always be smaller than the goal width
 			this.aainputblock.style.display = "inline-block";
 			//$(this.aainput).val($(this.current).width() + ", " + $(this.aainput).position().left);
-			this.aainputblock.style.maxWidth = ($(this.current).width() - $(this.aainputblock).position().left) + "px";
+			var blockwidth = $(this.current).width() - $(this.aainputblock).position().left; // Make the block take up all the space between the prompt and the right edge
+			var submitwidth = $("#aasubmit").width();
+			this.aainputblock.style.maxWidth = blockwidth + "px";
+			this.aainput.style.width = (blockwidth - submitwidth) + "px";
+			$("#aasubmit")[0].style.right = "-" + submitwidth + "px";
 			aaremote.update();
 			this.maybe_focus();
 			if(status == aaengine.status.quit || status == aaengine.status.restore) {
