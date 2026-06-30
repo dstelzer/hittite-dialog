@@ -1,0 +1,8 @@
+*.aastory
+*.z5
+*.z8
+*.zblorb
+web/
+*.log
+*.out
+dictionary.js
