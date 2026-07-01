@@ -584,7 +584,7 @@
 	(endif)
 	
 	(if) (save undo 1) (then)
-		(div @error) { The previous lines, starting with (print words $Words), are crossed out on the tablet and should be considered a scribal error. }
+		(div @error) { The previous lines, starting with (print quoted $Words), are crossed out on the tablet and should be considered a scribal error. }
 		(now) (update needed)
 		(stop)
 	(endif)

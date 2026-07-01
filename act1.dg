@@ -370,7 +370,7 @@
 	(now) (#fire is nowhere)
 	(now) ~(amphora has water)
 	Nu wātar paḫḫeni tēḫḫun. %% "I put the water on the fire..."
-	N=an kištanunun. %% "...and extinguished it."
+	N=at kištanunun. %% "...and extinguished it."
 	(now) (update needed)
 
 %% Never on-stage, but used by the parser
@@ -462,6 +462,7 @@
 	(now) (#street is visited)
 	(now) (#bolt is pristine)
 	(now) (#bolt is #in #gate)
+	(now) (direction numbers enabled)
 	(enter #gatehouse)
 
 (parse metacommand [\/test roof])

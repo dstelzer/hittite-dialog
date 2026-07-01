@@ -91,7 +91,7 @@
 (refuse [$Action $]) %% Prevent any interaction with this noun
 	(* is one of $Action)
 	~{ ($Action = [go *]) (or) ($Action = [travel *]) }
-	(div @error) { Since the "darkness" is insubstantial, it's unclear what this action would entail. }
+	(div @error) { Since the "dark" is insubstantial, it's unclear what this action would entail. }
 
 (describe environment)
 	
@@ -594,7 +594,7 @@
 	(if) (neuter $Obj) (then)
 		N=at mekki nakki
 	(else)
-		N=an mekki nakkiš
+		N=aš mekki nakkiš
 	(endif)
 	ēšta. %% "It was very heavy."
 
@@ -691,7 +691,7 @@
 (prevent [[put $Obj $Dest] $Details])
 	~(holder $Dest)
 	(describe failed action [[put $Obj $Dest] $Details])
-	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
+	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (span @hittite) (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
 
 (perform [[put $Obj $Dest] | $])
 	(now) ($Obj is #in $Dest) %% TODO always #in?
