@@ -4,3 +4,8 @@ title is in italics in translit
 metacommand links
 automap in left panel
 make $Raw show words that have been sanitized
+overhaul clitic matching system, it's awful
+split CSS into multiple files
+flex layout for panels
+cuneiform is broken in verbs panel??
+architecture for multiple tablets
