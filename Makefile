@@ -8,11 +8,11 @@ OPTIONS_DBG = --word-seps='^=.,;"()*'
 debug: $(FILES) platform_debug.dg
 	dgdebug $(OPTIONS_DBG) platform_debug.dg $(FILES)
 
-hittite.z5: $(FILES) platform_z.dg
-	dialogc -t z5 -o hittite.z5 $(OPTIONS) platform_z.dg $(FILES)
+#hittite.z5: $(FILES) platform_z.dg
+#	dialogc -t z5 -o hittite.z5 $(OPTIONS) platform_z.dg $(FILES)
 
-play: hittite.z5
-	frotz hittite.z5
+#play: hittite.z5
+#	frotz hittite.z5
 
 hittite.aastory: $(FILES) platform_web.dg
 	dialogc -t aa -o hittite.aastory $(OPTIONS) platform_web.dg $(FILES)
@@ -24,6 +24,7 @@ web: hittite.aastory ishamai modweb dictionary.js
 	rm -rf web
 	aambundle -t web hittite.aastory -o web
 	cp -r ishamai web/
+	## TODO: only really need to copy the .js files and fonts/ from Ishamai
 	rm web/play.html
 	cp -r modweb/* web/
 
