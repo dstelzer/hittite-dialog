@@ -1,3 +1,6 @@
 [submodule "ishamai"]
 	path = ishamai
 	url = git@github.com:dstelzer/ishamai.git
+[submodule "cartography-mono"]
+	path = cartography-mono
+	url = git@github.com:dstelzer/cartography-mono.git
