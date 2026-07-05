@@ -8,25 +8,38 @@
 	(log) (query $Closure)
 (parser log $) %% Always succeed
 
+%% Sanitize predicate: convert whatever the player typed into a standard form
+
+(sanitize $Input into $Output)
+	(parser log {Sanitizing})
+	(parser log { Input: $Input } )
+	
+	(collect $Word) %% Get rid of ^ determinative markers
+		*($Word is one of $Input)
+		~($Word = @^)
+	(into $One)
+	(parser log { One: $One } )
+	
+	(convert $One into normalized transcription $Two)
+	(parser log { Two: $Two } )
+	
+	(apply optional replacements to $Two into $Output) %% Try to fix invalid words if possible; does nothing to already-valid words
+	(parser log { Output: $Output } )
+
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
 (rewrite $Input into $Output) %% Input: [na = an witeni dahhun]
 	(parser log {Rewriting})
 	(parser log { Input: $Input } )
-	(collect $Word) %% Get rid of ^ determinative markers
-		*($Word is one of $Input)
-		~($Word = @^)
-	(into $ZeroPointFive)
-	(convert $ZeroPointFive into normalized transcription $One) %% One: [na = an witeni dahhun]
+	(separate clitics from $Input into $One) %% One: [[an] witeni dahhun]
 	(parser log { One: $One } )
-	(apply optional replacements to $One into $OnePointFive) %% Try to fix invalid words if possible; does nothing to already-valid words
-	(parser log { 1.5: $OnePointFive } )
-	(separate clitics from $OnePointFive into $Two) %% Two: [[an] witeni dahhun]
+	(transpose verb from $One into $Two) %% Two: [dahhun an witeni]
 	(parser log { Two: $Two } )
-	(transpose verb from $Two into $Three) %% Three: [dahhun an witeni]
-	(parser log { Three: $Three } )
-	(purify verb from $Three into $Output) %% Output: [dāḫḫun an witeni]
+	(purify verb from $Two into $Output) %% Output: [dāḫḫun an witeni]
 	(parser log { Output: $Output } )
+	
+	%% This last step, (purify verb...), is usually no longer necessary due to (sanitize $ into $)
+	%% But it allows for verb synonyms if we want those in the future
 
 %% This block of code should be discarded once we can handle it in the frontend, it's horribly inefficient to do this kind of text processing in Dialog itself
 (convert [] into normalized transcription [])
@@ -647,7 +660,7 @@
 
 (interface (parse action $<Words))
 (parse action $Words)
-	($Raw = $Words)
+	(sanitize $Words into $Raw)
 	
 	{
 		(rewrite $Raw into [$Verb $Clitics | $Rest])
@@ -826,7 +839,7 @@
 (prompt and input $Words)
 	*(repeat forever)
 	(line)
-	> (get input $Words)
+	(span @prompt) > (get input $Words)
 	~($Words = [\* | $]) %% Ignore lines starting with stars, for transcript comments
 
 (redraw status bar)

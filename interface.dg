@@ -45,6 +45,10 @@
 
 (style class @hittite)
 	data-language: ht;
+	text-indent: 0;
+
+(style class @prompt)
+	data-language: en;
 
 %% Rarely but occasionally needed
 (style class @bold)

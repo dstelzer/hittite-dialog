@@ -4,6 +4,19 @@
 	line-height: 1.2;
 }
 
+.panel .sign, .panel .whitespace{ /* Make the cuneiform smaller in the right panel */
+	font-size: 1.33em;
+}
+
+.word{ /* Don't break lines within a word if possible */
+	white-space: nowrap;
+}
+
+.aa-hittite .read{ /* Avoid incorrect italics and caps inside tutorials */
+	font-style: normal;
+	text-transform: none;
+}
+
 .whitespace{
 	margin-left: 0.33ch;
 	margin-right: 0.33ch;
@@ -24,6 +37,7 @@
 	visibility: visible;
 	font-style: normal;
 	font-synthesis-style: none; /* Don't make fake italics please! */
+	/* Fake bold is okay though, the stroke widths scale up just fine */
 }
 
 .sign .read{
