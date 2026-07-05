@@ -614,12 +614,13 @@ window.run_game = function(story64, options) {
 			this.scroll_anchor = this.current;
 			if(link) {
 				span = document.createElement("h2"); // Using an H2 instead of a span makes it easier for screen readers to jump to it
-				$(span).addClass(io.links_enabled? "aalink" : "aahidelink");
+	//			$(span).addClass(io.links_enabled? "aalink" : "aahidelink");
 				$(span).addClass("aainputtext"); // For styling input differently, if desired; currently unused
 				span.href = "#0";
 				span.appendChild(document.createTextNode(str));
 				this.current.appendChild(span);
-				this.install_link(span, str);
+	//			this.install_link(span, str);
+	// not using links for input for this game specifically
 			} else {
 				span = document.createElement("h2");
 				$(span).addClass("aainputtext"); // For styling input differently, if desired; currently unused

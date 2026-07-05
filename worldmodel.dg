@@ -334,6 +334,12 @@
 
 (interface ($>Obj is in scope))
 
+%% Some verbs need to extend the scope in particular ways
+(global variable (scope policy $))
+($Obj is in scope)
+	(scope policy $Policy)
+	*($Obj is in scope for $Policy)
+
 ($Obj is in scope)
 	*(add $Obj to scope)
 
@@ -600,6 +606,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Daemons
 
+(interface (inhibit next tick))
 (inhibit next tick)
 	(now) (inhibiting next tick)
 
@@ -652,8 +659,11 @@
 (program entry point)
 	(div @initial-spacer) {}
 	(update environment around player)
+	(exhaust) *(startup)
 	(stoppable) (intro)
 	*(repeat forever) (read-parse-act) (fail)
+
+(startup) (fail) %% Put calculations here that need to run at startup
 
 (intro)
 	(world log {Banner})

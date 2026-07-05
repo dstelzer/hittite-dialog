@@ -1,6 +1,12 @@
+Warning: act1.dg, line 546: Possible typo: A rule is defined for '(avoid
+genitive case)', but this predicate is never queried and has no interface
+definition.
 Nu=za wappui ešun.
 
 Nu apiya ḫapan ōḫḫun.
+
+                                       |  
+                                      (@) 
 
 Welcome to Ḫattušumna Laḫḫa! This game is presented entirely in the ancient
 Hittite language, which is probably a bit intimidating at first. But don't
@@ -19,6 +25,8 @@ Verbs: ōḫḫun, pāun
               auriya             
                 ✧                
                                  
+                                       |  
+                                      (@) 
 
 You probably came up with something like "I was at the riverbank. I saw a river
 there." Most Hittite sentences start with a meaningless "connective" word, then
@@ -44,6 +52,10 @@ Verbs: ōḫḫun, pāun, šarraḫḫun
               āškan              
           palši ✧ kutti          
              wappui              
+                                       :  
+                                     -(@)-
+                                       |  
+                                      ( ) 
 
 There we go! You'll encounter many more verbs and nouns as you go along, but
 all the relevant ones will be shown at the top of the screen: what you can see
@@ -77,6 +89,10 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun
                                  
                 ✧ auriya         
                                  
+                                         :  
+                                    (@)-( )-
+                                         |  
+                                        ( ) 
 > ilan dahhun
 Nu ilan dāḫḫun.
 
@@ -88,6 +104,10 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
                                  
                 ✧ auriya         
                                  
+                                         :  
+                                    (@)-( )-
+                                         |  
+                                        ( ) 
 > auriya paun
 Nu auriya pāun.
 
@@ -101,17 +121,22 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
              <2> āškan             
         <4> palši ✧ <3> kutti        
             <1> wappui             
+                                         :  
+                                    ( )-(@)-
+                                         |  
+                                        ( ) 
 
 You're getting the hang of this now! Since you'll be moving around a lot in
 this game, there's a shorter way to get from place to place: the Babylonians
-sometimes numbered their compass directions, so you can type "1 3 2" to go
-south, then east, then north. These numbers will be shown on the compass rose
-in the top right.
+sometimes numbered their compass directions, south north east west, so you can
+type "1 3 2" to go south, then east, then north. These numbers will be shown on
+the compass rose in the top right.
 
-(There's no evidence that the Hittites actually did this, and adding numbers
-for "up" and "down" is completely non-historical. But the Hittites imitating
-Babylonian writing isn't much of a stretch, and typing a full sentence every
-time gets tedious very fast.)
+(There's no evidence that the Hittites actually did this, and adding numbers 5
+and 6 for "up" and "down" is completely non-historical. But the Hittites
+imitating Babylonian writing isn't much of a stretch, and typing a full
+sentence every time gets tedious very fast! You can also click the map to
+navigate to anywhere you've been before.)
 
 > nu ackan dahhun
 Nu āškan natta taruḫḫun dāḫḫun. N=aš mekki nakkiš ēšta.
@@ -131,6 +156,10 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
           <2> ḫalḫaltomari         
        <4> auriya ✧                
                                  
+                                       :   |  
+                                  ( )-( )-(@) 
+                                       |      
+                                      ( )     
 > halhaltomari paun
 Nu kuttaš ḫalḫaltomari pāun.
 
@@ -144,6 +173,11 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
                                  
        <4> luttāi ✧                
              <1> kutti             
+                                         +(@) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > luttai carrahhun
 Nu ḫilamnaš luttāi natta taruḫḫun šarraḫḫun. N=at parku ēšta.
 
@@ -163,6 +197,11 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
                                  
        <4> luttāi ✧                
              <1> kutti             
+                                         +(@) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 
 Certain cuneiform signs were used as shorthand for entire words, like how "7"
 is short for "seven", or "&" short for "and". These signs are written in
@@ -181,6 +220,12 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> iškiši            
        <4> arkiwi ✧ <3> luttāi       
              <1> āškan             
+                                       |      
+                                     -(@)+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 
 Hittite nouns were sometimes written with a special sign in front, called a
 "determinative". These weren't pronounced, but indicated something about the
@@ -192,7 +237,7 @@ marks that something is made of wood.
 Nu āškan natta taruḫḫun šarraḫḫun. Nu āškaš ḫattalwanza ēšta.
 
 > hattalu dahhun
-Nu GIŠ^ḫattalu āškaz dāḫḫun. Nu āškan ḫašḫun.
+Nu GIŠ^ḫattalu dāḫḫun. Nu āškan ḫašḫun.
 
 Nu=za=kan ḫilamni anda ešun.
 
@@ -204,6 +249,12 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> iškiši            
        <4> arkiwi ✧ <3> luttāi       
              <1> āškan             
+                                       |      
+                                     -(@)+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > ackan carrahhun
 Nu āškan šarraḫḫun.
 
@@ -217,6 +268,12 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> āškan             
         <4> palši ✧ <3> kutti        
             <1> wappui             
+                                       |      
+                                     -( )+(.) 
+                                       :   |  
+                                  ( )-(@)-( ) 
+                                       |      
+                                      ( )     
 > ackan carrahhun
 Nu āškan šarraḫḫun.
 
@@ -230,6 +287,12 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> iškiši            
        <4> arkiwi ✧ <3> luttāi       
              <1> āškan             
+                                       |      
+                                     -(@)+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > arkiwi paun
 Nu É^arkiwi pāun.
 
@@ -244,6 +307,12 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> dankui            
                 ✧ <3> ḫilamni      
                                  
+                                   |   |      
+                                  (@)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 
 Most of the sentences you've seen so far have only one noun, but this doesn't
 have to be the case. To put one thing into or onto another, for example, you'll
@@ -257,10 +326,10 @@ Nu pēdan kuit dankui ēšta, parā natta taruḫḫun pāun.
 case doesn't make sense in this context.
 
 > agannin dahhun
-Nu DUG^agannin ḫaššaz natta taruḫḫun dāḫḫun. Nu paḫḫur änza ēšta.
+Nu DUG^agannin natta taruḫḫun dāḫḫun. Nu paḫḫur änza ēšta.
 
 > pahhur dahhun
-Nu paḫḫur ḫaššaz natta taruḫḫun dāḫḫun. Nu paḫḫur änza ēšta.
+Nu paḫḫur natta taruḫḫun dāḫḫun. Nu paḫḫur änza ēšta.
 
 > hattalu hacci tehhun
 Nu GIŠ^ḫattalu ḫašši tēḫḫun. Nu GIŠ^ḫattalu lukket.
@@ -276,6 +345,12 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> antaki            
                 ✧ <3> ḫilamni      
                                  
+                                   |   |      
+                                  (@)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > antaki paun
 Nu antaki pāun.
 
@@ -289,6 +364,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
                                  
                 ✧                
             <1> arkiwi             
+                                  [@]         
+                                   |   |      
+                                  (*)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > palhin dahhun
 Nu DUG^palḫin dāḫḫun.
 
@@ -300,6 +382,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
                                  
                 ✧                
             <1> arkiwi             
+                                  [@]         
+                                   |   |      
+                                  (*)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > 1 3 1 1
 1   Nu É^arkiwi pāun.
 3   Nu ḫilamni pāun.
@@ -316,6 +405,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> auriya            
                 ✧                
                                  
+                                  [ ]         
+                                   |   |      
+                                  (*)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      (@)     
 > hattalu hapi tehhun
 Nu warān GIŠ^ḫattalu ḫapi tēḫḫun.
 
@@ -329,6 +425,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> auriya            
                 ✧                
                                  
+                                  [ ]         
+                                   |   |      
+                                  (*)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      (@)     
 > watar dahhun
 Nu wātar DUG^palḫi tēḫḫun.
 
@@ -342,6 +445,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> auriya            
                 ✧                
                                  
+                                  [ ]         
+                                   |   |      
+                                  (*)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      (@)     
 > 2 2 4
 2   Nu auriya pāun.
 2   Nu āškan šarraḫḫun.
@@ -358,6 +468,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> dankui            
                 ✧ <3> ḫilamni      
                                  
+                                  [ ]         
+                                   |   |      
+                                  (@)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > watar hacci tehhun
 Nu wātar paḫḫeni tēḫḫun. N=at kištanunun.
 
@@ -372,8 +489,15 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> dankui            
                 ✧ <3> ḫilamni      
                                  
+                                  [ ]         
+                                   |   |      
+                                  (@)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > agannin dahhun
-Nu DUG^agannin ḫaššaz dāḫḫun.
+Nu DUG^agannin dāḫḫun.
 
 Nu=za=kan É^arkiwi anda ešun.
 
@@ -385,6 +509,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> dankui            
                 ✧ <3> ḫilamni      
                                  
+                                  [ ]         
+                                   |   |      
+                                  (@)-( )+(.) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > * To the roof!
 > 3 1 3 2
 3   Nu ḫilamni pāun.
@@ -402,6 +533,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
                                  
        <4> luttāi ✧                
              <1> kutti             
+                                  [ ]         
+                                   |   |      
+                                  (*)-( )+(@) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > ilan dahhun
 Nu ilan dāḫḫun.
 
@@ -415,6 +553,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
                                  
        <4> luttāi ✧                
              <1> kutti             
+                                  [ ]         
+                                   |   |      
+                                  (*)-( )+(@) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > 1 4 2 2
 1   Nu kutti pāun.
 4   Nu auriya pāun.
@@ -426,9 +571,17 @@ Nu=za=kan auriyaš iškiši anda ešun.
 Nu ilan Ù DUG^agannin Ù DUG^palḫin Ù GIŠ^ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun
-              <2> URU       <5> šuḫḫi
+            <2> ḫappiri     <5> šuḫḫi
                 ✧                
             <1> ḫilamni            
+                                       | /    
+                                  [ ] (@)     
+                                   |   |      
+                                  (*)-( )+( ) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > cuhhi paun
 Nu šuḫḫi natta taruḫḫun pāun. Nu šuḫḫa parku ēšta.
 
@@ -442,9 +595,17 @@ Nu apiya ilan ōḫḫun.
 Nu DUG^agannin Ù DUG^palḫin Ù GIŠ^ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun
-              <2> URU       <5> šuḫḫi
+            <2> ḫappiri     <5> šuḫḫi
                 ✧                
             <1> ḫilamni            
+                                       | /    
+                                  [ ] (@)     
+                                   |   |      
+                                  (*)-( )+( ) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > cuhhi paun
 Nu šuḫḫi natta taruḫḫun pāun. Nu palḫiš nakkiš ēšta.
 
@@ -458,9 +619,17 @@ Nu apiya DUG^palḫin Ù ilan ōḫḫun.
 Nu DUG^agannin Ù GIŠ^ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun
-              <2> URU       <5> šuḫḫi
+            <2> ḫappiri     <5> šuḫḫi
                 ✧                
             <1> ḫilamni            
+                                       | /    
+                                  [ ] (@)     
+                                   |   |      
+                                  (*)-( )+( ) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > cuhhi paun
 Nu šuḫḫi pāun.
 
@@ -472,6 +641,16 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
               <2> ḫali             
                 ✧                
 <6> iškiši                         
+                                           |  
+                                          (@) 
+                                       | /    
+                                  [ ] (.)     
+                                   |   |      
+                                  (*)-( )+( ) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > hali paun
 Nu karimnaš ḫali natta taruḫḫun pāun. Nu=za šaknuwanza ešun. Nu wātar natta
 ḫarkun.
@@ -486,11 +665,21 @@ Nu apiya DUG^palḫin Ù ilan ōḫḫun.
 Nu DUG^agannin Ù GIŠ^ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun
-              <2> URU       <5> šuḫḫi
+            <2> ḫappiri     <5> šuḫḫi
                 ✧                
             <1> ḫilamni            
+                                           |  
+                                          ( ) 
+                                       | /    
+                                  [ ] (@)     
+                                   |   |      
+                                  (*)-( )+( ) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > 2
-2   Nu ana URU LÚ^KÚR natta pāun.
+2   Nu ḫappiri natta pāun. Nu ḫappiraš kurur ēšta.
 
 > 1 1 1
 1   Nu ḫilamni pāun.
@@ -507,6 +696,16 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> auriya            
                 ✧                
                                  
+                                           |  
+                                          ( ) 
+                                       | /    
+                                  [ ] (.)     
+                                   |   |      
+                                  (*)-( )+( ) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      (@)     
 > watar dahhun
 Nu wātar DUG^aganniya tēḫḫun.
 
@@ -520,6 +719,16 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
              <2> auriya            
                 ✧                
                                  
+                                           |  
+                                          ( ) 
+                                       | /    
+                                  [ ] (.)     
+                                   |   |      
+                                  (*)-( )+( ) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      (@)     
 > 2 2 2 5
 2   Nu auriya pāun.
 2   Nu āškan šarraḫḫun.
@@ -534,6 +743,16 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
               <2> ḫali             
                 ✧                
 <6> iškiši                         
+                                           |  
+                                          (@) 
+                                       | /    
+                                  [ ] (.)     
+                                   |   |      
+                                  (*)-( )+( ) 
+                                       :   |  
+                                  ( )-( )-( ) 
+                                       |      
+                                      ( )     
 > hali paun
 Nu karimnaš ḫali pāun.
 The tablet breaks off here, as the soldier finally enters the temple precinct.

@@ -30,11 +30,15 @@
 (style class @error)
 	data-language: en;
 	font-family: sans-serif;
+	margin-top: 1em;
+	margin-bottom: 1em;
 
 %% Meta messages
 (style class @meta)
 	data-language: en;
 	font-family: sans-serif;
+	margin-top: 1em;
+	margin-bottom: 1em;
 
 %% Actual errors in the game's programming
 (style class @realerror)
@@ -42,6 +46,8 @@
 	font-weight: bold;
 	font-family: sans-serif;
 	data-language: en;
+	margin-top: 1em;
+	margin-bottom: 1em;
 
 (style class @hittite)
 	data-language: ht;

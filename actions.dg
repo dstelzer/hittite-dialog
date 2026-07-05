@@ -15,8 +15,8 @@
 (update description)
 	(update environment around player)
 	%% Do this in a status area if at all possible, either top or inline
-	(if) (interpreter supports status bar) ($Lines lines needed for status bar) (then)
-		(status bar @status with height $Lines) (describe environment)
+	(if) (interpreter supports status bar) (then)
+		(status bar @status) (describe environment)
 	(elseif) (interpreter supports inline status bar) (then)
 		(inline status bar @status) (describe environment)
 	(else) %% Otherwise fall back to a div
@@ -25,45 +25,16 @@
 	(if) (using separate panels) (then)
 		(compass rose panel)
 		(verbs list panel)
+		(automap panel)
 	(endif)
 
-($Lines lines needed for status bar)
-	%% 1 header
-	%% 1 line break
-	%% If objects:
-		%% 1 general
-		%% 1 per container
-		%% 1 line break
-	%% If inventory:
-		%% 1 inventory
-		%% 1 line break
-	%% If worn:
-		%% 1 worn
-		%% 1 line break
-	%% 1 verbs
-	
-	%% Which means:
-	%% Base 3
-	%% +2 if objects
-	%% +1 per container
-	%% +2 if inventory
-	%% +2 if worn
-	
-	(current player $Player)
-	(current room $Room)
-	
-	(accumulate $N)
-		($N = 3) (or)
-		{ (something in the room) ($N = 2) } (or)
-		{ *($Obj is #in $Room) ($ is #in $Obj) ($N = 1) } (or)
-		{ ($ is #heldby $Player) ($N = 2) } (or)
-		{ ($ is #wornby $Player) ($N = 2) }
-	(into $Lines)
+(automap panel) ~(given first message)
+(automap panel)
+	(inline status bar @p-map) (automap)
 
-(something in the room)
-	(current room $Room)
-	*($Obj is #in $Room)
-	~(current player $Obj)
+(style class @p-map)
+	font-size: larger; %% Make it a bit bigger
+	overflow-x: scroll; %% And scroll if it becomes an issue
 
 (header (room $Room))
 	($Room uses preverb $Prep)
@@ -85,7 +56,7 @@
 (short name $Obj) $Obj %% Don't crash
 
 #darkness
-(add * to scope)
+(add * to scope) *(adjacent $Room) (inherently dark $Room)
 (inherently dark *) %% Make the "go to a dark room" rules apply to this
 (name * in #dative) dankui
 (refuse [$Action $]) %% Prevent any interaction with this noun
@@ -98,6 +69,7 @@
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
 	(if) (interpreter supports status bar) ~(using separate panels) (then)
 		(compass rose)
+		(automap)
 	(endif)
 	
 	%% First paragraph: "I was at [location]."
@@ -168,6 +140,7 @@
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
 	(if) ~(interpreter supports status bar) ~(using separate panels) (then)
 		(compass rose)
+		(automap)
 	(endif)
 
 %% Some objects override this to add more detail if (and only if) they're on their own
@@ -375,6 +348,14 @@
 (translate [$ pāun $ $ $Dat | $] into [travel $Dat])
 	~(adjacent $Dat)
 
+(scope for @pāun is #go-policy)
+#go-policy
+($Obj is in scope for *)
+	*(adjacent $Obj)
+($Obj is in scope for *)
+	*(room $Obj)
+	($Obj is visited)
+
 (adjacent $Room)
 	(current room $Loc)
 	{ (from $Loc go $ to $Room) (or) (from $Loc through $ to $Room) }
@@ -437,20 +418,9 @@
 	(current room $Source)
 	(shortest path from $Source to $Dest is $Path)
 	(action log {Path: $Path})
-	(attempt to travel along $Path)
-
-(attempt to travel along [])
-	(action log {Travel finished!})
+	(convert direction list $Path to numbers $Numbers)
+	(parse number list $Numbers)
 	(inhibit next tick)
-	(now) (update needed)
-(attempt to travel along [$Head|$Rest])
-	(current room $Source)
-	(action log {Direction: $Head})
-	(from $Source go $Head to $Dest)
-	(action log {From $Source go $Head to $Dest})
-	(try [[go $Dest] [[] pāon [] [] $Dest []]])
-	(tick)
-	(attempt to travel along $Rest) %% Recurse
 
 #v-go
 (verb *)
@@ -542,6 +512,7 @@
 			(div @realerror) { ERROR: $Dir from $Room is $Next which is neither room nor door! }
 			(stop)
 		(endif)
+		(tick)
 	(else)
 		(div @error) {
 			The number $Num here presumably means going (name $Dir)(no space)ward, but it's unclear what would be in that direction.
@@ -555,6 +526,11 @@
 (number 4 means direction #west)
 (number 5 means direction #up)
 (number 6 means direction #down)
+
+(convert direction list [] to numbers [])
+(convert direction list [$Head|$Tail] to numbers [$NewHead|$NewTail])
+	(number $NewHead means direction $Head)
+	(convert direction list $Tail to numbers $NewTail)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TAKE
@@ -572,6 +548,7 @@
 	~($Acc has parent $Abl)
 
 (instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
+	~(avoid ablative case)
 	($Obj is $ $Holder)
 	~(room $Holder)
 	~(current player $Holder)
@@ -708,16 +685,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 (verb @kuenun/@slay means @kuenun)
+
+(@kuenun wants cases [#accusative]) (avoid ablative case) %% Allow no ablatives when they haven't been taught yet
+(@kuenun wants cases [#adverb #accusative]) (avoid ablative case)
+
 (@kuenun wants cases [#accusative #ablative])
 (@kuenun wants cases [#adverb #accusative #ablative]) %% needs =kkan
+
 (translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl])
 
 (prevent [[slay $ with $] [$ $ $Advs | $]])
 	~(@kan is one of $Advs)
 	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "slay" requires the sentence particle =kan to be attached to the first word of the sentence. }
 
-(prevent [[slay ~(animate $Obj) with $] $Details])
-	(describe negative action [[slay $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+(prevent [[slay ~(animate $Obj) with $Tool] $Details])
+	(describe negative action [[slay $Obj with $Tool] $Details]) %% negative, not failed: "did not" instead of "could not"
 	(if) (neuter $Obj) (then)
 		N=at
 	(else)
@@ -726,6 +708,7 @@
 	antuḫšaš natta ēšta. %% It was not a person.
 
 (prevent [[slay $Target with $Obj] $Details])
+	~(avoid ablative case)
 	(current player $Player)
 	~($Obj is #heldby $Player)
 	(describe failed action [[slay $Target with $Obj] $Details])
@@ -738,7 +721,7 @@
 #v-slay
 (verb *)
 (name *) =kan kuenun
-(verb * unlocked) %% TODO should this be unlocked at all in act 1? It needs an ablative which is otherwise not featured
+(verb * unlocked) %% TODO should this be unlocked at all in act 1?
 	(#foyer is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

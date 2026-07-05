@@ -695,6 +695,14 @@
 		(endif)
 		(stop)
 	(endif)
+	
+	%% Some verbs need different scope rules; we handle those here
+	(if) (scope for $Verb is $ScopePolicy) (then)
+		(now) (scope policy $ScopePolicy)
+	(else)
+		(now) ~(scope policy $)
+	(endif)
+	
 	(collect $Action)
 		*(parse top-level $Rest into noun list $Nouns)
 		(parser log { Noun list: $Nouns } )

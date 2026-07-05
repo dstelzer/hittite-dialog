@@ -16,6 +16,8 @@
 (name * in #bare) wappu
 (from * go #north to #watchtower)
 
+(origin *) %% Map origin
+
 #river
 (name * in #nominative/#genitive) ḫapaš
 (name * in #dative) ḫapi
@@ -285,9 +287,10 @@
 (name * in #ablative) paḫḫuenaz
 (* is #in #hearth)
 
-(prevent [[take $Obj from #hearth] $Details])
+(prevent [[take $Obj | $From] $Details])
+	($Obj is #in #hearth)
 	(* is #in #hearth)
-	(describe failed action [[take $Obj from #hearth] $Details])
+	(describe failed action [[take $Obj | $From] $Details])
 	Nu paḫḫur änza ēšta. %% "The fire was hot."
 	%% ä = a-a-a°
 
@@ -442,19 +445,14 @@
 #enemyland
 (room *)
 (* uses preverb #at)
-(short name *) URU
-(name * in #bare) URU LÚ KÚR %% Will not actually be printed, see below
-(logogram *)
-(dict * in $) LU2 KUR2
-
-(#nominative/#accusative/#bare *) URU (dtm {LÚ}) KÚR
-(#genitive *) (span @akk) ša (#bare *)
-(#dative *) (span @akk) ana (#bare *)
-(#ablative *) (span @akk) ištu (#bare *)
+(name * in #nominative/#genitive) ḫappiraš
+(name * in #dative/#bare) ḫappiri
+(name * in #accusative) ḫappiran
+(name * in #ablative) ḫappiraz
 
 (prevent [[go *] | $Details])
 	(describe negative action [[go *] | $Details]) %% did not rather than could not
-	%% Basic message should be enough, given the definitions of the words
+	Nu (#nominative *) kurur ēšta. %% "The city was hostile."
 
 (parse metacommand [\/test watchtower])
 	(now) (#ladder is #in #corner)
@@ -522,15 +520,15 @@
 (on every tick) %% Make sure this comes BEFORE redrawing the status bar
 	~(direction numbers enabled)
 	(current room #watchtower)
-	{ (#ladder is handled) (or) (#corner is visited) }
+	{ (#street is visited) (or) (#corner is visited) }
 	(now) (direction numbers enabled)
 
 (tutorial)
 	~(taught numbers)
 	(direction numbers enabled)
 	(div @tutorial) {
-		You're getting the hang of this now! Since you'll be moving around a lot in this game, there's a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, so you can type "1 3 2" to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
-		\( There's no evidence that the Hittites actually did this, and adding numbers for "up" and "down" is completely non-historical. But the Hittites imitating Babylonian writing isn't much of a stretch, and typing a full sentence every time gets tedious very fast. \)
+		You're getting the hang of this now! Since you'll be moving around a lot in this game, there's a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, south north east west, so you can type "1 3 2" to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
+		\( There's no evidence that the Hittites actually did this, and adding numbers 5 and 6 for "up" and "down" is completely non-historical. But the Hittites imitating Babylonian writing isn't much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the map to navigate to anywhere you've been before. \)
 	}
 	(now) (taught numbers)
 
@@ -544,3 +542,6 @@
 	(now) (taught multiple nouns)
 
 (tutorial) %% Don't fail
+
+(avoid genitive case) %% For this first tablet specifically
+(avoid ablative case)
