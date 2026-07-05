@@ -64,6 +64,8 @@
 	~{ ($Action = [go *]) (or) ($Action = [travel *]) }
 	(div @error) { Since the "dark" is insubstantial, it's unclear what this action would entail. }
 
+($ contains water) (fail) %% Needed for one little hack in tablet 1
+
 (describe environment)
 	
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
@@ -119,6 +121,19 @@
 		(par) Nu
 		(#accusative $HeldList)
 		ḫarkun.
+	(endif)
+	
+	%% Extra bonus paragraph: if avoiding genitive case, we need to mention water being in vessels too
+	(if) (avoid genitive case) (then)
+		(collect $Obj)
+			*($Obj has ancestor $Loc)
+			*(item $Obj)
+			($Obj contains water)
+		(into $WaterList)
+		(action log {Water: $WaterList} )
+		(if) (nonempty $WaterList) (then)
+			(line) Nu (#dative $WaterList) wātar ēšta.
+		(endif)
 	(endif)
 	
 	%% Fourth paragraph: Nu CLOTHES-ACC waššiyanun.

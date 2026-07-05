@@ -28,7 +28,7 @@
 	*(dict #water in $Case)
 (* is #in #riverbank)
 
-(player has water source *) (current room #riverbank)
+(* contains water)
 
 (instead of [[put $Dest *] $])
 	($Dest is one of [#cup #amphora])
@@ -302,17 +302,14 @@
 (name * in #accusative) agannin
 (name * in #ablative) aganniyaz
 (determiner *) DUG
-(* has modifier #water)
-	(cup has water)
+%% (* has modifier #water)
+%% 	(cup has water)
 (dict * in $Case)
 	(cup has water)
 	*(dict #water in $Case)
 (* is #in #hearth)
 
-(player has water source *)
-	(current player $Player)
-	(* is #heldby $Player)
-	(cup has water)
+(* contains water) (cup has water)
 
 #sleeping
 (adjective *)
@@ -358,14 +355,11 @@
 (dict * in $Case)
 	(amphora has water)
 	*(dict #water in $Case)
-(* has modifier #water)
-	(amphora has water)
+%% (* has modifier #water)
+%% 	(amphora has water)
 (* is #in #storeroom)
 
-(player has water source *)
-	(current player $Player)
-	(* is #heldby $Player)
-	(amphora has water)
+(* contains water) (amphora has water)
 
 (instead of [[put * #hearth/#fire] $])
 	(#fire is #in #hearth)
@@ -433,7 +427,7 @@
 %% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
 
 (instead of [[go *] $Details])
-	(if) (player has water source $) (then)
+	(if) (player has water source $Source) ($Source is #heldby $) (then)
 		(describe action [[go *] $Details])
 		(div @narration) { The tablet breaks off here, as the soldier finally enters the temple precinct. }
 		(game over { To be continued... } )
@@ -441,6 +435,12 @@
 		(describe failed action [[go *] $Details])
 		Nu=za šaknuwanza ešun. Nu wātar natta ḫarkun. %% "I was impure. I did not have water."
 	(endif)
+
+%% What does it mean to have a water source?
+(player has water source $Obj)
+	(current room $Room)
+	*($Obj has ancestor $Room)
+	($Obj contains water)
 
 #enemyland
 (room *)

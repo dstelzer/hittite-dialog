@@ -2,5 +2,3 @@ metacommand links
 overhaul clitic matching system, it's awful
 architecture for multiple tablets
 update cuneiform lessons to new version of Ishamai
-remove ablative and genitive and logograms from tablet 1
-include automap in regression tests
