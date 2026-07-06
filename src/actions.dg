@@ -104,6 +104,9 @@
 			*($Obj is $ $Container)
 		(into $ContentsList)
 		(line) Nu
+		(if) ($Rel is one of [#in #on #behind]) (then) %% anda, šēr, appa
+			(no space) =kan
+		(endif)
 		(#nominative $ContentsList)
 		(#dative $Container)
 		(preverb $Rel)

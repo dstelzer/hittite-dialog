@@ -22,5 +22,8 @@
 			"src/parser.dg"
 			"src/worldmodel.dg"
 		]
+		:debug [
+			"platform/debug.dg"
+		]
 	}
 }

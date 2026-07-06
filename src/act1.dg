@@ -291,7 +291,7 @@
 	($Obj is #in #hearth)
 	(* is #in #hearth)
 	(describe failed action [[take $Obj | $From] $Details])
-	Nu paḫḫur änza ēšta. %% "The fire was hot."
+	Nu paḫḫur än ēšta. %% "The fire was hot."
 	%% ä = a-a-a°
 
 #cup
@@ -395,7 +395,7 @@
 	(current room *)
 	~(#ladder is #in *)
 	(describe failed action [[cross #roof] $Details])
-	Nu šuḫḫa parku ēšta. %% "The roof is high up"
+	Nu šuḫḫan parku ēšta. %% "The roof is high up"
 
 (prevent [[go #roof] $Details])
 	(current player $Player)
