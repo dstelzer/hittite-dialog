@@ -158,11 +158,11 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
                                        |      
                                       ( )     
 > halhaltomari paun
-Nu kuttaš ḫalḫaltomari pāun.
+Nu ḫalḫaltomari pāun.
 
-Nu=za kuttaš ḫalḫaltomari tapušza ešun.
+Nu=za ḫalḫaltomari tapušza ešun.
 
-Nu apiya ḫilamnaš luttāi ōḫḫun.
+Nu apiya luttāi ōḫḫun.
 
 Nu ilan ḫarkun.
 
@@ -176,7 +176,7 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
                                        |      
                                       ( )     
 > luttai carrahhun
-Nu ḫilamnaš luttāi natta taruḫḫun šarraḫḫun. N=at parku ēšta.
+Nu luttāi natta taruḫḫun šarraḫḫun. N=at parku ēšta.
 
 > ilan tehhun
 This sentence seems to be incomplete. The verb tēḫḫun should include a
@@ -186,9 +186,9 @@ the ground).
 > ilan katta tehhun
 Nu ilan katta tēḫḫun.
 
-Nu=za kuttaš ḫalḫaltomari tapušza ešun.
+Nu=za ḫalḫaltomari tapušza ešun.
 
-Nu apiya ḫilamnaš luttāi Ù ilan ōḫḫun.
+Nu apiya luttāi Ù ilan ōḫḫun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
                                  
@@ -206,7 +206,7 @@ CAPITALS to make it clear that they're not conveying the actual Hittite
 pronunciation.
 
 > ilan carrahhun
-Nu ḫilamnaš luttāi šarraḫḫun.
+Nu luttāi šarraḫḫun.
 
 Nu=za=kan ḫilamni anda ešun.
 
@@ -520,11 +520,11 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
 3   Nu ḫilamni pāun.
 1   Nu āškan šarraḫḫun.
 3   Nu kutti pāun.
-2   Nu kuttaš ḫalḫaltomari pāun.
+2   Nu ḫalḫaltomari pāun.
 
-Nu=za kuttaš ḫalḫaltomari tapušza ešun.
+Nu=za ḫalḫaltomari tapušza ešun.
 
-Nu apiya ḫilamnaš luttāi Ù ilan ōḫḫun.
+Nu apiya luttāi Ù ilan ōḫḫun.
 
 Nu DUG^agannin Ù DUG^palḫin Ù GIŠ^ḫattalu ḫarkun.
 
@@ -542,9 +542,9 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
 > ilan dahhun
 Nu ilan dāḫḫun.
 
-Nu=za kuttaš ḫalḫaltomari tapušza ešun.
+Nu=za ḫalḫaltomari tapušza ešun.
 
-Nu apiya ḫilamnaš luttāi ōḫḫun.
+Nu apiya luttāi ōḫḫun.
 
 Nu ilan Ù DUG^agannin Ù DUG^palḫin Ù GIŠ^ḫattalu ḫarkun.
 
@@ -563,9 +563,9 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
 1   Nu kutti pāun.
 4   Nu auriya pāun.
 2   Nu āškan šarraḫḫun.
-2   Nu auriyaš iškiši pāun.
+2   Nu iškiši pāun.
 
-Nu=za=kan auriyaš iškiši anda ešun.
+Nu=za=kan iškiši anda ešun.
 
 Nu ilan Ù DUG^agannin Ù DUG^palḫin Ù GIŠ^ḫattalu ḫarkun.
 
@@ -587,7 +587,7 @@ Nu šuḫḫi natta taruḫḫun pāun. Nu šuḫḫa parku ēšta.
 > ilan katta tehhun
 Nu ilan katta tēḫḫun.
 
-Nu=za=kan auriyaš iškiši anda ešun.
+Nu=za=kan iškiši anda ešun.
 
 Nu apiya ilan ōḫḫun.
 
@@ -611,7 +611,7 @@ Nu šuḫḫi natta taruḫḫun pāun. Nu palḫiš nakkiš ēšta.
 > palhin katta tehhun
 Nu DUG^palḫin katta tēḫḫun.
 
-Nu=za=kan auriyaš iškiši anda ešun.
+Nu=za=kan iškiši anda ešun.
 
 Nu apiya DUG^palḫin Ù ilan ōḫḫun.
 
@@ -637,7 +637,7 @@ Nu=za=kan šuḫḫi šēr ešun.
 Nu DUG^agannin Ù GIŠ^ḫattalu ḫarkun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun
-              <2> ḫali             
+            <2> karimni            
                 ✧                
 <6> iškiši                         
                                            |  
@@ -650,14 +650,13 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
                                   ( )-( )-( ) 
                                        |      
                                       ( )     
-> hali paun
-Nu karimnaš ḫali natta taruḫḫun pāun. Nu=za šaknuwanza ešun. Nu wātar natta
-ḫarkun.
+> karimni paun
+Nu karimni natta taruḫḫun pāun. Nu=za šaknuwanza ešun. Nu wātar natta ḫarkun.
 
 > 6
-6   Nu auriyaš iškiši pāun.
+6   Nu iškiši pāun.
 
-Nu=za=kan auriyaš iškiši anda ešun.
+Nu=za=kan iškiši anda ešun.
 
 Nu apiya DUG^palḫin Ù ilan ōḫḫun.
 
@@ -732,7 +731,7 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
 > 2 2 2 5
 2   Nu auriya pāun.
 2   Nu āškan šarraḫḫun.
-2   Nu auriyaš iškiši pāun.
+2   Nu iškiši pāun.
 5   Nu šuḫḫi pāun.
 
 Nu=za=kan šuḫḫi šēr ešun.
@@ -741,7 +740,7 @@ Nu DUG^agannin Ù GIŠ^ḫattalu ḫarkun.
 Nu DUG^aganniya wātar ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun
-              <2> ḫali             
+            <2> karimni            
                 ✧                
 <6> iškiši                         
                                            |  
@@ -754,8 +753,8 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
                                   ( )-( )-( ) 
                                        |      
                                       ( )     
-> hali paun
-Nu karimnaš ḫali pāun.
+> karimni paun
+Nu karimni pāun.
 The tablet breaks off here, as the soldier finally enters the temple precinct.
 
      *** To be continued... ***

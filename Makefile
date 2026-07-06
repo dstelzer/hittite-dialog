@@ -1,12 +1,12 @@
-FILES = act1.dg actions.dg interface.dg automap.dg draclib.dg parser.dg worldmodel.dg
+FILES = src/act1.dg src/actions.dg src/interface.dg src/automap.dg src/draclib.dg src/parser.dg src/worldmodel.dg
 OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources
 # ^ for determiners, ⸗ for proper clitics, = for ASCII clitics; the rest are default
 OPTIONS_DBG = --word-seps='^=.,;"()*'
 # Debugger can't handle non-ASCII word separators yet
 
 
-debug: $(FILES) platform_debug.dg
-	dgdebug $(OPTIONS_DBG) platform_debug.dg $(FILES)
+debug: $(FILES) platform/debug.dg
+	dgdebug $(OPTIONS_DBG) platform/debug.dg $(FILES)
 
 #hittite.z5: $(FILES) platform_z.dg
 #	dialogc -t z5 -o hittite.z5 $(OPTIONS) platform_z.dg $(FILES)
@@ -14,8 +14,8 @@ debug: $(FILES) platform_debug.dg
 #play: hittite.z5
 #	frotz hittite.z5
 
-hittite.aastory: $(FILES) platform_web.dg
-	dialogc -t aa -o hittite.aastory $(OPTIONS) platform_web.dg $(FILES)
+hittite.aastory: $(FILES) platform/web.dg
+	dialogc -t aa -o hittite.aastory $(OPTIONS) platform/web.dg $(FILES)
 
 dictionary.js: dictionary.tsv dictionarify.py
 	python dictionarify.py
@@ -39,6 +39,8 @@ deploy: web
 vvv.log: $(FILES)
 	dgdebug -vvv $(OPTIONS) $(FILES) > vvv.log
 
-regress: $(FILES)
-	dgdebug -qD -s 1234 platform_debug.dg $(OPTIONS_DBG) $(FILES) <regress.in >regress.out
+regress.out: $(FILES) platform/debug.dg regress.in
+	dgdebug -qD -s 1234 $(OPTIONS_DBG) platform/debug.dg $(FILES) <regress.in >regress.out
+
+regress: regress.out
 	meld regress.out regress.gold

@@ -159,7 +159,7 @@
 (name * in #genitive) ḫalḫaltomaraš
 (name * in #dative) ḫalḫaltomari
 (name * in #ablative) ḫalḫaltomaraz
-(* has modifier #wall)
+%% (* has modifier #wall)
 (from * go #south to #wall)
 (from * go #west through #window to #gatehouse)
 
@@ -175,8 +175,8 @@
 (name * in #genitive) luttiyaš
 (name * in #dative) luttiya
 (name * in #ablative) luttiyaz
-(* has modifier #gatehouse)
-	~(current room #gatehouse)
+%% (* has modifier #gatehouse)
+%% 	~(current room #gatehouse)
 
 #gatehouse
 (room *)
@@ -386,7 +386,7 @@
 (name * in #genitive) iškišaš
 (name * in #dative) iškiši
 (name * in #ablative) iškišaz
-(* has modifier #watchtower)
+%% (* has modifier #watchtower)
 (from * go #south to #gatehouse)
 (from * go #up to #roof)
 (from * go #north to #enemyland)
@@ -418,11 +418,15 @@
 #precinct
 (room *)
 (neuter *)
-(name * in #nominative/#accusative/#dative/#bare) ḫali
-(name * in #genitive) ḫaliyaš
-(name * in #ablative) ḫaliyaz
-(* has modifier @karimnaš)
-(dict * in $) karimnac
+%% (name * in #nominative/#accusative/#dative/#bare) ḫali
+%% (name * in #genitive) ḫaliyaš
+%% (name * in #ablative) ḫaliyaz
+%% (* has modifier @karimnaš)
+%% (dict * in $) karimnac
+(name * in #nominative/#accusative/#bare) karimmi
+(name * in #genitive) karimnaš
+(name * in #dative) karimni
+(name * in #ablative) karimnaz
 
 %% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
 

@@ -1,0 +1,26 @@
+{
+	:name "Ḫattušumna Laḫḫa: Hittite Adventure"
+	:target :aa
+	:build {
+		:aa {:options [
+			"--word-seps" "^⸗=.,;\"()*"
+			"--resources" "resources"
+		]}
+		:dgdebug {:options [
+			"--word-seps" "^=.,;\"()*"
+		]}
+	}
+	:sources {
+		:main [
+			"src/act1.dg"
+		]
+		:library [
+			"src/actions.dg"
+			"src/interface.dg"
+			"src/automap.dg"
+			"src/draclib.dg"
+			"src/parser.dg"
+			"src/worldmodel.dg"
+		]
+	}
+}
