@@ -5,3 +5,5 @@
 	Draconis extensions :
 	(listing $List {(query $_)} @and) %% And-listing
 	.
+%% Normally this is the one extension that never needs to be modified
+%% But the Hittite library doesn't have identical objects so the signature for (listing...) is different lmao

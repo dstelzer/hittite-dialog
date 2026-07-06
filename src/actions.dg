@@ -42,7 +42,7 @@
 	(if) ($Prep is one of [#in #on #behind]) (then) %% anda, šēr, appa
 		(no space) =kan
 	(endif)
-	(#dative $Room)
+	(location name $Room)
 	(preverb $Prep)
 	ešun.
 (short name (inherently dark $Room))
@@ -54,6 +54,8 @@
 (short name (room $Room)) (name $Room in #dative)
 (short name (door $Door)) (name $Door in #accusative)
 (short name $Obj) $Obj %% Don't crash
+
+(location name $Room) (#dative $Room) %% Some rooms override this
 
 #darkness
 (add * to scope) *(adjacent $Room) (inherently dark $Room)

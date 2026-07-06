@@ -254,8 +254,8 @@
 (name * in #accusative) arkiwin
 (name * in #ablative) arkiwaz
 (name * in #bare) arkiwi
-(determiner *) É
-(dict * in $) E2
+(determiner *) E₂
+(dict * in $) E2 É
 
 (from * go #east to #gatehouse)
 (from * go #north to #storeroom)
@@ -329,8 +329,8 @@
 (name * in #ablative) ḫalliyatallaz
 (name * in #bare) ḫalliyatalla
 (* has modifier #sleeping)
-(determiner *) LÚ
-(dict * in $) LU2
+(determiner *) LU₂
+(dict * in $) LU2 LÚ
 (* is #in #foyer)
 
 #storeroom
@@ -378,18 +378,22 @@
 (name * in #dative) witeni
 (name * in #ablative) witenaz
 
-#backroom
+#backroom %% "behind the watchtower"
 (room *)
-(neuter *)
-(* uses preverb #in)
-(name * in #nominative/#accusative/#bare) iškiša
-(name * in #genitive) iškišaš
-(name * in #dative) iškiši
-(name * in #ablative) iškišaz
-%% (* has modifier #watchtower)
+(name * in #dative) (name #watchtower in #dative) āppa
+(name * in $Case) (name #watchtower in $Case)
+(* uses preverb #behind)
+(short name *) āppa
+(dict * in $) āppa āppan
 (from * go #south to #gatehouse)
 (from * go #up to #roof)
 (from * go #north to #enemyland)
+
+(location name *) (name #watchtower in #dative) %% avoid āppa āppa
+
+%% Make sure this doesn't cause ambiguity with GO TO WATCHTOWER
+(unlikely [$ pāun $ $ $Dats $])
+	(* is one of $Dats)
 
 (prevent [[go #roof] $Details])
 	(current room *)
@@ -417,23 +421,20 @@
 
 #precinct
 (room *)
-(neuter *)
-%% (name * in #nominative/#accusative/#dative/#bare) ḫali
-%% (name * in #genitive) ḫaliyaš
-%% (name * in #ablative) ḫaliyaz
-%% (* has modifier @karimnaš)
-%% (dict * in $) karimnac
-(name * in #nominative/#accusative/#bare) karimmi
-(name * in #genitive) karimnaš
-(name * in #dative) karimni
-(name * in #ablative) karimnaz
+(name * in #nominative/#genitive) gurtaš
+(name * in #dative) gurti
+(name * in #accusative) gurtan
+(name * in #ablative) gurtaz
+(name * in #bare) gurtan
+(determiner *) E₂
+(dict * in $) E2 É
 
 %% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
 
 (instead of [[go *] $Details])
 	(if) (player has water source $Source) ($Source is #heldby $) (then)
 		(describe action [[go *] $Details])
-		(div @narration) { The tablet breaks off here, as the soldier finally enters the temple precinct. }
+		(div @narration) { The tablet breaks off here, as the soldier finally approaches the temple itself. }
 		(game over { To be continued... } )
 	(else)
 		(describe failed action [[go *] $Details])
@@ -517,7 +518,7 @@
 	~(taught heterograms)
 	(heterograms used)
 	(div @tutorial) {
-		Certain cuneiform signs were used as shorthand for entire words, like how "7" is short for "seven", or "&" short for "and". These signs are written in CAPITALS to make it clear that they're not conveying the actual Hittite pronunciation.
+		Certain cuneiform signs were used as shorthand for entire words, like how "7" is short for "seven", or "&" short for "and". These signs are written in CAPITALS to make it clear that they're not conveying the actual Hittite pronunciation, and sometimes have subscript numbers attached to clarify exactly which sign is meant.
 	}
 	(now) (taught heterograms)
 

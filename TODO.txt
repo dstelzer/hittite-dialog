@@ -4,5 +4,3 @@ architecture for multiple tablets
 update cuneiform lessons to new version of Ishamai
 taruḫḫun needs =za when used with a person
 add lukkun as a transitive verb
-replace iškiša
-replace ḫali: É^gurta- "citadel, acropolis"?

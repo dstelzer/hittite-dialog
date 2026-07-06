@@ -148,7 +148,7 @@
 %% Recursive case: more than one noun
 ~(parse [] into noun list $)
 
-(parse [ù/u3/& | $Rest] into noun list $Nouns) %% Handle explicit "and"s
+(parse [ù/u3/u₃/& | $Rest] into noun list $Nouns) %% Handle explicit "and"s
 	(parse $Rest into noun list $Nouns) %% =ya etc will be purged already
 
 (parse $Words into noun list $Nouns)
@@ -963,7 +963,7 @@
 	($Case $Single)
 ($Case [$Head | $Rest])
 	($Case $Head)
-	(span @akk) { Ù } %% Using the "Akkadian ampersand" instead of the clitic =ya because the clitic does messy things with the last consonant of the word
+	(span @akk) { U₃ } %% Using the "Akkadian ampersand" instead of the clitic =ya because the clitic does messy things with the last consonant of the word
 	(now) (heterograms used) %% Give a tutorial the first time this happens
 	($Case $Rest)
 

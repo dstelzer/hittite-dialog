@@ -5,16 +5,16 @@ ešun	ešun ēšta ešer	I was (at a location: dative)	"I was" ešun "it was" ē
 taruḫḫun	taruḫḫun	I was able to (when attached to another verb); I overpowered (someone: accusative)
 dankui	dankui dankuin dankuwayaš dankuwaz	Dark	NOUN dankui dankuwayaš dankui dankuin dankuwaz
 apiya	apiya	There, at that place
-ōḫḫun	ōḫḫun	I looked, saw (something: accusative)
+ōḫḫun	ōḫḫun ūḫḫun	I looked, saw (something: accusative)
 ḫarkun	ḫarkun	I had, held (something: accusative)
 waššiyanon	waššiyanon	I wore, had on (something: accusative)
 pāun	pāun	I went (to a place: dative)
 pēda	pēdan pēdaš pēdi pēdaz pēda	Place, location	NOUN pēdan pēdaš pēdi pēdan pēdaz
 kuit	kuit	Because
-apēdani	apāš apēl apēdani apōn apēz	That	NOUN apāš apēl apēdani apōn apēz
+apa	apāš apēl apēdani apōn apūn apēz apa	That	NOUN apāš apēl apēdani apōn apēz
 karū	karū	Already
 šarraḫḫun	šarraḫḫun	I passed through, crossed (something: accusative)
-dāḫḫun	dāḫḫun	Take (something: accusative; from somewhere: ablative)
+dāḫḫun	dāḫḫun	Take (something: accusative)
 natta	natta	Not
 =an	=an =at	It	"Common gender nom" =aš "Common gender acc" =an "Neuter gender nom/acc" =at
 mekki	mekki	Very
@@ -35,41 +35,37 @@ auri	auriš auriyaš auriya aurin auriyaz auri	Watchtower	NOUN auriš auriyaš a
 āška	āškaš āški āškan āškaz āška	Door, gate	NOUN āškaš āškaš āški āškan āškaz
 ḫattalwanza	ḫattalwanza ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz	Locked, bolted, held shut by something	NOUN ḫattalwanza ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz
 palša	palšaš palši palšan palšaz palša	Road, street, path, journey	NOUN palšaš palšaš palši palšan palšaz
-ilan	ilan ilanaš ilani ilanaz	Ladder	NOUN ilan ilanaš ilani ilan ilanaz
+ilan	ilan ilanaš ilani ilanaz	Ladder, step	NOUN ilan ilanaš ilani ilan ilanaz
 kut	kuzza kuttaš kutti kuttan kuttaz kut	Wall	NOUN kuzza kuttaš kutti kuttan kuttaz
 ḫalḫaltomar	ḫalḫaltomar ḫalḫaltomaraš ḫalḫaltomari ḫalḫaltomaraz	Corner	NOUN ḫalḫaltomar ḫalḫaltomaraš ḫalḫaltomari ḫalḫaltomar ḫalḫaltomaraz
 parku	parku	High
 luttāi	luttāi luttiyaš luttiya luttiyaz	Window	NOUN luttāi luttiyaš luttiya luttāi luttiyaz
 ḫilammar	ḫilammar ḫilamnaš ḫilamni ḫilamnaz	Gatehouse	NOUN ḫilammar ḫilamnaš ḫilamni ḫilammar ḫilamnaz
-É	É	Building	DTM
+E₂	É E₂ E2	Building, structure, room	DTM
 warān	warān warantaš waranti warantaz	Burning, aflame	NOUN warān warantaš waranti warān warantaz
 GIŠ	GIŠ	Wood	DTM
-ḫattalu	ḫattalu ḫattaluwaš ḫattaluwi ḫattaluwaz	Door bar (piece of wood put across a door to keep it from opening)	NOUN ḫattalu ḫattaluwaš ḫattaluwi ḫattalu ḫattaluwaz
+ḫattalu	ḫattalu ḫattaluwaš ḫattaluwi ḫattaluwaz	Door bar: locks were not yet a common technology, so the best way to secure a door was to hold it shut with a big piece of wood.	NOUN ḫattalu ḫattaluwaš ḫattaluwi ḫattalu ḫattaluwaz
 ḫašḫun	ḫašḫun	I opened (something: accusative)
-lukket	lukket	It ignited, caught fire
-arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer	NOUN arkiwiš arkiwaš arkiwi arkiwin arkiwaz
-ḫašša	ḫaššaš ḫašši ḫaššan ḫaššaz ḫašša	Hearth	NOUN ḫaššaš ḫaššaš ḫašši ḫaššan ḫaššaz
+arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer, front room	NOUN arkiwiš arkiwaš arkiwi arkiwin arkiwaz
+ḫašša	ḫaššaš ḫašši ḫaššan ḫaššaz ḫašša	Hearth, fireplace	NOUN ḫaššaš ḫaššaš ḫašši ḫaššan ḫaššaz
 paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire	NOUN paḫḫur paḫḫuenaš paḫḫueni paḫḫur paḫḫuenaz
-än	än	Hot
+än	än ān	Hot
 DUG	DUG	Vessel	DTM
 aganni	aganniš aganniyaš aganniya agannin aganniyaz aganni	Cup	NOUN aganniš aganniyaš aganniya agannin aganniyaz
 LÚ	LÚ	Man	DTM
 šuppanza	šuppanza šuppandaš šuppandi šuppandan šuppandaz	Sleeping, asleep	NOUN šuppanza šuppandaš šuppandi šuppandan šuppndaz
 ḫalliyatalla	ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz ḫalliyatalla	Watchman, guard	NOUN ḫalliyatallaš ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz
-antaka	antakaš antaki antakan antakaz antaka	Storeroom	NOUN antakaš antakaš antaki antakan antakaz
+antaka	antakaš antaki antakan antakaz antaka	Room, storeroom	NOUN antakaš antakaš antaki antakan antakaz
 palḫi	palḫiš palḫaš palḫi palḫin palḫaz palḫi	Pithos (large clay jar)	NOUN palḫiš palḫaš palḫi palḫin palḫaz
 kištanunun	kištanunun	I extinguished (something: accusative)
-iškiša	iškiša iškišaš iškiši iškišaz	Back room - TODO, this noun needs replacement!	NOUN iškiša iškišaš iškiši iškiša iškišaz
+lukkun	lukkun	I kindled, ignited, set on fire (something: accusative)
 šuḫḫa	šuḫḫan šuḫḫaš šuḫḫi šuḫḫaz šuḫḫa	Roof	NOUN šuḫḫan šuḫḫaš šuḫḫi šuḫḫan šuḫḫaz
-ḫali	ḫali ḫaliyaš ḫaliyaz	Precinct, marked-out area (for a temple, this is the land dedicated to a particular god) - TODO, this noun needs replacement!	NOUN ḫali ḫaliyaš ḫali ḫali ḫaliyaz
 karimmi	karimmi karimnaš karimni karimnaz	Temple	NOUN karimmi karimnaš karimni karimmi karimnaz
-šaknuwanza	šaknuwanza	Unclean, not ritually pure
-URU	URU	City	DTM
-KÚR	KÚR	Enemy
-Ù	Ù	And (an abbreviation akin to "&" in English)
-IM	IM	Wind; cardinal direction	DTM
+šaknuwanza	šaknuwanza	Unclean, not ritually pure: in Hittite religion, interacting with the gods required someone to be free of impurity, both physical and spiritual. Many rituals required washing or bathing before doing something spiritually significant.
+<i>U₃</i>	Ù U₃ U3	And: a shorthand sign equivalent to "&" in English
+IM	IM	Wind, cardinal direction	DTM
 antuḫša	antuḫšaš antuḫši antuḫšan antuḫšaz antuḫša	Person, human being	NOUN antuḫšaš antuḫšaš antuḫši antuḫšan antuḫšaz
-kuenun	kuenun	I slew (someone: accusative; with something: ablative)
+kuenun	kuenun	I slew (someone: accusative; with something: ablative)	TODO don't mention the ablative in tablet 1!
 [Number]	1 2 3 4 5 6	Like in English, Hittite scribes usually wrote simple symbols for the numbers instead of the full words.
 parā	parā	Onward, forth, forward
 laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN laḫḫaš laḫḫaš laḫḫi laḫḫan laḫḫaz
@@ -77,5 +73,6 @@ laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN l
 <i>ANA</i>	ANA	To, toward (shorthand for the dative case)
 <i>ŠA</i>	ŠA	Of (shorthand for the genitive case)
 <i>IŠTU</i>	IŠTU	From (shorthand for the ablative case)
-ḫappira	ḫappiraš ḫappiri ḫappiran ḫappiraz	city	NOUN ḫappiraš ḫappiraš ḫappiri ḫappiran ḫappiraz
+ḫappira	ḫappiraš ḫappiri ḫappiran ḫappiraz	City	NOUN ḫappiraš ḫappiraš ḫappiri ḫappiran ḫappiraz
 kurur	kurur	hostile
+gurta	gurtaš gurti gurtan gurtaz gurta	Citadel, acropolis: the better-defended upper part of a city with all the temples and palaces	NOUN gurtaš gurtaš gurti gurtan gurtaz
