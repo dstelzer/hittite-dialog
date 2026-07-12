@@ -106,31 +106,37 @@
 (direction *)
 (opposite of * is #south)
 (name *) north %% Only ever appears in English messages, not Hittite
+(adverb or phrase for *) taršmeni ḫuwanti
 
 #south
 (direction *)
 (opposite of * is #north)
 (name *) south
+(adverb or phrase for *) šalli ḫuwanti
 
 #east
 (direction *)
 (opposite of * is #west)
 (name *) east
+(adverb or phrase for *) ekuni ḫuwanti
 
 #west
 (direction *)
 (opposite of * is #east)
 (name *) west
+(adverb or phrase for *) appezi ḫuwanti
 
 #up
 (direction *)
 (opposite of * is #down)
-(name *) down
+(name *) up
+(adverb or phrase for *) šāra
 
 #down
 (direction *)
 (opposite of * is #up)
-(name *) up
+(name *) down
+(adverb or phrase for *) kattan
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common traits and per-object flags
@@ -581,6 +587,7 @@
 	(object $Obj)
 	~(direction $Obj)
 	~(relation $Obj)
+	~(room $Obj)
 	(current room $Room)
 	~($Obj is in room $Room)
 	
@@ -591,9 +598,12 @@
 
 (instead of $Action)
 	~{ (prevent $Action) (tick) (stop) }
+	(perform $Action without prefix)
+	(exhaust) *(after $Action)
+
+(perform $Action without prefix) %% Standard (perform $) rules should happen with the action description prefixed; this stage exists for the rare cases when that's not desired
 	(describe action $Action)
 	(perform $Action)
-	(exhaust) *(after $Action)
 
 (prevent $)	(fail)
 

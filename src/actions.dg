@@ -347,9 +347,19 @@
 (@ōḫḫun wants cases [#accusative])
 (translate [$ ōḫḫun $ [] | $] into [look])
 (translate [$ ōḫḫun $ $Acc | $] into [examine $Acc])
-(perform [[look] | $])
+(perform [[look] $])
 	(now) (update needed)
-(perform [[examine $] | $]) %% Not a useful action in this game
+(perform [[examine (room $Room)] $] without prefix)
+	(current room $Current)
+	{
+		(from $Current go $Dir to $Room)
+	(or)
+		*(from $Current go $Dir to $Door)
+		(from $Current through $Door to $Room)
+	}
+	%% Now we know the direction
+	Nu (#accusative $Room) (adverb or phrase for $Dir) ōḫḫun.
+(perform [[examine $] $]) %% Not a useful action in this game for anything else
 	(now) (update needed)
 
 #v-look
