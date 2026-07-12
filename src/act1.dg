@@ -482,7 +482,9 @@
 		Clicking a word will show you its definition. See if you can use that to figure out the meaning of the two sentences at the top left. When you think you understand them, press ↩ to continue.
 	}
 	(now) (given first message)
-	(now) (update needed) %% Redraw the status bar to include verbs next time
+	(if) ~(using separate panels) (then)
+		(now) (update needed) %% Redraw the status bar to include verbs next time
+	(endif)
 
 (tutorial)
 	~(taught syntax)

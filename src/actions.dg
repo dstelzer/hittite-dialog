@@ -12,21 +12,34 @@
 %% Look: not really an action, but we implement it as one for now
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+(hr)
+	~(given first message)
+(hr)
+	(in debugger)
+	(div @hr) { (space) - (space) - (space) - (space) - (space) - }
+(hr)
+	(div @hr) (space 1)
+
+(style class @hr)
+	height: 0.1em;
+	width: 100\%;
+	background-color: var\(--text\);
+	aria-role: separator;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+
 (update description)
 	(update environment around player)
-	%% Do this in a status area if at all possible, either top or inline
-	(if) (interpreter supports status bar) (then)
-		(status bar @status) (describe environment)
-	(elseif) (interpreter supports inline status bar) (then)
-		(inline status bar @status) (describe environment)
-	(else) %% Otherwise fall back to a div
-		(div @status) (describe environment)
-	(endif)
-	(if) (using separate panels) (then)
-		(compass rose panel)
-		(verbs list panel)
-		(automap panel)
-	(endif)
+	%% No longer using a status area for this
+	(hr)
+	(div @status) (describe environment)
+
+(redraw separate panels)
+	(using separate panels)
+	(compass rose panel)
+	(verbs list panel)
+	(automap panel)
+(redraw separate panels)
 
 (automap panel) ~(given first message)
 (automap panel)
@@ -595,7 +608,7 @@
 (translate [$ dāḫḫun $ $Acc $ []] into [take $Acc])
 (translate [$ dāḫḫun $ $Acc $ $Abl] into [take $Acc from $Abl])
 
-(unlikely [$ $ $ $Accs $ $Abls]) %% Note: input is complex action, not action!
+(unlikely [$ $ $ $Accs $ $Abls]) %% Note: input is complex action, not action! [[raw] verb [advs] [accs] [dats] [abls]]
 	*($Acc is one of $Accs)
 	*($Abl is one of $Abls)
 	~($Acc has parent $Abl)

@@ -857,10 +857,15 @@
 	~($Words = [\* | $]) %% Ignore lines starting with stars, for transcript comments
 
 (redraw status bar)
+	(redraw separate panels)
+	(print room description if necessary)
+(redraw status bar) %% Don't fail
+
+(print room description if necessary)
 	(update needed)
 	(now) ~(update needed)
 	(update description)
-(redraw status bar) %% Don't fail
+(print room description if necessary) %% Don't fail
 
 (unlikely $ $) (fail)
 
