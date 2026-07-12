@@ -26,6 +26,23 @@
 	(if) ~(superscripts supported) (then) (no space) ^ (endif)
 	(no space) (span @dtm) { (no space) (query $Closure) }
 
+%% Horizontal rules to flag each description
+(hr)
+	~(given first message)
+(hr)
+	(in debugger)
+	(div @hr) { (space) - (space) - (space) - (space) - (space) - }
+(hr)
+	(div @hr) (space 1)
+
+(style class @hr)
+	height: 0.1em;
+	width: 100\%;
+	background-color: var\(--text\);
+	aria-role: separator;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+
 %% "Errors" in the player's input
 (style class @error)
 	data-language: en;

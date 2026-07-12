@@ -12,22 +12,6 @@
 %% Look: not really an action, but we implement it as one for now
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(hr)
-	~(given first message)
-(hr)
-	(in debugger)
-	(div @hr) { (space) - (space) - (space) - (space) - (space) - }
-(hr)
-	(div @hr) (space 1)
-
-(style class @hr)
-	height: 0.1em;
-	width: 100\%;
-	background-color: var\(--text\);
-	aria-role: separator;
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-
 (update description)
 	(update environment around player)
 	%% No longer using a status area for this
