@@ -791,16 +791,22 @@
 	(endif)
 
 %% NOTE: Input to these is a complex action, not an action yet!
+%% A "complex action" or "action candidate" has the form:
+%% [[raw words] verb [advs] [accs] [dats] [abls]]
 (unlikely $Action 0)
-	(unlikely $Action) (or) (very unlikely $Action) (or) (very very unlikely $Action)
+	(subtly unlikely $Action) (or) (unlikely $Action) (or) (very unlikely $Action)
 (unlikely $Action 1)
-	(very unlikely $Action) (or) (very very unlikely $Action)
+	(unlikely $Action) (or) (very unlikely $Action)
 (unlikely $Action 2)
-	(very very unlikely $Action)
+	(very unlikely $Action)
+
+%% "Subtly unlikely" disprefers anything with complex clauses in case of asyndeton
+(subtly unlikely [$ $ $ | $Complex]) %% raw verb advs don't count
+	*($Term is one of $Complex)
+	($Term = [$ $ | $]) %% Has at least two terms
 
 (interface (unlikely $<Complex))
 (interface (very unlikely $<Complex))
-(interface (very very unlikely $<Complex))
 
 (consider action candidates $List)
 	(if) ($List = [$Only]) (then) %% Optimize the common case

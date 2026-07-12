@@ -106,37 +106,57 @@
 (direction *)
 (opposite of * is #south)
 (name *) north %% Only ever appears in English messages, not Hittite
-(adverb or phrase for *) taršmeni ḫuwanti
+(name * in #nominative) taršmenaš ḫuwanza
+(name * in #genitive) taršmenaš ḫuwantaš
+(name * in #dative) taršmeni ḫuwanti
+(name * in #accusative) taršmenan ḫuwantan
+(name * in #ablative) taršmenaz ḫuwantaz
+(name * in #bare) taršmena ḫuwant
 
 #south
 (direction *)
 (opposite of * is #north)
 (name *) south
-(adverb or phrase for *) šalli ḫuwanti
+(name * in #nominative) šalliš ḫuwanza
+(name * in #genitive) šallayaš ḫuwantaš
+(name * in #dative) šalli ḫuwanti
+(name * in #accusative) šallin ḫuwantan
+(name * in #ablative) šallayaz ḫuwantaz
+(name * in #bare) šalli ḫuwant
 
 #east
 (direction *)
 (opposite of * is #west)
 (name *) east
-(adverb or phrase for *) ekuni ḫuwanti
+(name * in #nominative) ekunaš ḫuwanza
+(name * in #genitive) ekunaš ḫuwantaš
+(name * in #dative) ekuni ḫuwanti
+(name * in #accusative) ekunan ḫuwantan
+(name * in #ablative) ekunaz ḫuwantaz
+(name * in #bare) ekuna ḫuwant
 
 #west
 (direction *)
 (opposite of * is #east)
 (name *) west
-(adverb or phrase for *) appezi ḫuwanti
+(name * in #nominative) appezziš ḫuwanza
+(name * in #genitive) appezzayaš ḫuwantaš
+(name * in #dative) appezzi ḫuwanti
+(name * in #accusative) appezzin ḫuwantan
+(name * in #ablative) appezziyaz ḫuwantaz
+(name * in #bare) appezzi ḫuwant
 
 #up
 (direction *)
 (opposite of * is #down)
 (name *) up
-(adverb or phrase for *) šāra
+(name * in $) šāra
 
 #down
 (direction *)
 (opposite of * is #up)
 (name *) down
-(adverb or phrase for *) kattan
+(name * in $) kattan
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common traits and per-object flags

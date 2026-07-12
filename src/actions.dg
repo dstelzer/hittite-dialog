@@ -358,7 +358,17 @@
 		(from $Current through $Door to $Room)
 	}
 	%% Now we know the direction
-	Nu (#accusative $Room) (adverb or phrase for $Dir) ōḫḫun.
+	Nu (#accusative $Room) (#dative $Dir) ōḫḫun.
+(perform [[examine (direction $Dir)] $] without prefix)
+	(current room $Current)
+	{
+		(from $Current go $Dir to $Room)
+	(or)
+		(from $Current go $Dir to $Door)
+		(from $Current through $Door to $Room)
+	}
+	%% Now we know the room
+	Nu (#accusative $Room) (#dative $Dir) ōḫḫun.
 (perform [[examine $] $]) %% Not a useful action in this game for anything else
 	(now) (update needed)
 
@@ -374,9 +384,9 @@
 (verb @go/@paun/@pāun means @pāun)
 (@pāun wants cases [#dative])
 (translate [$ pāun $ $ $Dat | $] into [go $Dat])
-	(adjacent $Dat)
+	(adjacent $Dat) (or) (direction $Dat)
 (translate [$ pāun $ $ $Dat | $] into [travel $Dat])
-	~(adjacent $Dat)
+	~{ (adjacent $Dat) (or) (direction $Dat) }
 
 (scope for @pāun is #go-policy)
 #go-policy
@@ -385,6 +395,8 @@
 ($Obj is in scope for *)
 	*(room $Obj)
 	($Obj is visited)
+($Obj is in scope for *)
+	*(direction $Obj)
 
 (adjacent $Room)
 	(current room $Loc)
@@ -395,6 +407,17 @@
 %% For these specific actions, don't require targets to be in the same room
 ~(refuse [[go $] $])
 ~(refuse [[travel $] $])
+
+(instead of [[go (direction $Dir)] $Details])
+	(current room $Room)
+	(if) (from $Room go $Dir to $Next) (room $Next) (then)
+		(try [[go $Next] $Details])
+	(elseif) (from $Room go $Dir to $Next) (door $Next) (then)
+		(try [[cross $Next] $Details])
+	(else)
+		(div @error) { This line is likely an error. The narrator describes going (name $Dir) , but it's unclear what would be in that direction. }
+		(stop)
+	(endif)
 
 (prevent [[go $Dest] $Details])
 	(current room $Source)
