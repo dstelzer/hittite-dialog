@@ -8,3 +8,5 @@ update make deploy to use a recursive upload
 figure out how containers/supporters should work and apply that to the hearth
 standardize fire and water
 move room description into main text
+migrate regression testing to skein
+clicking ANA in dictionary window should not replace entry

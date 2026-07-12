@@ -9,6 +9,7 @@
 # 		CLIT						provide an explanation of clitics
 # 		DTM							provide an explanation of determiners
 # 		NOUN nom gen dat acc abl	a noun paradigm with five cases
+# 		VERB 1s 3s					a verb paradigm with 1 sg and 3 sg forms
 # 		A B A B A B...				make a two-column table, A left, B right
 # 										(cells containing spaces must be quoted)
 
@@ -19,6 +20,9 @@
 
 import json
 from pathlib import Path
+
+# If true, omit the genitive and ablative cases and third-person verb forms
+SIMPLIFIED_PARADIGMS = False
 
 def space_separated_with_quotes(s): # a   b "c \" d" -> ['a', 'b', 'c " d']
 	out = []
@@ -70,12 +74,26 @@ def parse_paradigm(s):
 		cases = space_separated_with_quotes(s[5:])
 		if len(cases) != 5:
 			raise ValueError(f'NOUN paradigm should have five cases; found {len(cases)} in {s}')
+		if SIMPLIFIED_PARADIGMS: return tablify([
+			'<abbr title="Nominative: subject of a verb">Nom</abbr>',	cases[0],
+			'<abbr title="Dative: location or destination">Dat</abbr>',	cases[2],
+			'<abbr title="Accusative: object of a verb">Acc</abbr>',	cases[3],
+		])
 		return tablify([
 			'<abbr title="Nominative: subject of a verb">Nom</abbr>',	cases[0],
 			'<abbr title="Genitive: owner of another noun">Gen</abbr>',	cases[1],
 			'<abbr title="Dative: location or destination">Dat</abbr>',	cases[2],
 			'<abbr title="Accusative: object of a verb">Acc</abbr>',	cases[3],
 			'<abbr title="Ablative: origin or tool used">Abl</abbr>',	cases[4],
+		])
+	elif s.startswith('VERB '):
+		forms = space_separated_with_quotes(s[5:])
+		if len(forms) != 2:
+			raise ValueError(f'VERB paradigm should have two forms; found {len(forms)} in {s}')
+		if SIMPLIFIED_PARADIGMS: return forms[0]
+		return tablify([
+			'<abbr title="First person: I did this">1st</abbr>',			forms[0],
+			'<abbr title="Third person: he/she/it did this">3rd</abbr>',	forms[1],
 		])
 	else:
 		cells = space_separated_with_quotes(s)
@@ -124,4 +142,7 @@ def do_it_all(infn, outfn):
 		outf.write('\n')
 
 if __name__ == '__main__':
+	SIMPLIFIED_PARADIGMS = False
 	do_it_all('dictionary.tsv', 'dictionary.js')
+	SIMPLIFIED_PARADIGMS = True
+	do_it_all('dictionary.tsv', 'dictionary_simple.js')
