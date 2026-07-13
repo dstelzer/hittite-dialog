@@ -84,6 +84,15 @@
 	text-transform: uppercase;
 	font-weight: bold;
 	aria-role: strong;
+(style class @engtitle)
+	data-language: en;
+	text-transform: uppercase;
+	font-weight: bold;
+	aria-role: strong;
+(style class @subtitle)
+	data-language: en;
+	font-style: italic;
+	aria-role: emphasis;
 
 %% Emphasis
 (style class @italic)

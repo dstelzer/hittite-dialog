@@ -67,7 +67,9 @@
 (name * in #ablative) paḫḫuenaz
 (* is #in #hearth)
 
-($Obj provides light) ($Obj is filled with *)
+($Obj provides light)
+	*($Obj accepts substance *)
+	*($Obj is filled with *)
 
 #burning %% Only used for #bolt currently and thus has neuter declension - this may need to change
 (adjective *)

@@ -1,5 +1,5 @@
 (extension version)
-	(line) Hittite action processing version 0.1 by Daniel Stelzer
+	Hittite action processing version 260713.
 
 (action logging) (fail)
 
@@ -23,7 +23,26 @@
 	(compass rose panel)
 	(verbs list panel)
 	(automap panel)
+	(meta panel)
 (redraw separate panels)
+
+(meta panel)
+	(inline status bar @p-meta) (meta verbs list)
+(meta verbs list)
+	~(meta verbs introduced)
+	Use (link) /about for info.
+(meta verbs list)
+	(span @metaverb) (link) /undo ,
+	(span @metaverb) (link) /save ,
+	(span @metaverb) (link) /restore ,
+	(span @metaverb) (link) /again ,
+	(span @metaverb) (link) /about
+
+(style class @p-meta)
+	data-language: en;
+	font-family: sans-serif;
+(style class @metaverb)
+	white-space: nowrap;
 
 (automap panel) ~(given first message)
 (automap panel)

@@ -1,5 +1,5 @@
 (extension version)
-	(line) Hittite parser version 0.6.
+	Hittite parser version 260713.
 
 (parser logging) (fail)
 
@@ -596,11 +596,15 @@
 		(now) (previous command $Words)
 	(endif)
 	
-	(if) (save undo 1) (then)
-		(div @error) { The previous lines, starting with (print quoted $Words), are crossed out on the tablet and should be considered a scribal error. }
-		(now) (update needed)
-		(stop)
-	(endif)
+	(if) (save undo $ComingBack) (then)
+		(if) ($ComingBack = 1) (then)
+			(div @error) { The previous lines, starting with (print quoted $Words), are crossed out on the tablet and should be considered a scribal error. }
+			(now) (update needed)
+			(stop)
+		(else)
+			(now) (undo state exists)
+		(endif)
+	(endif) %% If it failed, just carry on
 	
 	(if) ($Words are direction list $Dirs) (then) %% Only IM, dots, and numbers
 		(stoppable) (parse number list $Dirs)
@@ -627,6 +631,9 @@
 	~(interpreter supports undo)
 	(div @meta) { Unfortunately, this interpreter does not support UNDO. }
 (parse metacommand [\/undo])
+	~(undo state exists)
+	(div @meta) { Can't undo what hasn't been done! Take some actions in the game first, and then you can undo them. }
+(parse metacommand [\/undo])
 	(undo)
 	(div @realerror) { Undo failed! }
 
@@ -652,11 +659,19 @@
 (parse metacommand [\/again/\/g])
 	(div @realerror) { No previous command to repeat! }
 
-(parse metacommand [\/help])
-	TODO
+(parse metacommand [\/help/\/about])
+	(div @meta) {
+		(banner)
+		Most commands in this game will be in Hittite, not English. But to control the interpreter itself, you can use
+		(span @metaverb) (link) /undo ,
+		(span @metaverb) (link) /save ,
+		(span @metaverb) (link) /restore , and
+		(span @metaverb) (link) /again .
+	}
+	(now) (meta verbs introduced)
 
 (parse metacommand $Words)
-	(div @meta) { The meta command (print quoted $Words) was not recognized. Try /help for more information. }
+	(div @meta) { The meta command (print quoted $Words) was not recognized. Try (span @metaverb) (link) /about for more information. }
 
 (interface (parse action $<Words))
 (parse action $Words)

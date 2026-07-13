@@ -1,5 +1,5 @@
 (library version)
-	Hittite world model version 0.6.
+	Hittite world model version 260713.
 
 (world logging) (fail)
 
@@ -696,8 +696,8 @@
 (startup) (fail) %% Put calculations here that need to run at startup
 
 (intro)
-	(world log {Banner})
-	(banner)
+%%	(world log {Banner})
+%%	(banner)
 	(world log {Updating})
 	(update description)
 
@@ -709,11 +709,10 @@
 %% There is no formal requirement to print the banner, but it's appreciated
 %% and useful to the community and yourself.
 
-(banner) %% TODO temporarily disabled
-
 (banner)
 	(par)
-	(div @title) (story title or default)
+	(div @engtitle) (story title or default)
+	(div @subtitle) (tablet title)
 	(story noun) by (story author or default).
 	(line)
 	(additional banner text)
@@ -726,6 +725,8 @@
 	(library version)
 	(exhaust) { *(extension version) }
 	(par)
+
+(tablet title) %% Don't fail
 
 %% Override to insert co-credits, dedications, etc. into the banner:
 
