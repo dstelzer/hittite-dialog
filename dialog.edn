@@ -19,6 +19,7 @@
 			"src/interface.dg"
 			"src/automap.dg"
 			"src/draclib.dg"
+			"src/substances.dg"
 			"src/parser.dg"
 			"src/worldmodel.dg"
 		]

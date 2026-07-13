@@ -1,4 +1,4 @@
-FILES = src/act1.dg src/actions.dg src/interface.dg src/automap.dg src/draclib.dg src/parser.dg src/worldmodel.dg
+FILES = src/act1.dg src/actions.dg src/interface.dg src/automap.dg src/draclib.dg src/substances.dg src/parser.dg src/worldmodel.dg
 OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources
 # ^ for determiners, ⸗ for proper clitics, = for ASCII clitics; the rest are default
 OPTIONS_DBG = --word-seps='^=.,;"()*'

@@ -1,0 +1,95 @@
+%% Substances: things like fire and water that can be spread from one object to another
+%% Currently that means fire, water, and oil
+
+%% This is stored in a per-object variable ($ is filled with $)
+%% Since this variable will never be used on rooms, we can alias it
+@($Obj is filled with $Substance) ($Obj has coordinates $Substance)
+
+%% These are indicated to the player by adjectives
+($Obj has modifier #water)
+	($Obj is filled with #water)
+	~(avoid genitive case) %% See actions.dg for why this line is here
+($Obj has modifier #burning)
+	~(holder $Obj)
+	($Obj is filled with #fire)
+($Obj has modifier #oily)
+	($Obj is filled with #oil)
+
+%% In general, assume the player wants to refer to the container of a substance, not the substance itself
+%% (Substances usually aren't on-stage, but occasionally can be)
+(dict $Obj in $Case)
+	($Obj is filled with $Substance)
+	~($Substance is $ $Obj) %% In case it's being used as an on-stage object
+	(dict $Substance in $Case)
+(unlikely $Action)
+	*($Group is one of $Action)
+	*($Substance is one of $Group)
+	(substance $Substance)
+
+%% We can indicate which substances a thing is susceptible to
+(interface ($>Obj accepts substance $>Substance))
+
+%% Which is useful in action rules
+(player can access $Substance via $Obj)
+	(current room $Room)
+	*($Obj has ancestor $Room)
+	($Obj is filled with $Substance)
+
+(interface (when the player lacks access to $<Substance))
+(when the player lacks access to $Substance)
+	~(player can access $Substance via $)
+	Nu (#nominative $Substance) natta ḫarkun.
+
+(player carries $Substance in $Obj)
+	(current player $Player)
+	*($Obj is #heldby $Player)
+	($Obj is filled with $Substance)
+
+(interface (when the player is not carrying $<Substance))
+(when the player is not carrying $Substance)
+	~(player carries $Substance in $)
+	Nu (#nominative $Substance) natta ḫarkun.
+
+(player can hold $Substance in $Obj)
+	(current player $Player)
+	*($Obj is #heldby $Player)
+	($Obj accepts substance $Substance)
+	~($Obj is filled with $)
+
+%% Now, the substances themselves!
+
+#fire
+(substance *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) paḫḫur
+(name * in #genitive) paḫḫuenaš
+(name * in #dative) paḫḫueni
+(name * in #ablative) paḫḫuenaz
+(* is #in #hearth)
+
+($Obj provides light) ($Obj is filled with *)
+
+#burning %% Only used for #bolt currently and thus has neuter declension - this may need to change
+(adjective *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) warān
+(name * in #genitive) warantaš
+(name * in #dative) waranti
+(name * in #ablative) warantaz
+
+#water
+(substance *)
+(neuter *)
+(name * in #nominative/#accusative) wātar
+(dict * in #nominative/#accusative) watar
+(name * in #genitive) witenaš
+(name * in #dative) witeni
+(name * in #ablative) witenaz
+
+#oil
+(substance *)
+(name * in $) TODO
+
+#oily
+(adjective *)
+(name * in $) TODO

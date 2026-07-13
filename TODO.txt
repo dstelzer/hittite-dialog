@@ -3,9 +3,6 @@ overhaul clitic matching system, it's awful
 architecture for multiple tablets
 update cuneiform lessons to new version of Ishamai
 taruḫḫun needs =za when used with a person
-add lukkun as a transitive verb
 update make deploy to use a recursive upload
-figure out how containers/supporters should work and apply that to the hearth
-standardize fire and water
 migrate regression testing to skein
 clicking ANA in dictionary window should not replace entry

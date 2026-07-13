@@ -24,44 +24,37 @@
 (name * in #accusative) ḫapan
 (name * in #ablative) ḫapaz
 (name * in #bare) ḫapa
-(dict * in $Case)
-	*(dict #water in $Case)
 (* is #in #riverbank)
 
-(* contains water)
+(* is filled with #water) %% substances.dg
 
 (instead of [[put $Dest *] $])
-	($Dest is one of [#cup #amphora])
+	($Dest accepts substance #water)
+	~($Dest is filled with $)
 	Nu (#accusative #water) (#dative $Dest) tēḫḫun.
-	(if) ($Dest = #cup) (then)
-		(now) (cup has water)
-	(elseif) ($Dest = #amphora) (then)
-		(now) (amphora has water)
-	(endif)
+	(now) ($Dest is filled with #water)
+	(now) (update needed)
+	(tick)
+
+(instead of [[put $Obj *] $]) %% Pour other substances out into the river
+	(item $Obj)
+	($Obj is filled with $Substance)
+	~($Substance = #fire) %% This gets its own description in actions.dg
+	Nu (#accusative $Obj) (#dative #water) tēḫḫun.
+	(now) ~($Obj is filled with $)
 	(now) (update needed)
 	(tick)
 
 (instead of [[take *] $])
-	(current player $Player)
-	(if) (#cup is #heldby $Player) ~(cup has water) (then)
-		($Dest = #cup)
-	(elseif) (#amphora is #heldby $Player) ~(amphora has water) (then)
-		($Dest = #amphora)
-	(else)
-		(fail) %% Fall back to the usual "I can't hold the water" message
-	(endif)
-	Nu (#accusative #water) (#dative $Dest) tēḫḫun. %% "I put the water in the DEST."
-	(if) ($Dest = #cup) (then) %% Gotta fill the vessel after printing the message, otherwise it'll look wrong ("I put the water in the cup of water")
-		(now) (cup has water)
-	(elseif) ($Dest = #amphora) (then)
-		(now) (amphora has water)
-	(endif)
+	(player can hold #water in $Dest) %% If this fails, fall back to "I can't hold the water"
+	Nu (#accusative #water) (#dative $Dest) tēḫḫun. %%
+	(now) ($Dest is filled with #water)
 	(now) (update needed)
 	(tick)
 
 (prevent [[take *] $Details])
 	(describe failed action [[take *] $Details])
-	Nu wātar natta taruḫḫun ḫarkun. %% "I was not able to hold the water."
+	Nu (#accusative #water) natta taruḫḫun ḫarkun. %% "I was not able to hold the water."
 
 #watchtower
 (room *)
@@ -191,23 +184,16 @@
 (from * go #west to #foyer)
 (from * go #north to #backroom)
 
-#burning %% See below, only used for #bolt currently and thus has neuter declension
-(adjective *)
-(neuter *)
-(name * in #nominative/#accusative/#bare) warān
-(name * in #genitive) warantaš
-(name * in #dative) waranti
-(name * in #ablative) warantaz
-
 #bolt
 (item *)
 (neuter *)
 (determiner *) GIŠ
-(* has modifier #burning) (bolt is burning)
 (name * in #nominative/#accusative/#bare) ḫattalu
 (name * in #genitive) ḫattaluwaš
 (name * in #dative) ḫattaluwi
 (name * in #ablative) ḫattaluwaz
+
+(* accepts substance #fire)
 
 (after [[cross #window] | $]) %% Only describe it on the inside
 	(* is pristine)
@@ -217,33 +203,6 @@
 	(* is pristine)
 	Nu āškan ḫašḫun. %% "I opened the gate."
 	(now) (update needed)
-
-(instead of [[put * #hearth/#fire] $Details])
-	(#fire is #in #hearth)
-	(describe action [[put * #fire] $Details])
-	Nu (#nominative *) lukket. %% "The bolt ignited."
-	(now) (bolt is burning)
-	(now) (update needed)
-	(tick)
-
-(instead of [[put * #river] $Details])
-	(describe action [[put * #river] $Details])
-	(now) ~(bolt is burning)
-	(now) (update needed)
-	(tick)
-
-(* provides light)
-	(bolt is burning)
-
-(instead of [[extinguish *] $Details])
-	(bolt is burning)
-	(if) (player has water source $) (then)
-		(describe action [[extinguish *] $Details])
-		(now) ~(bolt is burning)
-	(else)
-		(describe failed action [[extinguish *] $Details])
-		Nu wātar natta ḫarkun. %% I did not have water.
-	(endif)
 
 #foyer
 (room *)
@@ -270,26 +229,16 @@
 (name * in #bare) ḫašša
 (* is #in #foyer)
 
-(instead of [[extinguish $Obj] $Details])
-	{ ($Obj = *) (or) ($Obj is #in *) }
-	(if) (player has water source $Source) (then)
-		(try [[put $Source *] $Details])
-	(else)
-		(describe failed action [[extinguish $Obj] $Details])
-		Nu wātar natta ḫarkun. %% I did not have water.
-	(endif)
-
-#fire
-(neuter *)
-(name * in #nominative/#accusative/#bare) paḫḫur
-(name * in #genitive) paḫḫuenaš
-(name * in #dative) paḫḫueni
-(name * in #ablative) paḫḫuenaz
-(* is #in #hearth)
+(* is filled with #fire)
+(#fire is #in *)
+(on every tick) %% Remove the fire object when needed
+	(#fire is #in *)
+	~(* is filled with #fire)
+	(now) (#fire is nowhere)
 
 (prevent [[take $Obj | $From] $Details])
 	($Obj is #in #hearth)
-	(* is #in #hearth)
+	(#fire is #in #hearth)
 	(describe failed action [[take $Obj | $From] $Details])
 	Nu paḫḫur än ēšta. %% "The fire was hot."
 	%% ä = a-a-a°
@@ -302,14 +251,9 @@
 (name * in #accusative) agannin
 (name * in #ablative) aganniyaz
 (determiner *) DUG
-%% (* has modifier #water)
-%% 	(cup has water)
-(dict * in $Case)
-	(cup has water)
-	*(dict #water in $Case)
 (* is #in #hearth)
 
-(* contains water) (cup has water)
+(* accepts substance #water)
 
 #sleeping
 (adjective *)
@@ -352,31 +296,9 @@
 (name * in #dative) palḫi
 (name * in #ablative) palḫaz
 (determiner *) DUG
-(dict * in $Case)
-	(amphora has water)
-	*(dict #water in $Case)
-%% (* has modifier #water)
-%% 	(amphora has water)
 (* is #in #storeroom)
 
-(* contains water) (amphora has water)
-
-(instead of [[put * #hearth/#fire] $])
-	(#fire is #in #hearth)
-	(amphora has water)
-	(now) (#fire is nowhere)
-	(now) ~(amphora has water)
-	Nu wātar paḫḫeni tēḫḫun. %% "I put the water on the fire..."
-	N=at kištanunun. %% "...and extinguished it."
-	(now) (update needed)
-
-%% Never on-stage, but used by the parser
-#water
-(name * in #nominative/#accusative) wātar
-(dict * in #nominative/#accusative) watar
-(name * in #genitive) witenaš
-(name * in #dative) witeni
-(name * in #ablative) witenaz
+(* accepts substance #water)
 
 #backroom %% "behind the watchtower"
 (room *)
@@ -405,7 +327,7 @@
 	(current player $Player)
 	(#amphora is #heldby $Player)
 	(describe failed action [[cross #roof] $Details])
-	Nu palḫiš nakkiš ēšta. %% "The amphora is heavy."
+	Nu (#nominative #amphora) nakkiš ēšta. %% "The amphora is heavy."
 
 #roof
 (room *)
@@ -432,20 +354,14 @@
 %% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
 
 (instead of [[go *] $Details])
-	(if) (player has water source $Source) ($Source is #heldby $) (then)
+	(if) (player carries #water in $) (then)
 		(describe action [[go *] $Details])
 		(div @narration) { The tablet breaks off here, as the soldier finally approaches the temple itself. }
 		(game over { To be continued... } )
 	(else)
 		(describe failed action [[go *] $Details])
-		Nu=za šaknuwanza ešun. Nu wātar natta ḫarkun. %% "I was impure. I did not have water."
+		Nu=za šaknuwanza ešun. Nu (#accusative #water) natta ḫarkun. %% "I was impure. I did not have water."
 	(endif)
-
-%% What does it mean to have a water source?
-(player has water source $Obj)
-	(current room $Room)
-	*($Obj has ancestor $Room)
-	($Obj contains water)
 
 #enemyland
 (room *)
@@ -470,8 +386,8 @@
 
 (parse metacommand [\/test roof])
 	(now) (#bolt is #heldby #me)
-	(now) (bolt is burning)
-	(now) (amphora has water)
+	(now) (#bolt is filled with #fire)
+	(now) (#amphora is filled with #water)
 
 %% Tutorial!
 

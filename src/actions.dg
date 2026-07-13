@@ -63,8 +63,6 @@
 	~{ ($Action = [go *]) (or) ($Action = [travel *]) }
 	(div @error) { Since the "dark" is insubstantial, it's unclear what this action would entail. }
 
-($ contains water) (fail) %% Needed for one little hack in tablet 1
-
 (describe environment)
 	
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
@@ -130,11 +128,11 @@
 		(collect $Obj)
 			*($Obj has ancestor $Loc)
 			*(item $Obj)
-			($Obj contains water)
+			($Obj is filled with #water)
 		(into $WaterList)
 		(action log {Water: $WaterList} )
 		(if) (nonempty $WaterList) (then)
-			(line) Nu (#dative $WaterList) wātar ēšta.
+			(line) Nu (#dative $WaterList) (#nominative #water) ēšta.
 		(endif)
 	(endif)
 	
@@ -775,6 +773,102 @@
 	(#foyer is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% EXTINGUISH and BURN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(verb @kištanunun/@extinguish means @kištanunun)
+(@kištanunun wants cases [#accusative])
+(translate [$ kištanunun $ $Acc | $] into [extinguish $Acc])
+
+(prevent [[extinguish $Obj] $Details])
+	~($Obj is filled with #fire)
+	(describe negative action [[extinguish $Obj] $Details])
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=aš
+	(endif)
+	warān natta ēšta. %% It was not burning.
+
+(prevent [[extinguish $] $])
+	(when the player lacks access to #water)
+
+(perform [[extinguish $Fire] $] without prefix)
+	(player can access #water via $Water)
+	(if) (item $Fire) (then)
+		($Source = $Fire)
+		($Dest = $Water)
+	(elseif) (item $Water) (then)
+		($Source = $Water)
+		($Dest = $Fire)
+	(else)
+		(div @realerror) { ERROR: Neither fire source $Fire nor water source $Water is portable! }
+		(stop)
+	(endif)
+	(try [[put $Source $Dest] [[] tēḫḫun [] $Source $Dest []]])
+
+(instead of [[put $Source $Dest] $])
+	{
+		($Source is filled with #fire)
+		($Dest is filled with #water)
+		Nu (#accusative $Source) (#dative #water) tēḫḫun. %% "I put the SRC in the water."
+		($Fire = $Source)
+		($Water = $Dest)
+	(or)
+		($Source is filled with #water)
+		($Dest is filled with #fire)
+		Nu (#accusative #water) (#dative $Dest) tēḫḫun. %% "I put water on the DEST."
+		($Water = $Source)
+		($Fire = $Dest)
+	}
+	Nu (#accusative #fire) kištanunun. %% "I extinguished the fire."
+	(now) ~($Fire is filled with $)
+	(if) (item $Water) (then) (now) ~($Water is filled with $) (endif) %% Only portable sources are exhausted when used this way
+	(now) (update needed)
+	(tick)
+
+(verb @lukkun/@burn means @lukkun)
+(@lukkun wants cases [#accusative])
+(translate [$ lukkun $ $Acc | $] into [burn $Acc])
+
+(prevent [[burn $Obj] $Details])
+	~($Obj accepts substance #fire) %% Not flammable
+	(describe failed action [[burn $Obj] $Details])
+
+(prevent [[burn $] $])
+	(when the player lacks access to #fire)
+
+(perform [[burn $Wood] $] without prefix)
+	(player can access #fire via $Fire)
+	(if) (item $Wood) (then)
+		($Source = $Wood)
+		($Dest = $Fire)
+	(elseif) (item $Fire) (then)
+		($Source = $Fire)
+		($Dest = $Wood)
+	(else)
+		(div @realerror) { ERROR: Neither fire source $Fire nor flammable $Wood is portable! }
+		(stop)
+	(endif)
+	(try [[put $Source $Dest] [[] tēḫḫun [] $Source $Dest []]])
+
+(instead of [[put $Source $Dest] $Details])
+	{
+		($Source is filled with #fire)
+		($Dest accepts substance #fire)
+		($Wood = $Dest)
+	(or)
+		($Source accepts substance #fire)
+		($Dest is filled with #fire)
+		($Wood = $Source)
+	}
+	(describe action [[put $Source $Dest] $Details])
+	Nu (#accusative $Wood) lukkun.
+	(now) ($Wood is filled with #fire)
+	(now) (update needed)
+	(tick)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Miscellaneous verbs used in the text
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -791,7 +885,8 @@
 	}
 
 (verb @taruḫḫun/@can means @taruḫḫun)
-(@taruḫḫun wants cases [#accusative #ablative])
+(@taruḫḫun wants cases [#accusative]) (avoid ablative case)
+(@taruḫḫun wants cases [#accusative #ablative]) ~(avoid ablative case)
 (translate [$ taruḫḫun $ $Acc $ $Abl] into [overpower $Acc with $Abl]) %% On its own, make it a synonym for "slay"
 (instead of [[overpower $Obj with $Tool] [$Raw | $]])
 	(try [[slay $Obj with $Tool] [$Raw kuenun [kan] $Obj [] $Tool]])
@@ -817,20 +912,3 @@
 
 (prevent [[open $Obj] $Details]) %% Just fail with default message
 	(describe failed action [[open $Obj] $Details])
-
-(verb @kištanunun means @kištanunun)
-(@kištanunun wants cases [#accusative])
-(translate [$ kištanunun $ $Acc | $] into [extinguish $Acc])
-
-%% Success handled in (instead of $) redirects in act1.dg
-
-(prevent [[extinguish $Obj] $Details])
-	(describe negative action [[extinguish $Obj] $Details])
-	(if) (neuter $Obj) (then)
-		N=at
-	(else)
-		N=aš
-	(endif)
-	warān natta ēšta. %% It was not burning.
-
-(third person verb @lukket)

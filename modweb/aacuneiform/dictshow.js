@@ -65,4 +65,5 @@ function insert_dictionary_word(node) {
 }
 
 $(document).on('click', '.word', function() { show_dictionary_entry(this); });
+// $("#dictionary").on('click', '.word', function(e) { e.stopPropagation(); }); // Prevent the above when inside the #dictionary
 $(document).on('dblclick', '.word', function() { insert_dictionary_word(this); });
