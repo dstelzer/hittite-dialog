@@ -707,8 +707,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% (verb $ means $) already done above
-(@tēḫḫun wants cases [#accusative #dative])
-(@tēḫḫun wants cases [#adverb #accusative #dative]) %% Optional preverb (currently ignored)
+(@tēḫḫun wants cases [#adverb #accusative #dative]) %% Preverb is currently ignored but is handled as #adverb
 (translate [$ tēḫḫun $ $Acc (object $Dat) | $] into [put $Acc $Dat])
 
 %% TODO: consider the preverb/postposition
@@ -753,17 +752,19 @@
 
 (verb @kuenun/@slay means @kuenun)
 
-(@kuenun wants cases [#accusative]) (avoid ablative case) %% Allow no ablatives when they haven't been taught yet
-(@kuenun wants cases [#adverb #accusative]) (avoid ablative case)
+(@kuenun wants cases [#adverb #accusative]) (avoid ablative case) %% Allow no ablatives when they haven't been taught yet
 
-(@kuenun wants cases [#accusative #ablative])
 (@kuenun wants cases [#adverb #accusative #ablative]) %% needs =kkan
 
 (translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl])
 
-(prevent [[slay $ with $] [$ $ $Advs | $]])
+%% Kuenun and taruḫḫun are mostly synonyms, but take different particles
+(prevent [[slay $ with $] [$ @kuenun $Advs | $]])
 	~(@kan is one of $Advs)
-	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "slay" requires the sentence particle =kan to be attached to the first word of the sentence. }
+	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "slay" requires the sentence particle =kan to be attached to the first word of the sentence, as in (span @hittite) { n=an=kan kuenun } "I slew him". }
+(prevent [[slay $ with $] [$ @taruḫḫun $Advs | $]])
+	~(@za is one of $Advs)
+	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) taruḫḫun , when it's used to mean "overpower \(a person\)", needs the clitic =za attached to the first word of the sentence, as in (span @hittite) { nu=za=an taruḫḫun } "I overpowered him". }
 
 (prevent [[slay ~(animate $Obj) with $Tool] $Details])
 	(describe negative action [[slay $Obj with $Tool] $Details]) %% negative, not failed: "did not" instead of "could not"
@@ -904,11 +905,9 @@
 	}
 
 (verb @taruḫḫun/@can means @taruḫḫun)
-(@taruḫḫun wants cases [#accusative]) (avoid ablative case)
-(@taruḫḫun wants cases [#accusative #ablative]) ~(avoid ablative case)
-(translate [$ taruḫḫun $ $Acc $ $Abl] into [overpower $Acc with $Abl]) %% On its own, make it a synonym for "slay"
-(instead of [[overpower $Obj with $Tool] [$Raw | $]])
-	(try [[slay $Obj with $Tool] [$Raw kuenun [kan] $Obj [] $Tool]])
+(@taruḫḫun wants cases [#adverb #accusative]) (avoid ablative case)
+(@taruḫḫun wants cases [#adverb #accusative #ablative]) ~(avoid ablative case)
+(translate [$ taruḫḫun $ $Acc $ $Abl] into [slay $Acc with $Abl]) %% On its own, make it a synonym for "slay"
 
 (adverb @taruḫḫun/@can means @taruḫḫun) %% Triggers an error in parser.dg
 

@@ -496,8 +496,8 @@
 
 %% Error codes:
 %%
-%%	11	Missing adverb
-%%	21	Excess adverb (currently not raised - excess adverbs are just ignored)
+%%	11	Missing adverb (currently not raised - better handled by action routines)
+%%	21	Excess adverb
 %%	12	Missing accusative
 %%	22	Excess accusative
 %%	13	Missing dative
@@ -509,10 +509,10 @@
 %%	32	Should not have ability taruḫḫun
 %%	36	Too many multiple objects
 
-(noun list [$Adv $ $ $] and case list $Cases produce error 11)
-	(empty $Adv)
-	(#adverb is one of $Cases)
-%% We do *not* check for excess adverbs at the moment, but that would be error 21 if we did
+%% We do *not* check for missing adverbs and sentence particles here - it's better if the individual action routines can handle that. But that would be error 11.
+(noun list [$Adv $ $ $] and case list $Cases produce error 21)
+	(nonempty $Adv)
+	~(#adverb is one of $Cases)
 (noun list [$ $Acc $ $] and case list $Cases produce error 12)
 	(empty $Acc)
 	(#accusative is one of $Cases)
@@ -584,7 +584,7 @@
 	This sentence, $Raw, is difficult to interpret, for multiple reasons.
 	(uppercase) (listing $List {(show parser error $_ for action [$Raw | $Action])}).
 
-(show parser error 11 for action $)
+(show parser error 11 for action $) %% Not currently raised
 	there should be an adverb or sentence particle
 (show parser error 21 for action $)
 	there should not be an adverb or sentence particle
@@ -603,7 +603,7 @@
 (show parser error 31 for action $)
 	the clitic (span @hittite) { =wa\(r\) } marks a quotation \( which this sentence should not be \)
 (show parser error 32 for action $)
-	the verb (span @hittite) { taruḫḫun } marks ability or possibility \( when this sentence should indicate an action \)
+	the verb (span @hittite) { taruḫḫun } marks ability or possibility \( when this sentence should indicate a definite action \)
 (show parser error 36 for action [$ $ $Acc $Dat $Abl])
 	there are multiple nouns in
 	(if) (more than one $Acc) (more than one $Dat) (more than one $Abl) (then)
