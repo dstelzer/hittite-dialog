@@ -1,5 +1,5 @@
 (extension version)
-	Hittite parser version 260713.
+	Hittite parser version 260714.
 
 (parser logging) (fail)
 
@@ -366,31 +366,41 @@
 (sentence particle @kan)
 
 %% Clitics
+%% The slot numbers are from GrHL §30.18 (p536)
 (convert clitic @mu into noun phrase [#accusative (first person singular $)])
 (convert clitic @mu into noun phrase [#dative (first person singular $)])
+(clitic @mu goes in slot 4)
 (convert clitic @naš into noun phrase [#accusative (first person plural $)])
 (convert clitic @naš into noun phrase [#dative (first person plural $)])
+(clitic @naš goes in slot 2)
 
 (convert clitic @ta/@du into noun phrase [#accusative (second person singular $)])
 (convert clitic @ta/@du into noun phrase [#dative (second person singular $)])
+(clitic @ta/@du goes in slot 4)
 (convert clitic @šmaš into noun phrase [#accusative (second person plural $)])
 (convert clitic @šmaš into noun phrase [#dative (second person plural $)])
+(clitic @šmaš goes in slot 2)
 
 (convert clitic @šmaš into noun phrase [#dative (third person plural $)])
 (convert clitic @ši into noun phrase [#dative (third person singular $)])
+(clitic @ši goes in slot 4)
 (convert clitic @an into noun phrase [#accusative (third person singular common $)])
 (convert clitic @at into noun phrase [#accusative (third person singular neuter $)])
 (convert clitic @at into noun phrase [#accusative (third person plural neuter $)])
 (convert clitic @e/@i into noun phrase [#accusative (third person plural neuter $)])
 (convert clitic @uš/@aš into noun phrase [#accusative (third person plural common $)])
+(clitic @an/@at/@e/@i/@uš/@aš goes in slot 3)
 
 (convert clitic @z/@za into noun phrase [#accusative (reflexive $)])
 (convert clitic @z/@za into noun phrase [#dative (reflexive $)])
 (convert clitic @z/@za into noun phrase [#adverb @za])
+(clitic @z/@za goes in slot 5)
 
 (convert clitic (sentence particle $Part) into noun phrase [#adverb $Part]) %% Sentence particles work kind of like adverbs, so we deal with them there
+(clitic *(sentence particle $) goes in slot 6)
 
 (convert clitic @wa/@war into noun phrase [#adverb @war]) %% Causes an error if it appears
+(clitic @wa/@war goes in slot 1)
 
 (interface (convert clitics $<Input into noun phrase list $>Output))
 (convert clitics [] into noun phrase list [])
@@ -922,8 +932,9 @@
 
 (divide adverbs $Advs into clitics $Clit and non-clitics $NClit)
 	(collect $C)
+		*($N is one of [1 2 3 4 5 6]) %% A messy way of ensuring slot 1 comes before slot 2, etc
 		*($C is one of $Advs)
-		(sentence particle $C)
+		(clitic $C goes in slot $N)
 	(into $Clit)
 	(collect $N)
 		*($N is one of $Advs)
@@ -946,7 +957,7 @@
 		(no space) =ši
 		($DatConsumed = 1)
 	(endif)
-	(divide adverbs $Advs into clitics $Clit and non-clitics $NClit)
+	(divide adverbs $Advs into clitics $Clit and non-clitics $NClit) %% This should only have slot 5 and 6 clitics currently, which means they'll come after =an (3) and =ši (4)
 	(exhaust) {
 		*($C is one of $Clit)
 		(no space) = (no space) $C
