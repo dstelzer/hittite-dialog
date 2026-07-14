@@ -408,6 +408,18 @@
 	*(convert clitic $First into noun phrase $NewFirst)
 	*(convert clitics $Rest into noun phrase list $NewRest)
 
+(interface (check order of clitics in $Clitics))
+(check order of clitics in $Clitics)
+	(check order of clitics in $Clitics starting at 0 for [])
+(check order of clitics in [] starting at $ for $)
+(check order of clitics in [$Head|$Tail] starting at $PrevScore for $Prev)
+	(clitic $Head goes in slot $HeadScore)
+	(if) ($HeadScore < $PrevScore) (then) %% We went backwards!
+		(div @error) { The order of clitics in this sentence is unusual. =(no space)$Head should come before =(no space)$Prev , not after. }
+		(stop)
+	(endif)
+	(check order of clitics in $Tail starting at $HeadScore for $Head)
+
 %% We can't report this from within (convert clitics $ into noun phrases $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
 (find first broken clitic from $Clitics and report it)
 	*($This is one of $Clitics)
@@ -428,6 +440,7 @@
 (convert parsed line [$Verb $Clitics | $Nouns] from raw $Raw into [$Raw | $Action])
 	(empty action with verb $Verb is $First)
 	*(add noun phrases $Nouns to action $First into $Second)
+	(check order of clitics in $Clitics) %% Will error out if necessary
 	*(convert clitics $Clitics into noun phrase list $ExtraNouns)
 	*(add noun phrases $ExtraNouns to action $Second into $Third)
 	(deduplicate $Third into $Action)
