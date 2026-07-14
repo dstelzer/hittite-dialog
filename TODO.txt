@@ -1,4 +1,3 @@
-overhaul clitic matching system, it's awful
 architecture for multiple tablets
 update cuneiform lessons to new version of Ishamai
 taruḫḫun needs =za when used with a person

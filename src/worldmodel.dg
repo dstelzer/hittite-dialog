@@ -602,6 +602,16 @@
 	(tick)
 	(par)
 
+%% We awkwardly call this at a few different points in action processing, ideally right before anything that could cause an action to fail
+(set pronouns from action [$ [$ $ $ | $Nouns]]) %% [[english] [[raw] verb [advs] acc dat abl]]
+	%% If one of the nouns in this object was a pronoun, we want to preserve that pronoun
+	($Nouns = [$Acc $Dat $Abl])
+	(if) (most recently mentioned noun $It) (then) (endif)
+	(notice $Abl)
+	(notice $Dat)
+	(notice $Acc)
+	(if) (bound $It) ($It is one of $Nouns) (then) (notice $It) (endif)
+
 (refuse [$Action $Details])
 	*($Obj is one of $Action)
 	(object $Obj)
@@ -617,12 +627,13 @@
 (before $)	(fail)
 
 (instead of $Action)
-	~{ (prevent $Action) (tick) (stop) }
+	~{ (prevent $Action) (set pronouns from action $Action) (tick) (stop) }
 	(perform $Action without prefix)
 	(exhaust) *(after $Action)
 
 (perform $Action without prefix) %% Standard (perform $) rules should happen with the action description prefixed; this stage exists for the rare cases when that's not desired
 	(describe action $Action)
+	(set pronouns from action $Action)
 	(perform $Action)
 
 (prevent $)	(fail)
@@ -673,15 +684,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Setting the pronouns from an object
 
-%% (notice $) %% TODO
-%% (notice player's $) %% TODO
-(forget pronouns out of scope) %% TODO
-(clear all pronouns) %% TODO
+%% Moved to parser.dg
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common complaints and prevent-checks
 
-%% TODO rewrite all of these
+%% Moved to actions.dg and substances.dg
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Program entry, main loop, status bar, score

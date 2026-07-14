@@ -306,40 +306,52 @@
 (add noun phrases [[#ablative $Abl] | $Rest] to action [$Verb $Adv $Acc $Dat $Abls] into $Out) %% Don't consider bare nouns as ablatives, it has too many false positives
 	(add noun phrases $Rest to action [$Verb $Adv $Acc $Dat [$Abl|$Abls]] into $Out)
 
-%% Silence compiler warnings
-(interface (pronoun $<Word)) %% Not currently used
-
-#1s
-(pronoun *)
-
 #2s
-(pronoun *)
+(invalid pronoun *)
+(name *) "you"
 
 #3sc
-(pronoun *)
+(invalid pronoun *)
+(name *) "he/she/it"
 
 #3sn
-(pronoun *)
+(invalid pronoun *)
+(name *) "it"
 
 #1p
-(pronoun *)
+(invalid pronoun *)
+(name *) "us"
 
 #2p
-(pronoun *)
+(invalid pronoun *)
+(name *) "you all"
 
 #3pc
-(pronoun *)
+(invalid pronoun *)
+(name *) "them"
 
 #3pn
-(pronoun *)
+(invalid pronoun *)
+(name *) "them"
 
-#reflexive
-(pronoun *)
+%% Pronoun handling pulled from worldmodel.dg
 
-%% Change some of these to variables or whatever eventually TODO
-(first person singular #1s)
+(global variable (most recently mentioned noun $))
+(notice (object $Obj))
+	(now) (most recently mentioned noun $Obj)
+(notice $) %% Don't fail on non-objects
+(clear all pronouns)
+	(now) ~(most recently mentioned noun $)
+(forget pronouns out of scope)
+	(if) (most recently mentioned noun $It) ~($It is in scope) (then)
+		(now) ~(most recently mentioned noun $)
+	(endif)
+
+(first person singular (current player $))
 (second person singular #2s)
-(third person singular common #3sc)
+(third person singular common (most recently mentioned noun $It)) ~(neuter $It)
+(third person singular neuter (most recently mentioned noun $It)) (neuter $It)
+(third person singular common #3sc) %% If the above fails
 (third person singular neuter #3sn)
 (third person singular $Which)
 	*(third person singular common $Which) (or) *(third person singular neuter $Which)
@@ -349,7 +361,7 @@
 (third person plural neuter #3pn)
 (third person plural $Which)
 	*(third person plural common $Which) (or) *(third person plural neuter $Which)
-(reflexive #reflexive)
+(reflexive (current player $))
 
 (sentence particle @kan)
 
@@ -374,6 +386,7 @@
 
 (convert clitic @z/@za into noun phrase [#accusative (reflexive $)])
 (convert clitic @z/@za into noun phrase [#dative (reflexive $)])
+(convert clitic @z/@za into noun phrase [#adverb @za])
 
 (convert clitic (sentence particle $Part) into noun phrase [#adverb $Part]) %% Sentence particles work kind of like adverbs, so we deal with them there
 
@@ -446,17 +459,40 @@
 %% Now, the parser!
 
 (valid sentence [$ $Verb | $Nouns])
+	~(noun list $Nouns contains unresolvable pronoun $)
 	*($Verb wants cases $Cases)
 	~(noun list $Nouns and case list $Cases produce error $)
 
+(noun list $Nouns contains unresolvable pronoun $Pronoun)
+	*($List is one of $Nouns)
+	*($Pronoun is one of $List)
+	(invalid pronoun $Pronoun)
+
 (show parser errors for [$Raw $Verb | $Nouns])
-	*($Verb wants cases $Cases)
-	%% Collect all the errors that happen in this particular instance
-	(collect $Error)
-		*(noun list $Nouns and case list $Cases produce error $Error)
-	(into $ErrorList)
-	%% If we're displaying errors, and we *have* errors, we should show them first
-	(show parser errors $ErrorList for action [$Raw $Verb | $Nouns])
+	(collect $BadPronoun)
+		*(noun list $Nouns contains unresolvable pronoun $BadPronoun)
+	(into $BadPronouns)
+	(if) (nonempty $BadPronouns) (then) %% Prioritize bad pronouns in error reporting
+		(report broken pronouns $BadPronouns)
+	(else)
+		*($Verb wants cases $Cases)
+		%% Collect all the errors that happen in this particular instance
+		(collect $Error)
+			*(noun list $Nouns and case list $Cases produce error $Error)
+		(into $ErrorList)
+		%% If we're displaying errors, and we *have* errors, we should show them first
+		(show parser errors $ErrorList for action [$Raw $Verb | $Nouns])
+	(endif)
+
+%% These errors should be rare
+(report broken pronouns [$Single]) %% Most common case
+	(div @realerror) {
+		This sentence is difficult to interpret. The pronoun points to (name $Single) , but it is unclear who or what exactly that is meant to be.
+	}
+(report broken pronouns $PronounList)
+	(div @realerror) {
+		This sentence is difficult to interpret. The pronouns point to (listing $PronounList {(name $_)} @and) , but it is unclear who or what those are meant to be.
+	}
 
 %% Error codes:
 %%
@@ -894,26 +930,48 @@
 		~($N is one of $Clit)
 	(into $NClit)
 
-%% Action format: [[english version] [[raw words] verb [advs] acc dat abl]]
-(describe action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
-	(divide adverbs $Adv into clitics $Clit and non-clitics $NClit)
-	Nu
+(describe action noun list [$Advs $Acc $Dat $Abl])
+	N (no space)
+	(if) (most recently mentioned noun $Acc) (then)
+		(if) (neuter $Acc) (then)
+			=at
+		(else)
+			=an
+		(endif)
+		($AccConsumed = 1)
+	(else)
+		u
+	(endif)
+	(if) (most recently mentioned noun $Dat) (then)
+		(no space) =ši
+		($DatConsumed = 1)
+	(endif)
+	(divide adverbs $Advs into clitics $Clit and non-clitics $NClit)
 	(exhaust) {
 		*($C is one of $Clit)
 		(no space) = (no space) $C
 	}
-	(#accusative $Acc)
-	(#dative $Dat)
+	(if) ~(bound $AccConsumed) (then) (#accusative $Acc) (endif)
+	(if) ~(bound $DatConsumed) (then) (#dative $Dat) (endif)
 	(#ablative $Abl)
 	(#adverb $NClit)
+
+%% Action format: [[english version] [[raw words] verb [advs] acc dat abl]]
+(describe action [$ [$ $Verb | $Nouns]])
+	(describe action noun list $Nouns)
 	$Verb
 	.
 (describe action $Action)
 	(span @realerror) { Improper action: $Action }
-(describe failed action $Action)
-	Nu (describe raw failed action $Action) .
-(describe raw failed action [$ [$ $Verb $Adv $Acc $Dat $Abl]]) %% No connective, capital, or punctuation, for embedding in a larger context
-	(divide adverbs $Adv into clitics $Clit and non-clitics $NClit)
+(describe failed action [$ [$ $Verb | $Nouns]])
+	(describe action noun list $Nouns)
+	natta %% Used in place of ŪL to avoid explaining heterograms too early
+	taruḫḫun %% "able to" in asyndetic construction
+	$Verb
+	.
+(describe raw failed action [$ [$ $Verb $Advs $Acc $Dat $Abl]]) %% No connective, capital, or punctuation, for embedding in a larger context
+	%% Which means we can't rely on (describe action noun list $)
+	(divide adverbs $Advs into clitics $Clit and non-clitics $NClit)
 	(exhaust) {
 		*($C is one of $Clit)
 		(no space) = (no space) $C
@@ -927,17 +985,8 @@
 	$Verb
 (describe raw failed action $Action)
 	(span @realerror) { Improper action: $Action }
-(describe negative action [$ [$ $Verb $Adv $Acc $Dat $Abl]])
-	(divide adverbs $Adv into clitics $Clit and non-clitics $NClit)
-	Nu
-	(exhaust) {
-		*($C is one of $Clit)
-		(no space) = (no space) $C
-	}
-	(#accusative $Acc)
-	(#dative $Dat)
-	(#ablative $Abl)
-	(#adverb $NClit)
+(describe negative action [$ [$ $Verb | $Nouns]])
+	(describe action noun list $Nouns)
 	natta
 	$Verb
 	.
