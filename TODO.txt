@@ -1,7 +1,5 @@
-architecture for multiple tablets
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 migrate regression testing to skein
 clicking ANA in dictionary window should not replace entry
-> ackan=za taruhhun "N=an za natta taruḫḫun. N=aš antuḫšaš natta ēšta."
 SLAY SELF has wrong error

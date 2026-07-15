@@ -23,10 +23,23 @@ dictionary.js: dictionary.tsv dictionarify.py
 web: hittite.aastory ishamai modweb dictionary.js
 	rm -rf web
 	aambundle -t web hittite.aastory -o web
+	## Generate the basic files needed
 	cp -r ishamai web/
 	## TODO: only really need to copy the .js files and fonts/ from Ishamai
 	rm web/play.html
+	rm web/resources/*.aastory
+	rm web/resources/story.js
+	## Get rid of the files we'll be replacing
 	cp -r modweb/* web/
+	## Replace the static files
+	aambundle -t web:story hittite.aastory -o web/resources/tablet1.js
+	cp hittite.aastory web/resources/tablet1.aastory
+	## Replace the generated files
+	cp web/template.html web/tablet1.html
+	sed -i 's/THISFILE/tablet1/g' web/tablet1.html
+	sed -i 's/dictionary\.js/dictionary_simple\.js/g' web/tablet1.html
+	rm web/template.html
+	## Get rid of the template once it's served its purpose
 
 # deploy to meadstelzer.com/daniel/if/hittite/
 deploy: web

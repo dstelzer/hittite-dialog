@@ -719,7 +719,7 @@
 
 (banner)
 	(par)
-	(div @engtitle) (story title or default)
+	(div @engtitle) (overall story title)
 	(div @subtitle) (tablet title)
 	(story noun) by (story author or default).
 	(line)
@@ -748,8 +748,9 @@
 %% provided. The compiler is smart enough to eliminate the second rule if the
 %% first is known to succeed:
 
-(story title or default)	(story title)
-(story title or default)	An Interactive Fiction
+%%(story title or default)	(story title)
+%%(story title or default)	An Interactive Fiction
+%% see interface.dg
 
 (story author or default)	(story author)
 (story author or default)	Anonymous

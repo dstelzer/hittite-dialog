@@ -47,6 +47,16 @@ var io;
 var status;
 var metadata;
 
+function get_sanitized_title() {
+	var title = aaengine.get_metadata().title;
+	title = title.replace(/Ḫ/gu, "H"); // Avoid mangling the title of this project in particular
+	title = title.replace(/ḫ/gu, "h");
+	title = title.replace(/Š/gu, "S");
+	title = title.replace(/š/gu, "s");
+	title = title.replace(/[^a-zA-Z0-9]+/g, "-"); // Anything else gets purged
+	return title;
+}
+
 for(var i = 0; i < b64_enc.length; i++) {
 	b64_dec[b64_enc.charAt(i)] = i;
 }
@@ -164,7 +174,7 @@ var aaremote = {
 				dstr = now.getFullYear().toString().slice(2) + ("0" + (now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2);
 				tstr = ("0" + now.getHours()).slice(-2) + ("0" + now.getMinutes()).slice(-2);
 				if(!this.logtag) {
-					this.logtag = aaengine.get_metadata().title.replace(/[^a-zA-Z0-9]+/g, "-");
+					this.logtag = get_sanitized_title();
 				}
 				this.sessionid = this.logtag + "-" + dstr + "-" + tstr + "-" + Math.ceil(Math.random()*10000);
 				this.up = true;
@@ -1036,7 +1046,7 @@ window.run_game = function(story64, options) {
 			now = new Date();
 			dstr = now.getFullYear().toString().slice(2) + ("0" + (now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2);
 			tstr = ("0" + now.getHours()).slice(-2) + ("0" + now.getMinutes()).slice(-2);
-			fname = aaengine.get_metadata().title.replace(/[^a-zA-Z0-9]+/g, "-") + "-" + dstr + "-" + tstr + ".aasave";
+			fname = get_sanitized_title() + "-" + dstr + "-" + tstr + ".aasave";
 			downloaddata(fname, filedata, false);
 			return true;
 		},
@@ -1447,7 +1457,7 @@ window.run_game = function(story64, options) {
 		now = new Date();
 		dstr = now.getFullYear().toString().slice(2) + ("0" + (now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2);
 		tstr = ("0" + now.getHours()).slice(-2) + ("0" + now.getMinutes()).slice(-2);
-		fname = aaengine.get_metadata().title.replace(/[^a-zA-Z0-9]+/g, "-") + "-" + dstr + "-" + tstr + ".txt";
+		fname = get_sanitized_title() + "-" + dstr + "-" + tstr + ".txt";
 		for(i = 0; i < aatranscript.full.length; i++) {
 			ch = aatranscript.full.charCodeAt(i);
 			if(ch < 0x80) {
@@ -1470,7 +1480,7 @@ window.run_game = function(story64, options) {
 		var fname, elem;
 
 		document.getElementById("aamenu").style.display = "none";
-		fname = aaengine.get_metadata().title.replace(/[^a-zA-Z0-9]+/g, "-") + ".aastory";
+		fname = aa_file_name_to_download; // See template.html
 		elem = document.createElement("a");
 		elem.href = 'resources/' + fname;
 		elem.setAttribute('download', fname);

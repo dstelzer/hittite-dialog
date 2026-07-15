@@ -1,152 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<title>&Aring;-machine Web Interpreter: Hittite Edition</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<script src="resources/jquery.js"></script>
-	<script src="resources/aaengine.js"></script>
-	<script src="resources/frontend.js"></script>
-	<script src="resources/story.js"></script>
-	<link rel="stylesheet" type="text/css" href="resources/style.css" />
-	
-	<script language="javascript" src="ishamai/hzl.js"></script>
-	<script language="javascript" src="ishamai/signbreak.js"></script>
-	<script language="javascript" src="ishamai/cuneiform.js"></script>
-	<link rel="stylesheet" href="aacuneiform/aa_cuneiform.css" />
-	<script language="javascript" src="aacuneiform/dictionary_simple.js"></script> <!-- for tablet 1 specifically we use the simplified dictionary -->
-	<script language="javascript" src="aacuneiform/dictshow.js"></script>
-	
-	<script>
-		$(function(){
-			run_game(aastory, {
-				aaLogServerPath: undefined,
-				aaLogTag: undefined,
-			});
-			aastory = null;
-		});
-	</script>
-</head>
-<body> <!-- Where "night" and "enlarge" classes attach -->
-<div id="aabody1"> <!-- Where (body style $) attaches, part 1 -->
-	<div id="aadefaults"> <!-- Where default values of CSS properties are evaluated -->
-		<div id="aabody2"> <!-- Where (body style $) attaches, part 2 -->
-			<div id="aadefaults2"> <!-- Where secondary values of CSS properties are evaluated -->
-				<div id="aabody3"> <!-- Third verse, same as the first two -->
-					<div id="aacontainer"> <!-- Central (width-limited) column -->
-						<div id="maincolumn">
-							<div id="aaouterstatus"> <!-- Top bar -->
-								<div id="aamenubutton"> <!-- Menu bottom (top right) -->
-									<div id="aamenulines"></div> <!-- Graphic -->
-									<div id="aamenu"> <!-- The menu itself -->
-										<div id="aamenulist"> <!-- List of options and links -->
-											
-											<!-- Hittite-specific cuneiform settings -->
-											<select class="settings" id="modesel">
-												<option value="hidebound">Cuneiform signs</option>
-												<option value="showbound" selected>Bound transcription</option>
-											</select>
-											<select class="settings" id="fontsel">
-												<option value="font-ink" selected>Ink font</option>
-												<option value="font-publish">Published</option>
-												<option value="font-write">Handwritten</option>
-												<option value="font-linear">Linear</option>
-											</select>
-											<select class="settings" id="sizesel">
-												<option value="size-small">Small signs</option>
-												<option value="size-medium" selected>Medium signs</option>
-												<option value="size-large">Large signs</option>
-											</select>
-											
-											<div id="aacheckboxes"></div> <!-- Filled in by JS -->
-											<hr /> <!-- Onclick for all of these is added by JS -->
-											<div id="aaviewscript" class="aamenuoption">View transcript</div>
-											<div id="aasavescript" class="aamenuoption">Save transcript</div>
-											<div id="aarestart" class="aamenuoption">Restart game</div>
-											<div id="aasavestory" class="aamenuoption">Download story file</div>
-											<hr />
-											<div id="aaaboutopen" class="aamenuoption">About</div>
-										</div>
-									</div>
-								</div>
-								<div id="aastatus"></div> <!-- Filled in by game -->
-							</div>
-							<div id="aastatusborder"></div> <!-- Bar between status and game -->
-							<div id="aaaboutouter"> <!-- "About" overlay -->
-								<div id="aaaboutinner">
-									<div id="aaaboutmeta" class="aaaboutline"></div> <!-- Filled in by JS -->
-									<hr />
-									<div class="aaaboutline">
-										<a id="aaaboutlink" target="_blank" href="https://github.com/Dialog-IF/aamachine/">&Aring;-machine web interpreter v1.0.3</a>
-									</div>
-									<hr />
-									<div class="aaaboutline">
-										<div id="aaaboutclose" class="aailink">Close</div>
-									</div>
-								</div>
-							</div>
-							<form id="aaform" autocomplete="off"> <!-- To handle keypresses etc -->
-								<div id="aamain" aria-live="polite"> <!-- Main body of the game -->
-									<div id="aainputblock">
-										<input id="aainput" type="text" value="" autocomplete="off" spellcheck="false" autocorrect="off" aria-live="off" />
-										<input id="aasubmit" type="submit" value="↩" />
-									</div>
-								</div>
-								<div id="aascriptouter"> <!-- Transcript -->
-									<textarea id="aascriptinner" readonly></textarea>
-									<div id="aascriptclose">Close transcript</div>
-								</div>
-							</form>
-							<div id="aaerrorouter"> <!-- Error messages -->
-								<div id="aaerrorinner">
-									<div id="aaerrorlog"></div> <!-- Filled with .aaerrorline divs when an error happens -->
-									<div class="aaaboutline">
-										<div id="aaerrorclose" class="aailink">Close</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<!-- Dictionary column on the right -->
-						<div id="rightcolumn">
-							<div id="compass" class="panel">
-								<table>
-									<tr><td></td> <td id="c-north"></td> <td id="c-up"></td></tr>
-									<tr><td id="c-west"></td> <td id="c-rose"></td> <td id="c-east"></td></tr>
-									<tr><td id="c-down"></td> <td id="c-south"></td> <td></td></tr>
-								</table>
-							</div>
-							
-							<div id="verbs" class="panel">
-								<div id="p-verbs"></div>
-							</div>
-							
-							<div id="dictionary" class="panel">
-								Pronunciation: <!-- Start with pronunciation guide; this will be overwritten by definitions in play -->
-								<ul>
-									<li>A, E, I, U as in f<b>a</b>ther, fort<b>e</b>, mach<b>i</b>ne, t<b>u</b>be</li>
-									<li>Vowels with a bar on top are longer and/or more stressed</li>
-									<li>Š is a normal S, like in <b>s</b>ide</li>
-									<li>Ḫ is a rough KH, like in lo<b>ch</b></li>
-									<li>Equals signs aren't pronounced</li>
-									<li>Everything else is like in English</li>
-								</ul>
-							</div>
-							
-							<div id="automap" class="panel">
-								<div id="p-map"></div>
-							</div>
-							
-							<div id="meta" class="panel">
-								<div id="p-meta"></div>
-							</div>
-						</div>
-					
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</body>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Ḫattušumna Laḫḫa</title>
+	</head>
+	<body>
+		<p><b>Ḫattušumna Laḫḫa</b> (“Hittite Adventure”) is the provisional name given to a series of recently-discovered tablets in New Hittite script. The text describes an unidentified hero’s attempt to infiltrate an enemy city and recover a stolen god; while the historical context is unknown, the focus on rival kings kidnapping each others’ gods suggests a pre-Empire origin.</p>
+		<p>Three tablets have been uncovered so far:</p>
+		<ul>
+			<li>In <a href="tablet1.html">Tablet 1</a>, the hero slips past the city walls under cover of night.</li>
+			<li><a href="tablet2.html">Tablet 2</a> describes the hero crafting a disguise, posing as a temple baker bringing fresh loaves of bread. It ends when he finally enters the temple proper.</li>
+			<li>A significant amount of text is missing between tablets 2 and 3; from context, it seems a royal retinue arrived before the hero could make his escape.</li>
+			<li>In <a href="tablet3.html">Tablet 3</a>, the hero uncovers a conspiracy to murder the king, and takes advantage of that conspiracy to seize his god and flee.</li>
+		</ul>
+		<b>Or, in other words…</b>
+		<p>This is a game (actually a series of three short games) presented entirely in the ancient Hittite language. It’s meant for absolute beginners—no knowledge of Hittite is needed!</p>
+		<p>Start with <a href="tablet1.html">tablet 1</a>, which will introduce the basic grammar and vocabulary. After that, you can play either <a href="tablet2.html">tablet 2</a> (which covers logograms and more noun cases, with classic text adventure puzzles) or <a href="tablet3.html">tablet 3</a> (which covers quotations and subordinate clauses, with logic and deduction puzzles).</p>
+		<p>Have fun!</p>
+	</body>
 </html>
