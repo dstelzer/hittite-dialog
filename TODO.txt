@@ -5,3 +5,4 @@ clicking ANA in dictionary window should not replace entry
 SLAY SELF has wrong error
 /abuut displayed in input
 side panels flicker on every input
+allow multi-word short names in the compass?

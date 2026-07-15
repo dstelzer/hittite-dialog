@@ -2,6 +2,7 @@
 (tablet title) Tablet 1: The Bakery
 
 (direction numbers enabled)
+(given first message)
 
 #me
 (current player *)
@@ -15,7 +16,6 @@
 	Nu (#nominative #dog) (#dative #building) pait. %% "A dog went into the building."
 	Nu (#nominative #baker) (#ablative #building) pait. %% "The baker came out of the building."
 	Nu (#nominative #baker) (#dative #washhouse) pait. %% "The baker went into the washhouse."
-	(now) (given first message)
 	(now) (update needed)
 
 #courtyard
@@ -49,7 +49,7 @@
 	TODO I did not wear the garment
 (prevent [[go *] $Details])
 	~(#bread is #heldby #me)
-	(narrate negative action [[go *] $Details]) %% I did not...
+	(describe negative action [[go *] $Details]) %% I did not...
 	Nu (#accusative #bread) natta ḫarkun. %% I was not holding the bread.
 
 (perform [[go *] $])
@@ -72,7 +72,7 @@
 (* blocks passage) (#bolt is #in *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #washhouse)
-(short name *) āškan
+(short name *) (#genitive #washhouse) %% TODO???
 (name * in #nominative) āškaš
 (name * in #genitive) āškaš
 (name * in #dative) āški
@@ -99,6 +99,19 @@
 (name * in #dative) lukkandi
 (name * in #ablative) lukkandaz
 
+#baker
+(animate *)
+(logogram *)
+(name * in #bare) NINDA.DU₃.DU₃
+(determiner *) LU₂
+(* is #in #washhouse)
+
+#dog
+(animate *)
+(logogram *)
+(name * in #bare) UR.GI₇
+(* is #in #dogmaze)
+
 #building
 (room *)
 (neuter *)
@@ -118,7 +131,7 @@
 (* blocks passage) (#bolt is #in *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #building)
-(short name *) āškan
+(short name *) (#genitive #building) %% TODO???
 (name * in #nominative) āškaš
 (name * in #genitive) āškaš
 (name * in #dative) āški
@@ -136,3 +149,12 @@
 (from * go #east to #building)
 (from * go #west to #guardmaze)
 (from * go #down to #cheesemaze)
+
+%% And finally, the circumstances in which each verb gets unlocked
+(verb #v-look unlocked)
+(verb #v-go unlocked)
+(verb #v-cross unlocked)
+(verb #v-take unlocked)
+(verb #v-drop unlocked)
+(verb #v-put unlocked)
+(verb #v-slay unlocked)

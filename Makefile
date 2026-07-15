@@ -46,8 +46,10 @@ web: tablet1.aastory tablet2.aastory ishamai modweb dictionary.js
 	cp web/template.html web/tablet1.html
 	sed -i 's/THISFILE/tablet1/g' web/tablet1.html
 	sed -i 's/dictionary\.js/dictionary_simple\.js/g' web/tablet1.html
+	## Tablet 1
 	cp web/template.html web/tablet2.html
 	sed -i 's/THISFILE/tablet2/g' web/tablet2.html
+	## Tablet 2
 	rm web/template.html
 	## Get rid of the template once it's served its purpose
 
@@ -65,5 +67,11 @@ vvv.log: $(FILES)
 regress1.out: $(FILES) src/act1.dg platform/debug.dg regress1.in
 	dgdebug -qD -s 1234 $(OPTIONS_DBG) platform/debug.dg src/act1.dg $(FILES) <regress1.in >regress1.out
 
+regress2.out: $(FILES) src/act2.dg platform/debug.dg regress2.in
+	dgdebug -qD -s 1234 $(OPTIONS_DBG) platform/debug.dg src/act2.dg $(FILES) <regress2.in >regress2.out
+
 regress1: regress1.out
 	meld regress1.out regress1.gold
+
+regress1: regress2.out
+	meld regress2.out regress2.gold
