@@ -1,6 +1,8 @@
 (story title) Ḫattušumna Laḫḫa Tablet 1: The Bakery
 (tablet title) Tablet 1: The Bakery
 
+(direction numbers enabled)
+
 #me
 (current player *)
 (name * in #nominative/#bare) ūk
@@ -9,13 +11,17 @@
 (* is #in #courtyard)
 
 (intro)
-	TODO beginning of tablet 2
+	Nu (#dative #courtyard) ešun. %% "I was in the courtyard."
+	Nu (#nominative #dog) (#dative #building) pait. %% "A dog went into the building."
+	Nu (#nominative #baker) (#ablative #building) pait. %% "The baker came out of the building."
+	Nu (#nominative #baker) (#dative #washhouse) pait. %% "The baker went into the washhouse."
 	(now) (given first message)
 	(now) (update needed)
 
 #courtyard
 (room *)
 (* uses preverb #in)
+(* has modifier #temple)
 (name * in #nominative/#genitive) ḫilaš
 (name * in #dative) ḫili
 (name * in #accusative) ḫilan
@@ -39,7 +45,7 @@
 
 (prevent [[go *] $Details])
 	~(#garment is #wornby #me)
-	(narrate negative action [[go *] $Details]) %% I did not...
+	(describe negative action [[go *] $Details]) %% I did not...
 	TODO I did not wear the garment
 (prevent [[go *] $Details])
 	~(#bread is #heldby #me)

@@ -924,6 +924,8 @@
 		(par)
 	(endif)
 
+(tutorial) %% Don't fail if the game didn't override this
+
 (prompt and input $Words)
 	*(repeat forever)
 	(line)

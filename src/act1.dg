@@ -468,7 +468,14 @@
 	}
 	(now) (taught multiple nouns)
 
-(tutorial) %% Don't fail
-
 (avoid genitive case) %% For this first tablet specifically
 (avoid ablative case)
+
+%% And finally, the circumstances in which each verb gets unlocked
+(verb #v-look unlocked)
+(verb #v-go unlocked)
+(verb #v-cross unlocked) (#watchtower is visited)
+(verb #v-take unlocked) (#street is visited)
+(verb #v-drop unlocked) (#ladder is handled)
+(verb #v-put unlocked) (#gatehouse is visited)
+(verb #v-slay unlocked) (#foyer is visited)

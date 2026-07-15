@@ -62,8 +62,8 @@ deploy: web
 vvv.log: $(FILES)
 	dgdebug -vvv $(OPTIONS) $(FILES) > vvv.log
 
-regress.out: $(FILES) platform/debug.dg regress.in
-	dgdebug -qD -s 1234 $(OPTIONS_DBG) platform/debug.dg $(FILES) <regress.in >regress.out
+regress1.out: $(FILES) src/act1.dg platform/debug.dg regress1.in
+	dgdebug -qD -s 1234 $(OPTIONS_DBG) platform/debug.dg src/act1.dg $(FILES) <regress1.in >regress1.out
 
-regress: regress.out
-	meld regress.out regress.gold
+regress1: regress1.out
+	meld regress1.out regress1.gold

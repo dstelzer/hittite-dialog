@@ -50,6 +50,7 @@
 	~(player carries $Substance in $)
 	Nu (#nominative $Substance) natta ḫarkun.
 
+(interface (player can hold $<Substance in $>Obj))
 (player can hold $Substance in $Obj)
 	(current player $Player)
 	*($Obj is #heldby $Player)

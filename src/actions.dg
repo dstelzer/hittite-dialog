@@ -8,6 +8,9 @@
 	(log) (query $Closure)
 (action log $) %% Always succeed
 
+(avoid ablative case) (fail) %% Individual games can override these to customize
+(avoid genitive case) (fail) %%   how actions are parsed and reported
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Look: not really an action, but we implement it as one for now
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -389,7 +392,6 @@
 #v-look
 (verb *)
 (name *) ōḫḫun
-(verb * unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GO (and TRAVEL)
@@ -492,7 +494,6 @@
 #v-go
 (verb *)
 (name *) pāun
-(verb * unlocked)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CROSS
@@ -536,8 +537,6 @@
 #v-cross
 (verb *)
 (name *) šarraḫḫun
-(verb * unlocked)
-	(#watchtower is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% GO shorthand: raw numbers
@@ -665,8 +664,6 @@
 #v-take
 (verb *)
 (name *) dāḫḫun
-(verb * unlocked)
-	(#street is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DROP
@@ -699,8 +696,6 @@
 #v-drop
 (verb *)
 (name *) katta tēḫḫun
-(verb * unlocked)
-	(#ladder is handled)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PUT
@@ -741,10 +736,8 @@
 	(now) (update needed)
 
 #v-put
-%% (verb *)
+%% (verb *) %% See above re ordering
 (name *) tēḫḫun
-(verb * unlocked)
-	(#gatehouse is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% SLAY
@@ -789,8 +782,6 @@
 #v-slay
 (verb *)
 (name *) =kan kuenun
-(verb * unlocked) %% TODO should this be unlocked at all in act 1?
-	(#foyer is visited)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EXTINGUISH and BURN
