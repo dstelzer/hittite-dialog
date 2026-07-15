@@ -255,7 +255,7 @@ h2 {
 #aainput {
 	width: 100%;
 	border: none;
-	outline: none;
+	outline: 1px solid rgba(128, 128, 128, 0.25);
 	font-family: var(--font-body);
 	font-size: 1em;
 	display: none;
