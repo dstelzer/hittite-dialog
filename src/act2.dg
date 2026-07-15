@@ -1,0 +1,132 @@
+(story title) Ḫattušumna Laḫḫa Tablet 1: The Bakery
+(tablet title) Tablet 1: The Bakery
+
+#me
+(current player *)
+(name * in #nominative/#bare) ūk
+(name * in #genitive) ammel
+(name * in #dative/#accusative/#ablative) ammuk
+(* is #in #courtyard)
+
+(intro)
+	TODO beginning of tablet 2
+	(now) (given first message)
+	(now) (update needed)
+
+#courtyard
+(room *)
+(* uses preverb #in)
+(name * in #nominative/#genitive) ḫilaš
+(name * in #dative) ḫili
+(name * in #accusative) ḫilan
+(name * in #ablative) ḫilaz
+(name * in #bare) ḫila
+
+(origin *)
+
+(from * go #north to #temple)
+(from * go #east through #washdoor to #washhouse)
+(from * go #west through #builddoor to #kitchen)
+
+#temple
+(room *)
+(neuter *)
+(* uses preverb #in)
+(name * in #nominative/#accusative/#bare) karimmi
+(name * in #genitive) karimnaš
+(name * in #dative) karimni
+(name * in #ablative) karimnaz
+
+(prevent [[go *] $Details])
+	~(#garment is #wornby #me)
+	(narrate negative action [[go *] $Details]) %% I did not...
+	TODO I did not wear the garment
+(prevent [[go *] $Details])
+	~(#bread is #heldby #me)
+	(narrate negative action [[go *] $Details]) %% I did not...
+	Nu (#accusative #bread) natta ḫarkun. %% I was not holding the bread.
+
+(perform [[go *] $])
+	TODO end of tablet 2
+
+#washhouse
+(room *)
+(* uses preverb #at)
+(name * in #nominative) šakuniš %% no longer "washhouse" but "spring/well"
+(name * in #genitive) šakuniyaš
+(name * in #dative) šakuniya
+(name * in #accusative) šakuniyan
+(name * in #ablative) šakuniyaz
+(name * in #bare) šakuni
+
+#washdoor
+(door *)
+(holder *)
+(* wants relation #at)
+(* blocks passage) (#bolt is #in *)
+(describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
+(* has modifier #washhouse)
+(short name *) āškan
+(name * in #nominative) āškaš
+(name * in #genitive) āškaš
+(name * in #dative) āški
+(name * in #accusative) āškan
+(name * in #ablative) āškaz
+(name * in #bare) āška
+
+#bolt
+(item *)
+(neuter *)
+(determiner *) GIŠ
+(* has modifier #burnt)
+(name * in #nominative/#accusative/#bare) ḫattalu
+(name * in #genitive) ḫattaluwaš
+(name * in #dative) ḫattaluwi
+(name * in #ablative) ḫattaluwaz
+(* is #heldby #me)
+
+#burnt
+(adjective *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) lukkan
+(name * in #genitive) lukkandaš
+(name * in #dative) lukkandi
+(name * in #ablative) lukkandaz
+
+#building
+(room *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) pēr
+(name * in #genitive) parnaš
+(name * in #dative) parni
+(name * in #ablative) parnaz
+
+(from * go #east through #builddoor to #courtyard)
+(from * go #west to #kitchen)
+(from * go #north to #dogmaze)
+
+#builddoor
+(door *)
+(holder *)
+(* wants relation #at)
+(* blocks passage) (#bolt is #in *)
+(describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
+(* has modifier #building)
+(short name *) āškan
+(name * in #nominative) āškaš
+(name * in #genitive) āškaš
+(name * in #dative) āški
+(name * in #accusative) āškan
+(name * in #ablative) āškaz
+(name * in #bare) āška
+
+#kitchen
+(room *)
+(logogram *)
+(name * in #bare) MUḪALDIM
+(* has modifier $X) ($X = {E₂}) %% Hack to make the determiner work right: E₂ is the modifier, LÚ is the determiner, MUḪALDIM is the main name
+(determiner *) LU₂
+
+(from * go #east to #building)
+(from * go #west to #guardmaze)
+(from * go #down to #cheesemaze)

@@ -364,6 +364,7 @@
 	(else)
 		(describe failed action [[go *] $Details])
 		Nu=za šaknuwanza ešun. Nu (#accusative #water) natta ḫarkun. %% "I was impure. I did not have water."
+		(tick) (stop)
 	(endif)
 
 #enemyland
