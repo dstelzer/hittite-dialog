@@ -3,3 +3,5 @@ update make deploy to use a recursive upload
 migrate regression testing to skein
 clicking ANA in dictionary window should not replace entry
 SLAY SELF has wrong error
+/abuut displayed in input
+side panels flicker on every input
