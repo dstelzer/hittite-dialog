@@ -23,7 +23,7 @@
 
 (redraw separate panels)
 	(using separate panels)
-	(compass rose panel)
+	(compass rose panel) %% Compass rose must come before automap for flag reasons
 	(verbs list panel)
 	(automap panel)
 	(meta panel)
@@ -48,8 +48,10 @@
 	white-space: nowrap;
 
 (automap panel) ~(given first message)
+(automap panel) ~(map update needed)
 (automap panel)
 	(inline status bar @p-map) (automap)
+	(now) ~(map update needed)
 
 (style class @p-map)
 	font-size: larger; %% Make it a bit bigger
@@ -272,7 +274,11 @@
 	(space 1) %% Keep alignment roughly consistent by ensuring the divs are never entirely empty
 (print name of $Obj number $N)
 	(if) (direction numbers enabled) (then) (link) $N (space 1) (endif)
-	(medium short name $Obj) %% We can allow slightly longer names then, if some objects need them
+	(if) (interpreter supports text alignment) (then)
+		(medium short name $Obj) %% We can allow slightly longer names then, if some objects need them
+	(else)
+		(short name $Obj)
+	(endif)
 
 (medium short name $Obj) (short name $Obj) %% Most objects won't though
 
@@ -280,6 +286,7 @@
 %% This should be changed to use (status panel $) when I get that proposal through
 %% Right now it's using a hacked interpreter that makes (inline status bar $) act like (status panel $) eventually will
 (compass rose panel) ~(given first message)
+(compass rose panel) ~(map update needed)
 (compass rose panel)
 	(#north on the compass rose is $North)
 	(#east on the compass rose is $East)
@@ -373,6 +380,7 @@
 (translate [$ ōḫḫun $ $Acc | $] into [examine $Acc])
 (perform [[look] $])
 	(now) (update needed)
+	(now) (map update needed)
 (perform [[examine (room $Room)] $] without prefix)
 	(current room $Current)
 	{
@@ -395,6 +403,7 @@
 	Nu (#accusative $Room) (#dative $Dir) ōḫḫun.
 (perform [[examine $] $]) %% Not a useful action in this game for anything else
 	(now) (update needed)
+	(now) (map update needed)
 
 #v-look
 (verb *)

@@ -482,6 +482,7 @@
 	(current player $Player)
 	(now) ($Player is $Rel $Loc)
 	(update environment around player)
+	(now) (map update needed) %% For sidebar purposes
 
 (interface (enter $<Room))
 

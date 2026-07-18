@@ -346,6 +346,7 @@
 
 #precinct
 (room *)
+(* uses preverb #at)
 (name * in #nominative/#genitive) gurtaš
 (name * in #dative) gurti
 (name * in #accusative) gurtan

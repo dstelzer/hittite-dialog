@@ -56,7 +56,7 @@
 
 (from * go #north to #temple)
 (from * go #east through #washdoor to #washhouse)
-(from * go #west through #builddoor to #kitchen)
+(from * go #west through #builddoor to #building)
 
 #temple
 (room *)
@@ -121,8 +121,8 @@
 (item *)
 (clothing *)
 (logogram *)
-(name * in #bare) TUG₂
-(dict * in $) TÚG TUG2
+(name *) TUG₂
+(dict *) TÚG TUG2
 (* is #in #washhouse)
 
 (baker is incapacitated)
@@ -168,7 +168,7 @@
 	(par) TODO The baker washed himself using the pool.
 
 #pool
-(* is #in #washroom)
+(* is #in #washhouse)
 (* is filled with #water)
 (* has modifier #water) %% Show off the genitive some more
 (name * in #nominative) lūliš
@@ -216,9 +216,9 @@
 #baker
 (animate *)
 (logogram *)
-(name * in #bare) NINDA.DU₃.DU₃
+(name *) NINDA.DU₃.DU₃
 (determiner *) LU₂
-(dict * in $) DÙ DU3 LÚ LU2
+(dict *) DÙ DU3 LÚ LU2
 (* is #in #washhouse)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -229,13 +229,13 @@
 (room *)
 (logogram *)
 (* uses preverb #in)
-(name * in #bare) MUḪALDIM
+(name *) MUḪALDIM
 (* has modifier $X) ($X = {E₂}) %% Hack to make the determiner work right: E₂ is the modifier, LÚ is the determiner, MUḪALDIM is the main name
 (determiner *) LU₂
 
 (from * go #east to #building)
 (from * go #west to #guardwalk1)
-(from * go #down to #cheesemaze)
+(from * go #down to #dm-grain)
 
 #oven
 (holder *)
@@ -268,10 +268,14 @@
 %% Dog region (north)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+(player is in dog region)
+	(current room $Room)
+	(dogs allowed in $Room)
+
 #dog
 (animate *)
 (logogram *)
-(name * in #bare) UR.GI₇
+(name *) UR.GI₇
 (* is #in #dogmaze)
 
 (on every tick)
@@ -292,7 +296,7 @@
 		(shortest path from $Start to $Player is $Path)
 		($Path = [$First $ | $]) %% At least two entries in the list
 		(from $Start go $First to $Next)
-		~($Next = #building)
+		(dogs allowed in $Next)
 		~($First is one of [#up #down])
 	(then)
 		(move dog from $Start to $Next)
@@ -300,7 +304,7 @@
 		(collect $Next)
 			*(from $Start go $Dir to $Next)
 			~($Dir is one of [#up #down]) %% Cannot move vertically
-			~($Next = #building) %% Cannot leave the dog region
+			(dogs allowed in $Next)
 		(into $Options)
 		(randomly select $Chosen from $Options)
 	(then)
@@ -328,6 +332,7 @@
 
 #dogmaze
 (room *)
+(dogs allowed in *)
 (determiner *) NA₄
 (dict * in $) NA4
 (neuter *)
@@ -343,6 +348,7 @@
 
 #dog-sw
 (storage *)
+(dogs allowed in *)
 (contents *) taršuwaš %% Drying
 
 (from * go #east to #dogmaze)
@@ -350,6 +356,7 @@
 
 #dog-w
 (storage *)
+(dogs allowed in *)
 (contents *) ZID₂.DA
 (dict * in $) ZID2 ZÍD
 
@@ -359,12 +366,14 @@
 
 #dog-nw
 (storage *)
+(dogs allowed in *)
 (contents *) BAPPIR
 
 (from * go #south to #dog-w)
 
 #dog-center %% middle room
 (room *)
+(dogs allowed in *)
 (* uses preverb #in)
 (name * in #nominative/#genitive) ištarniyaš antakaš
 (name * in #dative) ištarniya antaki
@@ -380,6 +389,7 @@
 
 #dog-upper
 (room *)
+(dogs allowed in *)
 (* uses preverb #in)
 (name * in #nominative/#genitive) šarāzziyaš antakaš
 (name * in #dative) šarāzziya antaki
@@ -393,6 +403,7 @@
 
 #dog-roof
 (room *)
+(dogs allowed in *)
 (neuter *)
 (* uses preverb #on)
 (name * in #nominative/#accusative) šuḫḫan
@@ -420,22 +431,18 @@
 (dict * in $) LU2 LÚ
 (* is #in #guardwalk1)
 
-(player should be alerted to guard movement)
-	(current room $Room)
-	($Room is one of [#kitchen #guardwalk1 #guardwalk2 #guardwalk3 #honeystorage #fruitstorage])
-
 @(guard is moving west) ~(guard is moving east)
 
 (on every tick)
-	(#watchman is in room $Room)
+	(* is in room $Room)
 	(if) ($Room = #guardwalk1) (guard is moving east) (then)
-		(if) (player should be alerted to guard movement) (then)
-			(par) Nu (#nominative *) ōḫḫun.
+		(if) (adjacent #guardwalk1) (or) (#guardwalk1 is visited) (then)
+			(par) Nu (#nominative *) aušta.
 		(endif)
 		(now) (guard is moving west)
 	(elseif) ($Room = #guardwalk3) (guard is moving west) (then)
-		(if) (player should be alerted to guard movement) (then)
-			(par) Nu (#nominative *) ōḫḫun.
+		(if) (adjacent #guardwalk3) (or) (#guardwalk3 is visited) (then)
+			(par) Nu (#nominative *) aušta.
 		(endif)
 		(now) (guard is moving east)
 	(elseif) (guard is moving east) (then)
@@ -448,11 +455,26 @@
 
 (move guard from $Start to $End)
 	(par)
-	(if) (player should be alerted to guard movement) (then)
-		Nu (#nominative *) (#dative $End) (#ablative $Start) pait.
+	(if)
+		($Start is visited) (or) ($End is visited) (or)
+		(adjacent $Start) (or) (adjacent $End)
+	(then)
+		Nu (#nominative *)
+		(if) (adjacent $End) (or) ($End is visited) (then)
+			(#dative $End)
+		(endif)
+		(if) (adjacent $Start) (or) ($Start is visited) (then)
+			(#ablative $Start)
+		(endif)
+		(if) (current room $End) (then)
+			uet
+		(else)
+			pait
+		(endif)
+		.
 	(endif)
 	(if) (current room $End) (then)
-		Nu=mu (#nominative *) ōḫḫun.
+		Nu=mu (#nominative *) aušta.
 		(death ensues) %% Don't actually move the guard in this case, to simulate an undo
 	(else)
 		(now) (* is #in $End)
@@ -461,12 +483,12 @@
 		(now) (map update needed)
 	(endif)
 	(if) (adjacent $Start) (or) (adjacent $End) (then)
-		(now) (update needed) %% Main room description mentions adjacent guard
+		(now) (update needed) %% Main room description mentions adjacent guard so needs to be updated
 	(endif)
 
 (perform [[go $Room] $])
 	(* is #in $Room)
-	Nu (#nominative *) apiya ēšta. Nu=mu (#nominative *) ōḫḫun.
+	Nu (#nominative *) apiya ēšta. Nu=mu (#nominative *) aušta.
 	(death ensues)
 
 (bonus room description paragraph)
@@ -530,6 +552,9 @@
 	palši
 (short name *) %% Otherwise call it "lower"
 	katteri
+
+(from * go #north to #fruitstorage)
+(from * go #east to #guardwalk2)
 
 #honeystorage
 (storage *)
@@ -613,7 +638,7 @@
 #cheese
 (item *)
 (logogram *)
-(name * in #bare) GA.KIN.AG
+(name *) GA.KIN.AG
 (* is #in #dm-cheese)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
