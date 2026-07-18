@@ -22,6 +22,17 @@
 	Nu (#nominative #baker) (#dative #washhouse) pait. %% "The baker went into the washhouse."
 	(now) (update needed)
 
+%% We're going to need so many of these, we should handle it right at the top
+(room *(storage $))
+(*(storage $) uses preverb #in)
+(name (storage $Obj) in #nominative/#genitive) (contents $Obj) antakaš
+(name (storage $Obj) in #dative) (contents $Obj) antaki
+(name (storage $Obj) in #accusative) (contents $Obj) antakan
+(name (storage $Obj) in #ablative) (contents $Obj) antakaz
+(name (storage $Obj) in #bare) (contents $Obj) antaka
+(short name (storage $Obj)) (contents $Obj)
+(medium short name (storage $Obj)) (#dative $Obj)
+
 #courtyard
 (room *)
 (* uses preverb #in)
@@ -79,13 +90,16 @@
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #building)
 (short name *) (#genitive #building)
-(medium short name *) (#dative *)
+(medium short name *) (#accusative *)
 (name * in #nominative) āškaš
 (name * in #genitive) āškaš
 (name * in #dative) āški
 (name * in #accusative) āškan
 (name * in #ablative) āškaz
 (name * in #bare) āška
+
+#reedjar
+TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Washhouse and baker (east)
@@ -136,6 +150,8 @@
 (name * in #ablative) šakuniyaz
 (name * in #bare) šakuni
 
+(from * go #west through #washdoor to #courtyard)
+
 (on every tick)
 	(current room *)
 	(#baker is in room *)
@@ -160,7 +176,7 @@
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #washhouse)
 (short name *) (#genitive #washhouse)
-(medium short name *) (#dative *)
+(medium short name *) (#accusative *)
 (name * in #nominative) āškaš
 (name * in #genitive) āškaš
 (name * in #dative) āški
@@ -210,6 +226,33 @@
 (from * go #west to #guardmaze)
 (from * go #down to #cheesemaze)
 
+#oven
+(holder *)
+(neuter *)
+(* wants relation #in)
+(name * in #nominative/#accusative/#bare) išliman
+(name * in #genitive) išlimanaš
+(name * in #dative) išlimani
+(name * in #ablative) išlimanaz
+
+(* is filled with #fire)
+(#fire is #in *)
+
+(prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet
+	(describe failed action [[put #bolt *] $Details])
+	Nu (#nominative #bolt) šalli ēšta. %% "It was big."
+
+#oiljar
+TODO
+(* is filled with #oil)
+(* has modifier #oil)
+
+#trough
+TODO
+
+#dough
+TODO
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Dog region (north)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -220,13 +263,132 @@
 (name * in #bare) UR.GI₇
 (* is #in #dogmaze)
 
+(on every tick)
+	(player is in dog region)
+	(dog movement)
+	(now) (dog is active)
+(on every tick) %% We also have to do one more tick of movement when the player leaves, to keep parity
+	~(player is in dog region)
+	(dog is active)
+	(dog movement)
+	(now) ~(dog is active)
+
+(dog movement)
+	(#dog is in room $Start)
+	(current room $Player)
+	%% If 2+ steps away from the player, take one step toward the player
+	(shortest path from $Start to $Player is $Path)
+	(if) ($Path = [$First $ | $]) (then) %% At least two entries in the list
+		(from $Start go $First to $Next)
+		(move dog from $Start to $Next)
+	(else)
+		(collect $Next)
+			*(from $Start go $ to $Next)
+			~($Next = #building) %% Cannot leave the dog region
+		(into $Options)
+		(randomly select $Chosen from $Options)
+		(move dog from $Start to $Chosen)
+	(endif)
+
+(move dog from $Start to $End)
+	Nu (nominative #dog) (#ablative $Start) (#dative $End) pait.
+	(now) (#dog is #in $End)
+	(now) (map update needed)
+	(if) (current room $Start) (or) (current room $End) (then)
+		(now) (update needed)
+	(endif)
+
+%% Whole buncha rooms
+
+#dogmaze
+TODO
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Watchman region (west)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+#watchman
+(animate *)
+(name * in #nominative) ḫalliyatallaš
+(name * in #genitive) halliyatallaš
+(name * in #dative) ḫalliyatalli
+(name * in #accusative) ḫalliyatallan
+(name * in #ablative) ḫalliyatallaz
+(name * in #bare) ḫalliyatalla
+(determiner *) LU₂
+(dict * in $) LU2 LÚ
+(* is #in #guardwalk1)
+
+#guardwalk1
+
+#guardwalk2
+
+#guardwalk3
+
+#fruitstorage
+
+#honeystorage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Darkness region (down)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#dm-grain %% N
+(storage *)
+(inherently dark *)
+(contents *) halkiyaš
+
+(from * go #up to #kitchen)
+(from * go #west to #dm-pottery)
+(from * go #east to #dm-oil)
+
+#dm-pottery %% NW
+(storage *)
+(inherently dark *)
+(contents *) GIR₄
+(dict * in $) GIR4
+
+(from * go #east to #dm-grain)
+(from * go #south to #dm-veg)
+
+#dm-oil %% NE
+(storage *)
+(inherently dark *)
+(contents *) I₃
+(dict * in $) Ì I3
+
+(from * go #west to #dm-grain)
+(from * go #south to #dm-legumes)
+
+#dm-veg %% SW
+(storage *)
+(inherently dark *)
+(contents *) TODO
+
+(from * go #east to #dm-cheese)
+(from * go #north to #dm-pottery)
+
+#dm-legumes %% SE
+(storage *)
+(inherently dark *)
+(contents *) TODO
+
+(from * go #west to #dm-cheese)
+(from * go #north to #dm-oil)
+
+#dm-cheese %% S
+(storage *)
+(inherently dark *)
+(contents *) GA.KIN.AG
+
+(from * go #west to #dm-veg)
+(from * go #east to #dm-legumes)
+
+#cheese
+(item *)
+(logogram *)
+(name * in #bare) GA.KIN.AG
+(* is in #dm-cheese)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Final bookkeeping
@@ -240,7 +402,9 @@
 (verb #v-take unlocked)
 (verb #v-drop unlocked)
 (verb #v-put unlocked)
-(verb #v-slay unlocked)
+
+%% This one pops up when you meet a person again, because it's funny
+(verb #v-slay unlocked) (#washhouse is visited)
 
 %% These are the new ones in tablet 2
 (verb #v-wear unlocked) (#garment is handled)
