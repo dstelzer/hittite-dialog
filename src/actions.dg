@@ -267,7 +267,9 @@
 	(space 1) %% Keep alignment roughly consistent by ensuring the divs are never entirely empty
 (print name of $Obj number $N)
 	(if) (direction numbers enabled) (then) (link) $N (space 1) (endif)
-	(short name $Obj)
+	(medium short name $Obj) %% We can allow slightly longer names then, if some objects need them
+
+(medium short name $Obj) (short name $Obj) %% Most objects won't though
 
 %% Fancy one involving injecting into specific HTML elements
 %% This should be changed to use (status panel $) when I get that proposal through
@@ -675,7 +677,7 @@
 (@tēḫḫun wants cases [#accusative #adverb])
 (translate [$ tēḫḫun $Advs $Acc | $] into [drop $Acc]) (@katta is one of $Advs)
 
-(refuse [[drop $Obj] $Details])
+(prevent [[drop $Obj] $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
 	(describe failed action [[drop $Obj] $Details])
@@ -715,7 +717,7 @@
 		This sentence seems to be incomplete. The verb (span @hittite) tēḫḫun should include a destination: either a noun in the dative, or an adverb like (span @hittite) katta "down" \( on the ground \) .
 	}
 
-(refuse [[put $Obj $Dest] $Details])
+(prevent [[put $Obj $Dest] $Details])
 	(current player $Player)
 	~($Obj has ancestor $Player)
 	(describe failed action [[put $Obj $Dest] $Details])
@@ -880,6 +882,49 @@
 	(tick)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% WEAR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(verb @waššiyanun/@wear means @waššiyanun)
+(@waššiyanun wants cases [#accusative])
+(translate [$ waššiyanun $ $Acc | $] into [wear $Acc])
+
+(interface (clothing $))
+(prevent [[wear ~(clothing $Obj)] $Details])
+	(describe failed action [[wear $Obj] $Details]) %% "I could not wear the X."
+
+(prevent [[wear $Obj] $Details])
+	(current player $Player)
+	($Obj is #wornby $Player)
+	(describe failed action [[wear $Obj] $Details])
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=an
+	(endif)
+	karū waššiyanun. %% "I already wore it."
+
+(prevent [[wear $Obj] $Details])
+	(current player $Player)
+	~($Obj has ancestor $Player)
+	(describe failed action [[wear $Obj] $Details])
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=an
+	(endif)
+	natta ḫarkun. %% "I did not hold it."
+
+(perform [[wear $Obj] $])
+	(current player $Player)
+	(now) ($Obj is #wornby $Player)
+	(now) (update needed)
+
+#v-wear
+(verb *)
+(name *) waššiyanun
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Miscellaneous verbs used in the text
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -913,11 +958,25 @@
 
 (perform [[hold $] $]) %% If already held, no special behavior
 
-%% TODO waššiyanun "wear"
-
 (verb @ḫašḫun/@open means @ḫašḫun)
 (@ḫašḫun wants cases [#accusative])
 (translate [$ ḫašḫun $ $Acc | $] into [open $Acc])
 
 (prevent [[open $Obj] $Details]) %% Just fail with default message
 	(describe failed action [[open $Obj] $Details])
+
+(verb @aggaḫḫun/@die means @aggaḫḫun)
+(@aggaḫḫun wants cases [])
+(translate [$ aggaḫḫun | $] into [die])
+
+(perform [die] without prefix)
+	(death ensues)
+
+(death ensues) %% Note: call this in (perform $) rules ideally, definitely not (on every tick)
+	Nu aggaḫḫun.
+	(div @error) {
+		The text must be corrupt at this point, as the hero must survive to continue the story. Ignoring the last few lines, we continue on...
+	}
+	(stop)
+
+%% TODO "wash"

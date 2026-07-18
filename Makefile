@@ -73,5 +73,5 @@ regress2.out: $(FILES) src/act2.dg platform/debug.dg regress2.in
 regress1: regress1.out
 	meld regress1.out regress1.gold
 
-regress1: regress2.out
+regress2: regress2.out
 	meld regress2.out regress2.gold

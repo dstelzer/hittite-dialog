@@ -1,6 +1,10 @@
 (story title) Ḫattušumna Laḫḫa Tablet 1: The Bakery
 (tablet title) Tablet 1: The Bakery
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Basic setup and courtyard region
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 (direction numbers enabled)
 (given first message)
 
@@ -55,15 +59,98 @@
 (perform [[go *] $])
 	TODO end of tablet 2
 
+#building
+(room *)
+(neuter *)
+(name * in #nominative/#accusative/#bare) pēr
+(name * in #genitive) parnaš
+(name * in #dative) parni
+(name * in #ablative) parnaz
+
+(from * go #east through #builddoor to #courtyard)
+(from * go #west to #kitchen)
+(from * go #north to #dogmaze)
+
+#builddoor
+(door *)
+(holder *)
+(* wants relation #at)
+(* blocks passage) (#bolt is #in *)
+(describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
+(* has modifier #building)
+(short name *) (#genitive #building)
+(medium short name *) (#dative *)
+(name * in #nominative) āškaš
+(name * in #genitive) āškaš
+(name * in #dative) āški
+(name * in #accusative) āškan
+(name * in #ablative) āškaz
+(name * in #bare) āška
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Washhouse and baker (east)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The baker's garment is lying in the courtyard. If you try to take it out of the courtyard, the baker interrupts you, unless you've sealed him in the washhouse or killed him.
+
+#garment
+(item *)
+(clothing *)
+(logogram *)
+(name * in #bare) TUG₂
+(dict * in $) TÚG TUG2
+(* is #in #washhouse)
+
+(baker is incapacitated)
+	(#bolt is $ #washdoor) %% Trapped
+(baker is incapacitated)
+	(#baker is nowhere) %% Killed
+
+(perform [[go #temple] $] without prefix)
+	~(baker is incapacitated)
+	(#garment has ancestor #me)
+	(intercepted by the baker)
+(perform [[cross #builddoor] $] without prefix)
+	~(baker is incapacitated)
+	(#garment has ancestor #me)
+	(intercepted by the baker)
+
+(intercepted by the baker)
+	%% I left the courtyard.
+	Nu (#ablative #courtyard) pāun.
+	%% The baker left the washhouse.
+	Nu (#nominative #baker) (#ablative #washhouse) pait.
+	%% The baker saw me.
+	Nu=mu (#nominative #baker) aušta.
+	%% The watchman killed me.
+	Nu=mu=kan (#nominative #watchman) kuenta.
+	(death ensues) %% See actions.dg for what this does
+
 #washhouse
 (room *)
 (* uses preverb #at)
 (name * in #nominative) šakuniš %% no longer "washhouse" but "spring/well"
 (name * in #genitive) šakuniyaš
 (name * in #dative) šakuniya
-(name * in #accusative) šakuniyan
+(name * in #accusative) šakuniyan %% TODO - not šakunin?
 (name * in #ablative) šakuniyaz
 (name * in #bare) šakuni
+
+(on every tick)
+	(current room *)
+	(#baker is in room *)
+	(par) TODO The baker washed himself using the pool.
+
+#pool
+(* is #in #washroom)
+(* is filled with #water)
+(* has modifier #water) %% Show off the genitive some more
+(name * in #nominative) lūliš
+(name * in #genitive) lūliyaš
+(name * in #dative) lūliya
+(name * in #accusative) lūlin
+(name * in #ablative) lūliyaz
+(name * in #bare) lūli
 
 #washdoor
 (door *)
@@ -72,7 +159,8 @@
 (* blocks passage) (#bolt is #in *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #washhouse)
-(short name *) (#genitive #washhouse) %% TODO???
+(short name *) (#genitive #washhouse)
+(medium short name *) (#dative *)
 (name * in #nominative) āškaš
 (name * in #genitive) āškaš
 (name * in #dative) āški
@@ -93,7 +181,7 @@
 
 #burnt
 (adjective *)
-(neuter *)
+(neuter *) %% Only applies to ḫattalu
 (name * in #nominative/#accusative/#bare) lukkan
 (name * in #genitive) lukkandaš
 (name * in #dative) lukkandi
@@ -104,40 +192,12 @@
 (logogram *)
 (name * in #bare) NINDA.DU₃.DU₃
 (determiner *) LU₂
+(dict * in $) DÙ DU3 LÚ LU2
 (* is #in #washhouse)
 
-#dog
-(animate *)
-(logogram *)
-(name * in #bare) UR.GI₇
-(* is #in #dogmaze)
-
-#building
-(room *)
-(neuter *)
-(name * in #nominative/#accusative/#bare) pēr
-(name * in #genitive) parnaš
-(name * in #dative) parni
-(name * in #ablative) parnaz
-
-(from * go #east through #builddoor to #courtyard)
-(from * go #west to #kitchen)
-(from * go #north to #dogmaze)
-
-#builddoor
-(door *)
-(holder *)
-(* wants relation #at)
-(* blocks passage) (#bolt is #in *)
-(describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
-(* has modifier #building)
-(short name *) (#genitive #building) %% TODO???
-(name * in #nominative) āškaš
-(name * in #genitive) āškaš
-(name * in #dative) āški
-(name * in #accusative) āškan
-(name * in #ablative) āškaz
-(name * in #bare) āška
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Central kitchen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 #kitchen
 (room *)
@@ -150,7 +210,30 @@
 (from * go #west to #guardmaze)
 (from * go #down to #cheesemaze)
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Dog region (north)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#dog
+(animate *)
+(logogram *)
+(name * in #bare) UR.GI₇
+(* is #in #dogmaze)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Watchman region (west)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Darkness region (down)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Final bookkeeping
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% And finally, the circumstances in which each verb gets unlocked
+%% All of these are automatically unlocked from tablet 1
 (verb #v-look unlocked)
 (verb #v-go unlocked)
 (verb #v-cross unlocked)
@@ -158,3 +241,6 @@
 (verb #v-drop unlocked)
 (verb #v-put unlocked)
 (verb #v-slay unlocked)
+
+%% These are the new ones in tablet 2
+(verb #v-wear unlocked) (#garment is handled)
