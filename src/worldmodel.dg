@@ -97,6 +97,14 @@
 (relation *)
 (preverb *) %% None, this is just like #heldby but for rooms
 
+%% Every room needs one of these; confirm this at startup
+(startup)
+	(exhaust) {
+		*(room $Room)
+		~($Room uses preverb $)
+		(div @realerror) { ERROR: Room $Room has no preverb! }
+	}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Directions
 

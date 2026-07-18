@@ -18,9 +18,18 @@
 (intro)
 	Nu (#dative #courtyard) ešun. %% "I was in the courtyard."
 	Nu (#nominative #dog) (#dative #building) pait. %% "A dog went into the building."
-	Nu (#nominative #baker) (#ablative #building) pait. %% "The baker came out of the building."
+	Nu (#nominative #baker) (#ablative #building) uet. %% "The baker came out of the building."
 	Nu (#nominative #baker) (#dative #washhouse) pait. %% "The baker went into the washhouse."
 	(now) (update needed)
+
+(tutorial)
+	~(tutorial introduced)
+	(div @tutorial) {
+		Welcome to tablet 2! The grammar is going to get more complicated this time, but if you made it through tablet 1, you should be well-prepared for what comes next. (par)
+		In particular, nouns will now appear in two additional cases: the "genitive" for one noun modifying another, and the "ablative" for the source of a movement or the tool used for an action. Verbs will sometimes describe what other people are doing instead of just you yourself. And some words will be written with "logograms": special cuneiform signs that represent whole words, like how "7" is short for "seven". When this happens, the names of those cuneiform signs will be written in CAPITAL LETTERS separated by dots. (par)
+		Don't worry, though; you can still click any word to see its definition, and the basic vocabulary isn't going anywhere. Good luck! You've got this!
+	}
+	(now) (tutorial introduced)
 
 %% We're going to need so many of these, we should handle it right at the top
 (room *(storage $))
@@ -73,6 +82,7 @@
 #building
 (room *)
 (neuter *)
+(* uses preverb #in)
 (name * in #nominative/#accusative/#bare) pēr
 (name * in #genitive) parnaš
 (name * in #dative) parni
@@ -99,7 +109,7 @@
 (name * in #bare) āška
 
 #reedjar
-TODO
+%% TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Washhouse and baker (east)
@@ -132,8 +142,8 @@ TODO
 (intercepted by the baker)
 	%% I left the courtyard.
 	Nu (#ablative #courtyard) pāun.
-	%% The baker left the washhouse.
-	Nu (#nominative #baker) (#ablative #washhouse) pait.
+	%% The baker came out of the washhouse.
+	Nu (#nominative #baker) (#ablative #washhouse) uet.
 	%% The baker saw me.
 	Nu=mu (#nominative #baker) aušta.
 	%% The watchman killed me.
@@ -218,12 +228,13 @@ TODO
 #kitchen
 (room *)
 (logogram *)
+(* uses preverb #in)
 (name * in #bare) MUḪALDIM
 (* has modifier $X) ($X = {E₂}) %% Hack to make the determiner work right: E₂ is the modifier, LÚ is the determiner, MUḪALDIM is the main name
 (determiner *) LU₂
 
 (from * go #east to #building)
-(from * go #west to #guardmaze)
+(from * go #west to #guardwalk1)
 (from * go #down to #cheesemaze)
 
 #oven
@@ -243,15 +254,15 @@ TODO
 	Nu (#nominative #bolt) šalli ēšta. %% "It was big."
 
 #oiljar
-TODO
+%% TODO
 (* is filled with #oil)
 (* has modifier #oil)
 
 #trough
-TODO
+%% TODO
 
 #dough
-TODO
+%% TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Dog region (north)
@@ -277,21 +288,29 @@ TODO
 	(#dog is in room $Start)
 	(current room $Player)
 	%% If 2+ steps away from the player, take one step toward the player
-	(shortest path from $Start to $Player is $Path)
-	(if) ($Path = [$First $ | $]) (then) %% At least two entries in the list
+	(if)
+		(shortest path from $Start to $Player is $Path)
+		($Path = [$First $ | $]) %% At least two entries in the list
 		(from $Start go $First to $Next)
+		~($Next = #building)
+		~($First is one of [#up #down])
+	(then)
 		(move dog from $Start to $Next)
-	(else)
+	(elseif) %% If anything goes wrong in the above, fall back to moving randomly
 		(collect $Next)
-			*(from $Start go $ to $Next)
+			*(from $Start go $Dir to $Next)
+			~($Dir is one of [#up #down]) %% Cannot move vertically
 			~($Next = #building) %% Cannot leave the dog region
 		(into $Options)
 		(randomly select $Chosen from $Options)
+	(then)
 		(move dog from $Start to $Chosen)
+	(else)
+		(div @realerror) { ERROR: The dog is stuck! Dog is in $Start , player is in $Player . What's going on? Please report this! }
 	(endif)
 
 (move dog from $Start to $End)
-	Nu (nominative #dog) (#ablative $Start) (#dative $End) pait.
+	Nu (#nominative #dog) (#ablative $Start) (#dative $End) pait.
 	(now) (#dog is #in $End)
 	(now) (map update needed)
 	(if) (current room $Start) (or) (current room $End) (then)
@@ -300,8 +319,90 @@ TODO
 
 %% Whole buncha rooms
 
+%% NW       R
+%%  |     / |
+%%  W---C---U
+%%  |   |
+%% SW---M
+%%      |
+
 #dogmaze
-TODO
+(room *)
+(determiner *) NA₄
+(dict * in $) NA4
+(neuter *)
+(* uses preverb #at)
+(name * in #nominative/#genitive/#bare) ḫararazi %% Mill(stone)
+(name * in #genitive) ḫararaziyaš
+(name * in #dative) ḫararaziya
+(name * in #ablative) ḫararaziyaz
+
+(from * go #south to #kitchen)
+(from * go #north to #dog-center)
+(from * go #west to #dog-sw)
+
+#dog-sw
+(storage *)
+(contents *) taršuwaš %% Drying
+
+(from * go #east to #dogmaze)
+(from * go #north to #dog-w)
+
+#dog-w
+(storage *)
+(contents *) ZID₂.DA
+(dict * in $) ZID2 ZÍD
+
+(from * go #east to #dog-center)
+(from * go #south to #dog-sw)
+(from * go #north to #dog-nw)
+
+#dog-nw
+(storage *)
+(contents *) BAPPIR
+
+(from * go #south to #dog-w)
+
+#dog-center %% middle room
+(room *)
+(* uses preverb #in)
+(name * in #nominative/#genitive) ištarniyaš antakaš
+(name * in #dative) ištarniya antaki
+(name * in #accusative) ištarniyan antakan
+(name * in #ablative) ištarniyaz antakaz
+(name * in #bare) ištarniya antaka
+(short name *) ištarniya
+
+(from * go #west to #dog-w)
+(from * go #south to #dogmaze)
+(from * go #east to #dog-upper)
+(from * go #up to #dog-roof)
+
+#dog-upper
+(room *)
+(* uses preverb #in)
+(name * in #nominative/#genitive) šarāzziyaš antakaš
+(name * in #dative) šarāzziya antaki
+(name * in #accusative) šarāzziyan antakan
+(name * in #ablative) šarāzziyaz antakaz
+(name * in #bare) šarāzziya antaka
+(short name *) šarāzziya
+
+(from * go #west to #dog-center)
+(from * go #north to #dog-roof)
+
+#dog-roof
+(room *)
+(neuter *)
+(* uses preverb #on)
+(name * in #nominative/#accusative) šuḫḫan
+(name * in #genitive) šuḫḫaš
+(name * in #dative) šuḫḫi
+(name * in #ablative) šuḫḫaz
+(name * in #bare) šuḫḫa
+
+(from * go #south to #dog-upper)
+(from * go #down to #dog-center)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Watchman region (west)
@@ -319,15 +420,140 @@ TODO
 (dict * in $) LU2 LÚ
 (* is #in #guardwalk1)
 
-#guardwalk1
+(player should be alerted to guard movement)
+	(current room $Room)
+	($Room is one of [#kitchen #guardwalk1 #guardwalk2 #guardwalk3 #honeystorage #fruitstorage])
 
-#guardwalk2
+@(guard is moving west) ~(guard is moving east)
 
-#guardwalk3
+(on every tick)
+	(#watchman is in room $Room)
+	(if) ($Room = #guardwalk1) (guard is moving east) (then)
+		(if) (player should be alerted to guard movement) (then)
+			(par) Nu (#nominative *) ōḫḫun.
+		(endif)
+		(now) (guard is moving west)
+	(elseif) ($Room = #guardwalk3) (guard is moving west) (then)
+		(if) (player should be alerted to guard movement) (then)
+			(par) Nu (#nominative *) ōḫḫun.
+		(endif)
+		(now) (guard is moving east)
+	(elseif) (guard is moving east) (then)
+		(from $Room go #east to $Next)
+		(move guard from $Room to $Next)
+	(else)
+		(from $Room go #west to $Next)
+		(move guard from $Room to $Next)
+	(endif)
 
-#fruitstorage
+(move guard from $Start to $End)
+	(par)
+	(if) (player should be alerted to guard movement) (then)
+		Nu (#nominative *) (#dative $End) (#ablative $Start) pait.
+	(endif)
+	(if) (current room $End) (then)
+		Nu=mu (#nominative *) ōḫḫun.
+		(death ensues) %% Don't actually move the guard in this case, to simulate an undo
+	(else)
+		(now) (* is #in $End)
+	(endif)
+	(if) ($Start is visited) (or) ($End is visited) (then)
+		(now) (map update needed)
+	(endif)
+	(if) (adjacent $Start) (or) (adjacent $End) (then)
+		(now) (update needed) %% Main room description mentions adjacent guard
+	(endif)
+
+(perform [[go $Room] $])
+	(* is #in $Room)
+	Nu (#nominative *) apiya ēšta. Nu=mu (#nominative *) ōḫḫun.
+	(death ensues)
+
+(bonus room description paragraph)
+	(* is in room $Guard)
+	(adjacent $Guard)
+	Nu (#nominative *)
+	(if) (current room $Player) ($Player is one of [#guardwalk1 #guardwalk2 #guardwalk3]) (then)
+		%% In the street, give the full name
+		(#dative $Guard)
+	(else)
+		%% Elsewhere, just say "in the street"
+		palši
+	(endif)
+	ēšta.
+
+#guardwalk1 %% Upper street
+(room *)
+(* uses preverb #at)
+(name * in #nominative/#genitive) šarāzziyaš palšaš
+(name * in #dative) šarāzziya palši
+(name * in #accusative) šarāzziyan palšan
+(name * in #ablative) šarāzziyaz palšaz
+(name * in #bare) šarāzziya palša
+(short name *) %% Call it "upper" when already in the street
+	(current room #guardwalk2)
+	šarāzziya
+(short name *) %% Otherwise call it "street"
+	palši
+
+(from * go #east to #kitchen)
+(from * go #west to #guardwalk2)
+
+#guardwalk2 %% Middle street
+(room *)
+(* uses preverb #at)
+(name * in #nominative/#genitive) ištarniyaš palšaš
+(name * in #dative) ištarniya palši
+(name * in #accusative) ištarniyan palšan
+(name * in #ablative) ištarniyaz palšaz
+(name * in #bare) ištarniya palša
+(short name *) %% Call it "street" when in the building
+	(current room #honeystorage)
+	palši
+(short name *) %% Otherwise call it "middle"
+	ištarniya
+
+(from * go #west to #guardwalk3)
+(from * go #east to #guardwalk1)
+(from * go #north to #honeystorage)
+
+#guardwalk3 %% Lower street
+(room *)
+(* uses preverb #at)
+(name * in #nominative/#genitive) katteraš palšaš
+(name * in #dative) katteri palši
+(name * in #accusative) katteran palšan
+(name * in #ablative) katteraz palšaz
+(name * in #bare) kattera palša
+(short name *) %% Call it "street" when in the building
+	(current room #fruitstorage)
+	palši
+(short name *) %% Otherwise call it "lower"
+	katteri
 
 #honeystorage
+(storage *)
+(contents *) militaš
+
+(from * go #south to #guardwalk2)
+
+#fruitstorage
+(storage *)
+(contents *) šešaš
+
+(from * go #south to #guardwalk3)
+
+#fruit
+(item *)
+(name * in #nominative/#genitive) šešaš
+(name * in #dative) šeši
+(name * in #accusative) šešan
+(name * in #ablative) šešaz
+(name * in #bare) šeša
+
+(* is #in #fruitstorage)
+
+%% TODO chopping
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Darkness region (down)
@@ -388,7 +614,7 @@ TODO
 (item *)
 (logogram *)
 (name * in #bare) GA.KIN.AG
-(* is in #dm-cheese)
+(* is #in #dm-cheese)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Final bookkeeping
