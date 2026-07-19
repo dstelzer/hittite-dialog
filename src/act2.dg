@@ -31,6 +31,18 @@
 	}
 	(now) (tutorial introduced)
 
+(after [[wait] $])
+	(now) (tried waiting)
+
+(tutorial)
+	~(taught waiting)
+	(tried waiting)
+	(div @tutorial) {
+		Waiting is the sort of thing you might need to do several times in a row, so you can abbreviate it with the number 0, or click the middle of the compass rose. (par)
+		\( Cuneiform did not have a number zero, but scholars sometimes use 0 or OO to transcribe a meaningful blank spot on the tablet, like in place-value numbers or tables of data. \)
+	}
+	(now) (taught waiting)
+
 %% We're going to need so many of these, we should handle it right at the top
 (room *(storage $))
 (*(storage $) uses preverb #in)
@@ -108,6 +120,13 @@
 (name * in #ablative) āškaz
 (name * in #bare) āška
 
+(after [[cross *] $]) %% Describe the dog the first time the building is entered
+	(select)
+		Nu (#nominative #dog) (#accusative #knife) dāš. %% The dog grabs the knife.
+		Na=aš (#dative #dogmaze) pait. %% The dog goes to the X.
+	(or)
+	(stopping)
+
 #reedjar
 %% TODO
 
@@ -115,7 +134,7 @@
 %% Washhouse and baker (east)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% The baker's garment is lying in the courtyard. If you try to take it out of the courtyard, the baker interrupts you, unless you've sealed him in the washhouse or killed him.
+%% The baker's garment is lying in the washhouse. If you try to take it out of the courtyard, the baker interrupts you, unless you've sealed him in the washhouse or killed him.
 
 #garment
 (item *)
@@ -162,10 +181,16 @@
 
 (from * go #west through #washdoor to #courtyard)
 
+(after [[cross #washdoor] $])
+	(now) (baker description suppressed)
 (on every tick)
 	(current room *)
 	(#baker is in room *)
-	(par) TODO The baker washed himself using the pool.
+	(if) (baker description suppressed) (then)
+		(now) ~(baker description suppressed)
+	(else)
+		(par) TODO The baker washed himself using the pool.
+	(endif)
 
 #pool
 (* is #in #washhouse)
@@ -316,10 +341,19 @@
 (move dog from $Start to $End)
 	Nu (#nominative #dog) (#ablative $Start) (#dative $End) pait.
 	(now) (#dog is #in $End)
-	(now) (map update needed)
+	(if) ($Start is visited) (or) ($End is visited) (then)
+		(now) (map update needed)
+	(endif)
 	(if) (current room $Start) (or) (current room $End) (then)
 		(now) (update needed)
 	(endif)
+
+#knife
+(item *)
+(logogram *)
+(name *) GIR₂
+(dict *) GIR2 GÍR
+(* is #heldby #dog)
 
 %% Whole buncha rooms
 
@@ -480,7 +514,7 @@
 		(now) (* is #in $End)
 	(endif)
 	(if) ($Start is visited) (or) ($End is visited) (then)
-		(now) (map update needed)
+		(now) (map update needed) %% Symbol moves on the map
 	(endif)
 	(if) (adjacent $Start) (or) (adjacent $End) (then)
 		(now) (update needed) %% Main room description mentions adjacent guard so needs to be updated
@@ -659,3 +693,4 @@
 
 %% These are the new ones in tablet 2
 (verb #v-wear unlocked) (#garment is handled)
+(verb #v-wait unlocked) (#kitchen is visited) %% When an every-turn-moving NPC appears

@@ -364,6 +364,7 @@
 		}
 	}
 
+(rose star) (unlock wait on the compass rose) (link [0]) ✧ %% See under WAIT
 (rose star) ✧ %% U+2727 WHITE FOUR POINTED STAR
 (style class @compass)
 	width: 33ch; %% 15 3 15, or 9 15 9, or 10 1 10 2 10
@@ -419,6 +420,12 @@
 	(adjacent $Dat) (or) (direction $Dat)
 (translate [$ pāun $ $ $Dat | $] into [travel $Dat])
 	~{ (adjacent $Dat) (or) (direction $Dat) }
+
+%% Disprefer travelling
+%% Argument is a complex action: [raw verb [adv] [acc] [dat] [abl]]
+(unlikely [$ pāun $ $ $Dat $])
+	*($Room is one of $Dat)
+	~(adjacent $Room)
 
 (scope for @pāun is #go-policy)
 #go-policy
@@ -558,6 +565,7 @@
 %% GO shorthand: raw numbers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% 0: wait (not attested) (TODO: how does this look in cuneiform?)
 %% 1: south
 %% 2: north
 %% 3: east
@@ -577,10 +585,19 @@
 	(div @realerror) { ERROR: How did non-number $Num get into the direction list? }
 	(stop)
 (use direction number $Num)
-	{ ($Num < 1) (or) ($Num > 6) }
-	(div @error) { Only the numbers 1 through 4 were used as shorthand for directions \( plus 5 and 6 in this particular text \) , so it's not clear what $Num would mean. }
+	{ ($Num > 6) }
+	(div @error) {
+		Only the numbers 1 through 4 were used as shorthand for directions \( plus 5 and 6 in this particular text
+		(if) (unlock wait on the compass rose) (then)
+			, and 0 for waiting
+		(endif)
+		\) , so it's not clear what $Num would mean.
+	}
 	(stop)
 
+(use direction number 0) %% See under WAIT
+	(wait)
+	(tick)
 (use direction number $Num)
 	(number $Num means direction $Dir)
 	(current room $Room)
@@ -937,6 +954,28 @@
 #v-wear
 (verb *)
 (name *) waššiyanun
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% WAIT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(verb @ḫuškanun/@wait means @ḫuškanun)
+(@ḫuškanun wants cases [])
+(translate [$ ḫuškanun | $] into [wait])
+
+(perform [[wait] $])
+	%% Do nothing
+
+(wait) %% For use in the number routines above
+	(par) (try [[wait] [[ḫuškanun] ḫuškanun [] [] [] []]])
+
+#v-wait
+(verb *)
+(name *) ḫuškanun
+
+(unlock wait on the compass rose)
+	(verb * unlocked)
+	~(in debugger) %% Looks bad in the compass rose
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Miscellaneous verbs used in the text
