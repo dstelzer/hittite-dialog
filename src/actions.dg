@@ -869,7 +869,6 @@
 	(now) ~($Fire is filled with $)
 	(if) (item $Water) (then) (now) ~($Water is filled with $) (endif) %% Only portable sources are exhausted when used this way
 	(now) (update needed)
-	(tick)
 
 (verb @lukkun/@burn means @lukkun)
 (@lukkun wants cases [#accusative])
@@ -910,7 +909,6 @@
 	Nu (#accusative $Wood) lukkun.
 	(now) ($Wood is filled with #fire)
 	(now) (update needed)
-	(tick)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% WEAR
@@ -1033,3 +1031,7 @@
 	(stop)
 
 %% TODO "wash"
+
+(verb @paršun/@flee means @paršun) %% Synonym for "go"
+(@paršun wants cases [#dative])
+(translate [$ paršun $ $ $Dat | $] into [go $Dat])

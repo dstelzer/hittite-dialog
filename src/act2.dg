@@ -117,9 +117,6 @@
 	(or)
 	(stopping)
 
-#reedjar
-%% TODO
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Washhouse and baker (east)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -260,6 +257,7 @@
 (name * in #genitive) išlimanaš
 (name * in #dative) išlimani
 (name * in #ablative) išlimanaz
+(* is #in #kitchen)
 
 (* is filled with #fire)
 (#fire is #in *)
@@ -267,11 +265,6 @@
 (prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet
 	(describe failed action [[put #bolt *] $Details])
 	Nu (#nominative #bolt) šalli ēšta. %% "It was big."
-
-#oiljar
-%% TODO
-(* is filled with #oil)
-(* has modifier #oil)
 
 #trough
 %% TODO
@@ -638,6 +631,93 @@
 %% Darkness region (down)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+#reedjar
+(holder *)
+(* wants relation #in)
+(logogram *)
+(name *) PISAN %% "container"
+(determiner *) GIŠ
+(* has modifier #reed) %% Conveniently the gen sg and gen pl look the same for a-stems
+(* is #in #kitchen)
+
+#reed
+(item *)
+(* has modifier #oily) (reed is oiled) %% substances.dg for definition
+(name * in #nominative/#genitive) nataš
+(name * in #dative) nati
+(name * in #accusative) natan
+(name * in #ablative) nataz
+(name * in #bare) nata
+
+(* accepts substance #oil) %% Doesn't actually become filled with it though
+(* accepts substance #fire)
+
+(instead of [[put $X $Y] $])
+	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
+	(* is #heldby #me)
+	Nu (#accusative #oil) (#dative *) tēḫḫun. %% I put the oil on the reed.
+	(now) (reed is oiled)
+	(now) (update needed)
+
+(perform [[drop/put * | $] $])
+	N=aš ḫarkta. %% It perished/was lost.
+	(reset the reed)
+	(now) (update needed)
+
+(reset the reed)
+	(now) (* is #in #reedjar)
+	(now) ~(reed is oiled)
+	(now) ~(* is filled with $)
+	(now) ~(reed burning timer $)
+(startup) (reset the reed) %% Ensure consistency
+
+(global variable (reed burning timer $))
+
+(on every tick)
+	(* is filled with #fire)
+	(if) ~(reed burning timer $) (then) %% Just ignited: start the timer
+		(if) (reed is oiled) (then)
+			(now) (reed burning timer 3)
+		(else)
+			(now) (reed burning timer 2)
+		(endif)
+	(elseif) (reed burning timer 1) (or) (reed burning timer 0) (then) %% Timer has run out
+		TODO the reed burned out
+		(reset the reed)
+		(now) (update needed)
+	(else)
+		(reed burning timer $Old)
+		($Old minus 1 into $New)
+		(now) (reed burning timer $New)
+		(log) { Reed timer ticks down to $New }
+	(endif)
+
+#oiljar
+(name * in #nominative) palḫiš %% pithos
+(name * in #accusative) palḫin
+(name * in #genitive) palḫaš
+(name * in #dative) palḫi
+(name * in #ablative) palḫaz
+(determiner *) DUG
+
+(* is filled with #oil)
+(* has modifier #oil)
+(* is #in #kitchen)
+
+%% Now for the dark maze itself
+
+(late on every tick) %% Remove the player from darkness if they got trapped
+	(current room $Room)
+	(inherently dark $Room)
+	~{ %% No light source
+		*($Obj has ancestor $Room)
+		($Obj is filled with #fire)
+	}
+	(par)
+	Nu pedaš dankuešta. %% The room became dark.
+	Nu apēz paršun. %% I fled from that place.
+	(enter #kitchen)
+
 #dm-grain %% N
 (storage *)
 (inherently dark *)
@@ -655,6 +735,42 @@
 
 (from * go #east to #dm-grain)
 (from * go #south to #dm-veg)
+
+%% This one has the crucial lamp
+
+#lamp
+(item *)
+(name * in #nominative/#genitive) šašannaš
+(name * in #dative) šašanni
+(name * in #accusative) šašannan
+(name * in #ablative) šašannaz
+(determiner *) DUG
+(* is #in #dm-pottery)
+
+(* accepts substance #oil)
+(* accepts substance #fire)
+	(* is filled with #oil) %% Doesn't accept fire until it's filled
+	(or)
+	(* is filled with #fire) %% But then keeps burning once the oil's gone
+(* has modifier #empty) ~(* is filled with $)
+(* has modifier #oily) (* is filled with #oil)
+%% Will receive "burning" modifier from substances.dg
+
+(instead of [[put $X $Y] $])
+	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
+	(* is #heldby #me)
+	Nu (#accusative #oil) (dtm {DUG})(name * in #dative) anda tēḫḫun. %% I put the oil in the lamp.
+	%% Doesn't use (#dative *) because that would include "empty"
+	(now) (* is filled with #oil)
+	(now) (update needed)
+
+#empty
+(adjective *)
+(name * in #nominative/#genitive) dannattaš
+(name * in #dative) dannatti
+(name * in #accusative) dannattan
+(name * in #ablative) dannattaz
+(name * in #bare) dannatta
 
 #dm-oil %% NE
 (storage *)
@@ -707,7 +823,19 @@
 (name (storage $Obj) in #accusative) (contents $Obj) antakan
 (name (storage $Obj) in #ablative) (contents $Obj) antakaz
 (name (storage $Obj) in #bare) (contents $Obj) antaka
+(short name (storage $Obj)) %% Duplicated from actions.dg which is not ideal
+	(inherently dark $Obj)
+	(current player $Player)
+	~($Player has a light source)
+	~($Obj has a light source)
+	dankui %% "Dark"
 (short name (storage $Obj)) (contents $Obj)
+(medium short name (storage $Obj)) %% Likewise
+	(inherently dark $Obj)
+	(current player $Player)
+	~($Player has a light source)
+	~($Obj has a light source)
+	dankui %% "Dark"
 (medium short name (storage $Obj)) (#dative $Obj)
 
 %% And finally, the circumstances in which each verb gets unlocked

@@ -8,16 +8,20 @@ lu2^ninda.du3.du3 ohhun
 túg dahhun
 4
 4
+* Can't leave the courtyard with the garment
 hattalu aski tehhun
 2
 4
+* Barring the door works
 /undo
 /undo
 3
 nu=kan lú ninda.dù.dù kuenun
+* Now that we have the ablative case, we need to use it
 nu=kan lú ninda.dù.dù hattaluwaz kuenun
 4
 4
+* Killing the baker also works
 tug2 wassiyanun
 *** North branch (dog)
 2
@@ -35,7 +39,7 @@ tug2 wassiyanun
 3
 2
 6
-* Having gone through the loop, we can now catch the dog
+* Having passed through the odd-length cycle, we can now catch the dog
 * With this random seed, it's right here; but otherwise you just have to chase it a bit
 gir2 dahhun
 1 1

@@ -291,7 +291,7 @@
 (inherently dark *)
 (from * go #south to #foyer)
 
-#amphora
+#amphora %% actually a pithos now
 (item *)
 (name * in #nominative) palḫiš
 (name * in #accusative) palḫin

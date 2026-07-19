@@ -9,11 +9,16 @@
 ($Obj has modifier #water)
 	($Obj is filled with #water)
 	~(avoid genitive case) %% See actions.dg for why this line is here
-($Obj has modifier #burning)
+($Obj has modifier #burning-n)
 	~(holder $Obj)
+	(neuter $Obj)
 	($Obj is filled with #fire)
-($Obj has modifier #oily)
-	($Obj is filled with #oil)
+($Obj has modifier #burning-c) %% Declension varies by gender unfortunately
+	~(holder $Obj)
+	~(neuter $Obj)
+	($Obj is filled with #fire)
+%%($Obj has modifier #oily)
+%%	($Obj is filled with #oil)
 
 %% In general, assume the player wants to refer to the container of a substance, not the substance itself
 %% (Substances usually aren't on-stage, but occasionally can be)
@@ -71,13 +76,22 @@
 	*($Obj accepts substance *)
 	*($Obj is filled with *)
 
-#burning %% Only used for #bolt currently and thus has neuter declension - this may need to change
+#burning-n
 (adjective *)
 (neuter *)
 (name * in #nominative/#accusative/#bare) warān
 (name * in #genitive) warantaš
 (name * in #dative) waranti
 (name * in #ablative) warantaz
+
+#burning-c
+(adjective *)
+(name * in #nominative) waranza
+(name * in #genitive) warantaš
+(name * in #dative) waranti
+(name * in #accusative) warantan
+(name * in #ablative) warantaz
+(name * in #bare) warān
 
 #water
 (substance *)
@@ -90,8 +104,16 @@
 
 #oil
 (substance *)
-(name * in $) TODO
+(neuter *)
+(name * in #nominative/#accusative/#bare) šākan
+(name * in #genitive) šaknaš
+(name * in #dative) šakni
+(name * in #ablative) šaknaz
 
 #oily
 (adjective *)
-(name * in $) TODO
+(name * in #nominative) šaknuwanza
+(name * in #genitive) šaknuwandaš
+(name * in #dative) šaknuwandi
+(name * in #accusative) šaknuwandan
+(name * in #ablative) šaknuwandaz
