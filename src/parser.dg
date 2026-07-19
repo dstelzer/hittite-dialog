@@ -1090,7 +1090,7 @@
 		(span @akk) (akkadian preposition for $Case)
 	(endif)
 	(if) ($Obj has modifier $Mod) (then)
-		(if) (adjective $Mod) (then) %% Note: this does NOT currently consider gender! Adjective objects are expected to have the same inherent gender as the noun
+		(if) (adjective $Mod) (then) %% Note: This does NOT currently consider gender! Adjective objects are expected to have the same inherent gender as the noun. See substances.dg for how this is handled.
 			(name $Mod in $Case)
 		(elseif) (object $Mod) (then)
 			(#genitive $Mod)

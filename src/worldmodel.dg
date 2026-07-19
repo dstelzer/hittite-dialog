@@ -165,6 +165,7 @@
 (opposite of * is #up)
 (name *) down
 (name * in $) kattan
+(dict * in $) katta
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common traits and per-object flags

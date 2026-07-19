@@ -11,3 +11,4 @@ baker behavior should not be described right after entering
 add 0 (blank) to font
 make the debugger compass rose wider so everything fits properly
 add a ladder for scenery
+multi-sign logograms in short names

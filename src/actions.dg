@@ -426,6 +426,11 @@
 (unlikely [$ pāun $ $ $Dat $])
 	*($Room is one of $Dat)
 	~(adjacent $Room)
+%% _Really_ disprefer travelling to multiple places
+(very unlikely [$ pāun $ $ $Dat $])
+	*($Room is one of $Dat)
+	~(adjacent $Room)
+	($Dat = [$ $ | $]) %% At least two entries
 
 (scope for @pāun is #go-policy)
 #go-policy
@@ -974,6 +979,36 @@
 (unlock wait on the compass rose)
 	(verb * unlocked)
 	~(in debugger) %% Looks bad in the compass rose
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CHOP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(verb @arkaḫḫun/@cut means @arkaḫḫun)
+(@arkaḫḫun wants cases [#accusative #ablative])
+(translate [$ arkaḫḫun $ $Acc $ $Abl] into [slay $Acc with $Abl])
+	(animate $Acc) (sharp $Abl)
+(translate [$ arkaḫḫun $ $Acc $ $Abl] into [cut $Acc with $Abl])
+
+(prevent [[cut $Acc with $Abl] $Details])
+	~(sharp $Abl)
+	(describe failed action [[cut $Acc with $Abl] $Details])
+	Nu (#nominative $Abl) GIR₂ natta ēšta. %% The ABL was not a knife.
+
+%% In case of a weird CUT KNIFE WITH KNIFE thing
+(prevent [[cut $Acc with $Abl] $Details])
+	(sharp $Acc)
+	(describe failed action [[cut $Acc with $Abl] $Details])
+
+(perform [[cut $ with $] $])
+	%% Do nothing by default - override for food items that can get cut
+	%% By default it just says "you cut it" with no mechanical effect
+
+(sharp $) (fail) %% Must exist in an act for this verb to be useful
+
+#v-cut
+(verb *)
+(name *) arkaḫḫun
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Miscellaneous verbs used in the text

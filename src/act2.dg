@@ -68,14 +68,14 @@
 (name * in #dative) karimni
 (name * in #ablative) karimnaz
 
-(prevent [[go *] $Details])
+(prevent [[go *] $Details]) %% Test garment first since it's easier to get
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details]) %% I did not...
-	TODO I did not wear the garment
+	Nu (name #garment in #accusative) natta waššiyanun.
 (prevent [[go *] $Details])
 	~(#bread is #heldby #me)
 	(describe negative action [[go *] $Details]) %% I did not...
-	Nu (#accusative #bread) natta ḫarkun. %% I was not holding the bread.
+	Nu (name #bread in #accusative) natta ḫarkun. %% I was not holding the bread.
 
 (perform [[go *] $])
 	TODO end of tablet 2
@@ -262,15 +262,149 @@
 (* is filled with #fire)
 (#fire is #in *)
 
-(prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet
+(prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet, it should have a clear failure message on this tablet
 	(describe failed action [[put #bolt *] $Details])
 	Nu (#nominative #bolt) šalli ēšta. %% "It was big."
 
 #trough
-%% TODO
+(holder *)
+(* wants relation #in)
+(name * in #nominative/#genitive) išnuraš
+(name * in #dative) išnuri
+(name * in #accusative) išnuran
+(name * in #ablative) išnuraz
+(determiner *) DUG
+(* is #in #kitchen)
+
+#cheese
+(item *)
+(logogram *)
+(name *) GA.KIN.AG
+(* is #in #dm-cheese)
+
+(* has modifier #chopped) (cheese is chopped)
+
+(perform [[cut * with $] $])
+	(now) (cheese is chopped)
+	(now) (update needed)
+
+(prevent [[cut * with $Tool] $Details])
+	(cheese is chopped)
+	(describe failed action [[cut * with $Tool] $Details])
+	N=aš arkanza karū ēšta. %% It was already chopped.
+
+#fruit
+(item *)
+(name * in #nominative/#genitive) šešaš
+(name * in #dative) šeši
+(name * in #accusative) šešan
+(name * in #ablative) šešaz
+(name * in #bare) šeša
+(* is #in #fruitstorage)
+
+(* has modifier #chopped) (fruit is chopped)
+
+(perform [[cut * with $] $])
+	(now) (fruit is chopped)
+	(now) (update needed)
+
+(prevent [[cut * with $Tool] $Details])
+	(fruit is chopped)
+	(describe failed action [[cut * with $Tool] $Details])
+	N=aš arkanza karū ēšta. %% It was already chopped.
+
+#chopped
+(adjective *)
+(name * in #nominative/#bare) arkanza
+(name * in #genitive) arkandaš
+(name * in #dative) arkandi
+(name * in #accusative) arkandan
+(name * in #ablative) arkandaz
 
 #dough
-%% TODO
+(item *)
+(name * in #nominative/#genitive) išnaš
+(name * in #dative) išni
+(name * in #accusative) išnan
+(name * in #ablative) išnaz
+(name * in #bare) išna
+(* is #in #trough)
+
+%% Add ingredients to the dough
+(instead of [[put $Ingredient *] $Details])
+	($Ingredient is one of [#fruit #cheese])
+	($Ingredient is #heldby #me)
+	
+	%% Since we're using (instead of $) we need to do our checks here
+	(if)
+		($Ingredient = #fruit) ~(fruit is chopped)
+	(or)
+		($Ingredient = #cheese) ~(cheese is chopped)
+	(then)
+		(describe negative action [[put $Ingredient *] $Details])
+		N=aš (#nominative #chopped) natta ēšta. %% It was not chopped.
+		(tick) (stop)
+	(endif)
+	
+	(describe action [[put $Ingredient *] $Details])
+	(now) ($Ingredient is nowhere) %% We handle that by just removing them from the world, which updates the description of the dough/bread
+	(now) (update needed)
+
+(prevent [[put * #oven] $Details])
+	{ ~(#cheese is nowhere) (or) ~(#fruit is nowhere) }
+	(describe negative action [[put * #oven] $Details])
+	(if) ~(#cheese is nowhere) (then)
+		Nu=ši (#nominative #cheese) anda natta ēšta. %% The cheese was not in it.
+	(endif)
+	(if) ~(#fruit is nowhere) (then)
+		Nu=ši (#nominative #fruit) anda natta ēšta. %% The fruit was not in it.
+	(endif)
+	(div @tutorial) {
+		The narrator seems to be making (span @italic) iyatti , a kind of bread "studded" with chopped pieces of fruit and cheese.
+	}
+
+#bread
+(item *)
+(name * in #nominative) iyattiš
+(name * in #genitive) iyattiyaš
+(name * in #dative) iyattiya
+(name * in #accusative) iyattiyan
+(name * in #ablative) iyattiyaz
+(name * in #bare) iyatti
+(determiner *) NINDA
+
+($Case $Obj) %% Here's where we handle the studding
+	($Obj is one of [#dough #bread])
+	(if) (#cheese is nowhere) (or) (#fruit is nowhere) (then)
+		(if) (#cheese is nowhere) (then)
+			(span @akk) ištu GA.KIN.AG
+		(endif)
+		(if) (#fruit is nowhere) (then)
+			šešaz
+		(endif)
+		(name #studded in $Case)
+	(endif)
+	(name $Obj in $Case)
+
+(dict $Obj in $Case)
+	($Obj is one of [#dough #bread])
+	(#cheese is nowhere)
+	ištu GA.KIN.AG
+	(name #studded in $Case)
+(dict $Obj in $Case)
+	($Obj is one of [#dough #bread])
+	(#fruit is nowhere)
+	(name #fruit in #ablative)
+	(name #fruit in $Case) %% In case of "take fruit"
+	(name #studded in $Case)
+
+#studded %% Used for both bread and dough
+(adjective *)
+(name * in #nominative/#bare) tiyanza
+(name * in #genitive) tiyantaš
+(name * in #dative) tiyanti
+(name * in #accusative) tiyantan
+(name * in #ablative) tiyantaz
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Dog region (north)
@@ -480,15 +614,19 @@
 
 @(guard is moving west) ~(guard is moving east)
 
+(guard is relevant) %% Don't spend the rest of the game narrating the guard's actions
+	(current room $Room)
+	($Room is one of [#kitchen #guardwalk1 #guardwalk2 #guardwalk3 #honeystorage #fruitstorage])
+
 (on every tick)
 	(* is in room $Room)
 	(if) ($Room = #guardwalk1) (guard is moving east) (then)
-		(if) (adjacent #guardwalk1) (or) (#guardwalk1 is visited) (then)
+		(if) (adjacent #guardwalk1) (or) (#guardwalk1 is visited) (guard is relevant) (then)
 			(par) Nu (#nominative *) aušta.
 		(endif)
 		(now) (guard is moving west)
 	(elseif) ($Room = #guardwalk3) (guard is moving west) (then)
-		(if) (adjacent #guardwalk3) (or) (#guardwalk3 is visited) (then)
+		(if) (adjacent #guardwalk3) (or) (#guardwalk3 is visited) (guard is relevant) (then)
 			(par) Nu (#nominative *) aušta.
 		(endif)
 		(now) (guard is moving east)
@@ -503,8 +641,11 @@
 (move guard from $Start to $End)
 	(par)
 	(if)
-		($Start is visited) (or) ($End is visited) (or)
-		(adjacent $Start) (or) (adjacent $End)
+		(guard is relevant)
+		{
+			($Start is visited) (or) ($End is visited) (or)
+			(adjacent $Start) (or) (adjacent $End)
+		}
 	(then)
 		Nu (#nominative *)
 		(if) (adjacent $End) (or) ($End is visited) (then)
@@ -615,18 +756,6 @@
 
 (from * go #south to #guardwalk3)
 
-#fruit
-(item *)
-(name * in #nominative/#genitive) šešaš
-(name * in #dative) šeši
-(name * in #accusative) šešan
-(name * in #ablative) šešaz
-(name * in #bare) šeša
-
-(* is #in #fruitstorage)
-
-%% TODO chopping
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Darkness region (down)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -725,7 +854,7 @@
 
 (from * go #up to #kitchen)
 (from * go #west to #dm-pottery)
-(from * go #east to #dm-oil)
+(from * go #east to #dm-wine)
 
 #dm-pottery %% NW
 (storage *)
@@ -760,7 +889,7 @@
 	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
 	(* is #heldby #me)
 	Nu (#accusative #oil) (dtm {DUG})(name * in #dative) anda tēḫḫun. %% I put the oil in the lamp.
-	%% Doesn't use (#dative *) because that would include "empty"
+	%% Doesn't use (#dative *) because that would include the "empty" modifier
 	(now) (* is filled with #oil)
 	(now) (update needed)
 
@@ -772,11 +901,10 @@
 (name * in #ablative) dannattaz
 (name * in #bare) dannatta
 
-#dm-oil %% NE
+#dm-wine %% NE
 (storage *)
 (inherently dark *)
-(contents *) I₃
-(dict * in $) Ì I3
+(contents *) wiyanaš
 
 (from * go #west to #dm-grain)
 (from * go #south to #dm-legumes)
@@ -784,7 +912,7 @@
 #dm-veg %% SW
 (storage *)
 (inherently dark *)
-(contents *) TODO
+(contents *) SAR
 
 (from * go #east to #dm-cheese)
 (from * go #north to #dm-pottery)
@@ -792,10 +920,11 @@
 #dm-legumes %% SE
 (storage *)
 (inherently dark *)
-(contents *) TODO
+(contents *) GUG₂
+(dict * in $) GUG2 GÚG
 
 (from * go #west to #dm-cheese)
-(from * go #north to #dm-oil)
+(from * go #north to #dm-wine)
 
 #dm-cheese %% S
 (storage *)
@@ -804,12 +933,6 @@
 
 (from * go #west to #dm-veg)
 (from * go #east to #dm-legumes)
-
-#cheese
-(item *)
-(logogram *)
-(name *) GA.KIN.AG
-(* is #in #dm-cheese)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Final bookkeeping
@@ -853,3 +976,4 @@
 %% These are the new ones in tablet 2
 (verb #v-wear unlocked) (#garment is handled)
 (verb #v-wait unlocked) (#kitchen is visited) %% When an every-turn-moving NPC appears
+(verb #v-cut unlocked) (#knife is handled)
