@@ -9,3 +9,5 @@ allow multi-word short names in the compass?
 "unimportant" objects that cannot be interacted with
 baker behavior should not be described right after entering
 add 0 (blank) to font
+make the debugger compass rose wider so everything fits properly
+add a ladder for scenery

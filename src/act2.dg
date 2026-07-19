@@ -43,17 +43,6 @@
 	}
 	(now) (taught waiting)
 
-%% We're going to need so many of these, we should handle it right at the top
-(room *(storage $))
-(*(storage $) uses preverb #in)
-(name (storage $Obj) in #nominative/#genitive) (contents $Obj) antakaš
-(name (storage $Obj) in #dative) (contents $Obj) antaki
-(name (storage $Obj) in #accusative) (contents $Obj) antakan
-(name (storage $Obj) in #ablative) (contents $Obj) antakaz
-(name (storage $Obj) in #bare) (contents $Obj) antaka
-(short name (storage $Obj)) (contents $Obj)
-(medium short name (storage $Obj)) (#dative $Obj)
-
 #courtyard
 (room *)
 (* uses preverb #in)
@@ -122,6 +111,7 @@
 
 (after [[cross *] $]) %% Describe the dog the first time the building is entered
 	(select)
+		(par)
 		Nu (#nominative #dog) (#accusative #knife) dāš. %% The dog grabs the knife.
 		Na=aš (#dative #dogmaze) pait. %% The dog goes to the X.
 	(or)
@@ -299,15 +289,17 @@
 
 #dog
 (animate *)
+(holder *) %% For room descriptions
+(* wants relation #heldby)
 (logogram *)
 (name *) UR.GI₇
 (* is #in #dogmaze)
 
-(on every tick)
+(after [[go/cross $] $])
 	(player is in dog region)
 	(dog movement)
 	(now) (dog is active)
-(on every tick) %% We also have to do one more tick of movement when the player leaves, to keep parity
+(after [[go/cross $] $]) %% We also have to do one more tick of movement when the player leaves, to keep parity
 	~(player is in dog region)
 	(dog is active)
 	(dog movement)
@@ -337,9 +329,31 @@
 	(else)
 		(div @realerror) { ERROR: The dog is stuck! Dog is in $Start , player is in $Player . What's going on? Please report this! }
 	(endif)
+	
+	%% For debugging, we also want to make sure the parity is intact
+	(check dog parity)
+
+(interface (check dog parity)) %% Don't complain if we comment it out
+(check dog parity)
+	(#dog is in room $Dog)
+	(current room $Player)
+	(at most once) {
+		(shortest path from $Dog to $Player is $Path)
+	(or)
+		($Dog = $Player) ($Path = [])
+	}
+	(length of $Path into $Length)
+	(log) {
+		Distance from dog to human: $Length (line)
+		(if) ($Length modulo 2 into 1) (then)
+			Odd parity
+		(else)
+			EVEN parity
+		(endif)
+	}
 
 (move dog from $Start to $End)
-	Nu (#nominative #dog) (#ablative $Start) (#dative $End) pait.
+	(par) Nu (#nominative #dog) (#ablative $Start) (#dative $End) pait.
 	(now) (#dog is #in $End)
 	(if) ($Start is visited) (or) ($End is visited) (then)
 		(now) (map update needed)
@@ -376,7 +390,7 @@
 (name * in #dative) ḫararaziya
 (name * in #ablative) ḫararaziyaz
 
-(from * go #south to #kitchen)
+(from * go #south to #building)
 (from * go #north to #dog-center)
 (from * go #west to #dog-sw)
 
@@ -393,6 +407,8 @@
 (dogs allowed in *)
 (contents *) ZID₂.DA
 (dict * in $) ZID2 ZÍD
+(short name *) ZID₂
+(medium short name *) (contents *)
 
 (from * go #east to #dog-center)
 (from * go #south to #dog-sw)
@@ -414,7 +430,9 @@
 (name * in #accusative) ištarniyan antakan
 (name * in #ablative) ištarniyaz antakaz
 (name * in #bare) ištarniya antaka
-(short name *) ištarniya
+(medium short name *) ištarniya
+(short name *) išt--iya %% Name slightly too long for debugger :( TODO
+(dict * in #dative) išt--iya
 
 (from * go #west to #dog-w)
 (from * go #south to #dogmaze)
@@ -430,7 +448,9 @@
 (name * in #accusative) šarāzziyan antakan
 (name * in #ablative) šarāzziyaz antakaz
 (name * in #bare) šarāzziya antaka
-(short name *) šarāzziya
+(medium short name *) šarāzziya
+(short name *) šar--iya %% Name slightly too long for debugger :( TODO
+(dict * in #dative) šar--iya
 
 (from * go #west to #dog-center)
 (from * go #north to #dog-roof)
@@ -678,6 +698,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Final bookkeeping
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% We're going to need so many of these...
+(room *(storage $))
+(*(storage $) uses preverb #in)
+(name (storage $Obj) in #nominative/#genitive) (contents $Obj) antakaš
+(name (storage $Obj) in #dative) (contents $Obj) antaki
+(name (storage $Obj) in #accusative) (contents $Obj) antakan
+(name (storage $Obj) in #ablative) (contents $Obj) antakaz
+(name (storage $Obj) in #bare) (contents $Obj) antaka
+(short name (storage $Obj)) (contents $Obj)
+(medium short name (storage $Obj)) (#dative $Obj)
 
 %% And finally, the circumstances in which each verb gets unlocked
 %% All of these are automatically unlocked from tablet 1

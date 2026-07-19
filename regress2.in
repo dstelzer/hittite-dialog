@@ -20,8 +20,29 @@ nu=kan lú ninda.dù.dù hattaluwaz kuenun
 4
 tug2 wassiyanun
 *** North branch (dog)
+2
+2
+4
+2
+1
+1
+3
+1
+3
+4
+2
+2
+3
+2
+6
+* Having gone through the loop, we can now catch the dog
+* With this random seed, it's right here; but otherwise you just have to chase it a bit
+gir2 dahhun
+1 1
 *** West branch (guard)
 4
+* With this random seed, the game should say there's a guard in the street
+* If not, wait until it does
 4
 huskanun
 /again
