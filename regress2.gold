@@ -300,8 +300,6 @@ waššiyanun
 2   Nu NA₄^ḫararaziya pāun.
 
 Nu UR.GI₇ NA₄^ḫararaziyaz ištarniya antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za NA₄^ḫararaziya ešun.
@@ -323,8 +321,6 @@ waššiyanun
 2   Nu ištarniya antaki pāun.
 
 Nu UR.GI₇ ištarniyaz antakaz ZID₂.DA antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan ištarniya antaki anda ešun.
@@ -348,8 +344,6 @@ waššiyanun
 4   Nu ZID₂.DA antaki pāun.
 
 Nu UR.GI₇ ZID₂.DA antakaz BAPPIR antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan ZID₂.DA antaki anda ešun.
@@ -373,8 +367,6 @@ waššiyanun
 2   Nu BAPPIR antaki pāun.
 
 Nu UR.GI₇ BAPPIR antakaz ZID₂.DA antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan BAPPIR antaki anda ešun.
@@ -399,8 +391,6 @@ waššiyanun
 1   Nu ZID₂.DA antaki pāun.
 
 Nu UR.GI₇ ZID₂.DA antakaz BAPPIR antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan ZID₂.DA antaki anda ešun.
@@ -425,8 +415,6 @@ waššiyanun
 1   Nu taršuwaš antaki pāun.
 
 Nu UR.GI₇ BAPPIR antakaz ZID₂.DA antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan taršuwaš antaki anda ešun.
@@ -451,8 +439,6 @@ waššiyanun
 3   Nu NA₄^ḫararaziya pāun.
 
 Nu UR.GI₇ ZID₂.DA antakaz ištarniya antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za NA₄^ḫararaziya ešun.
@@ -477,8 +463,6 @@ waššiyanun
 1   Nu parni pāun.
 
 Nu UR.GI₇ ištarniyaz antakaz NA₄^ḫararaziya pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan parni anda ešun.
@@ -553,8 +537,6 @@ waššiyanun
 2   Nu NA₄^ḫararaziya pāun.
 
 Nu UR.GI₇ NA₄^ḫararaziyaz taršuwaš antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za NA₄^ḫararaziya ešun.
@@ -579,8 +561,6 @@ waššiyanun
 2   Nu ištarniya antaki pāun.
 
 Nu UR.GI₇ taršuwaš antakaz NA₄^ḫararaziya pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan ištarniya antaki anda ešun.
@@ -605,8 +585,6 @@ waššiyanun
 3   Nu šarāzziya antaki pāun.
 
 Nu UR.GI₇ NA₄^ḫararaziyaz ištarniya antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan šarāzziya antaki anda ešun.
@@ -631,8 +609,6 @@ waššiyanun
 2   Nu šuḫḫi pāun.
 
 Nu UR.GI₇ ištarniyaz antakaz šarāzziya antaki pait.
-Distance from dog to human: 1
-Odd parity
 
 - - - - -
 Nu=za=kan šuḫḫi šēr ešun.
@@ -657,8 +633,6 @@ waššiyanun
 6   Nu ištarniya antaki pāun.
 
 Nu UR.GI₇ šarāzziyaz antakaz ištarniya antaki pait.
-Distance from dog to human: 0
-EVEN parity
 
 - - - - -
 Nu=za=kan ištarniya antaki anda ešun.
@@ -712,13 +686,9 @@ waššiyanun, arkaḫḫun
 1   Nu NA₄^ḫararaziya pāun.
 
 Nu UR.GI₇ ištarniyaz antakaz šarāzziya antaki pait.
-Distance from dog to human: 2
-EVEN parity
 1   Nu parni pāun.
 
 Nu UR.GI₇ šarāzziyaz antakaz ištarniya antaki pait.
-Distance from dog to human: 2
-EVEN parity
 
 - - - - -
 Nu=za=kan parni anda ešun.
@@ -1299,7 +1269,6 @@ waššiyanun, ḫuškanun, arkaḫḫun
                                      /                
 > 6
 6   Nu halkiyaš antaki pāun.
-Reed timer ticks down to 1
 
 - - - - -
 Nu=za=kan halkiyaš antaki anda ešun.
@@ -1458,8 +1427,6 @@ waššiyanun, ḫuškanun, arkaḫḫun
 > 6
 6   Nu halkiyaš antaki pāun.
 
-Reed timer ticks down to 2
-
 - - - - -
 Nu=za=kan halkiyaš antaki anda ešun.
 
@@ -1484,7 +1451,6 @@ waššiyanun, ḫuškanun, arkaḫḫun
                                |                      
 > 4
 4   Nu GIR₄ antaki pāun.
-Reed timer ticks down to 1
 
 - - - - -
 Nu=za=kan GIR₄ antaki anda ešun.

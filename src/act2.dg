@@ -274,6 +274,7 @@
 (name * in #dative) išnuri
 (name * in #accusative) išnuran
 (name * in #ablative) išnuraz
+(name * in #bare) išnura
 (determiner *) DUG
 (* is #in #kitchen)
 
@@ -467,7 +468,7 @@
 	(endif)
 	
 	%% For debugging, we also want to make sure the parity is intact
-	(check dog parity)
+%%	(check dog parity)
 
 (interface (check dog parity)) %% Don't complain if we comment it out
 (check dog parity)
@@ -828,7 +829,7 @@
 		(reed burning timer $Old)
 		($Old minus 1 into $New)
 		(now) (reed burning timer $New)
-		(log) { Reed timer ticks down to $New }
+%%		(log) { Reed timer ticks down to $New }
 	(endif)
 
 #oiljar

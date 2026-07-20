@@ -61,15 +61,29 @@ def tablify(l): # [A B C D E F] -> HTML table with A B // C D // E F
 	lines = ['<table class="paradigm">']
 	for i in range(0, len(l), 2): # We could use itertools but this is more readable if less elegant
 		first, second = l[i], l[i+1]
+		second = second.replace('<i>', '').replace('</i>', '') # In case of Akkadograms
 		lines.append(f'\t<tr> <td class="eng">{first}</td> <td class="htt word" data-word="{second}" data-language="ht">{second}</td> </tr>')
 	lines.append('</table>')
 	return '\n'.join(lines)
 
-def parse_paradigm(s):
+def parse_paradigm(s, name):
 	if s == 'CLIT':
 		return "The = sign separates \"clitics\": words that have their own meaning but can't stand on their own. It's like how the English word <i>cat's</i> is clearly made up of <i>cat</i> and <i>'s</i>, but while <i>cat</i> can exist as a word on its own, <i>'s</i> can't."
 	elif s == 'DTM':
 		return 'This sign can be used as a "determiner": not pronounced, but marking what sort of thing the next word is.'
+	elif s == 'LOGO':
+		return 'This cuneiform is a "logogram", standing for an entire Hittite word, like how "7" stands for "seven". Often the actual pronunciation of the Hittite word is unknown.' + tablify([
+			'<abbr title="Nominative: subject of a verb">Nom</abbr>',
+				name,
+			'<abbr title="Genitive: owner of another noun">Gen</abbr>',
+				'<i>ŠA</i> ' + name,
+			'<abbr title="Dative: location or destination">Dat</abbr>',
+				'<i>ANA</i> ' + name,
+			'<abbr title="Accusative: object of a verb">Acc</abbr>',
+				name,
+			'<abbr title="Ablative: origin or tool used">Abl</abbr>',
+				'<i>IŠTU</i> ' + name,
+		])
 	elif s.startswith('NOUN '):
 		cases = space_separated_with_quotes(s[5:])
 		if len(cases) != 5:
@@ -108,7 +122,7 @@ def parse_entry(s):
 		prdgm = None
 	elif len(pieces) == 4:
 		lemma, forms, defn, prdgm = pieces
-		prdgm = parse_paradigm(prdgm)
+		prdgm = parse_paradigm(prdgm, lemma)
 	else:
 		raise ValueError(f'Dictionary lines should have 0, 3, or 4 pieces, but this one has {len(pieces)}: {s}')
 	

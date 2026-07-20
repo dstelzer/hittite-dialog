@@ -4,11 +4,10 @@ migrate regression testing to skein
 clicking ANA in dictionary window should not replace entry
 SLAY SELF has wrong error
 /abuut displayed in input
-side panels flicker on every input
 allow multi-word short names in the compass?
 "unimportant" objects that cannot be interacted with
-baker behavior should not be described right after entering
 add 0 (blank) to font
 make the debugger compass rose wider so everything fits properly
 add a ladder for scenery
 multi-sign logograms in short names
+map does not show up immediately on web tablet 2?
