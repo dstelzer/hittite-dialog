@@ -78,7 +78,8 @@
 	Nu (name #bread in #accusative) natta ḫarkun. %% I was not holding the bread.
 
 (perform [[go *] $])
-	TODO end of tablet 2
+	(div @error) { The tablet ends as the narrator enters the temple building itself. His disguise and the fresh-baked bread must have been effective, as the next part of the text begins with him in the inner sanctum, stolen god in hand. }
+	(game over {To be continued...})
 
 #building
 (room *)
@@ -359,22 +360,31 @@
 	(if) ~(#fruit is nowhere) (then)
 		Nu=ši (#nominative #fruit) anda natta ēšta. %% The fruit was not in it.
 	(endif)
-	(div @tutorial) {
+	(div @error) {
 		The narrator seems to be making (span @italic) iyatti , a kind of bread "studded" with chopped pieces of fruit and cheese.
 	}
+
+(perform [[put * #oven] $])
+	(now) (* is nowhere)
+	(now) (#bread is #in #oven)
+	(now) (update needed)
 
 #bread
 (item *)
 (name * in #nominative) iyattiš
 (name * in #genitive) iyattiyaš
 (name * in #dative) iyattiya
-(name * in #accusative) iyattiyan
+(name * in #accusative) iyattin
 (name * in #ablative) iyattiyaz
 (name * in #bare) iyatti
 (determiner *) NINDA
 
 ($Case $Obj) %% Here's where we handle the studding
 	($Obj is one of [#dough #bread])
+	(if) ($Obj has determiner) (then)
+		(dtm {(determiner $Obj)})
+	(endif)
+	(name $Obj in $Case)
 	(if) (#cheese is nowhere) (or) (#fruit is nowhere) (then)
 		(if) (#cheese is nowhere) (then)
 			(span @akk) ištu GA.KIN.AG
@@ -384,7 +394,6 @@
 		(endif)
 		(name #studded in $Case)
 	(endif)
-	(name $Obj in $Case)
 
 (dict $Obj in $Case)
 	($Obj is one of [#dough #bread])
@@ -491,6 +500,7 @@
 
 #knife
 (item *)
+(sharp *) %% Allows "cut" action
 (logogram *)
 (name *) GIR₂
 (dict *) GIR2 GÍR

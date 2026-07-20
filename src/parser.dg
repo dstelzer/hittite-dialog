@@ -1046,16 +1046,18 @@
 %% (try-complex $) will take an action with multiple nouns in a certain case and turn it into several individual actions with a single noun in that case
 %% This actually works with any number of nouns in any number of cases; the parser just limits it to a single multiple object per action to avoid combinatorial headaches (PUT ALL ON ALL is unlikely to do anything good)
 (try-complex [$Raw $Verb $Advs | $Nouns])
-	*(expand groupings from $Nouns into $NounCombo)
-	%% TODO: This should be (exhaust) but that breaks everything. Why?
-	(if) (translate [$Raw $Verb $Advs | $NounCombo] into $EnglishAction) (then)
-		(parser log { English action: $EnglishAction } )
-		(parser log { (describe action [$EnglishAction [$Raw $Verb $Advs | $NounCombo]]) } )
-		(try [$EnglishAction [$Raw $Verb $Advs | $NounCombo]])
-		(tick)
-	(else)
-		(div @realerror) { ERROR: The Hittite sentence (print quoted $Raw) was parsed as $Verb, $Advs, and $NounCombo, but this could not be translated into an English action. Why not? }
-	(endif)
+	(exhaust) {
+		*(expand groupings from $Nouns into $NounCombo)
+		(if) (translate [$Raw $Verb $Advs | $NounCombo] into $EnglishAction) (then)
+			(parser log { English action: $EnglishAction } )
+			(parser log { (describe action [$EnglishAction [$Raw $Verb $Advs | $NounCombo]]) } )
+			(par)
+			(try [$EnglishAction [$Raw $Verb $Advs | $NounCombo]])
+			(tick)
+		(else)
+			(div @realerror) { ERROR: The Hittite sentence (print quoted $Raw) was parsed as $Verb, $Advs, and $NounCombo, but this could not be translated into an English action. Why not? }
+		(endif)
+	}
 
 %% (try $) then handles those single-noun actions
 %% Implemented in worldmodel.dg

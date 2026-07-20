@@ -360,7 +360,7 @@
 (instead of [[go *] $Details])
 	(if) (player carries #water in $) (then)
 		(describe action [[go *] $Details])
-		(div @narration) { The tablet breaks off here, as the soldier finally approaches the temple itself. }
+		(div @error) { The tablet breaks off here, as the soldier finally approaches the temple itself. }
 		(game over { To be continued... } )
 	(else)
 		(describe failed action [[go *] $Details])
