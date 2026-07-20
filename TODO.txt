@@ -11,3 +11,4 @@ make the debugger compass rose wider so everything fits properly
 add a ladder for scenery
 multi-sign logograms in short names
 map does not show up immediately on web tablet 2?
+allow different definitions/paradigms in tablet 1 and elsewhere

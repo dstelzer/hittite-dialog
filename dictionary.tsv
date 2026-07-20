@@ -29,7 +29,7 @@ lukkun	lukkun	I kindled, ignited, set on fire (something: accusative)
 ḫuškanun	ḫuškanun	I waited
 arkaḫḫun	arkaḫḫun	I cut, split, divided into pieces (something: accusative)
 aggaḫḫun	aggaḫḫun	I died
-paršun	paršun	I fled (to a place: dative)
+paršun	paršun	I fled (from a place: ablative; to a place: dative)
 
 # Basic world model
 anda	anda	In(side)
@@ -46,26 +46,25 @@ wappu	wappuš wappuwaš wappui wappun wappuwaz wappu	Riverbank	NOUN wappuš wapp
 wātar	wātar witenaš witeni witenaz	Water	NOUN wātar witenaš witeni wātar witenaz
 auri	auriš auriyaš auriya aurin auriyaz auri	Watchtower	NOUN auriš auriyaš auriya aurin auriyaz
 āška	āškaš āški āškan āškaz āška	Door, gate	NOUN āškaš āškaš āški āškan āškaz
-ḫattalwanza	ḫattalwanza ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz	Locked, bolted, held shut by something	NOUN ḫattalwanza ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz
+ḫattalwan	ḫattalwan ḫattalwanza ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz	Locked, bolted, held shut by something	NOUN ḫattalwanza ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz
 palša	palšaš palši palšan palšaz palša	Road, street, path, journey	NOUN palšaš palšaš palši palšan palšaz
 ilan	ilan ilanaš ilani ilanaz	Ladder, step	NOUN ilan ilanaš ilani ilan ilanaz
 kut	kuzza kuttaš kutti kuttan kuttaz kut	Wall	NOUN kuzza kuttaš kutti kuttan kuttaz
 ḫalḫaltomar	ḫalḫaltomar ḫalḫaltomaraš ḫalḫaltomari ḫalḫaltomaraz	Corner	NOUN ḫalḫaltomar ḫalḫaltomaraš ḫalḫaltomari ḫalḫaltomar ḫalḫaltomaraz
 parku	parku	High
 luttāi	luttāi luttiyaš luttiya luttiyaz	Window	NOUN luttāi luttiyaš luttiya luttāi luttiyaz
-ḫilammar	ḫilammar ḫilamnaš ḫilamni ḫilamnaz	Gatehouse	NOUN ḫilammar ḫilamnaš ḫilamni ḫilammar ḫilamnaz
+ḫilammar	ḫilammar ḫilamnaš ḫilamni ḫilamnaz	Gatehouse (the building surrounding an important gate, where guards could be stationed to defend it)	NOUN ḫilammar ḫilamnaš ḫilamni ḫilammar ḫilamnaz
 E₂	É E₂ E2	Building, structure, room	DTM
 warān	warān waranza warantaš waranti warantan warantaz	Burning, aflame	NOUN warān/waranza warantaš waranti warān/warantan warantaz
 GIŠ	GIŠ	Wood	DTM
-ḫattalu	ḫattalu ḫattaluwaš ḫattaluwi ḫattaluwaz	Door bar: locks were not yet a common technology, so the best way to secure a door was to hold it shut with a big piece of wood.	NOUN ḫattalu ḫattaluwaš ḫattaluwi ḫattalu ḫattaluwaz
+ḫattalu	ḫattalu ḫattaluwaš ḫattaluwi ḫattaluwaz	Door bar; key locks were not yet a common technology, so the best way to secure a door was to hold it shut with a big piece of wood.	NOUN ḫattalu ḫattaluwaš ḫattaluwi ḫattalu ḫattaluwaz
 ḫašḫun	ḫašḫun	I opened (something: accusative)
 arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer, front room	NOUN arkiwiš arkiwaš arkiwi arkiwin arkiwaz
 ḫašša	ḫaššaš ḫašši ḫaššan ḫaššaz ḫašša	Hearth, fireplace	NOUN ḫaššaš ḫaššaš ḫašši ḫaššan ḫaššaz
 paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire	NOUN paḫḫur paḫḫuenaš paḫḫueni paḫḫur paḫḫuenaz
-än	än ān	Hot
+än	än ān	Hot; this word is spelled unusually in cuneiform, so it may have actually been pronounced "a'an" or "ayyan" instead of "ān".
 DUG	DUG	Vessel	DTM
 aganni	aganniš aganniyaš aganniya agannin aganniyaz aganni	Cup	NOUN aganniš aganniyaš aganniya agannin aganniyaz
-LÚ	LÚ	Man	DTM
 šuppanza	šuppanza šuppandaš šuppandi šuppandan šuppandaz	Sleeping, asleep	NOUN šuppanza šuppandaš šuppandi šuppandan šuppndaz
 ḫalliyatalla	ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz ḫalliyatalla	Watchman, guard	NOUN ḫalliyatallaš ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz
 antaka	antakaš antaki antakan antakaz antaka	Room, storeroom	NOUN antakaš antakaš antaki antakan antakaz
@@ -73,17 +72,17 @@ palḫi	palḫiš palḫaš palḫi palḫin palḫaz palḫi	Pithos (large clay
 šuḫḫa	šuḫḫan šuḫḫaš šuḫḫi šuḫḫaz šuḫḫa	Roof	NOUN šuḫḫan šuḫḫaš šuḫḫi šuḫḫan šuḫḫaz
 karimmi	karimmi karimnaš karimni karimnaz	Temple	NOUN karimmi karimnaš karimni karimmi karimnaz
 šaknuwanza	šaknuwanza	Unclean, not ritually pure: in Hittite religion, interacting with the gods required someone to be free of impurity, both physical and spiritual. Many rituals required washing or bathing before doing something spiritually significant.
-<i>U₃</i>	Ù U₃ U3	And: a shorthand sign equivalent to "&" in English
+<i>U₃</i>	Ù U₃ U3	A shorthand sign for "and", equivalent to "&" in English
 IM	IM	Wind, cardinal direction	DTM
 antuḫša	antuḫšaš antuḫši antuḫšan antuḫšaz antuḫša	Person, human being	NOUN antuḫšaš antuḫšaš antuḫši antuḫšan antuḫšaz
 [Number]	1 2 3 4 5 6	Like in English, Hittite scribes usually wrote simple symbols for the numbers instead of the full words.
-0	0	There was no actual symbol for zero in cuneiform; they just left an empty space.
+0	0	There was no actual symbol for zero in cuneiform; they just left an empty space on the tablet when necessary.
 parā	parā	Onward, forth, forward
 laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN laḫḫaš laḫḫaš laḫḫi laḫḫan laḫḫaz
-Ḫattušumna	Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz Ḫattušumna	Hittite, from Hattusa (adjective)	NOUN Ḫattušumnaš Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz
-<i>ANA</i>	ANA	To, toward (shorthand for the dative case, especially with logograms)
-<i>ŠA</i>	ŠA	Of (shorthand for the genitive case, especially with logograms)
-<i>IŠTU</i>	IŠTU	From (shorthand for the ablative case, especially with logograms)
+Ḫattušumna	Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz Ḫattušumna	Hittite (adjective); literally, from the city of Hattusa	NOUN Ḫattušumnaš Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz
+<i>ANA</i>	ANA	To, toward (marks the dative case for logograms)	AKK
+<i>ŠA</i>	ŠA	Of (marks the dative case for logograms)	AKK
+<i>IŠTU</i>	IŠTU	From (marks the dative case for logograms)	AKK
 ḫappira	ḫappiraš ḫappiri ḫappiran ḫappiraz	City	NOUN ḫappiraš ḫappiraš ḫappiri ḫappiran ḫappiraz
 kurur	kurur	hostile
 gurta	gurtaš gurti gurtan gurtaz gurta	Citadel, acropolis: the better-defended upper part of a city with all the temples and palaces	NOUN gurtaš gurtaš gurti gurtan gurtaz
@@ -100,37 +99,37 @@ uwanun	uwanun uet	I came (to a place: dative)	VERB uwanun uet
 karimmi	karimmi karimnaš karimni karimnaz	Temple	NOUN karimmi karimnaš karimni karimmi karimnaz
 pēr	pēr parnaš parni parnaz per	House, building	NOUN pēr parnaš parni pēr parnaz
 TUG₂	TUG₂ TUG2 TÚG	Garment	LOGO
-šakuni	šakuni šakuniš šakuniyaš šakuniya šakuniyan šakunin šakuniyaz	Well, spring TODO šakuniyan or šakunin?	NOUN šakuniš šakuniyaš šakuniya šakuniyan šakuniyaz
+šakuni	šakuni šakuniš šakuniyaš šakuniya šakuniyan šakunin šakuniyaz	Well, spring (of water) TODO šakuniyan or šakunin?	NOUN šakuniš šakuniyaš šakuniya šakuniyan šakuniyaz
 lūli	lūli lūliš lūliyaš lūliya lūlin lūliyaz	Pool, lake, body of water	NOUN lūliš lūliyaš lūliya lūlin lūliyaz
 lukkan	lukkan lukkandaš lukkandi lukkandaz	Burnt	NOUN lukkan lukkandaš lukkandi lukkan lukkandaz
 LU₂	LU₂ LU2 LÚ	Man	DTM
 NINDA.DU₃.DU₃	NINDA.DU₃.DU₃ NINDA.DÙ.DÙ	Baker	LOGO
-MUḪALDIM	MUḪALDIM	Cook (specifically of meat rather than baked goods, but E₂ <sup>LU₂</sup>MUḪALDIM "house of the cook" = kitchen for all kinds of food preparation)	LOGO
+MUḪALDIM	MUḪALDIM	Cook (specifically of meat rather than baked goods, but E₂ <sup>LU₂</sup>MUḪALDIM "house of the cook" means "kitchen for all kinds of food preparation")	LOGO
 išliman	išliman išlimanaš išlimani išlimanaz	Oven	NOUN išliman išlimanaš išlimani išliman išlimanaz
 išnura	išnura išnuraš išnuri išnuran išnuraz	Kneading trough, where bread dough was kneaded and then left to rise over the course of the day	NOUN išnuraš išnuraš išnuri išnuran išnuraz
-GA.KIN.AG	GA.KIN.AG	Cheese; for the Hittites, this was a count noun ("one cheese" rather than "one bowl of cheese"), and the cheeses were solid enough that they could be thrown at other people in a dodgeball-like festival sport.	LOGO
+GA.KIN.AG	GA.KIN.AG	Cheese; for the Hittites, this was a count noun ("one cheese" rather than "one bowl of cheese"), and they were solid enough that they could be used in a common (dodgeball-like?) festival game where "the youths fight with the cheeses".	LOGO
 šeša	šeša šešaš šeši šešan šešaz	Fruit	NOUN šešaš šešaš šeši šešan šešaz
 arkan	arkan arkanza arkandaš arkandi arkandan arkandaz	Cut/chopped into pieces (adjective)	NOUN arkanza arkandaš arkandi arkandan arkandaz
 išna	išna išnaš išni išnan išnaz	Dough (for making bread)	NOUN išnaš išnaš išni išnan išnaz
-NINDA	NINDA	Bread, cake, porridge; broadly, any sort of flour-based food	DTM
-iyatti	iyatti iyattiš iyattiyaš iyattiya iyattin iyattiyaz	"Iyatti", a type of bread "studded" with pieces of fruit and cheese	NOUN iyattiš iyattiyaš iyattiya iyattin iyattiyaz
+NINDA	NINDA	Usually translated "bread", but also encompassed cakes, porridges, and any other type of flour-based food	DTM
+iyatti	iyatti iyattiš iyattiyaš iyattiya iyattin iyattiyaz	"Iyatti", a special type of bread "studded" with pieces of fruit and cheese	NOUN iyattiš iyattiyaš iyattiya iyattin iyattiyaz
 tiyan	tiyan tiyanza tiyantaš tiyanti tiyantan tiyantaz	Studded (with something: ablative); this word is mainly used for jewelry with gems set into it	NOUN tiyanza tiyantaš tiyanti tiyantan tiyantaz
-UR.GI₇	UR.GI₇ UR.GI7	Dog; the Hittites believed that dogs carried impurity from one place to another, so they had to be kept away from magically-significant places like the temple bakeries at all times.	LOGO
+UR.GI₇	UR.GI₇ UR.GI7	Dog; the Hittites believed that dogs carried impurity from one place to another, so they had to be kept away from ritually-significant places like the temple bakeries at all times. If one got too close, everything they touched needed to be cleansed or destroyed.	LOGO
 GIR₂	GIR₂ GIR2 GÍR	Knife	LOGO
 NA₄	NA4	Stone	DTM
 ḫararazi	ḫararazi ḫararaziyaš ḫararaziya ḫararaziyaz	Mill, millstone (for grinding grain into flour)	NOUN ḫararazi ḫararaziyaš ḫararaziya ḫararazi ḫararaziyaz
 taršuwar	taršuwar taršuwaš	Some sort of operation performed on grain; possibly "drying"?	Nom taršuwar Gen taršuwaš
 ZID₂.DA	ZID2.DA ZÍD.DA	Flour	LOGO
-BAPPIR	BAPPIR	Bappir, an ingredient for brewing beer	LOGO
+BAPPIR	BAPPIR	Bappir, a bread-like substance used for brewing beer	LOGO
 ištarniya	ištarniya ištarniyaš ištarniyan ištarniyaz	Middle, central (adjective)	NOUN ištarniyaš ištarniyaš ištarniya ištarniyan ištarniyaz
 šarāzziya	šarāzziya šarāzziyaš šarāzziyan šarāzziyaz	Upper	NOUN šarāzziyaš šarāzziyaš šarāzziya šarāzziyan šarāzziyaz
 kattera	kattera katteraš katteri katteran katteraz	Lower	NOUN katteraš katteraš katteri katteran katteraz
 milit	milit militaš	Honey	Nom milit Gen militaš
 PISAN	PISAN	Container	LOGO
-nata	nata nataš nati natan nataz	Reed (the form nataš can also be "of reeds", genitive plural)	NOUN nataš nataš nati natan nataz
+nata	nata nataš nati natan nataz	Reed (the form nataš can also mean "of reeds", genitive plural)	NOUN nataš nataš nati natan nataz
 šākan	šākan šaknaš šakni šaknaz	Oil	NOUN šākan šaknaš šakni šākan šaknaz
 šaknuwan	šaknuwan šaknuwanza šaknuwandaš šaknuwandi šaknuwandan šaknuwandaz	Oily	NOUN šaknuwanza šaknuwandaš šaknuwandi šaknuwandan šaknuwandaz
-ḫalki	ḫalki ḫalkiyaš	Grain, especially barley	Nom ḫalki Gen ḫalkiyaš
+ḫalki	ḫalki ḫalkiyaš	Grain in general, or barley in particular	Nom ḫalki Gen ḫalkiyaš
 GIR₄	GIR₄ GIR4	Pottery, fired clay	LOGO
 šašanna	šašanna šašannaš šašanni šašannan šašannaz	Lamp (clay vessel to burn oil in)	NOUN šašannaš šašannaš šašanni šašannan šašannaz
 dannatta	dannatta dannattaš dannatti dannattan dannattaz	Empty	NOUN dannattaš dannattaš dannatti dannattan dannattaz
