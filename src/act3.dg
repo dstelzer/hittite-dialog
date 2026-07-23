@@ -374,7 +374,16 @@
 		*([$J $] is one of $Entry)
 	(into $NRaw)
 	(remove duplicates from $NRaw into $NList)
-	(randomly select $NElim from $NList) %% Random person who is the target of at least one edge
+	(collect $NReal) %% Can we make the elimination guy be evil?
+		(real assassin $Ass) (number $NReal means $Ass) ($NReal is one of $NList)
+	(or)
+		(real mastermind $Mas) (number $NReal means $Mas) ($NReal is one of $NList)
+	(into $EvilList)
+	(if) (nonempty $EvilList) (then) %% Choose an evil person if possible
+		(randomly select $NElim from $EvilList)
+	(else)
+		(randomly select $NElim from $NList) %% Random person who is the target of at least one edge
+	(endif)
 	(number $NElim means $Elim)
 	(now) ($Elim is elimination-revealed)
 	
@@ -384,7 +393,7 @@
 		*([$J 0] is one of $Entry) %% Basic edges only
 		(number $J means $Suspect)
 		(now) ($Suspect is other-revealed)
-		(log) { Marking (name $Suspect) (job $Suspect) as other-revealed because of connection from (number $I means $Src) (name $Src) (job $Src) }
+%%		(log) { Marking (name $Suspect) (job $Suspect) as other-revealed because of connection from (number $I means $Src) (name $Src) (job $Src) }
 	}
 
 @($S is self-revealed) ~($S is other-revealed)
@@ -394,10 +403,27 @@
 	(log) { Generating tablets }
 	(exhaust) {
 		*(have $I count up from 1 to 5)
+		(now) ~(already generated a type-one for this speaker)
 		(entry $I of $G into $Entry)
 		*([$J $Type] is one of $Entry)
-		(generate a tablet from $I $J $Type)
+		(if)
+			($Type = 1)
+			(number $I means $II)
+			(number $J means $JJ)
+			~($II and $JJ agree)
+		(then) %% We do some special trickery in this case: see (testimony for $) for details
+			(if) (already generated a type-one for this speaker) (then)
+				(log) { Changing to 2 }
+				(generate a tablet from $I $J 2)
+			(else)
+				(generate a tablet from $I $J 1)
+				(now) (already generated a type-one for this speaker)
+			(endif)
+		(else)
+			(generate a tablet from $I $J $Type)
+		(endif)
 	}
+	(shuffle tablets into the box) %% Make sure they end up in a random order
 (generate a tablet from $SNum $DNum $Type)
 	*(tablet $Tablet)
 	($Tablet is nowhere) %% Pick a fresh one
@@ -406,7 +432,16 @@
 	(number $DNum means $Dest)
 	(now) ($Tablet has target $Dest)
 	(now) ($Tablet has type $Type)
-	(now) ($Tablet is #in #box)
+	(now) ($Tablet is #in #tmp)
+(shuffle tablets into the box)
+	(collect $Tablet)
+		*($Tablet is #in #tmp)
+	(into $List)
+	(shuffle $List into $Shuffled)
+	(exhaust) {
+		*($Tablet is one of $Shuffled)
+		(now) ($Tablet is #in #box)
+	}
 
 (global variable (real assassin $))
 (global variable (real mastermind $))
@@ -423,12 +458,8 @@
 (innocent (fake mastermind $))
 (innocent (fake default $))
 
-($X and $Y agree)
-	(innocent $X)
-	(innocent $Y)
-($X and $Y agree)
-	(guilty $X)
-	(guilty $Y)
+((innocent $) and (innocent $) agree)
+((guilty $) and (guilty $) agree)
 
 (initialize global variables)
 	(shuffle [1 2 3 4 5] into [$A $B $C $D $E])
@@ -496,17 +527,17 @@
 #dubsar
 (suspect *)
 (number 1 means *)
-(job *) chief of the scribes
+(job *) chief administrator
 
 #mecedi
 (suspect *)
 (number 2 means *)
-(job *) chief of the bodyguards
+(job *) chief of the royal guards
 
 #gectin
 (suspect *)
 (number 3 means *)
-(job *) chief of the palace staff
+(job *) overseer of the palace servants
 
 #tuhkanti
 (suspect *)
@@ -548,6 +579,7 @@
 (generate 8 (tablet $))
 
 #box %% Where tablets are put when generated
+#tmpbox %% Temporary tablet holder
 
 (source name $S)
 	($S is elimination-revealed)
@@ -585,7 +617,21 @@
 	%% First, the source
 	(uppercase) (source name $Source) says:
 	
-	(if) ($Type = 1) (then) %% Advanced edge
+	%% When we generated the puzzle, we only had two types of edge: 0 and 1
+	%% 0 for basic, 1 for advanced
+	%% But sometimes this can lead to awkwardness when a single speaker has multiple type-1 edges to opposite-polarity targets: it sounds wrong for them to say two complicated sentences with "someone" in them if they know both of the "someone"s!
+	%% So when that happens, we change all but the first to type-2
+	(if) ($Type = 2) (then) %% Special advanced edge
+		(if) ($Source and $Target agree) (then)
+			ERROR: Type-2 edges should not appear when two people agree!
+		(elseif) (real assassin $Target) (or) (fake assassin $Target) (then)
+			(uppercase) (advanced target name $Target) is the assassin.
+		(elseif) (real mastermind $Target) (or) (fake mastermind $Target) (then)
+			(uppercase) (advanced target name $Target) is the mastermind.
+		(else)
+			ERROR: Type-2 edges should never target the fake-default!
+		(endif)
+	(elseif) ($Type = 1) (then) %% Advanced edge
 		(if) ($Source and $Target agree) (then) %% X is not guilty
 			(uppercase) (advanced target name $Target) is not guilty .
 		(elseif) (real assassin $Target) (then)
