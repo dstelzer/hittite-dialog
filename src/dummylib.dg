@@ -1,0 +1,52 @@
+(library version) Dummy library for testing
+
+(interface (length of $List into $>Number))
+
+(length of [] into 0)
+(length of [$ | $More] into $Np1)
+	(length of $More into $N)
+	($N plus 1 into $Np1)
+
+(remove from [] matching $ into [])
+	(just)
+(remove from [$In | $MoreIn] matching $Keys into $MoreOut)
+	($In is one of $Keys)
+	(just)
+	(remove from $MoreIn matching $Keys into $MoreOut)
+(remove from [$In | $MoreIn] matching $Keys into [$In | $MoreOut])
+	(remove from $MoreIn matching $Keys into $MoreOut)
+
+(interface (randomly select $>Element from $<List))
+
+(randomly select $Element from $List)
+	(length of $List into $N)
+	(random from 1 to $N into $Index)
+	(nth $List $Index $Element)
+
+(interface (nth $List $<Index $Element))
+
+(nth [$Head | $] 1 $Head)
+(nth [$ | $Tail] $N $Result)
+	($N minus 1 into $Nm1)
+	(nth $Tail $Nm1 $Result)
+
+(error $N entry point)
+	ERROR $N !
+
+@($Obj is nowhere)
+	~($Obj has parent $)
+@($Obj is $Rel $Parent)
+	*($Obj has parent $Parent)
+	*($Obj has relation $Rel)
+#in
+
+(interface (remove duplicates from $<Input into $>Output))
+
+(remove duplicates from [] into [])
+	(just)
+(remove duplicates from [$Head | $MoreIn] into $MoreOut)
+	($Head is one of $MoreIn)
+	(just)
+	(remove duplicates from $MoreIn into $MoreOut)
+(remove duplicates from [$Head | $MoreIn] into [$Head | $MoreOut])
+	(remove duplicates from $MoreIn into $MoreOut)
