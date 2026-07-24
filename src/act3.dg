@@ -374,13 +374,13 @@
 		*([$J $] is one of $Entry)
 	(into $NRaw)
 	(remove duplicates from $NRaw into $NList)
-	(collect $NReal) %% Can we make the elimination guy be evil?
+	(collect $NReal) %% Can we make the elimination guy be guilty? That will ensure the elimination part of the puzzle is required for the solution
 		(real assassin $Ass) (number $NReal means $Ass) ($NReal is one of $NList)
 	(or)
 		(real mastermind $Mas) (number $NReal means $Mas) ($NReal is one of $NList)
-	(into $EvilList)
-	(if) (nonempty $EvilList) (then) %% Choose an evil person if possible
-		(randomly select $NElim from $EvilList)
+	(into $GuiltyList)
+	(if) (nonempty $GuiltyList) (then) %% Choose a guilty person if possible
+		(randomly select $NElim from $GuiltyList)
 	(else)
 		(randomly select $NElim from $NList) %% Random person who is the target of at least one edge
 	(endif)

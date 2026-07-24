@@ -234,6 +234,21 @@
 (dict *) DÙ DU3 LÚ LU2
 (* is #in #washhouse)
 
+(after [[slay * | $] $])
+	(now) (#blood is #on #me)
+	(now) (#blood is handled)
+
+#blood
+(neuter *)
+(name * in #nominative/#accusative/#bare) ešḫar
+(name * in #genitive) ešḫanaš
+(name * in #dative) ešḫani
+(name * in #ablative) ešḫanaz
+
+(prevent [[drop/put * | $] $Details])
+	(describe failed action [[drop *] $Details])
+	N=at (#dative #me) ēšta. %% It was on me.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Central kitchen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -506,6 +521,14 @@
 (name *) GIR₂
 (dict *) GIR2 GÍR
 (* is #heldby #dog)
+
+(after [[take * | $] $]) %% Explain a little plot hole
+	(select)
+		(div @error) {
+			Given the narrator's worries about "impurity" on the previous tablet, he seems notably unconcerned with objects touched by a dog. Perhaps because the (span @italic) iyatti -bread is only meant as a disguise, and will not actually be offered to his god?
+		}
+	(or)
+	(stopping)
 
 %% Whole buncha rooms
 
@@ -988,3 +1011,4 @@
 (verb #v-wear unlocked) (#garment is handled)
 (verb #v-wait unlocked) (#kitchen is visited) %% When an every-turn-moving NPC appears
 (verb #v-cut unlocked) (#knife is handled)
+(verb #v-wash unlocked) (#blood is handled)

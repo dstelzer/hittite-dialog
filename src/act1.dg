@@ -365,6 +365,9 @@
 	(else)
 		(describe failed action [[go *] $Details])
 		Nu=za šaknuwanza ešun. Nu (#accusative #water) natta ḫarkun. %% "I was impure. I did not have water."
+		(div @error) {
+			It is unclear what "impurity" the narrator is referring to. Presumably something has rendered him unfit to approach his god, but the text does not specify what—perhaps something on the ladder?
+		}
 		(tick) (stop)
 	(endif)
 

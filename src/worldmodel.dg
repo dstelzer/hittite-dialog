@@ -781,18 +781,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Game over
 
-%% TODO rewrite this!
-
 (game over)
-	(par)
-	(quit)
+	*(repeat forever)
+	(div @meta) {
+		(link) /restart ,
+		(link) /restore ,
+		(link) /quit ,
+		(link) /undo ?
+	}
+	(get input $Words)
+	(parse metacommand $Words)
+	(fail)
 
 (interface (game over $<Closure))
 
 (game over $Message)
-	(par)
-	(space 5)
-	(span @bold) { \*\*\* (query $Message) \*\*\* }
+	(div @gameover) {
+		(space 5) \*\*\* (query $Message) \*\*\* (space 5)
+	}
 	(game over)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

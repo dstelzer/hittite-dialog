@@ -134,6 +134,15 @@
 		(if) ($ContentsList = [$]) (then) ēšta (else) ešer (endif)
 		.
 	}
+	%% We also include the player if something is "on" them
+	(if) (current player $Player) ($ is #on $Player) (then)
+		(collect $Obj)
+			($Obj is #on $Player)
+		(into $OnList)
+		(line) Nu (#nominative $OnList) (#dative $Player)
+		(if) ($ContentsList = [$]) (then) ēšta (else) ešer (endif)
+		.
+	(endif)
 	
 	%% Third paragraph: Nu INVENTORY-ACC ḫarkun.
 	(current player $Player)
@@ -1065,7 +1074,7 @@
 	}
 	(stop)
 
-%% TODO "wash"
+%% TODO "wash" - NEEDED FOR TABLET 2
 
 (verb @paršun/@flee means @paršun) %% Synonym for "go"
 (@paršun wants cases [#dative])
