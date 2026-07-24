@@ -1,3 +1,4 @@
+Warning: Object #v-wash was used, but never declared as topic.
 Nu karimnaš ḫili ešun. Nu UR.GI₇ parni pait. Nu LU₂^NINDA.DU₃.DU₃ parnaz uet.
 Nu LU₂^NINDA.DU₃.DU₃ šakuniya pait.
 - - - - -
@@ -229,6 +230,7 @@ Nu=kan LU₂^NINDA.DU₃.DU₃ lukkandaz GIŠ^ḫattaluwaz kuenun.
 Nu=za šakuniya ešun.
 
 Nu apiya šakuniyaš āškan U₃ witenaš lūlin ōḫḫun.
+Nu ešḫar ammuk ēšta.
 
 Nu TUG₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
@@ -239,6 +241,9 @@ waššiyanun
                                  
                                      |      
                                    +( )+(@) 
+> /wash
+Washed.
+
 > 4
 4   Nu šakuniyaš āškan šarraḫḫun.
 

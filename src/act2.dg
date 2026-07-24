@@ -68,10 +68,14 @@
 (name * in #dative) karimni
 (name * in #ablative) karimnaz
 
+(prevent [[go *] $Details])
+	(#blood is #on #me)
+	(describe negative action [[go *] $Details]) %% I did not...
+	Nu (#nominative #blood) (#dative #me) ēšta. %% Blood was on me.
 (prevent [[go *] $Details]) %% Test garment first since it's easier to get
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details]) %% I did not...
-	Nu (name #garment in #accusative) natta waššiyanun.
+	Nu (#accusative #garment) natta waššiyanun.
 (prevent [[go *] $Details])
 	~(#bread is #heldby #me)
 	(describe negative action [[go *] $Details]) %% I did not...
@@ -248,6 +252,12 @@
 (prevent [[drop/put * | $] $Details])
 	(describe failed action [[drop *] $Details])
 	N=at (#dative #me) ēšta. %% It was on me.
+	(div @error) { TODO: Need translation for the actual "wash" action. Use (link) /wash for now. }
+
+%% We need a "wash" action; this is a placeholder
+(parse metacommand [\/wash])
+	(now) (#blood is nowhere)
+	(div @error) {Washed.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Central kitchen
