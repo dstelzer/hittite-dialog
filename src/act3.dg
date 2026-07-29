@@ -31,6 +31,8 @@
 %% - We choose one person to be elimination-revealed, and tag everyone else as either self-revealed or other-revealed
 %% - We turn each edge into a tablet
 
+%% (Can we always guarantee no more than three edges added? Not quite. See proof.txt in the parent folder. But we can guarantee no more than four, and four is rare. By spending more time on the "advanced edge" step we could guarantee no more than three, but the computation would be expensive.)
+
 (number of additional statements 3)
 
 %% Our graph will be represented via adjacency lists

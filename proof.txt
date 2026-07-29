@@ -1,0 +1,15 @@
+At this point we have a connected undirected tree with K nodes. Assign each edge a random direction. We want to modify this tree so that every node is the source of at least one edge.
+
+First, we look for any nodes N that are not the source of any edge. Since a tree is connected, such a node must be the destination of an edge E. Look at the source of E. If *that* node, S, is the source of two or more edges, we can flip the direction of E. Now N is the source of E, and S is still the source of the other edge.
+
+Second, we look for any nodes N that are *still* not the source of any edge. For each one, we add an edge from N to a random other node D, chosen such that there is not already an edge from D to N. (We want only one edge between any two nodes. If you don't care about this, you can pick D purely at random.)
+
+How many edges have to be added here? Or equivalently: how many such nodes can there be?
+
+Each of these nodes N must be the destination of some edge E (since it can't be the source of any edge, and the tree has to be connected). Let S be the source of E. S must be the source of only one edge, because if it were the source of multiple edges, N would have been handled in the first step.
+
+This means that each node N must belong to a subgraph {S, N} where S is the source of exactly one edge and N is the source of no edges. These subgraphs cannot overlap, because there cannot be any edges pointing from inside the subgraph to outside.
+
+So, how many such subgraphs can there be? There must be at least one node which is not in any of these subgraphs, because there cannot be any edges pointing from inside a subgraph to outside, so the only way for the tree to be connected is for some node outside *every* subgraph to point into each one.
+
+Thus, the maximum number of these subgraphs is floor((K-1)/2). This is the maximum number of edges we might possibly need to add.
