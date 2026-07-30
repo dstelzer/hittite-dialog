@@ -1,0 +1,716 @@
+%% This is where we put all the knights-and-knaves machinery, since it's needed only in this act, no other
+%% See old/knaves2.dg for more explanation of how this all works and a general case of the puzzle involved here
+
+%% But the basic idea is that we want to generate a weakly-connected directed graph, where the nodes are the suspects and the edges are the statements
+%% ("Weakly connected" = if you get rid of the edge directions, it's connected)
+%% To generate a random connected undirected graph with N nodes and K edges, we start by generating a random spanning tree with N nodes, then add (K-N) random edges
+%% And to generate that random spanning tree, we generate a random Prüfer sequence, then convert that into a tree
+
+%% For a basic knights-and-knaves puzzle, that would be enough—each directed edge becomes "X says Y is innocent" if X and Y have the same affiliation (both knights or both knaves), and "X says Y is guilty" if not
+%% However, for this puzzle, we need something more! We also need to convey:
+%% - Which of the guilty people is the assassin versus the mastermind
+%% - What the signal is (so the player can perform it)
+%% - Which of the two possible solutions is correct (since swapping every "innocent" to a "guilty" and vice versa creates an isomorphic puzzle)
+%% - The association between names and jobs
+
+%% The first and second we handle in the same way: with two types of edges. Each edge is one of two types:
+%% - **Basic edges** state only that someone is innocent or guilty
+%% - **Advanced edges** also state whether someone is the assassin or mastermind, and reveal what signal was used
+%% Since the latter is only used for "X says Y is guilty" edges, we repurpose that marker on "X says Y is innocent" edges to vary the wording of the message ("not guilty" vs "innocent")
+%% The third problem is the easiest: we have the oracle say specifically that *two* people are going to kill the king, and have five people total. This means one solution has two knaves and one solution has three knaves; the former must be correct.
+%% For the fourth, we choose one person to be "elimination-revealed". This person will only use their job when speaking about others, and their name when being spoken about. They can only be solved by process of elimination.
+%% Everyone else is tagged as either "self-revealed" or "other-revealed", based on whether they are the target of a basic edge or not. If they are the target of a basic edge, they are "other-revealed", and that basic edge connects their role to their name. Otherwise, they are "self-revealed", and their own statement(s) give both their name and their job.
+
+%% So overall:
+%% - We assign N=5 roles: real assassin, real mastermind, fake assassin, fake mastermind, and fake default (no role)
+%% - We build a spanning tree via random Prüfer sequence, giving each edge a random direction and random tag (basic/advanced)
+%% - We tweak the edges as needed and add (K-N)=3 extra to the tree, to make sure certain criteria are fulfilled:
+%%   - There should be no advanced edges pointing to the fake-default person
+%%   - Every person should make at least one statement
+%%   - There should be an advanced edge pointing from an innocent person to a guilty person, and an advanced edge pointing from a guilty person to an innocent person
+%% - We choose one person to be elimination-revealed, and tag everyone else as either self-revealed or other-revealed
+%% - We turn each edge into a tablet
+
+%% (Can we always guarantee no more than three edges added? Not quite. See proof.txt in the parent folder. But we can guarantee no more than four, and four is rare. By spending more time on the "advanced edge" step we could guarantee no more than three, but the computation would be expensive.)
+
+(number of additional statements 3)
+
+%% Our graph will be represented via adjacency lists
+%% We have a list of five lists, one for each suspect
+%% Each suspect's list contains a number of (target, type) pairs
+%% Each of those pairs represents a <type> statement that <suspect> makes about <target>
+%% We'll use numbers for the type too: 0 basic 1 advanced
+
+(random edge pointing at (fake default $Target) is [$Target 0])
+(random edge pointing at $Target is [$Target $Type])
+	(random from 0 to 1 into $Type)
+
+(empty graph $G)
+	(5 instances of [] into $G)
+(0 instances of $ into [])
+($N instances of $Value into [$Value|$Tail])
+	($N minus 1 into $Nm1)
+	($Nm1 instances of $Value into $Tail)
+
+(change entry 1 of [$|$Tail] to $Value into [$Value|$Tail])
+(change entry $N of [$Head|$Tail] to $Value into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(change entry $Nm1 of $Tail to $Value into $NewTail)
+
+(entry 1 of [$Head | $] into $Head)
+(entry $N of [$ | $Tail] into $Value)
+	($N minus 1 into $Nm1)
+	(entry $Nm1 of $Tail into $Value)
+
+(increment entry 1 of [$Old|$Tail] into [$New|$Tail])
+	($Old plus 1 into $New)
+(increment entry $N of [$Head|$Tail] into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(increment entry $Nm1 of $Tail into $NewTail)
+
+(decrement entry 1 of [$Old|$Tail] into [$New|$Tail])
+	($Old minus 1 into $New)
+(decrement entry $N of [$Head|$Tail] into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(decrement entry $Nm1 of $Tail into $NewTail)
+
+(prepend $Value to entry 1 of [$Head|$Tail] into [ [$Value|$Head] | $Tail])
+(prepend $Value to entry $N of [$Head|$Tail] into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(prepend $Value to entry $Nm1 of $Tail into $NewTail)
+
+(delete $Value from entry 1 of [$Old|$Tail] into [$New|$Tail])
+	(delete $Value from $Old into $New)
+(delete $Value from entry $N of [$Head|$Tail] into [$Head|$NewTail])
+	($N minus 1 into $Nm1)
+	(delete $Value from entry $Nm1 of $Tail into $NewTail)
+
+%% Remove the first instance of a value from a list
+(delete $Value from [$Value|$Tail] into $Tail)
+(delete $Value from [$Head|$Tail] into [$Head|$NewTail])
+	(delete $Value from $Tail into $NewTail)
+
+%% Replace the first instance of a value
+(replace $Old with $New in [$Old|$Tail] into [$New|$Tail])
+(replace $Old with $New in [$Head|$OldTail] into [$Head|$NewTail])
+	(replace $Old with $New in $OldTail into $NewTail)
+
+(have $N count up from $Low to $High)
+		($N = $Low)
+	(or)
+		($Low plus 1 into $Lp1)
+		~($Lp1 > $High)
+		*(have $N count up from $Lp1 to $High)
+
+%% Now, time to actually generate the Prüfer sequence!
+
+(0 random values between $ and $ into [])
+($N random values between $Low and $High into [$Random|$Tail])
+	(random from $Low to $High into $Random)
+	($N minus 1 into $Nm1)
+	($Nm1 random values between $Low and $High into $Tail)
+
+(random Prüfer sequence $Prüfer)
+	(5 minus 2 into $Length) %% 5 is the number of people, 2 is inherent to the Prüfer algorithm
+	($Length random values between 1 and 5 into $Prüfer)
+
+%% And the hardest part: converting it into a tree
+%% The normal algorithm for this requires a "degrees array" that stores the degree of each node
+%% Dialog doesn't really do arrays, though, so we have to handle it a bit awkwardly
+
+(convert Prüfer sequence $Prüfer into tree $G)
+	(empty graph $Empty)
+	(5 instances of 1 into $InitialDegrees)
+	(update degrees $InitialDegrees from sequence $Prüfer into $Degrees)
+	
+	(use Prüfer sequence $Prüfer on $Empty and $Degrees to make $NewTree and $NewDegrees)
+	(use degrees $NewDegrees to add final connection to $NewTree to make $G)
+
+(update degrees $Degrees from sequence [] into $Degrees)
+(update degrees $Degrees from sequence [$Head|$Tail] into $Updated)
+	(increment entry $Head of $Degrees into $Intermediate)
+	(update degrees $Intermediate from sequence $Tail into $Updated)
+
+(use Prüfer sequence [] on $Tree and $Degrees to make $Tree and $Degrees)
+(use Prüfer sequence [$I|$Tail] on $OldTree and $OldDegrees to make $NewTree and $NewDegrees)
+	(first index of 1 in $OldDegrees is $J)
+	(decrement entry $I of $OldDegrees into $Tmp)
+	(decrement entry $J of $Tmp into $Degrees)
+	(random edge pointing at $J is $Edge)
+	(prepend $Edge to entry $I of $OldTree into $Tree)
+	(use Prüfer sequence $Tail on $Tree and $Degrees to make $NewTree and $NewDegrees)
+
+(use degrees $Degrees to add final connection to $OldTree to make $NewTree)
+	(first index of 1 in $Degrees is $U)
+	(decrement entry $U of $Degrees into $NewDegrees)
+	(first index of 1 in $NewDegrees is $V)
+	(random edge pointing at $V is $Edge)
+	(prepend $Edge to entry $U of $OldTree into $NewTree)
+
+%% This predicate is implemented a bit awkwardly to ensure all recursion is in tail position
+%% The more elegant way to do it (without the "counting from") requires addition after the recursive call
+(first index of $Value in [$Value|$] counting from $N is $N)
+(first index of $Value in [$|$Tail] counting from $N is $Result)
+	($N plus 1 into $Np1)
+	(first index of $Value in $Tail counting from $Np1 is $Result)
+
+%% So we have a convenience predicate for the standard case
+(first index of $Value in $List is $N)
+	(first index of $Value in $List counting from 1 is $N)
+
+%% Of course, this makes a randomly-directed tree, and we have an additional constraint on our puzzle: we want everyone to give testimony
+%% So next we go through and flip edges as needed to ensure every node has an outgoing edge
+%% If we can't, we add new random edges
+
+(ensure testimony from $Tree into $G by adding $E edges)
+	(improve node 5 of $Tree into $G by adding $E edges counting from 0)
+
+(improve node $I of $Tree into $G by adding $ENew edges counting from $EOld) %% $EOld is how many we already added; we need to pass it in for tail recursion purposes
+	(if) (entry $I of $Tree into $List) ~(empty $List) (then) %% No need to add anything, there's already an edge here
+		($ETmp = $EOld)
+		($New = $Tree)
+	(elseif) *(have $J count up from 1 to 5) (node $J of $Tree has redundant edge to $I) (then) %% We can flip an edge
+		(delete [$I $] from entry $J of $Tree into $Tmp)
+		(random edge pointing at $J is $Edge)
+		(prepend $Edge to entry $I of $Tmp into $New)
+		($ETmp = $EOld)
+	(else) %% We have to insert a new edge
+		%% We want to pick a random entry that's NOT this node
+		(random from 1 to 5 excluding $I into $J)
+		(random edge pointing at $J is $Edge)
+		(prepend $Edge to entry $I of $Tree into $New)
+		($EOld plus 1 into $ETmp)
+	(endif)
+	
+	%% Now, potentially recurse (counting down because it's a bit easier that way)
+	(if) ($I > 1) (then)
+		($I minus 1 into $Next)
+		(improve node $Next of $New into $G by adding $ENew edges counting from $ETmp)
+	(else)
+		($G = $New)
+		($ENew = $ETmp)
+	(endif)
+
+(node $J of $Tree has redundant edge to $I)
+	(entry $J of $Tree into $List)
+	(length of $List into $Length)
+	($Length > 1)
+	([$I|$] is one of $List)
+
+(random from $Low to $High excluding $Exclude into $Result)
+	($High minus 1 into $NewHigh)
+	(random from $Low to $NewHigh into $Random) %% Generate a random number in [Low..High-1]
+	(if) ($Random < $Exclude) (then) %% If it's less than Exclude, use it directly
+		($Result = $Random)
+	(else) %% Otherwise, bump it up by 1 to skip over Exclude
+		($Random plus 1 into $Result)
+	(endif)
+
+%% And since this puzzle involves edge types, we also need to satisfy some constraints on those
+%% In particular:
+%% - There needs to be an advanced edge pointing from an innocent person to a guilty person
+%% - There needs to be an advanced edge pointing from a guilty person to an innocent person
+%% - There should *not* be an advanced edge pointing to the fake-default person (since they are not treated as an assassin or as a mastermind)
+%% The third of these is handled in (random edge pointing at $ is $)
+
+(correct edge types from $GOld into $GNew by adding $E edges)
+	(ensure advanced innocent-guilty edge from $GOld into $G2 adding $E1 edges)
+	(ensure advanced guilty-innocent edge from $G2 into $GNew adding $E2 edges)
+	($E1 plus $E2 into $E)
+
+(ensure advanced innocent-guilty edge from $G into $G adding 0 edges)
+	($G has advanced innocent-guilty edge)
+(ensure advanced innocent-guilty edge from $GOld into $GNew adding $E edges)
+	%% For the sake of time, we first generate a random edge, then if that edge exists flip its type, otherwise add it
+	%% We do *not* check if there's a flippable edge before randomizing
+	(random from 1 to 3 into $Rand1)
+	{
+		($Rand1 = 1) (fake assassin $I)
+	(or)
+		($Rand1 = 2) (fake mastermind $I)
+	(or)
+		($Rand1 = 3) (fake default $I)
+	}
+	
+	(random from 1 to 2 into $Rand2)
+	{
+		($Rand2 = 1) (real assassin $J)
+	(or)
+		($Rand2 = 2) (real mastermind $J)
+	}
+	
+	(if) (entry $I of $GOld into $Entry) (replace [$J 0] with [$J 1] in $Entry into $NewEntry) (then)
+		(change entry $I of $GOld to $NewEntry into $GNew)
+		($E = 0)
+	(else)
+		(prepend [$J 1] to entry $I of $GOld into $GNew)
+		($E = 1)
+	(endif)
+
+($G has advanced innocent-guilty edge)
+	{ (fake assassin $I) (or) (fake mastermind $I) (or) (fake default $I) }
+	{ (real assassin $J) (or) (real mastermind $J) }
+	(entry $I of $G into $Entry)
+	([$J 1] is one of $Entry)
+
+(ensure advanced guilty-innocent edge from $G into $G adding 0 edges)
+	($G has advanced guilty-innocent edge)
+(ensure advanced guilty-innocent edge from $GOld into $GNew adding $E edges)
+	%% For the sake of time, we first generate a random edge, then if that edge exists flip its type, otherwise add it
+	%% We do *not* check if there's a flippable edge before randomizing
+	(random from 1 to 2 into $Rand1)
+	{
+		($Rand1 = 1) (real assassin $I)
+	(or)
+		($Rand1 = 2) (real mastermind $I)
+	}
+	
+	(random from 1 to 2 into $Rand2)
+	{
+		($Rand2 = 1) (fake assassin $J)
+	(or)
+		($Rand2 = 2) (fake mastermind $J)
+	%% Fake default not included because it can't accept advanced edges
+	}
+	
+	(if) (entry $I of $GOld into $Entry) (replace [$J 0] with [$J 1] in $Entry into $NewEntry) (then)
+		(change entry $I of $GOld to $NewEntry into $GNew)
+		($E = 0)
+	(else)
+		(prepend [$J 1] to entry $I of $GOld into $GNew)
+		($E = 1)
+	(endif)
+
+($G has advanced guilty-innocent edge)
+	{ (real assassin $I) (or) (real mastermind $I) }
+	{ (fake assassin $J) (or) (fake mastermind $J) }
+	(entry $I of $G into $Entry)
+	([$J 1] is one of $Entry)
+
+%% Once that process is done, add random statements if necessary to get up to the right number
+
+(flesh out $Tree into $G)
+	(number of additional statements $Add)
+	($Add plus 5 into $Goal)
+	(5 minus 1 into $Edges) %% Number of edges in a tree
+	
+	(ensure testimony from $Tree into $Tmp1 by adding $E1 edges)
+	(log) {Improved 1: $Tmp1 adding $E1 edges}
+	(correct edge types from $Tmp1 into $Tmp2 by adding $E2 edges)
+	(log) {Improved 2: $Tmp2 adding $E2 edges}
+	($E1 plus $E2 into $E) %% Number of edges we added in corrections: E2 will always be 0-2 while E1 should usually be 0 or 1 (but how to prove an upper bound? TODO)
+	(if) ($Goal minus $Edges into $Need) ($Need minus $E into $Remaining) (then)
+		(log) { Adding $Remaining more edges }
+		(add $Remaining random edges to $Tmp2 into $G)
+	(else)
+		(log) { PROBLEM! Had to add $E1 edges in step 1 and $E2 edges in step 2, which is too many! }
+	%%	(quit 1) %% For testing, to see how often this happens
+		(restart) %% It happens extremely rarely so we just reboot if it does
+		($G = $Tmp2)
+	(endif)
+
+(add 0 random edges to $G into $G)
+(add $K random edges to $In into $Out)
+	(random from 1 to 5 into $I)
+	(entry $I of $In into $RawExisting)
+	(targets of edges $RawExisting are $Existing)
+	(collect $Choice)
+		*(have $Choice count up from 1 to 5)
+	(into $RawChoices)
+	(remove from $RawChoices matching [$I | $Existing] into $Choices)
+	(randomly select $J from $Choices)
+	($Edge = [$J 0]) %% Only adding basic edges at this point? TODO
+	(prepend $Edge to entry $I of $In into $Tmp)
+	($K minus 1 into $Km1)
+	(add $Km1 random edges to $Tmp into $Out)
+
+(targets of edges [] are [])
+(targets of edges [[$HIn $] | $TailIn] are [$HIn | $TailOut])
+	(targets of edges $TailIn are $TailOut)
+
+%% And now, put it all together!
+
+(generate random puzzle $G)
+	(random Prüfer sequence $Prüfer)
+	(log) { Sequence: $Prüfer }
+	(convert Prüfer sequence $Prüfer into tree $Tree)
+	(log) { Tree: $Tree }
+	(flesh out $Tree into $G)
+	(log) { G: $G }
+
+(build the knights and knaves puzzle)
+	(initialize global variables) %% Names and such
+	(generate random puzzle $G) %% Generate the graph itself
+	(re-initialize global variables) %% We now want the globals to hold people instead of numbers
+	(tag revelation status from $G) %% Tag people as elimination-revealed, self-revealed, or other-revealed (see top for what this means)
+	(generate tablets from $G) %% And make the tablets for the puzzle!
+
+(startup)
+	(exhaust) (build the knights and knaves puzzle) %% Reclaim memory afterward; all the important results are stored on the long-term heap
+
+(tag revelation status from $G)
+	(log) { Tagging revelation status }
+	(exhaust) {
+		*(suspect $S)
+		(now) ($S is self-revealed) %% Defaults
+		(now) ($S is evidence-revealed)
+	}
+	(log) { Assigned defaults }
+	
+	(collect $J)
+		*(have $I count up from 1 to 5)
+		(entry $I of $G into $Entry)
+		*([$J $] is one of $Entry)
+	(into $NRaw)
+	(remove duplicates from $NRaw into $NList)
+	(collect $NReal) %% Can we make the elimination guy be guilty? That will ensure the elimination part of the puzzle is required for the solution
+		(real assassin $Ass) (number $NReal means $Ass) ($NReal is one of $NList)
+	(or)
+		(real mastermind $Mas) (number $NReal means $Mas) ($NReal is one of $NList)
+	(into $GuiltyList)
+	(if) (nonempty $GuiltyList) (then) %% Choose a guilty person if possible
+		(randomly select $NElim from $GuiltyList)
+	(else)
+		(randomly select $NElim from $NList) %% Random person who is the target of at least one edge
+	(endif)
+	(number $NElim means $Elim)
+	(now) ($Elim is elimination-revealed)
+	
+	(exhaust) { %% Find everyone who is the target of a basic edge
+		*(have $I count up from 1 to 5)
+		(entry $I of $G into $Entry)
+		*([$J 0] is one of $Entry) %% Basic edges only
+		(number $J means $Suspect)
+		(now) ($Suspect is other-revealed)
+%%		(log) { Marking (name $Suspect) (job $Suspect) as other-revealed because of connection from (number $I means $Src) (name $Src) (job $Src) }
+	}
+
+@($S is self-revealed) ~($S is other-revealed)
+@($S is evidence-revealed) ~($S is elimination-revealed)
+
+(generate tablets from $G)
+	(log) { Generating tablets }
+	(exhaust) {
+		*(have $I count up from 1 to 5)
+		(now) ~(already generated a type-one for this speaker)
+		(entry $I of $G into $Entry)
+		*([$J $Type] is one of $Entry)
+		(if)
+			($Type = 1)
+			(number $I means $II)
+			(number $J means $JJ)
+			~($II and $JJ agree)
+		(then) %% We do some special trickery in this case: see (testimony for $) for details
+			(if) (already generated a type-one for this speaker) (then)
+				(log) { Changing to 2 }
+				(generate a tablet from $I $J 2)
+			(else)
+				(generate a tablet from $I $J 1)
+				(now) (already generated a type-one for this speaker)
+			(endif)
+		(else)
+			(generate a tablet from $I $J $Type)
+		(endif)
+	}
+	(shuffle tablets into the box) %% Make sure they end up in a random order
+(generate a tablet from $SNum $DNum $Type)
+	*(tablet $Tablet)
+	($Tablet is nowhere) %% Pick a fresh one
+	(number $SNum means $Source)
+	(now) ($Tablet has source $Source)
+	(number $DNum means $Dest)
+	(now) ($Tablet has target $Dest)
+	(now) ($Tablet has type $Type)
+	(now) ($Tablet is #in #tmp)
+(shuffle tablets into the box)
+	(collect $Tablet)
+		*($Tablet is #in #tmp)
+	(into $List)
+	(shuffle $List into $Shuffled)
+	(exhaust) {
+		*($Tablet is one of $Shuffled)
+		(now) ($Tablet is #in #box)
+	}
+
+#tmp %% Temporary holding space
+
+(global variable (real assassin $))
+(global variable (real mastermind $))
+(global variable (fake assassin $))
+(global variable (fake mastermind $))
+(global variable (fake default $))
+
+(global variable (real signal $))
+(global variable (fake signal $))
+
+(guilty (real assassin $))
+(guilty (real mastermind $))
+(innocent (fake assassin $))
+(innocent (fake mastermind $))
+(innocent (fake default $))
+
+((innocent $) and (innocent $) agree)
+((guilty $) and (guilty $) agree)
+
+(initialize global variables)
+	(shuffle [1 2 3 4 5] into [$A $B $C $D $E])
+	(now) (real assassin $A)
+	(now) (real mastermind $B)
+	(now) (fake assassin $C)
+	(now) (fake mastermind $D)
+	(now) (fake default $E)
+	
+	(shuffle [1 2 3 4 5 6 7 8 9 10] into [$W $X $Y $Z | $])
+	(now) (#dubsar uses name code $W)
+	(now) (#mecedi uses name code $X)
+	(now) (#gectin uses name code $Y)
+	(now) (#tuhkanti uses name code $Z)
+	
+	(random from 1 to 4 into $F)
+	(now) (#tawannana uses name code $F)
+	
+	(collect $Verb)
+		*(possible signal verb $Verb)
+	(into $Signals)
+	(shuffle $Signals into [$SReal $SFake | $])
+	(now) (real signal $SReal)
+	(now) (fake signal $SFake)
+
+(re-initialize global variables)
+	(real assassin $A)
+	(number $A means $A1)
+	(now) (real assassin $A1)
+	
+	(real mastermind $B)
+	(number $B means $B1)
+	(now) (real mastermind $B1)
+	
+	(fake assassin $C)
+	(number $C means $C1)
+	(now) (fake assassin $C1)
+	
+	(fake mastermind $D)
+	(number $D means $D1)
+	(now) (fake mastermind $D1)
+	
+	(fake default $E)
+	(number $E means $E1)
+	(now) (fake default $E1)
+
+%% The following come from Gosling
+%% Shuffle a list - something the standard library doesn’t handle
+
+(shuffle [] into [])
+(shuffle [$Single] into [$Single])
+(shuffle $Old into [$Chosen | $More] )
+	(length of $Old into $Length)
+	(random from 1 to $Length into $N)
+	(pop item $N from $Old into $Chosen and $Remains)
+	(shuffle $Remains into $More)
+
+%% Pop an item from a list, returning the item and the list without it
+%% This is implemented very much like (nth $ $ $)
+%% except that it also returns the shortened list
+
+(pop item 1 from [$Head|$List] into $Head and $List)
+(pop item $N from [$Head|$List] into $Element and [$Head|$New])
+	($N minus 1 into $Nm1)
+	(pop item $Nm1 from $List into $Element and $New)
+
+#box %% Where tablets are put when generated
+
+%% A big stash of Hittite names from Laman, all chosen to have different first letters
+%% First letters not used yet: B, G, Y
+
+(male name 1 in #nominative) Ašḫapalaš
+(male name 1 in #genitive) Ašḫapalaš
+(male name 1 in #dative) Ašḫapali
+(male name 1 in #accusative) Ašḫapalan
+(male name 1 in #ablative) Ašḫapalaz
+
+(male name 2 in #nominative) Eniadališ
+(male name 2 in #genitive) Eniadaliyaš
+(male name 2 in #dative) Eniadaliya
+(male name 2 in #accusative) Eniadalin
+(male name 2 in #ablative) Eniadaliyaz
+
+(male name 3 in #nominative) Ḫaḫuaš
+(male name 3 in #genitive) Ḫaḫuaš
+(male name 3 in #dative) Ḫaḫui
+(male name 3 in #accusative) Ḫaḫuan
+(male name 3 in #ablative) Ḫaḫuaz
+
+(male name 4 in #nominative) Iriyattiš
+(male name 4 in #genitive) Iriyattiyaš
+(male name 4 in #dative) Iriyattiya
+(male name 4 in #accusative) Iriyattin
+(male name 4 in #ablative) Iriyattiyaz
+
+(male name 5 in #nominative) Kaštandaš
+(male name 5 in #genitive) Kaštandaš
+(male name 5 in #dative) Kaštandi
+(male name 5 in #accusative) Kaštandan
+(male name 5 in #ablative) Kaštandaz
+
+(male name 6 in #nominative) Lariyaš
+(male name 6 in #genitive) Lariyaš
+(male name 6 in #dative) Lariya
+(male name 6 in #accusative) Lariyan
+(male name 6 in #ablative) Lariyaz
+
+(male name 7 in #nominative) Našailiš
+(male name 7 in #genitive) Našailiyaš
+(male name 7 in #dative) Našailiya
+(male name 7 in #accusative) Našailin
+(male name 7 in #ablative) Našailiyaz
+
+(male name 8 in #nominative) Dušaš
+(male name 8 in #genitive) Dušaš
+(male name 8 in #dative) Duši
+(male name 8 in #accusative) Dušan
+(male name 8 in #ablative) Dušaz
+
+(male name 9 in #nominative) Walwiš
+(male name 9 in #genitive) Walwiyaš
+(male name 9 in #dative) Walwiya
+(male name 9 in #accusative) Walwin
+(male name 9 in #ablative) Walwiyaz
+
+(male name 10 in #nominative) Zipuliššaš
+(male name 10 in #genitive) Zipuliššaš
+(male name 10 in #dative) Zipulišši
+(male name 10 in #accusative) Zipuliššan
+(male name 10 in #ablative) Zipuliššaz
+
+(female name 1 in #nominative) Paškuwaš
+(female name 1 in #genitive) Paškuwaš
+(female name 1 in #dative) Paškuwi
+(female name 1 in #accusative) Paškuwan
+(female name 1 in #ablative) Paškuwaz
+
+(female name 2 in #nominative) Tarluš
+(female name 2 in #genitive) Tarluwaš
+(female name 2 in #dative) Tarlui
+(female name 2 in #accusative) Tarlun
+(female name 2 in #ablative) Tarluwaz
+
+(female name 3 in #nominative) Uruwandaš
+(female name 3 in #genitive) Uruwandaš
+(female name 3 in #dative) Uruwandi
+(female name 3 in #accusative) Uruwandan
+(female name 3 in #ablative) Uruwandaz
+
+(female name 4 in #nominative) Maštiggaš
+(female name 4 in #genitive) Maštiggaš
+(female name 4 in #dative) Maštiggi
+(female name 4 in #accusative) Maštiggan
+(female name 4 in #ablative) Maštiggaz
+
+%% Now how do we print these in Hittite?
+%% We do a lot of messing around with case...which currently ends up being unnecessary, because with the rewrite of the testimony, the names are never in any case except the nominative
+%% But I'm keeping it here in case the writing changes again
+
+($Suspect in $Case name-only)
+	(real name $Suspect in $Case)
+
+($Suspect in $Case title-only)
+	($Case $Suspect)
+
+($Suspect in $Case name and title)
+	(logogram $Suspect)
+	(span @akk) (akkadian preposition for $Case) %% preposition goes before all
+	(real name $Suspect in $Case) %% personal name
+	(name $Suspect) %% job title
+
+(source $Suspect $Case)
+	($Suspect is elimination-revealed) %% Only name as target, only job as source
+	($Suspect in $Case title-only)
+(source $Suspect $Case)
+	($Suspect is other-revealed) %% Name + job as target, source doesn't matter
+	($Suspect in $Case title-only)
+(source $Suspect $Case) %% Name + job as source, target doesn't matter
+	($Suspect in $Case name and title)
+
+(advanced target $Suspect $Case) %% Always name
+	($Suspect in $Case name-only)
+
+(basic target $Suspect $Case)
+	($Suspect is elimination-revealed) %% Only name as target, only job as source
+	($Suspect in $Case name-only)
+(basic target $Suspect $Case)
+	($Suspect is other-revealed) %% Name + job as target, source doesn't matter
+	($Suspect in $Case name and title)
+(basic target $Suspect $Case) %% Name + job as source, target doesn't matter
+	($Suspect in $Case name-only)
+
+(real signal)
+	(real signal $S)
+	(signal $S)
+(fake signal)
+	(fake signal $S)
+	(signal $S)
+
+(testimony for $Tablet)
+	($Tablet has source $Source)
+	($Tablet has target $Target)
+	($Tablet has type $Type)
+	
+	%% First, the source
+	(span @akk) Umma (source $Source #nominative) (no space):
+	
+	%% When we generated the puzzle, we only had two types of edge: 0 and 1
+	%% 0 for basic, 1 for advanced
+	%% But sometimes this can lead to awkwardness when a single speaker has multiple type-1 edges to opposite-polarity targets: it sounds wrong for them to say two complicated sentences with "someone" in them if they know both of the "someone"s!
+	%% So when that happens, we change all but the first to type-2
+	(if) ($Type = 2) (then) %% Special advanced edge
+		%% It would be nice for this text to say "X is the mastermind" or "X is the assassin", but I haven't found clean ways to express that in Hittite
+		nu=wa (advanced target $Target #nominative) kupiyatin kupta. %% "X conspired a conspiracy."
+	(elseif) ($Type = 1) (then) %% Advanced edge
+		(if) ($Source and $Target agree) (then) %% X is not guilty
+			nu=wa (advanced target $Target #nominative) natta paprišzi.
+		(elseif) (real assassin $Target) (then)
+			(real signal $Sig) ($Sig wants $Case)
+			mān=wa
+			(if) ($Case = #dative) (then) (no space) =ši
+			(elseif) ($Case = #accusative) (then) (no space) =an
+			(else) (div @realerror) { Signal $Sig does not take case? } (endif)
+			kuiški (real signal) , %% When someone Z's them,
+			nu=wa=kan (advanced target $Target #nominative) (#accusative #king) kuenzi. %% X will kill the king
+			(now) ($Sig is unlocked)
+		(elseif) (fake assassin $Target) (then)
+			(fake signal $Sig) ($Sig wants $Case)
+			mān=wa
+			(if) ($Case = #dative) (then) (no space) =ši
+			(elseif) ($Case = #accusative) (then) (no space) =an
+			(else) (div @realerror) { Signal $Sig does not take case? } (endif)
+			kuiški (fake signal) , %% When someone Z's them,
+			nu=wa=kan (advanced target $Target #nominative) (#accusative #king) kuenzi. %% X will kill the king.
+			(now) ($Sig is unlocked)
+		(elseif) (real mastermind $Target) (then)
+			(real signal $Sig) ($Sig wants $Case)
+			mān=wa
+			(if) ($Case = #dative) (then) (no space) =ši
+			(elseif) ($Case = #accusative) (then) (no space) r=an
+			(else) (div @realerror) { Signal $Sig does not take case? } (endif)
+			(advanced target $Target #nominative) (real signal) , %% When X Z's them,
+			nu=wa kuiški (#accusative #king) kuenzi. %% someone will kill the king.
+			(now) ($Sig is unlocked)
+		(elseif) (fake mastermind $Target) (then)
+			(fake signal $Sig) ($Sig wants $Case)
+			mān=wa
+			(if) ($Case = #dative) (then) (no space) =ši
+			(elseif) ($Case = #accusative) (then) (no space) r=an
+			(else) (div @realerror) { Signal $Sig does not take case? } (endif)
+			(advanced target $Target #nominative) (fake signal) , %% When X Z's them,
+			nu=wa kuiški (#accusative #king) kuenzi. %% someone will kill the king.
+			(now) ($Sig is unlocked)
+		(else)
+			(div @realerror) { ERROR: There should never be an advanced edge pointing to the fake default. Something is deeply wrong! }
+		(endif)
+	(else) %% Basic edge
+		(if) ($Source and $Target agree) (then)
+			nu=wa (basic target $Target #nominative) parkuešzi.
+		(else)
+			nu=wa (basic target $Target #nominative) paprišzi.
+		(endif)
+	(endif)

@@ -1102,13 +1102,16 @@
 			(query $Mod)
 		(endif)
 	(endif)
-	(if) ($Obj has determiner) (then)
+	(if) ($Obj has determiner) ~(determiner comes after $Obj) (then)
 		(dtm {(determiner $Obj)})
 	(endif)
 	(if) (logogram $Obj) (then)
 		(name $Obj)
 	(else)
 		(name $Obj in $Case)
+	(endif)
+	(if) ($Obj has determiner) (determiner comes after $Obj) (then)
+		(dtm2 {(determiner $Obj)})
 	(endif)
 
 ($Obj has determiner) %% Not super efficient, but (determiner $) is going to be called inside a (collect words) anyway for dictionary purposes

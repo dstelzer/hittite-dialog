@@ -114,7 +114,7 @@
 	
 	%% Subsequent lines: Nu OBJECT-NOM CONTAINER-DAT anda ēšta/ešer
 	(collect $Obj)
-		*($Obj is #in $Loc)
+		*($Obj has ancestor $Loc)
 		($ is $ $Obj)
 	(into $ContainerList)
 	(action log {Containers: $ContainerList} )
@@ -799,10 +799,10 @@
 (translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl])
 
 %% Kuenun and taruḫḫun are mostly synonyms, but take different particles
-(prevent [[slay $ with $] [$ @kuenun $Advs | $]])
+(refuse [[slay $ with $] [$ @kuenun $Advs | $]])
 	~(@kan is one of $Advs)
 	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "slay" requires the sentence particle =kan to be attached to the first word of the sentence, as in (span @hittite) { n=an=kan kuenun } "I slew him". }
-(prevent [[slay $ with $] [$ @taruḫḫun $Advs | $]])
+(refuse [[slay $ with $] [$ @taruḫḫun $Advs | $]])
 	~(@za is one of $Advs)
 	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) taruḫḫun , when it's used to mean "overpower \(a person\)", needs the clitic =za attached to the first word of the sentence, as in (span @hittite) { nu=za=an taruḫḫun } "I overpowered him". }
 
@@ -1018,6 +1018,88 @@
 #v-cut
 (verb *)
 (name *) arkaḫḫun
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SIGNALS: KISS, DANCE, BOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(verb @kuwaššun/@kiss means @kuwaššun)
+(@kuwaššun wants cases [#accusative])
+(translate [$ kuwaššun $ $Acc | $] into [kiss $Acc])
+
+(prevent [[kiss ~(animate $Obj)] $Details])
+	(describe negative action [[kiss $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=aš
+	(endif)
+	antuḫšaš natta ēšta. %% It was not a person.
+
+(perform [[kiss $Obj] $Details]) %% Default perform just fails
+	(describe negative action [[kiss $Obj] $Details])
+	(div @error) { It is unclear why the text feels the need to specify that the protagonist did not do such an unlikely thing. }
+	(tick) (stop)
+
+#v-kiss
+(verb *)
+(name *) kuwaššun
+(signal *) kuwašzi
+(* matches [kiss $])
+(* wants #accusative)
+(possible signal verb *)
+
+(verb @tarkun/@dance means @tarkun)
+(@tarkun wants cases [#dative])
+(translate [$ tarkun $ $ $Dat | $] into [dance with $Dat])
+
+(prevent [[dance with ~(animate $Obj)] $Details])
+	(describe negative action [[dance with $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=aš
+	(endif)
+	antuḫšaš natta ēšta. %% It was not a person.
+
+(perform [[dance with $Obj] $Details]) %% Default perform just fails
+	(describe negative action [[dance with $Obj] $Details])
+	(div @error) { It is unclear why the text feels the need to specify that the protagonist did not do such an unlikely thing. }
+	(tick) (stop)
+
+#v-dance
+(verb *)
+(name *) tarkun
+(signal *) tarkuzi
+(* matches [dance with $])
+(* wants #dative)
+(possible signal verb *)
+
+(verb @kaninanun/@bow means @kaninanun)
+(@kaninanun wants cases [#dative])
+(translate [$ kaninanun $ $ $Dat | $] into [bow to $Dat])
+
+(prevent [[bow to ~(animate $Obj)] $Details])
+	(describe negative action [[bow to $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=aš
+	(endif)
+	antuḫšaš natta ēšta. %% It was not a person.
+
+(perform [[bow to $Obj] $Details]) %% Default perform just fails
+	(describe negative action [[bow to $Obj] $Details])
+	(div @error) { It is unclear why the text feels the need to specify that the protagonist did not do such an unlikely thing. }
+	(tick) (stop)
+
+#v-bow
+(verb *)
+(name *) kaninanun
+(signal *) kanināit
+(* matches [bow to $])
+(* wants #dative)
+(possible signal verb *)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Miscellaneous verbs used in the text
