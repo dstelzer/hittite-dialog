@@ -18,7 +18,8 @@
 %% - **Advanced edges** also state whether someone is the assassin or mastermind, and reveal what signal was used
 %% Since the latter is only used for "X says Y is guilty" edges, we repurpose that marker on "X says Y is innocent" edges to vary the wording of the message ("not guilty" vs "innocent")
 %% The third problem is the easiest: we have the oracle say specifically that *two* people are going to kill the king, and have five people total. This means one solution has two knaves and one solution has three knaves; the former must be correct.
-%% For the fourth, we choose one person to be "elimination-revealed". This person will only use their job when speaking about others, and their name when being spoken about. They can only be solved by process of elimination.
+%% For the fourth, we choose one male person to be "elimination-revealed". This person will only use their job when speaking about others, and their name when being spoken about. They can only be solved by process of elimination.
+%% The one female person will always be elimination-revealed, as the MUNUS determiner will connect the name to the title.
 %% Everyone else is tagged as either "self-revealed" or "other-revealed", based on whether they are the target of a basic edge or not. If they are the target of a basic edge, they are "other-revealed", and that basic edge connects their role to their name. Otherwise, they are "self-revealed", and their own statement(s) give both their name and their job.
 
 %% So overall:
@@ -348,6 +349,7 @@
 (startup)
 	(exhaust) (build the knights and knaves puzzle) %% Reclaim memory afterward; all the important results are stored on the long-term heap
 
+(female number 5) %% corresponds to #tawannana, the only female suspect
 (tag revelation status from $G)
 	(log) { Tagging revelation status }
 	(exhaust) {
@@ -359,6 +361,7 @@
 	
 	(collect $J)
 		*(have $I count up from 1 to 5)
+		~(female number $I)
 		(entry $I of $G into $Entry)
 		*([$J $] is one of $Entry)
 	(into $NRaw)
@@ -375,6 +378,9 @@
 	(endif)
 	(number $NElim means $Elim)
 	(now) ($Elim is elimination-revealed)
+	(if) (female number $NF) (number $NF means $Female) (then)
+		(now) ($Female is elimination-revealed)
+	(endif)
 	
 	(exhaust) { %% Find everyone who is the target of a basic edge
 		*(have $I count up from 1 to 5)
@@ -466,7 +472,7 @@
 	(now) (#gectin uses name code $Y)
 	(now) (#tuhkanti uses name code $Z)
 	
-	(random from 1 to 4 into $F)
+	(random from 1 to 4 into $F) %% The only female name, so it's drawn from a different pool
 	(now) (#tawannana uses name code $F)
 	
 	(collect $Verb)
@@ -621,6 +627,10 @@
 	(span @akk) (akkadian preposition for $Case) %% preposition goes before all
 	(real name $Suspect in $Case) %% personal name
 	(name $Suspect) %% job title
+($Suspect in $Case name and title)
+	~(logogram $Suspect)
+	(real name $Suspect in $Case)
+	($Case $Suspect)
 
 (source $Suspect $Case)
 	($Suspect is elimination-revealed) %% Only name as target, only job as source

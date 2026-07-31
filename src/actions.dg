@@ -103,7 +103,7 @@
 	%% Second paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōḫḫun.
 	(collect $Obj)
 		*($Obj is #in $Loc)
-		~(current player $Obj)
+		~(hidden $Obj)
 	(into $HereList)
 	(action log {Here: $HereList} )
 	(if) (nonempty $HereList) (then)
@@ -193,6 +193,8 @@
 		(compass rose)
 		(automap)
 	(endif)
+
+(hidden (current player $)) %% Extend this predicate to hide things from room descriptions when necessary
 
 (bonus room description paragraph) %% By default nothing
 
@@ -1020,8 +1022,35 @@
 (name *) arkaḫḫun
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% WASH
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(verb @warpun/@wash means @warpun)
+(@warpun wants cases [#accusative #ablative])
+(translate [$ warpun $ $Acc $ $Abl] into [wash $Acc with $Abl])
+
+(prevent [[wash $Acc with $Abl] $Details])
+	~($Abl is filled with #water)
+	(describe failed action [[wash $Acc with $Abl] $Details])
+	Nu (#nominative $Abl) (#nominative #water) natta ēšta. %% The X was not water.
+
+(perform [[wash $ with $] $])
+	%% Nothing special happens, it just works
+	%% See act2.dg for one place where this is useful
+
+#v-wash
+(verb *)
+(name *) warpun
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% SIGNALS: KISS, DANCE, BOW
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% These are only relevant in act 3
+(interface (signal $>Verb))
+(interface ($<Verb matches $<Action))
+(interface (possible signal verb $>Verb))
+(interface ($<Verb wants $>Case))
 
 (verb @kuwaššun/@kiss means @kuwaššun)
 (@kuwaššun wants cases [#accusative])
@@ -1036,7 +1065,7 @@
 	(endif)
 	antuḫšaš natta ēšta. %% It was not a person.
 
-(perform [[kiss $Obj] $Details]) %% Default perform just fails
+(perform [[kiss $Obj] $Details] without prefix) %% Default perform just fails
 	(describe negative action [[kiss $Obj] $Details])
 	(div @error) { It is unclear why the text feels the need to specify that the protagonist did not do such an unlikely thing. }
 	(tick) (stop)
@@ -1062,7 +1091,7 @@
 	(endif)
 	antuḫšaš natta ēšta. %% It was not a person.
 
-(perform [[dance with $Obj] $Details]) %% Default perform just fails
+(perform [[dance with $Obj] $Details] without prefix) %% Default perform just fails
 	(describe negative action [[dance with $Obj] $Details])
 	(div @error) { It is unclear why the text feels the need to specify that the protagonist did not do such an unlikely thing. }
 	(tick) (stop)
@@ -1088,7 +1117,7 @@
 	(endif)
 	antuḫšaš natta ēšta. %% It was not a person.
 
-(perform [[bow to $Obj] $Details]) %% Default perform just fails
+(perform [[bow to $Obj] $Details] without prefix) %% Default perform just fails
 	(describe negative action [[bow to $Obj] $Details])
 	(div @error) { It is unclear why the text feels the need to specify that the protagonist did not do such an unlikely thing. }
 	(tick) (stop)
@@ -1131,15 +1160,15 @@
 (instead of [[hold $Obj] [$Raw | $]]) %% Reinterpret as TAKE if not held
 	(current player $Player)
 	~($Obj is #heldby $Player)
-	(try [[take $Obj] [$Raw dāḫḫun [] $Obj [] []]]) %% But with ḫarkun as the verb
+	(try [[take $Obj] [$Raw dāḫḫun [] $Obj [] []]])
 
-(perform [[hold $] $]) %% If already held, no special behavior
+(perform [[hold $] $]) %% If already held, no special behavior: "I held it" is fine
 
 (verb @ḫašḫun/@open means @ḫašḫun)
 (@ḫašḫun wants cases [#accusative])
 (translate [$ ḫašḫun $ $Acc | $] into [open $Acc])
 
-(prevent [[open $Obj] $Details]) %% Just fail with default message
+(prevent [[open $Obj] $Details]) %% Just fail with default message; anything in this game that is openable gets opened automatically with no action required
 	(describe failed action [[open $Obj] $Details])
 
 (verb @aggaḫḫun/@die means @aggaḫḫun)

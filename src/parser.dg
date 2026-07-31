@@ -1037,7 +1037,8 @@
 (expand groupings from [] into [])
 (expand groupings from [$HeadIn|$TailIn] into [$HeadOut|$TailOut])
 	(if) (nonempty $HeadIn) (then)
-		*($HeadOut is one of $HeadIn)
+		(reverse $HeadIn into $Tmp) %% Our complex actions are in reverse order, so we reverse them again
+		*($HeadOut is one of $Tmp)
 	(else)
 		($HeadOut = $HeadIn)
 	(endif)
@@ -1094,7 +1095,7 @@
 	(if) ($Obj has modifier $Mod) (then)
 		(if) (adjective $Mod) (then) %% Note: This does NOT currently consider gender! Adjective objects are expected to have the same inherent gender as the noun. See substances.dg for how this is handled.
 			(name $Mod in $Case)
-		(elseif) (object $Mod) (then)
+		(elseif) (object $Mod) ~(logogram $Mod) (then)
 			(#genitive $Mod)
 		(elseif) (word $Mod) (then)
 			$Mod
@@ -1113,6 +1114,11 @@
 	(if) ($Obj has determiner) (determiner comes after $Obj) (then)
 		(dtm2 {(determiner $Obj)})
 	(endif)
+	(if) ($Obj has modifier $Mod) (object $Mod) (logogram $Mod) (then)
+		(#genitive $Mod) %% ŠA akkadogram comes after
+	(endif)
+
+(interface (determiner comes after $<Obj)) %% Not relevant in all acts
 
 ($Obj has determiner) %% Not super efficient, but (determiner $) is going to be called inside a (collect words) anyway for dictionary purposes
 	(collect words) (determiner $Obj) (into $List)

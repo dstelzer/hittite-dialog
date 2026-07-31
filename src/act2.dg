@@ -167,7 +167,7 @@
 (name * in #nominative) šakuniš %% no longer "washhouse" but "spring/well"
 (name * in #genitive) šakuniyaš
 (name * in #dative) šakuniya
-(name * in #accusative) šakuniyan %% TODO - not šakunin?
+(name * in #accusative) šakunin %% TODO - šakuniyan may be the only attested form
 (name * in #ablative) šakuniyaz
 (name * in #bare) šakuni
 
@@ -181,7 +181,7 @@
 	(if) (baker description suppressed) (then)
 		(now) ~(baker description suppressed)
 	(else)
-		(par) TODO The baker washed himself using the pool.
+		(par) Nu=za (#nominative #baker) (name #pool in #ablative) warpta.
 	(endif)
 
 #pool
@@ -254,10 +254,10 @@
 	N=at (#dative #me) ēšta. %% It was on me.
 	(div @error) { TODO: Need translation for the actual "wash" action. Use (link) /wash for now. }
 
-%% We need a "wash" action; this is a placeholder
-(parse metacommand [\/wash])
+(perform [[wash #me with $] $])
+	(#blood is $ #me)
 	(now) (#blood is nowhere)
-	(div @error) {Washed.}
+	(now) (update needed)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Central kitchen
@@ -1019,6 +1019,6 @@
 
 %% These are the new ones in tablet 2
 (verb #v-wear unlocked) (#garment is handled)
-(verb #v-wait unlocked) (#kitchen is visited) %% When an every-turn-moving NPC appears
+(verb #v-wait unlocked) (#kitchen is visited) %% Where an every-turn-moving NPC is first visible
 (verb #v-cut unlocked) (#knife is handled)
-(verb #v-wash unlocked) (#blood is handled)
+(verb #v-wash unlocked) (#washhouse is visited)

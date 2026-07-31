@@ -64,6 +64,37 @@ function insert_dictionary_word(node) {
 	$("#aainput").trigger('input'); // The text changed, so trigger any handlers that watch for the text changing
 }
 
+// Call this from the console after a run to make sure the dictionary is complete
+function check_dictionary_completeness() {
+	var i = 0;
+	$(".word").foreach(node => {
+		let word = node.dataset.word;
+		
+		// Remove stray punctuation from the beginning and end
+		word = word.replace(/[\.\?!,]+$/, "").replace(/^[\.\?!,]+/, "");
+		// Don't worry about casing distinctions
+		word = word.toLowerCase();
+		// And now break it at clitic and determiner boundaries
+		word = word.replace(/=/, " =").replace(/\^/, " ");
+		let pieces = word.match(/\S+/g);
+		
+		let clarify = pieces.length > 1 ? ` (from ${word})` : ""; // If a word is broken into multiple pieces, include the original in the error message
+		
+		for(let piece of pieces) {
+			if(!(piece in dictionary_forms)) {
+				console.error(`Word ${piece}${clarify} is not in the dictionary!`);
+				i++;
+			}
+		}
+	});
+	
+	if(i == 0) {
+		console.log("No errors :)");
+	} else {
+		console.log(`Found ${i} errors`);
+	}
+}
+
 $(document).on('click', '.word', function() { show_dictionary_entry(this); });
 // $("#dictionary").on('click', '.word', function(e) { e.stopPropagation(); }); // Prevent the above when inside the #dictionary
 $(document).on('dblclick', '.word', function() { insert_dictionary_word(this); });

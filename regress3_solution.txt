@@ -1,0 +1,10 @@
+Scribe Walwi: prince Ashapala is innocent
+Scribe Walwi: queen Uruwanda is innocent
+Bodyguard Hahua: Lariya is innocent
+Servant Lariya: When someone kisses her, queen Uruwanda will kill the king
+Servant Lariya: prince Ashapala is guilty
+Prince Ashapala: When someone bows down to him, bodyguard Hahua will kill the king
+Prince Ashapala: queen Uruwanda is innocent
+Queen Uruwanda: bodyguard Hahua is guilty
+
+Solution: mastermind servant Lariya, assassin bodyguard Hahua, signal bow down

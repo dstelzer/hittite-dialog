@@ -114,11 +114,12 @@
 (determiner (tablet $)) KAM
 (determiner comes after *(tablet $))
 
-#tablet1 %% All tablets will be populated and moved to the #box by act3_machinery.dg
+#tablet1
 (name *) DUB 1
 (tablet *)
+(* is #in #box) %% Since this one is already placed in the world, it won't be rewritten by the puzzle machinery - which is good, because this one shouldn't give testimony, it should lay out the design of the puzzle
 
-#tablet2
+#tablet2 %% All tablets will be populated and moved to the #box by act3_machinery.dg
 (name *) DUB 2
 (tablet *)
 
@@ -146,8 +147,19 @@
 (name *) DUB 8
 (tablet *)
 
-(perform [[examine (tablet $Tablet)] $Details]) %% The one place in the game where examining is useful, because the Hittites had no specific word for "read"—only "look at a tablet" and "read a tablet aloud"
+#tablet9
+(name *) DUB 9
+(tablet *)
+
+(perform [[examine (tablet $Tablet)] $]) %% The one place in the game where examining is useful, because the Hittites had no specific word for "read"—only "look at a tablet" and "read a tablet aloud"
 	(par) (testimony for $Tablet)
+
+(testimony for #tablet1)
+	(span @akk) umma (dtm {MUNUS}) ŠU.GI: %% Thus spoke a wise-woman:
+	mān=wa (span @akk) ina UD.20 (dtm2 {KAM}) Armaš aki, %% When the moon dies (i.e. is eclipsed) on the 20th day (of the month),
+	nu=wa=kan kupiyatallieš 2-eš ḫaššun kunanzi. %% Two conspirators will kill the king.
+	Nu ḫaššuš antuḫšuš 5 kupiyatiya punušta. %% The king questioned five people about the conspiracy.
+	Nu uttar parkuiyaš šakkuwašar ešzi. %% The word of an innocent person is true.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The Climax
@@ -215,6 +227,28 @@
 	(or)
 	(stopping)
 
+(real name * in $Case)
+	(* uses name code $Code)
+	(dtm {f})
+	(female name $Code in $Case)
+
+(real name (suspect $S) in $Case)
+	($S uses name code $Code)
+	(dtm {m})
+	(male name $Code in $Case)
+
+#realname %% In case players try to address the people by their personal names
+(* is #in #temple)
+(hidden *)
+(dict * in $Case) %% Accept all the names
+	(male name $ in $Case)
+	(female name $ in $Case)
+(refuse [$Action $])
+	(* is one of $Action)
+	(div @error) {
+		The use of a personal name in this line is unexpected, and it is not clear which of the officials it refers to. Fortunately, the following lines refer to the officials by their titles instead.
+	}
+
 #king
 (animate *)
 (name * in #nominative) ḫaššuš
@@ -226,19 +260,106 @@
 
 (* is #in #temple)
 
-(real name * in $Case)
-	(* uses name code $Code)
-	(dtm {f})
-	(female name $Code in $Case)
+(select avenger $Avenger who is not $Victim)
+	(if) ($Victim = #mecedi) (then) %% The bodyguard can't jump in, so someone else has to
+		($Avenger = #tuhkanti)
+	(elseif) ($Victim = #tuhkanti) (then) %% Vice versa
+		($Avenger = #mecedi)
+	(elseif) (random from 1 to 2 into 1) (then)
+		($Avenger = #tuhkanti)
+	(else)
+		($Avenger = #mecedi)
+	(endif)
 
-(real name (suspect $S) in $Case)
-	($S uses name code $Code)
-	(dtm {1})
-	(male name $Code in $Case)
+(perform [[slay $Victim | $] $]) %% It's not that easy
+	(current room #temple)
+	(select avenger $Avenger who is not $Victim)
+	Nu=mu=kan (#nominative $Avenger) kuenun. %% The avenger slew me.
+	(death ensues)
+
+(perform [$Action $Details] without prefix) %% We'll be putting the prefix back in, but this is needed in order to take precedence over the implementation in actions.dg
+	(fake signal $FSig)
+	($FSig matches $Action)
+	
+	(describe action [$Action $Details])
+	(wrong signal)
+
+(perform [$Action $Details] without prefix)
+	(real signal $RSig)
+	($RSig matches $Action)
+	
+	(describe action [$Action $Details])
+	
+	(real assassin $Target)
+	(if) ($Target is one of $Action) (then)
+		($Target kills the king)
+	(else)
+		(wrong signal)
+	(endif)
+
+(wrong signal)
+	Nu=mu (#nominative #king) punušta. %% The king questioned me.
+	Nu=mu=kan (#nominative #mecedi) kuenun. %% The bodyguard slew me.
+	Nu aggaḫḫun. %% I died.
+	(div @tutorial) {
+		Unfortunately, it seems that was not the right solution. You are welcome to (link) \/undo and try again, but brute-forcing this sort of logic puzzle is often frustrating instead of fun—so it may be more enjoyable to (link) \/restart and try again with a new puzzle. (par)
+		Which will it be? >
+		*(repeat forever)
+		(get input $Words)
+		(if) ($Words = [\/undo]) (or) ($Words = [undo]) (then)
+			Very well.
+		(elseif) ($Words = [\/restart]) (or) ($Words = [restart]) (then)
+			Very well.
+			(restart)
+		(else)
+			Please choose (link) \/undo or (link) \/restart .
+			(fail)
+		(endif)
+	}
+	%% If we got here, we chose to "undo" (actually continue)
+	(div @error) {
+		The text must be corrupt at this point, as the hero must survive to continue the story. Ignoring the last few lines, we continue on...
+	}
+	(stop)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The End
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+($Assassin kills the king)
+	%% Here we go!
+	Nu=kan (#nominative $Assassin) (#accusative #king) kuenun. %% X slew the king.
+	(select avenger $Avenger who is not $Assassin)
+	N=an=kan (#nominative $Avenger) kuenun. %% Y slew him/her.
+	
+	(par) (hr)
+	Nu zuppari dāḫḫun. %% I took a torch.
+	Nu (#accusative #temple) lukkun. %% I ignited the temple.
+	Nu (#ablative #temple) pāun. %% I left the temple.
+	Nu ḫappiraz pāun. %% I left the city.
+	Nu šiun appa arnunun. %% I brought the god back.
+	
+	(par) (hr)
+	(div @colophon) (colophon)
+	(div @error) { Cuneiform tablets often end with a short "colophon", providing the title, tablet number, and the name of the scribe who wrote it. In other words, this is... }
+	
+	(game over {The end})
+
+(colophon)
+	DUB 3 (dtm2 {KAM}) TIL (line)
+	(span @akk) ša "Ḫattušumna Laḫḫa" (line)
+	ŠU Dānīel Ištelšar DUB.SAR (line)
+	(span @akk) U₃ Dānīel Gaškel DUB.DU₃.DU₃ (line) %% unattested logogram for "tablet maker"
+	(span @akk) pani Tim Lēnard UM.MI.A (line)
+	(span @akk) išṭuru
+
+(style class @colophon)
+	margin-left: 2em;
+	margin-right: 2em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	data-language: ht;
+	font-weight: bold;
 
 (verb #v-look unlocked) %% This finally does something useful!
 (verb #v-go unlocked)
