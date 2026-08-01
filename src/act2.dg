@@ -10,6 +10,7 @@
 
 #me
 (current player *)
+(animate *)
 (name * in #nominative/#bare) ūk
 (name * in #genitive) ammel
 (name * in #dative/#accusative/#ablative) ammuk

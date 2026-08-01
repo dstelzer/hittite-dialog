@@ -1,8 +1,5 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
-SLAY SELF has wrong error
-/abuut displayed in input
 "unimportant" objects that cannot be interacted with
-recompile font with 0 (blank)
 map does not show up immediately on web tablet 2?

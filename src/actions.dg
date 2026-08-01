@@ -810,7 +810,7 @@
 
 (@kuenun wants cases [#adverb #accusative #ablative]) %% needs =kkan
 
-(translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl])
+(translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl]) %% Abl will be [] if it hasn't been taught yet
 
 %% Kuenun and taruḫḫun are mostly synonyms, but take different particles
 (refuse [[slay $ with $] [$ @kuenun $Advs | $]])
@@ -835,6 +835,9 @@
 	~($Obj is #heldby $Player)
 	(describe failed action [[slay $Target with $Obj] $Details])
 	Nu (#accusative $Obj) natta ḫarkun. %% I did not hold the $Obj.
+
+(perform [[slay (current player $) with $] $])
+	(death ensues) %% Why would you do this though?
 
 (perform [[slay $Obj with $] $]) %% Remove a person from the game; prevent this if someone should be un-slayable
 	(now) ($Obj is nowhere)

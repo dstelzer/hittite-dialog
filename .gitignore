@@ -6,4 +6,5 @@ web/
 *.log
 *.out
 dictionary.js
+dictionary_simple.js
 .~*
