@@ -179,6 +179,8 @@
 (name * in #dative) karimni
 (name * in #ablative) karimnaz
 
+(from * go #north to #sanctum)
+
 (prevent [[go *] $Details]) %% Force the player to explore the back room first
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details])

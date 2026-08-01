@@ -243,6 +243,18 @@
 	(collect words) (short name $Obj) (into $Name)
 	(if) ($Name = [$Word]) (then)
 		(length of single word $Word is $Intermediate)
+	(else)
+		(accumulate $Each)
+			*($Word is one of $Name)
+			(length of single word $Word is $Length)
+			($Length plus 1 into $Each) %% Space after
+		(into $Tmp)
+		(accumulate 2) %% Remove two spaces per dot (before and after), since we assume they're in compound logograms
+			*($Word is one of $Name)
+			($Word = @.)
+		(into $Dots)
+		($Tmp minus $Dots into $Tmp2)
+		($Tmp2 minus 1 into $Intermediate) %% We overcounted spaces by one
 	(endif)
 	(if) (direction numbers enabled) (then)
 		($Intermediate plus 2 into $Num) %% 1 for digit 1 for space
@@ -344,33 +356,33 @@
 	(div @compass) {
 		(div @compassline) { %% Line 1: north and up
 			(if) (empty $Up) (then) %% Give more space to north
-				(space 9)
-				(print name of $North number 2 with alignment @u in 15 characters)
-				(space 9)
-			(else)
 				(space 10)
+				(print name of $North number 2 with alignment @u in 21 characters)
+				(space 10)
+			(else)
+				(space 13)
 				(space 1)
-				(print name of $North number 2 with alignment @u in 10 characters)
-				(space 2)
-				(print name of $Up number 5 with alignment @r in 10 characters)
+				(print name of $North number 2 with alignment @u in 13 characters)
+				(space 1)
+				(print name of $Up number 5 with alignment @r in 13 characters)
 			(endif)
 		}
 		(div @compassline) { %% Line 2: west, rose, east
-			(print name of $West number 4 with alignment @r in 15 characters)
+			(print name of $West number 4 with alignment @r in 19 characters)
 			(space 1) (rose star) (space 1)
-			(print name of $East number 3 with alignment @l in 15 characters)
+			(print name of $East number 3 with alignment @l in 19 characters)
 		}
 		(div @compassline) { %% Line 3: down, south
 			(if) (empty $Down) (then) %% As above with up
-				(space 9)
-				(print name of $South number 1 with alignment @d in 15 characters)
-				(space 9)
-			(else)
-				(print name of $Down number 6 with alignment @l in 10 characters)
-				(space 2)
-				(print name of $South number 1 with alignment @d in 10 characters)
-				(space 1)
 				(space 10)
+				(print name of $South number 1 with alignment @d in 21 characters)
+				(space 10)
+			(else)
+				(print name of $Down number 6 with alignment @l in 13 characters)
+				(space 1)
+				(print name of $South number 1 with alignment @d in 13 characters)
+				(space 1)
+				(space 13)
 			(endif)
 		}
 	}
@@ -378,7 +390,7 @@
 (rose star) (unlock wait on the compass rose) (link [0]) ✧ %% See under WAIT
 (rose star) ✧ %% U+2727 WHITE FOUR POINTED STAR
 (style class @compass)
-	width: 33ch; %% 15 3 15, or 9 15 9, or 10 1 10 2 10
+	width: 41ch; %% 19 3 19, or 10 21 10, or 13 1 13 1 13
 	float: right;
 (style class @compassline)
 	font-family: monospace, monospace;

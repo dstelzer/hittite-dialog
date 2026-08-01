@@ -105,8 +105,7 @@
 (* blocks passage) (#bolt is #in *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #building)
-(short name *) (#genitive #building)
-(medium short name *) (#accusative *)
+(short name *) (#accusative *)
 (name * in #nominative) āškaš
 (name * in #genitive) āškaš
 (name * in #dative) āški
@@ -202,8 +201,7 @@
 (* blocks passage) (#bolt is #in *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #washhouse)
-(short name *) (#genitive #washhouse)
-(medium short name *) (#accusative *)
+(short name *) (#accusative *)
 (name * in #nominative) āškaš
 (name * in #genitive) āškaš
 (name * in #dative) āški
@@ -577,8 +575,6 @@
 (dogs allowed in *)
 (contents *) ZID₂.DA
 (dict * in $) ZID2 ZÍD
-(short name *) ZID₂
-(medium short name *) (contents *)
 
 (from * go #east to #dog-center)
 (from * go #south to #dog-sw)
@@ -600,14 +596,26 @@
 (name * in #accusative) ištarniyan antakan
 (name * in #ablative) ištarniyaz antakaz
 (name * in #bare) ištarniya antaka
-(medium short name *) ištarniya
-(short name *) išt--iya %% Name slightly too long for debugger :( TODO
-(dict * in #dative) išt--iya
+(short name *) ištarniya
 
 (from * go #west to #dog-w)
 (from * go #south to #dogmaze)
 (from * go #east to #dog-upper)
 (from * go #up to #dog-roof)
+
+%% Scenery, and bringing back a noun from act 1 as a cameo
+#ladder
+(neuter *)
+(name * in #nominative) ilan
+(name * in #genitive) ilanaš
+(name * in #dative) ilani
+(name * in #accusative) ilan
+(name * in #ablative) ilanaz
+(name * in #bare) ila
+(* is #in #dog-center)
+
+(instead of [[cross *] $Details])
+	(try [[go #dog-roof] $Details])
 
 #dog-upper
 (room *)
@@ -618,9 +626,7 @@
 (name * in #accusative) šarāzziyan antakan
 (name * in #ablative) šarāzziyaz antakaz
 (name * in #bare) šarāzziya antaka
-(medium short name *) šarāzziya
-(short name *) šar--iya %% Name slightly too long for debugger :( TODO
-(dict * in #dative) šar--iya
+(short name *) šarāzziya
 
 (from * go #west to #dog-center)
 (from * go #north to #dog-roof)
