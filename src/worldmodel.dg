@@ -27,7 +27,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Style class declarations
 
-%% TODO
+%% Moved to interface.dg and various other files
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Interface declarations for predicates typically defined in story code
@@ -59,7 +59,7 @@
 
 #in
 (relation *)
-(preverb *) anda %% (preverb $) is currently used both for preverb ("X is Rel Y") and preposition ("you put the X Rel Y"). Do those ever disagree? TODO
+(preverb *) anda %% (preverb $) is currently used both for preverb ("X is Rel Y") and preposition ("you put the X Rel Y"). According to Tim, these rarely disagree, so this should be fine.
 
 #on
 (relation *)
@@ -192,7 +192,6 @@
 (neuter $)		(fail)
 (opaque $)		(fail)
 (out of reach $)	(fail)
-(wearable $)		(fail)
 
 ($ provides light)	(fail)
 
@@ -515,15 +514,6 @@
 (narrate entering $)
 	(now) (update needed)
 
-(interface (prevent entering $<Obj))
-
-(prevent entering $) (fail) %% TODO
-
-(interface (narrate failing to leave $<Obj $<Dir))
-
-(narrate failing to leave $ $)
-	There doesn't appear to be an exit in that direction. TODO
-
 %% Extend the following predicate to simulate objects occupying multiple rooms:
 
 ($Room attracts $Obj)
@@ -648,8 +638,9 @@
 
 (prevent $)	(fail)
 
-(perform $Action) %% TODO this looks weird after the previous message
+(perform $Action)
 	(describe failed action $Action)
+	(div @error) { This apparent contradiction is difficult to resolve. Did the action happen or not? }
 	(tick) (stop)
 
 (after $)	(fail)
@@ -677,7 +668,7 @@
 	(current room $Room)
 	*(on every tick in $Room)
 
-(on every tick) %% TODO
+(on every tick) %% We don't have a "narrator's it" in this game, only a single "it" set by the player's actions
 %%	(if) (narrator's it is protected) (then)
 %%		(now) ~(narrator's it is protected)
 %%	(elseif) (player's it refers to $) (then)
@@ -976,24 +967,7 @@
 
 %% The following predicates are useful when writing before-rules:
 
-%% TODO replace the actions!
-
-(interface (ensure $<Obj is held))
-
-(ensure $Obj is held)
-	(current player $Player)
-	(if) (wearable $Obj) ($Obj is #wornby $Player) (then)
-		(first try [remove $Obj])
-	(elseif) (item $Obj) ~($Obj is #heldby $Player) (then)
-		(first try [take $Obj])
-	(endif)
-
-(recursively leave descendants of $Obj)
-	(current player $Actor)
-	($Actor has parent $FirstObj)
-	~($FirstObj = $Obj)
-	(first try [leave $FirstObj])
-	(recursively leave descendants of $Obj)
+%% Most of this has been ripped out and moved to actions.dg
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% List manipulation

@@ -5,10 +5,9 @@ SLAY SELF has wrong error
 /abuut displayed in input
 allow multi-word short names in the compass?
 "unimportant" objects that cannot be interacted with
-add 0 (blank) to font
+recompile font with 0 (blank)
 make the debugger compass rose wider so everything fits properly
 add a ladder for scenery in act 2
 multi-sign logograms in short names
 map does not show up immediately on web tablet 2?
 allow different definitions/paradigms in tablet 1 and elsewhere
-add act 3 ending

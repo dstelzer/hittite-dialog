@@ -16,6 +16,10 @@
 
 (* is #in #sanctum)
 
+(startup) %% Because the startup process takes a long time for this game, we should show the player that their computer hasn't frozen
+	(inline status bar @p-meta) {
+		Generating puzzle...please wait!
+	}
 (intro) %% No intro
 	(now) (update needed)
 	(now) (map update needed)
@@ -24,7 +28,7 @@
 (room *)
 (neuter *)
 (* uses preverb #in)
-(name * in #nominative/#accusative/#bare) tunnakkiš
+(name * in #nominative/#accusative/#bare) tunnakkeššar
 (name * in #genitive) tunnakkešnaš
 (name * in #dative) tunnakkešni
 (name * in #ablative) tunnakkišnaz

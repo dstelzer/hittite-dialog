@@ -252,7 +252,6 @@
 (prevent [[drop/put * | $] $Details])
 	(describe failed action [[drop *] $Details])
 	N=at (#dative #me) ēšta. %% It was on me.
-	(div @error) { TODO: Need translation for the actual "wash" action. Use (link) /wash for now. }
 
 (perform [[wash #me with $] $])
 	(#blood is $ #me)
@@ -855,7 +854,7 @@
 			(now) (reed burning timer 2)
 		(endif)
 	(elseif) (reed burning timer 1) (or) (reed burning timer 0) (then) %% Timer has run out
-		TODO the reed burned out
+		Nu (#nominative #reed) arḫa warati. %% The reed burned away.
 		(reset the reed)
 		(now) (update needed)
 	(else)

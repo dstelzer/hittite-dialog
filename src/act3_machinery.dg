@@ -320,7 +320,11 @@
 	(into $RawChoices)
 	(remove from $RawChoices matching [$I | $Existing] into $Choices)
 	(randomly select $J from $Choices)
-	($Edge = [$J 0]) %% Only adding basic edges at this point? TODO
+	(if) ($I and $J agree) (then)
+		($Edge = [$J 0]) %% Extra edges are basic if they agree and type-2 if they disagree, for a bit of variety
+	(else)
+		($Edge = [$J 2])
+	(endif)
 	(prepend $Edge to entry $I of $In into $Tmp)
 	($K minus 1 into $Km1)
 	(add $Km1 random edges to $Tmp into $Out)
