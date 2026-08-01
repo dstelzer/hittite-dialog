@@ -1,5 +1,5 @@
 FILES = src/actions.dg src/interface.dg src/automap.dg src/draclib.dg src/substances.dg src/parser.dg src/worldmodel.dg
-OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources
+OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources -vv -H 2000 -A 750
 # ^ for determiners, ⸗ for proper clitics, = for ASCII clitics; the rest are default
 OPTIONS_DBG = --word-seps='^=.,;"()*'
 # Debugger can't handle non-ASCII word separators yet

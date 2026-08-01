@@ -40,6 +40,7 @@
 	(span @metaverb) (link) /restore ,
 	(span @metaverb) (link) /again ,
 	(span @metaverb) (link) /about
+	, (span @metaverb) (link) /memory %% Comment this out when finalized
 
 (style class @p-meta)
 	data-language: en;

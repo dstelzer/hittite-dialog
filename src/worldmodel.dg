@@ -1086,7 +1086,7 @@
 	(div @realerror) {
 		\( Technical trouble:
 		(report fatal error $Code)
-		Attempting to recover with UNDO. \)
+		Attempting to recover with UNDO. (display memory statistics) \)
 	}
 	(if) (undo) (or) (then)
 		(div @realerror) { Undo failed! }

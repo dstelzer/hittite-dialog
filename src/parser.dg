@@ -681,6 +681,9 @@
 ([@im/@./@- | $Rest] are direction list $NewRest)
 	($Rest are direction list $NewRest)
 
+(parse metacommand [\/memory])
+	(div @meta) (display memory statistics)
+
 (parse metacommand [\/quit])
 	~(interpreter supports quit)
 	(div @meta) { To quit the game, close the browser tab or window. }

@@ -34,6 +34,7 @@
 (name * in #dative) tunnakkešni
 (name * in #ablative) tunnakkišnaz
 
+(origin *)
 (from * go #west to #backroom)
 (from * go #south to #temple)
 
