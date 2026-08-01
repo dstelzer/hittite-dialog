@@ -1099,7 +1099,7 @@
 #v-dance
 (verb *)
 (name *) tarkun
-(signal *) tarkuzi
+(signal *) tarkuzzi
 (* matches [dance with $])
 (* wants #dative)
 (possible signal verb *)
@@ -1185,7 +1185,26 @@
 	}
 	(stop)
 
-%% TODO "wash" - NEEDED FOR TABLET 2
+(verb @punuššun/@question means @punuššun)
+(@punuššun wants cases [#accusative #dative]) %% Dative is irrelevant but allowed
+(@punuššun wants cases [#accusative])
+(translate [$ punuššun $ $Acc | $] into [question $Acc])
+
+(prevent [[question ~(animate $Obj)] $Details])
+	(describe negative action [[question $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(if) (neuter $Obj) (then)
+		N=at
+	(else)
+		N=aš
+	(endif)
+	antuḫšaš natta ēšta. %% It was not a person.
+
+%% No default perform rule - the default one in worldmodel.dg will produce a contradiction and a message confused about that contradiction, which seems like a reasonable behavior for this weird action
+
+#v-question
+(verb *)
+(name *) punuššun
+%% TODO - should this appear at all? It's never helpful
 
 (verb @paršun/@flee means @paršun) %% Synonym for "go"
 (@paršun wants cases [#dative])

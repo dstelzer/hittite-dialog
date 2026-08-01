@@ -125,6 +125,10 @@ def parse_entry(s):
 	elif len(pieces) == 4:
 		lemma, forms, defn, prdgm = pieces
 		prdgm = parse_paradigm(prdgm, lemma)
+	elif len(pieces) == 5:
+		lemma, forms, defn, prd1, prd2 = pieces
+		if SIMPLIFIED_PARADIGMS: prdgm = parse_paradigm(prd2, lemma)
+		else: prdgm = parse_paradigm(prd1, lemma)
 	else:
 		raise ValueError(f'Dictionary lines should have 0, 3, or 4 pieces, but this one has {len(pieces)}: {s}')
 	

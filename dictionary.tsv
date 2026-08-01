@@ -23,12 +23,12 @@ nakkiš	nakkiš nakki	Heavy	"Common gender" nakkiš "Neuter gender" nakki
 šalliš	šalliš šalli	Large	"Common gender" šalliš "Neuter gender" šalli
 katta	katta	Down (as in katta tēḫḫun, "I put (something) down")
 tēḫḫun	tēḫḫun	I put (something: accusative; somewhere: dative)
-kuenun	kuenun	I slew (someone: accusative; with something: ablative; always comes with =kan)	VERB kuenun kuenta
+kuenun	kuenun kuenta	I slew (someone: accusative; with something: ablative; always comes with =kan)	VERB kuenun kuenta
 kištanunun	kištanunun	I extinguished (something: accusative)
 lukkun	lukkun	I kindled, ignited, set on fire (something: accusative)
 ḫuškanun	ḫuškanun	I waited
 arkaḫḫun	arkaḫḫun	I cut, split, divided into pieces (something: accusative)
-aggaḫḫun	aggaḫḫun	I died
+aggaḫḫun	aggaḫḫun	I died; this particular verb form has never been found in actual Hittite, for perhaps obvious reasons.
 paršun	paršun	I fled (from a place: ablative; to a place: dative)
 
 # Basic world model
@@ -43,7 +43,7 @@ tapušza	tapušza	Next to
 ammuk	ūk ammuk ammel ammēdaz	I, me	NOUN ūk ammel ammuk ammuk ammēdaz
 wappu	wappuš wappuwaš wappui wappun wappuwaz wappu	Riverbank	NOUN wappuš wappuwaš wappui wappun wappuwaz
 ḫapa	ḫapaš ḫapi ḫapan ḫapaz ḫapa	River	NOUN ḫapaš ḫapaš ḫapi ḫapan ḫapaz
-wātar	wātar witenaš witeni witenaz	Water	NOUN wātar witenaš witeni wātar witenaz
+wātar	wātar witenaš witeni witenaz	Water; the similarity to the English word is not a coincidence, and was the first clue in deciphering the Hittite language	NOUN wātar witenaš witeni wātar witenaz
 auri	auriš auriyaš auriya aurin auriyaz auri	Watchtower	NOUN auriš auriyaš auriya aurin auriyaz
 āška	āškaš āški āškan āškaz āška	Door, gate	NOUN āškaš āškaš āški āškan āškaz
 ḫattalwan	ḫattalwan ḫattalwanza ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz	Locked, bolted, held shut by something	NOUN ḫattalwanza ḫattalwantaš ḫattalwanti ḫattalwantan ḫattalwantaz
@@ -55,13 +55,14 @@ parku	parku	High
 luttāi	luttāi luttiyaš luttiya luttiyaz	Window	NOUN luttāi luttiyaš luttiya luttāi luttiyaz
 ḫilammar	ḫilammar ḫilamnaš ḫilamni ḫilamnaz	Gatehouse (the building surrounding an important gate, where guards could be stationed to defend it)	NOUN ḫilammar ḫilamnaš ḫilamni ḫilammar ḫilamnaz
 E₂	É E₂ E2	Building, structure, room	DTM
-warān	warān waranza warantaš waranti warantan warantaz	Burning, aflame	NOUN warān/waranza warantaš waranti warān/warantan warantaz
+warān	warān waranza warantaš waranti warantan warantaz	Burning, aflame	NOUN warān/waranza warantaš waranti warān/warantan warantaz	NOUN warān warantaš waranti warān warantaz
+# The above gets two paradigms to avoid mentioning gender distinctions on tablet 1
 GIŠ	GIŠ	Wood	DTM
 ḫattalu	ḫattalu ḫattaluwaš ḫattaluwi ḫattaluwaz	Door bar; key locks were not yet a common technology, so the best way to secure a door was to hold it shut with a big piece of wood.	NOUN ḫattalu ḫattaluwaš ḫattaluwi ḫattalu ḫattaluwaz
 ḫašḫun	ḫašḫun	I opened (something: accusative)
 arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer, front room	NOUN arkiwiš arkiwaš arkiwi arkiwin arkiwaz
 ḫašša	ḫaššaš ḫašši ḫaššan ḫaššaz ḫašša	Hearth, fireplace	NOUN ḫaššaš ḫaššaš ḫašši ḫaššan ḫaššaz
-paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire	NOUN paḫḫur paḫḫuenaš paḫḫueni paḫḫur paḫḫuenaz
+paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire; related to the English word "pyre"	NOUN paḫḫur paḫḫuenaš paḫḫueni paḫḫur paḫḫuenaz
 än	än ān	Hot; this word is spelled unusually in cuneiform, so it may have actually been pronounced "a'an" or "ayyan" instead of "ān".
 DUG	DUG	Vessel	DTM
 aganni	aganniš aganniyaš aganniya agannin aganniyaz aganni	Cup	NOUN aganniš aganniyaš aganniya agannin aganniyaz
@@ -71,11 +72,11 @@ antaka	antakaš antaki antakan antakaz antaka	Room, storeroom	NOUN antakaš anta
 palḫi	palḫiš palḫaš palḫi palḫin palḫaz palḫi	Pithos (large clay jar)	NOUN palḫiš palḫaš palḫi palḫin palḫaz
 šuḫḫa	šuḫḫan šuḫḫaš šuḫḫi šuḫḫaz šuḫḫa	Roof	NOUN šuḫḫan šuḫḫaš šuḫḫi šuḫḫan šuḫḫaz
 karimmi	karimmi karimnaš karimni karimnaz	Temple	NOUN karimmi karimnaš karimni karimmi karimnaz
-šaknuwanza	šaknuwanza	Unclean, not ritually pure: in Hittite religion, interacting with the gods required someone to be free of impurity, both physical and spiritual. Many rituals required washing or bathing before doing something spiritually significant.
-<i>U₃</i>	Ù U₃ U3	A shorthand sign for "and", equivalent to "&" in English
+šaknuwanza	šaknuwanza	Unclean, not ritually pure (In Hittite religion, interacting with the gods required someone to be free of impurity, both physical and spiritual. Many rituals required washing or bathing before doing something spiritually significant.)
+<i>U₃</i>	Ù U₃ U3	A cuneiform sign that stands for "and", like the "&" symbol in English
 IM	IM	Wind, cardinal direction	DTM
 antuḫša	antuḫšaš antuḫši antuḫšan antuḫšaz antuḫša	Person, human being	NOUN antuḫšaš antuḫšaš antuḫši antuḫšan antuḫšaz
-[Number]	1 2 3 4 5 6	Like in English, Hittite scribes usually wrote simple symbols for the numbers instead of the full words.
+[Number]	1 2 3 4 5 6 7 8 9 20 2-uš	Like in English, Hittite scribes usually wrote simple symbols for the numbers instead of the full words.
 0	0	There was no actual symbol for zero in cuneiform; they just left an empty space on the tablet when necessary.
 parā	parā	Onward, forth, forward
 laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN laḫḫaš laḫḫaš laḫḫi laḫḫan laḫḫaz
@@ -85,10 +86,10 @@ laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN l
 <i>IŠTU</i>	IŠTU	From (marks the dative case for logograms)	AKK
 ḫappira	ḫappiraš ḫappiri ḫappiran ḫappiraz	City	NOUN ḫappiraš ḫappiraš ḫappiri ḫappiran ḫappiraz
 kurur	kurur	hostile
-gurta	gurtaš gurti gurtan gurtaz gurta	Citadel, acropolis: the better-defended upper part of a city with all the temples and palaces	NOUN gurtaš gurtaš gurti gurtan gurtaz
+gurta	gurtaš gurti gurtan gurtaz gurta	Citadel, acropolis (the better-defended upper part of a city with all the temples and palaces)	NOUN gurtaš gurtaš gurti gurtan gurtaz
 ḫuwant	ḫuwanza ḫuwantaš ḫuwanti ḫuwantan ḫuwantaz ḫuwant	Wind, cardinal direction	NOUN ḫuwanza ḫuwantaš ḫuwanti ḫuwantan ḫuwantaz
 šalli	šalliš šallayaš šalli šallin šallayaz	Large, great; as a compass direction, south (the south wind was "the great wind")	NOUN šalliš šallayaš šalli šallin šallayaz
-taršmena	taršmenaš taršmeni taršmenan taršmenaz taršmena	North	NOUN taršmenaš taršmenaš taršmeni taršmenan taršmenaz
+taršmena	taršmenaš taršmeni taršmenan taršmenaz taršmena	North; this word is more obscure than the other compass directions, so if it has any meaning beyond "north", we don't know it. Even its pronunciation is uncertain.	NOUN taršmenaš taršmenaš taršmeni taršmenan taršmenaz
 ekuna	ekunaš ekuni ekunan ekunaz ekuna	Cold; as a compass direction, east (the east wind was "the cold wind")	NOUN ekunaš ekunaš ekuni ekunan ekunaz
 appezzi	appezziš appezziyaš appezzi appezzin appezziyaz	Rear, back (adjective); as a compass direction, west (the west wind was "the back wind")	NOUN appezziš appezziyaš appezzi appezzin appezziyaz
 šāra	šāra	Up, above
@@ -96,44 +97,105 @@ appezzi	appezziš appezziyaš appezzi appezzin appezziyaz	Rear, back (adjective)
 # Tablet 2
 uwanun	uwanun uet	I came (to a place: dative)	VERB uwanun uet
 ḫila	ḫila ḫilaš ḫili ḫilan ḫilaz	Courtyard, enclosed outdoor space	NOUN ḫilaš ḫilaš ḫili ḫilan ḫilaz
-karimmi	karimmi karimnaš karimni karimnaz	Temple	NOUN karimmi karimnaš karimni karimmi karimnaz
 pēr	pēr parnaš parni parnaz per	House, building	NOUN pēr parnaš parni pēr parnaz
 TUG₂	TUG₂ TUG2 TÚG	Garment	LOGO
-šakuni	šakuni šakuniš šakuniyaš šakuniya šakuniyan šakunin šakuniyaz	Well, spring (of water) TODO šakuniyan or šakunin?	NOUN šakuniš šakuniyaš šakuniya šakuniyan šakuniyaz
+šakuni	šakuni šakuniš šakuniyaš šakuniya šakunin šakunin šakuniyaz	Well, spring (of water)	NOUN šakuniš šakuniyaš šakuniya šakunin šakuniyaz
 lūli	lūli lūliš lūliyaš lūliya lūlin lūliyaz	Pool, lake, body of water	NOUN lūliš lūliyaš lūliya lūlin lūliyaz
 lukkan	lukkan lukkandaš lukkandi lukkandaz	Burnt	NOUN lukkan lukkandaš lukkandi lukkan lukkandaz
-LU₂	LU₂ LU2 LÚ	Man	DTM
+LU₂	LU₂ LU2 LÚ LU₂.MEŠ LU2.MEŠ LÚ.MEŠ	Man (profession, not individual name; LU₂.MEŠ is sometimes used as a plural)	DTM
 NINDA.DU₃.DU₃	NINDA.DU₃.DU₃ NINDA.DÙ.DÙ	Baker	LOGO
-ešḫar	ešḫar ešḫanaš ešḫani ešḫanaz	Blood, literal or metaphorical (blood is "on" someone who has committed murder)	NOUN ešḫar ešḫanaš ešḫani ešḫar ešḫanaz
-MUḪALDIM	MUḪALDIM	Cook (specifically of meat rather than baked goods, but E₂ <sup>LU₂</sup>MUḪALDIM "house of the cook" means "kitchen for all kinds of food preparation")	LOGO
+ešḫar	ešḫar ešḫanaš ešḫani ešḫanaz	Blood; guilt (someone who has committed murder has blood "on" them, like in the English expression "blood on your hands")	NOUN ešḫar ešḫanaš ešḫani ešḫar ešḫanaz
+MUḪALDIM	MUḪALDIM	Cook (specifically of meat rather than baked goods, but E₂ <sup>LU₂</sup>MUḪALDIM "house of the cook" means "kitchen for all kinds of food preparation", not just meat)	LOGO
 išliman	išliman išlimanaš išlimani išlimanaz	Oven	NOUN išliman išlimanaš išlimani išliman išlimanaz
-išnura	išnura išnuraš išnuri išnuran išnuraz	Kneading trough, where bread dough was kneaded and then left to rise over the course of the day	NOUN išnuraš išnuraš išnuri išnuran išnuraz
-GA.KIN.AG	GA.KIN.AG	Cheese; for the Hittites, this was a count noun ("one cheese" rather than "one bowl of cheese"), and they were solid enough that they could be used in a common (dodgeball-like?) festival game where "the youths fight with the cheeses".	LOGO
+išnura	išnura išnuraš išnuri išnuran išnuraz	Kneading trough (where bread dough was kneaded and then left to rise over the course of the day)	NOUN išnuraš išnuraš išnuri išnuran išnuraz
+GA.KIN.AG	GA.KIN.AG	Cheese; for the Hittites, this was a count noun ("one cheese" rather than "one bowl of cheese"), and they were solid enough that they could be used in a popular (dodgeball-like?) sport at festivals. The details of the game are unfortunately unknown, beyond the Hittite phrase "the youths fight with the cheeses".	LOGO
 šeša	šeša šešaš šeši šešan šešaz	Fruit	NOUN šešaš šešaš šeši šešan šešaz
 arkan	arkan arkanza arkandaš arkandi arkandan arkandaz	Cut/chopped into pieces (adjective)	NOUN arkanza arkandaš arkandi arkandan arkandaz
 išna	išna išnaš išni išnan išnaz	Dough (for making bread)	NOUN išnaš išnaš išni išnan išnaz
 NINDA	NINDA	Usually translated "bread", but also encompassed cakes, porridges, and any other type of flour-based food	DTM
-iyatti	iyatti iyattiš iyattiyaš iyattiya iyattin iyattiyaz	"Iyatti", a special type of bread "studded" with pieces of fruit and cheese	NOUN iyattiš iyattiyaš iyattiya iyattin iyattiyaz
+iyatti	iyatti iyattiš iyattiyaš iyattiya iyattin iyattiyaz	"Iyatti", a special type of bread "studded" with slivers of fruit and cheese	NOUN iyattiš iyattiyaš iyattiya iyattin iyattiyaz
 tiyan	tiyan tiyanza tiyantaš tiyanti tiyantan tiyantaz	Studded (with something: ablative); this word is mainly used for jewelry with gems set into it	NOUN tiyanza tiyantaš tiyanti tiyantan tiyantaz
-UR.GI₇	UR.GI₇ UR.GI7	Dog; the Hittites believed that dogs carried impurity from one place to another, so they had to be kept away from ritually-significant places like the temple bakeries at all times. If one got too close, everything they touched needed to be cleansed or destroyed.	LOGO
+UR.GI₇	UR.GI₇ UR.GI7	Dog; the Hittites believed that dogs carried impurity from one place to another, so they had to be kept away from ritually-significant places like the temple bakeries at all times. If one got too close, everything they touched needed to be cleansed (for metal and stone) or destroyed (for wood and ceramics).	LOGO
 GIR₂	GIR₂ GIR2 GÍR	Knife	LOGO
 NA₄	NA4	Stone	DTM
 ḫararazi	ḫararazi ḫararaziyaš ḫararaziya ḫararaziyaz	Mill, millstone (for grinding grain into flour)	NOUN ḫararazi ḫararaziyaš ḫararaziya ḫararazi ḫararaziyaz
-taršuwar	taršuwar taršuwaš	Some sort of operation performed on grain; possibly "drying"?	Nom taršuwar Gen taršuwaš
+taršuwar	taršuwar taršuwaš	Some sort of operation performed on grain; possibly "drying"? The exact meaning is unknown, but it is somehow connected to milling, but not the same as milling itself.	Nom taršuwar Gen taršuwaš
 ZID₂.DA	ZID2.DA ZÍD.DA	Flour	LOGO
-BAPPIR	BAPPIR	Bappir, a bread-like substance used for brewing beer	LOGO
-ištarniya	ištarniya ištarniyaš ištarniyan ištarniyaz	Middle, central (adjective)	NOUN ištarniyaš ištarniyaš ištarniya ištarniyan ištarniyaz
+BAPPIR	BAPPIR	"Bappir", a twice-baked bready substance used as an ingredient in beer-brewing	LOGO
+ištarniya	ištarniya ištarniyaš ištarniyan ištarniyaz	Middle, central	NOUN ištarniyaš ištarniyaš ištarniya ištarniyan ištarniyaz
 šarāzziya	šarāzziya šarāzziyaš šarāzziyan šarāzziyaz	Upper	NOUN šarāzziyaš šarāzziyaš šarāzziya šarāzziyan šarāzziyaz
 kattera	kattera katteraš katteri katteran katteraz	Lower	NOUN katteraš katteraš katteri katteran katteraz
-milit	milit militaš	Honey	Nom milit Gen militaš
+milit	milit militaš	Honey; this word is closely related to Latin <i>melle</i> with the same meaning	Nom milit Gen militaš
 PISAN	PISAN	Container	LOGO
-nata	nata nataš nati natan nataz	Reed (the form nataš can also mean "of reeds", genitive plural)	NOUN nataš nataš nati natan nataz
+nata	nata nataš nati natan nataz	Reed; the form <i>nataš</i> can also mean "of reeds", genitive plural	NOUN nataš nataš nati natan nataz
 šākan	šākan šaknaš šakni šaknaz	Oil	NOUN šākan šaknaš šakni šākan šaknaz
 šaknuwan	šaknuwan šaknuwanza šaknuwandaš šaknuwandi šaknuwandan šaknuwandaz	Oily	NOUN šaknuwanza šaknuwandaš šaknuwandi šaknuwandan šaknuwandaz
 ḫalki	ḫalki ḫalkiyaš	Grain in general, or barley in particular	Nom ḫalki Gen ḫalkiyaš
 GIR₄	GIR₄ GIR4	Pottery, fired clay	LOGO
 šašanna	šašanna šašannaš šašanni šašannan šašannaz	Lamp (clay vessel to burn oil in)	NOUN šašannaš šašannaš šašanni šašannan šašannaz
 dannatta	dannatta dannattaš dannatti dannattan dannattaz	Empty	NOUN dannattaš dannattaš dannatti dannattan dannattaz
-wiyanaš	wiyanaš	Wine	Nom wiyanaš Gen wiyanaš
+wiyanaš	wiyanaš	Wine; closely related to English "wine"	Nom wiyanaš Gen wiyanaš
 SAR	SAR	Herb, vegetable, leafy plant	LOGO
 GUG₂	GUG₂ GUG2 GÚG	Some type of legume	LOGO
+warpun	warpun warpta	I washed (something: accusative; with something: ablative)	VERB warpun warpta
+arḫa	arḫa	Away (both as in "went away" and as in "burned away")
+warati	warati	It burned up (one of the very few passive verb forms in this game)
+
+# Tablet 3
+tunnakkeššar	tunnakkeššar tunnakkešnaš tunnakkešni tunnakkišnaz	Inner chamber; in a house, "bedroom"; in a temple, "inner sanctum" (often abbreviated with the sign for "heart")	NOUN tunnakkeššar tunnakkešnaš tunnakkešni tunnakkeššar tunnakkišnaz
+šiuš	šiuš šiunaš šiuni šiun šiunaz	God, deity; many cultures in the Ancient Near East summoned their gods into specially-prepared physical forms (statues, icons, or sacred stones) in order to worship them, and those forms could be stolen in order to "godnap" the deity.	NOUN šiuš šiunaš šiuni šiun šiunaz
+DUB.SAR	DUB.SAR	Scribe, literally "clay tablet writer". Wooden tablets were written by a different person, the "wood-scribe".	LOGO
+akkan	akkan akkanza akkandaš akkandi akkandan akkandaz	Dead	NOUN akkanza akkandaš akkandi akkandan akkandaz
+DUB	DUB	Clay tablet	LOGO
+<i>UMMA</i>	UMMA	Thus, thus speaks (an Akkadian word used to introduce a quotation)
+f	f MUNUS	Woman; this is often transcribed "f" for individual women's names and "MUNUS" for types of women, but it's the same sign either way	DTM
+m	m DIŠ	Man (individual man's name)	DTM
+ŠU.GI	ŠU.GI	Wise-woman (type of ritual practitioner); the sign literally means "elderly" but it was a job title, not an age description	LOGO
+mān	mān	When
+=wa(r)	=wa(r) =wa =war	Attached to each sentence of a quotation	CLIT
+<i>INA</i>	INA	On, at (marks the dative case for logograms)
+UD	UD UD.20	Day (often attached to a number: UD.1 "the 1st day of the month")	LOGO
+KAM	KAM	Number	DTM
+Arma	Arma Armaš Armi Arman Armaz	Moon, the moon-god (the two were often used interchangeably)	NOUN Armaš Armaš Armi Arman Armaz
+d	d DINGIR	God, deity; this determiner is especially important because gods were often referred to by their domains or holy numbers, so this distinguishes "storm" from "storm-god" or "30" from "god with the holy number 30"	DTM
+aki	aki	He/she/it dies, will die (present tense of <i class="word" data-word="aggaḫḫun">aggaḫḫun</i>); "the moon dies" means "a total eclipse happens"
+kupiyatallieš	kupiyatallieš	Conspirators (nominative plural of <i class="word" data-word="kupiyatalli">kupiyatalli</i>)
+ḫaššu	ḫaššuš ḫaššuwaš ḫaššui ḫaššun ḫaššuwaz ḫaššu	King	NOUN ḫaššuš ḫaššuwaš ḫaššui ḫaššun ḫaššuwaz
+kunanzi	kunanzi kuenzi	Slay, will slay (present tense of <i class="word" data-word="kuenun">kuenun</i>)	Singular kuenzi Plural kunanzi
+antuḫšuš	antuḫšuš	People (accusative plural of <i class="word" data-word="antuḫša">antuḫša</i>)
+kupiyati	kupiyati kupiyatiš kupiyatiyaš kupiyatiya kupiyatin kupiyatiyaz	Conspiracy	NOUN kupiyatiš kupiyatiyaš kupiyatiya kupiyatin kupiyatiyaz
+punuššun	punuššun punušta	I questioned, interrogated (someone: accusative; about something: dative)	VERB punuššun punušta
+uttar	uttar uddanaš uddani uddanaz	Speech, word, matter	NOUN uttar uddanaš uddani uttar uddanaz
+parkui	parkui parkuiš parkuwayaš parkuwai parkuin parkuwayaz	Innocent (person)	NOUN parkuiš parkuwayaš parkuwai parkuin parkuwayaz
+šakkuwašar	šakkuwašar šakkuwašaraš šakkuwašari šakkuwašaraz	Truthful, honest	NOUN šakkuwašar šakkuwašaraš šakkuwašari šakkuwašar šakkuwašaraz
+ešzi	ešzi	Is, will be (present tense of <i class="word" data-word="ešun">ešun</i>)
+[Personal names]	Ašḫapalaš Eniadališ Ḫaḫuaš Iriyattiš Kaštandaš Lariyaš Našailiš Dušaš Walwiš Zipuliššaš Paškuwaš Tarluš Uruwandaš Maštiggaš Gulzawiyaš	Words with the "m" or "f" determiner are names of individual people. On this tablet, they always appear in the nominative case, so you don't have to worry about inflecting them.
+kupta	kupta	He/she/it conspired, plotted, schemed
+paprišzi	paprišzi	He/she/it is guilty (legal term)
+parkuešzi	parkuešzi	He/she/it is innocent (legal term)
+kuiški	kuiški kuēlka kuedanikki kuinki kuēzqa	Someone, anyone	NOUN kuiški kuēlka kuedanikki kuinki kuēzqa
+kuwaššun	kuwaššun kuwašzi	Kiss (someone: accusative)	"I kissed" kuwaššun "He/she will kiss" kuwašzi
+tarkun	tarkun tarkuzzi	Dance (toward someone: dative)	"I danced" tarkun "He/she will dance" tarkuzzi
+kaninanun	kaninanun kanināit	Bow (to someone: dative)	"I bowed" kaninanun "He/she will bow" kanināit
+GAL	GAL	Great, big; as a title, "chief" (of some particular unit)	LOGO
+<i>MEŠEDI</i>	MEŠEDI	Royal bodyguard (an Akkadian word of unknown meaning, probably referring to a weapon the guards used)
+GEŠTIN	GEŠTIN	Wine; as a title, "wine-steward" (the "chief wine-steward" was the chief of the palace staff)	LOGO
+tuḫkanti	tuḫkanti tuḫkantiš tuḫkantiyaš tuḫkantiya tuḫkantin tuḫkantiyaz	Crown prince, heir to the throne	NOUN tuḫkantiš tuḫkantiyaš tuḫkantiya tuḫkantin tuḫkantiyaz
+tawannana	tawannana tawannanaš tawannani tawannanan tawannanaz	Great Queen; in the Hittite Empire, this title was only relinquished on death, so the Great King's wife wouldn't inherit the title until his mother passed away. This was not generally used as a title for foreign or vassal queens.	NOUN tawannanaš tawannanaš tawannani tawannanan tawannanaz
+
+# Colophon
+zuppari	zuppari zuppariyaš zuppariya zuppariyaz	Torch	NOUN zuppari zuppariyaš zuppariya zuppari zuppariyaz
+appa	appa	Back (as in "went back")
+arnunun	arnunun	I brought (something: accusative; somewhere: dative)
+TIL	TIL	Finished (used to mark the last tablet of a series; all the other tablets will say NU.TIL "not finished")	LOGO
+NU.TIL	NU.TIL	Not finished (used to mark that a tablet is not the last one of a series)
+ŠU	ŠU	Hand (body part); in tablet colophons, short for "by the hand of" (indicating the author)	LOGO
+Dānīel	Dānīel	Daniel (not an actual Hittite name)
+Ištelšar	Ištelšar	Stelzer (not an actual Hittite name)
+Gaškel	Gaškel	Gaskell (not an actual Hittite name)
+DUB.DU₃.DU₃	DUB.DU3.DU3 DUB.DÙ.DÙ	"Tablet crafter" (invented for this colophon, not actually a historically-attested logogram)	LOGO
+<i>PANI</i>	PANI	In the presence of; under the supervision of
+Tim	Tim	Tim (not an actual Hittite name)
+Lēnard	Lēnard	Leonard (not an actual Hittite name)
+UM.MI.A	UM.MI.A	Expert, teacher, artisan	LOGO
+<i>IŠṬURU</i>	IŠṬURU IŠTURU IŠṬUR IŠTUR	They inscribed (an Akkadian verb form)
