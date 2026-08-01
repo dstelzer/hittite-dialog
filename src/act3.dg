@@ -123,7 +123,7 @@
 #tablet1
 (name *) DUB 1
 (tablet *)
-(* is #in #box) %% Since this one is already placed in the world, it won't be rewritten by the puzzle machinery - which is good, because this one shouldn't give testimony, it should lay out the design of the puzzle
+(* is #in #box) %% Since this one is already placed in the world, it won't be rewritten by the puzzle machinery—which is good, because this one shouldn't give testimony, it should lay out the design of the puzzle
 
 #tablet2 %% All tablets will be populated and moved to the #box by act3_machinery.dg
 (name *) DUB 2
@@ -187,7 +187,7 @@
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details])
 	Nu TUG natta waššiyanun. %% I was not wearing a garment
-	(div @error) { What exactly happened to the baker's garment from the previous tablet is not clear. The word TUG here might mean "appropriate clothing" - that is, a disguise - or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
+	(div @error) { What exactly happened to the baker's garment from the previous tablet is not clear. The word TUG here might mean "appropriate clothing"—that is, a disguise—or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
 
 (animate *(suspect $))
 (*(suspect $) is #in #temple) %% Put them all in one room for now
@@ -320,7 +320,7 @@
 	Nu=mu=kan (#nominative #mecedi) kuenta. %% The bodyguard slew me.
 	Nu aggaḫḫun. %% I died.
 	(div @tutorial) {
-		Unfortunately, it seems that was not the right solution. You are welcome to (link) \/undo and try again, but brute-forcing this sort of logic puzzle is often frustrating instead of fun - so it may be more enjoyable to (link) \/restart and try again with a new puzzle. (par)
+		Unfortunately, it seems that was not the right solution. You are welcome to (link) \/undo and try again, but brute-forcing this sort of logic puzzle is often frustrating instead of fun—so it may be more enjoyable to (link) \/restart and try again with a new puzzle. (par)
 		Which will it be? >
 		*(repeat forever)
 		(get input $Words)
