@@ -37,7 +37,8 @@ function show_dictionary_entry(node) {
 			return;
 		}
 		let defn = dictionary_defns[lemma];
-		defns.push(`<h2 class="lemma" data-language="ht"><p>${lemma}</p></h2>\n${defn}`);
+		let language = lemma[0] == '[' ? 'en' : 'ht'; // Lemmas like [numbers] and [personal names] are English, not Hittite
+		defns.push(`<h2 class="lemma" data-language="${language}"><p>${lemma}</p></h2>\n${defn}`);
 	}
 	
 	$("#dictionary").html(defns.join("\n\n<hr />\n\n"));

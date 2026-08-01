@@ -3,4 +3,4 @@ update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
 "unimportant" objects that cannot be interacted with
 map does not show up immediately on web tablet 2?
-Em dashes broken?? Search for " - " in both act1.dg and act3.dg when fixed
+Weirdness when right column gets longer than left column—add scroll bar somehow?

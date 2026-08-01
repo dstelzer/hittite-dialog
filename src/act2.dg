@@ -22,6 +22,7 @@
 	Nu (#nominative #baker) (#ablative #building) uet. %% "The baker came out of the building."
 	Nu (#nominative #baker) (#dative #washhouse) pait. %% "The baker went into the washhouse."
 	(now) (update needed)
+	(now) (map update needed)
 
 (tutorial)
 	~(tutorial introduced)
