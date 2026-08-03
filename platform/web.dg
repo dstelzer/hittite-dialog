@@ -1,9 +1,3 @@
-(style class @status)
-	height: auto;
-	line-height: 1.35em;
-	margin-bottom: 0.35em;
-	font-family: Georgia, serif !important; %% Override the web terp's styling
-
 (style class @tutorial)
 	margin-top: 1em;
 	margin-bottom: 1em;

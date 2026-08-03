@@ -1,0 +1,319 @@
+/* Globals (FIXME theme variables) */
+
+@font-face {
+	font-family: Caveat;
+	src: url("Caveat-Bold.woff");
+}
+
+/* Layout */
+
+body {
+	counter-reset: tablet;
+	background-image: url("wood.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+#aadefaults2 {
+	scrollbar-color: rgba(0, 0, 0, 0.05) rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+}
+
+#aacontainer {
+	height: 100%;
+	background-color: white;
+	-webkit-box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.5); 
+	box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.5);
+}
+
+#maincolumn {
+	padding-left: 185px;
+	padding-right: 185px;
+	max-width: 80ch;
+}
+
+#rightcolumn {
+	position: absolute;
+	right: -75px;
+	top: 0px;
+}
+
+#aamain {
+	padding-left: 165px;
+	padding-right: 0px;
+	margin-left: -165px;
+}
+
+/* Flow div styles */
+
+div.aa-meta {
+	font-family: var(--font-body);
+	margin-bottom: 1em;
+}
+
+div.aa-meta p {
+	margin-top: 1em;
+}
+
+div.aa-engtitle {
+	margin-top: 2em;
+	margin-bottom: 1em;
+	font-size: 1.5em;
+	line-height: 1.1em;
+	text-align: center;
+}
+
+div.aa-subtitle {
+	margin-bottom: 1em;
+	font-size: 1.2em;
+	text-align: center;
+	font-style: normal;
+	font-variant: small-caps;
+	margin-bottom: 2em;
+}
+
+div.aa-tutorial {
+	font-style: normal;
+	font-family: var(--font-body);
+	text-align: justify;
+}
+
+div.aa-tutorial p {
+	margin-top:1em;
+}
+
+/* Errors */
+
+div.aa-error {
+	border-top: none;
+	float: left;
+	width: 150px;
+	margin-left: -165px;
+	margin-top: -3.5em;
+	padding-top: 2em;
+	font-family: var(--font-body);
+	font-size: 90%;
+	line-height: 1.2em;
+	transform: translateZ(1px); /* necessary for WebKit to render background correctly */
+	background-color: rgba(255, 255, 255, 0);
+	background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 255) 2em, rgba(255, 255, 255, 255) 100%);
+}
+
+.aa-error p::before {
+	counter-increment: sidenote;
+	content: counter(sidenote) " ";
+	vertical-align: super;
+	font-size: 75%;
+}
+
+/* Panels */
+
+.panel {
+	border: 0px;
+	background: #F8EE99;
+	background: linear-gradient(180deg,rgba(250, 242, 170, 1) 0%, rgba(250, 239, 152, 1) 30px, rgba(255, 244, 143, 1) 30px, rgba(255, 244, 143, 1) 100%);
+	transform-style: preserve-3d;
+}
+
+.panel::after {
+    content: "";
+    position: absolute;
+	top: 3px;
+    left: 3px;
+    right: -3px;
+    bottom: 0px;
+    background: rgba(0, 0, 0, 0.4);
+    transform: skew(0deg, 2deg) translateZ(-1px);
+    transform-origin: left top;
+	filter: blur(3px);
+	z-index: 0;
+}
+
+#compass {
+	background: #94E1F2;
+	background: linear-gradient(90deg, rgba(168, 230, 247, 1) 0%, rgba(169, 224, 235, 1) 40px, rgba(148, 225, 252, 1) 40px, rgba(148, 225, 252, 1) 100%);
+    width: fit-content;
+    min-width: 100%;
+}
+
+#verbs {
+	background: #C0DF1F;
+	background: linear-gradient(90deg, rgba(200, 230, 50, 1) 0%, rgba(194, 222, 58, 1) 40px, rgba(191, 225, 29, 1) 40px, rgba(191, 225, 29, 1) 100%);
+}
+
+#dictionary {
+	margin-top: 25px;
+	background: white;
+	border: 1px solid #DDD;
+}
+
+#dictionary::before {
+	content: "";
+	position: absolute;
+	display: block;
+	background-image: url("tape.png");
+	width: 98px;
+	height: 30px;
+	top: -18px;
+	left: 10%;
+}
+
+#dictionary h2 p .translit {
+	font-size: 66%;
+}
+
+#p-meta {
+	font-family: Caveat;
+	font-size: 1.2em;
+}
+
+/*p:has(.aainputtext) {
+	display: none;
+}*/
+
+/* I/O */
+
+#aasubmit {
+    margin-top: -2px;
+	margin-right: 5px;
+	border: 2px black solid;
+    padding-top: 2px;
+    padding-bottom: 3px;
+}
+
+#aasubmit:hover {
+	background-color: #CCC;
+}
+
+#aainput {
+	outline: none;
+}
+
+.aainputtext {
+	font-weight: bold;
+}
+
+/* Tablet fragments */
+
+.output {
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+	padding-left: 5px;
+	padding-right: 5px;
+	counter-increment: output-line;
+}
+
+/* FIXME tinkering with this */
+/*.output p::before {
+    content: counter(output-line);
+    display: inline-block;
+    text-align: right;
+    width: 2em;
+    margin-left: -3em;
+    padding-right: 1em;
+	font-family: Caveat;
+}*/
+
+.output:nth-child(even) p::before {
+    content: "";
+}
+
+.output:has(.aainputtext) {
+	border-bottom: 0px;
+}
+
+.output-first {
+	border-top: 2px black solid;
+	counter-reset: output-line;
+	counter-reset: sidenote;
+	margin-top: 1em;
+}
+
+.output-first:nth-of-type(odd)::before {
+	counter-increment: tablet;
+	content: "1." counter(tablet) " Obv.";
+    float: left;
+    width: calc(100% + 12px);
+    aspect-ratio: 443/87;
+    background: url(tab_top0.png) no-repeat;
+	background-size: 100% 100%;
+    shape-outside: url(tab_top0.png);
+    shape-image-threshold: 0.5;
+	shape-margin: 0.5em;
+	margin-left: -7px;
+	margin-top: -2px;
+	font-family: Caveat;
+	font-size: 1.2em;
+}
+
+/* FIXME wrap into shape-randomization code */
+.output-first:nth-of-type(even)::before {
+	counter-increment: none;
+    content: "1." counter(tablet) " Rev.";
+	text-align: right;
+    float: right;
+    width: calc(100% + 12px);
+    aspect-ratio: 443/54;
+    background: url(tab_top1.png) no-repeat;
+	background-size: 100% 100%;
+	shape-outside: url(tab_top1.png);
+    shape-image-threshold: 0.5;
+	shape-margin: 0.5em;
+	margin-right: -7px;
+	margin-top: -2px;
+	font-family: Caveat;
+	font-size: 1.2em;
+}
+
+.output-last {
+	border-bottom: 2px black solid;
+	margin-bottom: 1em;
+}
+
+.output-last:nth-of-type(even)::after {
+    content: "";
+	display: block;
+    width: calc(100% + 12px);
+    aspect-ratio: 443/54;
+    background: url(tab_bot0.png) no-repeat;
+	background-size: 100% 100%;
+	shape-outside: url(tab_bot0.png);
+    shape-image-threshold: 0.5;
+	shape-margin: 0.5em;
+	margin-left: -7px;
+	margin-bottom: -2px;
+}
+
+.output-last:nth-of-type(odd)::after {
+    content: "";
+	display: block;
+    width: calc(100% + 12px);
+    aspect-ratio: 443/87;
+    background: url(tab_bot1.png) no-repeat;
+	background-size: 100% 100%;
+	shape-outside: url(tab_bot1.png);
+    shape-image-threshold: 0.5;
+	shape-margin: 0.5em;
+	margin-left: -5px;
+	margin-bottom: -2px;
+}
+
+/* Minor styling */
+
+.aalink:hover {
+	text-decoration: none;
+}
+
+.aa-hr {
+	display: none;
+}
+
+/* Other UI elements (FIXME) */
+
+#aaaboutinner {
+	-webkit-box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.5); 
+	box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.5);
+}
+
