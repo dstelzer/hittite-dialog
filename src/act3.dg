@@ -187,7 +187,7 @@
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details])
 	Nu TUG natta waššiyanun. %% I was not wearing a garment
-	(div @error) { What exactly happened to the baker's garment from the previous tablet is not clear. The word TUG here might mean "appropriate clothing"—that is, a disguise—or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
+	(div @error) { What exactly happened to the baker's garment from the previous tablet is not clear. The word TUG here might mean "appropriate clothing" (that is, a disguise) or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
 
 (animate *(suspect $))
 (*(suspect $) is #in #temple) %% Put them all in one room for now
