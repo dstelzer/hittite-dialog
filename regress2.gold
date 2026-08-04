@@ -148,7 +148,7 @@ waššiyanun, warpun
 > 4
 4   Nu parnaš āškan šarraḫḫun.
 
-Nu UR.GI₇ GIR₂ dāš. Na=aš NA₄^ḫararaziya pait.
+Nu UR.GI₇ GIR₂-an dāš. N=aš NA₄^ḫararaziya pait.
 
 - - - - -
 Nu=za=kan parni anda ešun.
@@ -164,6 +164,13 @@ waššiyanun, warpun
                                          
                                    |   |      
                                  -(@)+(.)+(*) 
+
+The Hittites used logograms extensively, because a single sign could be much
+shorter than the half dozen or so needed to spell out a word. Sometimes,
+though, they would write the Hittite ending onto the logogram for clarity: GIR₂
+means "knife" in general, but GIR₂-an is specifically the accusative form of
+"knife", GIR₂-aš the genitive, GIR₂-az the ablative, and so on.
+
 > * Barring the door works
 > /undo
 The previous lines, starting with "4", are crossed out on the tablet and should
@@ -279,7 +286,7 @@ waššiyanun, warpun
 > 4
 4   Nu parnaš āškan šarraḫḫun.
 
-Nu UR.GI₇ GIR₂ dāš. Na=aš NA₄^ḫararaziya pait.
+Nu UR.GI₇ GIR₂-an dāš. N=aš NA₄^ḫararaziya pait.
 
 - - - - -
 Nu=za=kan parni anda ešun.
@@ -295,6 +302,13 @@ waššiyanun, warpun
                                          
                                    |   |      
                                  -(@)+( )+( ) 
+
+The Hittites used logograms extensively, because a single sign could be much
+shorter than the half dozen or so needed to spell out a word. Sometimes,
+though, they would write the Hittite ending onto the logogram for clarity: GIR₂
+means "knife" in general, but GIR₂-an is specifically the accusative form of
+"knife", GIR₂-aš the genitive, GIR₂-az the ablative, and so on.
+
 > * Killing the baker also works
 > tug2 wassiyanun
 Nu TUG₂ waššiyanun.
@@ -340,7 +354,7 @@ waššiyanun, warpun
 > 2
 2   Nu ištarniya antaki pāun.
 
-Nu UR.GI₇ ištarniyaz antakaz ZID₂.DA antaki pait.
+Nu UR.GI₇ ištarniyaz antakaz ša ZID₂.DA antaki pait.
 
 - - - - -
 Nu=za=kan ištarniya antaki anda ešun.
@@ -363,12 +377,12 @@ waššiyanun, warpun
                                    |   |      
                                  -( )+( )+( ) 
 > 4
-4   Nu ZID₂.DA antaki pāun.
+4   Nu ša ZID₂.DA antaki pāun.
 
-Nu UR.GI₇ ZID₂.DA antakaz BAPPIR antaki pait.
+Nu UR.GI₇ ša ZID₂.DA antakaz ša BAPPIR antaki pait.
 
 - - - - -
-Nu=za=kan ZID₂.DA antaki anda ešun.
+Nu=za=kan ša ZID₂.DA antaki anda ešun.
 
 Nu lukkan GIŠ^ḫattalu ḫarkun.
 
@@ -386,12 +400,12 @@ waššiyanun, warpun
                                      |   |      
                                    -( )+( )+( ) 
 > 2
-2   Nu BAPPIR antaki pāun.
+2   Nu ša BAPPIR antaki pāun.
 
-Nu UR.GI₇ BAPPIR antakaz ZID₂.DA antaki pait.
+Nu UR.GI₇ ša BAPPIR antakaz ša ZID₂.DA antaki pait.
 
 - - - - -
-Nu=za=kan BAPPIR antaki anda ešun.
+Nu=za=kan ša BAPPIR antaki anda ešun.
 
 Nu lukkan GIŠ^ḫattalu ḫarkun.
 
@@ -410,12 +424,12 @@ waššiyanun, warpun
                                      |   |      
                                    -( )+( )+( ) 
 > 1
-1   Nu ZID₂.DA antaki pāun.
+1   Nu ša ZID₂.DA antaki pāun.
 
-Nu UR.GI₇ ZID₂.DA antakaz BAPPIR antaki pait.
+Nu UR.GI₇ ša ZID₂.DA antakaz ša BAPPIR antaki pait.
 
 - - - - -
-Nu=za=kan ZID₂.DA antaki anda ešun.
+Nu=za=kan ša ZID₂.DA antaki anda ešun.
 
 Nu lukkan GIŠ^ḫattalu ḫarkun.
 
@@ -436,7 +450,7 @@ waššiyanun, warpun
 > 1
 1   Nu taršuwaš antaki pāun.
 
-Nu UR.GI₇ BAPPIR antakaz ZID₂.DA antaki pait.
+Nu UR.GI₇ ša BAPPIR antakaz ša ZID₂.DA antaki pait.
 
 - - - - -
 Nu=za=kan taršuwaš antaki anda ešun.
@@ -460,7 +474,7 @@ waššiyanun, warpun
 > 3
 3   Nu NA₄^ḫararaziya pāun.
 
-Nu UR.GI₇ ZID₂.DA antakaz ištarniya antaki pait.
+Nu UR.GI₇ ša ZID₂.DA antakaz ištarniya antaki pait.
 
 - - - - -
 Nu=za NA₄^ḫararaziya ešun.
@@ -662,7 +676,7 @@ Nu UR.GI₇ šarāzziyaz antakaz ištarniya antaki pait.
 Nu=za=kan ištarniya antaki anda ešun.
 
 Nu apiya UR.GI₇ U₃ ilan ōḫḫun.
-Nu GIR₂ ana UR.GI₇ ēšta.
+Nu GIR₂-an ana UR.GI₇ ēšta.
 
 Nu lukkan GIŠ^ḫattalu ḫarkun.
 
@@ -683,7 +697,7 @@ waššiyanun, warpun
 > * Having passed through the odd-length cycle, we can now catch the dog
 > * With this random seed, it's right here; but otherwise you just have to chase it a bit
 > gir2 dahhun
-Nu GIR₂ ištu UR.GI₇ dāḫḫun.
+Nu GIR₂-an ištu UR.GI₇ dāḫḫun.
 
 Given the narrator's worries about "impurity" on the previous tablet, he seems
 notably unconcerned with objects touched by a dog. Perhaps because the iyatti-
@@ -694,7 +708,7 @@ Nu=za=kan ištarniya antaki anda ešun.
 
 Nu apiya UR.GI₇ U₃ ilan ōḫḫun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -724,7 +738,7 @@ Nu=za=kan parni anda ešun.
 
 Nu apiya parnaš āškan ōḫḫun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -754,7 +768,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -795,7 +809,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -829,7 +843,7 @@ Nu LU₂^ḫalliyatallaš ištarniyaz palšaz pait.
 - - - - -
 Nu=za šarāzziya palši ešun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -854,7 +868,7 @@ Nu LU₂^ḫalliyatallaš aušta.
 - - - - -
 Nu=za ištarniya palši ešun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -881,7 +895,7 @@ Nu LU₂^ḫalliyatallaš ištarniya palši pait.
 - - - - -
 Nu=za=kan militaš antaki anda ešun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -908,7 +922,7 @@ Nu LU₂^ḫalliyatallaš šarāzziya palši ištarniyaz palšaz pait.
 - - - - -
 Nu=za=kan militaš antaki anda ešun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -938,7 +952,7 @@ Nu LU₂^ḫalliyatallaš ištarniya palši šarāzziyaz palšaz pait.
 - - - - -
 Nu=za=kan militaš antaki anda ešun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -972,7 +986,7 @@ Nu LU₂^ḫalliyatallaš ištarniyaz palšaz pait.
 - - - - -
 Nu=za=kan militaš antaki anda ešun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1000,7 +1014,7 @@ Nu LU₂^ḫalliyatallaš ištarniya palši pait.
 - - - - -
 Nu=za=kan militaš antaki anda ešun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1027,7 +1041,7 @@ Nu LU₂^ḫalliyatallaš šarāzziya palši ištarniyaz palšaz pait.
 - - - - -
 Nu=za=kan militaš antaki anda ešun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1051,16 +1065,16 @@ Nu LU₂^ḫalliyatallaš aušta.
 4   Nu katteri palši pāun.
 
 Nu LU₂^ḫalliyatallaš ištarniya palši šarāzziyaz palšaz pait.
-2   Nu šešaš antaki pāun.
+2   Nu šēšanaš antaki pāun.
 
 Nu LU₂^ḫalliyatallaš katteri palši ištarniyaz palšaz pait.
 
 - - - - -
-Nu=za=kan šešaš antaki anda ešun.
+Nu=za=kan šēšanaš antaki anda ešun.
 
-Nu apiya šešan ōḫḫun.
+Nu apiya šēšan ōḫḫun.
 
-Nu GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1080,14 +1094,14 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                           (*)-( )-( )-(.)-( )+( )+( ) 
                                      /                
 > sesan dahhun
-Nu šešan dāḫḫun.
+Nu šēšan dāḫḫun.
 
 Nu LU₂^ḫalliyatallaš aušta.
 
 - - - - -
-Nu=za=kan šešaš antaki anda ešun.
+Nu=za=kan šēšanaš antaki anda ešun.
 
-Nu šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1112,9 +1126,9 @@ Nu ḫuškanun.
 Nu LU₂^ḫalliyatallaš ištarniya palši katteraz palšaz pait.
 
 - - - - -
-Nu=za=kan šešaš antaki anda ešun.
+Nu=za=kan šēšanaš antaki anda ešun.
 
-Nu šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1145,7 +1159,7 @@ Nu LU₂^ḫalliyatallaš ištarniya palši šarāzziyaz palšaz pait.
 - - - - -
 Nu=za=kan militaš antaki anda ešun.
 
-Nu šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1172,7 +1186,7 @@ Nu LU₂^ḫalliyatallaš katteri palši ištarniyaz palšaz pait.
 - - - - -
 Nu=za=kan militaš antaki anda ešun.
 
-Nu šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1208,7 +1222,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1245,7 +1259,7 @@ Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^pal
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 
-Nu natan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1275,7 +1289,7 @@ Nu apiya išliman U₃ DUG^išnuran U₃ warantaš nataš GIŠ^PISAN U₃ šakna
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 
-Nu warantan natan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1298,7 +1312,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
 - - - - -
 Nu=za=kan halkiyaš antaki anda ešun.
 
-Nu warantan natan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1317,7 +1331,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                      /                
                                  -[@]-                
 > 4
-4   Nu GIR₄ antaki pāun.
+4   Nu ša GIR₄ antaki pāun.
 
 Nu waranza nataš arḫa warati.
 
@@ -1331,7 +1345,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1362,7 +1376,7 @@ Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^pal
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 
-Nu natan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1396,7 +1410,7 @@ Nu apiya išliman U₃ DUG^išnuran U₃ šaknuwandaš nataš GIŠ^PISAN U₃ š
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 
-Nu šaknuwandan natan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šaknuwandan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1430,7 +1444,7 @@ Nu apiya išliman U₃ DUG^išnuran U₃ šaknuwandaš nataš GIŠ^PISAN U₃ š
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 
-Nu šaknuwandan natan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šaknuwandan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1455,7 +1469,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
 - - - - -
 Nu=za=kan halkiyaš antaki anda ešun.
 
-Nu šaknuwandan natan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šaknuwandan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1475,14 +1489,14 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                               [.]-[@]-                
                                |                      
 > 4
-4   Nu GIR₄ antaki pāun.
+4   Nu ša GIR₄ antaki pāun.
 
 - - - - -
-Nu=za=kan GIR₄ antaki anda ešun.
+Nu=za=kan ša GIR₄ antaki anda ešun.
 
-Nu apiya dannattan DUG^šašannan ōḫḫun.
+Nu apiya dannattan DUG^šāšan ōḫḫun.
 
-Nu šaknuwandan natan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šaknuwandan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1501,8 +1515,8 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                      /                
                               [@]-[ ]-                
                                |                      
-> sasannan dahhun
-Nu dannattan DUG^šašannan dāḫḫun.
+> sasan dahhun
+Nu dannattan DUG^šāšan dāḫḫun.
 
 Nu šaknuwanza nataš arḫa warati.
 
@@ -1516,7 +1530,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu dannattan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu dannattan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1535,7 +1549,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                      /                
                               [ ]-[ ]-                
                                |                      
-> sasannan islimani tehhun
+> sasan islimani tehhun
 N=an išlimani tēḫḫun.
 
 Nu LU₂^ḫalliyatallaš šarāzziya palši ištarniyaz palšaz pait.
@@ -1544,11 +1558,11 @@ Nu LU₂^ḫalliyatallaš šarāzziya palši ištarniyaz palšaz pait.
 Nu=za=kan ana E₂ LU₂^MUḪALDIM anda ešun.
 
 Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^palḫin ōḫḫun.
-Nu=kan dannattaš DUG^šašannaš U₃ paḫḫur išlimani anda ešer.
+Nu=kan dannattaš DUG^šāšaš U₃ paḫḫur išlimani anda ešer.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1582,7 +1596,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu dannattan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu dannattan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1604,7 +1618,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                               [ ]-[ ]-                
                                |                      
 > n=an sakni tehhun
-Nu šākan DUG^šašanni anda tēḫḫun.
+Nu šākan DUG^šāšani anda tēḫḫun.
 
 Nu LU₂^ḫalliyatallaš ištarniya palši šarāzziyaz palšaz pait.
 
@@ -1616,7 +1630,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu šaknuwandan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu šaknuwandan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1636,7 +1650,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                               [ ]-[ ]-                
                                |                      
 > n=an islimani tehhun
-N=an išlimani tēḫḫun. Nu šaknuwandan DUG^šašannan lukkun.
+N=an išlimani tēḫḫun. Nu šaknuwandan DUG^šāšan lukkun.
 
 Nu LU₂^ḫalliyatallaš katteri palši ištarniyaz palšaz pait.
 
@@ -1648,7 +1662,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1673,7 +1687,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
 - - - - -
 Nu=za=kan halkiyaš antaki anda ešun.
 
-Nu warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1698,7 +1712,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
 - - - - -
 Nu=za=kan wiyanaš antaki anda ešun.
 
-Nu warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1718,12 +1732,12 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                               [ ]-[ ]-[@]             
                                |       |              
 > 1
-1   Nu GUG₂ antaki pāun.
+1   Nu ša GUG₂ antaki pāun.
 
 - - - - -
-Nu=za=kan GUG₂ antaki anda ešun.
+Nu=za=kan ša GUG₂ antaki anda ešun.
 
-Nu warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1744,14 +1758,14 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                |       |              
                                      -[@]             
 > 4
-4   Nu GA.KIN.AG antaki pāun.
+4   Nu ša GA.KIN.AG antaki pāun.
 
 - - - - -
-Nu=za=kan GA.KIN.AG antaki anda ešun.
+Nu=za=kan ša GA.KIN.AG antaki anda ešun.
 
 Nu apiya GA.KIN.AG ōḫḫun.
 
-Nu warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -1773,18 +1787,18 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                  -[@]-[ ]             
 > GA.KIN.AG dahhun
 This line could be interpreted in multiple ways:
-    1: Nu GA.KIN.AG antakan dāḫḫun.
+    1: Nu ša GA.KIN.AG antakan dāḫḫun.
     2: Nu GA.KIN.AG dāḫḫun.
-    3: Nu GA.KIN.AG GA.KIN.AG antakaz dāḫḫun.
+    3: Nu GA.KIN.AG ša GA.KIN.AG antakaz dāḫḫun.
 It seems the intended interpretation is number...
 
 2
 Nu GA.KIN.AG dāḫḫun.
 
 - - - - -
-Nu=za=kan GA.KIN.AG antaki anda ešun.
+Nu=za=kan ša GA.KIN.AG antaki anda ešun.
 
-Nu GA.KIN.AG U₃ warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu
+Nu GA.KIN.AG U₃ warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu
 ḫarkun.
 
 Nu TUG₂ waššiyanun.
@@ -1806,12 +1820,12 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                |       |              
                                  -[@]-[ ]             
 > 4
-4   Nu SAR antaki pāun.
+4   Nu ša SAR antaki pāun.
 
 - - - - -
-Nu=za=kan SAR antaki anda ešun.
+Nu=za=kan ša SAR antaki anda ešun.
 
-Nu GA.KIN.AG U₃ warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu
+Nu GA.KIN.AG U₃ warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu
 ḫarkun.
 
 Nu TUG₂ waššiyanun.
@@ -1834,7 +1848,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                               [@]-[ ]-[ ]             
 > ana muhaldim paun
 Nu ana E₂ LU₂^MUḪALDIM pāun.
-2   Nu GIR₄ antaki pāun.
+2   Nu ša GIR₄ antaki pāun.
 3   Nu halkiyaš antaki pāun.
 
 5   Nu ana E₂ LU₂^MUḪALDIM pāun.
@@ -1849,7 +1863,7 @@ Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu GA.KIN.AG U₃ warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu
+Nu GA.KIN.AG U₃ warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu
 ḫarkun.
 
 Nu TUG₂ waššiyanun.
@@ -1885,7 +1899,7 @@ Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^pal
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu išnan U₃ GA.KIN.AG U₃ warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ
+Nu išnan U₃ GA.KIN.AG U₃ warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ
 ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
@@ -1909,7 +1923,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                |       |              
                               [ ]-[ ]-[ ]             
 > isnan islimani tehhun
-N=an išlimani natta tēḫḫun. Nu=ši GA.KIN.AG anda natta ēšta. Nu=ši šešaš anda
+N=an išlimani natta tēḫḫun. Nu=ši GA.KIN.AG anda natta ēšta. Nu=ši šēšaš anda
 natta ēšta.
 
 The narrator seems to be making iyatti, a kind of bread "studded" with chopped
@@ -1924,7 +1938,7 @@ Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^pal
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu išnan U₃ GA.KIN.AG U₃ warantan DUG^šašannan U₃ šešan U₃ GIR₂ U₃ lukkan GIŠ
+Nu išnan U₃ GA.KIN.AG U₃ warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ
 ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
@@ -1946,31 +1960,34 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                |       |              
                               [ ]-[ ]-[ ]             
 > sesan isni tehhun
-Nu=ši šešan natta tēḫḫun. N=aš arkanza natta ēšta.
+Nu=ši šēšan natta tēḫḫun. N=aš arkanza natta ēšta.
 
 Nu LU₂^ḫalliyatallaš katteri palši ištarniyaz palšaz pait.
 
 > sesan arkahhun
-This sentence, "šešan arkaḫḫun", is difficult to interpret. There should be an
+This sentence, "šēšan arkaḫḫun", is difficult to interpret. There should be an
 ablative noun.
 
 > GA.KIN.AG sesan ISTU GIR2 arkahhun
 This line could be interpreted in multiple ways:
-    1: Nu šešan U₃ GA.KIN.AG ištu GIR₂ arkaḫḫun.
-    2: Nu GIR₂ U₃ šešan U₃ GA.KIN.AG ištu E₂ LU₂^MUḪALDIM arkaḫḫun.
-    3: Nu GIR₂ U₃ šešan U₃ GA.KIN.AG ištu GA.KIN.AG arkaḫḫun.
-    4: Nu GIR₂ U₃ šešan U₃ GA.KIN.AG ištu TUG₂ arkaḫḫun.
-    5: Nu GIR₂ U₃ šešan U₃ GA.KIN.AG ištu nataš GIŠ^PISAN arkaḫḫun.
-    6: Nu šešan ištu GIR₂ U₃ ištu GA.KIN.AG arkaḫḫun.
-    7: Nu GIR₂ U₃ šešan ištu GA.KIN.AG arkaḫḫun.
+    1: Nu šēšan U₃ GA.KIN.AG GIR₂-az arkaḫḫun.
+    2: Nu GIR₂-an U₃ šēšan U₃ GA.KIN.AG ištu E₂ LU₂^MUḪALDIM arkaḫḫun.
+    3: Nu GIR₂-an U₃ šēšan U₃ GA.KIN.AG ištu GA.KIN.AG arkaḫḫun.
+    4: Nu GIR₂-an U₃ šēšan U₃ GA.KIN.AG ištu TUG₂ arkaḫḫun.
+    5: Nu GIR₂-an U₃ šēšan U₃ GA.KIN.AG ištu nataš GIŠ^PISAN arkaḫḫun.
+    6: Nu šēšan GIR₂-az U₃ ištu E₂ LU₂^MUḪALDIM U₃ ištu GA.KIN.AG arkaḫḫun.
+    7: Nu GIR₂-an U₃ šēšan ištu GA.KIN.AG arkaḫḫun.
+    8: Nu šēšan GIR₂-az U₃ ištu GA.KIN.AG arkaḫḫun.
+    9: Nu šēšan GIR₂-az U₃ ištu TUG₂ U₃ ištu GA.KIN.AG arkaḫḫun.
+    10: Nu šēšan GIR₂-az U₃ ištu nataš GIŠ^PISAN U₃ ištu GA.KIN.AG arkaḫḫun.
 It seems the intended interpretation is number...
 
 1
-Nu GA.KIN.AG ištu GIR₂ arkaḫḫun.
+Nu GA.KIN.AG GIR₂-az arkaḫḫun.
 
 Nu LU₂^ḫalliyatallaš aušta.
 
-Nu šešan ištu GIR₂ arkaḫḫun.
+Nu šēšan GIR₂-az arkaḫḫun.
 
 Nu LU₂^ḫalliyatallaš ištarniya palši katteraz palšaz pait.
 
@@ -1981,8 +1998,8 @@ Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^pal
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu išnan U₃ arkandan GA.KIN.AG U₃ warantan DUG^šašannan U₃ arkandan šešan U₃ 
-GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu išnan U₃ arkandan GA.KIN.AG U₃ warantan DUG^šāšan U₃ arkandan šēšan U₃ GIR₂-
+an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -2004,8 +2021,8 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                               [ ]-[ ]-[ ]             
 > GA.KIN.AG sesan isni tehhun
 This line could be interpreted in multiple ways:
-    1: Nu arkandan šešan U₃ arkandan GA.KIN.AG išni tēḫḫun.
-    2: Nu arkandan šešan išni U₃ ana arkandi GA.KIN.AG tēḫḫun.
+    1: Nu arkandan šēšan U₃ arkandan GA.KIN.AG išni tēḫḫun.
+    2: Nu arkandan šēšan išni U₃ ana arkandi GA.KIN.AG tēḫḫun.
 It seems the intended interpretation is number...
 
 1
@@ -2024,7 +2041,7 @@ Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^pal
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu išnan ištu GA.KIN.AG šešaz tiyantan U₃ warantan DUG^šašannan U₃ GIR₂ U₃
+Nu išnan ištu GA.KIN.AG šēšanaz tiyantan U₃ warantan DUG^šāšan U₃ GIR₂-an U₃
 lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
@@ -2048,7 +2065,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                |       |              
                               [ ]-[ ]-[ ]             
 > isnan islimani tehhun
-Nu išnan ištu GA.KIN.AG šešaz tiyantan išlimani tēḫḫun.
+Nu išnan ištu GA.KIN.AG šēšanaz tiyantan išlimani tēḫḫun.
 
 Nu LU₂^ḫalliyatallaš ištarniya palši šarāzziyaz palšaz pait.
 
@@ -2056,10 +2073,11 @@ Nu LU₂^ḫalliyatallaš ištarniya palši šarāzziyaz palšaz pait.
 Nu=za=kan ana E₂ LU₂^MUḪALDIM anda ešun.
 
 Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^palḫin ōḫḫun.
-Nu=kan NINDA^iyattiš ištu GA.KIN.AG šešaz tiyanza U₃ paḫḫur išlimani anda ešer.
+Nu=kan NINDA^iyattiš ištu GA.KIN.AG šēšanaz tiyanza U₃ paḫḫur išlimani anda
+ešer.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu warantan DUG^šašannan U₃ GIR₂ U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan DUG^šāšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
@@ -2080,7 +2098,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                |       |              
                               [ ]-[ ]-[ ]             
 > iyattin dahhun
-Nu NINDA^iyattin ištu GA.KIN.AG šešaz tiyantan išlimanaz dāḫḫun.
+Nu NINDA^iyattin ištu GA.KIN.AG šēšanaz tiyantan išlimanaz dāḫḫun.
 
 Nu LU₂^ḫalliyatallaš katteri palši ištarniyaz palšaz pait.
 
@@ -2091,8 +2109,8 @@ Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^pal
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan nataš ana nataš GIŠ^PISAN anda ēšta.
 
-Nu NINDA^iyattin ištu GA.KIN.AG šešaz tiyantan U₃ warantan DUG^šašannan U₃ GIR₂ 
-U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu NINDA^iyattin ištu GA.KIN.AG šēšanaz tiyantan U₃ warantan DUG^šāšan U₃ GIR₂-
+an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 

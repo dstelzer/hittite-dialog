@@ -671,7 +671,7 @@
 	($Tablet has type $Type)
 	
 	%% First, the source
-	(span @akk) Umma (source $Source #nominative) (no space):
+	Nu (source $Source #nominative) kiššan tēt (no space): %% X spoke thus:
 	
 	%% When we generated the puzzle, we only had two types of edge: 0 and 1
 	%% 0 for basic, 1 for advanced
@@ -724,7 +724,7 @@
 		(endif)
 	(else) %% Basic edge
 		(if) ($Source and $Target agree) (then)
-			nu=wa (basic target $Target #nominative) parkuešzi.
+			nu=wa (basic target $Target #nominative) parkuzzi.
 		(else)
 			nu=wa (basic target $Target #nominative) paprišzi.
 		(endif)
