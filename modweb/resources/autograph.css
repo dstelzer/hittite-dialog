@@ -35,7 +35,8 @@ body {
 
 #rightcolumn {
 	position: absolute;
-	right: -75px;
+/*	right: -75px;	*/
+	right: -100px; /* changed temporarily for testing -DMS */
 	top: 0px;
 }
 

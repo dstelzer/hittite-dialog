@@ -11,7 +11,7 @@
 
 (intro) %% No special intro
 	(now) (update needed)
-	(now) (map update needed)
+	%% Don't update map immediately
 
 #riverbank
 (room *)
@@ -414,6 +414,7 @@
 	(if) ~(using separate panels) (then)
 		(now) (update needed) %% Redraw the status bar to include verbs next time
 	(endif)
+	(now) (map update needed) %% And add the map regardless of separate panels
 
 (tutorial)
 	~(taught syntax)
@@ -464,7 +465,7 @@
 	(direction numbers enabled)
 	(div @tutorial) {
 		You're getting the hang of this now! Since you'll be moving around a lot in this game, there's a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, 1 south 2 north 3 east 4 west, so you can type "1 3 2" to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
-		There's no evidence that the Hittites did this, and this game addis numbers 5 and 6 for "up" and "down", which is completely non-historical. But the Hittites imitating Babylonian writing isn't much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the map to navigate to anywhere you've been before.
+		There's no evidence that the Hittites did this, and this game adds numbers 5 and 6 for "up" and "down", which is completely non-historical. But the Hittites imitating Babylonian writing isn't much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the map to navigate to anywhere you've been before.
 	}
 	(now) (taught numbers)
 
