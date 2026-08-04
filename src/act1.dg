@@ -9,6 +9,10 @@
 (name * in #dative/#accusative/#ablative) ammuk
 (* is #in #riverbank)
 
+(intro) %% No special intro
+	(now) (update needed)
+	(now) (map update needed)
+
 #riverbank
 (room *)
 (* uses preverb #at)
