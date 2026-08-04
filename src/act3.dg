@@ -25,6 +25,15 @@
 	(now) (update needed)
 	(now) (map update needed)
 
+(tutorial)
+	~(taught logograms)
+	(div @tutorial) {
+		If you haven't played tablet 2, don't worry—there's only one thing you need to know from it. Words written in ALL CAPITALS are "logograms", special cuneiform signs used as shorthand for entire words. The CAPITALS indicate that we're transcribing the names of the signs, not the actual Hittite pronunciation. (par)
+		Good luck!
+	}
+	(now) (taught logograms)
+	%% Genitive and ablative do show up marginally here—the garment belonged to the dead scribe, and the final message says you left the temple. But those aren't really important and players can figure them out as they go.
+
 #sanctum
 (room *)
 (neuter *)
@@ -349,7 +358,7 @@
 (room *)
 (* uses preverb #in)
 (* has modifier #temple)
-(name * in #nominative/#genitive) ḫilaš %% "Courtyard" from act 2
+(name * in #nominative/#genitive) ḫilaš %% The "courtyard" that was south of the temple in act 2
 (name * in #dative) ḫili
 (name * in #accusative) ḫilan
 (name * in #ablative) ḫilaz
@@ -370,10 +379,13 @@
 	
 	(par) (hr)
 	Nu zuppari dāḫḫun. %% I took a torch.
-	Nu (#accusative #temple) lukkun. %% I ignited the temple.
+	Nu (#accusative #temple) zuppariyaz lukkun. %% I ignited the temple with the torch.
+	(if) ~(#god is #heldby #me) (then)
+		Nu (#accusative #god) dāḫḫun. %% I grabbed the god.
+	(endif)
 	Nu (#ablative #temple) pāun. %% I left the temple.
 	Nu ḫappiraz pāun. %% I left the city.
-	Nu šiun appa arnunun. %% I brought the god back.
+	Nu šiun āppa arnunun. %% I brought the god back home.
 	
 	(par) (hr)
 	(div @colophon) (colophon)

@@ -297,7 +297,7 @@
 
 (prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet, it should have a clear failure message on this tablet
 	(describe failed action [[put #bolt *] $Details])
-	Nu (#nominative #bolt) šalli ēšta. %% "It was big."
+	Nu (#nominative #bolt) šalli ēšta. %% "It was big." bolt neuter
 
 #trough
 (holder *)
