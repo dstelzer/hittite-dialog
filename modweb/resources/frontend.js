@@ -27,7 +27,8 @@
 var b64_enc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 var b64_dec = [];
 
-var wants_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // https://stackoverflow.com/a/57795495/3233017
+//var wants_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // https://stackoverflow.com/a/57795495/3233017
+var wants_dark_mode = false; // Dark mode is not implemented yet TODO
 
 // These are turned into labelled checkboxes in the #aacheckboxes div
 var toggles = [
@@ -1395,9 +1396,9 @@ window.run_game = function(story64, options) {
 
 	function update_globalstyle() {
 		if(document.getElementById("aacb-dark").checked) {
-			$("body").addClass("night");
+	//		$("body").addClass("night"); // TODO
 		} else {
-			$("body").removeClass("night");
+	//		$("body").removeClass("night");
 		}
 		if(document.getElementById("aacb-large").checked) {
 			$("body").addClass("enlarge");
