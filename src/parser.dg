@@ -1,5 +1,5 @@
 (extension version)
-	Hittite parser version 260801.
+	Hittite parser version 260804.
 
 (parser logging) (fail)
 
@@ -723,14 +723,27 @@
 (parse metacommand [\/again/\/g])
 	(div @realerror) { No previous command to repeat! }
 
+(parse metacommand [\/credits])
+	(div @meta) {
+		(div @engtitle) (overall story title)
+		(span @bold) { Daniel Stelzer } (no space) : Backend programming and implementation—the parser and the gameplay. (line)
+		(span @bold) { Daniel Gaskell } (no space) : Frontend interface and design—the look and feel of the tablet. (line)
+		(span @bold) { Tim Leonard } (no space) : Hittite translations and editing—the words you're reading. (line)
+		Cuneiform rendering done via Ishamai, by Daniel Stelzer. (line)
+		Running on the Å-machine web interpreter, by Linus Åkesson and the Dialog Project Team. (par)
+		Tested by TODO YOUR NAME HERE!!! (par)
+		Depicted on the cover is the "Yozgat Amulet" in the Louvre Museum, AO 9647. Photograph © 2012 Musée du Louvre, Dist. GrandPalaisRmn / Raphaël Chipault.
+	}
+
 (parse metacommand [\/help/\/about])
 	(div @meta) {
 		(banner)
 		Most commands in this game will be in Hittite, not English. But to control the interpreter itself, you can use
 		(span @metaverb) (link) /undo ,
 		(span @metaverb) (link) /save ,
-		(span @metaverb) (link) /restore , and
-		(span @metaverb) (link) /again .
+		(span @metaverb) (link) /restore ,
+		(span @metaverb) (link) /again , and
+		(span @metaverb) (link) /credits .
 	}
 	(now) (meta verbs introduced)
 
