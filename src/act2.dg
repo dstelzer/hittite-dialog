@@ -119,9 +119,17 @@
 	(select)
 		(par)
 		Nu (#nominative #dog) (#accusative #knife) dāš. %% The dog grabs the knife.
-		Na=aš (#dative #dogmaze) pait. %% The dog goes to the X.
+		N=aš (#dative #dogmaze) pait. %% The dog goes to the X.
 	(or)
 	(stopping)
+
+(tutorial)
+	(#building is visited)
+	~(taught phonetic complements)
+	(div @tutorial) {
+		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @htt) GIR₂ means "knife" in general, but (span @htt) GIR₂-an is specifically the (span @italic) accusative form of "knife", (span @htt) GIR₂-aš the genitive, (span @htt) GIR₂-az the ablative, and so on.
+	}
+	(now) (taught phonetic complements)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Washhouse and baker (east)
@@ -289,7 +297,7 @@
 
 (prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet, it should have a clear failure message on this tablet
 	(describe failed action [[put #bolt *] $Details])
-	Nu (#nominative #bolt) šalli ēšta. %% "It was big."
+	Nu (#nominative #bolt) šalli ēšta. %% "It was big." bolt neuter
 
 #trough
 (holder *)
@@ -321,11 +329,11 @@
 
 #fruit
 (item *)
-(name * in #nominative/#genitive) šešaš
-(name * in #dative) šeši
-(name * in #accusative) šešan
-(name * in #ablative) šešaz
-(name * in #bare) šeša
+(name * in #nominative) šēšaš
+(name * in #genitive) šēšanaš
+(name * in #dative) šēšani
+(name * in #accusative/#bare) šēšan
+(name * in #ablative) šēšanaz
 (* is #in #fruitstorage)
 
 (* has modifier #chopped) (fruit is chopped)
@@ -412,10 +420,10 @@
 	(name $Obj in $Case)
 	(if) (#cheese is nowhere) (or) (#fruit is nowhere) (then)
 		(if) (#cheese is nowhere) (then)
-			(span @akk) ištu GA.KIN.AG
+			(span @akk) ištu (name #cheese)
 		(endif)
 		(if) (#fruit is nowhere) (then)
-			šešaz
+			(name #fruit in #ablative)
 		(endif)
 		(name #studded in $Case)
 	(endif)
@@ -423,7 +431,7 @@
 (dict $Obj in $Case)
 	($Obj is one of [#dough #bread])
 	(#cheese is nowhere)
-	ištu GA.KIN.AG
+	ištu (name #cheese)
 	(name #studded in $Case)
 (dict $Obj in $Case)
 	($Obj is one of [#dough #bread])
@@ -517,18 +525,26 @@
 	(par) Nu (#nominative #dog) (#ablative $Start) (#dative $End) pait.
 	(now) (#dog is #in $End)
 	(if) ($Start is visited) (or) ($End is visited) (then)
-		(now) (map update needed)
+		(now) (map update needed) %% Map changed (dog's position)
 	(endif)
 	(if) (current room $Start) (or) (current room $End) (then)
-		(now) (update needed)
+		(now) (update needed) %% Room description changed (dog's presence)
 	(endif)
 
 #knife
 (item *)
+(neuter *)
 (sharp *) %% Allows "cut" action
-(logogram *)
-(name *) GIR₂
-(dict *) GIR2 GÍR
+(name * in #bare) GIR₂
+(name * in #nominative/#accusative) GIR₂-an
+(name * in #genitive) GIR₂-aš
+(name * in #dative) GIR₂-i
+(name * in #ablative) GIR₂-az
+(dict * in $) GIR2 GÍR
+(dict * in #nominative/#accusative) GIR2-an GÍR-an
+(dict * in #genitive) GIR2-aš GÍR-aš
+(dict * in #dative) GIR2-i GÍR-i
+(dict * in #ablative) GIR2-az GÍR-az
 (* is #heldby #dog)
 
 (after [[take * | $] $]) %% Explain a little plot hole
@@ -575,7 +591,7 @@
 #dog-w
 (storage *)
 (dogs allowed in *)
-(contents *) ZID₂.DA
+(logo contents *) ZID₂.DA
 (dict * in $) ZID2 ZÍD
 
 (from * go #east to #dog-center)
@@ -585,7 +601,7 @@
 #dog-nw
 (storage *)
 (dogs allowed in *)
-(contents *) BAPPIR
+(logo contents *) BAPPIR
 
 (from * go #south to #dog-w)
 
@@ -803,7 +819,7 @@
 
 #fruitstorage
 (storage *)
-(contents *) šešaš
+(contents *) (name #fruit in #genitive)
 
 (from * go #south to #guardwalk3)
 
@@ -910,7 +926,7 @@
 #dm-pottery %% NW
 (storage *)
 (inherently dark *)
-(contents *) GIR₄
+(logo contents *) GIR₄
 (dict * in $) GIR4
 
 (from * go #east to #dm-grain)
@@ -920,10 +936,11 @@
 
 #lamp
 (item *)
-(name * in #nominative/#genitive) šašannaš
-(name * in #dative) šašanni
-(name * in #accusative) šašannan
-(name * in #ablative) šašannaz
+(name * in #nominative) šāšaš
+(name * in #genitive) šāšanaš
+(name * in #dative) šāšani
+(name * in #accusative) šāšan
+(name * in #ablative) šāšanaz
 (determiner *) DUG
 (* is #in #dm-pottery)
 
@@ -963,7 +980,7 @@
 #dm-veg %% SW
 (storage *)
 (inherently dark *)
-(contents *) SAR
+(logo contents *) SAR
 
 (from * go #east to #dm-cheese)
 (from * go #north to #dm-pottery)
@@ -971,7 +988,7 @@
 #dm-legumes %% SE
 (storage *)
 (inherently dark *)
-(contents *) GUG₂
+(logo contents *) GUG₂
 (dict * in $) GUG2 GÚG
 
 (from * go #west to #dm-cheese)
@@ -980,7 +997,7 @@
 #dm-cheese %% S
 (storage *)
 (inherently dark *)
-(contents *) GA.KIN.AG
+(logo contents *) (name #cheese)
 
 (from * go #west to #dm-veg)
 (from * go #east to #dm-legumes)
@@ -992,18 +1009,21 @@
 %% We're going to need so many of these...
 (room *(storage $))
 (*(storage $) uses preverb #in)
-(name (storage $Obj) in #nominative/#genitive) (contents $Obj) antakaš
-(name (storage $Obj) in #dative) (contents $Obj) antaki
-(name (storage $Obj) in #accusative) (contents $Obj) antakan
-(name (storage $Obj) in #ablative) (contents $Obj) antakaz
-(name (storage $Obj) in #bare) (contents $Obj) antaka
+(full contents $Obj) (contents $Obj)
+(full contents $Obj) (span @akk) ša (logo contents $Obj) %% Add an Akkadogram preposition if it's a logogram; Tim suggested putting the genitive before the noun even when it's ŠA something, so that's what I'm doing for now
+(name (storage $Obj) in #nominative/#genitive) (full contents $Obj) antakaš
+(name (storage $Obj) in #dative) (full contents $Obj) antaki
+(name (storage $Obj) in #accusative) (full contents $Obj) antakan
+(name (storage $Obj) in #ablative) (full contents $Obj) antakaz
+(name (storage $Obj) in #bare) (full contents $Obj) antaka
 (short name (storage $Obj)) %% Duplicated from actions.dg which is not ideal
 	(inherently dark $Obj)
 	(current player $Player)
 	~($Player has a light source)
 	~($Obj has a light source)
 	dankui %% "Dark"
-(short name (storage $Obj)) (contents $Obj)
+(short name (storage $Obj)) (contents $Obj) 
+(short name (storage $Obj)) (logo contents $Obj)
 (medium short name (storage $Obj)) %% Likewise
 	(inherently dark $Obj)
 	(current player $Player)

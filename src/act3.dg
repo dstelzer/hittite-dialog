@@ -25,6 +25,15 @@
 	(now) (update needed)
 	(now) (map update needed)
 
+(tutorial)
+	~(taught logograms)
+	(div @tutorial) {
+		If you haven't played tablet 2, don't worry—there's only one thing you need to know from it. Words written in ALL CAPITALS are "logograms", special cuneiform signs used as shorthand for entire words. The CAPITALS indicate that we're transcribing the names of the signs, not the actual Hittite pronunciation. (par)
+		Good luck!
+	}
+	(now) (taught logograms)
+	%% Genitive and ablative do show up marginally here—the garment belonged to the dead scribe, and the final message says you left the temple. But those aren't really important and players can figure them out as they go.
+
 #sanctum
 (room *)
 (neuter *)
@@ -161,11 +170,11 @@
 	(par) (testimony for $Tablet)
 
 (testimony for #tablet1)
-	(span @akk) umma (dtm {f}) Gulzawiyaš (dtm {MUNUS}) ŠU.GI: %% Thus spoke Gulzawiya the wise-woman:
+	Nu (dtm {f}) Gulzawiyaš šiuniyanza kiššan tēt: %% Thus spoke Gulzawiya the wise-woman:
 	mān=wa (span @akk) ina UD.20 (dtm2 {KAM}) (dtm {d}) Armaš aki, %% When the moon dies (i.e. is eclipsed) on the 20th day (of the month), (20 chosen because it's an HZL sign in its own right, not a combination of multiple)
-	nu=wa=kan 2-uš kupiyatallieš ḫaššun kunanzi. %% Two conspirators will kill the king.
+	nu=wa=kan 2 kupiyatallieš ḫaššun kunanzi. %% Two conspirators will kill the king.
 	Nu ḫaššuš 5 antuḫšuš kupiyatiya punušta. %% The king questioned five people about the conspiracy.
-	Nu uttar parkuwayaš šakkuwašar ešzi. %% The word of an innocent person is true.
+	Nu parkueššanteš ašantan memiyan memiškanzi. %% The pure ones speak the real words.
 	(now) (first tablet was read)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,6 +191,7 @@
 (name * in #ablative) karimnaz
 
 (from * go #north to #sanctum)
+(from * go #south to #freedom)
 
 (prevent [[go *] $Details]) %% Force the player to explore the back room first
 	~(#garment is #wornby #me)
@@ -344,6 +354,23 @@
 %% The End
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+#freedom
+(room *)
+(* uses preverb #in)
+(* has modifier #temple)
+(name * in #nominative/#genitive) ḫilaš %% The "courtyard" that was south of the temple in act 2
+(name * in #dative) ḫili
+(name * in #accusative) ḫilan
+(name * in #ablative) ḫilaz
+(name * in #bare) ḫila
+
+(prevent [[go *] $]) %% Can't just leave without solving the puzzle!
+	Nu (#ablative #temple) pāun. %% I went from the temple.
+	Nu=mu (#nominative #king) aušta. %% The king saw me.
+	Nu=mu (#nominative #king) punušta. %% The king questioned me.
+	Nu=mu=kan (#nominative #mecedi) kuenta. %% The bodyguard slew me.
+	(death ensues)
+
 ($Assassin kills the king)
 	%% Here we go!
 	Nu=kan (#nominative $Assassin) (#accusative #king) kuenta. %% X slew the king.
@@ -352,10 +379,13 @@
 	
 	(par) (hr)
 	Nu zuppari dāḫḫun. %% I took a torch.
-	Nu (#accusative #temple) lukkun. %% I ignited the temple.
+	Nu (#accusative #temple) zuppariyaz lukkun. %% I ignited the temple with the torch.
+	(if) ~(#god is #heldby #me) (then)
+		Nu (#accusative #god) dāḫḫun. %% I grabbed the god.
+	(endif)
 	Nu (#ablative #temple) pāun. %% I left the temple.
 	Nu ḫappiraz pāun. %% I left the city.
-	Nu šiun appa arnunun. %% I brought the god back.
+	Nu šiun āppa arnunun. %% I brought the god back home.
 	
 	(par) (hr)
 	(div @colophon) (colophon)

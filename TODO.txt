@@ -2,5 +2,4 @@ update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
 "unimportant" objects that cannot be interacted with
-map does not show up immediately on web tablet 2?
-Weirdness when right column gets longer than left column—add scroll bar somehow?
+actions on multiple objects are very slow - may be only logograms?

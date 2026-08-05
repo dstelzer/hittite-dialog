@@ -1,5 +1,5 @@
 (extension version)
-	Hittite action processing version 260801.
+	Hittite action processing version 260804.
 
 (action logging) (fail)
 
@@ -39,8 +39,10 @@
 	(span @metaverb) (link) /save ,
 	(span @metaverb) (link) /restore ,
 	(span @metaverb) (link) /again ,
-	(span @metaverb) (link) /about
+	(span @metaverb) (link) /about ,
+	(span @metaverb) (link) /credits
 	, (span @metaverb) (link) /memory %% Comment this out when finalized
+%% TODO: do we need to stop this bar from flashing?
 
 (style class @p-meta)
 	data-language: en;
@@ -209,14 +211,27 @@
 (verbs list) ~(given first message)
 (verbs list)
 	(span @bold) { Verbs: }
-	(collect $Verb)
-		*(verb $Verb)
-		(verb $Verb unlocked)
-	(into $VerbList)
+	(gather current verbs list into $VerbList)
 	(listing $VerbList {(hittite name $_)} @, 0)
 
 (hittite name $Obj) (span @hittite) (name $Obj) %% TODO workaround for Dialog bug
 
+(global variable (previous verbs list $))
+(gather current verbs list into $List)
+	(collect $Verb)
+		*(verb $Verb)
+		(verb $Verb unlocked)
+	(into $List)
+(verb list has changed since last turn)
+	(gather current verbs list into $Current)
+	(if) (previous verbs list $Current) (then)
+		(fail)
+	(else)
+		(now) (previous verbs list $Current)
+	(endif)
+
+(verbs list panel) %% Don't update the panel if we don't need to (because on web it does an animation every time)
+	~(verb list has changed since last turn)
 (verbs list panel)
 	(inline status bar @p-verbs) (verbs list)
 (style class @p-verbs)
@@ -399,8 +414,8 @@
 	height: 1em;
 
 (verb @look/@oḫḫun/@ōḫḫun/@uḫḫun/@ūḫḫun means @ōḫḫun)
+(@ōḫḫun wants cases [#accusative]) %% Put this first for better error messages
 (@ōḫḫun wants cases [])
-(@ōḫḫun wants cases [#accusative])
 (translate [$ ōḫḫun $ [] | $] into [look])
 (translate [$ ōḫḫun $ $Acc | $] into [examine $Acc])
 (perform [[look] $])
