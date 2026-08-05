@@ -8,7 +8,6 @@
 /* Layout */
 
 body {
-	counter-reset: tablet;
 	background-image: url("wood.jpg");
 	background-repeat: no-repeat;
 	background-position: center;
@@ -35,8 +34,7 @@ body {
 
 #rightcolumn {
 	position: absolute;
-/*	right: -75px;	*/
-	right: -100px; /* changed temporarily for testing -DMS */
+	right: -4.5em;
 	top: 0px;
 }
 
@@ -87,10 +85,10 @@ div.aa-tutorial p {
 /* Errors */
 
 div.aa-error {
-	border-top: none;
 	float: left;
+	clear: left;
 	width: 150px;
-	margin-left: -165px;
+	margin-left: calc(-165px - var(--before-element-width, 0px));
 	margin-top: -3.5em;
 	padding-top: 2em;
 	font-family: var(--font-body);
@@ -164,14 +162,15 @@ div.aa-error {
 	font-size: 66%;
 }
 
+#meta {
+	background: #FFADF8;
+	background: linear-gradient(90deg, rgba(235, 181, 233, 1) 0%, rgba(237, 190, 237, 1) 40px, rgba(250, 181, 248, 1) 40px, rgba(250, 181, 248, 1) 100%);
+}
+
 #p-meta {
 	font-family: Caveat;
 	font-size: 1.2em;
 }
-
-/*p:has(.aainputtext) {
-	display: none;
-}*/
 
 /* I/O */
 
@@ -195,6 +194,16 @@ div.aa-error {
 	font-weight: bold;
 }
 
+/* Hide input text when not immediately followed by an error */
+div.output.output-first:has(h2.aainputtext):not(:has(+ .aa-error)) p:has(h2.aainputtext) {
+	/* output-first: complicated layout so just white out text */
+	color: white;
+}
+div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
+	/* output: hide div */
+	display: none;
+}
+
 /* Tablet fragments */
 
 .output {
@@ -204,6 +213,7 @@ div.aa-error {
 	padding-left: 5px;
 	padding-right: 5px;
 	counter-increment: output-line;
+	min-height: 22px;
 }
 
 /* FIXME tinkering with this */
@@ -232,12 +242,11 @@ div.aa-error {
 	margin-top: 1em;
 }
 
-.output-first:nth-of-type(odd)::before {
-	counter-increment: tablet;
-	content: "1." counter(tablet) " Obv.";
-    float: left;
+.output-first:nth-of-type(5n)::before {
+	content: var(--rev-obv, "1.1 Obv.");
+	float: left;
     width: calc(100% + 12px);
-    aspect-ratio: 443/87;
+    aspect-ratio: 355/65;
     background: url(tab_top0.png) no-repeat;
 	background-size: 100% 100%;
     shape-outside: url(tab_top0.png);
@@ -248,15 +257,67 @@ div.aa-error {
 	font-family: Caveat;
 	font-size: 1.2em;
 }
+.output-first:has(#aainputblock):nth-of-type(5n)::before { shape-outside: none; }
 
-/* FIXME wrap into shape-randomization code */
-.output-first:nth-of-type(even)::before {
-	counter-increment: none;
-    content: "1." counter(tablet) " Rev.";
+.output-first:nth-of-type(5n+1)::before {
+	content: var(--rev-obv, "1.1 Obv.");
+	text-align: left;
+    float: left;
+    width: calc(100% + 12px);
+    aspect-ratio: 355/112;
+    background: url(tab_top4.png) no-repeat;
+	background-size: 100% 100%;
+	shape-outside: url(tab_top4.png);
+    shape-image-threshold: 0.5;
+	shape-margin: 0.5em;
+	margin-left: -7px;
+	margin-top: -2px;
+	font-family: Caveat;
+	font-size: 1.2em;
+}
+.output-first:has(#aainputblock):nth-of-type(5n+1)::before { shape-outside: none; }
+
+.output-first:nth-of-type(5n+2)::before {
+	content: var(--rev-obv, "1.1 Obv.");
 	text-align: right;
     float: right;
     width: calc(100% + 12px);
-    aspect-ratio: 443/54;
+    aspect-ratio: 355/53;
+    background: url(tab_top2.png) no-repeat;
+	background-size: 100% 100%;
+	shape-outside: url(tab_top2.png);
+    shape-image-threshold: 0.5;
+	margin-right: -7px;
+	margin-top: -2px;
+	font-family: Caveat;
+	font-size: 1.2em;
+}
+.output-first:has(#aainputblock):nth-of-type(5n+2)::before { shape-outside: none; }
+
+.output-first:nth-of-type(5n+3)::before {
+	content: var(--rev-obv, "1.1 Obv.");
+	text-align: left;
+    float: left;
+    width: calc(100% + 12px);
+    aspect-ratio: 355/138;
+    background: url(tab_top3.png) no-repeat;
+	background-size: 100% 100%;
+	shape-outside: url(tab_top3.png);
+    shape-image-threshold: 0.5;
+	shape-margin: 0.5em;
+	margin-left: -7px;
+	margin-top: -2px;
+	font-family: Caveat;
+	font-size: 1.2em;
+}
+.output-first:has(#aainputblock):nth-of-type(5n+3)::before { shape-outside: none; }
+
+.output-first:nth-of-type(5n+4)::before {
+	content: var(--rev-obv, "1.1 Obv.");
+	text-align: right;
+    float: right;
+    width: calc(100% + 12px);
+    aspect-ratio: 355/41;
     background: url(tab_top1.png) no-repeat;
 	background-size: 100% 100%;
 	shape-outside: url(tab_top1.png);
@@ -267,38 +328,66 @@ div.aa-error {
 	font-family: Caveat;
 	font-size: 1.2em;
 }
+.output-first:has(#aainputblock):nth-of-type(5n+4)::before { shape-outside: none; }
 
 .output-last {
 	border-bottom: 2px black solid;
 	margin-bottom: 1em;
 }
 
-.output-last:nth-of-type(even)::after {
+.output-last:nth-of-type(5n)::after {
     content: "";
 	display: block;
     width: calc(100% + 12px);
-    aspect-ratio: 443/54;
+    aspect-ratio: 355/65;
     background: url(tab_bot0.png) no-repeat;
 	background-size: 100% 100%;
-	shape-outside: url(tab_bot0.png);
-    shape-image-threshold: 0.5;
-	shape-margin: 0.5em;
-	margin-left: -7px;
-	margin-bottom: -2px;
+	margin-left: -5px;
+	margin-bottom: -3px;
 }
 
-.output-last:nth-of-type(odd)::after {
+.output-last:nth-of-type(5n+1)::after {
     content: "";
 	display: block;
     width: calc(100% + 12px);
-    aspect-ratio: 443/87;
+    aspect-ratio: 355/39;
     background: url(tab_bot1.png) no-repeat;
 	background-size: 100% 100%;
-	shape-outside: url(tab_bot1.png);
-    shape-image-threshold: 0.5;
-	shape-margin: 0.5em;
+	margin-left: -7px;
+	margin-bottom: -3px;
+}
+
+.output-last:nth-of-type(5n+2)::after {
+    content: "";
+	display: block;
+    width: calc(100% + 12px);
+    aspect-ratio: 355/60;
+    background: url(tab_bot2.png) no-repeat;
+	background-size: 100% 100%;
 	margin-left: -5px;
-	margin-bottom: -2px;
+	margin-bottom: -3px;
+}
+
+.output-last:nth-of-type(5n+3)::after {
+    content: "";
+	display: block;
+    width: calc(100% + 12px);
+    aspect-ratio: 355/25;
+    background: url(tab_bot3.png) no-repeat;
+	background-size: 100% 100%;
+	margin-left: -7px;
+	margin-bottom: -3px;
+}
+
+.output-last:nth-of-type(5n+4)::after {
+    content: "";
+	display: block;
+    width: calc(100% + 14px);
+    aspect-ratio: 355/28;
+    background: url(tab_bot4.png) no-repeat;
+	background-size: 100% 100%;
+	margin-left: -7px;
+	margin-bottom: -3px;
 }
 
 /* Minor styling */

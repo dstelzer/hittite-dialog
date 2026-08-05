@@ -348,6 +348,7 @@ window.run_game = function(story64, options) {
 		needs_output: true,
 		last_output: null,
 		in_seq: false,
+		fragment_number: 1,
 		after_text: false,
 		status_visible: false,
 		in_status: false,
@@ -534,9 +535,16 @@ window.run_game = function(story64, options) {
 				if(!document.getElementById("aacb-fade").checked) {
 					p.style["animation-name"] = "none";
 				}
+				
+				// Rev./Obv. logic
+				var beforeContent = "1." + Math.floor(this.fragment_number / 2) + " " + ((this.fragment_number % 2 === 0) ? "Obv." : "Rev.");
+				
+				// output-first logic
 				if(this.divs.length == 1 && this.style_data[this.divs[0]].name == "aa-status" && !this.in_status) {
 					// aa-status case: always start of fragment
 					this.current.className += " output output-first";
+					this.current.style.setProperty("--rev-obv", '"' + beforeContent + '"');
+					this.fragment_number++;
 					this.in_seq = true;
 					this.needs_output = false;
 					this.current.appendChild(p);
@@ -546,6 +554,8 @@ window.run_game = function(story64, options) {
 					var wrapper = document.createElement("div");
 					if(!this.in_seq) {
 						wrapper.className = "output output-first";
+						wrapper.style.setProperty("--rev-obv", '"' + beforeContent + '"');
+						this.fragment_number++;
 						this.in_seq = true;
 					} else {
 						wrapper.className = "output";
@@ -678,6 +688,7 @@ window.run_game = function(story64, options) {
 				span.appendChild(document.createTextNode(str));
 				this.current.appendChild(span);
 			}
+			cuneiform.process_element(span, true); // ensure input is rendered as signs on the fragments
 			this.transcript.print(str);
 			this.transcript.line();
 			//this.current.style["margin-bottom"] = ".3em";
