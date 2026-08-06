@@ -194,15 +194,20 @@ div.aa-error {
 	font-weight: bold;
 }
 
+.aainputmeta {
+	font-weight: bold;
+}
+
 /* Hide input text when not immediately followed by an error */
+/* (disabled for now until we figure out what to do with this) */
 div.output.output-first:has(h2.aainputtext):not(:has(+ .aa-error)) p:has(h2.aainputtext) {
 	/* output-first: complicated layout so just white out text */
-	color: white;
+	/* color: white; */
 	/* visibility: hidden; */
 }
 div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	/* output: hide div */
-	display: none;
+	/* display: none; */
 }
 
 /* Tablet fragments */
@@ -389,6 +394,29 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	background-size: 100% 100%;
 	margin-left: -7px;
 	margin-bottom: -3px;
+}
+
+.output-break-start::after {
+	content: "";
+	display: block;
+    width: calc(100% + 14px);
+    aspect-ratio: 355/19;
+    background: url(dither_top.png) no-repeat;
+	background-size: 100% 100%;
+	margin-left: -7px;
+	margin-bottom: -3px;
+	margin-top: 5px;
+}
+
+.output-break-end::before {
+	content: "";
+	display: block;
+    width: calc(100% + 14px);
+    aspect-ratio: 355/19;
+    background: url(dither_bot.png) no-repeat;
+	background-size: 100% 100%;
+	margin-left: -7px;
+	margin-bottom: 2px;
 }
 
 /* Minor styling */

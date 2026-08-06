@@ -553,7 +553,11 @@ window.run_game = function(story64, options) {
 					// normal output case
 					var wrapper = document.createElement("div");
 					if(!this.in_seq) {
-						wrapper.className = "output output-first";
+						if(this.last_output && this.last_output.classList.contains("output-break-start")) {
+							wrapper.className = "output output-break-end";
+						} else {
+							wrapper.className = "output output-first";
+						}
 						wrapper.style.setProperty("--rev-obv", '"' + beforeContent + '"');
 						this.fragment_number++;
 						this.in_seq = true;
@@ -784,7 +788,11 @@ window.run_game = function(story64, options) {
 			if(this.in_seq && this.last_output &&
 			   this.style_data[id].name != "aa-error" &&
 			   this.style_data[id].name != "aa-map") {
-				this.last_output.classList.add("output-last");
+				if(this.style_data[id].name == "aa-tutorial") {
+					this.last_output.classList.add("output-break-start");
+				} else {
+					this.last_output.classList.add("output-last");
+				}
 				this.in_seq = false;
 			}
 			this.needs_output = true;			
