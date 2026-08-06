@@ -4,3 +4,4 @@ clicking ANA in dictionary window should not replace entry
 "unimportant" objects that cannot be interacted with
 actions on multiple objects are very slow - may be only logograms?
 "This sentence is likely a scribal error" does not use span @hittite
+switch fonts to woff2
