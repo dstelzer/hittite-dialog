@@ -34,9 +34,10 @@ destination, while an "accusative" noun like ḫapan indicates the object of the
 verb.
 
 Now it's time to construct a sentence of your own. The compass rose at the top
-right indicates nearby locations, and the "verbs" bar suggests some relevant
-verbs. Double-click any of these words to insert them into your sentence; see
-if you can use them to move to a new location.
+right indicates nearby locations, and the panel underneath it suggests some
+relevant verbs. Double-click any of these words to insert them into your
+sentence; see if you can use them to move to a new location. (You can also type
+on a keyboard, if you prefer, and just leave off the special accent marks.)
 
 > * Starting out
 > nu auriya paun
@@ -137,8 +138,8 @@ shown on the compass rose in the top right.
 There's no evidence that the Hittites did this, and this game adds numbers 5
 and 6 for "up" and "down", which is completely non-historical. But the Hittites
 imitating Babylonian writing isn't much of a stretch, and typing a full
-sentence every time gets tedious very fast! You can also click the map to
-navigate to anywhere you've been before.
+sentence every time gets tedious very fast! You can also click the boxes on the
+map to navigate to anywhere you've been before.
 
 > nu ackan dahhun
 Nu āškan natta taruḫḫun dāḫḫun. N=aš mekki nakkiš ēšta.
@@ -210,7 +211,8 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, katta tēḫḫun
 
 U₃ is the name of a cuneiform sign that functions like the "&" symbol in
 English: a shorter way to write the word "and". The capital letters in our
-transcription show that this isn't the actual Hittite pronunciation.
+transcription show that this is the name of the sign, not the actual Hittite
+pronunciation.
 
 > ilan carrahhun
 Nu luttāi šarraḫḫun.
@@ -233,9 +235,12 @@ Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫ
                                       ( )     
 
 Hittite nouns were sometimes written with a special sign in front, called a
-"determinative". These weren't pronounced, but indicated something about the
-noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example,
-marks that something is made of wood.
+"determiner" or "determinative". These weren't pronounced, but indicated some
+property of the noun, like how "amber" is a rock but "Amber" is a person. GIŠ,
+for example, marks that something is made of wood.
+
+These signs are normally transcribed in superscript, but for typing, you can
+use a ^ symbol instead (GIŠ^ḫattalu).
 
 > * In the watchtower
 > ackan carrahhun

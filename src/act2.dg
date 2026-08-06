@@ -1032,6 +1032,11 @@
 	dankui %% "Dark"
 (medium short name (storage $Obj)) (#dative $Obj)
 
+%% In case someone tries to grab random logograms
+(prevent [[take (storage $) | $] $])
+	Nu kuitki natta dāḫḫun. %% I did not take anything.
+	(div @error) { Presumably nothing in this room was useful to the narrator's mission. }
+
 %% And finally, the circumstances in which each verb gets unlocked
 %% All of these are automatically unlocked from tablet 1
 (verb #v-look unlocked)
