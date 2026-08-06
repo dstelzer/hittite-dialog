@@ -90,6 +90,8 @@
 	~{ ($Action = [go *]) (or) ($Action = [travel *]) }
 	(div @error) { Since the "dark" is insubstantial, it's unclear what this action would entail. }
 
+(use bold room headers) %% Change this as needed
+
 (describe environment)
 	
 	%% Compass rose belongs off to one side, but in debugger it has to be inline
@@ -101,7 +103,11 @@
 	%% First paragraph: "I was at [location]."
 	(current room $Loc)
 	(action log {Current room: $Loc} )
-	(header $Loc)
+	(if) (use bold room headers) (then)
+		(span @bold) (header $Loc)
+	(else)
+		(header $Loc)
+	(endif)
 	
 	%% Second paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōḫḫun.
 	(collect $Obj)

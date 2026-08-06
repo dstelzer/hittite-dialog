@@ -49,6 +49,10 @@
 	vertical-align: middle;
 }
 
+.size-small .sign .read{
+	font-size: 1em; /* 0.75 is too small for the small size */
+}
+
 .sign:hover .glyph{
 	/* visibility: hidden; */
 	opacity: 0.25;
