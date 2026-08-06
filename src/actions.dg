@@ -230,6 +230,8 @@
 		(now) (previous verbs list $Current)
 	(endif)
 
+(verbs list panel)
+	~(given first message)
 (verbs list panel) %% Don't update the panel if we don't need to (because on web it does an animation every time)
 	~(verb list has changed since last turn)
 (verbs list panel)

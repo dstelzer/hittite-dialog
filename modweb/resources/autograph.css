@@ -34,7 +34,7 @@ body {
 
 #rightcolumn {
 	position: absolute;
-	right: -4.5em;
+	right: -6.5em;
 	top: 0px;
 }
 
@@ -198,6 +198,7 @@ div.aa-error {
 div.output.output-first:has(h2.aainputtext):not(:has(+ .aa-error)) p:has(h2.aainputtext) {
 	/* output-first: complicated layout so just white out text */
 	color: white;
+	/* visibility: hidden; */
 }
 div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	/* output: hide div */

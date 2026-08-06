@@ -661,6 +661,7 @@
 		(if) ($ComingBack = 1) (then)
 			(div @error) { The previous lines, starting with (print quoted $Words), are crossed out on the tablet and should be considered a scribal error. }
 			(now) (update needed)
+			(now) (map update needed)
 			(stop)
 		(else)
 			(now) (undo state exists)
@@ -693,7 +694,7 @@
 
 (parse metacommand [\/undo])
 	~(interpreter supports undo)
-	(div @meta) { Unfortunately, this interpreter does not support UNDO. }
+	(div @meta) { Unfortunately, this interpreter does not support /undo. }
 (parse metacommand [\/undo])
 	~(undo state exists)
 	(div @meta) { Can't undo what hasn't been done! Take some actions in the game first, and then you can undo them. }
@@ -708,6 +709,7 @@
 		(else)
 			(div @meta) { Game state restored. }
 			(now) (update needed)
+			(now) (map update needed)
 		(endif)
 	(else)
 		(div @realerror) { Save failed! }
