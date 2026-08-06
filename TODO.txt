@@ -3,4 +3,3 @@ update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
 switch fonts to woff2
 fill in third-person verb forms from tablet 3 into actions.dg
-"put water on hearth" doesn't work??
