@@ -100,7 +100,8 @@
 (item *)
 (clothing *)
 (logogram *)
-(name *) TUG
+(name *) TUG₂
+(dict *) TUG2 TÚG
 (* has modifier #scribe) ~(* is #heldby #scribe)
 
 (* is #heldby #scribe)

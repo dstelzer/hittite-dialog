@@ -702,6 +702,10 @@
 	(div @meta) { Thanks for playing! }
 	(quit)
 
+(parse metacommand [\/restart])
+	(restart)
+	(div @meta) { Restart failed! }
+
 (parse metacommand [\/undo])
 	~(interpreter supports undo)
 	(div @meta) { Unfortunately, this interpreter does not support /undo. }
@@ -758,6 +762,8 @@
 		(span @metaverb) (link) /credits .
 	}
 	(now) (meta verbs introduced)
+
+(parse metacommand [\/gameover]) (game over {The End}) %% For testing
 
 (parse metacommand $Words)
 	(div @meta) { The meta command (print quoted $Words) was not recognized. Try (span @metaverb) (link) /about for more information. }
@@ -1104,11 +1110,29 @@
 ($ [])
 ($Case [$Single])
 	($Case $Single)
+($Case $List)
+	(length of $List into $Length)
+	($Length > 5)
+	(complicated list of $List in $Case)
 ($Case [$Head | $Rest])
 	($Case $Head)
+	(and)
+	($Case $Rest)
+
+(and)
 	(span @akk) { U₃ } %% Using the "Akkadian ampersand" instead of the clitic =ya because the clitic does messy things with the last consonant of the word
 	(now) (heterograms used) %% Give a tutorial the first time this happens
-	($Case $Rest)
+
+(complicated list of [$A $B $C $D | $Rest] in $Case) %% When enough things are in the same room description, we have to do this in a more complicated way that's easier to read
+	($Case $A) (space 4) (and)
+	($Case $B) (space 4) (and)
+	($Case $C) (line) (space 4) (and)
+	(complicated list of [$D | $Rest] in $Case)
+(complicated list of [$Single] in $Case) %% Fall back in the base case
+	($Case $Single)
+(complicated list of [$Head | $ShortList] in $Case)
+	($Case $Head) (space 4) (and)
+	(complicated list of $ShortList in $Case)
 
 (name (logogram $Obj) in #bare/#nominative/#accusative) (name $Obj)
 %% We do not have (name $ in $) rules for logograms in any other case

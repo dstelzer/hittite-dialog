@@ -3,3 +3,6 @@ update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
 switch fonts to woff2
 fill in third-person verb forms from tablet 3 into actions.dg
+"put water on hearth" doesn't work??
+lowercase determiners broken
+better listing of many objects in room description (basically only relevant for the bunch of tablets in act 3)

@@ -90,7 +90,7 @@
 	~{ ($Action = [go *]) (or) ($Action = [travel *]) }
 	(div @error) { Since the "dark" is insubstantial, it's unclear what this action would entail. }
 
-(use bold room headers) %% Change this as needed
+(use bold room headers) (fail) %% Change this as needed
 
 (describe environment)
 	
