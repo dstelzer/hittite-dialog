@@ -1,5 +1,9 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
-"unimportant" objects that cannot be interacted with
-actions on multiple objects are very slow - may be only logograms?
+switch fonts to woff2
+fill in third-person verb forms from tablet 3 into actions.dg
+n(u) translates to n(u-u) and displays as ��
+explain that you should type in transliteration, not cuneiform
+"Typing “/about” into the first prompt triggers the “You probably came up with something like…” passage, even though it’s a special interpreter command."
+Quotes and apostrophes
