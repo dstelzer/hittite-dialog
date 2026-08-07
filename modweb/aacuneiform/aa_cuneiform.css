@@ -49,6 +49,10 @@
 	vertical-align: middle;
 }
 
+.size-small .sign .read{
+	font-size: 1em; /* 0.75 is too small for the small size */
+}
+
 .sign:hover .glyph{
 	/* visibility: hidden; */
 	opacity: 0.25;
@@ -104,19 +108,19 @@
 
 @font-face{
 	font-family: CuneiInk;
-	src: url("fonts/ArmannisNew.otf");
+	src: url("../ishamai/fonts/ArmannisNew.otf");
 }
 @font-face{
 	font-family: CuneiPublished;
-	src: url("fonts/MittellinienNew.otf");
+	src: url("../ishamai/fonts/MittellinienNew.otf");
 }
 @font-face{
 	font-family: CuneiHandwrite;
-	src: url("fonts/PenstrokeNew.otf");
+	src: url("../ishamai/fonts/PenstrokeNew.otf");
 }
 @font-face{
 	font-family: CuneiLinear;
-	src: url("fonts/LinearNew.otf");
+	src: url("../ishamai/fonts/LinearNew.otf");
 }
 
 .font-ink .glyph{

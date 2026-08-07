@@ -778,11 +778,14 @@
 		(link) /restart ,
 		(link) /restore ,
 		(link) /quit ,
-		(link) /undo ?
+		(link) /undo ,
+		or (link resource @parent) { go back to the main page } ?
 	}
 	(get input $Words)
 	(parse metacommand $Words)
 	(fail)
+
+(define resource @parent) redirect.html
 
 (interface (game over $<Closure))
 

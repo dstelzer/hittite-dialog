@@ -25,7 +25,7 @@
 (dict $Obj in $Case)
 	($Obj is filled with $Substance)
 	~($Substance is $ $Obj) %% In case it's being used as an on-stage object
-	(dict $Substance in $Case)
+	*(dict $Substance in $Case)
 (unlikely $Action)
 	*($Group is one of $Action)
 	*($Substance is one of $Group)

@@ -27,7 +27,8 @@
 var b64_enc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 var b64_dec = [];
 
-var wants_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // https://stackoverflow.com/a/57795495/3233017
+//var wants_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // https://stackoverflow.com/a/57795495/3233017
+var wants_dark_mode = false; // Dark mode is not implemented yet TODO
 
 // These are turned into labelled checkboxes in the #aacheckboxes div
 var toggles = [
@@ -344,6 +345,10 @@ window.run_game = function(story64, options) {
 
 	io = {
 		in_par: false,
+		needs_output: true,
+		last_output: null,
+		in_seq: false,
+		fragment_number: 1,
 		after_text: false,
 		status_visible: false,
 		in_status: false,
@@ -401,6 +406,8 @@ window.run_game = function(story64, options) {
 				this.current = document.getElementById("aamain");
 				$(this.current).empty();
 				this.in_par = false;
+				this.needs_output = true;
+				this.in_seq = false;
 				this.after_text = false;
 				this.n_inner = 0;
 				this.transcript.par();
@@ -466,7 +473,7 @@ window.run_game = function(story64, options) {
 			if(!io.in_status) {
 				div = io.current;
 				while(div.nodeName == "P" || div.nodeName == "SPAN") {
-					div = this.current.parentNode;
+					div = div.parentNode;
 				}
 				if(div.nodeName == "DIV") {
 					div.style.display = "none";
@@ -511,6 +518,7 @@ window.run_game = function(story64, options) {
 			this.current = document.getElementById("aamain");
 			this.in_status = false;
 			this.in_par = false;
+			this.needs_output = true;
 			this.after_text = false;
 			this.n_inner = 0;
 			this.transcript.par();
@@ -521,13 +529,48 @@ window.run_game = function(story64, options) {
 		ensure_par: function() {
 			if(!this.in_par) {
 				var p = document.createElement("p");
-				if(this.after_text) {
+				/*if(this.after_text) {
 					p.style["margin-top"] = "1em";
-				}
+				}*/
 				if(!document.getElementById("aacb-fade").checked) {
 					p.style["animation-name"] = "none";
 				}
-				this.current.appendChild(p);
+				
+				// Rev./Obv. logic
+				var beforeContent = "1." + Math.floor(this.fragment_number / 2) + " " + ((this.fragment_number % 2 === 0) ? "Obv." : "Rev.");
+				
+				// output-first logic
+				if(this.divs.length == 1 && this.style_data[this.divs[0]].name == "aa-status" && !this.in_status) {
+					// aa-status case: always start of fragment
+					this.current.className += " output output-first";
+					this.current.style.setProperty("--rev-obv", '"' + beforeContent + '"');
+					this.fragment_number++;
+					this.in_seq = true;
+					this.needs_output = false;
+					this.current.appendChild(p);
+					this.last_output = this.current;
+				} else if(this.divs.length == 0 && !this.in_status) {
+					// normal output case
+					var wrapper = document.createElement("div");
+					if(!this.in_seq) {
+						if(this.last_output && this.last_output.classList.contains("output-break-start")) {
+							wrapper.className = "output output-break-end";
+						} else {
+							wrapper.className = "output output-first";
+						}
+						wrapper.style.setProperty("--rev-obv", '"' + beforeContent + '"');
+						this.fragment_number++;
+						this.in_seq = true;
+					} else {
+						wrapper.className = "output";
+					}
+					this.needs_output = false;
+					wrapper.appendChild(p);
+					this.current.appendChild(wrapper);
+					this.last_output = wrapper;
+				} else {
+					this.current.appendChild(p);
+				}
 				this.current = p;
 				this.in_par = true;
 				this.after_text = false;
@@ -583,6 +626,9 @@ window.run_game = function(story64, options) {
 			this.raw_unstyle();
 			if(this.in_par) {
 				this.current = this.current.parentNode;
+				if(this.current && this.current.classList && this.current.classList.contains("output") && !this.current.classList.contains("aa-status")) {
+					this.current = this.current.parentNode;
+				}
 				this.in_par = false;
 			}
 			this.after_text = false;
@@ -611,6 +657,9 @@ window.run_game = function(story64, options) {
 			this.raw_unstyle();
 			if(this.in_par) {
 				this.current = this.current.parentNode;
+				if(this.current && this.current.classList && this.current.classList.contains("output") && !this.current.classList.contains("aa-status")) {
+					this.current = this.current.parentNode;
+				}
 				this.in_par = false;
 			}
 			if(!this.in_status) {
@@ -625,7 +674,7 @@ window.run_game = function(story64, options) {
 			if(link) {
 				span = document.createElement("h2"); // Using an H2 instead of a span makes it easier for screen readers to jump to it
 	//			$(span).addClass(io.links_enabled? "aalink" : "aahidelink");
-				$(span).addClass("aainputtext"); // For styling input differently, if desired; currently unused
+				$(span).addClass(str[0] != '/' ? "aainputtext" : "aainputmeta"); // For styling input differently, if desired; currently unused
 				if(str[0] == '/') { // English metacommand
 					span.dataset['language'] = 'en';
 				}
@@ -636,16 +685,17 @@ window.run_game = function(story64, options) {
 	// not using links for input for this game specifically
 			} else {
 				span = document.createElement("h2");
-				$(span).addClass("aainputtext"); // For styling input differently, if desired; currently unused
+				$(span).addClass(str[0] != '/' ? "aainputtext" : "aainputmeta"); // For styling input differently, if desired; currently unused
 				if(str[0] == '/') { // English metacommand
 					span.dataset['language'] = 'en';
 				}
 				span.appendChild(document.createTextNode(str));
 				this.current.appendChild(span);
 			}
+			cuneiform.process_element(span, true); // ensure input is rendered as signs on the fragments
 			this.transcript.print(str);
 			this.transcript.line();
-			this.current.style["margin-bottom"] = ".3em";
+			//this.current.style["margin-bottom"] = ".3em";
 			this.after_text = false;
 			this.leave_inner();
 			this.currarray.push({t: "i", s: str});
@@ -735,6 +785,17 @@ window.run_game = function(story64, options) {
 			var div, sty;
 
 			this.leave_inner();
+			if(this.in_seq && this.last_output &&
+			   this.style_data[id].name != "aa-error" &&
+			   this.style_data[id].name != "aa-map") {
+				if(this.style_data[id].name == "aa-tutorial") {
+					this.last_output.classList.add("output-break-start");
+				} else {
+					this.last_output.classList.add("output-last");
+				}
+				this.in_seq = false;
+			}
+			this.needs_output = true;			
 			div = document.createElement("div");
 			div.className = this.style_data[id].name;
 			for(let attr in this.style_data[id].attrs) {
@@ -1151,7 +1212,7 @@ window.run_game = function(story64, options) {
 			this.aainputblock.style.maxWidth = "100px"; // Should always be smaller than the goal width
 			this.aainputblock.style.display = "inline-block";
 			//$(this.aainput).val($(this.current).width() + ", " + $(this.aainput).position().left);
-			var blockwidth = $(this.current).width() - $(this.aainputblock).position().left; // Make the block take up all the space between the prompt and the right edge
+			var blockwidth = $(this.current).offset().left + $(this.current).width() - $(this.aainputblock).offset().left; // Make the block take up all the space between the prompt and the right edge
 			var submitwidth = $("#aasubmit").width();
 			this.aainputblock.style.maxWidth = blockwidth + "px";
 			this.aainput.style.width = (blockwidth - submitwidth) + "px";
@@ -1354,9 +1415,9 @@ window.run_game = function(story64, options) {
 
 	function update_globalstyle() {
 		if(document.getElementById("aacb-dark").checked) {
-			$("body").addClass("night");
+	//		$("body").addClass("night"); // TODO
 		} else {
-			$("body").removeClass("night");
+	//		$("body").removeClass("night");
 		}
 		if(document.getElementById("aacb-large").checked) {
 			$("body").addClass("enlarge");
