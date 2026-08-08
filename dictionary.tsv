@@ -1,4 +1,4 @@
-# Headword	All forms	Definition	Paradigm (Nominals: NOM GEN DAT ACC ABL; Verbs: 1SG 3SG)	Simplified paradigm (optional)
+# Headword	All forms	Definition	Paradigm (Nominals: NOM GEN DAT ACC ABL; Verbs: 1SG 3SG)	Simplified paradigm (optional)	Simplified definition (optional)
 
 # Basic actions
 n(u)	nu na n n(u)	Then (a mostly-meaningless word used to introduce a new sentence in Hittite, called the "sentence connective".)
@@ -25,7 +25,7 @@ nakkiš	nakkiš nakki	Heavy	"Common gender" nakkiš "Neuter gender" nakki
 šalliš	šalliš šalli	Large	"Common gender" šalliš "Neuter gender" šalli
 katta	katta	Down (as in katta tēḫḫun, "I put (something) down")
 tēḫḫun	tēḫḫun	I put (something: accusative; somewhere: dative)
-kuenun	kuenun kuenta	I slew (someone: accusative; with something: ablative; always comes with =kan)	VERB kuenun kuenta
+kuenun	kuenun kuenta	I slew (someone: accusative; with something: ablative; always comes with =kan)	VERB kuenun kuenta	VERB kuenun kuenta	I slew (someone: accusative; always comes with =kan)
 kištanunun	kištanunun	I extinguished (something: accusative)
 lukkun	lukkun	I kindled, ignited, set on fire (something: accusative)
 ḫuškanun	ḫuškanun	I waited

@@ -168,7 +168,7 @@
 (neuter *)
 (* blocks passage)
 	(current room $Room)
-	~(#ladder is #in $Room)
+	~{ ($Room is one of [#corner #gatehouse]) (#ladder is #in $Room) } %% Don't pathfind through it
 (describe * blocking passage) N=at parku ēšta. %% "The window is high up"
 (name * in #nominative/#accusative/#bare) luttāi
 (dict * in #nominative/#accusative/#bare) luttai
