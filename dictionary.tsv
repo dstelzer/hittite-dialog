@@ -1,4 +1,4 @@
-# Headword	All forms	Definition	Paradigm (Nominals: NOM GEN DAT ACC ABL; Verbs: 1SG 3SG)	Simplified paradigm (optional)
+# Headword	All forms	Definition	Paradigm (Nominals: NOM GEN DAT ACC ABL; Verbs: 1SG 3SG)	Simplified paradigm (optional)	Simplified definition (optional)
 
 # Basic actions
 n(u)	nu na n n(u)	Then (a mostly-meaningless word used to introduce a new sentence in Hittite, called the "sentence connective")
@@ -17,7 +17,7 @@ kuit	kuit	Because
 apa	apāš apēl apēdani apōn apūn apēz apa	That	NOUN apāš apēl apēdani apōn apēz
 karū	karū	Already
 šarraḫḫun	šarraḫḫun	I passed through, crossed (something: accusative)
-dāḫḫun	dāḫḫun dāš	I took (something: accusative)	VERB dāḫḫun dāš
+dāḫḫun	dāḫḫun dāš	I picked up, took (something: accusative)	VERB dāḫḫun dāš
 natta	natta	Not
 =aš	=aš =an =at =ši	He/she/it (referring back to the most recently-mentioned noun)	"Common gender nom" =aš "Common gender acc" =an "Neuter gender nom/acc" =at "Any gender dat" =ši
 mekki	mekki	Very
@@ -25,7 +25,7 @@ nakkiš	nakkiš nakki	Heavy	"Common gender" nakkiš "Neuter gender" nakki
 šalliš	šalliš šalli	Large	"Common gender" šalliš "Neuter gender" šalli
 katta	katta	Down (as in katta tēḫḫun, "I put (something) down")
 tēḫḫun	tēḫḫun	I put (something: accusative; somewhere: dative)
-kuenun	kuenun kuenta	I slew (someone: accusative; with something: ablative; always comes with =kan)	VERB kuenun kuenta
+kuenun	kuenun kuenta	I slew (someone: accusative; with something: ablative; always comes with =kan)	VERB kuenun kuenta	VERB kuenun kuenta	I slew (someone: accusative; always comes with =kan)
 kištanunun	kištanunun	I extinguished (something: accusative)
 lukkun	lukkun	I kindled, ignited, set on fire (something: accusative)
 ḫuškanun	ḫuškanun	I waited
@@ -67,14 +67,14 @@ arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer, front room	NOUN arkiwiš 
 paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire; related to the English word "pyre"	NOUN paḫḫur paḫḫuenaš paḫḫueni paḫḫur paḫḫuenaz
 än	än ān	Hot; this word is spelled unusually in cuneiform, so it may have actually been pronounced "a'an" or "ayyan" instead of "ān".
 DUG	DUG	Vessel	DTM
-aganni	aganniš aganniyaš aganniya agannin aganniyaz aganni	Cup	NOUN aganniš aganniyaš aganniya agannin aganniyaz
+dammuri	dammuriš dammuriyaš dammuri dammurin dammuriyaz	Meaning unknown. From context, some kind of portable object.	NOUN dammuriš dammuriyaš dammuri dammurin dammuriyaz
+URUDU	URUDU	Copper, bronze	DTM
 šuppanza	šuppanza šuppandaš šuppandi šuppandan šuppandaz	Sleeping, asleep	NOUN šuppanza šuppandaš šuppandi šuppandan šuppndaz
 ḫalliyatalla	ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz ḫalliyatalla	Watchman, guard	NOUN ḫalliyatallaš ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz
 antaka	antakaš antaki antakan antakaz antaka	Room, storeroom	NOUN antakaš antakaš antaki antakan antakaz
 palḫi	palḫiš palḫaš palḫi palḫin palḫaz palḫi	Pithos (large clay jar)	NOUN palḫiš palḫaš palḫi palḫin palḫaz
 šuḫḫa	šuḫḫan šuḫḫaš šuḫḫi šuḫḫaz šuḫḫa	Roof	NOUN šuḫḫan šuḫḫaš šuḫḫi šuḫḫan šuḫḫaz
 karimmi	karimmi karimnaš karimni karimnaz	Temple	NOUN karimmi karimnaš karimni karimmi karimnaz
-šaknuwanza	šaknuwanza	Unclean, not ritually pure; in Hittite religion, interacting with the gods required someone to be free of impurity, both physical and spiritual. Many rituals required washing or bathing before doing something spiritually significant.
 <i>U₃</i>	Ù U₃ U3	A cuneiform sign that stands for "and", like the "&" symbol in English
 IM	IM	Wind, cardinal direction	DTM
 antuḫša	antuḫšaš antuḫši antuḫšan antuḫšaz antuḫša	Person, human being	NOUN antuḫšaš antuḫšaš antuḫši antuḫšan antuḫšaz
