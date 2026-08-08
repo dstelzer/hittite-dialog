@@ -1,1 +1,1 @@
-/home/daniel/Documents/OtherIF/Dialog/hittite/dictionary_simple.js
+../../dictionary_simple.js

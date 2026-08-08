@@ -14,18 +14,19 @@
 	(parser log {Sanitizing})
 	(parser log { Input: $Input } )
 	
-	(collect $Word) %% Get rid of ^ determinative markers and . logogram separators
-		*($Word is one of $Input)
-		~($Word = @^)
-		~($Word = @.)
-	(into $One)
+	(convert $Input into normalized transcription $One)
 	(parser log { One: $One } )
 	
-	(convert $One into normalized transcription $Two)
-	(parser log { Two: $Two } )
-	
-	(apply optional replacements to $Two into $Output) %% Try to fix invalid words if possible; does nothing to already-valid words
+	(apply optional replacements to $One into $Output) %% Try to fix invalid words if possible; does nothing to already-valid words
 	(parser log { Output: $Output } )
+
+%% This step is done a bit later in the process, so that determiner and compound markers can be considered during clitic separation
+(remove compound and determiner separators from $In into $Out)
+	(collect $Word) %% Get rid of ^ determinative markers and . logogram separators
+		*($Word is one of $In)
+		~($Word = @^)
+		~($Word = @.)
+	(into $Out)
 
 %% Rewrite predicate: take the verb from the end of the sentence and move it to the front, then take clitics in Wackernagel position (attached to the first word) and make them a separate object
 
@@ -36,7 +37,9 @@
 	(parser log { One: $One } )
 	(transpose verb from $One into $Two) %% Two: [dahhun an witeni]
 	(parser log { Two: $Two } )
-	(purify verb from $Two into $Output) %% Output: [dāḫḫun an witeni]
+	(purify verb from $Two into $Three) %% Three: [dāḫḫun an witeni]
+	(parser log { Three: $Three } )
+	(remove compound and determiner separators from $Three into $Output)
 	(parser log { Output: $Output } )
 	
 	%% This last step, (purify verb...), is usually no longer necessary due to (sanitize $ into $)
@@ -98,7 +101,13 @@
 (separate clitics from [(sentence connective $First) | $Rest] into [$Clitics | $Sentence])
 	(separate clitics internal from $Rest into $Clitics and $Sentence)
 
-%% Otherwise we need to preserve the first word (e.g. a noun that's been topicalized)
+%% Otherwise we need to preserve the first word (e.g. a noun that's been topicalized) - which requires some special handling for compound logograms and determiners
+(separate clitics from [$First @^ | $Rest] into [$Clitics $First @^ | $Sentence])
+	(separate clitics from $Rest into [$Clitics | $Sentence])
+(separate clitics from [$First @. | $Rest] into [$Clitics $First @. | $Sentence])
+	(separate clitics from $Rest into [$Clitics | $Sentence])
+
+%% If we have no multi-part logograms or determiners, finally we fall through to the general case
 (separate clitics from [$First | $Rest] into [$Clitics $First | $Sentence])
 	(separate clitics internal from $Rest into $Clitics and $Sentence)
 
@@ -180,11 +189,11 @@
 		(find first broken noun from $Right and report it)
 	(or)
 		*(parse $Left as invalid case $Case of $)
-		"(no space)(uppercase)(print words $Left)(no space)" is likely a scribal error; this is a valid noun, but the (name $Case) case doesn't make sense in this context.
+		"(no space) (span @hittite) {(uppercase)(print words $Left)} (no space)" is likely a scribal error; this is a valid noun, but the (name $Case) case doesn't make sense in this context.
 		(stop)
 	(or)
 		*(parse $Left as not-here object $)
-		It's unclear what (print quoted $Left) is meant to refer to;
+		It's unclear what (print quoted hittite $Left) is meant to refer to;
 		(if) ($Left = [$]) (then) %% Single word
 			this noun (emph {is}) used on the tablet, but what it describes
 		(else)
@@ -193,7 +202,7 @@
 		is not currently near our protagonist.
 		(stop)
 	(or)
-		The nouns in this line are obscure, and it's unclear what (print quoted $Left) means.
+		The nouns in this line are obscure, and it's unclear what (print quoted hittite $Left) means.
 		(stop)
 	}
 
@@ -453,6 +462,7 @@
 (dict (neuter $Obj) in #accusative)
 	*(dict $Obj in #nominative)
 (dict $Obj in $Case)
+	~(logogram $Obj) %% These need special parsing
 	($Case $Obj)
 
 (sentence connective @nu)
@@ -576,7 +586,7 @@
 (show parser errors [] for action $)
 	(div @realerror) { ERROR: there's an error, but no error code was returned! }
 (show parser errors [$Single] for action [$Raw | $Action])
-	This sentence, (print quoted $Raw), is difficult to interpret.
+	This sentence, (print quoted hittite $Raw), is difficult to interpret.
 	(uppercase) (show parser error $Single for action [$Raw | $Action]).
 (show parser errors [$A $B] for action [$Raw $Verb $ $Acc $Dat $Abl]) %% Exactly two errors might be a noun in the wrong case
 	{
@@ -603,7 +613,7 @@
 	(else) (div @realerror) { Missing $N ! } (fail)
 	(endif)
 	
-	This sentence, (print quoted $Raw), is likely a scribal error. The verb $Verb expects a noun in the (name $MissingCase), not the (name $ExcessCase): (span @hittite) ($MissingCase $ExcessNoun) rather than (span @hittite) ($ExcessCase $ExcessNoun) .
+	This sentence, (print quoted hittite $Raw), is likely a scribal error. The verb $Verb expects a noun in the (name $MissingCase), not the (name $ExcessCase): (span @hittite) ($MissingCase $ExcessNoun) rather than (span @hittite) ($ExcessCase $ExcessNoun) .
 	
 (show parser errors $List for action [$Raw | $Action])
 	This sentence, $Raw, is difficult to interpret, for multiple reasons.
@@ -692,9 +702,13 @@
 	(div @meta) { Thanks for playing! }
 	(quit)
 
+(parse metacommand [\/restart])
+	(restart)
+	(div @meta) { Restart failed! }
+
 (parse metacommand [\/undo])
 	~(interpreter supports undo)
-	(div @meta) { Unfortunately, this interpreter does not support UNDO. }
+	(div @meta) { Unfortunately, this interpreter does not support /undo. }
 (parse metacommand [\/undo])
 	~(undo state exists)
 	(div @meta) { Can't undo what hasn't been done! Take some actions in the game first, and then you can undo them. }
@@ -747,6 +761,8 @@
 		(span @metaverb) (link) /credits .
 	}
 	(now) (meta verbs introduced)
+
+(parse metacommand [\/gameover]) (game over {The End}) %% For testing
 
 (parse metacommand $Words)
 	(div @meta) { The meta command (print quoted $Words) was not recognized. Try (span @metaverb) (link) /about for more information. }
@@ -1043,9 +1059,18 @@
 	(span @realerror) { Improper action: $Action }
 
 (print words $Words)
-	(exhaust) { *($Word is one of $Words) $Word }
+	(exhaust) {
+		*($Word is one of $Words)
+		(if) ($Word is one of [. = ^]) (then) (no space) (endif)
+		$Word
+		(if) ($Word is one of [. = ^]) (then) (no space) (endif)
+	}
 (print quoted $Words)
 	"(no space) (print words $Words) (no space)"
+(print hittite $Words)
+	(span @hittite) (print words $Words)
+(print quoted hittite $Words)
+	"(no space) (print hittite $Words) (no space)"
 
 (enumerate possible actions [] $)
 (enumerate possible actions [$Head|$Tail] $N)
@@ -1088,16 +1113,34 @@
 ($ [])
 ($Case [$Single])
 	($Case $Single)
+($Case $List)
+	(length of $List into $Length)
+	($Length > 5)
+	(complicated list of $List in $Case)
 ($Case [$Head | $Rest])
 	($Case $Head)
+	(and)
+	($Case $Rest)
+
+(and)
 	(span @akk) { U₃ } %% Using the "Akkadian ampersand" instead of the clitic =ya because the clitic does messy things with the last consonant of the word
 	(now) (heterograms used) %% Give a tutorial the first time this happens
-	($Case $Rest)
+
+(complicated list of [$A $B $C $D | $Rest] in $Case) %% When enough things are in the same room description, we have to do this in a more complicated way that's easier to read
+	($Case $A) (space 4) (and)
+	($Case $B) (space 4) (and)
+	($Case $C) (line) (space 4) (and)
+	(complicated list of [$D | $Rest] in $Case)
+(complicated list of [$Single] in $Case) %% Fall back in the base case
+	($Case $Single)
+(complicated list of [$Head | $ShortList] in $Case)
+	($Case $Head) (space 4) (and)
+	(complicated list of $ShortList in $Case)
 
 (name (logogram $Obj) in #bare/#nominative/#accusative) (name $Obj)
 %% We do not have (name $ in $) rules for logograms in any other case
 %% They're handled specially by the parser
-(dict (logogram $Obj) in #bare/#nominative/#accusative) (dict $Obj)
+(dict (logogram $Obj) in #bare/#nominative/#accusative) (name $Obj) *(dict $Obj)
 
 %% Silence warnings in tablet 1 which has no logograms
 (interface (name $>Obj))

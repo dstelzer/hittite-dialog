@@ -19,6 +19,10 @@
 %% So this is an empty style class
 (style class @dtm)
 
+%% The lowercasing, though, we can deal with here
+(style class @lowercase)
+	text-transform: lowercase;
+
 (interface (dtm $<Closure))
 (dtm $Closure) %% Make sure of no space on the right
 	(span @dtm) { (query $Closure) (no space) } (no space)
@@ -27,6 +31,14 @@
 (dtm2 $Closure) %% For determiners on the right side
 	(if) ~(superscripts supported) (then) (no space) ^ (endif)
 	(no space) (span @dtm) { (no space) (query $Closure) }
+(interface (dtml $<Closure))
+(dtml $Closure) %% For lowercase determiners on the left: m, f, d
+	(span @dtm) {
+		(span @lowercase) {
+			(query $Closure) (no space)
+		} (no space)
+	} (no space)
+	(if) ~(superscripts supported) (then) ^ (no space) (endif)
 
 %% Horizontal rules to flag each description
 (hr)

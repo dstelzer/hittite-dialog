@@ -100,7 +100,8 @@
 (item *)
 (clothing *)
 (logogram *)
-(name *) TUG
+(name *) TUG₂
+(dict *) TUG2 TÚG
 (* has modifier #scribe) ~(* is #heldby #scribe)
 
 (* is #heldby #scribe)
@@ -170,8 +171,8 @@
 	(par) (testimony for $Tablet)
 
 (testimony for #tablet1)
-	Nu (dtm {f}) Gulzawiyaš šiuniyanza kiššan tēt: %% Thus spoke Gulzawiya the wise-woman:
-	mān=wa (span @akk) ina UD.20 (dtm2 {KAM}) (dtm {d}) Armaš aki, %% When the moon dies (i.e. is eclipsed) on the 20th day (of the month), (20 chosen because it's an HZL sign in its own right, not a combination of multiple)
+	Nu (dtml {F}) Gulzawiyaš šiuniyanza kiššan tēt: %% Thus spoke Gulzawiya the wise-woman:
+	mān=wa (span @akk) ina UD.20 (dtm2 {KAM}) (dtml {D}) Armaš aki, %% When the moon dies (i.e. is eclipsed) on the 20th day (of the month), (20 chosen because it's an HZL sign in its own right, not a combination of multiple)
 	nu=wa=kan 2 kupiyatallieš ḫaššun kunanzi. %% Two conspirators will kill the king.
 	Nu ḫaššuš 5 antuḫšuš kupiyatiya punušta. %% The king questioned five people about the conspiracy.
 	Nu parkueššanteš ašantan memiyan memiškanzi. %% The pure ones speak the real words.
@@ -252,12 +253,12 @@
 
 (real name * in $Case)
 	(* uses name code $Code)
-	(dtm {f})
+	(dtml {F})
 	(female name $Code in $Case)
 
 (real name (suspect $S) in $Case)
 	($S uses name code $Code)
-	(dtm {m})
+	(dtml {M})
 	(male name $Code in $Case)
 
 #realname %% In case players try to address the people by their personal names

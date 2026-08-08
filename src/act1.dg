@@ -9,6 +9,10 @@
 (name * in #dative/#accusative/#ablative) ammuk
 (* is #in #riverbank)
 
+(intro) %% No special intro
+	(now) (update needed)
+	%% Don't update map immediately
+
 #riverbank
 (room *)
 (* uses preverb #at)
@@ -429,13 +433,14 @@
 	(if) ~(using separate panels) (then)
 		(now) (update needed) %% Redraw the status bar to include verbs next time
 	(endif)
+	(now) (map update needed) %% And add the map regardless of separate panels
 
 (tutorial)
 	~(taught syntax)
 	(div @tutorial) {
 		You probably came up with something like "I was at the riverbank. I saw a river there." Most Hittite sentences start with a meaningless "connective" word, then have a series of nouns, and finish off with a verb. The (span @italic) case of those nouns indicates their purpose: a "dative" noun like (span @hittite) wappui indicates a location or destination, while an "accusative" noun like (span @hittite) ḫapan indicates the object of the verb.
 		(if) (#watchtower is unvisited) (then)
-			(par) Now it's time to construct a sentence of your own. The compass rose at the top right indicates nearby locations, and the "verbs" bar suggests some relevant verbs. Double-click any of these words to insert them into your sentence; see if you can use them to move to a new location.
+			(par) Now it's time to construct a sentence of your own. The compass rose at the top right indicates nearby locations, and the panel underneath it suggests some relevant verbs. Double-click any of these words to insert them into your sentence; see if you can use them to move to a new location. \( You can also type on a keyboard, if you prefer, and just leave off the special accent marks. \)
 			(now) (prompted movement specifically)
 		(endif)
 	}
@@ -456,7 +461,8 @@
 	~(taught determinatives)
 	(#gatehouse is visited)
 	(div @tutorial) {
-		Hittite nouns were sometimes written with a special sign in front, called a "determinative". These weren't pronounced, but indicated something about the noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example, marks that something is made of wood.
+		Hittite nouns were sometimes written with a special sign in front, called a "determiner" or "determinative". These weren't pronounced, but indicated some property of the noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example, marks that something is made of wood. (par)
+		These signs are normally transcribed in superscript, but for typing, you can use a ^ symbol instead \( GIŠ^ḫattalu \) .
 	}
 	(now) (taught determinatives)
 
@@ -464,7 +470,7 @@
 	~(taught heterograms)
 	(heterograms used)
 	(div @tutorial) {
-		(span @akk) {U₃} is the name of a cuneiform sign that functions like the "&" symbol in English: a shorter way to write the word "and". The capital letters in our transcription show that this isn't the actual Hittite pronunciation.
+		(span @akk) {U₃} is the name of a cuneiform sign that functions like the "&" symbol in English: a shorter way to write the word "and". The capital letters in our transcription show that this is the name of the sign, not the actual Hittite pronunciation.
 	}
 	(now) (taught heterograms)
 
@@ -479,7 +485,7 @@
 	(direction numbers enabled)
 	(div @tutorial) {
 		You're getting the hang of this now! Since you'll be moving around a lot in this game, there's a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, 1 south 2 north 3 east 4 west, so you can type "1 3 2" to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
-		There's no evidence that the Hittites did this, and this game addis numbers 5 and 6 for "up" and "down", which is completely non-historical. But the Hittites imitating Babylonian writing isn't much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the map to navigate to anywhere you've been before.
+		There's no evidence that the Hittites did this, and this game adds numbers 5 and 6 for "up" and "down", which is completely non-historical. But the Hittites imitating Babylonian writing isn't much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the boxes on the map to navigate to anywhere you've been before.
 	}
 	(now) (taught numbers)
 

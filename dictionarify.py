@@ -8,6 +8,8 @@
 # "Paradigm", if provided, is one of:
 # 		CLIT						provide an explanation of clitics
 # 		DTM							provide an explanation of determiners
+# 		LOGO						provide an explanation of logograms, and
+# 										a paradigm with ŠA, ANA, IŠTU
 # 		NOUN nom gen dat acc abl	a noun paradigm with five cases
 # 		VERB 1s 3s					a verb paradigm with 1 sg and 3 sg forms
 # 		A B A B A B...				make a two-column table, A left, B right
@@ -106,7 +108,7 @@ def parse_paradigm(s, name):
 		forms = space_separated_with_quotes(s[5:])
 		if len(forms) != 2:
 			raise ValueError(f'VERB paradigm should have two forms; found {len(forms)} in {s}')
-		if SIMPLIFIED_PARADIGMS: return forms[0]
+		if SIMPLIFIED_PARADIGMS: return None # First person should be headword
 		return tablify([
 			'<abbr title="First person: I did this">1st</abbr>',			forms[0],
 			'<abbr title="Third person: he/she/it did this">3rd</abbr>',	forms[1],

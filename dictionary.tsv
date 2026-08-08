@@ -1,7 +1,7 @@
 # Headword	All forms	Definition	Paradigm (Nominals: NOM GEN DAT ACC ABL; Verbs: 1SG 3SG)	Simplified paradigm (optional)	Simplified definition (optional)
 
 # Basic actions
-n(u)	nu na n n(u)	Then (a mostly-meaningless word used to introduce a new sentence in Hittite, called the "sentence connective".)
+n(u)	nu na n n(u)	Then (a mostly-meaningless word used to introduce a new sentence in Hittite, called the "sentence connective")
 =za	=za =z	Self (as in "myself", "yourself", etc). In Hittite, this word is also used any time the main verb in a sentence is "I am" or "you are", but not "it is" or "they are".	CLIT
 =kan	=kan =kkan	A particle that affects the meaning of the verb in subtle ways. Usually left untranslated.	CLIT
 ešun	ešun ēšta ešer	I was (at a location: dative)	"I was" ešun "it was" ēšta "they were" ešer
@@ -142,15 +142,16 @@ GUG₂	GUG₂ GUG2 GÚG	Some type of legume	LOGO
 warpun	warpun warpta	I washed (something: accusative; with something: ablative)	VERB warpun warpta
 arḫa	arḫa	Away (both "from this place" as in "went away", and "completely destroyed" as in "burned away")
 warati	warati	It burned up (one of the very few passive verb forms in this game)
+kuitki	kuitki	Something, anything (nominative or accusative)
 
 # Tablet 3
 tunnakkeššar	tunnakkeššar tunnakkešnaš tunnakkešni tunnakkišnaz	Inner chamber; in a house, "bedroom"; in a temple, "inner sanctum" (often abbreviated with the sign for "heart")	NOUN tunnakkeššar tunnakkešnaš tunnakkešni tunnakkeššar tunnakkišnaz
-šiuš	šiuš šiunaš šiuni šiun šiunaz	God, deity; many cultures in the Ancient Near East summoned their gods into specially-prepared physical forms (statues, icons, or sacred stones) in order to worship them, and those forms could be stolen in order to "godnap" the deity.	NOUN šiuš šiunaš šiuni šiun šiunaz
+šiuš	šiuš šiunaš šiuni šiun šiunaz	God, deity; many cultures in the Ancient Near East summoned their gods into specially-prepared physical forms (statues, icons, or sacred stones) in order to worship them, and those forms could be stolen in order to "godnap" the deity. The Hittite word is related to "Zeus".	NOUN šiuš šiunaš šiuni šiun šiunaz
 DUB.SAR	DUB.SAR	Scribe, literally "clay tablet writer". Wooden tablets were handled by a different person, the "wood-scribe".	LOGO
 akkan	akkan akkanza akkandaš akkandi akkandan akkandaz	Dead	NOUN akkanza akkandaš akkandi akkandan akkandaz
 DUB	DUB	Clay tablet	LOGO
-f	f MUNUS	Woman; this determiner is usually transcribed "f" for individual women's names and "MUNUS" for categories of women, but it's the same sign either way	DTM
-m	m DIŠ	Man (individual man's name)	DTM
+[f]	f [f] MUNUS	Woman; this determiner is usually transcribed "f" for individual women's names and "MUNUS" for categories of women, but it's the same sign either way	DTM
+[m]	m [m] DIŠ	Man (individual man's name)	DTM
 šiuniyant	šiuniyant šiuniyanza šiuniyantaš šiuniyanti šiuniyantan šiuniyantaz	Diviner, ecstatic, oracle; literally, "god-touched"	NOUN šiuniyanza šiuniyantaš šiuniyanti šiuniyantan šiuniyantaz
 kiššan	kiššan	Thus, as follows (used to introduce a quotation)
 tēt	tēt	He/she/it said, spoke
@@ -160,7 +161,7 @@ mān	mān	When
 UD	UD UD.20	Day (often attached to a number: UD.1<sup>KAM</sup> "the 1st day of the month")	LOGO
 KAM	KAM	Number (specifically when counting days, months, years, or clay tablets)	DTM
 Arma	Arma Armaš Armi Arman Armaz	Moon, the moon-god (the two were often used interchangeably)	NOUN Armaš Armaš Armi Arman Armaz
-d	d DINGIR	God, deity; this determiner is especially important because gods were mainly referred to by their domains or holy numbers, so this distinguishes "storm" from "the storm-god" or "30" from "the god with the holy number 30"	DTM
+[d]	d [d] DINGIR	God, deity; this determiner is especially important because gods were mainly referred to by their domains or holy numbers, so this distinguishes "storm" from "the storm-god" or "30" from "the god with the holy number 30"	DTM
 aki	aki	He/she/it dies, will die (present tense of <i class="word" data-word="aggaḫḫun">aggaḫḫun</i>); "the moon dies" means "a lunar eclipse happens"
 kupiyatallieš	kupiyatallieš	Conspirators (nominative plural of <i class="word" data-word="kupiyatalli">kupiyatalli</i>)
 kupiyatalli	kupiyatalli kupiyatalliš kupiyatalliyaš kupiyatalliya kupiyatallin kupiyatalliyaz	Conspirator	NOUN kupiyatalliš kupiyatalliyaš kupiyatalliya kupiyatallin kupiyatalliyaz
