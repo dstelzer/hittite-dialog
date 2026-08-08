@@ -1664,3 +1664,17 @@ window.run_game = function(story64, options) {
 };
 
 })();
+
+// enable double-tap to double-click words on mobile
+$(function() {
+	let then = 0;
+	$(document).on('touchend', '.word', function(event) {
+		const now = new Date().getTime();
+		const tapLen = now - then;
+		if(tapLen > 0 && tapLen < 500) {
+			$(this).trigger('dblclick');
+			event.preventDefault();
+		}
+		then = now;
+	});
+});

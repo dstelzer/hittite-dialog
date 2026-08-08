@@ -432,3 +432,9 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.5);
 }
 
+/* Helps with touch double-tap, sometimes */
+.word {
+	touch-action: manipulation;
+	user-select: none;
+	-webkit-user-select: none;
+}
