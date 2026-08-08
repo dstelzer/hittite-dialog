@@ -29,8 +29,15 @@
 	(meta panel)
 (redraw separate panels)
 
+(update everything after restore)
+	(now) (update needed)
+	(now) (map update needed)
+	(redraw separate panels)
+
 (meta panel)
 	(inline status bar @p-meta) (meta verbs list)
+(meta verbs list)
+	~(given first message) %% Don't hint this until after the first message
 (meta verbs list)
 	~(meta verbs introduced)
 	Use (link) /about for info.

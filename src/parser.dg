@@ -651,6 +651,7 @@
 
 (parse commandline $Words)
 	(if) ($Words = [$First | $]) (split word $First into [\/ | $]) (then) %% First word starts with `/` so it's an English metacommand
+		(now) (no tutorial this turn) %% Don't continue the tutorial after a metacommand
 		(parse metacommand $Words)
 		(stop)
 	(else)
@@ -660,7 +661,7 @@
 	(if) (save undo $ComingBack) (then)
 		(if) ($ComingBack = 1) (then)
 			(div @error) { The previous lines, starting with (print quoted $Words), are crossed out on the tablet and should be considered a scribal error. }
-			(now) (update needed)
+			(update everything after restore)
 			(stop)
 		(else)
 			(now) (undo state exists)
@@ -707,7 +708,7 @@
 			(div @meta) { Game state saved. Use /restore to come back to this point at any time. }
 		(else)
 			(div @meta) { Game state restored. }
-			(now) (update needed)
+			(update everything after restore)
 		(endif)
 	(else)
 		(div @realerror) { Save failed! }
@@ -934,7 +935,11 @@
 		(par)
 	(else)
 		(redraw status bar)
-		(tutorial)
+		(if) (no tutorial this turn) (then)
+			(now) ~(no tutorial this turn)
+		(else)
+			(tutorial)
+		(endif)
 		(prompt and input $Words)
 		(stoppable) {
 			(parse commandline $Words)

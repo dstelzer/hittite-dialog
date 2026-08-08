@@ -22,6 +22,9 @@
 
 (origin *) %% Map origin
 
+(instead of [[put $Obj *] $Details])
+	(try [[put $Obj #riverbank] $Details])
+
 #river
 (name * in #nominative/#genitive) ḫapaš
 (name * in #dative) ḫapi
@@ -239,6 +242,15 @@
 	(#fire is #in *)
 	~(* is filled with #fire)
 	(now) (#fire is nowhere)
+
+(instead of [[put $Obj #fire] $Details])
+	(current room #foyer)
+	(try [[put $Obj #hearth] $Details])
+
+(prevent [[put #amphora *] $Details])
+	~(#amphora is filled with $) %% No water to pour out
+	(describe failed action [[put #amphora *] $Details])
+	Nu (#nominative #amphora modifierless) mekki šalliš ēšta. %% The amphora was very big.
 
 (prevent [[take $Obj | $From] $Details])
 	($Obj is #in #hearth)
