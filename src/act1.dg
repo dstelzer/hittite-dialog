@@ -446,6 +446,15 @@
 	}
 	(now) (taught syntax)
 
+%% Not in the (tutorial) predicate but counts as a tutorial
+(after [[look/examine | $] $])
+	(select)
+		(div @error) {
+			The standard transcription of the word "I looked at" is ūḫḫun, with a U, but it occasionally appears as ōḫḫun, with an O, to capture the exact cuneiform signs it's spelled with. Just ignore the O here; the U is what you'll need to look up in a dictionary.
+		}
+	(or)
+	(stopping)
+
 (tutorial)
 	~(taught objects)
 	(#watchtower is visited)
