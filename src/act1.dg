@@ -259,17 +259,15 @@
 	Nu paḫḫur än ēšta. %% "The fire was hot."
 	%% ä = a-a-a°
 
-#cup
+#orb
 (item *)
-(name * in #nominative) aganniš
-(name * in #genitive) aganniyaš
-(name * in #dative) aganniya
-(name * in #accusative) agannin
-(name * in #ablative) aganniyaz
-(determiner *) DUG
+(name * in #nominative) dammuriš
+(name * in #genitive) dammuriyaš
+(name * in #dative) dammuri
+(name * in #accusative) dammurin
+(name * in #ablative) dammuriyaz
+(determiner *) URUDU
 (* is #in #hearth)
-
-(* accepts substance #water)
 
 #sleeping
 (adjective *)
@@ -380,15 +378,15 @@
 %% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
 
 (instead of [[go *] $Details])
-	(if) (player carries #water in $) (then)
+	(if) (#orb is #heldby #me) (then)
 		(describe action [[go *] $Details])
 		(div @error) { The tablet breaks off here, as the soldier finally approaches the temple itself. }
 		(game over { To be continued... } )
 	(else)
 		(describe failed action [[go *] $Details])
-		Nu=za šaknuwanza ešun. Nu (#accusative #water) natta ḫarkun. %% "I was impure. I did not have water."
+		Nu (#accusative #orb) natta ḫarkun. %% "I did not have a dammuri-object."
 		(div @error) {
-			It is unclear what "impurity" the narrator is referring to. Presumably something has rendered him unfit to approach his god, but the text does not specify what—perhaps something on the ladder?
+			Why exactly the narrator requires a dammuri-object is unclear. Presumably it was so obvious to the ancient scribe that it did not need to be explained; but to modern scholars, it remains a mystery. This is unfortunately quite common in ancient texts.
 		}
 		(tick) (stop)
 	(endif)
