@@ -27,7 +27,7 @@
 (origin *) %% Map origin
 
 (instead of [[put $Obj *] $Details])
-	(try [[put $Obj #riverbank] $Details])
+	(try [[put $Obj #river] $Details])
 
 #river
 (name * in #nominative/#genitive) ḫapaš

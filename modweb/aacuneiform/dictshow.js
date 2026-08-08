@@ -68,7 +68,7 @@ function insert_dictionary_word(node) {
 // Call this from the console after a run to make sure the dictionary is complete
 function check_dictionary_completeness() {
 	var i = 0;
-	$(".word").foreach(node => {
+	$(".word").each(node => {
 		let word = node.dataset.word;
 		
 		// Remove stray punctuation from the beginning and end

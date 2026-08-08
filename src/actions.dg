@@ -931,6 +931,9 @@
 	(now) ~($Fire is filled with $)
 	(if) (item $Water) (then) (now) ~($Water is filled with $) (endif) %% Only portable sources are exhausted when used this way
 	(now) (update needed)
+	(if) (adjacent room is dark) (then)
+		(now) (map update needed)
+	(endif)
 
 (verb @lukkun/@burn means @lukkun)
 (@lukkun wants cases [#accusative])
@@ -971,6 +974,13 @@
 	Nu (#accusative $Wood) lukkun.
 	(now) ($Wood is filled with #fire)
 	(now) (update needed)
+	(if) (adjacent room is dark) (then)
+		(now) (map update needed)
+	(endif)
+
+(adjacent room is dark)
+	*(adjacent $Room)
+	(inherently dark $Room)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% WEAR
