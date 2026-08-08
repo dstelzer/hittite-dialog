@@ -5,6 +5,11 @@
 	src: url("Caveat-Bold.woff");
 }
 
+@font-face {
+	font-family: BethEllen;
+	src: url("BethEllen-Regular.woff2");
+}
+
 /* Layout */
 
 body {
@@ -95,7 +100,7 @@ div.aa-error {
 	clear: left;
 	width: 10.5em;
 	margin-left: calc(-11.5em - var(--before-element-width, 0px));
-	margin-top: -3.5em;
+	margin-top: -5em;
 	padding-top: 2em;
 	font-family: var(--font-body);
 	font-size: 90%;
@@ -263,8 +268,8 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	background-size: 100% 100%;
 	margin-left: -7px;
 	margin-top: -2px;
-	font-family: Caveat;
-	font-size: 1.2em;
+	font-family: BethEllen;
+	font-size: 1em;
 }
 .output-first:has(#aainputblock):nth-of-type(5n)::before { shape-outside: none; }
 
@@ -279,8 +284,8 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	shape-outside: polygon(0% 0%, 100% 0%, 100% 10%, 53% 10%, 46% 46%, 26% 70%, 15% 70%, 4% 100%, 0% 100%);
     margin-left: -7px;
 	margin-top: -2px;
-	font-family: Caveat;
-	font-size: 1.2em;
+	font-family: BethEllen;
+	font-size: 1em;
 }
 .output-first:has(#aainputblock):nth-of-type(5n+1)::before { shape-outside: none; }
 
@@ -295,8 +300,8 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	shape-outside: polygon(0.0% 15%, 27% 15%, 52% 100.0%, 100.0% 100.0%, 100.0% 0.0%, 0.0% 0.0%);
 	margin-right: -7px;
 	margin-top: -2px;
-	font-family: Caveat;
-	font-size: 1.2em;
+	font-family: BethEllen;
+	font-size: 1em;
 }
 .output-first:has(#aainputblock):nth-of-type(5n+2)::before { shape-outside: none; }
 
@@ -311,8 +316,8 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	shape-outside: polygon(0% 0%, 100% 0%, 100% 42%, 26% 42%, 6% 100%, 0% 100%);
 	margin-left: -7px;
 	margin-top: -2px;
-	font-family: Caveat;
-	font-size: 1.2em;
+	font-family: BethEllen;
+	font-size: 1em;
 }
 .output-first:has(#aainputblock):nth-of-type(5n+3)::before { shape-outside: none; }
 
@@ -327,8 +332,8 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	shape-outside: polygon(0% 0%, 100% 0%, 100% 100%, 77% 100%, 56% 26%, 0% 26%);
 	margin-right: -7px;
 	margin-top: -2px;
-	font-family: Caveat;
-	font-size: 1.2em;
+	font-family: BethEllen;
+	font-size: 1em;
 }
 .output-first:has(#aainputblock):nth-of-type(5n+4)::before { shape-outside: none; }
 
@@ -415,6 +420,214 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	margin-bottom: 2px;
 }
 
+/* Menus */
+#aamenu {
+	position: relative;
+	z-index: 3;
+	width: 16em;
+	line-height: 1.5em;
+	font-family: Caveat;
+	font-size: 1.2em;
+	border: 1px solid #DDD;
+	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+}
+
+#aamenu::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 4;
+	box-sizing: border-box;
+	background: white repeating-linear-gradient(to bottom, white 0, white 1.4em, #CEF 1.4em, #CEF 1.5em);
+	mask-image:
+		radial-gradient(circle at 1em 3em, transparent 0.5em, black 0.52em),
+		radial-gradient(circle at 1em 50.2%, transparent 0.5em, black 0.52em),
+		radial-gradient(circle at 1em calc(100% - 2.8em), transparent 0.5em, black 0.52em);
+	mask-composite: intersect;
+}
+
+#aamenulist {
+	position: relative;
+	z-index: 5;
+	padding: 1.5em;
+	padding-left: 1em;
+	padding-bottom: 1.3em;
+    border: none;
+	border-left: 0.2em solid rgba(255, 128, 128, 0.5);
+	border-radius: 0px;
+	margin-left: 2em;
+	background: transparent;
+}
+
+.aamenuoption {
+	margin: 0px;
+}
+
+#aamenu hr {
+    margin-top: 0.6em;
+    margin-bottom: 0.7em;
+    border: none;
+	border-top: 0.2em dotted #777;
+}
+
+.aamenuoption:hover {
+	color: royalblue;
+}
+
+select.settings {
+	border: 0.1em solid black;
+	outline: none;
+	background: transparent;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+	font-family: Caveat;
+	font-size: 1em;
+	appearance: none;
+	cursor: pointer;
+}
+
+select.settings:hover {
+	color: royalblue;
+}
+
+.aamenuoption input {
+	appearance: none;
+	width: 1em;
+	height: 1em;
+	margin: 0px;
+	margin-right: 0.75em;
+	border: 2px solid black;
+	background: white;
+	display: inline-grid;
+	place-content: center;
+	cursor: pointer;
+}
+
+.aamenuoption input::before {
+	content: "";
+	font-family: Caveat;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+.aamenuoption input:checked::before {
+	content: "✓";
+}
+
+/* About page */
+
+#aaaboutouter {
+	padding: 0px;
+	font-family: American Typewriter, Courier New, monospace;
+	font-weight: bold;
+	position: absolute;
+	top: 25%;
+	left: 9em;
+	width: 30em;
+	height: 20em;
+	z-index: 4;
+	line-height: 1.5em;
+	border: 1px solid #DDCF9B;
+	border-radius: 5px;
+	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+}
+
+#aaaboutouter::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+	box-sizing: border-box;
+	background: #f6e5cd repeating-linear-gradient(to bottom, #f6e5cd 0, #f6e5cd 1.4em, #bcd4ca 1.4em, #bcd4ca 1.5em);
+	mask-image: radial-gradient(circle at 15em 17em, transparent 1em, black 1.1em);
+	mask-composite: intersect;
+}
+
+#aaaboutouter::after {
+    content: "Götterraub\avorreichszeitlich?";
+    white-space: pre;
+    position: absolute;
+    left: 20em;
+    top: 0.5em;
+    margin: 0px;
+    padding: 0px;
+    color: rgba(0, 0, 0, 0.1);
+    font-family: BethEllen;
+    transform: rotate(5deg);
+    z-index: 5;
+    font-size: 1em;
+    line-height: 0.8em;
+}
+
+#aaaboutinner {
+    position: relative;
+    width: 21em;
+    height: 16em;
+    z-index: 5;
+    padding: 2em;
+    padding-left: 0.5em;
+    border: none;
+    border-left: 0.2em solid rgba(255, 128, 128, 0.5);
+    border-radius: 0px;
+    margin: 0px;
+    margin-left: 6em;
+    background: transparent;
+    text-indent: 2em hanging each-line;
+}
+
+#aaaboutinner::before {
+    content: "Lit\aHittite";
+    white-space: pre;
+    position: absolute;
+    left: -5em;
+    top: 4.5em;
+    margin: 0px;
+    padding: 0px;
+    color: #B00;
+}
+
+#aaaboutinner::after {
+    content: "";
+    position: absolute;
+    width: 30em;
+    left: -6.2em;
+    top: 4.4em;
+    border-top: 0.2em solid rgba(255, 128, 128, 0.5);
+}
+
+#aaaboutinner hr {
+	display: none;
+}
+
+.aaaboutline {
+	margin-top: 1em;
+	margin-bottom: 1.5em;
+}
+
+#aaaboutlink {
+	color: black;
+	text-decoration: underline;
+}
+
+#aaaboutlink:hover {
+	color: royalblue;
+}
+
+#aaaboutclose {
+	color: black;
+	text-decoration: underline;
+	cursor: pointer;
+	text-align: right;
+}
+
+#aaaboutclose:hover {
+	color: royalblue;
+}
+
+.aaaboutline {
+	text-align: left;
+}
+
 /* Minor styling */
 
 .aalink:hover {
@@ -425,11 +638,8 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	display: none;
 }
 
-/* Other UI elements (FIXME) */
-
-#aaaboutinner {
-	-webkit-box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.5); 
-	box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.5);
+.word {
+	cursor: pointer;
 }
 
 /* Helps with touch double-tap, sometimes */
