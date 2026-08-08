@@ -1103,12 +1103,16 @@
 (akkadian preposition for #ablative) ištu
 (akkadian preposition for #nominative/#accusative/#bare)
 
-(interface ($<Case $<Obj))
-($Case $Obj) %% Adds modifiers as needed; these can be adjectives, nouns, dict words, or closures. Determiners come after modifiers.
+%% Two convenience wrappers around the following
+@($Case $Obj) ($Case $Obj modifier 1)
+@($Case $Obj modifierless) ($Case $Obj modifier 0)
+
+(interface ($<Case $<Obj modifier $<Mod))
+($Case $Obj modifier $ModEnabled) %% Adds modifiers as needed; these can be adjectives, nouns, dict words, or closures. Determiners come after modifiers.
 	(if) (logogram $Obj) (then)
 		(span @akk) (akkadian preposition for $Case)
 	(endif)
-	(if) ($Obj has modifier $Mod) (then)
+	(if) ($Obj has modifier $Mod) ($ModEnabled = 1) (then)
 		(if) (adjective $Mod) (then) %% Note: This does NOT currently consider gender! Adjective objects are expected to have the same inherent gender as the noun. See substances.dg for how this is handled.
 			(name $Mod in $Case)
 		(elseif) (object $Mod) ~(logogram $Mod) (then)
@@ -1130,7 +1134,7 @@
 	(if) ($Obj has determiner) (determiner comes after $Obj) (then)
 		(dtm2 {(determiner $Obj)})
 	(endif)
-	(if) ($Obj has modifier $Mod) (object $Mod) (logogram $Mod) (then)
+	(if) ($Obj has modifier $Mod) (object $Mod) (logogram $Mod) ($ModEnabled = 1) (then)
 		(#genitive $Mod) %% ŠA akkadogram comes after
 	(endif)
 

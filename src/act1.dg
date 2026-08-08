@@ -35,7 +35,7 @@
 (instead of [[put $Dest *] $])
 	($Dest accepts substance #water)
 	~($Dest is filled with $)
-	Nu (#accusative #water) (#dative $Dest) tēḫḫun.
+	Nu (#accusative #water) (#dative $Dest modifierless) tēḫḫun.
 	(now) ($Dest is filled with #water)
 	(now) (update needed)
 	(tick)
@@ -44,14 +44,14 @@
 	(item $Obj)
 	($Obj is filled with $Substance)
 	~($Substance = #fire) %% This gets its own description in actions.dg
-	Nu (#accusative $Obj) (#dative #water) tēḫḫun.
+	Nu (#accusative $Obj modifierless) (#dative #water) tēḫḫun.
 	(now) ~($Obj is filled with $)
 	(now) (update needed)
 	(tick)
 
 (instead of [[take *] $])
 	(player can hold #water in $Dest) %% If this fails, fall back to "I can't hold the water"
-	Nu (#accusative #water) (#dative $Dest) tēḫḫun. %%
+	Nu (#accusative #water) (#dative $Dest modifierless) tēḫḫun. %% I put the water in the X.
 	(now) ($Dest is filled with #water)
 	(now) (update needed)
 	(tick)
@@ -301,8 +301,17 @@
 (name * in #ablative) palḫaz
 (determiner *) DUG
 (* is #in #storeroom)
+(* has modifier #empty) ~(* is filled with $)
 
 (* accepts substance #water)
+
+#empty
+(adjective *)
+(name * in #nominative/#genitive) dannattaš
+(name * in #dative) dannatti
+(name * in #accusative) dannattan
+(name * in #ablative) dannattaz
+(name * in #bare) dannatta
 
 #backroom %% "behind the watchtower"
 (room *)

@@ -7,3 +7,4 @@ n(u) translates to n(u-u) and displays as ��
 explain that you should type in transliteration, not cuneiform
 "Typing “/about” into the first prompt triggers the “You probably came up with something like…” passage, even though it’s a special interpreter command."
 Quotes and apostrophes
+Process dead player input so it's cuneiformed and ōḫḫun becomes ūḫḫun

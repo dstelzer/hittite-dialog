@@ -441,9 +441,8 @@
 	}
 	%% Now we know the room
 	Nu (#accusative $Room) (#dative $Dir) ōḫḫun.
-(perform [[examine $] $]) %% Not a useful action in this game for anything else
-	(now) (update needed)
-	(now) (map update needed)
+(perform [[examine $] $]) %% Not a useful action except for tablets
+	%% Do nothing
 
 #v-look
 (verb *)

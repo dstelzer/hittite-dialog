@@ -190,7 +190,7 @@
 	(if) (baker description suppressed) (then)
 		(now) ~(baker description suppressed)
 	(else)
-		(par) Nu=za (#nominative #baker) (name #pool in #ablative) warpta.
+		(par) Nu=za (#nominative #baker) (#ablative #pool modifierless) warpta.
 	(endif)
 
 #pool
@@ -412,7 +412,7 @@
 (name * in #bare) iyatti
 (determiner *) NINDA
 
-($Case $Obj) %% Here's where we handle the studding
+($Case $Obj modifier $) %% Here's where we handle the studding
 	($Obj is one of [#dough #bread])
 	(if) ($Obj has determiner) (then)
 		(dtm {(determiner $Obj)})
