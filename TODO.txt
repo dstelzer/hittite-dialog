@@ -1,8 +1,6 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
-switch fonts to woff2
 fill in third-person verb forms from tablet 3 into actions.dg
-explain that you should type in transliteration, not cuneiform
 Quotes and apostrophes
 Process dead player input so it's cuneiformed and ōḫḫun becomes ūḫḫun
