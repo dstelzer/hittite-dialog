@@ -14,6 +14,11 @@ debug2: $(FILES) src/act2.dg platform/debug.dg
 debug3: $(FILES) src/act3.dg src/act3_machinery.dg platform/debug.dg
 	dgdebug $(OPTIONS_DBG) platform/debug.dg src/act3.dg src/act3_machinery.dg $(FILES)
 
+serials:
+	./update_serials.sh src/actions.dg
+	./update_serials.sh src/parser.dg
+	./update_serials.sh src/worldmodel.dg
+
 #hittite.z5: $(FILES) platform_z.dg
 #	dialogc -t z5 -o hittite.z5 $(OPTIONS) platform_z.dg $(FILES)
 
@@ -32,7 +37,7 @@ tablet3.aastory: $(FILES) src/act3.dg src/act3_machinery.dg platform/web.dg
 dictionary.js: dictionary.tsv dictionarify.py
 	python dictionarify.py
 
-web: tablet1.aastory tablet2.aastory tablet3.aastory ishamai modweb dictionary.js
+web: tablet1.aastory tablet2.aastory tablet3.aastory ishamai modweb dictionary.js serials
 	rm -rf web
 	aambundle -t web tablet1.aastory -o web
 	## Generate the basic files needed, using the first tablet as a template
@@ -67,7 +72,7 @@ web: tablet1.aastory tablet2.aastory tablet3.aastory ishamai modweb dictionary.j
 # deploy to meadstelzer.com/daniel/if/hittite/
 deploy: web
 	( cd web/resources && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/resources/ ./* )
-	( cd web/ishamai/fonts && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/ishamai/fonts/ ./*.otf )
+	( cd web/ishamai/fonts && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/ishamai/fonts/ ./*.woff2 )
 	( cd web/ishamai && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/ishamai/ ./*.css ./*.js )
 	( cd web/aacuneiform && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/aacuneiform/ ./* )
 	( cd web && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/ *.html )
@@ -95,4 +100,4 @@ regress3: regress3.out
 
 regress: regress1 regress2 regress3
 
-.PHONY: regress regress1 regress2 regress3 deploy debug1 debug2 debug3
+.PHONY: regress regress1 regress2 regress3 deploy debug1 debug2 debug3 serials

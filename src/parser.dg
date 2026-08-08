@@ -1,5 +1,5 @@
 (extension version)
-	Hittite parser version 260804.
+	Hittite parser version 260808.
 
 (parser logging) (fail)
 
@@ -661,6 +661,7 @@
 
 (parse commandline $Words)
 	(if) ($Words = [$First | $]) (split word $First into [\/ | $]) (then) %% First word starts with `/` so it's an English metacommand
+		(now) (no tutorial this turn) %% Don't continue the tutorial after a metacommand
 		(parse metacommand $Words)
 		(stop)
 	(else)
@@ -669,9 +670,8 @@
 	
 	(if) (save undo $ComingBack) (then)
 		(if) ($ComingBack = 1) (then)
-			(div @error) { The previous lines, starting with (print quoted hittite $Words), are crossed out on the tablet and should be considered a scribal error. }
-			(now) (update needed)
-			(now) (map update needed)
+			(div @error) { The previous lines, starting with (print quoted $Words), are crossed out on the tablet and should be considered a scribal error. }
+			(update everything after restore)
 			(stop)
 		(else)
 			(now) (undo state exists)
@@ -722,8 +722,7 @@
 			(div @meta) { Game state saved. Use /restore to come back to this point at any time. }
 		(else)
 			(div @meta) { Game state restored. }
-			(now) (update needed)
-			(now) (map update needed)
+			(update everything after restore)
 		(endif)
 	(else)
 		(div @realerror) { Save failed! }
@@ -747,7 +746,7 @@
 		(span @bold) { Tim Leonard } (no space) : Hittite translations and editing—the words you're reading. (line)
 		Cuneiform rendering done via Ishamai, by Daniel Stelzer. (line)
 		Running on the Å-machine web interpreter, by Linus Åkesson and the Dialog Project Team. (par)
-		Tested by TODO YOUR NAME HERE!!! (par)
+		Tested by Melisande, Mike Russo, rh, and YOUR NAME HERE! (par)
 		Depicted on the cover is the "Yozgat Amulet" in the Louvre Museum, AO 9647. Photograph © 2012 Musée du Louvre, Dist. GrandPalaisRmn / Raphaël Chipault.
 	}
 
@@ -952,7 +951,11 @@
 		(par)
 	(else)
 		(redraw status bar)
-		(tutorial)
+		(if) (no tutorial this turn) (then)
+			(now) ~(no tutorial this turn)
+		(else)
+			(tutorial)
+		(endif)
 		(prompt and input $Words)
 		(stoppable) {
 			(parse commandline $Words)
@@ -1148,12 +1151,16 @@
 (akkadian preposition for #ablative) ištu
 (akkadian preposition for #nominative/#accusative/#bare)
 
-(interface ($<Case $<Obj))
-($Case $Obj) %% Adds modifiers as needed; these can be adjectives, nouns, dict words, or closures. Determiners come after modifiers.
+%% Two convenience wrappers around the following
+@($Case $Obj) ($Case $Obj modifier 1)
+@($Case $Obj modifierless) ($Case $Obj modifier 0)
+
+(interface ($<Case $<Obj modifier $<Mod))
+($Case $Obj modifier $ModEnabled) %% Adds modifiers as needed; these can be adjectives, nouns, dict words, or closures. Determiners come after modifiers.
 	(if) (logogram $Obj) (then)
 		(span @akk) (akkadian preposition for $Case)
 	(endif)
-	(if) ($Obj has modifier $Mod) (then)
+	(if) ($Obj has modifier $Mod) ($ModEnabled = 1) (then)
 		(if) (adjective $Mod) (then) %% Note: This does NOT currently consider gender! Adjective objects are expected to have the same inherent gender as the noun. See substances.dg for how this is handled.
 			(name $Mod in $Case)
 		(elseif) (object $Mod) ~(logogram $Mod) (then)
@@ -1175,7 +1182,7 @@
 	(if) ($Obj has determiner) (determiner comes after $Obj) (then)
 		(dtm2 {(determiner $Obj)})
 	(endif)
-	(if) ($Obj has modifier $Mod) (object $Mod) (logogram $Mod) (then)
+	(if) ($Obj has modifier $Mod) (object $Mod) (logogram $Mod) ($ModEnabled = 1) (then)
 		(#genitive $Mod) %% ŠA akkadogram comes after
 	(endif)
 

@@ -108,19 +108,19 @@
 
 @font-face{
 	font-family: CuneiInk;
-	src: url("../ishamai/fonts/ArmannisNew.otf");
+	src: url("../ishamai/fonts/ArmannisNew.woff2");
 }
 @font-face{
 	font-family: CuneiPublished;
-	src: url("../ishamai/fonts/MittellinienNew.otf");
+	src: url("../ishamai/fonts/MittellinienNew.woff2");
 }
 @font-face{
 	font-family: CuneiHandwrite;
-	src: url("../ishamai/fonts/PenstrokeNew.otf");
+	src: url("../ishamai/fonts/PenstrokeNew.woff2");
 }
 @font-face{
 	font-family: CuneiLinear;
-	src: url("../ishamai/fonts/LinearNew.otf");
+	src: url("../ishamai/fonts/LinearNew.woff2");
 }
 
 .font-ink .glyph{
