@@ -557,9 +557,9 @@ window.run_game = function(story64, options) {
 							wrapper.className = "output output-break-end";
 						} else {
 							wrapper.className = "output output-first";
+							this.fragment_number++;
 						}
 						wrapper.style.setProperty("--rev-obv", '"' + beforeContent + '"');
-						this.fragment_number++;
 						this.in_seq = true;
 					} else {
 						wrapper.className = "output";

@@ -20,28 +20,34 @@ body {
 }
 
 #aacontainer {
+	--col-width: min(93ch, calc(100vw - 12em));
+	width: --var(--col-width);
 	height: 100%;
+	margin-left: auto;
+	margin-right: max(0px, calc(50% - (var(--col-width) / 2)));
 	background-color: white;
 	-webkit-box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.5); 
 	box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.5);
 }
 
 #maincolumn {
-	padding-left: 185px;
-	padding-right: 185px;
-	max-width: 80ch;
+	padding-left: 12em;
+	padding-right: 11em;
 }
 
 #rightcolumn {
 	position: absolute;
-	right: -6.5em;
+	right: -5.5em;
 	top: 0px;
+	width: 15em;
 }
 
 #aamain {
-	padding-left: 165px;
-	padding-right: 0px;
-	margin-left: -165px;
+	width: 100%;
+	padding-right: 0.5em;
+	padding-left: 11em;
+	margin: 0;
+	margin-left: -11em;
 }
 
 /* Flow div styles */
@@ -87,8 +93,8 @@ div.aa-tutorial p {
 div.aa-error {
 	float: left;
 	clear: left;
-	width: 150px;
-	margin-left: calc(-165px - var(--before-element-width, 0px));
+	width: 10.5em;
+	margin-left: calc(-11.5em - var(--before-element-width, 0px));
 	margin-top: -3.5em;
 	padding-top: 2em;
 	font-family: var(--font-body);
@@ -242,7 +248,7 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 }
 
 .output-first {
-	border-top: 2px black solid;
+	border-top: none;
 	counter-reset: output-line;
 	counter-reset: sidenote;
 	margin-top: 1em;
@@ -252,12 +258,9 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	content: var(--rev-obv, "1.1 Obv.");
 	float: left;
     width: calc(100% + 12px);
-    aspect-ratio: 355/65;
+    aspect-ratio: 480/87;
     background: url(tab_top0.png) no-repeat;
 	background-size: 100% 100%;
-    shape-outside: url(tab_top0.png);
-    shape-image-threshold: 0.5;
-	shape-margin: 0.5em;
 	margin-left: -7px;
 	margin-top: -2px;
 	font-family: Caveat;
@@ -270,13 +273,11 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	text-align: left;
     float: left;
     width: calc(100% + 12px);
-    aspect-ratio: 355/112;
+    aspect-ratio: 480/153;
     background: url(tab_top4.png) no-repeat;
 	background-size: 100% 100%;
-	shape-outside: url(tab_top4.png);
-    shape-image-threshold: 0.5;
-	shape-margin: 0.5em;
-	margin-left: -7px;
+	shape-outside: polygon(0% 0%, 100% 0%, 100% 10%, 53% 10%, 46% 46%, 26% 70%, 15% 70%, 4% 100%, 0% 100%);
+    margin-left: -7px;
 	margin-top: -2px;
 	font-family: Caveat;
 	font-size: 1.2em;
@@ -288,11 +289,10 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	text-align: right;
     float: right;
     width: calc(100% + 12px);
-    aspect-ratio: 355/53;
+    aspect-ratio: 480/71;
     background: url(tab_top2.png) no-repeat;
 	background-size: 100% 100%;
-	shape-outside: url(tab_top2.png);
-    shape-image-threshold: 0.5;
+	shape-outside: polygon(0.0% 15%, 27% 15%, 52% 100.0%, 100.0% 100.0%, 100.0% 0.0%, 0.0% 0.0%);
 	margin-right: -7px;
 	margin-top: -2px;
 	font-family: Caveat;
@@ -305,12 +305,10 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	text-align: left;
     float: left;
     width: calc(100% + 12px);
-    aspect-ratio: 355/138;
+    aspect-ratio: 480/162;
     background: url(tab_top3.png) no-repeat;
 	background-size: 100% 100%;
-	shape-outside: url(tab_top3.png);
-    shape-image-threshold: 0.5;
-	shape-margin: 0.5em;
+	shape-outside: polygon(0% 0%, 100% 0%, 100% 42%, 26% 42%, 6% 100%, 0% 100%);
 	margin-left: -7px;
 	margin-top: -2px;
 	font-family: Caveat;
@@ -323,12 +321,10 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	text-align: right;
     float: right;
     width: calc(100% + 12px);
-    aspect-ratio: 355/41;
+    aspect-ratio: 480/53;
     background: url(tab_top1.png) no-repeat;
 	background-size: 100% 100%;
-	shape-outside: url(tab_top1.png);
-    shape-image-threshold: 0.5;
-	shape-margin: 0.5em;
+	shape-outside: polygon(0% 0%, 100% 0%, 100% 100%, 77% 100%, 56% 26%, 0% 26%);
 	margin-right: -7px;
 	margin-top: -2px;
 	font-family: Caveat;
@@ -337,7 +333,7 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 .output-first:has(#aainputblock):nth-of-type(5n+4)::before { shape-outside: none; }
 
 .output-last {
-	border-bottom: 2px black solid;
+	border-bottom: none;
 	margin-bottom: 1em;
 }
 
@@ -345,7 +341,7 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
     content: "";
 	display: block;
     width: calc(100% + 12px);
-    aspect-ratio: 355/65;
+    aspect-ratio: 480/87;
     background: url(tab_bot0.png) no-repeat;
 	background-size: 100% 100%;
 	margin-left: -5px;
@@ -356,7 +352,7 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
     content: "";
 	display: block;
     width: calc(100% + 12px);
-    aspect-ratio: 355/39;
+    aspect-ratio: 480/54;
     background: url(tab_bot1.png) no-repeat;
 	background-size: 100% 100%;
 	margin-left: -7px;
@@ -367,7 +363,7 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
     content: "";
 	display: block;
     width: calc(100% + 12px);
-    aspect-ratio: 355/60;
+    aspect-ratio: 480/81;
     background: url(tab_bot2.png) no-repeat;
 	background-size: 100% 100%;
 	margin-left: -5px;
@@ -378,7 +374,7 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
     content: "";
 	display: block;
     width: calc(100% + 12px);
-    aspect-ratio: 355/25;
+    aspect-ratio: 480/44;
     background: url(tab_bot3.png) no-repeat;
 	background-size: 100% 100%;
 	margin-left: -7px;
@@ -389,7 +385,7 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
     content: "";
 	display: block;
     width: calc(100% + 14px);
-    aspect-ratio: 355/28;
+    aspect-ratio: 480/39;
     background: url(tab_bot4.png) no-repeat;
 	background-size: 100% 100%;
 	margin-left: -7px;
