@@ -386,7 +386,7 @@
 		(describe failed action [[go *] $Details])
 		Nu (#accusative #orb) natta ḫarkun. %% "I did not have a dammuri-object."
 		(div @error) {
-			Why exactly the narrator requires a dammuri-object is unclear. Presumably it was so obvious to the ancient scribe that it did not need to be explained; but to modern scholars, it remains a mystery. This is unfortunately quite common in ancient texts.
+			Why exactly the narrator requires a dammuri-object is unclear. Presumably it was so obvious to the ancient scribe that it did not need to be explained; but to modern scholars, it remains a mystery. This is unfortunately quite a common situation in ancient texts.
 		}
 		(tick) (stop)
 	(endif)
