@@ -227,7 +227,7 @@
 	(gather current verbs list into $VerbList)
 	(listing $VerbList {(hittite name $_)} @, 0)
 
-(hittite name $Obj) (span @hittite) (name $Obj) %% TODO workaround for Dialog bug
+(hittite name $Obj) (span @hittite) (name $Obj) %% Workaround for Dialog bug
 
 (global variable (previous verbs list $))
 (gather current verbs list into $List)
@@ -623,7 +623,7 @@
 %% GO shorthand: raw numbers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% 0: wait (not attested) (TODO: how does this look in cuneiform?)
+%% 0: wait (not attested)
 %% 1: south
 %% 2: north
 %% 3: east
@@ -823,7 +823,8 @@
 	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (span @hittite) (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
 
 (perform [[put $Obj $Dest] | $])
-	(now) ($Obj is #in $Dest) %% TODO always #in?
+	{ ($Dest wants relation $Rel) (or) ($Rel = #in) }
+	(now) ($Obj is $Rel $Dest)
 	(now) (update needed)
 
 #v-put
@@ -1080,7 +1081,7 @@
 	Nu (#nominative $Abl) (#nominative #water) natta ēšta. %% The X was not water.
 
 (perform [[wash $ with $] $])
-	%% Nothing special happens, it just works
+	%% Nothing special happens
 	%% See act2.dg for one place where this is useful
 
 #v-wash
@@ -1179,8 +1180,6 @@
 %% Miscellaneous verbs used in the text
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(third person verb @ēšta/@ešer)
-
 (verb @ešun/@be means @ešun)
 (@ešun wants cases [#dative])
 (@ešun wants cases [#accusative #dative]) %% =za is usually [#accusative #reflexive]
@@ -1249,8 +1248,16 @@
 #v-question
 (verb *)
 (name *) punuššun
-%% TODO - should this appear at all? It's never helpful
+%% Has no #v- because it's never helpful
 
 (verb @paršun/@flee means @paršun) %% Synonym for "go"
 (@paršun wants cases [#dative])
 (translate [$ paršun $ $ $Dat | $] into [go $Dat])
+
+%% TODO - bring?
+
+(third person verb @ēšta/@ešer) %% Act 1
+(third person verb @aušta/@pait/@dāš/@uet/@warpta) %% Act 2
+(third person verb @kuwašzi/@tarkuzzi/@kanināit) %% Signals
+(third person verb @tēt/@kupta/@papriszi/@kuenzi/@parkuzzi) %% Act 3 machinery
+(third person verb @aki/@kunanzi/@punušta/@memiškanzi/@kuenta) %% Act 3
