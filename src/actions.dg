@@ -700,6 +700,11 @@
 	*($Abl is one of $Abls)
 	~($Acc has parent $Abl)
 
+(subtly unlikely [$ @dāḫḫun $ $ $ (nonempty $)]) %% Prefer one noun over two, even when the noun is in the right place
+(unlikely [$ @dāḫḫun $ $Accs | $]) %% Don't take non-portable things
+	*($Acc is one of $Accs)
+	~(item $Acc)
+
 (instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
 	~(avoid ablative case)
 	($Obj is $ $Holder)
