@@ -17,8 +17,8 @@
 
 (* is #in #sanctum)
 
-(startup) %% Because the startup process takes a long time for this game, we should show the player that their computer hasn't frozen
-	(inline status bar @p-meta) { %% Actually the speed has been improved quite a lot now, so this is no longer really a concern, but there's no reason to remove it; maybe someone has a really low-end machine
+(startup) %% Because the startup process takes a long time for this game, we should show the player that their computer hasn’t frozen
+	(inline status bar @p-meta) { %% Actually the speed has been improved quite a lot now, so this is no longer really a concern, but there’s no reason to remove it; maybe someone has a really low-end machine
 		Generating puzzle...please wait!
 	}
 (intro) %% No intro
@@ -28,11 +28,11 @@
 (tutorial)
 	~(taught logograms)
 	(div @tutorial) {
-		If you haven't played tablet 2, don't worry—there's only one thing you need to know from it. Words written in ALL CAPITALS are "logograms", special cuneiform signs used as shorthand for entire words. The CAPITALS indicate that we're transcribing the names of the signs, not the actual Hittite pronunciation. (par)
+		If you haven’t played tablet 2, don’t worry—there’s only one thing you need to know from it. Words written in ALL CAPITALS are "logograms", special cuneiform signs used as shorthand for entire words. The CAPITALS indicate that we’re transcribing the names of the signs, not the actual Hittite pronunciation. (par)
 		Good luck!
 	}
 	(now) (taught logograms)
-	%% Genitive and ablative do show up marginally here—the garment belonged to the dead scribe, and the final message says you left the temple. But those aren't really important and players can figure them out as they go.
+	%% Genitive and ablative do show up marginally here—the garment belonged to the dead scribe, and the final message says you left the temple. But those aren’t really important and players can figure them out as they go.
 
 #sanctum
 (room *)
@@ -133,7 +133,7 @@
 #tablet1
 (name *) DUB 1
 (tablet *)
-(* is #in #box) %% Since this one is already placed in the world, it won't be rewritten by the puzzle machinery—which is good, because this one shouldn't give testimony, it should lay out the design of the puzzle
+(* is #in #box) %% Since this one is already placed in the world, it won’t be rewritten by the puzzle machinery—which is good, because this one shouldn’t give testimony, it should lay out the design of the puzzle
 
 #tablet2 %% All tablets will be populated and moved to the #box by act3_machinery.dg
 (name *) DUB 2
@@ -178,7 +178,7 @@
 
 (testimony for #tablet1)
 	Nu (dtml {F}) Gulzawiyaš šiuniyanza kiššan tēt: %% Thus spoke Gulzawiya the god-touched:
-	mān=wa (span @akk) ina UD.20 (dtm2 {KAM}) (dtml {D}) Armaš aki, %% When the moon dies (i.e. is eclipsed) on the 20th day (of the month), (20 chosen because it's an HZL sign in its own right, not a combination of multiple)
+	mān=wa (span @akk) ina UD.20 (dtm2 {KAM}) (dtml {D}) Armaš aki, %% When the moon dies (i.e. is eclipsed) on the 20th day (of the month), (20 chosen because it’s an HZL sign in its own right, not a combination of multiple)
 	nu=wa=kan 2 kupiyatallieš ḫaššun kunanzi. %% Two conspirators will kill the king.
 	Nu ḫaššuš 5 antuḫšuš kupiyatiya punušta. %% The king questioned five people about the conspiracy.
 	Nu parkueššanteš ašantan memiyan memiškanzi. %% The pure ones speak the real words.
@@ -204,7 +204,7 @@
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details])
 	Nu TUG natta waššiyanun. %% I was not wearing a garment
-	(div @error) { What exactly happened to the baker's garment from the previous tablet is not clear. The word TUG here might mean "appropriate clothing"—that is, a disguise—or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
+	(div @error) { What exactly happened to the baker’s garment from the previous tablet is not clear. The word TUG here might mean "appropriate clothing"—that is, a disguise—or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
 
 (animate *(suspect $))
 (*(suspect $) is #in #temple) %% Put them all in one room for now
@@ -291,7 +291,7 @@
 (* is #in #temple)
 
 (select avenger $Avenger who is not $Victim)
-	(if) ($Victim = #mecedi) (then) %% The bodyguard can't jump in, so someone else has to
+	(if) ($Victim = #mecedi) (then) %% The bodyguard can’t jump in, so someone else has to
 		($Avenger = #tuhkanti)
 	(elseif) ($Victim = #tuhkanti) (then) %% Vice versa
 		($Avenger = #mecedi)
@@ -301,7 +301,7 @@
 		($Avenger = #mecedi)
 	(endif)
 
-(perform [[slay $Victim | $] $]) %% It's not that easy
+(perform [[slay $Victim | $] $]) %% It’s not that easy
 	(current room #temple)
 	(select avenger $Avenger who is not $Victim)
 	Nu=mu=kan (#nominative $Avenger) kuenta. %% The avenger slew me.
@@ -312,7 +312,7 @@
 	Nu=mu=kan (#nominative #mecedi) kuenta. %% The bodyguard slew me.
 	(death ensues)
 
-(perform [$Action $Details] without prefix) %% We'll be putting the prefix back in, but this is needed in order to take precedence over the implementation in actions.dg
+(perform [$Action $Details] without prefix) %% We’ll be putting the prefix back in, but this is needed in order to take precedence over the implementation in actions.dg
 	(fake signal $FSig)
 	($FSig matches $Action)
 	
@@ -371,7 +371,7 @@
 (name * in #ablative) ḫilaz
 (name * in #bare) ḫila
 
-(prevent [[go *] $]) %% Can't just leave without solving the puzzle!
+(prevent [[go *] $]) %% Can’t just leave without solving the puzzle!
 	Nu (#ablative #temple) pāun. %% I went from the temple.
 	Nu=mu (#nominative #king) aušta. %% The king saw me.
 	Nu=mu (#nominative #king) punušta. %% The king questioned me.
@@ -422,7 +422,7 @@
 (verb #v-take unlocked)
 (verb #v-drop unlocked)
 (verb #v-put unlocked)
-(verb #v-slay unlocked) %% This doesn't
+(verb #v-slay unlocked) %% This doesn’t
 (verb #v-wear unlocked)
 %% (verb #v-wait unlocked)
 

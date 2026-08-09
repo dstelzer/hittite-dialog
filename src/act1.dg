@@ -11,7 +11,7 @@
 
 (intro) %% No special intro
 	(now) (update needed)
-	%% Don't update map immediately
+	%% Don’t update map immediately
 
 #riverbank
 (room *)
@@ -57,7 +57,7 @@
 	(tick)
 
 (instead of [[take *] $])
-	(player can hold #water in $Dest) %% If this fails, fall back to "I can't hold the water"
+	(player can hold #water in $Dest) %% If this fails, fall back to "I can’t hold the water"
 	Nu (#accusative #water) (#dative $Dest modifierless) tēḫḫun. %% I put the water in the X.
 	(now) ($Dest is filled with #water)
 	(now) (update needed)
@@ -140,7 +140,7 @@
 	(elseif) (current room #backroom) (then)
 		(try [[go #roof] [$Raw $Verb $Adv #roof $Dat $Abl]])
 	(else)
-		(fail) %% Default message will say that non-doors can't be crossed
+		(fail) %% Default message will say that non-doors can’t be crossed
 	(endif)
 
 #wall
@@ -172,7 +172,7 @@
 (neuter *)
 (* blocks passage)
 	(current room $Room)
-	~{ ($Room is one of [#corner #gatehouse]) (#ladder is #in $Room) } %% Don't pathfind through it
+	~{ ($Room is one of [#corner #gatehouse]) (#ladder is #in $Room) } %% Don’t pathfind through it
 (describe * blocking passage) N=at parku ēšta. %% "The window is high up"
 (name * in #nominative/#accusative/#bare) luttāi
 (dict * in #nominative/#accusative/#bare) luttai
@@ -340,7 +340,7 @@
 
 (location name *) (name #watchtower in #dative) %% avoid āppa āppa
 
-%% Make sure this doesn't cause ambiguity with GO TO WATCHTOWER
+%% Make sure this doesn’t cause ambiguity with GO TO WATCHTOWER
 (unlikely [$ pāun $ $ $Dats $])
 	(* is one of $Dats)
 
@@ -426,7 +426,7 @@
 (tutorial)
 	~(given first message)
 	(div @tutorial) {
-		Welcome to (span @title) { Ḫattušumna Laḫḫa }! This game is presented entirely in the ancient Hittite language, which is probably a bit intimidating at first. But don't panic; just take it slow. (par)
+		Welcome to (span @title) { Ḫattušumna Laḫḫa }! This game is presented entirely in the ancient Hittite language, which is probably a bit intimidating at first. But don’t panic; just take it slow. (par)
 		Clicking a word will show you its definition. See if you can use that to figure out the meaning of the two sentences at the top left. When you think you understand them, press ↩ to continue.
 	}
 	(now) (given first message)
@@ -440,7 +440,7 @@
 	(div @tutorial) {
 		You probably came up with something like "I was at the riverbank. I saw a river there." Most Hittite sentences start with a meaningless "connective" word, then have a series of nouns, and finish off with a verb. The (span @italic) case of those nouns indicates their purpose: a "dative" noun like (span @hittite) wappui indicates a location or destination, while an "accusative" noun like (span @hittite) ḫapan indicates the object of the verb.
 		(if) (#watchtower is unvisited) (then)
-			(par) Now it's time to construct a sentence of your own. The compass rose at the top right indicates nearby locations, and the panel underneath it suggests some relevant verbs. Double-click any of these words to insert them into your sentence; see if you can use them to move to a new location. \( You can also type on a keyboard, if you prefer, and just leave off the special accent marks. \)
+			(par) Now it’s time to construct a sentence of your own. The compass rose at the top right indicates nearby locations, and the panel underneath it suggests some relevant verbs. Double-click any of these words to insert them into your sentence; see if you can use them to move to a new location. \( You can also type on a keyboard, if you prefer, and just leave off the special accent marks. \)
 			(now) (prompted movement specifically)
 		(endif)
 	}
@@ -450,7 +450,7 @@
 (after [[look/examine | $] $])
 	(select)
 		(div @error) {
-			The standard transcription of the word "I looked at" is ūḫḫun, with a U, but it occasionally appears as ōḫḫun, with an O, to capture the exact cuneiform signs it's spelled with. Just ignore the O here; the U is what you'll need to look up in a dictionary.
+			The standard transcription of the word "I looked at" is ūḫḫun, with a U, but it occasionally appears as ōḫḫun, with an O, to capture the exact cuneiform signs it’s spelled with. Just ignore the O here; the U is what you’ll need to look up in a dictionary.
 		}
 	(or)
 	(stopping)
@@ -462,7 +462,7 @@
 		(if) (prompted movement specifically) (then)
 			There we go!
 		(endif)
-		You'll encounter many more verbs and nouns as you go along, but all the relevant ones will be shown at the top of each tablet fragment and the right edge of the screen: what you can see and where you can go. \( You can also leave off the sentence connectives if you want. \)
+		You’ll encounter many more verbs and nouns as you go along, but all the relevant ones will be shown at the top of each tablet fragment and the right edge of the screen: what you can see and where you can go. \( You can also leave off the sentence connectives if you want. \)
 	}
 	(now) (taught objects)
 
@@ -470,7 +470,7 @@
 	~(taught determinatives)
 	(#gatehouse is visited)
 	(div @tutorial) {
-		Hittite nouns were sometimes written with a special sign in front, called a "determiner" or "determinative". These weren't pronounced, but indicated some property of the noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example, marks that something is made of wood. (par)
+		Hittite nouns were sometimes written with a special sign in front, called a "determiner" or "determinative". These weren’t pronounced, but indicated some property of the noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example, marks that something is made of wood. (par)
 		These signs are normally transcribed in superscript, but for typing, you can use a ^ symbol instead \( GIŠ^ḫattalu \) .
 	}
 	(now) (taught determinatives)
@@ -493,8 +493,8 @@
 	~(taught numbers)
 	(direction numbers enabled)
 	(div @tutorial) {
-		You're getting the hang of this now! Since you'll be moving around a lot in this game, there's a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, 1 south 2 north 3 east 4 west, so you can type "1 3 2" to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
-		There's no evidence that the Hittites did this, and this game adds numbers 5 and 6 for "up" and "down", which is completely non-historical. But the Hittites imitating Babylonian writing isn't much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the boxes on the map to navigate to anywhere you've been before.
+		You’re getting the hang of this now! Since you’ll be moving around a lot in this game, there’s a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, 1 south 2 north 3 east 4 west, so you can type "1 3 2" to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
+		There’s no evidence that the Hittites did this, and this game adds numbers 5 and 6 for "up" and "down", which is completely non-historical. But the Hittites imitating Babylonian writing isn’t much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the boxes on the map to navigate to anywhere you’ve been before.
 	}
 	(now) (taught numbers)
 
@@ -503,7 +503,7 @@
 	(#bolt is handled)
 	(#foyer is visited)
 	(div @tutorial) {
-		Most of the sentences you've seen so far have only one noun, but this doesn't have to be the case. To put one thing into or onto another, for example, you'll need both an accusative noun (span @italic) and a dative noun.
+		Most of the sentences you’ve seen so far have only one noun, but this doesn’t have to be the case. To put one thing into or onto another, for example, you’ll need both an accusative noun (span @italic) and a dative noun.
 	}
 	(now) (taught multiple nouns)
 

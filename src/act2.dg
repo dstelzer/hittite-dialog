@@ -29,7 +29,7 @@
 	(div @tutorial) {
 		Welcome to tablet 2! The grammar is going to get more complicated this time, but if you made it through tablet 1, you should be well-prepared for what comes next. (par)
 		In particular, nouns will now appear in two additional cases: the "genitive" for one noun modifying another, and the "ablative" for the source of a movement or the tool used for an action. Verbs will sometimes describe what other people are doing instead of just you yourself. And some words will be written with "logograms": special cuneiform signs that represent whole words, like how "7" is short for "seven". When this happens, the names of those cuneiform signs will be written in CAPITAL LETTERS separated by dots. (par)
-		Don't worry, though; you can still click any word to see its definition, and the basic vocabulary isn't going anywhere. Good luck! You've got this!
+		Don’t worry, though; you can still click any word to see its definition, and the basic vocabulary isn’t going anywhere. Good luck! You’ve got this!
 	}
 	(now) (tutorial introduced)
 
@@ -74,7 +74,7 @@
 	(#blood is #on #me)
 	(describe negative action [[go *] $Details]) %% I did not...
 	Nu (#nominative #blood) (#dative #me) ēšta. %% Blood was on me.
-(prevent [[go *] $Details]) %% Test garment first since it's easier to get
+(prevent [[go *] $Details]) %% Test garment first since it’s easier to get
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details]) %% I did not...
 	Nu (#accusative #garment) natta waššiyanun.
@@ -135,7 +135,7 @@
 %% Washhouse and baker (east)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% The baker's garment is lying in the washhouse. If you try to take it out of the courtyard, the baker interrupts you, unless you've sealed him in the washhouse or killed him.
+%% The baker’s garment is lying in the washhouse. If you try to take it out of the courtyard, the baker interrupts you, unless you’ve sealed him in the washhouse or killed him.
 
 #garment
 (item *)
@@ -381,7 +381,7 @@
 	($Ingredient is one of [#fruit #cheese])
 	($Ingredient is #heldby #me)
 	
-	%% Since we're using (instead of $) we need to do our checks here
+	%% Since we’re using (instead of $) we need to do our checks here
 	(if)
 		($Ingredient = #fruit) ~(fruit is chopped)
 	(or)
@@ -424,7 +424,7 @@
 (name * in #bare) iyatti
 (determiner *) NINDA
 
-($Case $Obj modifier $) %% Here's where we handle the studding
+($Case $Obj modifier $) %% Here’s where we handle the studding
 	($Obj is one of [#dough #bread])
 	(if) ($Obj has determiner) (then)
 		(dtm {(determiner $Obj)})
@@ -510,13 +510,13 @@
 	(then)
 		(move dog from $Start to $Chosen)
 	(else)
-		(div @realerror) { ERROR: The dog is stuck! Dog is in $Start , player is in $Player . What's going on? Please report this! }
+		(div @realerror) { ERROR: The dog is stuck! Dog is in $Start , player is in $Player . What’s going on? Please report this! }
 	(endif)
 	
 	%% For debugging, we also want to make sure the parity is intact
 %%	(check dog parity)
 
-(interface (check dog parity)) %% Don't complain if we comment it out
+(interface (check dog parity)) %% Don’t complain if we comment it out
 (check dog parity)
 	(#dog is in room $Dog)
 	(current room $Player)
@@ -539,10 +539,10 @@
 	(par) Nu (#nominative #dog) (#ablative $Start) (#dative $End) pait.
 	(now) (#dog is #in $End)
 	(if) ($Start is visited) (or) ($End is visited) (then)
-		(now) (map update needed) %% Map changed (dog's position)
+		(now) (map update needed) %% Map changed (dog’s position)
 	(endif)
 	(if) (current room $Start) (or) (current room $End) (then)
-		(now) (update needed) %% Room description changed (dog's presence)
+		(now) (update needed) %% Room description changed (dog’s presence)
 	(endif)
 
 #knife
@@ -687,7 +687,7 @@
 
 @(guard is moving west) ~(guard is moving east)
 
-(guard is relevant) %% Don't spend the rest of the game narrating the guard's actions
+(guard is relevant) %% Don’t spend the rest of the game narrating the guard’s actions
 	(current room $Room)
 	($Room is one of [#kitchen #guardwalk1 #guardwalk2 #guardwalk3 #honeystorage #fruitstorage])
 
@@ -736,7 +736,7 @@
 	(endif)
 	(if) (current room $End) (then)
 		Nu=mu (#nominative *) aušta.
-		(death ensues) %% Don't actually move the guard in this case, to simulate an undo
+		(death ensues) %% Don’t actually move the guard in this case, to simulate an undo
 	(else)
 		(now) (* is #in $End)
 	(endif)
@@ -859,7 +859,7 @@
 (name * in #ablative) nataz
 (name * in #bare) nata
 
-(* accepts substance #oil) %% Doesn't actually become filled with it though
+(* accepts substance #oil) %% Doesn’t actually become filled with it though
 (* accepts substance #fire)
 
 (instead of [[put $X $Y] $])
@@ -978,9 +978,9 @@
 
 (* accepts substance #oil)
 (* accepts substance #fire)
-	(* is filled with #oil) %% Doesn't accept fire until it's filled
+	(* is filled with #oil) %% Doesn’t accept fire until it’s filled
 	(or)
-	(* is filled with #fire) %% But then keeps burning once the oil's gone
+	(* is filled with #fire) %% But then keeps burning once the oil’s gone
 (* has modifier #empty) ~(* is filled with $)
 (* has modifier #oily) (* is filled with #oil)
 %% Will receive "burning" modifier from substances.dg
@@ -989,7 +989,7 @@
 	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
 	(* is #heldby #me)
 	Nu (#accusative #oil) (dtm {DUG})(name * in #dative) anda tēḫḫun. %% I put the oil in the lamp.
-	%% Doesn't use (#dative *) because that would include the "empty" modifier
+	%% Doesn’t use (#dative *) because that would include the "empty" modifier
 	(now) (* is filled with #oil)
 	(now) (update needed)
 
@@ -1042,11 +1042,11 @@
 %% Final bookkeeping
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% We're going to need so many of these...
+%% We’re going to need so many of these...
 (room *(storage $))
 (*(storage $) uses preverb #in)
 (full contents $Obj) (contents $Obj)
-(full contents $Obj) (span @akk) ša (logo contents $Obj) %% Add an Akkadogram preposition if it's a logogram; Tim suggested putting the genitive before the noun even when it's ŠA something, so that's what I'm doing for now
+(full contents $Obj) (span @akk) ša (logo contents $Obj) %% Add an Akkadogram preposition if it’s a logogram; Tim suggested putting the genitive before the noun even when it’s ŠA something, so that’s what I’m doing for now
 (name (storage $Obj) in #nominative/#genitive) (full contents $Obj) antakaš
 (name (storage $Obj) in #dative) (full contents $Obj) antaki
 (name (storage $Obj) in #accusative) (full contents $Obj) antakan
@@ -1071,7 +1071,7 @@
 %% In case someone tries to grab random logograms
 (prevent [[take (storage $) | $] $])
 	Nu kuitki natta dāḫḫun. %% I did not take anything.
-	(div @error) { Presumably nothing in this room was useful to the narrator's mission. }
+	(div @error) { Presumably nothing in this room was useful to the narrator’s mission. }
 
 %% And finally, the circumstances in which each verb gets unlocked
 %% All of these are automatically unlocked from tablet 1
@@ -1082,7 +1082,7 @@
 (verb #v-drop unlocked)
 (verb #v-put unlocked)
 
-%% This one pops up when you meet a person again, because it's funny
+%% This one pops up when you meet a person again, because it’s funny
 (verb #v-slay unlocked) (#washhouse is visited)
 
 %% These are the new ones in tablet 2

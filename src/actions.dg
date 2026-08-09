@@ -37,7 +37,7 @@
 (meta panel)
 	(inline status bar @p-meta) (meta verbs list)
 (meta verbs list)
-	~(given first message) %% Don't hint this until after the first message
+	~(given first message) %% Don’t hint this until after the first message
 (meta verbs list)
 	~(meta verbs introduced)
 	Use (link) /about for info.
@@ -84,7 +84,7 @@
 (short name (logogram $Room)) (name $Room)
 (short name (room $Room)) (name $Room in #dative)
 (short name (door $Door)) (name $Door in #accusative)
-(short name $Obj) $Obj %% Don't crash
+(short name $Obj) $Obj %% Don’t crash
 
 (location name $Room) (#dative $Room) %% Some rooms override this
 
@@ -95,7 +95,7 @@
 (refuse [$Action $]) %% Prevent any interaction with this noun
 	(* is one of $Action)
 	~{ ($Action = [go *]) (or) ($Action = [travel *]) }
-	(div @error) { Since the "dark" is insubstantial, it's unclear what this action would entail. }
+	(div @error) { Since the "dark" is insubstantial, it’s unclear what this action would entail. }
 
 (use bold room headers) (fail) %% Change this as needed
 
@@ -214,11 +214,11 @@
 
 (bonus room description paragraph) %% By default nothing
 
-%% Some objects override this to add more detail if (and only if) they're on their own
+%% Some objects override this to add more detail if (and only if) they’re on their own
 (room description [$Single]) (room description $Single)
 (room description $Whatever) (#accusative $Whatever)
 
-(using separate panels) %% Only do this if it won't interfere with the normal stuff
+(using separate panels) %% Only do this if it won’t interfere with the normal stuff
 	(interpreter supports status bar) (interpreter supports inline status bar)
 
 (verbs list) ~(given first message)
@@ -245,7 +245,7 @@
 
 (verbs list panel)
 	~(given first message)
-(verbs list panel) %% Don't update the panel if we don't need to (because on web it does an animation every time)
+(verbs list panel) %% Don’t update the panel if we don’t need to (because on web it does an animation every time)
 	~(verb list has changed since last turn)
 (verbs list panel)
 	(inline status bar @p-verbs) (verbs list)
@@ -265,7 +265,7 @@
 	(current room $Loc)
 	(from $Loc go $Dir to $Obj)
 	{ (room $Obj) (or) (door $Obj) }
-($ on the compass rose is []) %% Use [] if there's no room that way
+($ on the compass rose is []) %% Use [] if there’s no room that way
 
 (length of single word $Word is $Length)
 	(split word $Word into $List)
@@ -280,7 +280,7 @@
 			(length of single word $Word is $Length)
 			($Length plus 1 into $Each) %% Space after
 		(into $Tmp)
-		(accumulate 2) %% Remove two spaces per dot (before and after), since we assume they're in compound logograms
+		(accumulate 2) %% Remove two spaces per dot (before and after), since we assume they’re in compound logograms
 			*($Word is one of $Name)
 			($Word = @.)
 		(into $Dots)
@@ -334,11 +334,11 @@
 		(short name $Obj)
 	(endif)
 
-(medium short name $Obj) (short name $Obj) %% Most objects won't though
+(medium short name $Obj) (short name $Obj) %% Most objects won’t though
 
 %% Fancy one involving injecting into specific HTML elements
 %% This should be changed to use (status panel $) when I get that proposal through
-%% Right now it's using a hacked interpreter that makes (inline status bar $) act like (status panel $) eventually will
+%% Right now it’s using a hacked interpreter that makes (inline status bar $) act like (status panel $) eventually will
 (compass rose panel) ~(given first message)
 (compass rose panel) ~(map update needed)
 (compass rose panel)
@@ -501,7 +501,7 @@
 (adjacent (current room $Room))
 (adjacent #darkness)
 
-%% For these specific actions, don't require targets to be in the same room
+%% For these specific actions, don’t require targets to be in the same room
 ~(refuse [[go $] $])
 ~(refuse [[travel $] $])
 
@@ -512,7 +512,7 @@
 	(elseif) (from $Room go $Dir to $Next) (door $Next) (then)
 		(try [[cross $Next] $Details])
 	(else)
-		(div @error) { This line is likely an error. The narrator describes going (name $Dir) , but it's unclear what would be in that direction. }
+		(div @error) { This line is likely an error. The narrator describes going (name $Dir) , but it’s unclear what would be in that direction. }
 		(stop)
 	(endif)
 
@@ -547,7 +547,7 @@
 (perform [[go $Dest] $])
 	(enter $Dest)
 
-%% "Travel" is the action invoked when the room isn't adjacent; it plots out a route and tries to move along it
+%% "Travel" is the action invoked when the room isn’t adjacent; it plots out a route and tries to move along it
 
 (prevent [[travel $Dest] $Details])
 	(current room $Source)
@@ -604,7 +604,7 @@
 
 (prevent [[cross $Door] $])
 	~{ (current room $Room) (from $Room through $Door to $Dest) (room $Dest) }
-	(div @realerror) { ERROR: Cannot go through $Door ! What's going on? }
+	(div @realerror) { ERROR: Cannot go through $Door ! What’s going on? }
 
 (perform [[cross $Door] $])
 	(current room $Room)
@@ -645,7 +645,7 @@
 		(if) (unlock wait on the compass rose) (then)
 			, and 0 for waiting
 		(endif)
-		\) , so it's not clear what $Num would mean.
+		\) , so it’s not clear what $Num would mean.
 	}
 	(stop)
 
@@ -668,7 +668,7 @@
 		(tick)
 	(else)
 		(div @error) {
-			The number $Num here presumably means going (name $Dir)(no space)ward, but it's unclear what would be in that direction.
+			The number $Num here presumably means going (name $Dir)(no space)ward, but it’s unclear what would be in that direction.
 		}
 		(stop)
 	(endif)
@@ -701,11 +701,11 @@
 	~($Acc has parent $Abl)
 
 (subtly unlikely [$ @dāḫḫun $ $ $ (nonempty $)]) %% Prefer one noun over two, even when the noun is in the right place
-(unlikely [$ @dāḫḫun $ $Accs | $]) %% Don't take non-portable things
+(unlikely [$ @dāḫḫun $ $Accs | $]) %% Don’t take non-portable things
 	*($Acc is one of $Accs)
 	~(item $Acc)
 
-(instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
+(instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there’s a holder
 	~(avoid ablative case)
 	($Obj is $ $Holder)
 	~(room $Holder)
@@ -821,7 +821,7 @@
 (prevent [[put $Obj $Dest] $Details])
 	{ ~(holder $Dest) (or) (animate $Dest) }
 	(describe failed action [[put $Obj $Dest] $Details])
-	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (span @hittite) (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
+	(div @error) { Spatial relations in Hittite are a complicated topic, and it’s not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (span @hittite) (#dative $Dest). Whatever that arrangement was, it doesn’t seem to have worked. }
 
 (perform [[put $Obj $Dest] | $])
 	{ ($Dest wants relation $Rel) (or) ($Rel = #in) }
@@ -838,11 +838,11 @@
 
 (verb @kuenun/@slay means @kuenun)
 
-(@kuenun wants cases [#adverb #accusative]) (avoid ablative case) %% Allow no ablatives when they haven't been taught yet
+(@kuenun wants cases [#adverb #accusative]) (avoid ablative case) %% Allow no ablatives when they haven’t been taught yet
 
 (@kuenun wants cases [#adverb #accusative #ablative]) %% needs =kkan
 
-(translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl]) %% Abl will be [] if it hasn't been taught yet
+(translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl]) %% Abl will be [] if it hasn’t been taught yet
 
 %% Kuenun and taruḫḫun are mostly synonyms, but take different particles
 (refuse [[slay $ with $] [$ @kuenun $Advs | $]])
@@ -850,7 +850,7 @@
 	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "slay" requires the sentence particle =kan to be attached to the first word of the sentence, as in (span @hittite) { n=an=kan kuenun } "I slew him". }
 (refuse [[slay $ with $] [$ @taruḫḫun $Advs | $]])
 	~(@za is one of $Advs)
-	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) taruḫḫun , when it's used to mean "overpower \(a person\)", needs the clitic =za attached to the first word of the sentence, as in (span @hittite) { nu=za=an taruḫḫun } "I overpowered him". }
+	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) taruḫḫun , when it’s used to mean "overpower \(a person\)", needs the clitic =za attached to the first word of the sentence, as in (span @hittite) { nu=za=an taruḫḫun } "I overpowered him". }
 
 (prevent [[slay ~(animate $Obj) with $Tool] $Details])
 	(describe negative action [[slay $Obj with $Tool] $Details]) %% negative, not failed: "did not" instead of "could not"
@@ -1259,7 +1259,7 @@
 (perform [die] without prefix)
 	(death ensues)
 
-(death ensues) %% Note: call this in (perform $) rules ideally, not (on every tick) unless you're prepared to deal with the consequences
+(death ensues) %% Note: call this in (perform $) rules ideally, not (on every tick) unless you’re prepared to deal with the consequences
 	Nu aggaḫḫun.
 	(div @error) {
 		The text must be corrupt at this point, as the hero must survive to continue the story. Ignoring the last few lines, we continue on...
@@ -1285,7 +1285,7 @@
 #v-question
 (verb *)
 (name *) punuššun
-%% Has no #v- because it's never helpful
+%% Has no #v- because it’s never helpful
 
 (verb @paršun/@flee means @paršun) %% Synonym for "go"
 (@paršun wants cases [#dative])

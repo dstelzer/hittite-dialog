@@ -1,6 +1,6 @@
 %% Metadata
 
-%% We don't use the standard (story title) because that's set in each act individually
+%% We don’t use the standard (story title) because that’s set in each act individually
 (overall story title) Ḫattušumna Laḫḫa \( Hittite Adventure \)
 (story noun) An educational adventure
 (story ifid) 58715A25-1E91-4BAC-ACED-F1E534F9C33D
@@ -57,7 +57,7 @@
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 
-%% "Errors" in the player's input
+%% "Errors" in the player’s input
 (style class @error)
 	data-language: en;
 	font-family: sans-serif;
@@ -78,7 +78,7 @@
 	margin-top: 1em;
 	margin-bottom: 1em;
 
-%% Actual errors in the game's programming
+%% Actual errors in the game’s programming
 (style class @realerror)
 	color: red;
 	font-weight: bold;
