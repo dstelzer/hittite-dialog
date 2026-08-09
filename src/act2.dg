@@ -233,6 +233,15 @@
 (name * in #ablative) ḫattaluwaz
 (* is #heldby #me)
 
+(after [$Action $])
+	(* is one of $Action)
+	(select)
+		(div @error) {
+			While the door bolt from tablet 1 reappears here, no mention is made of the dammuri-object. It is unclear what has happened to it, or what it might have been used for—unfortunate, since that might have given us more clues about its nature!
+		}
+	(or)
+	(stopping)
+
 #burnt
 (adjective *)
 (neuter *) %% Only applies to ḫattalu
