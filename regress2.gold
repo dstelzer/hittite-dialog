@@ -18,16 +18,16 @@ Welcome to tablet 2! The grammar is going to get more complicated this time,
 but if you made it through tablet 1, you should be well-prepared for what comes
 next.
 
-In particular, nouns will now appear in two additional cases: the "genitive"
-for one noun modifying another, and the "ablative" for the source of a movement
+In particular, nouns will now appear in two additional cases: the “genitive”
+for one noun modifying another, and the “ablative” for the source of a movement
 or the tool used for an action. Verbs will sometimes describe what other people
 are doing instead of just you yourself. And some words will be written with
-"logograms": special cuneiform signs that represent whole words, like how "7"
-is short for "seven". When this happens, the names of those cuneiform signs
+“logograms”: special cuneiform signs that represent whole words, like how “7”
+is short for “seven”. When this happens, the names of those cuneiform signs
 will be written in CAPITAL LETTERS separated by dots.
 
-Don't worry, though; you can still click any word to see its definition, and
-the basic vocabulary isn't going anywhere. Good luck! You've got this!
+Don’t worry, though; you can still click any word to see its definition, and
+the basic vocabulary isn’t going anywhere. Good luck! You’ve got this!
 
 > 2
 2   Nu karimni natta pāun. Nu TUG₂ natta waššiyanun.
@@ -116,6 +116,11 @@ It seems the intended interpretation is number...
 2
 Nu=ši lukkan GIŠ^ḫattalu tēḫḫun.
 
+While the door bolt from tablet 1 reappears here, no mention is made of the
+dammuri-object. It is unclear what has happened to it, or what it might have
+been used for—unfortunate, since that might have given us more clues about its
+nature!
+
 - - - - -
 Nu=za=kan karimnaš ḫili anda ešun.
 
@@ -154,12 +159,13 @@ waššiyanun, warpun
 The Hittites used logograms extensively, because a single sign could be much
 shorter than the half dozen or so needed to spell out a word. Sometimes,
 though, they would write the Hittite ending onto the logogram for clarity: GIR₂
-means "knife" in general, but GIR₂-an is specifically the accusative form of
-"knife", GIR₂-aš the genitive, GIR₂-az the ablative, and so on.
+means “knife” in general, but GIR₂-an is specifically the nominative or
+accusative form of “knife”, GIR₂-aš the genitive, GIR₂-az the ablative, and so
+on.
 
 > * Barring the door works
 > /undo
-The previous lines, starting with "4", are crossed out on the tablet and should
+The previous lines, starting with “4”, are crossed out on the tablet and should
 be considered a scribal error.
 
 - - - - -
@@ -178,7 +184,7 @@ waššiyanun, warpun
                                      |      
                                    +(@)+(*) 
 > /undo
-The previous lines, starting with "hattalu aski tehhun", are crossed out on the
+The previous lines, starting with “hattalu aski tehhun”, are crossed out on the
 tablet and should be considered a scribal error.
 
 - - - - -
@@ -213,12 +219,17 @@ waššiyanun, warpun
                                      |      
                                    +( )+(@) 
 > nu=kan lú ninda.dù.dù kuenun
-This sentence, "nu=kan lú ninda.dù.dù kuenun", is difficult to interpret. There
+This sentence, “nu=kan lú ninda.dù.dù kuenun”, is difficult to interpret. There
 should be an ablative noun.
 
 > * Now that we have the ablative case, we need to use it
 > nu=kan lú ninda.dù.dù hattaluwaz kuenun
 Nu=kan LU₂^NINDA.DU₃.DU₃ lukkandaz GIŠ^ḫattaluwaz kuenun.
+
+While the door bolt from tablet 1 reappears here, no mention is made of the
+dammuri-object. It is unclear what has happened to it, or what it might have
+been used for—unfortunate, since that might have given us more clues about its
+nature!
 
 - - - - -
 Nu=za šakuniya ešun.
@@ -292,8 +303,9 @@ waššiyanun, warpun
 The Hittites used logograms extensively, because a single sign could be much
 shorter than the half dozen or so needed to spell out a word. Sometimes,
 though, they would write the Hittite ending onto the logogram for clarity: GIR₂
-means "knife" in general, but GIR₂-an is specifically the accusative form of
-"knife", GIR₂-aš the genitive, GIR₂-az the ablative, and so on.
+means “knife” in general, but GIR₂-an is specifically the nominative or
+accusative form of “knife”, GIR₂-aš the genitive, GIR₂-az the ablative, and so
+on.
 
 > * Killing the baker also works
 > tug2 wassiyanun
@@ -669,7 +681,7 @@ Nu lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, warpun
+waššiyanun, warpun, genzuwanun
                                   <5> šuḫḫi
           <4> ZID₂.DA ✧ <3> šarāzziya        
               <1> ḫararaziya               
@@ -695,7 +707,35 @@ Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, arkaḫḫun, warpun
+waššiyanun, arkaḫḫun, warpun, genzuwanun
+                                  <5> šuḫḫi
+          <4> ZID₂.DA ✧ <3> šarāzziya        
+              <1> ḫararaziya               
+                                ( )     ( )     
+                                 |     / |      
+                                ( )-(@)-( )     
+                                 |   |          
+                                ( )-( )         
+                                     |   |      
+                                   -( )+( )+( ) 
+> ur.gi7 genzuwanun
+Nu UR.GI₇ genzuwanun.
+
+> /undo
+The previous lines, starting with “ur.gi7 genzuwanun”, are crossed out on the
+tablet and should be considered a scribal error.
+
+- - - - -
+Nu=za=kan ištarniya antaki anda ešun.
+
+Nu apiya UR.GI₇ U₃ ilan ōḫḫun.
+
+Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
+
+Nu TUG₂ waššiyanun.
+
+Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
+waššiyanun, arkaḫḫun, warpun, genzuwanun
                                   <5> šuḫḫi
           <4> ZID₂.DA ✧ <3> šarāzziya        
               <1> ḫararaziya               
@@ -725,7 +765,7 @@ Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, arkaḫḫun, warpun
+waššiyanun, arkaḫḫun, warpun, genzuwanun
                <2> ḫararaziya              
          <4> MUḪALDIM ✧ <3> parnaš āškan     
                                          
@@ -757,7 +797,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -796,7 +836,7 @@ Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -830,7 +870,7 @@ Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
         <4> ištarniya ✧ <3> MUḪALDIM         
                                          
@@ -857,7 +897,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš katteri palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                 <2> militaš                
           <4> katteri ✧ <3> šarāzziya        
                                          
@@ -884,7 +924,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -909,7 +949,7 @@ Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -941,7 +981,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -973,7 +1013,7 @@ Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -1003,7 +1043,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -1028,7 +1068,7 @@ Nu GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -1063,7 +1103,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -1090,7 +1130,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -1115,7 +1155,7 @@ Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -1148,7 +1188,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -1173,7 +1213,7 @@ Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
                     ✧                    
                  <1> palši                 
@@ -1211,7 +1251,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1246,7 +1286,7 @@ Nu natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1266,8 +1306,7 @@ Nu LU₂^ḫalliyatallaš katteri palši ištarniyaz palšaz pait.
 - - - - -
 Nu=za=kan ana E₂ LU₂^MUḪALDIM anda ešun.
 
-Nu apiya išliman U₃ DUG^išnuran U₃ warantaš nataš GIŠ^PISAN U₃ šaknaš DUG
-^palḫin ōḫḫun.
+Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^palḫin ōḫḫun.
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 
@@ -1276,10 +1315,10 @@ Nu warantan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫark
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -1289,17 +1328,17 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                           (*)-( )-( )-(@)-( )+( )+( ) 
                                      /                
 > 6
-6   Nu halkiyaš antaki pāun.
+6   Nu ḫalkiyaš antaki pāun.
 
 - - - - -
-Nu=za=kan halkiyaš antaki anda ešun.
+Nu=za=kan ḫalkiyaš antaki anda ešun.
 
 Nu warantan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                <5> MUḪALDIM
              <4> GIR₄ ✧ <3> wiyanaš          
                                          
@@ -1317,7 +1356,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
 
 Nu waranza nataš arḫa warati.
 
-Nu pedaš dankuešta. Nu apēz paršun.
+Nu pedan dankuešta. Nu apēz paršun.
 
 - - - - -
 Nu=za=kan ana E₂ LU₂^MUḪALDIM anda ešun.
@@ -1332,7 +1371,7 @@ Nu šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1365,7 +1404,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1387,8 +1426,7 @@ Nu LU₂^ḫalliyatallaš aušta.
 - - - - -
 Nu=za=kan ana E₂ LU₂^MUḪALDIM anda ešun.
 
-Nu apiya išliman U₃ DUG^išnuran U₃ šaknuwandaš nataš GIŠ^PISAN U₃ šaknaš DUG
-^palḫin ōḫḫun.
+Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^palḫin ōḫḫun.
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 
@@ -1399,7 +1437,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1421,20 +1459,19 @@ Nu LU₂^ḫalliyatallaš ištarniya palši šarāzziyaz palšaz pait.
 - - - - -
 Nu=za=kan ana E₂ LU₂^MUḪALDIM anda ešun.
 
-Nu apiya išliman U₃ DUG^išnuran U₃ šaknuwandaš nataš GIŠ^PISAN U₃ šaknaš DUG
-^palḫin ōḫḫun.
+Nu apiya išliman U₃ DUG^išnuran U₃ nataš GIŠ^PISAN U₃ šaknaš DUG^palḫin ōḫḫun.
 Nu=kan paḫḫur išlimani anda ēšta.
 Nu=kan išnaš DUG^išnuri anda ēšta.
 
-Nu šaknuwandan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -1446,17 +1483,17 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                               [.]-[ ]-                
                                |                      
 > 6
-6   Nu halkiyaš antaki pāun.
+6   Nu ḫalkiyaš antaki pāun.
 
 - - - - -
-Nu=za=kan halkiyaš antaki anda ešun.
+Nu=za=kan ḫalkiyaš antaki anda ešun.
 
-Nu šaknuwandan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                <5> MUḪALDIM
              <4> GIR₄ ✧ <3> wiyanaš          
                                          
@@ -1478,14 +1515,14 @@ Nu=za=kan ša GIR₄ antaki anda ešun.
 
 Nu apiya dannattan DUG^šāšan ōḫḫun.
 
-Nu šaknuwandan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
+Nu warantan natan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
-                    ✧ <3> halkiyaš         
+                    ✧ <3> ḫalkiyaš         
                   <1> SAR                  
                                       ( )     ( )     
                                        |     / |      
@@ -1500,9 +1537,9 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
 > sasan dahhun
 Nu dannattan DUG^šāšan dāḫḫun.
 
-Nu šaknuwanza nataš arḫa warati.
+Nu waranza nataš arḫa warati.
 
-Nu pedaš dankuešta. Nu apēz paršun.
+Nu pedan dankuešta. Nu apēz paršun.
 
 - - - - -
 Nu=za=kan ana E₂ LU₂^MUḪALDIM anda ešun.
@@ -1517,7 +1554,7 @@ Nu dannattan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattal
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1551,7 +1588,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1585,7 +1622,7 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1617,7 +1654,7 @@ Nu šaknuwandan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫat
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
 <6> dankui                                 
@@ -1649,10 +1686,10 @@ Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -1664,17 +1701,17 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                               [ ]-[ ]-                
                                |                      
 > 6
-6   Nu halkiyaš antaki pāun.
+6   Nu ḫalkiyaš antaki pāun.
 
 - - - - -
-Nu=za=kan halkiyaš antaki anda ešun.
+Nu=za=kan ḫalkiyaš antaki anda ešun.
 
 Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                <5> MUḪALDIM
              <4> GIR₄ ✧ <3> wiyanaš          
                                          
@@ -1699,9 +1736,9 @@ Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
-         <4> halkiyaš ✧                    
+         <4> ḫalkiyaš ✧                    
                  <1> GUG₂                  
                                       ( )     ( )     
                                        |     / |      
@@ -1724,7 +1761,7 @@ Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                 <2> wiyanaš                
         <4> GA.KIN.AG ✧                    
                                          
@@ -1752,7 +1789,7 @@ Nu warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
               <4> SAR ✧ <3> GUG₂             
                                          
@@ -1768,13 +1805,6 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
                                |       |              
                                  -[@]-[ ]             
 > GA.KIN.AG dahhun
-This line could be interpreted in multiple ways:
-    1: Nu ša GA.KIN.AG antakan dāḫḫun.
-    2: Nu GA.KIN.AG dāḫḫun.
-    3: Nu GA.KIN.AG ša GA.KIN.AG antakaz dāḫḫun.
-It seems the intended interpretation is number...
-
-2
 Nu GA.KIN.AG dāḫḫun.
 
 - - - - -
@@ -1786,7 +1816,7 @@ Nu GA.KIN.AG U₃ warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
               <4> SAR ✧ <3> GUG₂             
                                          
@@ -1813,7 +1843,7 @@ Nu GA.KIN.AG U₃ warantan DUG^šāšan U₃ šēšan U₃ GIR₂-an U₃ lukkan
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                   <2> GIR₄                 
                     ✧ <3> GA.KIN.AG        
                                          
@@ -1831,7 +1861,7 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
 > ana muhaldim paun
 Nu ana E₂ LU₂^MUḪALDIM pāun.
 2   Nu ša GIR₄ antaki pāun.
-3   Nu halkiyaš antaki pāun.
+3   Nu ḫalkiyaš antaki pāun.
 
 5   Nu ana E₂ LU₂^MUḪALDIM pāun.
 
@@ -1853,10 +1883,10 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -1889,10 +1919,10 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -1908,8 +1938,8 @@ waššiyanun, ḫuškanun, arkaḫḫun, warpun
 N=an išlimani natta tēḫḫun. Nu=ši GA.KIN.AG anda natta ēšta. Nu=ši šēšaš anda
 natta ēšta.
 
-The narrator seems to be making iyatti, a kind of bread "studded" with chopped
-pieces of fruit and cheese.
+The narrator is apparently trying to make iyatti, a kind of bread “studded”
+with chopped pieces of fruit and cheese.
 
 Nu LU₂^ḫalliyatallaš ištarniya palši šarāzziyaz palšaz pait.
 
@@ -1926,10 +1956,10 @@ Nu išnan    U₃ GA.KIN.AG    U₃ warantan DUG^šāšan
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -1947,7 +1977,7 @@ Nu=ši šēšan natta tēḫḫun. N=aš arkanza natta ēšta.
 Nu LU₂^ḫalliyatallaš katteri palši ištarniyaz palšaz pait.
 
 > sesan arkahhun
-This sentence, "šēšan arkaḫḫun", is difficult to interpret. There should be an
+This sentence, “šēšan arkaḫḫun”, is difficult to interpret. There should be an
 ablative noun.
 
 > GA.KIN.AG sesan ISTU GIR2 arkahhun
@@ -1972,10 +2002,10 @@ Nu išnan    U₃ arkandan GA.KIN.AG    U₃ warantan DUG^šāšan
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -2011,10 +2041,10 @@ Nu TUG₂ waššiyanun.
 Nu LU₂^ḫalliyatallaš palši ēšta.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -2044,10 +2074,10 @@ Nu warantan DUG^šāšan U₃ GIR₂-an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     
@@ -2077,10 +2107,10 @@ an U₃ lukkan GIŠ^ḫattalu ḫarkun.
 Nu TUG₂ waššiyanun.
 
 Verbs: ōḫḫun, pāun, šarraḫḫun, dāḫḫun, tēḫḫun, katta tēḫḫun, =kan kuenun, 
-waššiyanun, ḫuškanun, arkaḫḫun, warpun
+waššiyanun, ḫuškanun, arkaḫḫun, warpun, genzuwanun
                                          
             <4> palši ✧ <3> parni            
-<6> halkiyaš                               
+<6> ḫalkiyaš                               
                                       ( )     ( )     
                                        |     / |      
                                       ( )-(*)-( )     

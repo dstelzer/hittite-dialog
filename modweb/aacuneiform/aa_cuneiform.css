@@ -1,3 +1,10 @@
+.showbound #fontsel{ /* Hide these when not applicable */
+	display: none;
+}
+.showbound #sizesel{
+	display: none;
+}
+
 .sign{
 	position: relative;
 	display: inline-grid;

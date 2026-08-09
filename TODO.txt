@@ -1,7 +1,3 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
-fill in third-person verb forms from tablet 3 into actions.dg
-Quotes and apostrophes
-Process dead player input so it's cuneiformed and ōḫḫun becomes ūḫḫun
-Update map when creating a light source if darkness is adjacent
