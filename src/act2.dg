@@ -470,10 +470,12 @@
 
 #dog
 (animate *)
+(pettable *) %% See actions.dg
 (holder *) %% For room descriptions
 (* wants relation #heldby)
 (logogram *)
 (name *) UR.GI₇
+(dict *) UR.GI7
 (* is #in #dogmaze)
 
 (after [[go/cross $] $])
@@ -1084,3 +1086,10 @@
 (verb #v-wait unlocked) (#kitchen is visited) %% Where an every-turn-moving NPC is first visible
 (verb #v-cut unlocked) (#knife is handled)
 (verb #v-wash unlocked) (#washhouse is visited)
+
+%% By popular demand: pet the dog
+(late on every tick)
+	(current room $Room)
+	(#dog is in room $Room)
+	(now) (dog has been met)
+(verb #v-pet unlocked) (dog has been met)

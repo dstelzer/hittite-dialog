@@ -3,4 +3,4 @@ update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
 Quotes and apostrophes
 Process dead player input so it's cuneiformed and ōḫḫun becomes ūḫḫun
-Pet the dog
+Pet the dog: genzuwanun?
