@@ -128,10 +128,9 @@ div.aa-tutorial p {
 
 div.aa-error {
 	float: left;
-	clear: left;
 	width: 10.5em;
 	margin-left: calc(-11.5em - var(--before-element-width, 0px));
-	margin-top: -5em;
+	margin-top: -3.5em;
 	padding-top: 2em;
 	font-family: var(--font-body);
 	font-size: 90%;
@@ -234,9 +233,10 @@ div.aa-error {
 
 #aasubmit {
 	position: absolute;
-	height: calc(100% + 2px);
+	height: calc(100% + 4px);
 	aspect-ratio: 1 / 1 !important;
 	right: -7px !important;
+	top: -2px;
 	padding: 0px;
 	border: 2px black solid;
 }
@@ -262,15 +262,13 @@ div.aa-error {
 }
 
 /* Hide input text when not immediately followed by an error */
-/* (disabled for now until we figure out what to do with this) */
-div.output.output-first:has(h2.aainputtext):not(:has(+ .aa-error)) p:has(h2.aainputtext) {
-	/* output-first: complicated layout so just white out text */
-	/* color: white; */
-	/* visibility: hidden; */
+div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) p:has(h2.aainputtext) {
+	display: none;
 }
-div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
-	/* output: hide div */
-	/* display: none; */
+
+/* Hide blank tutorial sections */
+.output.output-break-end.output-break-start {
+	display: none;
 }
 
 /* Tablet fragments */
@@ -283,7 +281,6 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 	padding-left: 5px;
 	padding-right: 5px;
 	counter-increment: output-line;
-	min-height: 22px;
 }
 
 /* FIXME tinkering with this */
@@ -760,7 +757,7 @@ select.settings:hover {
 }
 
 .word {
-	cursor: pointer;
+	cursor: help;
 }
 
 /* Helps with touch double-tap, sometimes */
