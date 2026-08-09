@@ -35,11 +35,11 @@
 	(parser log { Input: $Input } )
 	(separate clitics from $Input into $One) %% One: [[an] witeni dahhun]
 	(parser log { One: $One } )
-	(transpose verb from $One into $Two) %% Two: [dahhun an witeni]
+	(remove compound and determiner separators from $One into $Two) %% no dots
 	(parser log { Two: $Two } )
-	(purify verb from $Two into $Three) %% Three: [dāḫḫun an witeni]
+	(transpose verb from $Two into $Three) %% Three: [dahhun an witeni]
 	(parser log { Three: $Three } )
-	(remove compound and determiner separators from $Three into $Output)
+	(purify verb from $Three into $Output) %% Output: [dāḫḫun an witeni]
 	(parser log { Output: $Output } )
 	
 	%% This last step, (purify verb...), is usually no longer necessary due to (sanitize $ into $)

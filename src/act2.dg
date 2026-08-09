@@ -397,7 +397,7 @@
 		Nu=ši (#nominative #fruit) anda natta ēšta. %% The fruit was not in it.
 	(endif)
 	(div @error) {
-		The narrator seems to be making (span @italic) iyatti , a kind of bread "studded" with chopped pieces of fruit and cheese.
+		The narrator is apparently trying to make (span @italic) iyatti , a kind of bread "studded" with chopped pieces of fruit and cheese.
 	}
 
 (perform [[put * #oven] $])
