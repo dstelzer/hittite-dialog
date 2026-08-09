@@ -1,7 +1,7 @@
 # Headword	All forms	Definition	Paradigm (Nominals: NOM GEN DAT ACC ABL; Verbs: 1SG 3SG)	Simplified paradigm (optional)	Simplified definition (optional)
 
 # Basic actions
-n(u)	nu na n n(u)	Then (a mostly-meaningless word used to introduce a new sentence in Hittite, called the "sentence connective")
+n(u)	nu na n n(u)	Then (a mostly-meaningless word used to introduce a new sentence in Hittite, called the "sentence connective"). The parentheses mean that it appears as "nu" in most positions but just "n" when it comes right before a vowel.
 =za	=za =z	Self (as in "myself", "yourself", etc). In Hittite, this word is also used any time the main verb in a sentence is "I am" or "you are", but not "it is" or "they are".	CLIT
 =kan	=kan =kkan	A particle that affects the meaning of the verb in subtle ways. Usually left untranslated.	CLIT
 ešun	ešun ēšta ešer	I was (at a location: dative)	"I was" ešun "it was" ēšta "they were" ešer
@@ -112,7 +112,7 @@ MUḪALDIM	MUḪALDIM	Cook (specifically of meat rather than baked goods, but E�
 išliman	išliman išlimanaš išlimani išlimanaz	Oven	NOUN išliman išlimanaš išlimani išliman išlimanaz
 išnura	išnura išnuraš išnuri išnuran išnuraz	Kneading trough (where bread dough was kneaded and then left to rise over the course of the day)	NOUN išnuraš išnuraš išnuri išnuran išnuraz
 GA.KIN.AG	GA.KIN.AG	Cheese; for the Hittites, this was a count noun ("two cheeses" rather than "two cups of cheese"), and they were solid enough that they could be used in a popular (dodgeball-like?) sport at festivals. The details of that game are unfortunately unknown, beyond the Hittite phrase "the youths fight with the cheeses".	LOGO
-šēšan	šēšaš šēšanaš šēšani šēšan šēšaz	Fruit, fruit tree; for the Hittites, this primarily meant apples and figs, as well as some other words of unclear meaning (the "foreign apple" or "mountain apple", for example, might mean "apricot" or "pear").	NOUN šēšaš šēšanaš šēšani šēšan šēšaz
+šēšan	šēšaš šēšanaš šēšani šēšan šēšanaz	Fruit, fruit tree; for the Hittites, this primarily meant apples and figs, as well as some other words of unclear meaning (the "foreign apple" or "mountain apple", for example, might mean "apricot" or "pear").	NOUN šēšaš šēšanaš šēšani šēšan šēšanaz
 arkan	arkan arkanza arkandaš arkandi arkandan arkandaz	Cut/chopped into pieces (adjective)	NOUN arkanza arkandaš arkandi arkandan arkandaz
 išna	išna išnaš išni išnan išnaz	Dough (for making bread)	NOUN išnaš išnaš išni išnan išnaz
 NINDA	NINDA	Usually translated as "bread", but this word also encompassed cakes, porridges, and any other type of flour-based food	DTM

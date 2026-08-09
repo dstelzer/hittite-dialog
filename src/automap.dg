@@ -261,7 +261,8 @@
 					%% ōḫḫun
 					ūḫḫun
 				(else)
-					(#dative $Room) pāun
+					(to-name $Room)
+					pāun
 				(endif)
 			(into $Command)
 			(link $Command) (full room glyph $Room)
@@ -272,6 +273,9 @@
 		(space 3)
 	(endif)
 	(draw row $Y of layer $Z from $XP1 to $XMax)
+
+(to-name (logogram $Room)) ana (name $Room)
+(to-name $Room) (name $Room in #dative)
 
 (use hyperlinks in map) %% The map gets unreadable in the debugger if links are included
 	~(in debugger)

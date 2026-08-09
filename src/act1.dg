@@ -247,8 +247,8 @@
 	~(* is filled with #fire)
 	(now) (#fire is nowhere)
 
-(instead of [[put $Obj #fire] $Details])
-	(current room #foyer)
+(instead of [[put $Obj $Sub] $Details]) %% Put water on fire, put water on cup
+	($Sub is #in #hearth)
 	(try [[put $Obj #hearth] $Details])
 
 (prevent [[put #amphora *] $Details])
@@ -462,7 +462,7 @@
 		(if) (prompted movement specifically) (then)
 			There we go!
 		(endif)
-		You'll encounter many more verbs and nouns as you go along, but all the relevant ones will be shown at the top of the screen: what you can see and where you can go. \( You can also leave off the sentence connectives if you want. \)
+		You'll encounter many more verbs and nouns as you go along, but all the relevant ones will be shown at the top of each tablet fragment and the right edge of the screen: what you can see and where you can go. \( You can also leave off the sentence connectives if you want. \)
 	}
 	(now) (taught objects)
 
