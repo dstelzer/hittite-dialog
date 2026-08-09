@@ -1074,7 +1074,7 @@
 
 (enumerate possible actions [] $)
 (enumerate possible actions [$Head|$Tail] $N)
-	(line) (space 4) $N : (describe action [[unknown] $Head])
+	(line) (space 4) $N : (span @hittite) (describe action [[] $Head])
 	($N plus 1 into $Np1)
 	(enumerate possible actions $Tail $Np1)
 
@@ -1141,6 +1141,7 @@
 %% We do not have (name $ in $) rules for logograms in any other case
 %% They're handled specially by the parser
 (dict (logogram $Obj) in #bare/#nominative/#accusative) (name $Obj) *(dict $Obj)
+(dict (logogram $Obj) in #bare/#nominative/#accusative) (determiner $Obj)
 
 %% Silence warnings in tablet 1 which has no logograms
 (interface (name $>Obj))
@@ -1192,4 +1193,5 @@
 	(collect words) (determiner $Obj) (into $List)
 	(nonempty $List)
 (dict $Obj in $) %% Namely, right here
+	~(logogram $Obj)
 	(determiner $Obj)

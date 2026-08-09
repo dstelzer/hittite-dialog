@@ -814,7 +814,7 @@
 	natta ḫarkun. %% "I did not hold it."
 
 (prevent [[put $Obj $Dest] $Details])
-	~(holder $Dest)
+	{ ~(holder $Dest) (or) (animate $Dest) }
 	(describe failed action [[put $Obj $Dest] $Details])
 	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (span @hittite) (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
 
@@ -1080,6 +1080,11 @@
 (verb @warpun/@wash means @warpun)
 (@warpun wants cases [#accusative #ablative])
 (translate [$ warpun $ $Acc $ $Abl] into [wash $Acc with $Abl])
+
+(prevent [[wash (animate $Acc) with $Abl] $Details])
+	~(pettable $Acc) %% Exception for dogs
+	~(current player $Acc) %% And for yourself
+	(describe negative action [[wash $Acc with $Abl] $Details])
 
 (prevent [[wash $Acc with $Abl] $Details])
 	~($Abl is filled with #water)

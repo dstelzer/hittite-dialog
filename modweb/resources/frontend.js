@@ -674,10 +674,11 @@ window.run_game = function(story64, options) {
 			if(link) {
 				span = document.createElement("h2"); // Using an H2 instead of a span makes it easier for screen readers to jump to it
 	//			$(span).addClass(io.links_enabled? "aalink" : "aahidelink");
-				$(span).addClass(str[0] != '/' ? "aainputtext" : "aainputmeta"); // For styling input differently, if desired; currently unused
-				if(str[0] == '/') { // English metacommand
+				if(str[0] == '/' || str[0] == '*') { // English metacommand
 					span.dataset['language'] = 'en';
-				}
+					$(span).addClass("aainputmeta");
+				} else {
+					$(span).addClass("aainputtext");
 				span.href = "#0";
 				span.appendChild(document.createTextNode(str));
 				this.current.appendChild(span);
@@ -685,9 +686,11 @@ window.run_game = function(story64, options) {
 	// not using links for input for this game specifically
 			} else {
 				span = document.createElement("h2");
-				$(span).addClass(str[0] != '/' ? "aainputtext" : "aainputmeta"); // For styling input differently, if desired; currently unused
-				if(str[0] == '/') { // English metacommand
+				if(str[0] == '/' || str[0] == '*') { // English metacommand
 					span.dataset['language'] = 'en';
+					$(span).addClass("aainputmeta");
+				} else {
+					$(span).addClass("aainputtext");
 				}
 				span.appendChild(document.createTextNode(str));
 				this.current.appendChild(span);
