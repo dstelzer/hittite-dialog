@@ -58,13 +58,16 @@ web: tablet1.aastory tablet2.aastory tablet3.aastory ishamai modweb dictionary.j
 	## Replace the generated files
 	cp web/template.html web/tablet1.html
 	sed -i 's/THISFILE/tablet1/g' web/tablet1.html
+	sed -i 's/THISNUMBER/1/g' web/tablet1.html
 	sed -i 's/dictionary\.js/dictionary_simple\.js/g' web/tablet1.html
 	## Tablet 1
 	cp web/template.html web/tablet2.html
 	sed -i 's/THISFILE/tablet2/g' web/tablet2.html
+	sed -i 's/THISNUMBER/2/g' web/tablet2.html
 	## Tablet 2
 	cp web/template.html web/tablet3.html
 	sed -i 's/THISFILE/tablet3/g' web/tablet3.html
+	sed -i 's/THISNUMBER/3/g' web/tablet3.html
 	## Tablet 3
 	rm web/template.html
 	## Get rid of the template once it's served its purpose

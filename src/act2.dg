@@ -182,6 +182,9 @@
 
 (from * go #west through #washdoor to #courtyard)
 
+(instead of [[wash $Obj with *] $Details])
+	(try [[wash $Obj with #pool] $Details])
+
 (after [[cross #washdoor] $])
 	(now) (baker description suppressed)
 (on every tick)
