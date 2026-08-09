@@ -835,7 +835,7 @@
 (logogram *)
 (name *) PISAN %% "container"
 (determiner *) GIŠ
-(* has modifier #reed) %% Conveniently the gen sg and gen pl look the same for a-stems
+(* has modifier @nataš) %% gen pl, not nom sg
 (* is #in #kitchen)
 
 #reed
@@ -901,6 +901,15 @@
 (* is filled with #oil)
 (* has modifier #oil)
 (* is #in #kitchen)
+
+(prevent [[put $Obj *] $Details])
+	($Obj is filled with #fire)
+	(describe negative action [[put $Obj *] $Details])
+	(if) (neuter $Obj) (then)
+		N=at (#nominative #burning-n) ēšta. %% It was burning.
+	(else)
+		N=an (#nominative #burning-c) ēšta.
+	(endif)
 
 %% Now for the dark maze itself
 
