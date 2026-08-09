@@ -195,6 +195,8 @@ div.aa-error {
 #verbs {
 	background: #C0DF1F;
 	background: linear-gradient(90deg, rgba(200, 230, 50, 1) 0%, rgba(194, 222, 58, 1) 40px, rgba(191, 225, 29, 1) 40px, rgba(191, 225, 29, 1) 100%);
+    width: fit-content;
+    min-width: 100%;
 }
 
 #dictionary {
@@ -575,6 +577,18 @@ select.settings:hover {
 	border: 1px solid #DDCF9B;
 	border-radius: 5px;
 	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+}
+
+@media (max-width: 700px) {
+	#aaaboutouter {
+		left: 2em;
+	}
+}
+
+@media (max-width: 500px) {
+	#aaaboutouter {
+		left: -5em;
+	}
 }
 
 #aaaboutouter::before {
