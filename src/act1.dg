@@ -57,7 +57,7 @@
 	(tick)
 
 (instead of [[take *] $])
-	(player can hold #water in $Dest) %% If this fails, fall back to "I can’t hold the water"
+	(player can hold #water in $Dest) %% If this fails, fall back to “I can’t hold the water”
 	Nu (#accusative #water) (#dative $Dest modifierless) tēḫḫun. %% I put the water in the X.
 	(now) ($Dest is filled with #water)
 	(now) (update needed)
@@ -65,7 +65,7 @@
 
 (prevent [[take *] $Details])
 	(describe failed action [[take *] $Details])
-	Nu (#accusative #water) natta taruḫḫun ḫarkun. %% "I was not able to hold the water."
+	Nu (#accusative #water) natta taruḫḫun ḫarkun. %% “I was not able to hold the water.”
 
 #watchtower
 (room *)
@@ -88,7 +88,7 @@
 (* blocks passage)
 	{ (#bolt is #in *) (or) (#bolt is pristine) }
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
-(room description *) (* blocks passage) ḫattalwantan āškan %% "closed door"
+(room description *) (* blocks passage) ḫattalwantan āškan %% “closed door”
 (short name *) āškan
 (name * in #nominative) āškaš
 (name * in #genitive) āškaš
@@ -96,7 +96,7 @@
 (name * in #accusative) āškan
 (name * in #ablative) āškaz
 (name * in #bare) āška
-(dict * in #nominative/#bare) %% Adjective "closed" currently not displayed outside of the error message and room description
+(dict * in #nominative/#bare) %% Adjective “closed” currently not displayed outside of the error message and room description
 	(* blocks passage)
 	ḫattalwanza
 (dict * in #genitive)
@@ -173,7 +173,7 @@
 (* blocks passage)
 	(current room $Room)
 	~{ ($Room is one of [#corner #gatehouse]) (#ladder is #in $Room) } %% Don’t pathfind through it
-(describe * blocking passage) N=at parku ēšta. %% "The window is high up"
+(describe * blocking passage) N=at parku ēšta. %% “The window is high up”
 (name * in #nominative/#accusative/#bare) luttāi
 (dict * in #nominative/#accusative/#bare) luttai
 (name * in #genitive) luttiyaš
@@ -212,7 +212,7 @@
 
 (narrate taking *)
 	(* is pristine)
-	Nu āškan ḫašḫun. %% "I opened the gate."
+	Nu āškan ḫašḫun. %% “I opened the gate.”
 	(now) (update needed)
 
 #foyer
@@ -260,7 +260,7 @@
 	($Obj is #in #hearth)
 	(#fire is #in #hearth)
 	(describe failed action [[take $Obj | $From] $Details])
-	Nu paḫḫur än ēšta. %% "The fire was hot."
+	Nu paḫḫur än ēšta. %% “The fire was hot.”
 	%% ä = a-a-a°
 
 #orb
@@ -327,7 +327,7 @@
 (name * in #ablative) dannattaz
 (name * in #bare) dannatta
 
-#backroom %% "behind the watchtower"
+#backroom %% “behind the watchtower”
 (room *)
 (name * in #dative) (name #watchtower in #dative) āppa
 (name * in $Case) (name #watchtower in $Case)
@@ -348,13 +348,13 @@
 	(current room *)
 	~(#ladder is #in *)
 	(describe failed action [[cross #roof] $Details])
-	Nu šuḫḫan parku ēšta. %% "The roof is high up"
+	Nu šuḫḫan parku ēšta. %% “The roof is high up”
 
 (prevent [[go #roof] $Details])
 	(current player $Player)
 	(#amphora is #heldby $Player)
 	(describe failed action [[cross #roof] $Details])
-	Nu (#nominative #amphora) nakkiš ēšta. %% "The amphora is heavy."
+	Nu (#nominative #amphora) nakkiš ēšta. %% “The amphora is heavy.”
 
 #roof
 (room *)
@@ -379,7 +379,7 @@
 (determiner *) E₂
 (dict * in $) E2 É
 
-%% For later: "temple" is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
+%% For later: “temple” is É^karimmi, neuter: karimmi, karimnac, karimni, karimnaz
 
 (instead of [[go *] $Details])
 	(if) (#orb is #heldby #me) (then)
@@ -388,7 +388,7 @@
 		(game over { To be continued... } )
 	(else)
 		(describe failed action [[go *] $Details])
-		Nu (#accusative #orb) natta ḫarkun. %% "I did not have a dammuri-object."
+		Nu (#accusative #orb) natta ḫarkun. %% “I did not have a dammuri-object.”
 		(div @error) {
 			Why exactly the narrator requires a dammuri-object is unclear. Presumably it was so obvious to the ancient scribe that it did not need to be explained; but to modern scholars, it remains a mystery. This is unfortunately quite a common situation in ancient texts.
 		}
@@ -405,7 +405,7 @@
 
 (prevent [[go *] | $Details])
 	(describe negative action [[go *] | $Details]) %% did not rather than could not
-	Nu (#nominative *) kurur ēšta. %% "The city was hostile."
+	Nu (#nominative *) kurur ēšta. %% “The city was hostile.”
 
 (parse metacommand [\/test watchtower])
 	(now) (#ladder is #in #corner)
@@ -438,7 +438,7 @@
 (tutorial)
 	~(taught syntax)
 	(div @tutorial) {
-		You probably came up with something like "I was at the riverbank. I saw a river there." Most Hittite sentences start with a meaningless "connective" word, then have a series of nouns, and finish off with a verb. The (span @italic) case of those nouns indicates their purpose: a "dative" noun like (span @hittite) wappui indicates a location or destination, while an "accusative" noun like (span @hittite) ḫapan indicates the object of the verb.
+		You probably came up with something like “I was at the riverbank. I saw a river there.” Most Hittite sentences start with a meaningless “connective” word, then have a series of nouns, and finish off with a verb. The (span @italic) case of those nouns indicates their purpose: a “dative” noun like (span @hittite) wappui indicates a location or destination, while an “accusative” noun like (span @hittite) ḫapan indicates the object of the verb.
 		(if) (#watchtower is unvisited) (then)
 			(par) Now it’s time to construct a sentence of your own. The compass rose at the top right indicates nearby locations, and the panel underneath it suggests some relevant verbs. Double-click any of these words to insert them into your sentence; see if you can use them to move to a new location. \( You can also type on a keyboard, if you prefer, and just leave off the special accent marks. \)
 			(now) (prompted movement specifically)
@@ -450,7 +450,7 @@
 (after [[look/examine | $] $])
 	(select)
 		(div @error) {
-			The standard transcription of the word "I looked at" is ūḫḫun, with a U, but it occasionally appears as ōḫḫun, with an O, to capture the exact cuneiform signs it’s spelled with. Just ignore the O here; the U is what you’ll need to look up in a dictionary.
+			The standard transcription of the word “I looked at” is ūḫḫun, with a U, but it occasionally appears as ōḫḫun, with an O, to capture the exact cuneiform signs it’s spelled with. Just ignore the O here; the U is what you’ll need to look up in a dictionary.
 		}
 	(or)
 	(stopping)
@@ -470,7 +470,7 @@
 	~(taught determinatives)
 	(#gatehouse is visited)
 	(div @tutorial) {
-		Hittite nouns were sometimes written with a special sign in front, called a "determiner" or "determinative". These weren’t pronounced, but indicated some property of the noun, like how "amber" is a rock but "Amber" is a person. GIŠ, for example, marks that something is made of wood. (par)
+		Hittite nouns were sometimes written with a special sign in front, called a “determiner” or “determinative”. These weren’t pronounced, but indicated some property of the noun, like how “amber” is a rock but “Amber” is a person. GIŠ, for example, marks that something is made of wood. (par)
 		These signs are normally transcribed in superscript, but for typing, you can use a ^ symbol instead \( GIŠ^ḫattalu \) .
 	}
 	(now) (taught determinatives)
@@ -479,7 +479,7 @@
 	~(taught heterograms)
 	(heterograms used)
 	(div @tutorial) {
-		(span @akk) {U₃} is the name of a cuneiform sign that functions like the "&" symbol in English: a shorter way to write the word "and". The capital letters in our transcription show that this is the name of the sign, not the actual Hittite pronunciation.
+		(span @akk) {U₃} is the name of a cuneiform sign that functions like the “&” symbol in English: a shorter way to write the word “and”. The capital letters in our transcription show that this is the name of the sign, not the actual Hittite pronunciation.
 	}
 	(now) (taught heterograms)
 
@@ -493,8 +493,8 @@
 	~(taught numbers)
 	(direction numbers enabled)
 	(div @tutorial) {
-		You’re getting the hang of this now! Since you’ll be moving around a lot in this game, there’s a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, 1 south 2 north 3 east 4 west, so you can type "1 3 2" to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
-		There’s no evidence that the Hittites did this, and this game adds numbers 5 and 6 for "up" and "down", which is completely non-historical. But the Hittites imitating Babylonian writing isn’t much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the boxes on the map to navigate to anywhere you’ve been before.
+		You’re getting the hang of this now! Since you’ll be moving around a lot in this game, there’s a shorter way to get from place to place: the Babylonians sometimes numbered their compass directions, 1 south 2 north 3 east 4 west, so you can type “1 3 2” to go south, then east, then north. These numbers will be shown on the compass rose in the top right. (par)
+		There’s no evidence that the Hittites did this, and this game adds numbers 5 and 6 for “up” and “down”, which is completely non-historical. But the Hittites imitating Babylonian writing isn’t much of a stretch, and typing a full sentence every time gets tedious very fast! You can also click the boxes on the map to navigate to anywhere you’ve been before.
 	}
 	(now) (taught numbers)
 

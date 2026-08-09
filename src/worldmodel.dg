@@ -59,7 +59,7 @@
 
 #in
 (relation *)
-(preverb *) anda %% (preverb $) is currently used both for preverb ("X is Rel Y") and preposition ("you put the X Rel Y"). According to Tim, these rarely disagree, so this should be fine.
+(preverb *) anda %% (preverb $) is currently used both for preverb (“X is Rel Y”) and preposition (“you put the X Rel Y”). According to Tim, these rarely disagree, so this should be fine.
 
 #on
 (relation *)
@@ -524,10 +524,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Dealing with actions
 
-%% If the player enters multiple actions on one line ("get lamp. n"), they
+%% If the player enters multiple actions on one line (“get lamp. n”), they
 %% are parsed and carried out one at a time.
 
-%% A complex action ("get all") is broken down, and the simple actions are
+%% A complex action (“get all”) is broken down, and the simple actions are
 %% carried out in turn.
 
 %% After the preliminary actions (before) have been carried out, the action
@@ -557,9 +557,9 @@
 %% operation, in order to say for instance ‘you take the worm out of the can’.
 
 %% If something dramatic happens, an overriding rule should advance time if
-%% necessary and (stop). So if the player types "n. n", and the first action
+%% necessary and (stop). So if the player types “n. n”, and the first action
 %% implies opening a door, which implies unlocking the door, and the unlocking
-%% triggers a cutscene, then opening the door is cancelled, and the second "n"
+%% triggers a cutscene, then opening the door is cancelled, and the second “n”
 %% is also ignored.
 
 %% After a non-command action, time is advanced using (tick). This can be
@@ -668,7 +668,7 @@
 	(current room $Room)
 	*(on every tick in $Room)
 
-(on every tick) %% We don’t have a "narrator’s it" in this game, only a single "it" set by the player’s actions
+(on every tick) %% We don’t have a “narrator’s it” in this game, only a single “it” set by the player’s actions
 %%	(if) (narrator’s it is protected) (then)
 %%		(now) ~(narrator’s it is protected)
 %%	(elseif) (player’s it refers to $) (then)

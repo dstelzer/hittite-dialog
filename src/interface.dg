@@ -57,7 +57,7 @@
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 
-%% "Errors" in the player’s input
+%% “Errors” in the player’s input
 (style class @error)
 	data-language: en;
 	font-family: sans-serif;

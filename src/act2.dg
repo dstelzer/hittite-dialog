@@ -17,10 +17,10 @@
 (* is #in #courtyard)
 
 (intro)
-	Nu (#dative #courtyard) ešun. %% "I was in the courtyard."
-	Nu (#nominative #dog) (#dative #building) pait. %% "A dog went into the building."
-	Nu (#nominative #baker) (#ablative #building) uet. %% "The baker came out of the building."
-	Nu (#nominative #baker) (#dative #washhouse) pait. %% "The baker went into the washhouse."
+	Nu (#dative #courtyard) ešun. %% “I was in the courtyard.”
+	Nu (#nominative #dog) (#dative #building) pait. %% “A dog went into the building.”
+	Nu (#nominative #baker) (#ablative #building) uet. %% “The baker came out of the building.”
+	Nu (#nominative #baker) (#dative #washhouse) pait. %% “The baker went into the washhouse.”
 	(now) (update needed)
 	(now) (map update needed)
 
@@ -28,7 +28,7 @@
 	~(tutorial introduced)
 	(div @tutorial) {
 		Welcome to tablet 2! The grammar is going to get more complicated this time, but if you made it through tablet 1, you should be well-prepared for what comes next. (par)
-		In particular, nouns will now appear in two additional cases: the "genitive" for one noun modifying another, and the "ablative" for the source of a movement or the tool used for an action. Verbs will sometimes describe what other people are doing instead of just you yourself. And some words will be written with "logograms": special cuneiform signs that represent whole words, like how "7" is short for "seven". When this happens, the names of those cuneiform signs will be written in CAPITAL LETTERS separated by dots. (par)
+		In particular, nouns will now appear in two additional cases: the “genitive” for one noun modifying another, and the “ablative” for the source of a movement or the tool used for an action. Verbs will sometimes describe what other people are doing instead of just you yourself. And some words will be written with “logograms”: special cuneiform signs that represent whole words, like how “7” is short for “seven”. When this happens, the names of those cuneiform signs will be written in CAPITAL LETTERS separated by dots. (par)
 		Don’t worry, though; you can still click any word to see its definition, and the basic vocabulary isn’t going anywhere. Good luck! You’ve got this!
 	}
 	(now) (tutorial introduced)
@@ -127,7 +127,7 @@
 	(#building is visited)
 	~(taught phonetic complements)
 	(div @tutorial) {
-		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @htt) GIR₂ means "knife" in general, but (span @htt) GIR₂-an is specifically the (span @italic) {nominative or accusative} form of "knife", (span @htt) GIR₂-aš the genitive, (span @htt) GIR₂-az the ablative, and so on.
+		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @htt) GIR₂ means “knife” in general, but (span @htt) GIR₂-an is specifically the (span @italic) {nominative or accusative} form of “knife”, (span @htt) GIR₂-aš the genitive, (span @htt) GIR₂-az the ablative, and so on.
 	}
 	(now) (taught phonetic complements)
 
@@ -173,7 +173,7 @@
 #washhouse
 (room *)
 (* uses preverb #at)
-(name * in #nominative) šakuniš %% no longer "washhouse" but "spring/well"
+(name * in #nominative) šakuniš %% no longer “washhouse” but “spring/well”
 (name * in #genitive) šakuniyaš
 (name * in #dative) šakuniya
 (name * in #accusative) šakunin %% TODO - šakuniyan may be the only attested form
@@ -309,7 +309,7 @@
 
 (prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet, it should have a clear failure message on this tablet
 	(describe failed action [[put #bolt *] $Details])
-	Nu (#nominative #bolt) šalli ēšta. %% "It was big." bolt neuter
+	Nu (#nominative #bolt) šalli ēšta. %% “It was big.” bolt neuter
 
 #trough
 (holder *)
@@ -406,7 +406,7 @@
 		Nu=ši (#nominative #fruit) anda natta ēšta. %% The fruit was not in it.
 	(endif)
 	(div @error) {
-		The narrator is apparently trying to make (span @italic) iyatti , a kind of bread "studded" with chopped pieces of fruit and cheese.
+		The narrator is apparently trying to make (span @italic) iyatti , a kind of bread “studded” with chopped pieces of fruit and cheese.
 	}
 
 (perform [[put * #oven] $])
@@ -449,7 +449,7 @@
 	($Obj is one of [#dough #bread])
 	(#fruit is nowhere)
 	(name #fruit in #ablative)
-	(name #fruit in $Case) %% In case of "take fruit"
+	(name #fruit in $Case) %% In case of “take fruit”
 	(name #studded in $Case)
 
 #studded %% Used for both bread and dough
@@ -548,7 +548,7 @@
 #knife
 (item *)
 (neuter *)
-(sharp *) %% Allows "cut" action
+(sharp *) %% Allows “cut” action
 (name * in #bare) GIR₂
 (name * in #nominative/#accusative) GIR₂-an
 (name * in #genitive) GIR₂-aš
@@ -760,7 +760,7 @@
 		%% In the street, give the full name
 		(#dative $Guard)
 	(else)
-		%% Elsewhere, just say "in the street"
+		%% Elsewhere, just say “in the street”
 		palši
 	(endif)
 	ēšta.
@@ -773,10 +773,10 @@
 (name * in #accusative) šarāzziyan palšan
 (name * in #ablative) šarāzziyaz palšaz
 (name * in #bare) šarāzziya palša
-(short name *) %% Call it "upper" when already in the street
+(short name *) %% Call it “upper” when already in the street
 	(current room #guardwalk2)
 	šarāzziya
-(short name *) %% Otherwise call it "street"
+(short name *) %% Otherwise call it “street”
 	palši
 
 (from * go #east to #kitchen)
@@ -790,10 +790,10 @@
 (name * in #accusative) ištarniyan palšan
 (name * in #ablative) ištarniyaz palšaz
 (name * in #bare) ištarniya palša
-(short name *) %% Call it "street" when in the building
+(short name *) %% Call it “street” when in the building
 	(current room #honeystorage)
 	palši
-(short name *) %% Otherwise call it "middle"
+(short name *) %% Otherwise call it “middle”
 	ištarniya
 
 (from * go #west to #guardwalk3)
@@ -808,10 +808,10 @@
 (name * in #accusative) katteran palšan
 (name * in #ablative) katteraz palšaz
 (name * in #bare) kattera palša
-(short name *) %% Call it "street" when in the building
+(short name *) %% Call it “street” when in the building
 	(current room #fruitstorage)
 	palši
-(short name *) %% Otherwise call it "lower"
+(short name *) %% Otherwise call it “lower”
 	katteri
 
 (from * go #north to #fruitstorage)
@@ -844,7 +844,7 @@
 (holder *)
 (* wants relation #in)
 (logogram *)
-(name *) PISAN %% "container"
+(name *) PISAN %% “container”
 (determiner *) GIŠ
 (* has modifier @nataš) %% gen pl, not nom sg
 (* is #in #kitchen)
@@ -983,13 +983,13 @@
 	(* is filled with #fire) %% But then keeps burning once the oil’s gone
 (* has modifier #empty) ~(* is filled with $)
 (* has modifier #oily) (* is filled with #oil)
-%% Will receive "burning" modifier from substances.dg
+%% Will receive “burning” modifier from substances.dg
 
 (instead of [[put $X $Y] $])
 	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
 	(* is #heldby #me)
 	Nu (#accusative #oil) (dtm {DUG})(name * in #dative) anda tēḫḫun. %% I put the oil in the lamp.
-	%% Doesn’t use (#dative *) because that would include the "empty" modifier
+	%% Doesn’t use (#dative *) because that would include the “empty” modifier
 	(now) (* is filled with #oil)
 	(now) (update needed)
 
@@ -1057,7 +1057,7 @@
 	(current player $Player)
 	~($Player has a light source)
 	~($Obj has a light source)
-	dankui %% "Dark"
+	dankui %% “Dark”
 (short name (storage $Obj)) (contents $Obj) 
 (short name (storage $Obj)) (logo contents $Obj)
 (medium short name (storage $Obj)) %% Likewise
@@ -1065,7 +1065,7 @@
 	(current player $Player)
 	~($Player has a light source)
 	~($Obj has a light source)
-	dankui %% "Dark"
+	dankui %% “Dark”
 (medium short name (storage $Obj)) (#dative $Obj)
 
 %% In case someone tries to grab random logograms

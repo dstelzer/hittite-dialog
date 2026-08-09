@@ -1,4 +1,3 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
-Quotes and apostrophes

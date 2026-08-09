@@ -87,7 +87,7 @@
 	*(optionally replace $Head with $NewHead)
 	*(do optional letter replacements on $Tail into $NewTail)
 
-(optionally replace $X with $X) %% "No change" is always valid and should be the first default
+(optionally replace $X with $X) %% “No change” is always valid and should be the first default
 (optionally replace @s with @š) %% Make this optional since the distinction could possibly matter: SU ‘entrails’ vs ŠU ‘hand’. But proper S is rare.
 (optionally replace @a with @ā) %% Likewise this could matter but usually doesn’t
 (optionally replace @e with @ē)
@@ -111,7 +111,7 @@
 (separate clitics from [$First | $Rest] into [$Clitics $First | $Sentence])
 	(separate clitics internal from $Rest into $Clitics and $Sentence)
 
-%% For the "internal" predicate, we take an equals sign as marking a clitic
+%% For the “internal” predicate, we take an equals sign as marking a clitic
 (separate clitics internal from [= $Clitic | $Rest] into [$Clitic | $Others] and $Sentence)
 	(separate clitics internal from $Rest into $Others and $Sentence)
 
@@ -158,7 +158,7 @@
 %% Recursive case: more than one noun
 ~(parse [] into noun list $)
 
-(parse [ù/u3/u₃/& | $Rest] into noun list $Nouns) %% Handle explicit "and"s
+(parse [ù/u3/u₃/& | $Rest] into noun list $Nouns) %% Handle explicit “and”s
 	(parse $Rest into noun list $Nouns) %% =ya etc will be purged already
 
 (parse $Words into noun list $Nouns)
@@ -181,7 +181,7 @@
 		*(split $Nouns anywhere into $Left and $Right)
 		(nonempty $Left) %% Forbid the split where everything is on the right
 	(or)
-		($Left = $Nouns) ($Right = []) %% We also want to allow a "split" where everything is on the left and nothing is on the right
+		($Left = $Nouns) ($Right = []) %% We also want to allow a “split” where everything is on the left and nothing is on the right
 	}
 	(parser log { Split: $Left $Right } )
 	{
@@ -189,7 +189,7 @@
 		(find first broken noun from $Right and report it)
 	(or)
 		*(parse $Left as invalid case $Case of $)
-		"(no space) (span @hittite) {(uppercase)(print words $Left)} (no space)" is likely a scribal error; this is a valid noun, but the (name $Case) case doesn’t make sense in this context.
+		“(no space) (span @hittite) {(uppercase)(print words $Left)} (no space)” is likely a scribal error; this is a valid noun, but the (name $Case) case doesn’t make sense in this context.
 		(stop)
 	(or)
 		*(parse $Left as not-here object $)
@@ -319,31 +319,31 @@
 
 #2s
 (invalid pronoun *)
-(name *) "you"
+(name *) “you”
 
 #3sc
 (invalid pronoun *)
-(name *) "he/she/it"
+(name *) “he/she/it”
 
 #3sn
 (invalid pronoun *)
-(name *) "it"
+(name *) “it”
 
 #1p
 (invalid pronoun *)
-(name *) "us"
+(name *) “us”
 
 #2p
 (invalid pronoun *)
-(name *) "you all"
+(name *) “you all”
 
 #3pc
 (invalid pronoun *)
-(name *) "them"
+(name *) “them”
 
 #3pn
 (invalid pronoun *)
-(name *) "them"
+(name *) “them”
 
 %% Pronoun handling pulled from worldmodel.dg
 
@@ -747,7 +747,7 @@
 		Cuneiform rendering done via Ishamai, by Daniel Stelzer. (line)
 		Running on the Å-machine web interpreter, by Linus Åkesson and the Dialog Project Team. (par)
 		Tested by Melisande, Mike Russo, rh, and YOUR NAME HERE! (par)
-		Depicted on the cover is the "Yozgat Amulet" in the Louvre Museum, AO 9647. Photograph © 2012 Musée du Louvre, Dist. GrandPalaisRmn / Raphaël Chipault.
+		Depicted on the cover is the “Yozgat Amulet” in the Louvre Museum, AO 9647. Photograph © 2012 Musée du Louvre, Dist. GrandPalaisRmn / Raphaël Chipault.
 	}
 
 (parse metacommand [\/help/\/about])
@@ -789,11 +789,11 @@
 			{ (verb $Alt means $) (or) (third person verb $Verb) }
 		(then)
 			(div @error) {
-				The structure of this sentence is unusual. "(no space)(uppercase)$Alt(no space)" is a verb, and the verb should always be at the end of a Hittite sentence.
+				The structure of this sentence is unusual. “(no space)(uppercase)$Alt(no space)” is a verb, and the verb should always be at the end of a Hittite sentence.
 			}
 		(else)
 			(div @error) {
-				From its position in the sentence, we would expect "(no space)$Verb(no space)" to be the main verb. But this
+				From its position in the sentence, we would expect “(no space)$Verb(no space)” to be the main verb. But this
 				(if) (unknown word $Verb) (then)
 					verb is not used for the protagonist’s actions
 				(else)
@@ -900,7 +900,7 @@
 	(endif)
 
 %% NOTE: Input to these is a complex action, not an action yet!
-%% A "complex action" or "action candidate" has the form:
+%% A “complex action” or “action candidate” has the form:
 %% [[raw words] verb [advs] [accs] [dats] [abls]]
 (unlikely $Action 0)
 	(subtly unlikely $Action) (or) (unlikely $Action) (or) (very unlikely $Action)
@@ -909,7 +909,7 @@
 (unlikely $Action 2)
 	(very unlikely $Action)
 
-%% "Subtly unlikely" disprefers anything with complex clauses (so that a multi-word phrase isn’t misinterpreted as asyndeton)
+%% “Subtly unlikely” disprefers anything with complex clauses (so that a multi-word phrase isn’t misinterpreted as asyndeton)
 (subtly unlikely [$ $ $ | $Complex]) %% raw verb advs don’t count
 	*($Term is one of $Complex)
 	($Term = [$ $ | $]) %% Has at least two terms
@@ -1031,7 +1031,7 @@
 (describe failed action [$ [$ $Verb | $Nouns]])
 	(describe action noun list $Nouns)
 	natta %% Used in place of ŪL to avoid explaining heterograms too early
-	taruḫḫun %% "able to" in asyndetic construction
+	taruḫḫun %% “able to” in asyndetic construction
 	$Verb
 	.
 (describe raw failed action [$ [$ $Verb $Advs $Acc $Dat $Abl]]) %% No connective, capital, or punctuation, for embedding in a larger context
@@ -1046,7 +1046,7 @@
 	(#ablative $Abl)
 	(#adverb $NClit)
 	natta %% Used in place of ŪL to avoid explaining heterograms too early
-	taruḫḫun %% "able to" in asyndetic construction
+	taruḫḫun %% “able to” in asyndetic construction
 	$Verb
 (describe raw failed action $Action)
 	(span @realerror) { Improper action: $Action }
@@ -1066,11 +1066,11 @@
 		(if) ($Word is one of [. = ^]) (then) (no space) (endif)
 	}
 (print quoted $Words)
-	"(no space) (print words $Words) (no space)"
+	“(no space) (print words $Words) (no space)”
 (print hittite $Words)
 	(span @hittite) (print words $Words)
 (print quoted hittite $Words)
-	"(no space) (print hittite $Words) (no space)"
+	“(no space) (print hittite $Words) (no space)”
 
 (enumerate possible actions [] $)
 (enumerate possible actions [$Head|$Tail] $N)
@@ -1123,7 +1123,7 @@
 	($Case $Rest)
 
 (and)
-	(span @akk) { U₃ } %% Using the "Akkadian ampersand" instead of the clitic =ya because the clitic does messy things with the last consonant of the word
+	(span @akk) { U₃ } %% Using the “Akkadian ampersand” instead of the clitic =ya because the clitic does messy things with the last consonant of the word
 	(now) (heterograms used) %% Give a tutorial the first time this happens
 
 (complicated list of [$A $B $C $D | $Rest] in $Case) %% When enough things are in the same room description, we have to do this in a more complicated way that’s easier to read

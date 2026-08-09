@@ -2,25 +2,25 @@
 %% See old/knaves2.dg for more explanation of how this all works and a general case of the puzzle involved here
 
 %% But the basic idea is that we want to generate a weakly-connected directed graph, where the nodes are the suspects and the edges are the statements
-%% ("Weakly connected" = if you get rid of the edge directions, it’s connected)
+%% (“Weakly connected” = if you get rid of the edge directions, it’s connected)
 %% To generate a random connected undirected graph with N nodes and K edges, we start by generating a random spanning tree with N nodes, then add (K-N) random edges
 %% And to generate that random spanning tree, we generate a random Prüfer sequence, then convert that into a tree
 
-%% For a basic knights-and-knaves puzzle, that would be enough—each directed edge becomes "X says Y is innocent" if X and Y have the same affiliation (both knights or both knaves), and "X says Y is guilty" if not
+%% For a basic knights-and-knaves puzzle, that would be enough—each directed edge becomes “X says Y is innocent” if X and Y have the same affiliation (both knights or both knaves), and “X says Y is guilty” if not
 %% However, for this puzzle, we need something more! We also need to convey:
 %% - Which of the guilty people is the assassin versus the mastermind
 %% - What the signal is (so the player can perform it)
-%% - Which of the two possible solutions is correct (since swapping every "innocent" to a "guilty" and vice versa creates an isomorphic puzzle)
+%% - Which of the two possible solutions is correct (since swapping every “innocent” to a “guilty” and vice versa creates an isomorphic puzzle)
 %% - The association between names and jobs
 
 %% The first and second we handle in the same way: with two types of edges. Each edge is one of two types:
 %% - **Basic edges** state only that someone is innocent or guilty
 %% - **Advanced edges** also state whether someone is the assassin or mastermind, and reveal what signal was used
-%% Since the latter is only used for "X says Y is guilty" edges, we repurpose that marker on "X says Y is innocent" edges to vary the wording of the message ("not guilty" vs "innocent")
+%% Since the latter is only used for “X says Y is guilty” edges, we repurpose that marker on “X says Y is innocent” edges to vary the wording of the message (“not guilty” vs “innocent”)
 %% The third problem is the easiest: we have the oracle say specifically that *two* people are going to kill the king, and have five people total. This means one solution has two knaves and one solution has three knaves; the former must be correct.
-%% For the fourth, we choose one male person to be "elimination-revealed". This person will only use their job when speaking about others, and their name when being spoken about. They can only be solved by process of elimination.
+%% For the fourth, we choose one male person to be “elimination-revealed”. This person will only use their job when speaking about others, and their name when being spoken about. They can only be solved by process of elimination.
 %% The one female person will always be elimination-revealed, as the MUNUS determiner will connect the name to the title.
-%% Everyone else is tagged as either "self-revealed" or "other-revealed", based on whether they are the target of a basic edge or not. If they are the target of a basic edge, they are "other-revealed", and that basic edge connects their role to their name. Otherwise, they are "self-revealed", and their own statement(s) give both their name and their job.
+%% Everyone else is tagged as either “self-revealed” or “other-revealed”, based on whether they are the target of a basic edge or not. If they are the target of a basic edge, they are “other-revealed”, and that basic edge connects their role to their name. Otherwise, they are “self-revealed”, and their own statement(s) give both their name and their job.
 
 %% So overall:
 %% - We assign N=5 roles: real assassin, real mastermind, fake assassin, fake mastermind, and fake default (no role)
@@ -32,7 +32,7 @@
 %% - We choose one person to be elimination-revealed, and tag everyone else as either self-revealed or other-revealed
 %% - We turn each edge into a tablet
 
-%% (Can we always guarantee no more than three edges added? Not quite. See proof.txt in the parent folder. But we can guarantee no more than four, and four is rare. By spending more time on the "advanced edge" step we could guarantee no more than three, but the computation would be expensive.)
+%% (Can we always guarantee no more than three edges added? Not quite. See proof.txt in the parent folder. But we can guarantee no more than four, and four is rare. By spending more time on the “advanced edge” step we could guarantee no more than three, but the computation would be expensive.)
 
 (number of additional statements 3)
 
@@ -116,7 +116,7 @@
 	($Length random values between 1 and 5 into $Prüfer)
 
 %% And the hardest part: converting it into a tree
-%% The normal algorithm for this requires a "degrees array" that stores the degree of each node
+%% The normal algorithm for this requires a “degrees array” that stores the degree of each node
 %% Dialog doesn’t really do arrays, though, so we have to handle it a bit awkwardly
 
 (convert Prüfer sequence $Prüfer into tree $G)
@@ -149,7 +149,7 @@
 	(prepend $Edge to entry $U of $OldTree into $NewTree)
 
 %% This predicate is implemented a bit awkwardly to ensure all recursion is in tail position
-%% The more elegant way to do it (without the "counting from") requires addition after the recursive call
+%% The more elegant way to do it (without the “counting from”) requires addition after the recursive call
 (first index of $Value in [$Value|$] counting from $N is $N)
 (first index of $Value in [$|$Tail] counting from $N is $Result)
 	($N plus 1 into $Np1)
@@ -675,11 +675,11 @@
 	
 	%% When we generated the puzzle, we only had two types of edge: 0 and 1
 	%% 0 for basic, 1 for advanced
-	%% But sometimes this can lead to awkwardness when a single speaker has multiple type-1 edges to opposite-polarity targets: it sounds wrong for them to say two complicated sentences with "someone" in them if they know both of the "someone"s!
+	%% But sometimes this can lead to awkwardness when a single speaker has multiple type-1 edges to opposite-polarity targets: it sounds wrong for them to say two complicated sentences with “someone” in them if they know both of the “someone”s!
 	%% So when that happens, we change all but the first to type-2
 	(if) ($Type = 2) (then) %% Special advanced edge
-		%% It would be nice for this text to say "X is the mastermind" or "X is the assassin", but I haven’t found clean ways to express that in Hittite
-		nu=wa (advanced target $Target #nominative) kupiyatin kupta. %% "X conspired a conspiracy."
+		%% It would be nice for this text to say “X is the mastermind” or “X is the assassin”, but I haven’t found clean ways to express that in Hittite
+		nu=wa (advanced target $Target #nominative) kupiyatin kupta. %% “X conspired a conspiracy.”
 	(elseif) ($Type = 1) (then) %% Advanced edge
 		(if) ($Source and $Target agree) (then) %% X is not guilty
 			nu=wa (advanced target $Target #nominative) natta paprišzi.

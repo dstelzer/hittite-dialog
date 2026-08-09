@@ -28,7 +28,7 @@
 (tutorial)
 	~(taught logograms)
 	(div @tutorial) {
-		If you haven’t played tablet 2, don’t worry—there’s only one thing you need to know from it. Words written in ALL CAPITALS are "logograms", special cuneiform signs used as shorthand for entire words. The CAPITALS indicate that we’re transcribing the names of the signs, not the actual Hittite pronunciation. (par)
+		If you haven’t played tablet 2, don’t worry—there’s only one thing you need to know from it. Words written in ALL CAPITALS are “logograms”, special cuneiform signs used as shorthand for entire words. The CAPITALS indicate that we’re transcribing the names of the signs, not the actual Hittite pronunciation. (par)
 		Good luck!
 	}
 	(now) (taught logograms)
@@ -167,11 +167,11 @@
 (name *) DUB 9
 (tablet *)
 
-(perform [[examine (tablet $Tablet)] $]) %% The one place in the game where examining is useful, because the Hittites had no specific word for "read"—only "look at a tablet" and "read a tablet aloud"
+(perform [[examine (tablet $Tablet)] $]) %% The one place in the game where examining is useful, because the Hittites had no specific word for “read”—only “look at a tablet” and “read a tablet aloud”
 	(par) (testimony for $Tablet)
 	(select)
 		(div @error) {
-			Hittite had no specific word for "read": only "look at" and "speak out loud". In this case, the narrator seems to be reading silently: he looks at the tablet, then provides the text of that tablet in the next paragraph.
+			Hittite had no specific word for “read”: only “look at” and “speak out loud”. In this case, the narrator seems to be reading silently: he looks at the tablet, then provides the text of that tablet in the next paragraph.
 		}
 	(or)
 	(stopping)
@@ -204,7 +204,7 @@
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details])
 	Nu TUG natta waššiyanun. %% I was not wearing a garment
-	(div @error) { What exactly happened to the baker’s garment from the previous tablet is not clear. The word TUG here might mean "appropriate clothing"—that is, a disguise—or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
+	(div @error) { What exactly happened to the baker’s garment from the previous tablet is not clear. The word TUG here might mean “appropriate clothing”—that is, a disguise—or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
 
 (animate *(suspect $))
 (*(suspect $) is #in #temple) %% Put them all in one room for now
@@ -252,7 +252,7 @@
 (bonus room description paragraph) %% Explain the unusual title
 	(current room #temple)
 	(select)
-		(div @error) { The word (span @htt) tawannana is unexpected here, since that is a title of the Hittite queen specifically, not a foreign one. The scribe copying this tablet likely misinterpreted a logogram for "queen" and replaced it with the wrong Hittite word. }
+		(div @error) { The word (span @htt) tawannana is unexpected here, since that is a title of the Hittite queen specifically, not a foreign one. The scribe copying this tablet likely misinterpreted a logogram for “queen” and replaced it with the wrong Hittite word. }
 	(or)
 		(fail)
 	(stopping)
@@ -351,7 +351,7 @@
 			(fail)
 		(endif)
 	}
-	%% If we got here, we chose to "undo" (actually continue)
+	%% If we got here, we chose to “undo” (actually continue)
 	(div @error) {
 		The text must be corrupt at this point, as the hero must survive to continue the story. Ignoring the last few lines, we continue on...
 	}
@@ -365,7 +365,7 @@
 (room *)
 (* uses preverb #in)
 (* has modifier #temple)
-(name * in #nominative/#genitive) ḫilaš %% The "courtyard" that was south of the temple in act 2
+(name * in #nominative/#genitive) ḫilaš %% The “courtyard” that was south of the temple in act 2
 (name * in #dative) ḫili
 (name * in #accusative) ḫilan
 (name * in #ablative) ḫilaz
@@ -396,15 +396,15 @@
 	
 	(par) (hr)
 	(div @colophon) (colophon)
-	(div @error) { Cuneiform tablets often end with a short "colophon", providing the title, tablet number, and the name of the scribe who wrote it. In other words, this is... }
+	(div @error) { Cuneiform tablets often end with a short “colophon”, providing the title, tablet number, and the name of the scribe who wrote it. In other words, this is... }
 	
 	(game over {The end})
 
 (colophon)
 	DUB 3 (dtm2 {KAM}) TIL (line)
-	(span @akk) ša "Ḫattušumna Laḫḫa" (line)
+	(span @akk) ša “Ḫattušumna Laḫḫa” (line)
 	ŠU Dānīel Ištelšar DUB.SAR (line)
-	(span @akk) U₃ Dānīel Gaškel DUB.DU₃.DU₃ (line) %% unattested logogram for "tablet maker"
+	(span @akk) U₃ Dānīel Gaškel DUB.DU₃.DU₃ (line) %% unattested logogram for “tablet maker”
 	(span @akk) pani Tim Lēnard UM.MI.A (line)
 	(span @akk) išṭuru
 
