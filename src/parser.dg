@@ -922,7 +922,7 @@
 		(try-complex $Only)
 	(else)
 		(length of $List into $N)
-		(div @error) {
+		(div @disambig) {
 			This line could be interpreted in multiple ways:
 			(enumerate possible actions $List 1)
 			(line) It seems the intended interpretation is number...

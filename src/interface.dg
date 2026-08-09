@@ -64,6 +64,13 @@
 	margin-top: 1em;
 	margin-bottom: 1em;
 
+%% Disambiguation prompts
+(style class @disambig)
+	data-language: en;
+	font-family: sans-serif;
+	margin-top: 1em;
+	margin-bottom: 1em;
+
 %% Meta messages
 (style class @meta)
 	data-language: en;

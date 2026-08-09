@@ -851,6 +851,7 @@
 
 #reed
 (item *)
+(* has modifier #burning-c) (* is filled with #fire)
 (* has modifier #oily) (reed is oiled) %% substances.dg for definition
 (name * in #nominative/#genitive) nataš
 (name * in #dative) nati
@@ -864,12 +865,15 @@
 (instead of [[put $X $Y] $])
 	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
 	(* is #heldby #me)
+	~(* is filled with #fire)
 	Nu (#accusative #oil) (#dative *) tēḫḫun. %% I put the oil on the reed.
 	(now) (reed is oiled)
 	(now) (update needed)
 
-(perform [[drop/put * | $] $])
-	N=aš ḫarkta. %% It perished/was lost.
+(perform [[drop/put * | $Tail] $])
+	(if) ~($Tail = [#reedjar]) (then)
+		N=aš ḫarkta. %% It perished/was lost.
+	(endif)
 	(reset the reed)
 	(now) (update needed)
 
@@ -940,7 +944,7 @@
 #dm-grain %% N
 (storage *)
 (inherently dark *)
-(contents *) halkiyaš
+(contents *) ḫalkiyaš
 (dict * in #nominative) ḫalkiš
 (dict * in #genitive) ḫalkiyaš
 (dict * in #dative) ḫalkiya
