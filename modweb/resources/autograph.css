@@ -233,11 +233,12 @@ div.aa-error {
 /* I/O */
 
 #aasubmit {
-    margin-top: -2px;
-	margin-right: 5px;
+	position: absolute;
+	height: calc(100% + 2px);
+	aspect-ratio: 1 / 1 !important;
+	right: -7px !important;
+	padding: 0px;
 	border: 2px black solid;
-    padding-top: 2px;
-    padding-bottom: 3px;
 }
 
 #aasubmit:hover {
@@ -246,6 +247,10 @@ div.aa-error {
 
 #aainput {
 	outline: none;
+}
+
+#aainputblock {
+	height: 100%;
 }
 
 .aainputtext {
@@ -271,6 +276,7 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)) {
 /* Tablet fragments */
 
 .output {
+	position: relative;
 	border-left: 2px solid black;
 	border-right: 2px solid black;
 	border-bottom: 2px solid black;

@@ -1074,7 +1074,7 @@ window.run_game = function(story64, options) {
 		adjust_size: function() {
 			var aamain, newheight;
 
-			newheight = $(window).innerHeight() - $("#aaouterstatus").outerHeight() - 40;
+			newheight = $(window).innerHeight() - $("#aaouterstatus").outerHeight() - 30;
 			if(io.viewing_script) {
 				aamain = $("#aascriptinner");
 				newheight -= $("#aascriptclose").outerHeight();
