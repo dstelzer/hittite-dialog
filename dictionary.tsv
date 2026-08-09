@@ -20,6 +20,7 @@ karū	karū	Already
 dāḫḫun	dāḫḫun dāš	I picked up, took (something: accusative)	VERB dāḫḫun dāš
 natta	natta	Not
 =aš	=aš =an =at =ši	He/she/it (referring back to the most recently-mentioned noun)	"Common gender nom" =aš "Common gender acc" =an "Neuter gender nom/acc" =at "Any gender dat" =ši
+=mu	Me (accusative or dative, not emphatic)	CLIT
 mekki	mekki	Very
 nakkiš	nakkiš nakki	Heavy	"Common gender" nakkiš "Neuter gender" nakki
 šalliš	šalliš šalli	Large	"Common gender" šalliš "Neuter gender" šalli
@@ -42,7 +43,7 @@ kattan	kattan	Below, underneath
 tapušza	tapušza	Next to
 
 # Tablet 1
-ammuk	ūk ammuk ammel ammēdaz	I, me	NOUN ūk ammel ammuk ammuk ammēdaz
+ammuk	ūk ammuk ammel ammēdaz	I, me (emphatic)	NOUN ūk ammel ammuk ammuk ammēdaz
 wappu	wappuš wappuwaš wappui wappun wappuwaz wappu	Riverbank	NOUN wappuš wappuwaš wappui wappun wappuwaz
 ḫapa	ḫapaš ḫapi ḫapan ḫapaz ḫapa	River	NOUN ḫapaš ḫapaš ḫapi ḫapan ḫapaz
 wātar	wātar witenaš witeni witenaz	Water; the similarity to the English word is not a coincidence, and was the first clue in deciphering the Hittite language	NOUN wātar witenaš witeni wātar witenaz
@@ -83,9 +84,9 @@ antuḫša	antuḫšaš antuḫši antuḫšan antuḫšaz antuḫša	Person, hu
 parā	parā	Onward, forth, forward
 laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN laḫḫaš laḫḫaš laḫḫi laḫḫan laḫḫaz
 Ḫattušumna	Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz Ḫattušumna	Hittite (adjective); literally, "from the city of Ḫattuša"	NOUN Ḫattušumnaš Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz
-<i>ANA</i>	ANA	To, toward (marks the dative case for logograms)	AKK
-<i>ŠA</i>	ŠA	Of (marks the genitive case for logograms)	AKK
-<i>IŠTU</i>	IŠTU	From (marks the ablative case for logograms)	AKK
+<span class="aa-akk">ana</span>	ANA	To, toward (marks the dative case for logograms)	AKK
+<span class="aa-akk">ŠA</span>	ŠA	Of (marks the genitive case for logograms)	AKK
+<span class="aa-akk">IŠTU</span>	IŠTU	From (marks the ablative case for logograms)	AKK
 ḫappira	ḫappiraš ḫappiri ḫappiran ḫappiraz	City	NOUN ḫappiraš ḫappiraš ḫappiri ḫappiran ḫappiraz
 kurur	kurur	hostile
 gurta	gurtaš gurti gurtan gurtaz gurta	Citadel, acropolis (the better-defended upper part of a city with all the temples and palaces)	NOUN gurtaš gurtaš gurti gurtan gurtaz
@@ -118,8 +119,8 @@ NINDA	NINDA	Usually translated as "bread", but this word also encompassed cakes,
 iyatti	iyatti iyattiš iyattiyaš iyattiya iyattin iyattiyaz	"Iyatti", a special type of bread "studded" with slivers of fruit and cheese	NOUN iyattiš iyattiyaš iyattiya iyattin iyattiyaz
 tiyan	tiyan tiyanza tiyantaš tiyanti tiyantan tiyantaz	Studded (with something: ablative); this word is mainly used for jewelry with gems set into it	NOUN tiyanza tiyantaš tiyanti tiyantan tiyantaz
 UR.GI₇	UR.GI₇ UR.GI7	Dog; the Hittites believed that dogs carried impurity from one place to another, so they had to be kept away from ritually-significant places like the temple bakeries at all times. If one got too close, everything they might have touched needed to be cleansed (for metal and stone) or destroyed (for wood and ceramics).	LOGO
-GIR₂	GIR₂ GIR2 GÍR GIR₂-aš GIR2-aš GÍR-aš GIR₂-i GIR2-i GÍR-i GIR₂-an GIR2-an GÍR-an GIR₂-az GIR2-az GÍR-az	Knife (written with a logogram plus a Hittite ending)	NOUN GIR₂-an GIR₂-aš GIR2-i GIR₂-an GIR₂-az
-NA₄	NA4	Stone	DTM
+GIR₂	GIR₂ GIR2 GÍR GIR₂-aš GIR2-aš GÍR-aš GIR₂-i GIR2-i GÍR-i GIR₂-an GIR2-an GÍR-an GIR₂-az GIR2-az GÍR-az	Knife (written with a logogram plus a Hittite ending)	NOUN GIR₂-an GIR₂-aš GIR₂-i GIR₂-an GIR₂-az
+NA₄	NA₄ NA4	Stone	DTM
 ḫararazi	ḫararazi ḫararaziyaš ḫararaziya ḫararaziyaz	Mill, millstone (for grinding grain into flour)	NOUN ḫararazi ḫararaziyaš ḫararaziya ḫararazi ḫararaziyaz
 taršuwar	taršuwar taršuwaš	Some sort of operation performed on grain; possibly "drying"? The exact meaning is unknown; it is somehow connected to milling, but not the same as milling itself.	Nom taršuwar Gen taršuwaš
 ZID₂.DA	ZID₂.DA ZID2.DA ZÍD.DA	Flour	LOGO
@@ -127,12 +128,12 @@ BAPPIR	BAPPIR	"Bappir", a twice-baked bready substance used as an ingredient in 
 ištarniya	ištarniya ištarniyaš ištarniyan ištarniyaz	Middle, central	NOUN ištarniyaš ištarniyaš ištarniya ištarniyan ištarniyaz
 šarāzziya	šarāzziya šarāzziyaš šarāzziyan šarāzziyaz	Upper	NOUN šarāzziyaš šarāzziyaš šarāzziya šarāzziyan šarāzziyaz
 kattera	kattera katteraš katteri katteran katteraz	Lower	NOUN katteraš katteraš katteri katteran katteraz
-milit	milit militaš	Honey; this word is closely related to Latin <i>melle</i> with the same meaning	Nom milit Gen militaš
+milit	milit militaš militi milit militaz	Honey; this word is closely related to Latin <i>melle</i> with the same meaning	NOUN milit militaš militi milit militaz
 PISAN	PISAN	Container	LOGO
 nata	nata nataš nati natan nataz	Reed; the form <i>nataš</i> can also mean "of reeds", genitive plural	NOUN nataš nataš nati natan nataz
 šākan	šākan šaknaš šakni šaknaz	Oil	NOUN šākan šaknaš šakni šākan šaknaz
 šaknuwan	šaknuwan šaknuwanza šaknuwandaš šaknuwandi šaknuwandan šaknuwandaz	Oily, oiled	NOUN šaknuwanza šaknuwandaš šaknuwandi šaknuwandan šaknuwandaz
-ḫalki	ḫalki ḫalkiyaš	Grain in general, or barley in particular	Nom ḫalki Gen ḫalkiyaš
+ḫalki	ḫalki ḫalkiš ḫalkiyaš ḫalkiya ḫalkin ḫalkiyaz	Grain in general, or barley in particular	NOUN ḫalkiš ḫalkiyaš ḫalkiya ḫalkin ḫalkiyaz
 GIR₄	GIR₄ GIR4	Pottery, fired clay	LOGO
 šāšan	šāšaš šāšanaš šāšani šāšan šāšanaz	Lamp (clay vessel to burn oil in)	NOUN šāšaš šāšanaš šāšani šāšan šāšanaz
 dannatta	dannatta dannattaš dannatti dannattan dannattaz	Empty	NOUN dannattaš dannattaš dannatti dannattan dannattaz
@@ -143,6 +144,7 @@ warpun	warpun warpta	I washed (something: accusative; with something: ablative)	
 arḫa	arḫa	Away (both "from this place" as in "went away", and "completely destroyed" as in "burned away")
 warati	warati	It burned up (one of the very few passive verb forms in this game)
 kuitki	kuitki	Something, anything (nominative or accusative)
+dankuešta	dankuešta	It became dark
 
 # Tablet 3
 tunnakkeššar	tunnakkeššar tunnakkešnaš tunnakkešni tunnakkišnaz	Inner chamber; in a house, "bedroom"; in a temple, "inner sanctum" (often abbreviated with the sign for "heart")	NOUN tunnakkeššar tunnakkešnaš tunnakkešni tunnakkeššar tunnakkišnaz

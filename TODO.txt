@@ -5,3 +5,16 @@ fill in third-person verb forms from tablet 3 into actions.dg
 Quotes and apostrophes
 Process dead player input so it's cuneiformed and ōḫḫun becomes ūḫḫun
 Update map when creating a light source if darkness is adjacent
+Akkadogram dictionary lemmas display as if logograms instead of phonograms
+Explanation of phonetic complements suggests -an is only accusative, but it's not
+Map clicks for logogram rooms don't work, because they use the accusative, not the dative
+Baker's clothes check only tests for šarraḫḫun, not pāun
+Basket of reeds becomes a "basket of burning reeds"
+What happens to the dammuri in tablet 2?
+Should not be able to put a burning reed or lamp into the pot of oil
+Failing to make iyatti is still described in the footnote as "making iyatti"
+Periods at the end of the sentence are not removed
+Washing things in the spring should be equivalent to washing them in the pool
+Tablet 2 fragments are still numbered as 1.X
+Pet the dog
+"Ink font" should be just "ink"
