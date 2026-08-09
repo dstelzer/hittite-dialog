@@ -81,7 +81,7 @@
 	~($Player has a light source)
 	~($Room has a light source)
 	dankui %% "Dark"
-(short name (logogram $Room)) (name $Room in #bare)
+(short name (logogram $Room)) (name $Room)
 (short name (room $Room)) (name $Room in #dative)
 (short name (door $Door)) (name $Door in #accusative)
 (short name $Obj) $Obj %% Don't crash
@@ -516,18 +516,10 @@
 		(stop)
 	(endif)
 
-(prevent [[go $Dest] $Details])
+(instead of [[go $Dest] $Details]) %% Redirect to CROSS if needed
 	(current room $Source)
 	(from $Source through $Door to $Dest)
-	(action log {Found door $Door})
-	($Door blocks passage)
-	(describe failed action [[go $Dest] $Details])
-	(describe $Door blocking passage)
-
-(describe $Door blocking passage) %% This should be overridden for each door if possible
-	Nu (#nominative $Door) ḫattalwantaš ēšta. %% "The DOOR was closed."
-(($Door is closed) blocks passage)
-($ is closed) (fail) %% TODO do we even want this in the world model?
+	(try [[cross $Door] $Details])
 
 (prevent [[go (inherently dark $Dest)] $]) %% See also under CROSS
 	(current player $Player)
@@ -544,13 +536,12 @@
 	(describe failed action [[go $Dest] $Details])
 	Nu=za apēdani pēdi karū ešun. %% "I was already in that place."
 
-(prevent [[go $Dest] $])
-	~(room $Dest)
+(prevent [[go ~(room $Dest)] $])
 	(div @error) { This line is likely a scribal error. The verb (span @hittite) pāun "go" is generally used with locations, not objects; for things like doors and thresholds, the verb (span @hittite) šarraḫḫun "pass through" is used instead. }
 
 (prevent [[go $Dest] $])
 	(current room $Source)
-	~{ (from $Source go $ to $Dest) (or) (from $Source through $ to $Dest) }
+	~(from $Source go $ to $Dest)
 	(div @realerror) { ERROR: no immediate connection from source $Source to destination $Dest! How was this action created? }
 
 (perform [[go $Dest] $])
@@ -590,10 +581,15 @@
 	~(door $Door)
 	(div @error) { This line is likely a scribal error. The verb (span @hittite) šaraḫḫun "pass through" is generally used with things like doors and thresholds. For going to a place, the verb (span @hittite) pāun is used instead. }
 
-(prevent [[cross $Door] $Details])
-	($Door blocks passage) %% See above under GO for details
+(prevent [[cross $Door] $Details]) %% See above under GO for details
+	($Door blocks passage)
 	(describe failed action [[cross $Door] $Details])
 	(describe $Door blocking passage)
+
+(describe $Door blocking passage) %% This should be overridden for each door if possible
+	Nu (#nominative $Door) ḫattalwantaš ēšta. %% "The DOOR was closed."
+
+($ is closed) (fail) %% Not currently part of the world model
 
 (prevent [[cross $Door] $Details]) %% Copied from GO
 	(current room $Room)

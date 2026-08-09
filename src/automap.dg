@@ -261,7 +261,7 @@
 					%% ōḫḫun
 					ūḫḫun
 				(else)
-					(short name $Room) pāun
+					(#dative $Room) pāun
 				(endif)
 			(into $Command)
 			(link $Command) (full room glyph $Room)

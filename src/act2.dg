@@ -127,7 +127,7 @@
 	(#building is visited)
 	~(taught phonetic complements)
 	(div @tutorial) {
-		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @htt) GIR₂ means "knife" in general, but (span @htt) GIR₂-an is specifically the (span @italic) accusative form of "knife", (span @htt) GIR₂-aš the genitive, (span @htt) GIR₂-az the ablative, and so on.
+		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @htt) GIR₂ means "knife" in general, but (span @htt) GIR₂-an is specifically the (span @italic) {nominative or accusative} form of "knife", (span @htt) GIR₂-aš the genitive, (span @htt) GIR₂-az the ablative, and so on.
 	}
 	(now) (taught phonetic complements)
 
@@ -806,12 +806,19 @@
 #honeystorage
 (storage *)
 (contents *) militaš
+(dict * in #nominative/#accusative) milit
+(dict * in #genitive) militaš
+(dict * in #dative) militi
+(dict * in #ablative) militaz
 
 (from * go #south to #guardwalk2)
 
 #fruitstorage
 (storage *)
 (contents *) (name #fruit in #genitive)
+(dict * in $Case)
+	~(#fruit is in room *)
+	*(dict #fruit in $Case)
 
 (from * go #south to #guardwalk3)
 
@@ -905,11 +912,17 @@
 	Nu pedan dankuešta. %% The room became dark.
 	Nu apēz paršun. %% I fled from that place.
 	(enter #kitchen)
+	(now) (map update needed)
 
 #dm-grain %% N
 (storage *)
 (inherently dark *)
 (contents *) halkiyaš
+(dict * in #nominative) ḫalkiš
+(dict * in #genitive) ḫalkiyaš
+(dict * in #dative) ḫalkiya
+(dict * in #accusative) ḫalkin
+(dict * in #ablative) ḫalkiyaz
 
 (from * go #up to #kitchen)
 (from * go #west to #dm-pottery)
@@ -965,6 +978,10 @@
 (storage *)
 (inherently dark *)
 (contents *) wiyanaš
+(dict * in #nominative/#genitive) wiyanaš
+(dict * in #dative) wiyani
+(dict * in #accusative) wiyanan
+(dict * in #ablative) wiyanaz
 
 (from * go #west to #dm-grain)
 (from * go #south to #dm-legumes)

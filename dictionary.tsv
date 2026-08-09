@@ -85,8 +85,8 @@ parā	parā	Onward, forth, forward
 laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN laḫḫaš laḫḫaš laḫḫi laḫḫan laḫḫaz
 Ḫattušumna	Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz Ḫattušumna	Hittite (adjective); literally, "from the city of Ḫattuša"	NOUN Ḫattušumnaš Ḫattušumnaš Ḫattušumni Ḫattušumnan Ḫattušumnaz
 <span class="aa-akk">ana</span>	ANA	To, toward (marks the dative case for logograms)	AKK
-<span class="aa-akk">ŠA</span>	ŠA	Of (marks the genitive case for logograms)	AKK
-<span class="aa-akk">IŠTU</span>	IŠTU	From (marks the ablative case for logograms)	AKK
+<span class="aa-akk">ša</span>	ŠA	Of (marks the genitive case for logograms)	AKK
+<span class="aa-akk">ištu</span>	IŠTU	From (marks the ablative case for logograms)	AKK
 ḫappira	ḫappiraš ḫappiri ḫappiran ḫappiraz	City	NOUN ḫappiraš ḫappiraš ḫappiri ḫappiran ḫappiraz
 kurur	kurur	hostile
 gurta	gurtaš gurti gurtan gurtaz gurta	Citadel, acropolis (the better-defended upper part of a city with all the temples and palaces)	NOUN gurtaš gurtaš gurti gurtan gurtaz
@@ -137,7 +137,7 @@ nata	nata nataš nati natan nataz	Reed; the form <i>nataš</i> can also mean "of
 GIR₄	GIR₄ GIR4	Pottery, fired clay	LOGO
 šāšan	šāšaš šāšanaš šāšani šāšan šāšanaz	Lamp (clay vessel to burn oil in)	NOUN šāšaš šāšanaš šāšani šāšan šāšanaz
 dannatta	dannatta dannattaš dannatti dannattan dannattaz	Empty	NOUN dannattaš dannattaš dannatti dannattan dannattaz
-wiyanaš	wiyanaš	Wine (closely related to the English word "wine")	Nom wiyanaš Gen wiyanaš
+wiyanaš	wiyanaš wiyani wiyanan wiyanaz	Wine (closely related to the English word "wine")	NOUN wiyanaš wiyanaš wiyani wiyanan wiyanaz
 SAR	SAR	Herb, vegetable, leafy plant	LOGO
 GUG₂	GUG₂ GUG2 GÚG	Some type of legume	LOGO
 warpun	warpun warpta	I washed (something: accusative; with something: ablative)	VERB warpun warpta
@@ -159,7 +159,7 @@ kiššan	kiššan	Thus, as follows (used to introduce a quotation)
 tēt	tēt	He/she/it said, spoke
 mān	mān	When
 =wa(r)	=wa(r) =wa =war	Marks a quotation (attached to the first word of each sentence)	CLIT
-<i>INA</i>	INA	On, at (marks the dative case for logograms)
+<span class="aa-akk">ina</span>	INA	On, at (marks the dative case for logograms)
 UD	UD UD.20	Day (often attached to a number: UD.1<sup>KAM</sup> "the 1st day of the month")	LOGO
 KAM	KAM	Number (specifically when counting days, months, years, or clay tablets)	DTM
 Arma	Arma Armaš Armi Arman Armaz	Moon, the moon-god (the two were often used interchangeably)	NOUN Armaš Armaš Armi Arman Armaz
@@ -184,7 +184,7 @@ kuwaššun	kuwaššun kuwašzi	Kiss (someone: accusative)	"I kissed" kuwaššun 
 tarkun	tarkun tarkuzzi	Dance (toward someone: dative)	"I danced" tarkun "He/she will dance" tarkuzzi
 kaninanun	kaninanun kanināit	Bow (to someone: dative)	"I bowed" kaninanun "He/she will bow" kanināit
 GAL	GAL	Large, great; as a title, "chief" (of some particular unit)	LOGO
-LU₂.<i>MEŠEDI</i>	MEŠEDI LU₂.MEŠEDI LU2.MEŠEDI LÚ.MEŠEDI	Royal bodyguard (<i>mešedi</i> is an Akkadian word of unclear meaning, probably referring to a particular spear the guards wielded)
+LU₂.<span class="aa-akk">mešedi</span>	MEŠEDI LU₂.MEŠEDI LU2.MEŠEDI LÚ.MEŠEDI	Royal bodyguard (<i>mešedi</i> is an Akkadian word of unclear meaning, probably referring to a particular spear the guards wielded)
 GEŠTIN	GEŠTIN	Wine; as a title, "wine-steward" (the "chief wine-steward" was the chief of the palace staff)	LOGO
 tuḫkanti	tuḫkanti tuḫkantiš tuḫkantiyaš tuḫkantiya tuḫkantin tuḫkantiyaz	Crown prince, heir to the throne	NOUN tuḫkantiš tuḫkantiyaš tuḫkantiya tuḫkantin tuḫkantiyaz
 tawannana	tawannana tawannanaš tawannani tawannanan tawannanaz	Great Queen; in the Hittite Empire, this title was only relinquished on death, so the Great King's wife wouldn't inherit the title until his mother passed away. This was not generally used as a title for foreign or vassal queens.	NOUN tawannanaš tawannanaš tawannani tawannanan tawannanaz
@@ -199,8 +199,8 @@ Dānīel	Dānīel	Daniel (not an actual Hittite name)
 Ištelšar	Ištelšar	Stelzer (not an actual Hittite name)
 Gaškel	Gaškel	Gaskell (not an actual Hittite name)
 DUB.DU₃.DU₃	DUB.DU3.DU3 DUB.DÙ.DÙ	"Tablet crafter" (invented for this colophon, not actually a historically-attested logogram)	LOGO
-<i>PANI</i>	PANI	In the presence of; under the supervision of	AKK
+<span class="aa-akk">pani</span>	PANI	In the presence of; under the supervision of	AKK
 Tim	Tim	Tim (not an actual Hittite name)
 Lēnard	Lēnard	Leonard (not an actual Hittite name)
 UM.MI.A	UM.MI.A	Expert, specialist, teacher, artisan	LOGO
-<i>IŠṬURU</i>	IŠṬURU IŠTURU IŠṬUR IŠTUR IŠṬURA IŠTURA	They inscribed (an Akkadian verb form). The Ṭ is an Akkadian sound that didn't exist in Hittite.	Singular <i>IŠṬUR</i> "Masculine or mixed plural" <i>IŠṬURU</i> "Feminine plural" <i>IŠṬURA</i>
+<span class="aa-akk">išṭuru</span>	IŠṬURU IŠTURU IŠṬUR IŠTUR IŠṬURA IŠTURA	They inscribed (an Akkadian verb form). The Ṭ is an Akkadian sound that didn't exist in Hittite.	Singular <i>IŠṬUR</i> "Masculine or mixed plural" <i>IŠṬURU</i> "Feminine plural" <i>IŠṬURA</i>
