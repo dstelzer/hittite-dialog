@@ -685,39 +685,41 @@
 			nu=wa (advanced target $Target #nominative) natta paprišzi.
 		(elseif) (real assassin $Target) (then)
 			(real signal $Sig) ($Sig wants $Case)
-			mān=wa
-			(if) ($Case = #dative) (then) (no space) =ši
-			(elseif) ($Case = #accusative) (then) (no space) =an
-			(else) (div @realerror) { Signal $Sig does not take case? } (endif)
-			kuiški (real signal) , %% When someone Z’s them,
-			nu=wa=kan (advanced target $Target #nominative) (#accusative #king) kuenzi. %% X will kill the king
+			mān=wa kuiški
+			(advanced target $Target $Case)
+			(real signal) , %% When someone Z’s them,
+			nu=wa=kan
+			(advanced target $Target #nominative)
+			(#accusative #king) kuenzi. %% X will kill the king
 			(now) ($Sig is unlocked)
 		(elseif) (fake assassin $Target) (then)
 			(fake signal $Sig) ($Sig wants $Case)
-			mān=wa
-			(if) ($Case = #dative) (then) (no space) =ši
-			(elseif) ($Case = #accusative) (then) (no space) =an
-			(else) (div @realerror) { Signal $Sig does not take case? } (endif)
-			kuiški (fake signal) , %% When someone Z’s them,
-			nu=wa=kan (advanced target $Target #nominative) (#accusative #king) kuenzi. %% X will kill the king.
+			mān=wa kuiški
+			(advanced target $Target $Case)
+			(fake signal) , %% When someone Z’s them,
+			nu=wa=kan
+			(advanced target $Target #nominative)
+			(#accusative #king) kuenzi. %% X will kill the king
 			(now) ($Sig is unlocked)
 		(elseif) (real mastermind $Target) (then)
 			(real signal $Sig) ($Sig wants $Case)
 			mān=wa
-			(if) ($Case = #dative) (then) (no space) =ši
-			(elseif) ($Case = #accusative) (then) (no space) r=an
-			(else) (div @realerror) { Signal $Sig does not take case? } (endif)
-			(advanced target $Target #nominative) (real signal) , %% When X Z’s them,
-			nu=wa kuiški (#accusative #king) kuenzi. %% someone will kill the king.
+			(advanced target $Target #nominative)
+			(if) ($Case = #dative) (then) kuedanikki
+			(else) kuinki
+			(endif)
+			(real signal) , %% When X Z’s someone,
+			nu=wa apāš (#accusative #king) kuenzi. %% that person will kill the king.
 			(now) ($Sig is unlocked)
 		(elseif) (fake mastermind $Target) (then)
 			(fake signal $Sig) ($Sig wants $Case)
 			mān=wa
-			(if) ($Case = #dative) (then) (no space) =ši
-			(elseif) ($Case = #accusative) (then) (no space) r=an
-			(else) (div @realerror) { Signal $Sig does not take case? } (endif)
-			(advanced target $Target #nominative) (fake signal) , %% When X Z’s them,
-			nu=wa kuiški (#accusative #king) kuenzi. %% someone will kill the king.
+			(advanced target $Target #nominative)
+			(if) ($Case = #dative) (then) kuedanikki
+			(else) kuinki
+			(endif)
+			(fake signal) , %% When X Z’s someone,
+			nu=wa apāš (#accusative #king) kuenzi. %% that person will kill the king.
 			(now) ($Sig is unlocked)
 		(else)
 			(div @realerror) { ERROR: There should never be an advanced edge pointing to the fake default. Something is deeply wrong! }

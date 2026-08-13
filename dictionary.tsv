@@ -14,7 +14,7 @@ waššiyanun	waššiyanun	I wore, had on (something: accusative)
 pāun	pāun pait	I went (to a place: dative)	VERB pāun pait
 pēda	pēdan pēdaš pēdi pēdaz pēda	Place, location	NOUN pēdan pēdaš pēdi pēdan pēdaz
 kuit	kuit	Because
-apa	apāš apēl apēdani apōn apūn apēz apa	That	NOUN apāš apēl apēdani apōn apēz
+apa	apāš apēl apēdani apōn apūn apēz apa	That (thing/person/place)	NOUN apāš apēl apēdani apōn apēz
 karū	karū	Already
 šarraḫḫun	šarraḫḫun	I passed through, crossed (something: accusative)
 dāḫḫun	dāḫḫun dāš	I picked up, took (something: accusative)	VERB dāḫḫun dāš
@@ -179,11 +179,12 @@ memiyan	memiyaš memiyanaš memiyani memiyan memiyanaz	Word, statement, thing, m
 memiškanzi	memiškanzi	They speak, they will speak
 parkueššanteš	parkueššanteš	Innocent people; literally, “purified people” (nominative plural)
 ašant	ašant ašanza ašantaš ašanti ašantan ašantaz	True, real, accurate; the literal meaning is “existing”	NOUN ašanza ašantaš ašanti ašantan ašantaz
-[Personal names]	Ašḫapalaš Eniadališ Ḫaḫuaš Iriyattiš Kaštandaš Lariyaš Našailiš Dušaš Walwiš Zipuliššaš Paškuwaš Tarluš Uruwandaš Maštiggaš Gulzawiyaš	Words with the “m” or “f” determiner are names of individual people. On this tablet, they always appear in the nominative case, so you don't have to worry about inflecting them.
+# The list of forms in the next line was automatically generated; editing it by hand is a nightmare! Don’t do that.
+[Personal names]	Ašḫapalaš Ašḫapalaš Ašḫapali Ašḫapalan Ašḫapalaz Eniadališ Eniadaliyaš Eniadaliya Eniadalin Eniadaliyaz Ḫaḫuaš Ḫaḫuaš Ḫaḫui Ḫaḫuan Ḫaḫuaz Iriyattiš Iriyattiyaš Iriyattiya Iriyattin Iriyattiyaz Kaštandaš Kaštandaš Kaštandi Kaštandan Kaštandaz Lariyaš Lariyaš Lariya Lariyan Lariyaz Našailiš Našailiyaš Našailiya Našailin Našailiyaz Dušaš Dušaš Duši Dušan Dušaz Walwiš Walwiyaš Walwiya Walwin Walwiyaz Zipuliššaš Zipuliššaš Zipulišši Zipuliššan Zipuliššaz Paškuwaš Paškuwaš Paškuwi Paškuwan Paškuwaz Tarluš Tarluwaš Tarlui Tarlun Tarluwaz Uruwandaš Uruwandaš Uruwandi Uruwandan Uruwandaz Maštiggaš Maštiggaš Maštiggi Maštiggan Maštiggaz	Words with the “m” or “f” determiner are names of individual people. Their declension is not provided here; what letters do the nominative, genitive, and dative case typically end with?
 kupta	kupta	He/she/it conspired, plotted, schemed
 paprišzi	paprišzi	He/she/it is guilty (legal term)
 parkuzzi	parkuzzi	He/she/it is innocent (legal term)
-kuiški	kuiški	Someone, anyone (nominative singular)
+kuiški	kuiški kuinki kuēlqa kuedanikki kuēzqa	Someone, anyone	NOUN kuiški kuēlqa kuedanikki kuinki kuēzqa
 kuwaššun	kuwaššun kuwašzi	Kiss (someone: accusative)	"I kissed" kuwaššun "He/she will kiss" kuwašzi
 tarkun	tarkun tarkuzzi	Dance (toward someone: dative)	"I danced" tarkun "He/she will dance" tarkuzzi
 kaninanun	kaninanun kanināit	Bow (to someone: dative)	"I bowed" kaninanun "He/she will bow" kanināit
