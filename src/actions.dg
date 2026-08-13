@@ -868,12 +868,29 @@
 	(describe failed action [[slay $Target with $Obj] $Details])
 	Nu (#accusative $Obj) natta ḫarkun. %% I did not hold the $Obj.
 
+(prevent [[slay $Target with $Weapon] $Details])
+	(object $Weapon) %% Not nil
+	~(weapon $Weapon) %% Only some objects can be used as weapons
+	(describe failed action [[slay $Target with $Weapon] $Details])
+	(div @error) { Presumably the (span @hittite) (#nominative $Weapon) would not make an effective weapon. }
+
+%% Provide some default weapons
+(weapon *(clothing $))
+(weapon *(sharp $))
+
 (perform [[slay (current player $) with $] $])
 	(death ensues) %% Why would you do this though?
 
-(perform [[slay $Obj with $] $]) %% Remove a person from the game; prevent this if someone should be un-slayable
+(perform [[slay $Obj with $Weapon] $]) %% Remove a person from the game; prevent this if someone should be un-slayable
 	(now) ($Obj is nowhere)
 	(now) (update needed)
+	(if) (clothing $Weapon) (then) %% Players were confused about this
+		(div @error) { Presumably through some manner of strangulation. }
+	(elseif) (sharp $Weapon) (then)
+		(div @error) { Presumably via stabbing. }
+	(else)
+		(div @error) { Presumably through some manner of blunt force. }
+	(endif)
 
 #v-slay
 (verb *)

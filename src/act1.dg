@@ -125,6 +125,7 @@
 #ladder
 (item *)
 (neuter *)
+(weapon *)
 (name * in #nominative) ilan
 (name * in #genitive) ilanaš
 (name * in #dative) ilani
@@ -198,6 +199,7 @@
 #bolt
 (item *)
 (neuter *)
+(weapon *)
 (determiner *) GIŠ
 (name * in #nominative/#accusative/#bare) ḫattalu
 (name * in #genitive) ḫattaluwaš
@@ -265,6 +267,7 @@
 
 #orb
 (item *)
+(weapon *)
 (name * in #nominative) dammuriš
 (name * in #genitive) dammuriyaš
 (name * in #dative) dammuri
@@ -272,6 +275,11 @@
 (name * in #ablative) dammuriyaz
 (determiner *) URUDU
 (* is #in #hearth)
+
+(after [$Action $]) %% Amuses me
+	(* is one of $Action)
+	~{ ($Action = [$First | $]) ($First is one of [take drop put]) } %% It’s not surprising that an unknown object could be used for these
+	(div @error) { Apparently a dammuri-object can be used for this purpose. }
 
 #sleeping
 (adjective *)
@@ -308,6 +316,7 @@
 
 #amphora %% actually a pithos now
 (item *)
+(weapon *)
 (name * in #nominative) palḫiš
 (name * in #accusative) palḫin
 (name * in #genitive) palḫaš

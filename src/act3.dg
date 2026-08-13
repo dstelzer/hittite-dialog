@@ -427,7 +427,7 @@
 (verb #v-wear unlocked)
 %% (verb #v-wait unlocked)
 
-(verb #v-question unlocked) (first tablet was read)
+%% (verb #v-question unlocked) (first tablet was read) %% Disabled for now
 %% We use per-object flags for the signal verbs so they only pop up after reading the relevant tablets
 (verb *(possible signal verb $V) unlocked) ($V is unlocked)
 

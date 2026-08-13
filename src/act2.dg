@@ -231,6 +231,7 @@
 #bolt
 (item *)
 (neuter *)
+(weapon *)
 (determiner *) GIŠ
 (* has modifier #burnt)
 (name * in #nominative/#accusative/#bare) ḫattalu

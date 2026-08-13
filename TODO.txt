@@ -1,3 +1,6 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
+recommend different difficulty levels
+reword advanced edges in act 3 to avoid putting pronouns before referents
+better failure message for punuššun
