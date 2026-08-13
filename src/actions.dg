@@ -1297,12 +1297,12 @@
 	(endif)
 	antuḫšaš natta ēšta. %% It was not a person.
 
-%% No default perform rule - the default one in worldmodel.dg will produce a contradiction and a message confused about that contradiction, which seems like a reasonable behavior for this weird action
+(perform [[question $Obj] $Details] without prefix) %% Since this is never useful - but note that you’ll need to modify this rule, NOT just add your own perform rule, to make the action usable! Without prefix wins over with prefix.
+	(describe negative action [[question $Obj] $Details])
 
-#v-question
+#v-question %% Currently unused
 (verb *)
 (name *) punuššun
-%% Has no #v- because it’s never helpful
 
 (verb @paršun/@flee means @paršun) %% Synonym for “go”
 (@paršun wants cases [#dative])
