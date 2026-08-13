@@ -104,7 +104,7 @@
 (door *)
 (holder *)
 (* wants relation #at)
-(* blocks passage) (#bolt is #in *)
+(* blocks passage) (#bolt is $ *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #building)
 (short name *) (#accusative *)
@@ -172,7 +172,7 @@
 
 #washhouse
 (room *)
-(* uses preverb #at)
+(* uses preverb #in)
 (name * in #nominative) šakuniš %% no longer “washhouse” but “spring/well”
 (name * in #genitive) šakuniyaš
 (name * in #dative) šakuniya
@@ -196,6 +196,12 @@
 		(par) Nu=za (#nominative #baker) (#ablative #pool modifierless) warpta.
 	(endif)
 
+(tutorial)
+	(current room *)
+	~(taught washhouse)
+	(div @error) { Since the narrator describes being “in” the spring, and mentions a door, he is probably talking about an enclosed washhouse rather than an outdoor pool. The usual term for such a washhouse is the logogram (span @htt) { E₂.DU₁₀.US₂.SA } . }
+	(now) (taught washhouse)
+
 #pool
 (* is #in #washhouse)
 (* is filled with #water)
@@ -211,7 +217,7 @@
 (door *)
 (holder *)
 (* wants relation #at)
-(* blocks passage) (#bolt is #in *)
+(* blocks passage) (#bolt is $ *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #washhouse)
 (short name *) (#accusative *)

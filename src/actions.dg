@@ -1089,7 +1089,7 @@
 (prevent [[wash (animate $Acc) with $Abl] $Details])
 	~(pettable $Acc) %% Exception for dogs
 	~(current player $Acc) %% And for yourself
-	(describe negative action [[wash $Acc with $Abl] $Details])
+	(describe negative action [[wash $Acc with $Abl] $Details]) %% I just didn’t.
 
 (prevent [[wash $Acc with $Abl] $Details])
 	~($Abl is filled with #water)
@@ -1136,7 +1136,7 @@
 (verb *)
 (name *) kuwaššun
 (signal *) kuwašzi
-(* matches [kiss $])
+(* matches [kiss $Obj]) ~(current player $Obj)
 (* wants #accusative)
 (possible signal verb *)
 
@@ -1162,7 +1162,7 @@
 (verb *)
 (name *) tarkun
 (signal *) tarkuzzi
-(* matches [dance with $])
+(* matches [dance with $Obj]) ~(current player $Obj)
 (* wants #dative)
 (possible signal verb *)
 
@@ -1188,7 +1188,7 @@
 (verb *)
 (name *) kaninanun
 (signal *) kanināit
-(* matches [bow to $])
+(* matches [bow to $Obj]) ~(current player $Obj)
 (* wants #dative)
 (possible signal verb *)
 

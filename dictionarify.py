@@ -73,6 +73,8 @@ def parse_paradigm(s, name):
 		return "The = sign separates \"clitics\": words that have their own meaning but can't stand on their own. It's like how the English word <i>cat's</i> is clearly made up of <i>cat</i> and <i>'s</i>, but while <i>cat</i> can exist as a word on its own, <i>'s</i> can't."
 	elif s == 'DTM':
 		return 'This sign can be used as a "determiner": not pronounced, but marking what sort of thing the next word is.'
+	elif s == 'DTM2':
+		return 'This sign can be used as a "determiner": not pronounced, but marking what sort of thing the <i>previous</i> word is. (Unlike most determiners, this one comes after the word, not before.)'
 	elif s == 'AKK':
 		return 'The uppercase italics indicate that this is an Akkadian word, not a Hittite one. Hittite scribes would have pronounced it as the Hittite equivalent.'
 	elif s == 'LOGO':

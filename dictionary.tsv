@@ -20,7 +20,7 @@ karū	karū	Already
 dāḫḫun	dāḫḫun dāš	I picked up, took (something: accusative)	VERB dāḫḫun dāš
 natta	natta	Not
 =aš	=aš =an =at =ši	He/she/it (referring back to the most recently-mentioned noun)	"Common gender nom" =aš "Common gender acc" =an "Neuter gender nom/acc" =at "Any gender dat" =ši
-=mu	Me (accusative or dative, not emphatic)	CLIT
+=mu	=mu	Me (accusative or dative, not emphatic)	CLIT
 mekki	mekki	Very
 nakkiš	nakkiš nakki	Heavy	"Common gender" nakkiš "Neuter gender" nakki
 šalliš	šalliš šalli	Large	"Common gender" šalliš "Neuter gender" šalli
@@ -103,6 +103,7 @@ uwanun	uwanun uet	I came (to a place: dative)	VERB uwanun uet
 pēr	pēr parnaš parni parnaz per	House, building	NOUN pēr parnaš parni pēr parnaz
 TUG₂	TUG₂ TUG2 TÚG	Garment	LOGO
 šakuni	šakuni šakuniš šakuniyaš šakuniya šakunin šakunin šakuniyaz	Well, spring (of water)	NOUN šakuniš šakuniyaš šakuniya šakunin šakuniyaz
+E₂.DU₁₀.US₂.SA	E₂.DU₁₀.US₂.SA E2.DU10.US2.SA É.DU₁₀.ÚS.SA É.DU10.ÚS.SA	Washhouse (enclosed area for bathing)	LOGO
 lūli	lūli lūliš lūliyaš lūliya lūlin lūliyaz	Pool, lake, basin, body of water	NOUN lūliš lūliyaš lūliya lūlin lūliyaz
 lukkan	lukkan lukkandaš lukkandi lukkandaz	Burnt	NOUN lukkan lukkandaš lukkandi lukkan lukkandaz
 LU₂	LU₂ LU2 LÚ LU₂.MEŠ LU2.MEŠ LÚ.MEŠ	Man (profession, not individual name; LU₂.MEŠ is sometimes used as a plural)	DTM
@@ -163,7 +164,7 @@ mān	mān	When
 =wa(r)	=wa(r) =wa =war	Marks a quotation (attached to the first word of each sentence)	CLIT
 <span class="aa-akk">ina</span>	INA	On, at (marks the dative case for logograms)
 UD	UD UD.20	Day (often attached to a number: UD.1<sup>KAM</sup> “the 1st day of the month”)	LOGO
-KAM	KAM	Number (specifically when counting days, months, years, or clay tablets)	DTM
+KAM	KAM	Number (specifically when counting days, months, years, or clay tablets)	DTM2
 Arma	Arma Armaš Armi Arman Armaz	Moon, the moon-god (the two were often used interchangeably)	NOUN Armaš Armaš Armi Arman Armaz
 [d]	d [d] DINGIR	God, deity; this determiner is especially important because gods were mainly referred to by their domains or holy numbers, so this distinguishes “storm” from “the storm-god” or “30” from “the god with the holy number 30”	DTM
 aki	aki	He/she/it dies, will die (present tense of <i class="word" data-word="aggaḫḫun">aggaḫḫun</i>); “the moon dies” means “a lunar eclipse happens”
@@ -175,6 +176,7 @@ antuḫšuš	antuḫšuš	People (accusative plural of <i class="word" data-word
 kupiyati	kupiyati kupiyatiš kupiyatiyaš kupiyatiya kupiyatin kupiyatiyaz	Conspiracy	NOUN kupiyatiš kupiyatiyaš kupiyatiya kupiyatin kupiyatiyaz
 punuššun	punuššun punušta	I questioned, interrogated (someone: accusative; about something: dative)	VERB punuššun punušta
 memiyan	memiyaš memiyanaš memiyani memiyan memiyanaz	Word, statement, thing, matter	NOUN memiyaš memiyanaš memiyani memiyan memiyanaz
+memiškanzi	memiškanzi	They speak, they will speak
 parkueššanteš	parkueššanteš	Innocent people; literally, “purified people” (nominative plural)
 ašant	ašant ašanza ašantaš ašanti ašantan ašantaz	True, real, accurate; the literal meaning is “existing”	NOUN ašanza ašantaš ašanti ašantan ašantaz
 [Personal names]	Ašḫapalaš Eniadališ Ḫaḫuaš Iriyattiš Kaštandaš Lariyaš Našailiš Dušaš Walwiš Zipuliššaš Paškuwaš Tarluš Uruwandaš Maštiggaš Gulzawiyaš	Words with the “m” or “f” determiner are names of individual people. On this tablet, they always appear in the nominative case, so you don't have to worry about inflecting them.
@@ -200,7 +202,7 @@ NU.TIL	NU.TIL	Not finished (used to mark that a tablet is not the last one of a 
 Dānīel	Dānīel	Daniel (not an actual Hittite name)
 Ištelšar	Ištelšar	Stelzer (not an actual Hittite name)
 Gaškel	Gaškel	Gaskell (not an actual Hittite name)
-DUB.DU₃.DU₃	DUB.DU3.DU3 DUB.DÙ.DÙ	“Tablet crafter” (invented for this colophon, not actually a historically-attested logogram)	LOGO
+DUB.DU₃.DU₃	DUB.DU₃.DU₃ DUB.DU3.DU3 DUB.DÙ.DÙ	“Tablet crafter” (invented for this colophon, not actually a historically-attested logogram)	LOGO
 <span class="aa-akk">pani</span>	PANI	In the presence of; under the supervision of	AKK
 Tim	Tim	Tim (not an actual Hittite name)
 Lēnard	Lēnard	Leonard (not an actual Hittite name)

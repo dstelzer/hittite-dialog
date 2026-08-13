@@ -203,8 +203,8 @@
 (prevent [[go *] $Details]) %% Force the player to explore the back room first
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details])
-	Nu TUG natta waššiyanun. %% I was not wearing a garment
-	(div @error) { What exactly happened to the baker’s garment from the previous tablet is not clear. The word TUG here might mean “appropriate clothing”—that is, a disguise—or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
+	Nu (name #garment) natta waššiyanun. %% I was not wearing a garment
+	(div @error) { What exactly happened to the baker’s garment from the previous tablet is not clear. The word (name #garment) here might mean “appropriate clothing”—that is, a disguise—or it could mean that the protagonist discarded his unclean clothing and is now naked in the inner sanctum. }
 
 (animate *(suspect $))
 (*(suspect $) is #in #temple) %% Put them all in one room for now
@@ -302,6 +302,7 @@
 	(endif)
 
 (perform [[slay $Victim | $] $]) %% It’s not that easy
+	~(current player $Victim)
 	(current room #temple)
 	(select avenger $Avenger who is not $Victim)
 	Nu=mu=kan (#nominative $Avenger) kuenta. %% The avenger slew me.
@@ -429,3 +430,5 @@
 (verb #v-question unlocked) (first tablet was read)
 %% We use per-object flags for the signal verbs so they only pop up after reading the relevant tablets
 (verb *(possible signal verb $V) unlocked) ($V is unlocked)
+
+(avoid ablative case) %% But not genitive, for this tablet
