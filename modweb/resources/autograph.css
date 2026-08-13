@@ -147,6 +147,17 @@ div.aa-error {
 	font-size: 75%;
 }
 
+.aa-disambig {
+	display: none;
+    border-bottom: 2px solid black;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.aa-disambig:has(+ div.output p div#aainputblock) {
+	display: block;
+}
+
 @media (max-width: 700px) {
 	div.aa-error {
 		display: block;
