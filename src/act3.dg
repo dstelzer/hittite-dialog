@@ -302,7 +302,7 @@
 	(endif)
 
 (perform [[slay $Victim | $] $]) %% It’s not that easy
-	~(current player $Victim)
+	~(current player $Victim) %% You can kill yourself just fine
 	(current room #temple)
 	(select avenger $Avenger who is not $Victim)
 	Nu=mu=kan (#nominative $Avenger) kuenta. %% The avenger slew me.
