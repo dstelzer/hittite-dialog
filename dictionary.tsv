@@ -70,7 +70,7 @@ paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire; related to
 DUG	DUG	Vessel	DTM
 dammuri	dammuriš dammuriyaš dammuri dammurin dammuriyaz	Meaning unknown. From context, some kind of portable object.	NOUN dammuriš dammuriyaš dammuri dammurin dammuriyaz
 URUDU	URUDU	Copper, bronze	DTM
-šuppanza	šuppanza šuppandaš šuppandi šuppandan šuppandaz	Sleeping, asleep	NOUN šuppanza šuppandaš šuppandi šuppandan šuppndaz
+šuppan	šuppanza šuppandaš šuppandi šuppandan šuppandaz	Sleeping, asleep	NOUN šuppanza šuppandaš šuppandi šuppandan šuppndaz
 ḫalliyatalla	ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz ḫalliyatalla	Watchman, guard	NOUN ḫalliyatallaš ḫalliyatallaš ḫalliyatalli ḫalliyatallan ḫalliyatallaz
 antaka	antakaš antaki antakan antakaz antaka	Room, storeroom	NOUN antakaš antakaš antaki antakan antakaz
 palḫi	palḫiš palḫaš palḫi palḫin palḫaz palḫi	Pithos (large clay jar)	NOUN palḫiš palḫaš palḫi palḫin palḫaz
@@ -90,7 +90,7 @@ laḫḫa	laḫḫaš laḫḫi laḫḫan laḫḫaz laḫḫa	Adventure	NOUN l
 ḫappira	ḫappiraš ḫappiri ḫappiran ḫappiraz	City	NOUN ḫappiraš ḫappiraš ḫappiri ḫappiran ḫappiraz
 kurur	kurur	hostile
 gurta	gurtaš gurti gurtan gurtaz gurta	Citadel, acropolis (the better-defended upper part of a city with all the temples and palaces)	NOUN gurtaš gurtaš gurti gurtan gurtaz
-ḫuwant	ḫuwanza ḫuwantaš ḫuwanti ḫuwantan ḫuwantaz ḫuwant	Wind, cardinal direction	NOUN ḫuwanza ḫuwantaš ḫuwanti ḫuwantan ḫuwantaz
+ḫuwanza	ḫuwanza ḫuwantaš ḫuwanti ḫuwantan ḫuwantaz ḫuwant	Wind, cardinal direction	NOUN ḫuwanza ḫuwantaš ḫuwanti ḫuwantan ḫuwantaz
 šalli	šalliš šallayaš šalli šallin šallayaz	Large, great; as a compass direction, south (the south wind was “the great wind”)	NOUN šalliš šallayaš šalli šallin šallayaz
 taršmena	taršmenaš taršmeni taršmenan taršmenaz taršmena	North; this word is more obscure than the other compass directions, so if it has any meaning beyond “north”, we don’t know it. Even its pronunciation is only conjuectural.	NOUN taršmenaš taršmenaš taršmeni taršmenan taršmenaz
 ekuna	ekunaš ekuni ekunan ekunaz ekuna	Cold; as a compass direction, east (the east wind was “the cold wind”)	NOUN ekunaš ekunaš ekuni ekunan ekunaz
@@ -133,6 +133,7 @@ milit	milit militaš militi milit militaz	Honey; this word is closely related to
 PISAN	PISAN	Container	LOGO
 nata	nata nataš nati natan nataz	Reed; the form <i>nataš</i> can also mean “of reeds”, genitive plural	NOUN nataš nataš nati natan nataz
 šākan	šākan šaknaš šakni šaknaz	Oil	NOUN šākan šaknaš šakni šākan šaknaz
+tākan	tākan	“On the ground”, slightly misspelled. This meaning does not make sense in context, so the scribe probably meant to write <span class="word" data-word="šākan">šākan</span> “oil”.
 šaknuwan	šaknuwan šaknuwanza šaknuwandaš šaknuwandi šaknuwandan šaknuwandaz	Oily, oiled	NOUN šaknuwanza šaknuwandaš šaknuwandi šaknuwandan šaknuwandaz
 ḫalki	ḫalki ḫalkiš ḫalkiyaš ḫalkiya ḫalkin ḫalkiyaz	Grain in general, or barley in particular	NOUN ḫalkiš ḫalkiyaš ḫalkiya ḫalkin ḫalkiyaz
 GIR₄	GIR₄ GIR4	Pottery, fired clay	LOGO
@@ -178,7 +179,7 @@ punuššun	punuššun punušta	I questioned, interrogated (someone: accusative; 
 memiyan	memiyaš memiyanaš memiyani memiyan memiyanaz	Word, statement, thing, matter	NOUN memiyaš memiyanaš memiyani memiyan memiyanaz
 memiškanzi	memiškanzi	They speak, they will speak
 parkueššanteš	parkueššanteš	Innocent people; literally, “purified people” (nominative plural)
-ašant	ašant ašanza ašantaš ašanti ašantan ašantaz	True, real, accurate; the literal meaning is “existing”	NOUN ašanza ašantaš ašanti ašantan ašantaz
+ašan	ašant ašanza ašantaš ašanti ašantan ašantaz	True, real, accurate; the literal meaning is “existing”	NOUN ašanza ašantaš ašanti ašantan ašantaz
 # The list of forms in the next line was automatically generated; editing it by hand is a nightmare! Don’t do that.
 [Personal names]	Ašḫapalaš Ašḫapalaš Ašḫapali Ašḫapalan Ašḫapalaz Eniadališ Eniadaliyaš Eniadaliya Eniadalin Eniadaliyaz Ḫaḫuaš Ḫaḫuaš Ḫaḫui Ḫaḫuan Ḫaḫuaz Iriyattiš Iriyattiyaš Iriyattiya Iriyattin Iriyattiyaz Kaštandaš Kaštandaš Kaštandi Kaštandan Kaštandaz Lariyaš Lariyaš Lariya Lariyan Lariyaz Našailiš Našailiyaš Našailiya Našailin Našailiyaz Dušaš Dušaš Duši Dušan Dušaz Walwiš Walwiyaš Walwiya Walwin Walwiyaz Zipuliššaš Zipuliššaš Zipulišši Zipuliššan Zipuliššaz Paškuwaš Paškuwaš Paškuwi Paškuwan Paškuwaz Tarluš Tarluwaš Tarlui Tarlun Tarluwaz Uruwandaš Uruwandaš Uruwandi Uruwandan Uruwandaz Maštiggaš Maštiggaš Maštiggi Maštiggan Maštiggaz	Words with the “m” or “f” determiner are names of individual people. Their declension is not provided here; what letters do the nominative, genitive, and dative case typically end with?
 kupta	kupta	He/she/it conspired, plotted, schemed

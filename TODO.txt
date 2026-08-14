@@ -1,3 +1,8 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
+Add araḫzanda to bare "look" ("look around") - both in act 2 and in actions
+Update declension of tunnakkiš (should be -iš not -ar)
+Think about blood phrasing??
+figure out what to do about tawannana error
+uwanun?

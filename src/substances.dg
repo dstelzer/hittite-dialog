@@ -109,6 +109,22 @@
 (name * in #genitive) šaknaš
 (name * in #dative) šakni
 (name * in #ablative) šaknaz
+(dict * in #nominative/#accusative/#bare) šākan tākan
+(errorize #accusative *) %% The scribe messed up!
+	(select)
+		šākan
+	(or)
+		tākan
+	(or)
+		šākan
+	(or)
+		šākan
+	(or)
+		tākan
+	(or)
+		šākan
+	(stopping)
+(interface (errorize $<Case $<Word))
 
 #oily
 (adjective *)

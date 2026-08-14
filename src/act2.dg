@@ -873,7 +873,7 @@
 	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
 	(* is #heldby #me)
 	~(* is filled with #fire)
-	Nu (#accusative #oil) (#dative *) tēḫḫun. %% I put the oil on the reed.
+	Nu (errorize #accusative #oil) (#dative *) tēḫḫun. %% I put the oil on the reed
 	(now) (reed is oiled)
 	(now) (update needed)
 
@@ -995,8 +995,7 @@
 (instead of [[put $X $Y] $])
 	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
 	(* is #heldby #me)
-	Nu (#accusative #oil) (dtm {DUG})(name * in #dative) anda tēḫḫun. %% I put the oil in the lamp.
-	%% Doesn’t use (#dative *) because that would include the “empty” modifier
+	Nu (errorize #accusative #oil) (#dative * modifierless) anda tēḫḫun. %% I put the oil in the lamp.
 	(now) (* is filled with #oil)
 	(now) (update needed)
 

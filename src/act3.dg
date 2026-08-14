@@ -54,6 +54,7 @@
 (name * in #dative) šiuni
 (name * in #accusative) šiun
 (name * in #ablative) šiunaz
+(* has modifier @ammel) %% My
 
 (* is #heldby #me)
 
@@ -400,6 +401,10 @@
 	(div @error) { Cuneiform tablets often end with a short “colophon”, providing the title, tablet number, and the name of the scribe who wrote it. In other words, this is... }
 	
 	(game over {The end})
+
+(parse metacommand [\/win])
+	(real assassin $Real)
+	($Real kills the king)
 
 (colophon)
 	DUB 3 (dtm2 {KAM}) TIL (line)

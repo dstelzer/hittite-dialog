@@ -631,7 +631,7 @@
 	(logogram $Suspect)
 	(span @akk) (akkadian preposition for $Case) %% preposition goes before all
 	(real name $Suspect in $Case) %% personal name
-	(name $Suspect) %% job title
+	(#nominative $Suspect) %% job title
 ($Suspect in $Case name and title)
 	~(logogram $Suspect)
 	(real name $Suspect in $Case)
