@@ -24,6 +24,19 @@
 	text-transform: none;
 }
 
+.aa-dont-syllabify .read{ /* A hacky workaround to make a certain name work properly */
+	text-transform: lowercase;
+}
+.aa-dont-syllabify .read::first-letter{
+	text-transform: uppercase;
+}
+.bound .aa-dont-syllabify{
+	text-transform: lowercase;
+}
+.bound .aa-dont-syllabify::first-letter{
+	text-transform: uppercase;
+}
+
 .whitespace{
 	margin-left: 0.33ch;
 	margin-right: 0.33ch;

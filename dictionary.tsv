@@ -66,7 +66,7 @@ GIŠ	GIŠ	Wood (includes both living trees and things crafted out of wood)	DTM
 arkiwi	arkiwiš arkiwaš arkiwi arkiwin arkiwaz	Foyer, front room	NOUN arkiwiš arkiwaš arkiwi arkiwin arkiwaz
 ḫašša	ḫaššaš ḫašši ḫaššan ḫaššaz ḫašša	Hearth, fireplace	NOUN ḫaššaš ḫaššaš ḫašši ḫaššan ḫaššaz
 paḫḫur	paḫḫur paḫḫuenaš paḫḫueni paḫḫuenaz	Fire; related to the English word “pyre”	NOUN paḫḫur paḫḫuenaš paḫḫueni paḫḫur paḫḫuenaz
-än	än ān	Hot; this word is spelled unusually in cuneiform, so it may have actually been pronounced “a'an” or “ayyan” instead of “ān”.
+än	än ān	Hot; this word is spelled unusually in cuneiform, so it may have actually been pronounced “a’an” or “ayyan” instead of “ān”.
 DUG	DUG	Vessel	DTM
 dammuri	dammuriš dammuriyaš dammuri dammurin dammuriyaz	Meaning unknown. From context, some kind of portable object.	NOUN dammuriš dammuriyaš dammuri dammurin dammuriyaz
 URUDU	URUDU	Copper, bronze	DTM
@@ -92,7 +92,7 @@ kurur	kurur	hostile
 gurta	gurtaš gurti gurtan gurtaz gurta	Citadel, acropolis (the better-defended upper part of a city with all the temples and palaces)	NOUN gurtaš gurtaš gurti gurtan gurtaz
 ḫuwant	ḫuwanza ḫuwantaš ḫuwanti ḫuwantan ḫuwantaz ḫuwant	Wind, cardinal direction	NOUN ḫuwanza ḫuwantaš ḫuwanti ḫuwantan ḫuwantaz
 šalli	šalliš šallayaš šalli šallin šallayaz	Large, great; as a compass direction, south (the south wind was “the great wind”)	NOUN šalliš šallayaš šalli šallin šallayaz
-taršmena	taršmenaš taršmeni taršmenan taršmenaz taršmena	North; this word is more obscure than the other compass directions, so if it has any meaning beyond “north”, we don't know it. Even its pronunciation is only conjuectural.	NOUN taršmenaš taršmenaš taršmeni taršmenan taršmenaz
+taršmena	taršmenaš taršmeni taršmenan taršmenaz taršmena	North; this word is more obscure than the other compass directions, so if it has any meaning beyond “north”, we don’t know it. Even its pronunciation is only conjuectural.	NOUN taršmenaš taršmenaš taršmeni taršmenan taršmenaz
 ekuna	ekunaš ekuni ekunan ekunaz ekuna	Cold; as a compass direction, east (the east wind was “the cold wind”)	NOUN ekunaš ekunaš ekuni ekunan ekunaz
 appezzi	appezziš appezziyaš appezzi appezzin appezziyaz	Rear, back (adjective); as a compass direction, west (the west wind was “the back wind”)	NOUN appezziš appezziyaš appezzi appezzin appezziyaz
 šāra	šāra	Up, above
@@ -107,7 +107,7 @@ E₂.DU₁₀.US₂.SA	E₂.DU₁₀.US₂.SA E2.DU10.US2.SA É.DU₁₀.ÚS.SA 
 lūli	lūli lūliš lūliyaš lūliya lūlin lūliyaz	Pool, lake, basin, body of water	NOUN lūliš lūliyaš lūliya lūlin lūliyaz
 lukkan	lukkan lukkandaš lukkandi lukkandaz	Burnt	NOUN lukkan lukkandaš lukkandi lukkan lukkandaz
 LU₂	LU₂ LU2 LÚ LU₂.MEŠ LU2.MEŠ LÚ.MEŠ	Man (profession, not individual name; LU₂.MEŠ is sometimes used as a plural)	DTM
-NINDA.DU₃.DU₃	NINDA.DU₃.DU₃ NINDA.DU3.DU3 NINDA.DÙ.DÙ	Baker, literally “bread crafter”; in Hittite society, specialized bakers were only found in temples and palaces, where everything had to be carefully controlled for purity and couldn't be entrusted to ordinary people	LOGO
+NINDA.DU₃.DU₃	NINDA.DU₃.DU₃ NINDA.DU3.DU3 NINDA.DÙ.DÙ	Baker, literally “bread crafter”; in Hittite society, specialized bakers were only found in temples and palaces, where everything had to be carefully controlled for purity and couldn’t be entrusted to ordinary people	LOGO
 ešḫar	ešḫar ešḫanaš ešḫani ešḫanaz	Blood, guilt; someone who has committed murder has blood “on” them, metaphorically, like in the English expression “blood on their hands”.	NOUN ešḫar ešḫanaš ešḫani ešḫar ešḫanaz
 MUḪALDIM	MUḪALDIM	Cook (specifically of meat rather than baked goods, but E₂ <sup>LU₂</sup>MUḪALDIM “house of the cook” means “kitchen for all kinds of food preparation”, not just meat)	LOGO
 išliman	išliman išlimanaš išlimani išlimanaz	Oven	NOUN išliman išlimanaš išlimani išliman išlimanaz
@@ -146,7 +146,7 @@ arḫa	arḫa	Away (both “from this place” as in “went away”, and “com
 warati	warati	It burned up (one of the very few passive verb forms in this game)
 kuitki	kuitki	Something, anything (nominative or accusative)
 dankuešta	dankuešta	It became dark
-genzuwanun	genzuwanun	I treated (someone: accusative) with affection, was kind to them, showed compassion to them. This verb comes from a noun meaning “lower abdomen” as well as “kindness”; maybe it originally meant “to hold on one's lap”?
+genzuwanun	genzuwanun	I treated (someone: accusative) with affection, was kind to them, showed compassion to them. This verb comes from a noun meaning “lower abdomen” as well as “kindness”; maybe it originally meant “to hold on one’s lap”?
 ḫarkta	ḫarkta	It perished, it was lost. This is a separate ḫark- from the ḫark- that means “have, hold”, as in <span class="word" data-word="ḫarkun">ḫarkun</span>.
 
 # Tablet 3
@@ -155,8 +155,8 @@ tunnakkeššar	tunnakkeššar tunnakkešnaš tunnakkešni tunnakkišnaz	Inner ch
 DUB.SAR	DUB.SAR	Scribe, literally “clay tablet writer”. Wooden tablets were handled by a different person, the “wood-scribe”.	LOGO
 akkan	akkan akkanza akkandaš akkandi akkandan akkandaz	Dead	NOUN akkanza akkandaš akkandi akkandan akkandaz
 DUB	DUB	Clay tablet	LOGO
-[f]	f [f] MUNUS	Woman; this determiner is usually transcribed “f” for individual women's names and “MUNUS” for categories of women, but it's the same sign either way	DTM
-[m]	m [m] DIŠ	Man (individual man's name)	DTM
+[f]	f [f] MUNUS	Woman; this determiner is usually transcribed “f” for individual women’s names and “MUNUS” for categories of women, but it’s the same sign either way	DTM
+[m]	m [m] DIŠ	Man (individual man’s name)	DTM
 šiuniyant	šiuniyant šiuniyanza šiuniyantaš šiuniyanti šiuniyantan šiuniyantaz	Diviner, ecstatic, oracle; literally, “god-touched”	NOUN šiuniyanza šiuniyantaš šiuniyanti šiuniyantan šiuniyantaz
 kiššan	kiššan	Thus, as follows (used to introduce a quotation)
 tēt	tēt	He/she/it said, spoke
@@ -192,7 +192,7 @@ GAL	GAL	Large, great; as a title, “chief” (of some particular unit)	LOGO
 LU₂.<span class="aa-akk">mešedi</span>	MEŠEDI LU₂.MEŠEDI LU2.MEŠEDI LÚ.MEŠEDI	Royal bodyguard (<i>mešedi</i> is an Akkadian word of unclear meaning, probably referring to a particular spear the guards wielded)
 GEŠTIN	GEŠTIN	Wine; as a title, “wine-steward” (the “chief wine-steward” was the chief of the palace staff)	LOGO
 tuḫkanti	tuḫkanti tuḫkantiš tuḫkantiyaš tuḫkantiya tuḫkantin tuḫkantiyaz	Crown prince, heir to the throne	NOUN tuḫkantiš tuḫkantiyaš tuḫkantiya tuḫkantin tuḫkantiyaz
-tawannana	tawannana tawannanaš tawannani tawannanan tawannanaz	Great Queen; in the Hittite Empire, this title was only relinquished on death, so the Great King's wife wouldn't inherit the title until his mother passed away. This was not generally used as a title for foreign or vassal queens.	NOUN tawannanaš tawannanaš tawannani tawannanan tawannanaz
+tawannana	tawannana tawannanaš tawannani tawannanan tawannanaz	Great Queen; in the Hittite Empire, this title was only relinquished on death, so the Great King’s wife wouldn’t inherit the title until his mother passed away. This was not generally used as a title for foreign or vassal queens.	NOUN tawannanaš tawannanaš tawannani tawannanan tawannanaz
 
 # Colophon
 zuppari	zuppari zuppariyaš zuppariya zuppariyaz	Torch	NOUN zuppari zuppariyaš zuppariya zuppari zuppariyaz
@@ -201,11 +201,12 @@ TIL	TIL	Finished, complete (used to mark the last tablet of a series; all the ot
 NU.TIL	NU.TIL	Not finished (used to mark that a tablet is not the last one of a series)
 ŠU	ŠU	Hand (body part); in tablet colophons, short for “by the hand of” (indicating the author)	LOGO
 Dānīel	Dānīel	Daniel (not an actual Hittite name)
+DI.KUD.DINGIR	DI.KUD.DINGIR DI.KUD.DIŊIR Dayyānī-ilum	Logographic writing of the hypothetical Akkadian name Dayyānī-ilum, “the god is my judge”, equivalent to Hebrew “Daniel”
 Ištelšar	Ištelšar	Stelzer (not an actual Hittite name)
 Gaškel	Gaškel	Gaskell (not an actual Hittite name)
 DUB.DU₃.DU₃	DUB.DU₃.DU₃ DUB.DU3.DU3 DUB.DÙ.DÙ	“Tablet crafter” (invented for this colophon, not actually a historically-attested logogram)	LOGO
 <span class="aa-akk">pani</span>	PANI	In the presence of; under the supervision of	AKK
 Tim	Tim	Tim (not an actual Hittite name)
-Lēnard	Lēnard	Leonard (not an actual Hittite name)
+UR.MAḪ-muwa	UR.MAḪ-muwa Walwimuwa	Semi-logographic writing of the Luwian name Walwimuwa, “Lion-might”, equivalent to Germanic “Leonard”
 UM.MI.A	UM.MI.A	Expert, specialist, teacher, artisan	LOGO
-<span class="aa-akk">išṭuru</span>	IŠṬURU IŠTURU IŠṬUR IŠTUR IŠṬURA IŠTURA	They inscribed (an Akkadian verb form). The Ṭ is an Akkadian sound that didn't exist in Hittite.	Singular <i>IŠṬUR</i> "Masculine or mixed plural" <i>IŠṬURU</i> "Feminine plural" <i>IŠṬURA</i>
+<span class="aa-akk">išṭuru</span>	IŠṬURU IŠTURU IŠṬUR IŠTUR IŠṬURA IŠTURA	They inscribed (an Akkadian verb form). The Ṭ is an Akkadian sound that didn’t exist in Hittite.	Singular <i>IŠṬUR</i> "Masculine or mixed plural" <i>IŠṬURU</i> "Feminine plural" <i>IŠṬURA</i>
