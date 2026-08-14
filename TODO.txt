@@ -6,3 +6,5 @@ Update declension of tunnakkiš (should be -iš not -ar)
 Think about blood phrasing??
 figure out what to do about tawannana error
 uwanun?
+ishamai does weird things with curly quotes, putting them in whitespace spans
+Tim capitalization in bound transcription

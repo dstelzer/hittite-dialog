@@ -30,10 +30,10 @@
 .aa-dont-syllabify .read::first-letter{
 	text-transform: uppercase;
 }
-.bound .aa-dont-syllabify{
+.bound .aa-dont-syllabify .word{
 	text-transform: lowercase;
 }
-.bound .aa-dont-syllabify::first-letter{
+.bound .aa-dont-syllabify .word::first-letter{
 	text-transform: uppercase;
 }
 
