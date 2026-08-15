@@ -1,7 +1,5 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
-clicking ANA in dictionary window should not replace entry
 Add araḫzanda to bare "look" ("look around") - both in act 2 and in actions
-figure out what to do about tawannana error
 Tim capitalization in bound transcription
 verbs in bullet list?
