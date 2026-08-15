@@ -1,6 +1,4 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
-clicking ANA in dictionary window should not replace entry
-figure out what to do about tawannana error
 Tim capitalization in bound transcription
-put verbs in unlock order?
+verbs in bullet list?
