@@ -1,5 +1,4 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
-Add araḫzanda to bare "look" ("look around") - both in act 2 and in actions
 Tim capitalization in bound transcription
 verbs in bullet list?
