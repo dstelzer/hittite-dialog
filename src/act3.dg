@@ -406,9 +406,13 @@
 	(real assassin $Ass)
 	(real signal $Sig)
 	($Sig wants $Case)
-	(div @meta) {
-		The winning command is: (span @hittite) { nu ($Case $Ass) (name $Sig) } .
-	}
+	(select)
+		(div @meta) {
+			The winning command is: (span @hittite) { nu ($Case $Ass) (name $Sig) } .
+		}
+	(or)
+		($Ass kills the king)
+	(stopping)
 
 (colophon)
 	DUB 3 (dtm2 {KAM}) TIL (line)
