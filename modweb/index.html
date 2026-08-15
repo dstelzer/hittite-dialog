@@ -10,13 +10,38 @@
 			<div id="map-small" class="popup-element" onClick="document.getElementById('map-large').classList.add('open')"></div>
 			<div id="map-large" class="popup">
 				<button class="popup-close" onClick="document.getElementById('map-large').classList.remove('open')">&times;</button>
-				<div id="map-link-1"><a class="popup-link" href="https://www.worldhistory.org/image/16114/map-of-the-hittite-empire-16th-13th-century-bce/"></a></div>
-				<div id="map-link-2"><a class="popup-link" href="https://www.worldhistory.org/image/16114/map-of-the-hittite-empire-16th-13th-century-bce/"></a></div>
+			</div>
+			
+			<div id="postscript" class="popup">
+				<button class="popup-close" onClick="document.getElementById('postscript').classList.remove('open')">&times;</button>
+				<div id="postscript-inner">
+					<p>Congratulations on finishing the game!</p>
+					<p>Have you learned the Hittite names for the compass directions? (Try looking at a nearby room.) These were only discovered in 2023! (Kreitzscheck, "The Hittite words for North, East, South, and West")</p>
+					<p>There are two ways to deal with the baker in tablet 2, one violent, one non-violent. Both of them involve the door bolt from tablet 1.</p>
+					<p>The puzzle on tablet 3 is randomly generated every time you restart the game, with over ten thousand possibilities.</p>
+					<p>Hittite has a very simple noun gender system: all nouns are either "common" or "neuter". This game doesn't put much focus on it, but the nouns that look the same in the nominative and accusative are neuter, and the ones that don't are common. (Neuter nouns in Hittite actually don't have a nominative or accusative at all, just a merged case called the "absolutive".)</p>
+				</div>
 			</div>
 			
 			<div id="book">
+				<div id="mug"></div>
+				<div id="steam">
+				  <span class="steam0 steamfilled"></span>
+				  <span class="steam1"></span>
+				  <span class="steam2 steamsquare"></span>
+				  <span class="steam3 steamfilled"></span>
+				  <span class="steam4"></span>
+				  <span class="steam5 steamsquare"></span>
+				  <span class="steam6 steamfilled"></span>
+				  <span class="steam7"></span>
+				  <span class="steam8 steamsquare"></span>
+				  <span class="steam9"></span>
+				</div>
+				
 				<a id="tablet" href="https://en.wikipedia.org/wiki/Hittite_language"></a>
+				
 				<div id="book-back-left"></div>
+				<div id="book-back-right"></div>
 				<svg viewBox="-10 -10 310 210">
 					<defs>
 						<filter id="polygon-blur" x="-50%" y="-50%" width="200%" height="200%" preserveAspectRatio="none">
@@ -24,7 +49,7 @@
 						</filter>
 					</defs>
 					<polygon
-						points="0,0 260,0 285,15 285,200 150,200 0,190"
+						points="4,0 260,0 285,15 285,200 150,200 4,190"
 						fill="black"
 						fill-opacity="0.25"
 						filter="url(#polygon-blur)"
@@ -37,10 +62,10 @@
 						<div id="book-copyright">
 							<p>ḪATTUŠUMNA LAḪḪA: HITTITE ADVENTURE</p>
 							<p>Copyright &copy; 2026 by Daniel M. Stelzer, Tim Leonard, and Daniel E. Gaskell</p>
-							<p>Some rights reserved.</p>
+							<p>Some rights reserved. Text and code are written by hand and released under the <a href="https://creativecommons.org/licenses/by/4.0/deed.en">CC BY 4.0</a> and <a href="https://opensource.org/license/mit">MIT</a> licenses.</p>
 							<p>First edition: September 2026</p>
 							<p>Lead Implementor: Daniel M. Stelzer. Lead Translator: Tim Leonard. Art/Web Design: Daniel E. Gaskell. Dialog compiler and Å-machine originally by Linus Åkesson. Ishamai and Cartography Mono by Daniel M. Stelzer.</p>
-							<p>Images: Hittite pendant (AO 9647) courtesy of 2012 Musée du Louvre/GrandPalaisRmn (non-commercial use). Treaty of Muwattalli II and Alakšandu (#108569) courtesy of the Trustees of the British Museum, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">CC BY-NC-SA 4.0</a>. Map by Simeon Netchev, <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en">CC BY-NC-ND 4.0</a>.</p>
+							<p>Images: Hittite pendant (AO 9647) and tablet (AO 7728) &copy; Musée du Louvre / GrandPalaisRmn. Map by Ennomus, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.</p>
 						</div>
 					</div>
 					<div class="page book-right">
@@ -49,10 +74,14 @@
 							<h2>In other words...</h2>
 							<p>This is a game (actually a series of three short games) presented entirely in the ancient Hittite language. It’s meant for absolute beginners—no knowledge of Hittite is needed!</p>
 							<p>Start with <a href="tablet1.html">tablet 1</a>, which will introduce the basic grammar and vocabulary. After that, you can play either <a href="tablet2.html">tablet 2</a> (which covers logograms and more noun cases, with classic text adventure puzzles) or <a href="tablet3.html">tablet 3</a> (which covers quotations and subordinate clauses, with logical deduction puzzles).</p>
-							<p>Have fun! When you're done, check out the <a href="postscript.html">postscript</a>.</p>
+							<p>Have fun! When you're done, check out the <a href="javascript:document.getElementById('postscript').classList.add('open')">postscript</a>.</p>
 							<div id="sticky">
 								<div id="sticky-title">Tip!</div>
-								<p>Advanced Hittite learners can switch the game's output from bound transcription to actual cuneiform at any time from the menu in the top right corner. Either way, though, you should type your input in bound transcription—typing cuneiform is currently not an easy feat. If you're new to Hittite, sticking with transcription is recommended. Learning an entirely new language is hard enough without trying to learn a new writing system at the same time!</p>
+								<p>If you’re new to Hittite, the default settings are a good starting point—no need to make it harder! But the options menu in the top right (≡) offers some adjustments for advanced learners:</p>
+								<ul>
+									<li>Turn off “double-click to insert” to force yourself to type Hittite commands (harder, but helps you actually learn the language).</li>
+									<li>Switch the output to actual cuneiform to practice reading the signs yourself. (You should still type your input in bound transcription, though—typing cuneiform is currently not an easy feat.)</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -78,7 +107,7 @@
 								</ul>
 								<p>(A significant amount of text is missing between tablets 2 and 3; from context, it seems a royal retinue arrived before the hero could make his escape.)</p>
 								<ul>
-									<li>In <a href="tablet3.html">Tablet 3</a>, the hero uncovers a conspiracy to murder the king, and takes advantage of that conspiracy to seize his god and flee.</li>
+									<li>In <a href="tablet3.html">Tablet 3</a>, the hero uncovers a conspiracy to murder the enemy king, and uses that conspiracy to create a distraction, seize his god, and flee.</li>
 								</ul>
 							</div>
 						</label>

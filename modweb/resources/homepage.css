@@ -40,8 +40,8 @@ html, body {
 	top: 0;
 	bottom: 0;
 	border: 1px solid #888;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-	z-index: 5;
+	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+	z-index: 10;
 }
 
 .open {
@@ -55,23 +55,24 @@ html, body {
 	width: 1.2em;
 	height: 1.2em;
 	border: 1px solid rgba(0, 0, 0, 0.5);
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: white;
 	font-size: 1.5em;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
+	z-index: 13;
 }
 
 .popup-close:hover {
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: #DDD;
 }
 
 #map-small {
 	position: absolute;
-	right: -15vw;
+	left: 42%;
 	top: 3vw;
 	height: 70%;
-	aspect-ratio: 1920 / 1080;
+	aspect-ratio: 1745 / 1080;
 	background-image: url("map.png");
 	background-size: 100% 100%;
 	transform: rotate(15deg);
@@ -88,56 +89,105 @@ html, body {
 	max-height: 90vh;
 	width: auto;
 	height: auto;
-	aspect-ratio: 1920 / 1080;
+	aspect-ratio: 1745 / 1080;
 	background-image: url("map.png");
 	background-size: 100% 100%;
 }
 
-#map-link-1 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 16%;
-	aspect-ratio: 3.2 / 1;
-	cursor: pointer;
-}
-
-#map-link-1:hover {
-	background-color: rgba(255, 255, 255, 0.25);
-}
-
-#map-link-2 {
-	position: absolute;
-	right: 0px;
-	bottom: 0px;
-	width: 12%;
-	aspect-ratio: 4 / 1;
-	cursor: pointer;
-}
-
-#map-link-2:hover {
-	background-color: rgba(255, 255, 255, 0.25);
-}
-
-.popup-link {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-#tablet {
-	background-image: url("tablet.png");
+#mug {
+	background-image: url("mug.png");
 	background-size: 100% 100%;
 	position: absolute;
-	left: -26%;
-	bottom: -5%;
-	height: 50%;
-	aspect-ratio: 375 / 480;
-	transform: rotate(5deg);
-	filter: drop-shadow(2em 2em 1em rgba(0, 0, 0, 0.35));
-	z-index: 5;
-	cursor: pointer;
+	height: 45%;
+	aspect-ratio: 1 / 1;
+	left: -31%;
+	bottom: 50%;
+	filter: drop-shadow(5em 4em 1em rgba(0, 0, 0, 0.35));
+	z-index: 6;
+}
+
+#steam {
+	position: absolute;
+	z-index: 7;
+	height: 25%;
+	aspect-ratio: 1 / 1;
+	left: -20%;
+	bottom: 65%;
+}
+
+#steam span { 
+	display: block;
+	position: absolute;
+	height: 1.5em;
+	width: 1.5em;
+	border: 1em solid rgba(255, 255, 255, 1.0);
+	border-radius: 50%;
+	opacity: 0;
+	transform: scale(0.0);
+	filter: blur(1em);
+}
+
+#steam span.steamfilled {
+	border: 1em solid rgba(225, 225, 225, 0.8);
+	height: 0em;
+	width: 0em;
+}
+
+#steam span.steamsquare {
+	border: 1em solid rgba(192, 192, 192, 0.7);
+	border-radius: 0%;
+	height: 2em;
+	width: 0.5em;
+}
+
+#steam span.steam0 { left: 50%; top: 50%; }
+#steam span.steam1 { left: 0%;  top: 50%; }
+#steam span.steam2 { left: 33%; top: 25%; }
+#steam span.steam3 { left: 75%; top: 33%; }
+#steam span.steam4 { left: 50%; top: 10%; }
+#steam span.steam5 { left: 25%; top: 50%; }
+#steam span.steam6 { left: 33%; top: 75%; }
+#steam span.steam7 { left: 50%; top: 33%; }
+#steam span.steam8 { left: 75%; top: 50%; }
+#steam span.steam9 { left: 50%; top: 75%; }
+
+@keyframes steamleft {
+	0%   { opacity: 0.00; transform: scale(0)  translate(0, 0); }
+	28%  { opacity: 0.01; transform: scale(2)  translate(15%, -5%); }
+	55%  { opacity: 0.30; transform: scale(3)  translate(0%, -25%); }
+	100% { opacity: 0.00; transform: scale(4)  translate(-25%, -50%); }
+}
+
+@keyframes steamright {
+	0%   { opacity: 0.00; transform: scale(0)  translate(0, 0); }
+	22%  { opacity: 0.01; transform: scale(2)  translate(-15%, 0); }
+	45%  { opacity: 0.30; transform: scale(3)  translate(0%, -25%); }
+	100% { opacity: 0.00; transform: scale(4)  translate(50%, -75%); }
+}
+
+#steam .steam0 { animation: steamleft  8s linear 0s infinite; }
+#steam .steam1 { animation: steamright 8s linear 2s infinite; }
+#steam .steam2 { animation: steamleft  8s linear 4s infinite; }
+#steam .steam3 { animation: steamright 8s linear 6s infinite; }
+#steam .steam4 { animation: steamleft  8s linear 8s infinite; }
+#steam .steam5 { animation: steamright 8s linear 10s infinite; }
+#steam .steam6 { animation: steamleft  8s linear 12s infinite; }
+#steam .steam7 { animation: steamright 8s linear 14s infinite; }
+#steam .steam8 { animation: steamleft  8s linear 16s infinite; }
+#steam .steam9 { animation: steamright 8s linear 18s infinite; }
+
+#tablet {
+    background-image: url("tablet.png");
+    background-size: 100% 100%;
+    position: absolute;
+    left: -23%;
+    bottom: 5%;
+    height: 33%;
+    aspect-ratio: 480 / 405;
+    transform: rotate(-30deg);
+    filter: drop-shadow(0.5em 2em 1em rgba(0, 0, 0, 0.35));
+    z-index: 5;
+    cursor: pointer;
 }
 
 #tablet::after {
@@ -164,11 +214,6 @@ html, body {
 	margin-right: auto;
 	height: 80%;
 	aspect-ratio: 3 / 2;
-	background-color: #e9dac8;
-	padding: 1em;
-	border-radius: 0.5em;
-	box-shadow: inset 0 0 3px 3px rgba(255, 255, 255, 0.25);
-	filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
 #book > svg {
@@ -199,13 +244,26 @@ html, body {
 #book-back-left {
 	position: absolute;
 	top: -0.5em;
-	left: 0%;
+	left: 1%;
 	height: 100%;
-	width: 47%;
+	width: 46%;
 	background-color: #e9dac8;
 	padding: 0.5em;
 	border-radius: 0.5em;
 	box-shadow: inset 0 0 3px 3px rgba(255, 255, 255, 0.25);
+	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5));
+}
+
+#book-back-right {
+	position: absolute;
+	top: 0%;
+	right: 0%;
+	height: 100%;
+	width: 47%;
+	background-color: #e9dac8;
+	border-radius: 0.5em;
+	box-shadow: inset 0 0 3px 3px rgba(255, 255, 255, 0.25);
+	filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
 .panel {
@@ -282,13 +340,15 @@ html, body {
 	z-index: 0;
 }
 
-#paper {
+#postscript {
 	position: absolute;
-	z-index: 3;
-	width: 45%;
-	height: 42%;
-	top: 57%;
-	right: 3%;
+	z-index: 10;
+	height: 75%;
+	aspect-ratio: 3 / 4;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
 	line-height: 1.2em;
 	font-family: Caveat;
 	font-size: 1.3em;
@@ -296,41 +356,28 @@ html, body {
 	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
 }
 
-#paper::before {
+#postscript::before {
 	content: "";
 	position: absolute;
 	inset: 0;
-	z-index: 4;
+	z-index: 11;
 	box-sizing: border-box;
 	background: white repeating-linear-gradient(to bottom, white 0, white 1.1em, #CEF 1.1em, #CEF 1.2em);
 	mask-image:
-		radial-gradient(circle at 1em 2em, transparent 0.5em, black 0.52em),
+		radial-gradient(circle at 1em 3em, transparent 0.5em, black 0.52em),
 		radial-gradient(circle at 1em 50.2%, transparent 0.5em, black 0.52em),
-		radial-gradient(circle at 1em calc(100% - 1.8em), transparent 0.5em, black 0.52em);
+		radial-gradient(circle at 1em calc(100% - 2.8em), transparent 0.5em, black 0.52em);
 	mask-composite: intersect;
 }
 
-#paper-tape {
-	content: "";
-	position: absolute;
-	display: block;
-	background-image: url("tape.png");
-	background-size: 100% 100%;
-	width: 5em;
-	height: 1.6em;
-	top: -0.75em;
-	left: calc(50% - 4em);
-	z-index: 5;
-}
-
-#paper-inner {
+#postscript-inner {
 	position: relative;
-	width: calc(100% - 3em);
+	width: calc(100% - 3.75em);
 	height: calc(100% - 0.4em);
-	z-index: 5;
+	z-index: 12;
 	padding: 0.2em;
 	padding-left: 0.75em;
-	padding-right: 0.75em;
+	padding-right: 1.5em;
 	border-left: 0.2em solid rgba(255, 128, 128, 0.5);
 	margin-left: 2em;
 	background: transparent;
@@ -339,14 +386,14 @@ html, body {
 	scrollbar-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
-#paper p {
+#postscript p {
 	position: relative;
 	z-index: 5;
 	margin-bottom: 1.2em;
 }
 
 #sticky {
-    width: 75%;
+    width: calc(100% - 3.5em);
     padding: 1.5em;
     padding-bottom: 0.5em;
     background: #F8EE99;
@@ -372,8 +419,9 @@ html, body {
 	font-family: Caveat;
 	font-size: 2em;
 	transform: rotate(-10deg);
-	margin-top: -1.2em;
-	padding-bottom: 0.2em;
+	margin-top: -0.5em;
+	margin-bottom: -0.5em;
+	width: 25%;
 }
 
 /* Page-flipping witchcraft */
@@ -429,16 +477,18 @@ input {
 .book-left {
 	background: white linear-gradient(90deg, #FFF 0%, #FFF 85%, #EEE 95%, #CCC 100%);
 	padding: 3em;
+	padding-right: 2em;
 	padding-bottom: 1em;
-	width: calc(100% - 6em);
+	width: calc(100% - 5em);
 	height: calc(100% - 4em);
 }
 
 .book-right {
 	background: white linear-gradient(90deg, #AAA 0%, #FFF 3%, #FFF 100%);
 	padding: 3em;
+	padding-right: 2em;
 	padding-bottom: 1em;
-	width: calc(100% - 6em);
+	width: calc(100% - 5em);
 	height: calc(100% - 4em);
 }
 
@@ -459,9 +509,7 @@ h1, h2 {
 }
 
 .face.book-right h1, .bleed-left h1 {
-	margin-top: 20%;
-	margin-left: 1em;
-	margin-right: 1em;
+	margin-top: calc(50% - 4em);
 	padding-bottom: 1em;
 	border-bottom: 0.2em solid black;
 }
@@ -473,7 +521,7 @@ h1, h2 {
 }
 
 .subtitle {
-	margin-top: 33%;
+	margin-top: calc(50% - 4em);
 	margin-bottom: 0.8em;
 	font-size: 1.6em;
 }
