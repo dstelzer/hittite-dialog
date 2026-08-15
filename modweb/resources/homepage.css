@@ -433,6 +433,10 @@ input {
 	transform: rotateY(-180deg);
 }
 
+#select-right:checked ~ #book-content .face.back.book-left::after {
+	opacity: 0;
+}
+
 #book-content {
 	display: flex;
 	position: absolute;
@@ -481,6 +485,17 @@ input {
 	padding-bottom: 1em;
 	width: calc(100% - 5em);
 	height: calc(100% - 4em);
+}
+
+/* subtle shadow on back of page 1 */
+.face.back.book-left::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 1;
+	pointer-events: none;
+	transition: opacity 1.5s;
 }
 
 .book-right {
