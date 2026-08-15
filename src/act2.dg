@@ -702,12 +702,12 @@
 	(* is in room $Room)
 	(if) ($Room = #guardwalk1) (guard is moving east) (then)
 		(if) (adjacent #guardwalk1) (or) (#guardwalk1 is visited) (guard is relevant) (then)
-			(par) Nu (#nominative *) aušta.
+			(par) Nu (#nominative *) araḫzanda aušta.
 		(endif)
 		(now) (guard is moving west)
 	(elseif) ($Room = #guardwalk3) (guard is moving west) (then)
 		(if) (adjacent #guardwalk3) (or) (#guardwalk3 is visited) (guard is relevant) (then)
-			(par) Nu (#nominative *) aušta.
+			(par) Nu (#nominative *) araḫzanda aušta.
 		(endif)
 		(now) (guard is moving east)
 	(elseif) (guard is moving east) (then)

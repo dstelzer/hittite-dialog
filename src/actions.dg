@@ -430,12 +430,27 @@
 
 (verb @look/@oḫḫun/@ōḫḫun/@uḫḫun/@ūḫḫun means @ōḫḫun)
 (@ōḫḫun wants cases [#accusative]) %% Put this first for better error messages
+(@ōḫḫun wants cases [#adverb]) %% LOOK AROUND
 (@ōḫḫun wants cases [])
 (translate [$ ōḫḫun $ [] | $] into [look])
 (translate [$ ōḫḫun $ $Acc | $] into [examine $Acc])
-(perform [[look] $])
+
+(adverb @araḫzanda means @araḫzanda) %% “around”
+(refuse [[examine $] [$ $ $Advs | $]])
+	(@araḫzanda is one of $Advs)
+	(div @error) { The wording of this sentence is confusing. We would expect either “I looked around” or “I looked at something”, not “I looked around at something”. }
+
+(instead of [[look] [$Raw $Verb $Advs [] $Dat $Abl]]) %% No accusatives
+	~(@araḫzanda is one of $Advs)
+	%% So we add an adverb to make it grammatical
+	(try [[look] [$Raw $Verb [@araḫzanda] [] $Dat $Abl]])
+
+(perform [[look] $]) %% Update all the panels
 	(now) (update needed)
 	(now) (map update needed)
+
+(instead of [[examine (current room $Room)] $]) %% Examining the room is looking
+	(try [[look] [[] ōḫḫun [] $Room [] []]])
 (perform [[examine (room $Room)] $] without prefix)
 	(current room $Current)
 	{
