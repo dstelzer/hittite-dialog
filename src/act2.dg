@@ -71,7 +71,7 @@
 (name * in #ablative) karimnaz
 
 (prevent [[go *] $Details])
-	(#blood is #on #me)
+	(#blood is $ #me)
 	(describe negative action [[go *] $Details]) %% I did not...
 	Nu (#nominative #blood) (#dative #me) ēšta. %% Blood was on me.
 (prevent [[go *] $Details]) %% Test garment first since it’s easier to get
@@ -127,7 +127,7 @@
 	(#building is visited)
 	~(taught phonetic complements)
 	(div @tutorial) {
-		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @htt) GIR₂ means “knife” in general, but (span @htt) GIR₂-an is specifically the (span @italic) {nominative or accusative} form of “knife”, (span @htt) GIR₂-aš the genitive, (span @htt) GIR₂-az the ablative, and so on.
+		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @hittite) GIR₂ means “knife” in general, but (span @hittite) GIR₂-an is specifically the (span @italic) {nominative or accusative} form of “knife”, (span @hittite) GIR₂-aš the genitive, (span @hittite) GIR₂-az the ablative, and so on.
 	}
 	(now) (taught phonetic complements)
 
@@ -199,7 +199,7 @@
 (tutorial)
 	(current room *)
 	~(taught washhouse)
-	(div @error) { Since the narrator describes being “in” the spring, and mentions a door, he is probably talking about an enclosed washhouse rather than an outdoor pool. The usual term for such a washhouse is the logogram (span @htt) { E₂.DU₁₀.US₂.SA } . }
+	(div @error) { Since the narrator describes being “in” the spring, and mentions a door, he is probably talking about an enclosed washhouse rather than an outdoor pool. The usual term for such a washhouse is the logogram (span @hittite) { E₂.DU₁₀.US₂.SA } . }
 	(now) (taught washhouse)
 
 #pool
@@ -271,10 +271,10 @@
 
 #blood
 (neuter *)
-(name * in #nominative/#accusative/#bare) ešḫar
-(name * in #genitive) ešḫanaš
-(name * in #dative) ešḫani
-(name * in #ablative) ešḫanaz
+(name * in #nominative/#accusative/#bare) ēšḫar
+(name * in #genitive) išḫanaš
+(name * in #dative) išḫani
+(name * in #ablative) išḫanaz
 
 (prevent [[drop/put * | $] $Details])
 	(describe failed action [[drop *] $Details])

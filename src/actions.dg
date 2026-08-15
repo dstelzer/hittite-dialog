@@ -467,7 +467,7 @@
 %% GO (and TRAVEL)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(verb @go/@paun/@pāun means @pāun)
+(verb @go/@paun/@pāun/@uwanun means @pāun) %% uwanun = come
 (@pāun wants cases [#dative])
 (translate [$ pāun $ $ $Dat | $] into [go $Dat])
 	(adjacent $Dat) (or) (direction $Dat)

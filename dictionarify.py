@@ -63,8 +63,8 @@ def tablify(l): # [A B C D E F] -> HTML table with A B // C D // E F
 	lines = ['<table class="paradigm">']
 	for i in range(0, len(l), 2): # We could use itertools but this is more readable if less elegant
 		first, second = l[i], l[i+1]
-		second = second.replace('<i>', '').replace('</i>', '') # In case of Akkadograms
-		lines.append(f'\t<tr> <td class="eng">{first}</td> <td class="htt word" data-word="{second}" data-language="ht">{second}</td> </tr>')
+		second_plain = second.replace('<i>', '').replace('</i>', '') # In case of Akkadograms
+		lines.append(f'\t<tr> <td class="eng">{first}</td> <td class="htt word" data-word="{second_plain}" data-language="ht">{second}</td> </tr>')
 	lines.append('</table>')
 	return '\n'.join(lines)
 

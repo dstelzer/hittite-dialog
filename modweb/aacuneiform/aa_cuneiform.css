@@ -116,16 +116,6 @@
 	font-size: smaller;
 }
 
-.aa-dtm2 .read{
-	vertical-align: super;
-	font-size: smaller;
-}
-
-.bound .aa-dtm2{
-	vertical-align: super;
-	font-size: smaller;
-}
-
 @font-face{
 	font-family: CuneiInk;
 	src: url("../ishamai/fonts/ArmannisNew.woff2");

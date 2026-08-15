@@ -2,10 +2,6 @@ update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 clicking ANA in dictionary window should not replace entry
 Add araḫzanda to bare "look" ("look around") - both in act 2 and in actions
-Think about blood phrasing??
 figure out what to do about tawannana error
-uwanun?
-ishamai does weird things with curly quotes, putting them in whitespace spans
 Tim capitalization in bound transcription
 put verbs in unlock order?
-make ink default

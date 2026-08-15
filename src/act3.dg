@@ -253,7 +253,7 @@
 (bonus room description paragraph) %% Explain the unusual title
 	(current room #temple)
 	(select)
-		(div @error) { The word (span @htt) tawannana is unexpected here, since that is a title of the Hittite queen specifically, not a foreign one. The scribe copying this tablet likely misinterpreted a logogram for “queen” and replaced it with the wrong Hittite word. }
+		(div @error) { The word (span @hittite) tawannana is unexpected here, since that is a title of the Hittite queen specifically, not a foreign one. The scribe copying this tablet likely misinterpreted a logogram for “queen” and replaced it with the wrong Hittite word. }
 	(or)
 		(fail)
 	(stopping)
@@ -403,14 +403,18 @@
 	(game over {The end})
 
 (parse metacommand [\/win])
-	(real assassin $Real)
-	($Real kills the king)
+	(real assassin $Ass)
+	(real signal $Sig)
+	($Sig wants $Case)
+	(div @meta) {
+		The winning command is: (span @hittite) { nu ($Case $Ass) (name $Sig) } .
+	}
 
 (colophon)
 	DUB 3 (dtm2 {KAM}) TIL (line)
 	(span @akk) ša “Ḫattušumna Laḫḫa” (line)
 	ŠU (dtm {1}) DI.KUD.DINGIR Ištelšar DUB.SAR (line)
-	(span @akk) U₃ (dtml {M}) Dānīel Gaškel DUB.DU₃.DU₃ (line) %% unattested logogram for “tablet maker”
+	(span @akk) U₃ (dtml {M}) DI.KUD.DINGIR Gaškel DUB.DU₃.DU₃ (line) %% unattested logogram for “tablet maker”
 	(span @akk) pani (dtml {M}) (span @dont-syllabify) TIM UR.MAḪ-muwa UM.MI.A (line)
 	(span @akk) išṭuru
 
