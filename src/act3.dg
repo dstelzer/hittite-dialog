@@ -241,22 +241,22 @@
 (name * in #ablative) tuḫkantiyaz
 (name * in #bare) tuḫkanti
 
-#tawannana
+#tawannana %% changed to ḫaššuššara; Tim thought the “MUNUS.LUGAL = tawannana vs ḫaššuššara” misreading was implausible
 (suspect *)
 (number 5 means *)
-(name * in #nominative/#genitive) tawannanaš
-(name * in #dative) tawannani
-(name * in #accusative) tawannanan
-(name * in #ablative) tawannanaz
-(name * in #bare) tawannana
+(name * in #nominative/#genitive) ḫaššuššaraš
+(name * in #dative) ḫaššuššari
+(name * in #accusative) ḫaššuššaran
+(name * in #ablative) ḫaššuššaraz
+(name * in #bare) ḫaššuššara
 
-(bonus room description paragraph) %% Explain the unusual title
-	(current room #temple)
-	(select)
-		(div @error) { The word (span @hittite) tawannana is unexpected here, since that is a title of the Hittite queen specifically, not a foreign one. The scribe copying this tablet likely misinterpreted a logogram for “queen” and replaced it with the wrong Hittite word. }
-	(or)
-		(fail)
-	(stopping)
+%% (bonus room description paragraph) %% Explain the unusual title
+%% 	(current room #temple)
+%% 	(select)
+%% 		(div @error) { The word (span @hittite) tawannana is unexpected here, since that is a title of the Hittite queen specifically, not a foreign one. The scribe copying this tablet likely misinterpreted a logogram for “queen” and replaced it with the wrong Hittite word. }
+%% 	(or)
+%% 		(fail)
+%% 	(stopping)
 
 (real name * in $Case)
 	(* uses name code $Code)
