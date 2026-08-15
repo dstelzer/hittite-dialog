@@ -38,7 +38,7 @@
 (room *)
 (neuter *)
 (* uses preverb #in)
-(name * in #nominative/#accusative/#bare) tunnakkeššar
+(name * in #nominative/#accusative/#bare) tunnakkiš
 (name * in #genitive) tunnakkešnaš
 (name * in #dative) tunnakkešni
 (name * in #ablative) tunnakkišnaz
