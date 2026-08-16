@@ -367,11 +367,11 @@
 
 #roof
 (room *)
-(neuter *)
 (* uses preverb #on)
-(name * in #nominative/#accusative) šuḫḫan
+(name * in #nominative) šuḫḫaš
 (name * in #genitive) šuḫḫaš
 (name * in #dative) šuḫḫi
+(name * in #accusative) šuḫḫan
 (name * in #ablative) šuḫḫaz
 (name * in #bare) šuḫḫa
 (from * go #down to #backroom)

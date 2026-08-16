@@ -168,6 +168,9 @@ def do_it_all(infn, outfn):
 	with Path(infn).open('r') as inf:
 		for line in inf:
 			fd, dd = parse_entry(line)
+			for key in fd: # Sanity check
+				if key in forms:
+					print(f'WARNING: form {key} appears multiple times ({forms[key]} and {fd[key]})')
 			forms.update(fd)
 			defns.update(dd)
 	with Path(outfn).open('w') as outf:
