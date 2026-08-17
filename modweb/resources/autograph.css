@@ -133,7 +133,7 @@ div.aa-tutorial p {
 div.aa-error {
 	position: absolute;
 	width: 10.5em;
-	margin-left: calc(-11.5em - var(--before-element-width, 0px));
+	margin-left: -11.5em;
 	margin-top: -3.5em;
 	padding-top: 2em;
 	font-family: var(--font-body);
