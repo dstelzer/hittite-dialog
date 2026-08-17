@@ -1,4 +1,4 @@
-/* Globals (FIXME theme variables) */
+/* Globals */
 
 @font-face {
 	font-family: Caveat;
@@ -17,6 +17,7 @@ body {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	background-attachment: fixed;
 }
 
 #aadefaults2 {
@@ -35,7 +36,7 @@ body {
 	box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.5);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 50em) {
 	#aacontainer {
 		--col-width: 80vw;
 	}
@@ -46,7 +47,7 @@ body {
 	padding-right: 11em;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 50em) {
 	#maincolumn {
 		display: block;
 		padding-left: 3vw;
@@ -62,7 +63,7 @@ body {
 	width: 15em;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 50em) {
 	#rightcolumn {
 		width: 41vw;
 		right: -6vw;
@@ -70,6 +71,7 @@ body {
 }
 
 #aamain {
+	position: relative;
 	width: 100%;
 	padding-right: 0.5em;
 	padding-left: 11em;
@@ -77,7 +79,7 @@ body {
 	margin-left: -11em;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 50em) {
 	#aamain {
 		padding-left: 0px;
 		margin-left: 0px;
@@ -118,6 +120,8 @@ div.aa-tutorial {
 	font-style: normal;
 	font-family: var(--font-body);
 	text-align: justify;
+	margin-left: 0em;
+	margin-right: 0em;
 }
 
 div.aa-tutorial p {
@@ -127,7 +131,7 @@ div.aa-tutorial p {
 /* Errors */
 
 div.aa-error {
-	float: left;
+	position: absolute;
 	width: 10.5em;
 	margin-left: calc(-11.5em - var(--before-element-width, 0px));
 	margin-top: -3.5em;
@@ -147,15 +151,35 @@ div.aa-error {
 	font-size: 75%;
 }
 
-.aa-disambig {
+div.aa-disambig {
 	display: none;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    padding-top: 1em;
-    padding-bottom: 1em;
+	font-style: normal;
+	font-family: var(--font-body);
+	text-align: justify;
+	margin: 0em;
 }
 
-.aa-disambig:has(+ div.output p div#aainputblock) {
+div.aa-disambig::before {
+	content: "";
+	display: block;
+	width: 100%;
+	aspect-ratio: 355/19;
+	background: url(dither_top.png) no-repeat;
+	background-size: 100% 100%;
+	margin-bottom: 0.3em;
+}
+
+div.aa-disambig::after {
+	content: "";
+	display: block;
+	width: 100%;
+	aspect-ratio: 355/19;
+	background: url(dither_bot.png) no-repeat;
+	background-size: 100% 100%;
+	margin-top: 0.7em;
+}
+
+div.aa-disambig:has(+ div.output p div#aainputblock) {
 	display: block;
 }
 
@@ -182,17 +206,35 @@ div.output:has(+ div.aa-disambig) p::after {
 		52% 49%, 41% 34%, 9% 76%, 79% 37%, 95% 21%;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 50em) {
 	div.aa-error {
+		position: relative;
 		display: block;
-		float: none;
 		padding: 0px;
 		margin: 0px;
-		margin-top: 1em;
-		margin-bottom: 1em;
 		width: 100%;
 		background-color: transparent;
 		background-image: none;
+	}
+	
+	div.aa-error::before {
+		content: "";
+		display: block;
+		width: 100%;
+		aspect-ratio: 355/19;
+		background: url(dither_top.png) no-repeat;
+		background-size: 100% 100%;
+		margin-bottom: 0.3em;
+	}
+
+	div.aa-error::after {
+		content: "";
+		display: block;
+		width: 100%;
+		aspect-ratio: 355/19;
+		background: url(dither_bot.png) no-repeat;
+		background-size: 100% 100%;
+		margin-top: 0.7em;
 	}
 }
 
@@ -296,8 +338,8 @@ div.output:has(+ div.aa-disambig) p::after {
 	font-weight: bold;
 }
 
-/* Hide input text when not immediately followed by an error/disambiguation */
-div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)):not(:has(+ .aa-disambig)) p:has(h2.aainputtext) {
+/* Hide input text when in cuneiform mode and not immediately followed by an error/disambiguation */
+body.hidebound div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)):not(:has(+ .aa-disambig)) p:has(h2.aainputtext) {
 	display: none;
 }
 
@@ -317,17 +359,6 @@ div.output:not(.output-first):has(h2.aainputtext):not(:has(+ .aa-error)):not(:ha
 	padding-right: 5px;
 	counter-increment: output-line;
 }
-
-/* FIXME tinkering with this */
-/*.output p::before {
-    content: counter(output-line);
-    display: inline-block;
-    text-align: right;
-    width: 2em;
-    margin-left: -3em;
-    padding-right: 1em;
-	font-family: Caveat;
-}*/
 
 .output:nth-child(even) p::before {
     content: "";
@@ -617,13 +648,13 @@ select.settings:hover {
 	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
-@media (max-width: 700px) {
+@media (max-width: 50em) {
 	#aaaboutouter {
 		left: 2em;
 	}
 }
 
-@media (max-width: 500px) {
+@media (max-width: 32em) {
 	#aaaboutouter {
 		left: -5em;
 	}
@@ -739,9 +770,9 @@ select.settings:hover {
 	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
-@media (max-width: 700px) {
+@media (max-width: 50em) {
 	#aascriptouter {
-		margin-left: -5vw;
+		margin-left: -1.5vw;
 		width: 41vw;
 	}
 }

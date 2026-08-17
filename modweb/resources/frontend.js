@@ -540,14 +540,18 @@ window.run_game = function(story64, options) {
 				}
 				
 				// Rev./Obv. logic
-				var beforeContent = "1." + Math.floor(this.fragment_number / 2) + " " + ((this.fragment_number % 2 === 0) ? "Obv." : "Rev.");
+				function beforeContent(fragment_count) {
+					return 'counter(tablet-number) "' + "." + Math.floor(fragment_count / 2) + " " + ((fragment_count % 2 === 0) ? 'Obv."' : 'Rev."');
+				}
 				
 				// output-first logic
 				if(this.divs.length == 1 && this.style_data[this.divs[0]].name == "aa-status" && !this.in_status) {
 					// aa-status case: always start of fragment
-					this.current.className += " output output-first";
-					this.current.style.setProperty("--rev-obv", '"' + beforeContent + '"');
-					this.fragment_number++;
+					if(!this.current.classList.contains("output-first")) {
+						this.current.className += " output output-first";
+						this.fragment_number++;
+						this.current.style.setProperty("--rev-obv", beforeContent(this.fragment_number));
+					}
 					this.in_seq = true;
 					this.needs_output = false;
 					this.current.appendChild(p);
@@ -559,10 +563,10 @@ window.run_game = function(story64, options) {
 						if(this.last_output && this.last_output.classList.contains("output-break-start")) {
 							wrapper.className = "output output-break-end";
 						} else {
-							wrapper.className = "output output-first";
 							this.fragment_number++;
+							wrapper.className = "output output-first";
+							wrapper.style.setProperty("--rev-obv", beforeContent(this.fragment_number));
 						}
-						wrapper.style.setProperty("--rev-obv", '"' + beforeContent + '"');
 						this.in_seq = true;
 					} else {
 						wrapper.className = "output";

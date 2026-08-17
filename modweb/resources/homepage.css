@@ -390,6 +390,7 @@ html, body {
 	position: relative;
 	z-index: 5;
 	margin-bottom: 1.2em;
+	text-align: left;
 }
 
 #sticky {
@@ -399,6 +400,7 @@ html, body {
     background: #F8EE99;
     background: linear-gradient(180deg,rgba(250, 242, 170, 1) 0%, rgba(250, 239, 152, 1) 30px, rgba(255, 244, 143, 1) 30px, rgba(255, 244, 143, 1) 100%);
     transform-style: preserve-3d;
+	text-align: left;
 }
 
 #sticky::after {

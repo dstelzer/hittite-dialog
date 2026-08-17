@@ -1,5 +1,5 @@
 (library version)
-	Hittite world model version 260809.
+	Hittite world model version .
 
 (world logging) (fail)
 
