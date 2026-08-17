@@ -1,5 +1,5 @@
 (library version)
-	Hittite world model version 260808.
+	Hittite world model version 260809.
 
 (world logging) (fail)
 
@@ -59,7 +59,7 @@
 
 #in
 (relation *)
-(preverb *) anda %% (preverb $) is currently used both for preverb ("X is Rel Y") and preposition ("you put the X Rel Y"). According to Tim, these rarely disagree, so this should be fine.
+(preverb *) anda %% (preverb $) is currently used both for preverb (“X is Rel Y”) and preposition (“you put the X Rel Y”). According to Tim, these rarely disagree, so this should be fine.
 
 #on
 (relation *)
@@ -524,27 +524,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Dealing with actions
 
-%% If the player enters multiple actions on one line ("get lamp. n"), they
+%% If the player enters multiple actions on one line (“get lamp. n”), they
 %% are parsed and carried out one at a time.
 
-%% A complex action ("get all") is broken down, and the simple actions are
+%% A complex action (“get all”) is broken down, and the simple actions are
 %% carried out in turn.
 
 %% After the preliminary actions (before) have been carried out, the action
 %% is potentially refused. Normally, actions that involve unreachable objects
-%% are refused; this is overridden by actions, such as look at, that don't
+%% are refused; this is overridden by actions, such as look at, that don’t
 %% require reachability.
 
-%% If the action wasn't refused, it will be handled by the (instead of $)
+%% If the action wasn’t refused, it will be handled by the (instead of $)
 %% predicate. This predicate can be overridden for special cases in the story.
 %% The default behaviour is to further break down handling into two stages:
 %% Prevent and perform.
-%% They are separate because it's convenient to be able to override
+%% They are separate because it’s convenient to be able to override
 %% e.g. what happens when you put the twig in the fire without also overriding
 %% the default checks, such as whether you are holding the twig.
 
 %% (prevent $) should print something and succeed if the player character
-%% tries, but there's a problem with completing the action. When prevent
+%% tries, but there’s a problem with completing the action. When prevent
 %% succeeds, time is advanced (tick), and further actions are stopped.
 
 %% If prevent fails, (perform $) is invoked to carry out the action. For the
@@ -554,12 +554,12 @@
 
 %% Note that the world model is updated after narrating. This allows the
 %% narrate rule to query the world as it used to be, before carrying out the
-%% operation, in order to say for instance 'you take the worm out of the can'.
+%% operation, in order to say for instance ‘you take the worm out of the can’.
 
 %% If something dramatic happens, an overriding rule should advance time if
-%% necessary and (stop). So if the player types "n. n", and the first action
+%% necessary and (stop). So if the player types “n. n”, and the first action
 %% implies opening a door, which implies unlocking the door, and the unlocking
-%% triggers a cutscene, then opening the door is cancelled, and the second "n"
+%% triggers a cutscene, then opening the door is cancelled, and the second “n”
 %% is also ignored.
 
 %% After a non-command action, time is advanced using (tick). This can be
@@ -631,7 +631,7 @@
 	(perform $Action without prefix)
 	(exhaust) *(after $Action)
 
-(perform $Action without prefix) %% Standard (perform $) rules should happen with the action description prefixed; this stage exists for the rare cases when that's not desired
+(perform $Action without prefix) %% Standard (perform $) rules should happen with the action description prefixed; this stage exists for the rare cases when that’s not desired
 	(describe action $Action)
 	(set pronouns from action $Action)
 	(perform $Action)
@@ -668,13 +668,13 @@
 	(current room $Room)
 	*(on every tick in $Room)
 
-(on every tick) %% We don't have a "narrator's it" in this game, only a single "it" set by the player's actions
-%%	(if) (narrator's it is protected) (then)
-%%		(now) ~(narrator's it is protected)
-%%	(elseif) (player's it refers to $) (then)
-%%		%% The narrator's it is short-lived, except when
-%%		%% 'it' unambiguously refers to it.
-%%		(now) ~(narrator's it refers to $)
+(on every tick) %% We don’t have a “narrator’s it” in this game, only a single “it” set by the player’s actions
+%%	(if) (narrator’s it is protected) (then)
+%%		(now) ~(narrator’s it is protected)
+%%	(elseif) (player’s it refers to $) (then)
+%%		%% The narrator’s it is short-lived, except when
+%%		%% ‘it’ unambiguously refers to it.
+%%		(now) ~(narrator’s it refers to $)
 %%	(endif)
 
 (on every tick in $)		(fail)
@@ -715,7 +715,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Banner and default metadata
 
-%% There is no formal requirement to print the banner, but it's appreciated
+%% There is no formal requirement to print the banner, but it’s appreciated
 %% and useful to the community and yourself.
 
 (banner)
@@ -735,7 +735,7 @@
 	(exhaust) { *(extension version) }
 	(par)
 
-(tablet title) %% Don't fail
+(tablet title) %% Don’t fail
 
 %% Override to insert co-credits, dedications, etc. into the banner:
 
@@ -756,7 +756,7 @@
 (story author or default)	(story author)
 (story author or default)	Anonymous
 
-%% Don't warn about querying these; however, this does not disable the warning
+%% Don’t warn about querying these; however, this does not disable the warning
 %% about them not being defined (for a sufficiently large story):
 
 (story title)		(fail)
@@ -841,12 +841,12 @@
 	(into $NextGen)
 	(elaborate paths from $NextGen)
 
-%% Rooms have no locations, so '($ has relation $)' is unused for rooms.
+%% Rooms have no locations, so ‘($ has relation $)’ is unused for rooms.
 %% We can repurpose it for path finding, to save RAM:
 
 @(last hop before $A is $B) ($A has relation $B)
 
-%% Reconstruct the full path from the 'last hop' links:
+%% Reconstruct the full path from the ‘last hop’ links:
 
 (build path from $Start to $End $SoFar $Path)
 	(last hop before $End is $Last)

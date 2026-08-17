@@ -10,7 +10,8 @@ function show_dictionary_entry(node) {
 	}
 	
 	// Remove stray punctuation from the beginning and end
-	word = word.replace(/[\.\?!,]+$/, "").replace(/^[\.\?!,]+/, "");
+	word = word.replace(/[\.\?!,:]+$/, "").replace(/^[\.\?!,]+/, "");
+	// Since colons mark the Glossenkeil, we only remove them from the end
 	// Don't worry about casing distinctions
 	word = word.toLowerCase();
 	// And now break it at clitic and determiner boundaries
@@ -46,6 +47,12 @@ function show_dictionary_entry(node) {
 }
 
 function insert_dictionary_word(node) {
+	
+	// Do we have a click-to-insert checkbox? If so, and it's not checked, return
+	if($("#click-to-insert").length && !($("#click-to-insert").is(":checked"))) {
+		return;
+	}
+	
 	let word = node.dataset.word;
 	if(!word) {
 		console.error(`Node ${node} was double-clicked, but it has no data-word attribute!`);

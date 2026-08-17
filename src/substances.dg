@@ -21,10 +21,10 @@
 %%	($Obj is filled with #oil)
 
 %% In general, assume the player wants to refer to the container of a substance, not the substance itself
-%% (Substances usually aren't on-stage, but occasionally can be)
+%% (Substances usually aren’t on-stage, but occasionally can be)
 (dict $Obj in $Case)
 	($Obj is filled with $Substance)
-	~($Substance is $ $Obj) %% In case it's being used as an on-stage object
+	~($Substance is $ $Obj) %% In case it’s being used as an on-stage object
 	*(dict $Substance in $Case)
 (unlikely $Action)
 	*($Group is one of $Action)
@@ -109,6 +109,22 @@
 (name * in #genitive) šaknaš
 (name * in #dative) šakni
 (name * in #ablative) šaknaz
+(dict * in #nominative/#accusative/#bare) šākan tākan
+(errorize #accusative *) %% The scribe messed up!
+	(select)
+		šākan
+	(or)
+		tākan
+	(or)
+		šākan
+	(or)
+		šākan
+	(or)
+		tākan
+	(or)
+		šākan
+	(stopping)
+(interface (errorize $<Case $<Word))
 
 #oily
 (adjective *)

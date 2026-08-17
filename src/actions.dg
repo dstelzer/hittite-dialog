@@ -1,5 +1,5 @@
 (extension version)
-	Hittite action processing version 260808.
+	Hittite action processing version 260815.
 
 (action logging) (fail)
 
@@ -37,7 +37,7 @@
 (meta panel)
 	(inline status bar @p-meta) (meta verbs list)
 (meta verbs list)
-	~(given first message) %% Don't hint this until after the first message
+	~(given first message) %% Don’t hint this until after the first message
 (meta verbs list)
 	~(meta verbs introduced)
 	Use (link) /about for info.
@@ -80,22 +80,22 @@
 	(current player $Player)
 	~($Player has a light source)
 	~($Room has a light source)
-	dankui %% "Dark"
-(short name (logogram $Room)) (name $Room in #bare)
+	dankui %% “Dark”
+(short name (logogram $Room)) (name $Room)
 (short name (room $Room)) (name $Room in #dative)
 (short name (door $Door)) (name $Door in #accusative)
-(short name $Obj) $Obj %% Don't crash
+(short name $Obj) $Obj %% Don’t crash
 
 (location name $Room) (#dative $Room) %% Some rooms override this
 
 #darkness
 (add * to scope) *(adjacent $Room) (inherently dark $Room)
-(inherently dark *) %% Make the "go to a dark room" rules apply to this
+(inherently dark *) %% Make the “go to a dark room” rules apply to this
 (name * in #dative) dankui
 (refuse [$Action $]) %% Prevent any interaction with this noun
 	(* is one of $Action)
 	~{ ($Action = [go *]) (or) ($Action = [travel *]) }
-	(div @error) { Since the "dark" is insubstantial, it's unclear what this action would entail. }
+	(div @error) { Since the “dark” is insubstantial, it’s unclear what this action would entail. }
 
 (use bold room headers) (fail) %% Change this as needed
 
@@ -107,7 +107,7 @@
 		(automap)
 	(endif)
 	
-	%% First paragraph: "I was at [location]."
+	%% First paragraph: “I was at [location].”
 	(current room $Loc)
 	(action log {Current room: $Loc} )
 	(if) (use bold room headers) (then)
@@ -116,7 +116,7 @@
 		(header $Loc)
 	(endif)
 	
-	%% Second paragraph: Nu apiya ("there", or kā "here"?) OBJECTS-ACC ōḫḫun.
+	%% Second paragraph: Nu apiya (“there”, or kā “here”?) OBJECTS-ACC ōḫḫun.
 	(collect $Obj)
 		*($Obj is #in $Loc)
 		~(hidden $Obj)
@@ -150,7 +150,7 @@
 		(if) ($ContentsList = [$]) (then) ēšta (else) ešer (endif)
 		.
 	}
-	%% We also include the player if something is "on" them
+	%% We also include the player if something is “on” them
 	(if) (current player $Player) ($ is #on $Player) (then)
 		(collect $Obj)
 			($Obj is #on $Player)
@@ -214,26 +214,37 @@
 
 (bonus room description paragraph) %% By default nothing
 
-%% Some objects override this to add more detail if (and only if) they're on their own
+%% Some objects override this to add more detail if (and only if) they’re on their own
 (room description [$Single]) (room description $Single)
 (room description $Whatever) (#accusative $Whatever)
 
-(using separate panels) %% Only do this if it won't interfere with the normal stuff
+(using separate panels) %% Only do this if it won’t interfere with the normal stuff
 	(interpreter supports status bar) (interpreter supports inline status bar)
 
 (verbs list) ~(given first message)
 (verbs list)
 	(span @bold) { Verbs: }
-	(gather current verbs list into $VerbList)
+	(gather current verbs list into $Backwards)
+	(reverse $Backwards into $VerbList)
 	(listing $VerbList {(hittite name $_)} @, 0)
 
 (hittite name $Obj) (span @hittite) (name $Obj) %% Workaround for Dialog bug
 
 (global variable (previous verbs list $))
 (gather current verbs list into $List)
-	(collect $Verb)
-		*(verb $Verb)
+	(exhaust) { %% First, find any new verbs since last time
+		*(verb $Verb) %% In case of ties, definition order wins out
 		(verb $Verb unlocked)
+		~($Verb is flagged)
+		(now) ($Verb is flagged) %% Custom per-object flag that we’re using to record the order verbs are unlocked in
+	}
+	(exhaust) { %% We can also remove any verbs that are no longer available, though this doesn’t currently happen
+		*($Verb is flagged)
+		~(verb $Verb unlocked)
+		(now) ~($Verb is flagged)
+	}
+	(collect $Verb) %% Then, iterate over the per-object flag—this will ensure we get them in the *reverse* order they were flagged (most recent first), because of how Dialog implements these
+		*($Verb is flagged)
 	(into $List)
 (verb list has changed since last turn)
 	(gather current verbs list into $Current)
@@ -245,7 +256,7 @@
 
 (verbs list panel)
 	~(given first message)
-(verbs list panel) %% Don't update the panel if we don't need to (because on web it does an animation every time)
+(verbs list panel) %% Don’t update the panel if we don’t need to (because on web it does an animation every time)
 	~(verb list has changed since last turn)
 (verbs list panel)
 	(inline status bar @p-verbs) (verbs list)
@@ -265,7 +276,7 @@
 	(current room $Loc)
 	(from $Loc go $Dir to $Obj)
 	{ (room $Obj) (or) (door $Obj) }
-($ on the compass rose is []) %% Use [] if there's no room that way
+($ on the compass rose is []) %% Use [] if there’s no room that way
 
 (length of single word $Word is $Length)
 	(split word $Word into $List)
@@ -280,7 +291,7 @@
 			(length of single word $Word is $Length)
 			($Length plus 1 into $Each) %% Space after
 		(into $Tmp)
-		(accumulate 2) %% Remove two spaces per dot (before and after), since we assume they're in compound logograms
+		(accumulate 2) %% Remove two spaces per dot (before and after), since we assume they’re in compound logograms
 			*($Word is one of $Name)
 			($Word = @.)
 		(into $Dots)
@@ -334,11 +345,11 @@
 		(short name $Obj)
 	(endif)
 
-(medium short name $Obj) (short name $Obj) %% Most objects won't though
+(medium short name $Obj) (short name $Obj) %% Most objects won’t though
 
 %% Fancy one involving injecting into specific HTML elements
 %% This should be changed to use (status panel $) when I get that proposal through
-%% Right now it's using a hacked interpreter that makes (inline status bar $) act like (status panel $) eventually will
+%% Right now it’s using a hacked interpreter that makes (inline status bar $) act like (status panel $) eventually will
 (compass rose panel) ~(given first message)
 (compass rose panel) ~(map update needed)
 (compass rose panel)
@@ -430,12 +441,27 @@
 
 (verb @look/@oḫḫun/@ōḫḫun/@uḫḫun/@ūḫḫun means @ōḫḫun)
 (@ōḫḫun wants cases [#accusative]) %% Put this first for better error messages
+(@ōḫḫun wants cases [#adverb]) %% LOOK AROUND
 (@ōḫḫun wants cases [])
 (translate [$ ōḫḫun $ [] | $] into [look])
 (translate [$ ōḫḫun $ $Acc | $] into [examine $Acc])
-(perform [[look] $])
+
+(adverb @araḫzanda means @araḫzanda) %% “around”
+(refuse [[examine $] [$ $ $Advs | $]])
+	(@araḫzanda is one of $Advs)
+	(div @error) { The wording of this sentence is confusing. We would expect either “I looked around” or “I looked at something”, not “I looked around at something”. }
+
+(instead of [[look] [$Raw $Verb $Advs [] $Dat $Abl]]) %% No accusatives
+	~(@araḫzanda is one of $Advs)
+	%% So we add an adverb to make it grammatical
+	(try [[look] [$Raw $Verb [@araḫzanda] [] $Dat $Abl]])
+
+(perform [[look] $]) %% Update all the panels
 	(now) (update needed)
 	(now) (map update needed)
+
+(instead of [[examine (current room $Room)] $]) %% Examining the room is looking
+	(try [[look] [[] ōḫḫun [] $Room [] []]])
 (perform [[examine (room $Room)] $] without prefix)
 	(current room $Current)
 	{
@@ -467,7 +493,7 @@
 %% GO (and TRAVEL)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(verb @go/@paun/@pāun means @pāun)
+(verb @go/@paun/@pāun/@uwanun means @pāun) %% uwanun = come
 (@pāun wants cases [#dative])
 (translate [$ pāun $ $ $Dat | $] into [go $Dat])
 	(adjacent $Dat) (or) (direction $Dat)
@@ -501,7 +527,7 @@
 (adjacent (current room $Room))
 (adjacent #darkness)
 
-%% For these specific actions, don't require targets to be in the same room
+%% For these specific actions, don’t require targets to be in the same room
 ~(refuse [[go $] $])
 ~(refuse [[travel $] $])
 
@@ -512,29 +538,21 @@
 	(elseif) (from $Room go $Dir to $Next) (door $Next) (then)
 		(try [[cross $Next] $Details])
 	(else)
-		(div @error) { This line is likely an error. The narrator describes going (name $Dir) , but it's unclear what would be in that direction. }
+		(div @error) { This line is likely an error. The narrator describes going (name $Dir) , but it’s unclear what would be in that direction. }
 		(stop)
 	(endif)
 
-(prevent [[go $Dest] $Details])
+(instead of [[go $Dest] $Details]) %% Redirect to CROSS if needed
 	(current room $Source)
 	(from $Source through $Door to $Dest)
-	(action log {Found door $Door})
-	($Door blocks passage)
-	(describe failed action [[go $Dest] $Details])
-	(describe $Door blocking passage)
-
-(describe $Door blocking passage) %% This should be overridden for each door if possible
-	Nu (#nominative $Door) ḫattalwantaš ēšta. %% "The DOOR was closed."
-(($Door is closed) blocks passage)
-($ is closed) (fail) %% TODO do we even want this in the world model?
+	(try [[cross $Door] $Details])
 
 (prevent [[go (inherently dark $Dest)] $]) %% See also under CROSS
 	(current player $Player)
 	~($Player has a light source)
 	~($Dest has a light source)
-	Nu pēdan kuit dankui ēšta, %% "Because the place was dark..."
-	parā natta taruḫḫun pāun. %% "...I was not able to go onward."
+	Nu pēdan kuit dankui ēšta, %% “Because the place was dark...”
+	parā natta taruḫḫun pāun. %% “...I was not able to go onward.”
 
 ($Parent has a light source)
 	*($Obj has ancestor $Parent)
@@ -542,21 +560,20 @@
 
 (prevent [[go (current room $Dest)] $Details])
 	(describe failed action [[go $Dest] $Details])
-	Nu=za apēdani pēdi karū ešun. %% "I was already in that place."
+	Nu=za apēdani pēdi karū ešun. %% “I was already in that place.”
 
-(prevent [[go $Dest] $])
-	~(room $Dest)
-	(div @error) { This line is likely a scribal error. The verb (span @hittite) pāun "go" is generally used with locations, not objects; for things like doors and thresholds, the verb (span @hittite) šarraḫḫun "pass through" is used instead. }
+(prevent [[go ~(room $Dest)] $])
+	(div @error) { This line is likely a scribal error. The verb (span @hittite) pāun “go” is generally used with locations, not objects; for things like doors and thresholds, the verb (span @hittite) šarraḫḫun “pass through” is used instead. }
 
 (prevent [[go $Dest] $])
 	(current room $Source)
-	~{ (from $Source go $ to $Dest) (or) (from $Source through $ to $Dest) }
+	~(from $Source go $ to $Dest)
 	(div @realerror) { ERROR: no immediate connection from source $Source to destination $Dest! How was this action created? }
 
 (perform [[go $Dest] $])
 	(enter $Dest)
 
-%% "Travel" is the action invoked when the room isn't adjacent; it plots out a route and tries to move along it
+%% “Travel” is the action invoked when the room isn’t adjacent; it plots out a route and tries to move along it
 
 (prevent [[travel $Dest] $Details])
 	(current room $Source)
@@ -588,12 +605,17 @@
 
 (prevent [[cross $Door] $])
 	~(door $Door)
-	(div @error) { This line is likely a scribal error. The verb (span @hittite) šaraḫḫun "pass through" is generally used with things like doors and thresholds. For going to a place, the verb (span @hittite) pāun is used instead. }
+	(div @error) { This line is likely a scribal error. The verb (span @hittite) šaraḫḫun “pass through” is generally used with things like doors and thresholds. For going to a place, the verb (span @hittite) pāun is used instead. }
 
-(prevent [[cross $Door] $Details])
-	($Door blocks passage) %% See above under GO for details
+(prevent [[cross $Door] $Details]) %% See above under GO for details
+	($Door blocks passage)
 	(describe failed action [[cross $Door] $Details])
 	(describe $Door blocking passage)
+
+(describe $Door blocking passage) %% This should be overridden for each door if possible
+	Nu (#nominative $Door) ḫattalwantaš ēšta. %% “The DOOR was closed.”
+
+($ is closed) (fail) %% Not currently part of the world model
 
 (prevent [[cross $Door] $Details]) %% Copied from GO
 	(current room $Room)
@@ -602,13 +624,13 @@
 	(current player $Player)
 	~($Player has a light source)
 	~($Dest has a light source)
-	Nu pēdan kuit dankui ēšta, %% "Because the place was dark..."
-	(describe raw failed action [[cross $Door] $Details]) %% "raw" = no connective, caps, or punctuation
+	Nu pēdan kuit dankui ēšta, %% “Because the place was dark...”
+	(describe raw failed action [[cross $Door] $Details]) %% “raw” = no connective, caps, or punctuation
 	.
 
 (prevent [[cross $Door] $])
 	~{ (current room $Room) (from $Room through $Door to $Dest) (room $Dest) }
-	(div @realerror) { ERROR: Cannot go through $Door ! What's going on? }
+	(div @realerror) { ERROR: Cannot go through $Door ! What’s going on? }
 
 (perform [[cross $Door] $])
 	(current room $Room)
@@ -649,7 +671,7 @@
 		(if) (unlock wait on the compass rose) (then)
 			, and 0 for waiting
 		(endif)
-		\) , so it's not clear what $Num would mean.
+		\) , so it’s not clear what $Num would mean.
 	}
 	(stop)
 
@@ -672,7 +694,7 @@
 		(tick)
 	(else)
 		(div @error) {
-			The number $Num here presumably means going (name $Dir)(no space)ward, but it's unclear what would be in that direction.
+			The number $Num here presumably means going (name $Dir)(no space)ward, but it’s unclear what would be in that direction.
 		}
 		(stop)
 	(endif)
@@ -704,7 +726,12 @@
 	*($Abl is one of $Abls)
 	~($Acc has parent $Abl)
 
-(instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there's a holder
+(subtly unlikely [$ @dāḫḫun $ $ $ (nonempty $)]) %% Prefer one noun over two, even when the noun is in the right place
+(unlikely [$ @dāḫḫun $ $Accs | $]) %% Don’t take non-portable things
+	*($Acc is one of $Accs)
+	~(item $Acc)
+
+(instead of [[take $Obj] $Details]) %% Change to TAKE FROM if there’s a holder
 	~(avoid ablative case)
 	($Obj is $ $Holder)
 	~(room $Holder)
@@ -720,7 +747,7 @@
 	~($Obj is $ $Holder)
 	($Holder wants relation $Rel)
 	(describe failed action [[take $Obj from $Holder] $Details])
-	Nu (#nominative $Obj) natta (#dative $Holder) (preverb $Rel) ēšta. %% "The OBJ was not REL the HOLDER."
+	Nu (#nominative $Obj) natta (#dative $Holder) (preverb $Rel) ēšta. %% “The OBJ was not REL the HOLDER.”
 
 (prevent [[take $Obj | $From] $Details]) %% Or is this message better?
 	~(item $Obj)
@@ -730,7 +757,7 @@
 	(else)
 		N=aš mekki nakkiš
 	(endif)
-	ēšta. %% "It was very heavy."
+	ēšta. %% “It was very heavy.”
 
 (prevent [[take $Obj | $] $Details])
 	(current player $Player)
@@ -741,7 +768,7 @@
 	(else)
 		N=an
 	(endif)
-	karū ḫarkun. %% "I already held it"
+	karū ḫarkun. %% “I already held it”
 
 (perform [[take $Obj | $] $])
 	(narrate taking $Obj)
@@ -775,7 +802,7 @@
 	(else)
 		N=an
 	(endif)
-	natta ḫarkun. %% "I did not hold it."
+	natta ḫarkun. %% “I did not hold it.”
 
 (perform [[drop $Obj] $])
 	(current room $Room)
@@ -803,7 +830,7 @@
 (translate [$ tēḫḫun [] $Acc [] | $] into [put $Acc])
 (refuse [[put $] | $])
 	(div @error) {
-		This sentence seems to be incomplete. The verb (span @hittite) tēḫḫun should include a destination: either a noun in the dative, or an adverb like (span @hittite) katta "down" \( on the ground \) .
+		This sentence seems to be incomplete. The verb (span @hittite) tēḫḫun should include a destination: either a noun in the dative, or an adverb like (span @hittite) katta “down” \( on the ground \) .
 	}
 
 (prevent [[put $Obj $Dest] $Details])
@@ -815,12 +842,12 @@
 	(else)
 		N=an
 	(endif)
-	natta ḫarkun. %% "I did not hold it."
+	natta ḫarkun. %% “I did not hold it.”
 
 (prevent [[put $Obj $Dest] $Details])
-	~(holder $Dest)
+	{ ~(holder $Dest) (or) (animate $Dest) }
 	(describe failed action [[put $Obj $Dest] $Details])
-	(div @error) { Spatial relations in Hittite are a complicated topic, and it's not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (span @hittite) (#dative $Dest). Whatever that arrangement was, it doesn't seem to have worked. }
+	(div @error) { Spatial relations in Hittite are a complicated topic, and it’s not clear what arrangement the scribe was envisioning between the (span @hittite) (#accusative $Obj) and the (span @hittite) (#dative $Dest). Whatever that arrangement was, it doesn’t seem to have worked. }
 
 (perform [[put $Obj $Dest] | $])
 	{ ($Dest wants relation $Rel) (or) ($Rel = #in) }
@@ -837,22 +864,22 @@
 
 (verb @kuenun/@slay means @kuenun)
 
-(@kuenun wants cases [#adverb #accusative]) (avoid ablative case) %% Allow no ablatives when they haven't been taught yet
+(@kuenun wants cases [#adverb #accusative]) (avoid ablative case) %% Allow no ablatives when they haven’t been taught yet
 
 (@kuenun wants cases [#adverb #accusative #ablative]) %% needs =kkan
 
-(translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl]) %% Abl will be [] if it hasn't been taught yet
+(translate [$ kuenun $ $Acc $ $Abl] into [slay $Acc with $Abl]) %% Abl will be [] if it hasn’t been taught yet
 
 %% Kuenun and taruḫḫun are mostly synonyms, but take different particles
 (refuse [[slay $ with $] [$ @kuenun $Advs | $]])
 	~(@kan is one of $Advs)
-	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun "slay" requires the sentence particle =kan to be attached to the first word of the sentence, as in (span @hittite) { n=an=kan kuenun } "I slew him". }
+	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) kuenun “slay” requires the sentence particle =kan to be attached to the first word of the sentence, as in (span @hittite) { n=an=kan kuenun } “I slew him”. }
 (refuse [[slay $ with $] [$ @taruḫḫun $Advs | $]])
 	~(@za is one of $Advs)
-	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) taruḫḫun , when it's used to mean "overpower \(a person\)", needs the clitic =za attached to the first word of the sentence, as in (span @hittite) { nu=za=an taruḫḫun } "I overpowered him". }
+	(div @error) { This sentence is likely a scribal error. The verb (span @hittite) taruḫḫun , when it’s used to mean “overpower \(a person\)”, needs the clitic =za attached to the first word of the sentence, as in (span @hittite) { nu=za=an taruḫḫun } “I overpowered him”. }
 
 (prevent [[slay ~(animate $Obj) with $Tool] $Details])
-	(describe negative action [[slay $Obj with $Tool] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(describe negative action [[slay $Obj with $Tool] $Details]) %% negative, not failed: “did not” instead of “could not”
 	(if) (neuter $Obj) (then)
 		N=at
 	(else)
@@ -867,12 +894,29 @@
 	(describe failed action [[slay $Target with $Obj] $Details])
 	Nu (#accusative $Obj) natta ḫarkun. %% I did not hold the $Obj.
 
+(prevent [[slay $Target with $Weapon] $Details])
+	(object $Weapon) %% Not nil
+	~(weapon $Weapon) %% Only some objects can be used as weapons
+	(describe failed action [[slay $Target with $Weapon] $Details])
+	(div @error) { Presumably the (span @hittite) (#nominative $Weapon) would not make an effective weapon. }
+
+%% Provide some default weapons
+(weapon *(clothing $))
+(weapon *(sharp $))
+
 (perform [[slay (current player $) with $] $])
 	(death ensues) %% Why would you do this though?
 
-(perform [[slay $Obj with $] $]) %% Remove a person from the game; prevent this if someone should be un-slayable
+(perform [[slay $Obj with $Weapon] $]) %% Remove a person from the game; prevent this if someone should be un-slayable
 	(now) ($Obj is nowhere)
 	(now) (update needed)
+	(if) (clothing $Weapon) (then) %% Players were confused about this
+		(div @error) { Presumably through some manner of strangulation. }
+	(elseif) (sharp $Weapon) (then)
+		(div @error) { Presumably via stabbing. }
+	(else)
+		(div @error) { Presumably through some manner of blunt force. }
+	(endif)
 
 #v-slay
 (verb *)
@@ -917,17 +961,17 @@
 	{
 		($Source is filled with #fire)
 		($Dest is filled with #water)
-		Nu (#accusative $Source) (#dative #water) tēḫḫun. %% "I put the SRC in the water."
+		Nu (#accusative $Source) (#dative #water) tēḫḫun. %% “I put the SRC in the water.”
 		($Fire = $Source)
 		($Water = $Dest)
 	(or)
 		($Source is filled with #water)
 		($Dest is filled with #fire)
-		Nu (#accusative #water) (#dative $Dest) tēḫḫun. %% "I put water on the DEST."
+		Nu (#accusative #water) (#dative $Dest) tēḫḫun. %% “I put water on the DEST.”
 		($Water = $Source)
 		($Fire = $Dest)
 	}
-	Nu (#accusative #fire) kištanunun. %% "I extinguished the fire."
+	Nu (#accusative #fire) kištanunun. %% “I extinguished the fire.”
 	(now) ~($Fire is filled with $)
 	(if) (item $Water) (then) (now) ~($Water is filled with $) (endif) %% Only portable sources are exhausted when used this way
 	(now) (update needed)
@@ -992,7 +1036,7 @@
 
 (interface (clothing $))
 (prevent [[wear ~(clothing $Obj)] $Details])
-	(describe failed action [[wear $Obj] $Details]) %% "I could not wear the X."
+	(describe failed action [[wear $Obj] $Details]) %% “I could not wear the X.”
 
 (prevent [[wear $Obj] $Details])
 	(current player $Player)
@@ -1003,7 +1047,7 @@
 	(else)
 		N=an
 	(endif)
-	karū waššiyanun. %% "I already wore it."
+	karū waššiyanun. %% “I already wore it.”
 
 (prevent [[wear $Obj] $Details])
 	(current player $Player)
@@ -1014,7 +1058,7 @@
 	(else)
 		N=an
 	(endif)
-	natta ḫarkun. %% "I did not hold it."
+	natta ḫarkun. %% “I did not hold it.”
 
 (perform [[wear $Obj] $])
 	(current player $Player)
@@ -1069,7 +1113,7 @@
 
 (perform [[cut $ with $] $])
 	%% Do nothing by default - override for food items that can get cut
-	%% By default it just says "you cut it" with no mechanical effect
+	%% By default it just says “you cut it” with no mechanical effect
 
 (sharp $) (fail) %% Must exist in an act for this verb to be useful
 
@@ -1084,6 +1128,11 @@
 (verb @warpun/@wash means @warpun)
 (@warpun wants cases [#accusative #ablative])
 (translate [$ warpun $ $Acc $ $Abl] into [wash $Acc with $Abl])
+
+(prevent [[wash (animate $Acc) with $Abl] $Details])
+	~(pettable $Acc) %% Exception for dogs
+	~(current player $Acc) %% And for yourself
+	(describe negative action [[wash $Acc with $Abl] $Details]) %% I just didn’t.
 
 (prevent [[wash $Acc with $Abl] $Details])
 	~($Abl is filled with #water)
@@ -1113,7 +1162,7 @@
 (translate [$ kuwaššun $ $Acc | $] into [kiss $Acc])
 
 (prevent [[kiss ~(animate $Obj)] $Details])
-	(describe negative action [[kiss $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(describe negative action [[kiss $Obj] $Details]) %% negative, not failed: “did not” instead of “could not”
 	(if) (neuter $Obj) (then)
 		N=at
 	(else)
@@ -1130,7 +1179,7 @@
 (verb *)
 (name *) kuwaššun
 (signal *) kuwašzi
-(* matches [kiss $])
+(* matches [kiss $Obj]) ~(current player $Obj)
 (* wants #accusative)
 (possible signal verb *)
 
@@ -1139,7 +1188,7 @@
 (translate [$ tarkun $ $ $Dat | $] into [dance with $Dat])
 
 (prevent [[dance with ~(animate $Obj)] $Details])
-	(describe negative action [[dance with $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(describe negative action [[dance with $Obj] $Details]) %% negative, not failed: “did not” instead of “could not”
 	(if) (neuter $Obj) (then)
 		N=at
 	(else)
@@ -1156,7 +1205,7 @@
 (verb *)
 (name *) tarkun
 (signal *) tarkuzzi
-(* matches [dance with $])
+(* matches [dance with $Obj]) ~(current player $Obj)
 (* wants #dative)
 (possible signal verb *)
 
@@ -1165,7 +1214,7 @@
 (translate [$ kaninanun $ $ $Dat | $] into [bow to $Dat])
 
 (prevent [[bow to ~(animate $Obj)] $Details])
-	(describe negative action [[bow to $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(describe negative action [[bow to $Obj] $Details]) %% negative, not failed: “did not” instead of “could not”
 	(if) (neuter $Obj) (then)
 		N=at
 	(else)
@@ -1182,9 +1231,30 @@
 (verb *)
 (name *) kaninanun
 (signal *) kanināit
-(* matches [bow to $])
+(* matches [bow to $Obj]) ~(current player $Obj)
 (* wants #dative)
 (possible signal verb *)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PET (by popular demand)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+(verb @genzuwanun/@pet means @genzuwanun)
+(@genzuwanun wants cases [#accusative])
+(translate [$ genzuwanun $ $Acc | $] into [pet $Acc])
+
+(prevent [[pet (animate $Obj)] $Details])
+	~(pettable $Obj) %% Only set on the dog in act 2
+	(describe negative action [[pet $Obj] $Details])
+
+(perform [[pet $] $])
+	%% No effect, it just happens
+
+(pettable $) (fail) %% On most tablets this predicate is not used
+
+#v-pet
+(verb *)
+(name *) genzuwanun
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Miscellaneous verbs used in the text
@@ -1203,7 +1273,7 @@
 (verb @taruḫḫun/@can means @taruḫḫun)
 (@taruḫḫun wants cases [#adverb #accusative]) (avoid ablative case)
 (@taruḫḫun wants cases [#adverb #accusative #ablative]) ~(avoid ablative case)
-(translate [$ taruḫḫun $ $Acc $ $Abl] into [slay $Acc with $Abl]) %% On its own, make it a synonym for "slay"
+(translate [$ taruḫḫun $ $Acc $ $Abl] into [slay $Acc with $Abl]) %% On its own, make it a synonym for “slay”
 
 (adverb @taruḫḫun/@can means @taruḫḫun) %% Triggers an error in parser.dg
 
@@ -1216,7 +1286,7 @@
 	~($Obj is #heldby $Player)
 	(try [[take $Obj] [$Raw dāḫḫun [] $Obj [] []]])
 
-(perform [[hold $] $]) %% If already held, no special behavior: "I held it" is fine
+(perform [[hold $] $]) %% If already held, no special behavior: “I held it” is fine
 
 (verb @ḫašḫun/@open means @ḫašḫun)
 (@ḫašḫun wants cases [#accusative])
@@ -1232,7 +1302,7 @@
 (perform [die] without prefix)
 	(death ensues)
 
-(death ensues) %% Note: call this in (perform $) rules ideally, not (on every tick) unless you're prepared to deal with the consequences
+(death ensues) %% Note: call this in (perform $) rules ideally, not (on every tick) unless you’re prepared to deal with the consequences
 	Nu aggaḫḫun.
 	(div @error) {
 		The text must be corrupt at this point, as the hero must survive to continue the story. Ignoring the last few lines, we continue on...
@@ -1245,7 +1315,7 @@
 (translate [$ punuššun $ $Acc | $] into [question $Acc])
 
 (prevent [[question ~(animate $Obj)] $Details])
-	(describe negative action [[question $Obj] $Details]) %% negative, not failed: "did not" instead of "could not"
+	(describe negative action [[question $Obj] $Details]) %% negative, not failed: “did not” instead of “could not”
 	(if) (neuter $Obj) (then)
 		N=at
 	(else)
@@ -1253,21 +1323,21 @@
 	(endif)
 	antuḫšaš natta ēšta. %% It was not a person.
 
-%% No default perform rule - the default one in worldmodel.dg will produce a contradiction and a message confused about that contradiction, which seems like a reasonable behavior for this weird action
+(perform [[question $Obj] $Details] without prefix) %% Since this is never useful - but note that you’ll need to modify this rule, NOT just add your own perform rule, to make the action usable! Without prefix wins over with prefix.
+	(describe negative action [[question $Obj] $Details])
 
-#v-question
+#v-question %% Currently unused
 (verb *)
 (name *) punuššun
-%% Has no #v- because it's never helpful
 
-(verb @paršun/@flee means @paršun) %% Synonym for "go"
+(verb @paršun/@flee means @paršun) %% Synonym for “go”
 (@paršun wants cases [#dative])
 (translate [$ paršun $ $ $Dat | $] into [go $Dat])
 
 %% TODO - bring?
 
 (third person verb @ēšta/@ešer) %% Act 1
-(third person verb @aušta/@pait/@dāš/@uet/@warpta) %% Act 2
+(third person verb @aušta/@pait/@dāš/@uet/@warpta/@dankuešta/@ḫarkta) %% Act 2
 (third person verb @kuwašzi/@tarkuzzi/@kanināit) %% Signals
 (third person verb @tēt/@kupta/@papriszi/@kuenzi/@parkuzzi) %% Act 3 machinery
 (third person verb @aki/@kunanzi/@punušta/@memiškanzi/@kuenta) %% Act 3

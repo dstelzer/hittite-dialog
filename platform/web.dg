@@ -1,6 +1,8 @@
 (style class @tutorial)
 	margin-top: 1em;
 	margin-bottom: 1em;
+	margin-left: 1.5em;
+	margin-right: 1.5em;
 	data-language: en;
 	font-style: italic;
 	font-family: sans-serif;

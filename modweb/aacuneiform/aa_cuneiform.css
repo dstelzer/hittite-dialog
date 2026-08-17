@@ -1,3 +1,10 @@
+.showbound #fontsel{ /* Hide these when not applicable */
+	display: none;
+}
+.showbound #sizesel{
+	display: none;
+}
+
 .sign{
 	position: relative;
 	display: inline-grid;
@@ -15,6 +22,19 @@
 .aa-hittite .read{ /* Avoid incorrect italics and caps inside tutorials */
 	font-style: normal;
 	text-transform: none;
+}
+
+.aa-dont-syllabify .read{ /* A hacky workaround to make a certain name work properly */
+	text-transform: lowercase;
+}
+.aa-dont-syllabify .read::first-letter{
+	text-transform: uppercase;
+}
+.bound .aa-dont-syllabify .word{
+	text-transform: lowercase;
+}
+.bound .aa-dont-syllabify .word::first-letter{
+	text-transform: uppercase;
 }
 
 .whitespace{
@@ -92,16 +112,6 @@
 }
 
 .bound .aa-dtm{
-	vertical-align: super;
-	font-size: smaller;
-}
-
-.aa-dtm2 .read{
-	vertical-align: super;
-	font-size: smaller;
-}
-
-.bound .aa-dtm2{
 	vertical-align: super;
 	font-size: smaller;
 }

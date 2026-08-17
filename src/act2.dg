@@ -17,10 +17,10 @@
 (* is #in #courtyard)
 
 (intro)
-	Nu (#dative #courtyard) ešun. %% "I was in the courtyard."
-	Nu (#nominative #dog) (#dative #building) pait. %% "A dog went into the building."
-	Nu (#nominative #baker) (#ablative #building) uet. %% "The baker came out of the building."
-	Nu (#nominative #baker) (#dative #washhouse) pait. %% "The baker went into the washhouse."
+	Nu (#dative #courtyard) ešun. %% “I was in the courtyard.”
+	Nu (#nominative #dog) (#dative #building) pait. %% “A dog went into the building.”
+	Nu (#nominative #baker) (#ablative #building) uet. %% “The baker came out of the building.”
+	Nu (#nominative #baker) (#dative #washhouse) pait. %% “The baker went into the washhouse.”
 	(now) (update needed)
 	(now) (map update needed)
 
@@ -28,8 +28,8 @@
 	~(tutorial introduced)
 	(div @tutorial) {
 		Welcome to tablet 2! The grammar is going to get more complicated this time, but if you made it through tablet 1, you should be well-prepared for what comes next. (par)
-		In particular, nouns will now appear in two additional cases: the "genitive" for one noun modifying another, and the "ablative" for the source of a movement or the tool used for an action. Verbs will sometimes describe what other people are doing instead of just you yourself. And some words will be written with "logograms": special cuneiform signs that represent whole words, like how "7" is short for "seven". When this happens, the names of those cuneiform signs will be written in CAPITAL LETTERS separated by dots. (par)
-		Don't worry, though; you can still click any word to see its definition, and the basic vocabulary isn't going anywhere. Good luck! You've got this!
+		In particular, nouns will now appear in two additional cases: the “genitive” for one noun modifying another, and the “ablative” for the source of a movement or the tool used for an action. Verbs will sometimes describe what other people are doing instead of just you yourself. And some words will be written with “logograms”: special cuneiform signs that represent whole words, like how “7” is short for “seven”. When this happens, the names of those cuneiform signs will be written in CAPITAL LETTERS separated by dots. (par)
+		Don’t worry, though; you can still click any word to see its definition, and the basic vocabulary isn’t going anywhere. Good luck! You’ve got this!
 	}
 	(now) (tutorial introduced)
 
@@ -71,10 +71,10 @@
 (name * in #ablative) karimnaz
 
 (prevent [[go *] $Details])
-	(#blood is #on #me)
+	(#blood is $ #me)
 	(describe negative action [[go *] $Details]) %% I did not...
 	Nu (#nominative #blood) (#dative #me) ēšta. %% Blood was on me.
-(prevent [[go *] $Details]) %% Test garment first since it's easier to get
+(prevent [[go *] $Details]) %% Test garment first since it’s easier to get
 	~(#garment is #wornby #me)
 	(describe negative action [[go *] $Details]) %% I did not...
 	Nu (#accusative #garment) natta waššiyanun.
@@ -104,7 +104,7 @@
 (door *)
 (holder *)
 (* wants relation #at)
-(* blocks passage) (#bolt is #in *)
+(* blocks passage) (#bolt is $ *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #building)
 (short name *) (#accusative *)
@@ -127,7 +127,7 @@
 	(#building is visited)
 	~(taught phonetic complements)
 	(div @tutorial) {
-		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @htt) GIR₂ means "knife" in general, but (span @htt) GIR₂-an is specifically the (span @italic) accusative form of "knife", (span @htt) GIR₂-aš the genitive, (span @htt) GIR₂-az the ablative, and so on.
+		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @hittite) GIR₂ means “knife” in general, but (span @hittite) GIR₂-an is specifically the (span @italic) {nominative or accusative} form of “knife”, (span @hittite) GIR₂-aš the genitive, (span @hittite) GIR₂-az the ablative, and so on.
 	}
 	(now) (taught phonetic complements)
 
@@ -135,7 +135,7 @@
 %% Washhouse and baker (east)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% The baker's garment is lying in the washhouse. If you try to take it out of the courtyard, the baker interrupts you, unless you've sealed him in the washhouse or killed him.
+%% The baker’s garment is lying in the washhouse. If you try to take it out of the courtyard, the baker interrupts you, unless you’ve sealed him in the washhouse or killed him.
 
 #garment
 (item *)
@@ -172,8 +172,8 @@
 
 #washhouse
 (room *)
-(* uses preverb #at)
-(name * in #nominative) šakuniš %% no longer "washhouse" but "spring/well"
+(* uses preverb #in)
+(name * in #nominative) šakuniš %% no longer “washhouse” but “spring/well”
 (name * in #genitive) šakuniyaš
 (name * in #dative) šakuniya
 (name * in #accusative) šakunin %% TODO - šakuniyan may be the only attested form
@@ -181,6 +181,9 @@
 (name * in #bare) šakuni
 
 (from * go #west through #washdoor to #courtyard)
+
+(instead of [[wash $Obj with *] $Details])
+	(try [[wash $Obj with #pool] $Details])
 
 (after [[cross #washdoor] $])
 	(now) (baker description suppressed)
@@ -192,6 +195,12 @@
 	(else)
 		(par) Nu=za (#nominative #baker) (#ablative #pool modifierless) warpta.
 	(endif)
+
+(tutorial)
+	(current room *)
+	~(taught washhouse)
+	(div @error) { Since the narrator describes being “in” the spring, and mentions a door, he is probably talking about an enclosed washhouse rather than an outdoor pool. The usual term for such a washhouse is the logogram (span @hittite) { E₂.DU₁₀.US₂.SA } . }
+	(now) (taught washhouse)
 
 #pool
 (* is #in #washhouse)
@@ -208,7 +217,7 @@
 (door *)
 (holder *)
 (* wants relation #at)
-(* blocks passage) (#bolt is #in *)
+(* blocks passage) (#bolt is $ *)
 (describe * blocking passage) Nu āškaš ḫattalwanza ēšta.
 (* has modifier #washhouse)
 (short name *) (#accusative *)
@@ -222,6 +231,7 @@
 #bolt
 (item *)
 (neuter *)
+(weapon *)
 (determiner *) GIŠ
 (* has modifier #burnt)
 (name * in #nominative/#accusative/#bare) ḫattalu
@@ -229,6 +239,15 @@
 (name * in #dative) ḫattaluwi
 (name * in #ablative) ḫattaluwaz
 (* is #heldby #me)
+
+(after [$Action $])
+	(* is one of $Action)
+	(select)
+		(div @error) {
+			While the door bolt from tablet 1 reappears here, no mention is made of the dammuri-object. It is unclear what has happened to it, or what it might have been used for—unfortunate, since that might have given us more clues about its nature!
+		}
+	(or)
+	(stopping)
 
 #burnt
 (adjective *)
@@ -252,10 +271,10 @@
 
 #blood
 (neuter *)
-(name * in #nominative/#accusative/#bare) ešḫar
-(name * in #genitive) ešḫanaš
-(name * in #dative) ešḫani
-(name * in #ablative) ešḫanaz
+(name * in #nominative/#accusative/#bare) ēšḫar
+(name * in #genitive) išḫanaš
+(name * in #dative) išḫani
+(name * in #ablative) išḫanaz
 
 (prevent [[drop/put * | $] $Details])
 	(describe failed action [[drop *] $Details])
@@ -297,7 +316,7 @@
 
 (prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet, it should have a clear failure message on this tablet
 	(describe failed action [[put #bolt *] $Details])
-	Nu (#nominative #bolt) šalli ēšta. %% "It was big." bolt neuter
+	Nu (#nominative #bolt) šalli ēšta. %% “It was big.” bolt neuter
 
 #trough
 (holder *)
@@ -369,7 +388,7 @@
 	($Ingredient is one of [#fruit #cheese])
 	($Ingredient is #heldby #me)
 	
-	%% Since we're using (instead of $) we need to do our checks here
+	%% Since we’re using (instead of $) we need to do our checks here
 	(if)
 		($Ingredient = #fruit) ~(fruit is chopped)
 	(or)
@@ -394,7 +413,7 @@
 		Nu=ši (#nominative #fruit) anda natta ēšta. %% The fruit was not in it.
 	(endif)
 	(div @error) {
-		The narrator seems to be making (span @italic) iyatti , a kind of bread "studded" with chopped pieces of fruit and cheese.
+		The narrator is apparently trying to make (span @italic) iyatti , a kind of bread “studded” with chopped pieces of fruit and cheese.
 	}
 
 (perform [[put * #oven] $])
@@ -412,7 +431,7 @@
 (name * in #bare) iyatti
 (determiner *) NINDA
 
-($Case $Obj modifier $) %% Here's where we handle the studding
+($Case $Obj modifier $) %% Here’s where we handle the studding
 	($Obj is one of [#dough #bread])
 	(if) ($Obj has determiner) (then)
 		(dtm {(determiner $Obj)})
@@ -437,7 +456,7 @@
 	($Obj is one of [#dough #bread])
 	(#fruit is nowhere)
 	(name #fruit in #ablative)
-	(name #fruit in $Case) %% In case of "take fruit"
+	(name #fruit in $Case) %% In case of “take fruit”
 	(name #studded in $Case)
 
 #studded %% Used for both bread and dough
@@ -458,10 +477,12 @@
 
 #dog
 (animate *)
+(pettable *) %% See actions.dg
 (holder *) %% For room descriptions
 (* wants relation #heldby)
 (logogram *)
 (name *) UR.GI₇
+(dict *) UR.GI7
 (* is #in #dogmaze)
 
 (after [[go/cross $] $])
@@ -496,13 +517,13 @@
 	(then)
 		(move dog from $Start to $Chosen)
 	(else)
-		(div @realerror) { ERROR: The dog is stuck! Dog is in $Start , player is in $Player . What's going on? Please report this! }
+		(div @realerror) { ERROR: The dog is stuck! Dog is in $Start , player is in $Player . What’s going on? Please report this! }
 	(endif)
 	
 	%% For debugging, we also want to make sure the parity is intact
 %%	(check dog parity)
 
-(interface (check dog parity)) %% Don't complain if we comment it out
+(interface (check dog parity)) %% Don’t complain if we comment it out
 (check dog parity)
 	(#dog is in room $Dog)
 	(current room $Player)
@@ -525,16 +546,16 @@
 	(par) Nu (#nominative #dog) (#ablative $Start) (#dative $End) pait.
 	(now) (#dog is #in $End)
 	(if) ($Start is visited) (or) ($End is visited) (then)
-		(now) (map update needed) %% Map changed (dog's position)
+		(now) (map update needed) %% Map changed (dog’s position)
 	(endif)
 	(if) (current room $Start) (or) (current room $End) (then)
-		(now) (update needed) %% Room description changed (dog's presence)
+		(now) (update needed) %% Room description changed (dog’s presence)
 	(endif)
 
 #knife
 (item *)
 (neuter *)
-(sharp *) %% Allows "cut" action
+(sharp *) %% Allows “cut” action
 (name * in #bare) GIR₂
 (name * in #nominative/#accusative) GIR₂-an
 (name * in #genitive) GIR₂-aš
@@ -644,11 +665,11 @@
 #dog-roof
 (room *)
 (dogs allowed in *)
-(neuter *)
 (* uses preverb #on)
-(name * in #nominative/#accusative) šuḫḫan
+(name * in #nominative) šuḫḫaš
 (name * in #genitive) šuḫḫaš
 (name * in #dative) šuḫḫi
+(name * in #accusative) šuḫḫan
 (name * in #ablative) šuḫḫaz
 (name * in #bare) šuḫḫa
 
@@ -673,7 +694,7 @@
 
 @(guard is moving west) ~(guard is moving east)
 
-(guard is relevant) %% Don't spend the rest of the game narrating the guard's actions
+(guard is relevant) %% Don’t spend the rest of the game narrating the guard’s actions
 	(current room $Room)
 	($Room is one of [#kitchen #guardwalk1 #guardwalk2 #guardwalk3 #honeystorage #fruitstorage])
 
@@ -681,12 +702,12 @@
 	(* is in room $Room)
 	(if) ($Room = #guardwalk1) (guard is moving east) (then)
 		(if) (adjacent #guardwalk1) (or) (#guardwalk1 is visited) (guard is relevant) (then)
-			(par) Nu (#nominative *) aušta.
+			(par) Nu (#nominative *) araḫzanda aušta.
 		(endif)
 		(now) (guard is moving west)
 	(elseif) ($Room = #guardwalk3) (guard is moving west) (then)
 		(if) (adjacent #guardwalk3) (or) (#guardwalk3 is visited) (guard is relevant) (then)
-			(par) Nu (#nominative *) aušta.
+			(par) Nu (#nominative *) araḫzanda aušta.
 		(endif)
 		(now) (guard is moving east)
 	(elseif) (guard is moving east) (then)
@@ -722,7 +743,7 @@
 	(endif)
 	(if) (current room $End) (then)
 		Nu=mu (#nominative *) aušta.
-		(death ensues) %% Don't actually move the guard in this case, to simulate an undo
+		(death ensues) %% Don’t actually move the guard in this case, to simulate an undo
 	(else)
 		(now) (* is #in $End)
 	(endif)
@@ -746,7 +767,7 @@
 		%% In the street, give the full name
 		(#dative $Guard)
 	(else)
-		%% Elsewhere, just say "in the street"
+		%% Elsewhere, just say “in the street”
 		palši
 	(endif)
 	ēšta.
@@ -759,10 +780,10 @@
 (name * in #accusative) šarāzziyan palšan
 (name * in #ablative) šarāzziyaz palšaz
 (name * in #bare) šarāzziya palša
-(short name *) %% Call it "upper" when already in the street
+(short name *) %% Call it “upper” when already in the street
 	(current room #guardwalk2)
 	šarāzziya
-(short name *) %% Otherwise call it "street"
+(short name *) %% Otherwise call it “street”
 	palši
 
 (from * go #east to #kitchen)
@@ -776,10 +797,10 @@
 (name * in #accusative) ištarniyan palšan
 (name * in #ablative) ištarniyaz palšaz
 (name * in #bare) ištarniya palša
-(short name *) %% Call it "street" when in the building
+(short name *) %% Call it “street” when in the building
 	(current room #honeystorage)
 	palši
-(short name *) %% Otherwise call it "middle"
+(short name *) %% Otherwise call it “middle”
 	ištarniya
 
 (from * go #west to #guardwalk3)
@@ -794,10 +815,10 @@
 (name * in #accusative) katteran palšan
 (name * in #ablative) katteraz palšaz
 (name * in #bare) kattera palša
-(short name *) %% Call it "street" when in the building
+(short name *) %% Call it “street” when in the building
 	(current room #fruitstorage)
 	palši
-(short name *) %% Otherwise call it "lower"
+(short name *) %% Otherwise call it “lower”
 	katteri
 
 (from * go #north to #fruitstorage)
@@ -806,12 +827,19 @@
 #honeystorage
 (storage *)
 (contents *) militaš
+(dict * in #nominative/#accusative) milit
+(dict * in #genitive) militaš
+(dict * in #dative) militi
+(dict * in #ablative) militaz
 
 (from * go #south to #guardwalk2)
 
 #fruitstorage
 (storage *)
 (contents *) (name #fruit in #genitive)
+(dict * in $Case)
+	~(#fruit is in room *)
+	*(dict #fruit in $Case)
 
 (from * go #south to #guardwalk3)
 
@@ -823,13 +851,14 @@
 (holder *)
 (* wants relation #in)
 (logogram *)
-(name *) PISAN %% "container"
+(name *) PISAN %% “container”
 (determiner *) GIŠ
-(* has modifier #reed) %% Conveniently the gen sg and gen pl look the same for a-stems
+(* has modifier @nataš) %% gen pl, not nom sg
 (* is #in #kitchen)
 
 #reed
 (item *)
+(* has modifier #burning-c) (* is filled with #fire)
 (* has modifier #oily) (reed is oiled) %% substances.dg for definition
 (name * in #nominative/#genitive) nataš
 (name * in #dative) nati
@@ -837,18 +866,21 @@
 (name * in #ablative) nataz
 (name * in #bare) nata
 
-(* accepts substance #oil) %% Doesn't actually become filled with it though
+(* accepts substance #oil) %% Doesn’t actually become filled with it though
 (* accepts substance #fire)
 
 (instead of [[put $X $Y] $])
 	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
 	(* is #heldby #me)
-	Nu (#accusative #oil) (#dative *) tēḫḫun. %% I put the oil on the reed.
+	~(* is filled with #fire)
+	Nu (errorize #accusative #oil) (#dative *) tēḫḫun. %% I put the oil on the reed
 	(now) (reed is oiled)
 	(now) (update needed)
 
-(perform [[drop/put * | $] $])
-	N=aš ḫarkta. %% It perished/was lost.
+(perform [[drop/put * | $Tail] $])
+	(if) ~($Tail = [#reedjar]) (then)
+		N=aš ḫarkta. %% It perished/was lost.
+	(endif)
 	(reset the reed)
 	(now) (update needed)
 
@@ -892,6 +924,15 @@
 (* has modifier #oil)
 (* is #in #kitchen)
 
+(prevent [[put $Obj *] $Details])
+	($Obj is filled with #fire)
+	(describe negative action [[put $Obj *] $Details])
+	(if) (neuter $Obj) (then)
+		N=at (#nominative #burning-n) ēšta. %% It was burning.
+	(else)
+		N=an (#nominative #burning-c) ēšta.
+	(endif)
+
 %% Now for the dark maze itself
 
 (late on every tick) %% Remove the player from darkness if they got trapped
@@ -902,14 +943,20 @@
 		($Obj is filled with #fire)
 	}
 	(par)
-	Nu pedaš dankuešta. %% The room became dark.
+	Nu pedan dankuešta. %% The room became dark.
 	Nu apēz paršun. %% I fled from that place.
 	(enter #kitchen)
+	(now) (map update needed)
 
 #dm-grain %% N
 (storage *)
 (inherently dark *)
-(contents *) halkiyaš
+(contents *) ḫalkiyaš
+(dict * in #nominative) ḫalkiš
+(dict * in #genitive) ḫalkiyaš
+(dict * in #dative) ḫalkiya
+(dict * in #accusative) ḫalkin
+(dict * in #ablative) ḫalkiyaz
 
 (from * go #up to #kitchen)
 (from * go #west to #dm-pottery)
@@ -938,18 +985,17 @@
 
 (* accepts substance #oil)
 (* accepts substance #fire)
-	(* is filled with #oil) %% Doesn't accept fire until it's filled
+	(* is filled with #oil) %% Doesn’t accept fire until it’s filled
 	(or)
-	(* is filled with #fire) %% But then keeps burning once the oil's gone
+	(* is filled with #fire) %% But then keeps burning once the oil’s gone
 (* has modifier #empty) ~(* is filled with $)
 (* has modifier #oily) (* is filled with #oil)
-%% Will receive "burning" modifier from substances.dg
+%% Will receive “burning” modifier from substances.dg
 
 (instead of [[put $X $Y] $])
 	{ ($X = *) ($Y is filled with #oil) (or) ($Y = *) ($X is filled with #oil) }
 	(* is #heldby #me)
-	Nu (#accusative #oil) (dtm {DUG})(name * in #dative) anda tēḫḫun. %% I put the oil in the lamp.
-	%% Doesn't use (#dative *) because that would include the "empty" modifier
+	Nu (errorize #accusative #oil) (#dative * modifierless) anda tēḫḫun. %% I put the oil in the lamp.
 	(now) (* is filled with #oil)
 	(now) (update needed)
 
@@ -965,6 +1011,10 @@
 (storage *)
 (inherently dark *)
 (contents *) wiyanaš
+(dict * in #nominative/#genitive) wiyanaš
+(dict * in #dative) wiyani
+(dict * in #accusative) wiyanan
+(dict * in #ablative) wiyanaz
 
 (from * go #west to #dm-grain)
 (from * go #south to #dm-legumes)
@@ -998,11 +1048,11 @@
 %% Final bookkeeping
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% We're going to need so many of these...
+%% We’re going to need so many of these...
 (room *(storage $))
 (*(storage $) uses preverb #in)
 (full contents $Obj) (contents $Obj)
-(full contents $Obj) (span @akk) ša (logo contents $Obj) %% Add an Akkadogram preposition if it's a logogram; Tim suggested putting the genitive before the noun even when it's ŠA something, so that's what I'm doing for now
+(full contents $Obj) (span @akk) ša (logo contents $Obj) %% Add an Akkadogram preposition if it’s a logogram; Tim suggested putting the genitive before the noun even when it’s ŠA something, so that’s what I’m doing for now
 (name (storage $Obj) in #nominative/#genitive) (full contents $Obj) antakaš
 (name (storage $Obj) in #dative) (full contents $Obj) antaki
 (name (storage $Obj) in #accusative) (full contents $Obj) antakan
@@ -1013,7 +1063,7 @@
 	(current player $Player)
 	~($Player has a light source)
 	~($Obj has a light source)
-	dankui %% "Dark"
+	dankui %% “Dark”
 (short name (storage $Obj)) (contents $Obj) 
 (short name (storage $Obj)) (logo contents $Obj)
 (medium short name (storage $Obj)) %% Likewise
@@ -1021,13 +1071,13 @@
 	(current player $Player)
 	~($Player has a light source)
 	~($Obj has a light source)
-	dankui %% "Dark"
+	dankui %% “Dark”
 (medium short name (storage $Obj)) (#dative $Obj)
 
 %% In case someone tries to grab random logograms
 (prevent [[take (storage $) | $] $])
 	Nu kuitki natta dāḫḫun. %% I did not take anything.
-	(div @error) { Presumably nothing in this room was useful to the narrator's mission. }
+	(div @error) { Presumably nothing in this room was useful to the narrator’s mission. }
 
 %% And finally, the circumstances in which each verb gets unlocked
 %% All of these are automatically unlocked from tablet 1
@@ -1038,7 +1088,7 @@
 (verb #v-drop unlocked)
 (verb #v-put unlocked)
 
-%% This one pops up when you meet a person again, because it's funny
+%% This one pops up when you meet a person again, because it’s funny
 (verb #v-slay unlocked) (#washhouse is visited)
 
 %% These are the new ones in tablet 2
@@ -1046,3 +1096,10 @@
 (verb #v-wait unlocked) (#kitchen is visited) %% Where an every-turn-moving NPC is first visible
 (verb #v-cut unlocked) (#knife is handled)
 (verb #v-wash unlocked) (#washhouse is visited)
+
+%% By popular demand: pet the dog
+(late on every tick)
+	(current room $Room)
+	(#dog is in room $Room)
+	(now) (dog has been met)
+(verb #v-pet unlocked) (dog has been met)
