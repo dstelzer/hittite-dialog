@@ -104,3 +104,7 @@ regress3: regress3.out
 regress: regress1 regress2 regress3
 
 .PHONY: regress regress1 regress2 regress3 deploy debug1 debug2 debug3 serials
+
+PWD := $(shell pwd)
+hints.html: hints.clu
+	( cd ~/Projects/Invisiclues && python3 maker.py $(PWD)/hints )

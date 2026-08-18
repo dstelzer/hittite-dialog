@@ -31,6 +31,7 @@
 	text-transform: uppercase;
 }
 .bound .aa-dont-syllabify .word{
+	display: inline-block; /* Enable ::first-letter */
 	text-transform: lowercase;
 }
 .bound .aa-dont-syllabify .word::first-letter{

@@ -1,0 +1,340 @@
+<!-- Automatically generated -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hittite Adventure InvisiClues</title>
+	<style>
+html {
+	background: white;
+	color: black;
+}
+
+@media (prefers-color-scheme: dark) { /* Dark mode support! */
+	html {
+		background: black;
+		color: white;
+	}
+	.clue::selection{
+		background-color:white;
+		color:black;
+	}
+}
+
+h1{
+	text-align:center;
+}
+
+h2, h3, h4, h5, h6{
+	display: inline;
+	font-size: inherit;
+	margin: inherit;
+	font-weight: inherit;
+}
+
+/*p{
+	text-align:center;
+}*/
+ol li{
+	font-size:large; /* formerly x-large */
+	font-weight:bold;
+	/*text-decoration:underline;*/
+}
+li ol li{
+	font-size:large;
+	font-weight:normal; /* formerly bold */
+	text-decoration:none;
+}
+li ol li ol li{
+	font-size:large;
+	font-weight:normal;
+	text-decoration:none;
+}
+
+.outer{
+	background-color:#CCC;
+	font-size:medium;
+	font-weight:normal;
+	text-decoration:none;
+	color:#CCC;
+}
+
+.clue{
+/*	background-color:#CCC;
+	color:#CCC;	*/
+/*	visibility:hidden;	*/
+}
+
+.outer:hover .clue{
+	visibility:visible;
+	background-color:#666;
+}
+
+.clue2{
+	background-color:#333;
+	visibility:visible;
+}
+
+.clue::selection{
+	background-color:black;
+	color:white;
+}
+
+</style><script language="javascript">
+function showhide(id){
+	console.log("Show/hide "+id);
+	var obj = document.getElementById('x'+id);
+	var child = obj.getElementsByTagName('span')[0];
+	if(child.className == "clue"){
+		console.log("\tShowing");
+		child.className = "clue2";
+	}else{
+		console.log("\tHiding");
+		child.className = "clue";
+	}
+}
+
+function expandcollapse(id){
+	console.log("Expand/collapse "+id);
+	var obj = document.getElementById('x'+id);
+	while(obj.localName != 'li') obj = obj.parentElement;
+	var child = obj.getElementsByTagName('ol')[0];
+	if(!child) return;
+	if(child.style.display == "block"){
+		console.log("\tCollapsing");
+		child.style.display = "none";
+	}else{
+		console.log("\tExpanding");
+		child.style.display = "block";
+	}
+}
+
+function startup(){
+	var list = document.getElementsByTagName('ol');
+	var obj;
+	for(var i=0; i<list.length; i++){
+		obj = list[i];
+		if(obj.parentElement.nodeName.toLowerCase() == "li")
+			obj.style.display = "none";
+	}
+}
+
+</script>
+</head>
+<body onload="startup()">
+<h1>InvisiClues for <i>Ḫattušumna Laḫḫa</i> by Daniel Stelzer, Tim Leonard, and Daniel Gaskell</h1>
+<p>Click a section heading to show or hide its contents. To show a clue after opening a question, hover your mouse over the gray box. The text should appear on top of it. You can also highlight the boxes or click them to reveal the hints.</p>
+Stuck? Don’t worry! These hints are here to help.
+<ol>
+<li> <h2> <span class="parent" role="link" id="x0" onclick="expandcollapse(0);">The Hittite Language</span> </h2><ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x1" onclick="expandcollapse(1);">How does cuneiform work?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x2" onclick="showhide(2);"> <span class="clue">If you’re not already familiar with cuneiform, we recommend sticking with transcription. Learning a new language is hard enough on its own!</span> </span></li>
+<li> <span class="outer" id="x3" onclick="showhide(3);"> <span class="clue">But, <a href="https://meadstelzer.com/daniel/cuneiform/lessons/cuneiform.html">there are some lessons here</a> if you want them!</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x4" onclick="expandcollapse(4);">How do I pronounce these words?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x5" onclick="showhide(5);"> <span class="clue">Don’t worry too much about accurate pronunciation! But the way most scholars pronounce these words:</span> </span></li>
+<li> <span class="outer" id="x6" onclick="showhide(6);"> <span class="clue">A, E, I, U as in f<u>a</u>ther, fort<u>e</u>, mach<u>i</u>ne, t<u>u</u>be.</span> </span></li>
+<li> <span class="outer" id="x7" onclick="showhide(7);"> <span class="clue">Ā, Ē, Ī, Ū like that but longer.</span> </span></li>
+<li> <span class="outer" id="x8" onclick="showhide(8);"> <span class="clue">Ḫ like in lo<u>ch</u> or Ba<u>ch</u>.</span> </span></li>
+<li> <span class="outer" id="x9" onclick="showhide(9);"> <span class="clue">Z like in pi<u>zz</u>a.</span> </span></li>
+<li> <span class="outer" id="x10" onclick="showhide(10);"> <span class="clue">Š is a normal S, like in <u>s</u>ip.</span> </span></li>
+<li> <span class="outer" id="x11" onclick="showhide(11);"> <span class="clue">Everything else basically like English.</span> </span></li>
+<li> <span class="outer" id="x12" onclick="showhide(12);"> <span class="clue">There was probably no distinction between P/B, T/D, or K/G/Q in actual Hittite, but scholars may pronounce them differently for convenience.</span> </span></li>
+<li> <span class="outer" id="x13" onclick="showhide(13);"> <span class="clue">There was also probably an O (and Ō) sound in actual Hittite, but most people don’t write or pronounce them differently nowadays.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x14" onclick="expandcollapse(14);">How does the structure of a Hittite sentence work?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x15" onclick="showhide(15);"> <span class="clue">It often (but not always) starts with a meaningless “connective” word, like <i>nu</i>.</span> </span></li>
+<li> <span class="outer" id="x16" onclick="showhide(16);"> <span class="clue">Next, there may be a series of “clitics”, little mini-words that can’t stand on their own and have to glom onto the first word of the sentence.</span> </span></li>
+<li> <span class="outer" id="x17" onclick="showhide(17);"> <span class="clue">Then, a series of nouns, adverbs, and other words. These can come in any order: the case markings make their roles in the sentence clear.</span> </span></li>
+<li> <span class="outer" id="x18" onclick="showhide(18);"> <span class="clue">Finally, the verb(s) end the sentence.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x19" onclick="expandcollapse(19);">How do the noun cases work?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x20" onclick="showhide(20);"> <span class="clue">The nominative marks the subject of the sentence: “<u>I</u> gave the book to her.”</span> </span></li>
+<li> <span class="outer" id="x21" onclick="showhide(21);"> <span class="clue">The accusative marks the direct object of the sentence: “I gave <u>the book</u> to her.”</span> </span></li>
+<li> <span class="outer" id="x22" onclick="showhide(22);"> <span class="clue">The dative marks a location or destination: “I gave the book <u>to her</u>”, “I was <u>at the library</u>”.</span> </span></li>
+<li> <span class="outer" id="x23" onclick="showhide(23);"> <span class="clue">This is enough for tablet 1. But on tablets 2 and 3, there are two additional noun cases.</span> </span></li>
+<li> <span class="outer" id="x24" onclick="showhide(24);"> <span class="clue">The genitive turns one noun into a modifier for another noun: “<u>my sister’s</u> book”, “a bottle <u>of water</u>”.</span> </span></li>
+<li> <span class="outer" id="x25" onclick="showhide(25);"> <span class="clue">The ablative marks a source or a tool: “I took a coin <u>from the jar</u>”, “I unlocked the door <u>with the key</u>”.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x26" onclick="expandcollapse(26);">What are these words with capital letters and dots?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x27" onclick="showhide(27);"> <span class="clue">Those are “logograms”: cuneiform signs standing for whole words, like how “7” is short for “seven”.</span> </span></li>
+<li> <span class="outer" id="x28" onclick="showhide(28);"> <span class="clue">Often we don’t know how the Hittites would actually pronounce the words, so we give the names of the cuneiform signs, written in capitals to show that we’re talking about signs instead of sounds.</span> </span></li>
+<li> <span class="outer" id="x29" onclick="showhide(29);"> <span class="clue">It’s sort of like kanji in Japanese.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x30" onclick="expandcollapse(30);">What are these words in italic capitals?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x31" onclick="showhide(31);"> <span class="clue">Those are “Akkadograms”: Akkadian words written in a Hittite text.</span> </span></li>
+<li> <span class="outer" id="x32" onclick="showhide(32);"> <span class="clue">They’re mostly used to indicate the case of a logogram noun.</span> </span></ol></ol>
+</li>
+<li> <h2> <span class="parent" role="link" id="x33" onclick="expandcollapse(33);">Tablet 1</span> </h2><ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x34" onclick="expandcollapse(34);">What is my overall goal here?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x35" onclick="showhide(35);"> <span class="clue">To enter the city.</span> </span></li>
+<li> <span class="outer" id="x36" onclick="showhide(36);"> <span class="clue">You’ll have to get in via the watchtower.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x37" onclick="expandcollapse(37);">How do I move around?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x38" onclick="showhide(38);"> <span class="clue">To go to a place, use that place with the verb <i>pāun</i>.</span> </span></li>
+<li> <span class="outer" id="x39" onclick="showhide(39);"> <span class="clue">The place should be in the dative case, since it’s a destination.</span> </span></li>
+<li> <span class="outer" id="x40" onclick="showhide(40);"> <span class="clue">To cross a threshold, use that threshold with the verb <i>šarraḫḫun</i>.</span> </span></li>
+<li> <span class="outer" id="x41" onclick="showhide(41);"> <span class="clue">The threshold should be in the accusative case.</span> </span></li>
+<li> <span class="outer" id="x42" onclick="showhide(42);"> <span class="clue">The compass rose will show places in the dative case and thresholds in the accusative case, for your convenience.</span> </span></li>
+<li> <span class="outer" id="x43" onclick="showhide(43);"> <span class="clue">Once you’ve moved around a bit, you’ll unlock an easier way to navigate, involving numbers.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x44" onclick="expandcollapse(44);">How do I get through the gate?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x45" onclick="showhide(45);"> <span class="clue">You have to open it from the other side.</span> </span></li>
+<li> <span class="outer" id="x46" onclick="showhide(46);"> <span class="clue">Once you’re on the other side, take the bar.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x47" onclick="expandcollapse(47);">How do I get through the window?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x48" onclick="showhide(48);"> <span class="clue">It’s very high up.</span> </span></li>
+<li> <span class="outer" id="x49" onclick="showhide(49);"> <span class="clue">You’ll need a ladder.</span> </span></li>
+<li> <span class="outer" id="x50" onclick="showhide(50);"> <span class="clue">Make sure you’ve set the ladder down on the ground.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x51" onclick="expandcollapse(51);">How do I deal with the watchman?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x52" onclick="showhide(52);"> <span class="clue">He’s unconscious and not a threat. You can ignore him entirely.</span> </span></li>
+<li> <span class="outer" id="x53" onclick="showhide(53);"> <span class="clue">But you can also kill him if you want. It’s the Bronze Age; death is common.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x54" onclick="expandcollapse(54);">How can I see in the dark room?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x55" onclick="showhide(55);"> <span class="clue">In the Bronze Age, a light source basically means sunlight, moonlight, or fire.</span> </span></li>
+<li> <span class="outer" id="x56" onclick="showhide(56);"> <span class="clue">In this case you need fire.</span> </span></li>
+<li> <span class="outer" id="x57" onclick="showhide(57);"> <span class="clue">Have you found anything made of wood that you could ignite?</span> </span></li>
+<li> <span class="outer" id="x58" onclick="showhide(58);"> <span class="clue">Put the door bar in the hearth.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x59" onclick="expandcollapse(59);">How can I get the dammuri-object?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x60" onclick="showhide(60);"> <span class="clue">The fire is too hot to put your hand in.</span> </span></li>
+<li> <span class="outer" id="x61" onclick="showhide(61);"> <span class="clue">You need to put water on it.</span> </span></li>
+<li> <span class="outer" id="x62" onclick="showhide(62);"> <span class="clue">Find some container, then fill it with water from the river, and put it on the fire.</span> </span></li>
+<li> <span class="outer" id="x63" onclick="showhide(63);"> <span class="clue">The pithos in the dark room will work.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x64" onclick="expandcollapse(64);">How can I enter the city?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x65" onclick="showhide(65);"> <span class="clue">You can’t. That’s enemy territory; you can’t just walk in!</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x66" onclick="expandcollapse(66);">How can I climb onto the roof?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x67" onclick="showhide(67);"> <span class="clue">You’ll need a ladder.</span> </span></li>
+<li> <span class="outer" id="x68" onclick="showhide(68);"> <span class="clue">You can carry it in through the front gate.</span> </span></ol></ol>
+</li>
+<li> <h2> <span class="parent" role="link" id="x69" onclick="expandcollapse(69);">Tablet 2</span> </h2><ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x70" onclick="expandcollapse(70);">What is my overall goal here?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x71" onclick="showhide(71);"> <span class="clue">To enter the temple.</span> </span></li>
+<li> <span class="outer" id="x72" onclick="showhide(72);"> <span class="clue">It’s guarded, so you need a disguise.</span> </span></li>
+<li> <span class="outer" id="x73" onclick="showhide(73);"> <span class="clue">That means a garment and a prop (some fresh bread for the sacrifice).</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x74" onclick="expandcollapse(74);">Where can I find a garment?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x75" onclick="showhide(75);"> <span class="clue">Look in the washhouse.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x76" onclick="expandcollapse(76);">How do I leave with the garment?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x77" onclick="showhide(77);"> <span class="clue">You need to keep the baker from chasing you.</span> </span></li>
+<li> <span class="outer" id="x78" onclick="showhide(78);"> <span class="clue">This will require an object in your inventory.</span> </span></li>
+<li> <span class="outer" id="x79" onclick="showhide(79);"> <span class="clue">One option is to just kill him. (The door bolt works as a weapon.)</span> </span></li>
+<li> <span class="outer" id="x80" onclick="showhide(80);"> <span class="clue">The other option is to put the door bolt on the washhouse door, to block him in.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x81" onclick="expandcollapse(81);">How do I make bread?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x82" onclick="showhide(82);"> <span class="clue">Look at the definition of “iyatti”.</span> </span></li>
+<li> <span class="outer" id="x83" onclick="showhide(83);"> <span class="clue">You’ll need three things: bread dough, chopped cheese, and chopped fruit.</span> </span></li>
+<li> <span class="outer" id="x84" onclick="showhide(84);"> <span class="clue">Which means you really need four things: bread dough, cheese, fruit, and a knife.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x85" onclick="expandcollapse(85);">Where do I find bread dough?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x86" onclick="showhide(86);"> <span class="clue">It’s just sitting out in the open. Explore a bit and you’ll find it.</span> </span></li>
+<li> <span class="outer" id="x87" onclick="showhide(87);"> <span class="clue">It’s in the kneading trough in the kitchen.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x88" onclick="expandcollapse(88);">Where do I find cheese?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x89" onclick="showhide(89);"> <span class="clue">It’s in the cellars (the bottom of the map).</span> </span></li>
+<li> <span class="outer" id="x90" onclick="showhide(90);"> <span class="clue">You need some light source to see in the dark.</span> </span></li>
+<li> <span class="outer" id="x91" onclick="showhide(91);"> <span class="clue">The reeds can be ignited in the oven.</span> </span></li>
+<li> <span class="outer" id="x92" onclick="showhide(92);"> <span class="clue">They don’t burn for very long, though. What would make them burn longer?</span> </span></li>
+<li> <span class="outer" id="x93" onclick="showhide(93);"> <span class="clue">Dipping a reed in oil makes it burn for longer.</span> </span></li>
+<li> <span class="outer" id="x94" onclick="showhide(94);"> <span class="clue">It will still burn out before you find the cheese...</span> </span></li>
+<li> <span class="outer" id="x95" onclick="showhide(95);"> <span class="clue">...but you can find a lamp.</span> </span></li>
+<li> <span class="outer" id="x96" onclick="showhide(96);"> <span class="clue">Fill the lamp with oil and light it in the oven.</span> </span></li>
+<li> <span class="outer" id="x97" onclick="showhide(97);"> <span class="clue">Now you have all the light you could want.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x98" onclick="expandcollapse(98);">Where do I find fruit?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x99" onclick="showhide(99);"> <span class="clue">It’s off to the west (the left side of the map).</span> </span></li>
+<li> <span class="outer" id="x100" onclick="showhide(100);"> <span class="clue">You’ll have to evade the guard—there’s no way to kill him.</span> </span></li>
+<li> <span class="outer" id="x101" onclick="showhide(101);"> <span class="clue">Follow him down the road, and hide in the honey storeroom while he turns around.</span> </span></li>
+<li> <span class="outer" id="x102" onclick="showhide(102);"> <span class="clue">The fruit storeroom is at the very end of the path.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x103" onclick="expandcollapse(103);">Where do I find a knife?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x104" onclick="showhide(104);"> <span class="clue">You saw one near the beginning of the tablet.</span> </span></li>
+<li> <span class="outer" id="x105" onclick="showhide(105);"> <span class="clue">A dog took it and ran off to the north (the top of the map).</span> </span></li>
+<li> <span class="outer" id="x106" onclick="showhide(106);"> <span class="clue">You can chase the dog around all you want...</span> </span></li>
+<li> <span class="outer" id="x107" onclick="showhide(107);"> <span class="clue">...but it will always be one room away from you.</span> </span></li>
+<li> <span class="outer" id="x108" onclick="showhide(108);"> <span class="clue">Mathematically, we could say you and the dog have opposite parity.</span> </span></li>
+<li> <span class="outer" id="x109" onclick="showhide(109);"> <span class="clue">You need to go through a loop of odd length to flip your parity.</span> </span></li>
+<li> <span class="outer" id="x110" onclick="showhide(110);"> <span class="clue">The triangle at the top right of the map works.</span> </span></li>
+<li> <span class="outer" id="x111" onclick="showhide(111);"> <span class="clue">Once you’ve passed through that loop, you can catch the dog.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x112" onclick="expandcollapse(112);">Can I pet the dog?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x113" onclick="showhide(113);"> <span class="clue">I couldn’t find a Hittite word for “pet”, but you can “show affection to” the dog.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x114" onclick="expandcollapse(114);">I have all the ingredients for bread. Now what?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x115" onclick="showhide(115);"> <span class="clue">Chop up the fruit and cheese.</span> </span></li>
+<li> <span class="outer" id="x116" onclick="showhide(116);"> <span class="clue">(You can do that in a single command if you want!)</span> </span></li>
+<li> <span class="outer" id="x117" onclick="showhide(117);"> <span class="clue">Put the fruit and cheese in the dough.</span> </span></li>
+<li> <span class="outer" id="x118" onclick="showhide(118);"> <span class="clue">Put the dough in the oven.</span> </span></li>
+<li> <span class="outer" id="x119" onclick="showhide(119);"> <span class="clue">You now have bread!</span> </span></ol></ol>
+</li>
+<li> <h2> <span class="parent" role="link" id="x120" onclick="expandcollapse(120);">Tablet 3</span> </h2><ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x121" onclick="expandcollapse(121);">What is my overall goal here?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x122" onclick="showhide(122);"> <span class="clue">You’ve recovered your stolen god: it’s in your inventory.</span> </span></li>
+<li> <span class="outer" id="x123" onclick="showhide(123);"> <span class="clue">Now you need to escape.</span> </span></li>
+<li> <span class="outer" id="x124" onclick="showhide(124);"> <span class="clue">That means a disguise and a distraction.</span> </span></li>
+<li> <span class="outer" id="x125" onclick="showhide(125);"> <span class="clue">See below.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x126" onclick="expandcollapse(126);">How can I enter the main temple area?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x127" onclick="showhide(127);"> <span class="clue">You need a disguise.</span> </span></li>
+<li> <span class="outer" id="x128" onclick="showhide(128);"> <span class="clue">The dead scribe in the back room has something that will work.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x129" onclick="expandcollapse(129);">How do I leave the main temple area?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x130" onclick="showhide(130);"> <span class="clue">You need a big distraction.</span> </span></li>
+<li> <span class="outer" id="x131" onclick="showhide(131);"> <span class="clue">Have you read the tablets in the back room?</span> </span></li>
+<li> <span class="outer" id="x132" onclick="showhide(132);"> <span class="clue">Someone is planning to assassinate the king.</span> </span></li>
+<li> <span class="outer" id="x133" onclick="showhide(133);"> <span class="clue">Give that person the signal, and you’ll have a great distraction.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x134" onclick="expandcollapse(134);">How do I read a tablet?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x135" onclick="showhide(135);"> <span class="clue">Hittite actually didn’t have a word for “read”.</span> </span></li>
+<li> <span class="outer" id="x136" onclick="showhide(136);"> <span class="clue">Just “look at” the tablet (ūḫḫun).</span> </span></li>
+<li> <span class="outer" id="x137" onclick="showhide(137);"> <span class="clue">(You can look at them all in a single command if you want!)</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x138" onclick="expandcollapse(138);">How do I solve this puzzle to make a distraction?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x139" onclick="showhide(139);"> <span class="clue">Remember, the diviner said that exactly two people are guilty.</span> </span></li>
+<li> <span class="outer" id="x140" onclick="showhide(140);"> <span class="clue">And that the innocent people would tell the truth.</span> </span></li>
+<li> <span class="outer" id="x141" onclick="showhide(141);"> <span class="clue">There’s only one grouping of the five people that has three innocent truth-tellers and two guilty liars.</span> </span></li>
+<li> <span class="outer" id="x142" onclick="showhide(142);"> <span class="clue">Once you know who’s telling the truth, you have to figure out the intended assassin, and what signal will make them kill the king.</span> </span></li>
+<li> <span class="outer" id="x143" onclick="showhide(143);"> <span class="clue">Do that signal to that person.</span> </span></ol>
+</li>
+<li> <h3> <span class="parent" role="link" id="x144" onclick="expandcollapse(144);">I weep. Is there no easier way to do this?</span> </h3><ol>
+</li>
+<li> <span class="outer" id="x145" onclick="showhide(145);"> <span class="clue">You can type <tt>/win</tt> to bypass the puzzle.</span> </span></li></ol>
+</body>
+</html>
