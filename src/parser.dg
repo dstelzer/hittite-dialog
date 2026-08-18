@@ -776,12 +776,26 @@
 		(span @metaverb) (link) /undo ,
 		(span @metaverb) (link) /save ,
 		(span @metaverb) (link) /restore ,
-		(span @metaverb) (link) /again , and
+		(span @metaverb) (link) /again ,
+		(span @metaverb) (link) /hint , and
 		(span @metaverb) (link) /credits .
 	}
 	(now) (meta verbs introduced)
 
 (parse metacommand [\/gameover]) (game over {The End}) %% For testing
+
+(parse metacommand [\/hints/\/hint])
+	(if) (interpreter supports links) (then)
+		(div @meta) {
+			(link resource @hints) { Click here } to open hints in a new tab.
+		}
+	(else)
+		(div @meta) {
+			For hints, see the file hints.html included in the download.
+		}
+	(endif)
+
+(define resource @hints) hints.html; A file of hints
 
 (parse metacommand $Words)
 	(div @meta) { The meta command (print quoted $Words) was not recognized. Try (span @metaverb) (link) /about for more information. }

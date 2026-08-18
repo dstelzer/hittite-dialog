@@ -10,3 +10,5 @@ dictionary_simple.js
 .~*
 *.xcf
 feedback/
+ifcomp/
+*.zip

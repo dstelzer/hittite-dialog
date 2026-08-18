@@ -1,4 +1,2 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
-Tim capitalization in bound transcription
-verbs in bullet list?
