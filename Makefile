@@ -47,7 +47,7 @@ web: tablet1.aastory tablet2.aastory tablet3.aastory ishamai modweb dictionary.j
 	rm web/resources/*.aastory
 	rm web/resources/story.js
 	## Get rid of the files we'll be replacing
-	cp -r modweb/* web/
+	cp -rL modweb/* web/
 	## Replace the static files
 	aambundle -t web:story tablet1.aastory -o web/resources/tablet1.js
 	aambundle -t web:story tablet2.aastory -o web/resources/tablet2.js
@@ -76,7 +76,7 @@ ifcomp.zip: web hints.html
 	rm -f ifcomp.zip
 	rm -rf ifcomp
 	mkdir ifcomp
-	cp -r web ifcomp/
+	cp -rL web ifcomp/
 	cp index.html ifcomp/
 	cp hints.html ifcomp/
 	cp README.ifcomp ifcomp/
