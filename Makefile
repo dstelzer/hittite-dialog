@@ -3,7 +3,7 @@ OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources -vv -H 2000 -A 750
 # ^ for determiners, ⸗ for proper clitics, = for ASCII clitics; the rest are default
 OPTIONS_DBG = --word-seps='^=.,;"()*'
 # Debugger can't handle non-ASCII word separators yet
-
+VERSION = 3
 
 debug1: $(FILES) src/act1.dg platform/debug.dg
 	dgdebug $(OPTIONS_DBG) platform/debug.dg src/act1.dg $(FILES)
@@ -41,8 +41,8 @@ web: tablet1.aastory tablet2.aastory tablet3.aastory ishamai modweb dictionary.j
 	rm -rf web
 	aambundle -t web tablet1.aastory -o web
 	## Generate the basic files needed, using the first tablet as a template
-	cp -r ishamai web/
-	## TODO: only really need to copy the .js files and fonts/ from Ishamai
+	cp -rL ishamai_trimmed web/ishamai
+	## Bring in ishamai
 	rm web/play.html
 	rm web/resources/*.aastory
 	rm web/resources/story.js
@@ -71,6 +71,17 @@ web: tablet1.aastory tablet2.aastory tablet3.aastory ishamai modweb dictionary.j
 	## Tablet 3
 	rm web/template.html
 	## Get rid of the template once it's served its purpose
+
+ifcomp.zip: web hints.html
+	rm -f ifcomp.zip
+	rm -rf ifcomp
+	mkdir ifcomp
+	cp -r web ifcomp/
+	cp index.html ifcomp/
+	cp hints.html ifcomp/
+	cp README.ifcomp ifcomp/
+	( cd ifcomp && zip -r ../ifcomp.zip . )
+	cp ifcomp.zip ifcomp_$(VERSION).zip
 
 # deploy to meadstelzer.com/daniel/if/hittite/
 deploy: web
@@ -104,3 +115,7 @@ regress3: regress3.out
 regress: regress1 regress2 regress3
 
 .PHONY: regress regress1 regress2 regress3 deploy debug1 debug2 debug3 serials
+
+PWD := $(shell pwd)
+hints.html: hints.clu
+	( cd ~/Projects/Invisiclues && python3 maker.py $(PWD)/hints )

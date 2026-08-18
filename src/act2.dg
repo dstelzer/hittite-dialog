@@ -568,6 +568,11 @@
 (dict * in #ablative) GIR2-az GÍR-az
 (* is #heldby #dog)
 
+(prevent [[cut $Obj with *] $Details]) %% Ensure no inappropriate responses
+	~($Obj = #fruit)
+	~($Obj = #cheese)
+	(describe negative action [[cut $Obj with *] $Details]) %% I didn’t chop it
+
 %% Whole buncha rooms
 
 %% NW       R

@@ -1,0 +1,151 @@
+@TITLE Ḫattušumna Laḫḫa
+@SHORT Hittite Adventure
+@AUTHOR Daniel Stelzer, Tim Leonard, and Daniel Gaskell
+@INTRO Stuck? Don’t worry! These hints are here to help.
+
+# The Hittite Language
+	# How does cuneiform work?
+		If you’re not already familiar with cuneiform, we recommend sticking with transcription. Learning a new language is hard enough on its own!
+		But, <a href="https://meadstelzer.com/daniel/cuneiform/lessons/cuneiform.html">there are some lessons here</a> if you want them!
+	# How do I pronounce these words?
+		Don’t worry too much about accurate pronunciation! But the way most scholars pronounce these words:
+		A, E, I, U as in f<u>a</u>ther, fort<u>e</u>, mach<u>i</u>ne, t<u>u</u>be.
+		Ā, Ē, Ī, Ū like that but longer.
+		Ḫ like in lo<u>ch</u> or Ba<u>ch</u>.
+		Z like in pi<u>zz</u>a.
+		Š is a normal S, like in <u>s</u>ip.
+		Everything else basically like English.
+		There was probably no distinction between P/B, T/D, or K/G/Q in actual Hittite, but scholars may pronounce them differently for convenience.
+		There was also probably an O (and Ō) sound in actual Hittite, but most people don’t write or pronounce them differently nowadays.
+	# How does the structure of a Hittite sentence work?
+		It often (but not always) starts with a meaningless “connective” word, like <i>nu</i>.
+		Next, there may be a series of “clitics”, little mini-words that can’t stand on their own and have to glom onto the first word of the sentence.
+		Then, a series of nouns, adverbs, and other words. These can come in any order: the case markings make their roles in the sentence clear.
+		Finally, the verb(s) end the sentence.
+	# How do the noun cases work?
+		The nominative marks the subject of the sentence: “<u>I</u> gave the book to her.”
+		The accusative marks the direct object of the sentence: “I gave <u>the book</u> to her.”
+		The dative marks a location or destination: “I gave the book <u>to her</u>”, “I was <u>at the library</u>”.
+		This is enough for tablet 1. But on tablets 2 and 3, there are two additional noun cases.
+		The genitive turns one noun into a modifier for another noun: “<u>my sister’s</u> book”, “a bottle <u>of water</u>”.
+		The ablative marks a source or a tool: “I took a coin <u>from the jar</u>”, “I unlocked the door <u>with the key</u>”.
+	# What are these words with capital letters and dots?
+		Those are “logograms”: cuneiform signs standing for whole words, like how “7” is short for “seven”.
+		Often we don’t know how the Hittites would actually pronounce the words, so we give the names of the cuneiform signs, written in capitals to show that we’re talking about signs instead of sounds.
+		It’s sort of like kanji in Japanese.
+	# What are these words in italic capitals?
+		Those are “Akkadograms”: Akkadian words written in a Hittite text.
+		They’re mostly used to indicate the case of a logogram noun.
+# Tablet 1
+	# What is my overall goal here?
+		To enter the city.
+		You’ll have to get in via the watchtower.
+	# How do I move around?
+		To go to a place, use that place with the verb <i>pāun</i>.
+		The place should be in the dative case, since it’s a destination.
+		To cross a threshold, use that threshold with the verb <i>šarraḫḫun</i>.
+		The threshold should be in the accusative case.
+		The compass rose will show places in the dative case and thresholds in the accusative case, for your convenience.
+		Once you’ve moved around a bit, you’ll unlock an easier way to navigate, involving numbers.
+	# How do I get through the gate?
+		You have to open it from the other side.
+		Once you’re on the other side, take the bar.
+	# How do I get through the window?
+		It’s very high up.
+		You’ll need a ladder.
+		Make sure you’ve set the ladder down on the ground.
+	# How do I deal with the watchman?
+		He’s unconscious and not a threat. You can ignore him entirely.
+		But you can also kill him if you want. It’s the Bronze Age; death is common.
+	# How can I see in the dark room?
+		In the Bronze Age, a light source basically means sunlight, moonlight, or fire.
+		In this case you need fire.
+		Have you found anything made of wood that you could ignite?
+		Put the door bar in the hearth.
+	# How can I get the dammuri-object?
+		The fire is too hot to put your hand in.
+		You need to put water on it.
+		Find some container, then fill it with water from the river, and put it on the fire.
+		The pithos in the dark room will work.
+	# How can I enter the city?
+		You can’t. That’s enemy territory; you can’t just walk in!
+	# How can I climb onto the roof?
+		You’ll need a ladder.
+		You can carry it in through the front gate.
+# Tablet 2
+	# What is my overall goal here?
+		To enter the temple.
+		It’s guarded, so you need a disguise.
+		That means a garment and a prop (some fresh bread for the sacrifice).
+	# Where can I find a garment?
+		Look in the washhouse.
+	# How do I leave with the garment?
+		You need to keep the baker from chasing you.
+		This will require an object in your inventory.
+		One option is to just kill him. (The door bolt works as a weapon.)
+		The other option is to put the door bolt on the washhouse door, to block him in.
+	# How do I make bread?
+		Look at the definition of “iyatti”.
+		You’ll need three things: bread dough, chopped cheese, and chopped fruit.
+		Which means you really need four things: bread dough, cheese, fruit, and a knife.
+	# Where do I find bread dough?
+		It’s just sitting out in the open. Explore a bit and you’ll find it.
+		It’s in the kneading trough in the kitchen.
+	# Where do I find cheese?
+		It’s in the cellars (the bottom of the map).
+		You need some light source to see in the dark.
+		The reeds can be ignited in the oven.
+		They don’t burn for very long, though. What would make them burn longer?
+		Dipping a reed in oil makes it burn for longer.
+		It will still burn out before you find the cheese...
+		...but you can find a lamp.
+		Fill the lamp with oil and light it in the oven.
+		Now you have all the light you could want.
+	# Where do I find fruit?
+		It’s off to the west (the left side of the map).
+		You’ll have to evade the guard—there’s no way to kill him.
+		Follow him down the road, and hide in the honey storeroom while he turns around.
+		The fruit storeroom is at the very end of the path.
+	# Where do I find a knife?
+		You saw one near the beginning of the tablet.
+		A dog took it and ran off to the north (the top of the map).
+		You can chase the dog around all you want...
+		...but it will always be one room away from you.
+		Mathematically, we could say you and the dog have opposite parity.
+		You need to go through a loop of odd length to flip your parity.
+		The triangle at the top right of the map works.
+		Once you’ve passed through that loop, you can catch the dog.
+	# Can I pet the dog?
+		I couldn’t find a Hittite word for “pet”, but you can “show affection to” the dog.
+	# I have all the ingredients for bread. Now what?
+		Chop up the fruit and cheese.
+		(You can do that in a single command if you want!)
+		Put the fruit and cheese in the dough.
+		Put the dough in the oven.
+		You now have bread!
+# Tablet 3
+	# What is my overall goal here?
+		You’ve recovered your stolen god: it’s in your inventory.
+		Now you need to escape.
+		That means a disguise and a distraction.
+		See below.
+	# How can I enter the main temple area?
+		You need a disguise.
+		The dead scribe in the back room has something that will work.
+	# How do I leave the main temple area?
+		You need a big distraction.
+		Have you read the tablets in the back room?
+		Someone is planning to assassinate the king.
+		Give that person the signal, and you’ll have a great distraction.
+	# How do I read a tablet?
+		Hittite actually didn’t have a word for “read”.
+		Just “look at” the tablet (ūḫḫun).
+		(You can look at them all in a single command if you want!)
+	# How do I solve this puzzle to make a distraction?
+		Remember, the diviner said that exactly two people are guilty.
+		And that the innocent people would tell the truth.
+		There’s only one grouping of the five people that has three innocent truth-tellers and two guilty liars.
+		Once you know who’s telling the truth, you have to figure out the intended assassin, and what signal will make them kill the king.
+		Do that signal to that person.
+	# I weep. Is there no easier way to do this?
+		You can type <tt>/win</tt> to bypass the puzzle.
