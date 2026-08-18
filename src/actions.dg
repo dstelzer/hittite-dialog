@@ -47,7 +47,7 @@
 	(span @metaverb) (link) /restore ,
 	(span @metaverb) (link) /again ,
 	(span @metaverb) (link) /about ,
-	(span @metaverb) (link) /hint ,
+	(span @metaverb) (link resource @hints) /hint , %% No need for an extra click
 	(span @metaverb) (link) /credits
 	, (span @metaverb) (link) /memory %% Comment this out when finalized
 %% TODO: do we need to stop this bar from flashing?

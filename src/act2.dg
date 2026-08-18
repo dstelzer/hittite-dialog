@@ -17,7 +17,7 @@
 (* is #in #courtyard)
 
 (intro)
-	Nu (#dative #courtyard) ešun. %% “I was in the courtyard.”
+	Nu=za=kan (#dative #courtyard) anda ešun. %% “I was in the courtyard.”
 	Nu (#nominative #dog) (#dative #building) pait. %% “A dog went into the building.”
 	Nu (#nominative #baker) (#ablative #building) uet. %% “The baker came out of the building.”
 	Nu (#nominative #baker) (#dative #washhouse) pait. %% “The baker went into the washhouse.”
