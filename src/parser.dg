@@ -1150,6 +1150,7 @@
 	($Obj has modifier $Mod)
 	(object $Mod)
 	~(adjective $Mod)
+	($Mod is one of $AccDatAbl)
 	
 	(if) ($Obj is one of $Acc) (then)
 		($ObjCase = #accusative)
