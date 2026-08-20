@@ -9,3 +9,6 @@ link shows up too visibly in invisiclues
 genzuwanun works on inanimate objects; it should not
 signal verb on dead scribe says he's not a person which is odd
 content warnings
+hand-typed commands always give prevent errors???
+nu=za=kan (likewise nu=mu=kan etc) gives no definition: splits on only first =
+add Ada to credits
