@@ -1,5 +1,5 @@
 (extension version)
-	Hittite action processing version 260815.
+	Hittite action processing version 260817.
 
 (action logging) (fail)
 
@@ -1244,7 +1244,7 @@
 (@genzuwanun wants cases [#accusative])
 (translate [$ genzuwanun $ $Acc | $] into [pet $Acc])
 
-(prevent [[pet (animate $Obj)] $Details])
+(prevent [[pet $Obj] $Details])
 	~(pettable $Obj) %% Only set on the dog in act 2
 	(describe negative action [[pet $Obj] $Details])
 

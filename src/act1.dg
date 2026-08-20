@@ -183,6 +183,9 @@
 %% (* has modifier #gatehouse)
 %% 	~(current room #gatehouse)
 
+(instead of [[put #ladder *] $Details])
+	(try [[drop #ladder] $Details]) %% But keep the original details wording
+
 #gatehouse
 (room *)
 (* uses preverb #in)
@@ -207,6 +210,14 @@
 (name * in #ablative) ḫattaluwaz
 
 (* accepts substance #fire)
+(* has modifier #burnt)
+	(bolt has been burned)
+	~(* is filled with $)
+
+(on every tick)
+	~(bolt has been burned)
+	(* is filled with #fire)
+	(now) (bolt has been burned)
 
 (after [[cross #window] | $]) %% Only describe it on the inside
 	(* is pristine)
@@ -216,6 +227,18 @@
 	(* is pristine)
 	Nu āškan ḫašḫun. %% “I opened the gate.”
 	(now) (update needed)
+
+%% Prioritize putting water on the hearth over this when it’s burning
+(unlikely [$ tēḫḫun $ $ $Dat $])
+	(* is one of $Dat)
+
+#burnt
+(adjective *)
+(neuter *) %% Only applies to ḫattalu
+(name * in #nominative/#accusative/#bare) lukkan
+(name * in #genitive) lukkandaš
+(name * in #dative) lukkandi
+(name * in #ablative) lukkandaz
 
 #foyer
 (room *)
@@ -491,6 +514,14 @@
 		(span @akk) {U₃} is the name of a cuneiform sign that functions like the “&” symbol in English: a shorter way to write the word “and”. The capital letters in our transcription show that this is the name of the sign, not the actual Hittite pronunciation.
 	}
 	(now) (taught heterograms)
+
+%% (tutorial)
+%%	~(taught adjectives)
+%%	(adjectives used)
+%%	(div @tutorial) {
+%%		Like in English, adjectives in Hittite usually come right before the noun. They take the same case as the noun they’re modifying.
+%%	}
+%%	(now) (taught adjectives)
 
 (on every tick) %% Make sure this comes BEFORE redrawing the status bar
 	~(direction numbers enabled)

@@ -2,13 +2,5 @@ update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 new error message when noun X and noun Y appear in a command together, X has Y as a modifier, and Y is not in the genitive case (for people misusing the genitive)
 tablet 3 or Tablet 3? pick one!
-link shows up too visibly in invisiclues
-1: putting ladder on window should redirect to putting ladder down
-1: "put water on fire" should prioritize hearth over door bar
-1: door bar should become "burnt" after use
-genzuwanun works on inanimate objects; it should not
 signal verb on dead scribe says he's not a person which is odd
 content warnings
-hand-typed commands always give prevent errors???
-nu=za=kan (likewise nu=mu=kan etc) gives no definition: splits on only first =
-add Ada to credits

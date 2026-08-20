@@ -1,5 +1,5 @@
 (extension version)
-	Hittite parser version 260813.
+	Hittite parser version 260817.
 
 (parser logging) (fail)
 
@@ -757,15 +757,16 @@
 (parse metacommand [\/again/\/g])
 	(div @realerror) { No previous command to repeat! }
 
-(parse metacommand [\/credits])
+(parse metacommand [\/credit/\/credits])
 	(div @meta) {
 		(div @engtitle) (overall story title)
 		(span @bold) { Daniel Stelzer } (no space) : Backend programming and implementation—the parser and the gameplay. (line)
 		(span @bold) { Daniel Gaskell } (no space) : Frontend interface and design—the look and feel of the tablet. (line)
 		(span @bold) { Tim Leonard } (no space) : Hittite translations and editing—the words you’re reading. (line)
 		Cuneiform rendering done via Ishamai, by Daniel Stelzer. (line)
+		Built with (compiler version). (line)
 		Running on the Å-machine web interpreter, by Linus Åkesson and the Dialog Project Team. (par)
-		Tested by Melisande, Mike Russo, rh, and YOUR NAME HERE! (par)
+		With thanks to Melisande, Mike Russo, rh, and Ada Stelzer for testing and reporting issues! (par)
 		Depicted on the cover is the “Yozgat Amulet” in the Louvre Museum, AO 9647. Photograph © 2012 Musée du Louvre, Dist. GrandPalaisRmn / Raphaël Chipault.
 	}
 
@@ -1202,6 +1203,7 @@
 	(if) ($Obj has modifier $Mod) ($ModEnabled = 1) (then)
 		(if) (adjective $Mod) (then) %% Note: This does NOT currently consider gender! Adjective objects are expected to have the same inherent gender as the noun. See substances.dg for how this is handled.
 			(name $Mod in $Case)
+			(now) (adjectives used) %% Can be checked in tutorials
 		(elseif) (object $Mod) ~(logogram $Mod) (then)
 			(#genitive $Mod)
 		(elseif) (word $Mod) (then)
@@ -1226,6 +1228,7 @@
 	(endif)
 
 (interface (determiner comes after $<Obj)) %% Not relevant in all acts
+(interface (adjectives used)) %% Likewise
 
 ($Obj has determiner) %% Not super efficient, but (determiner $) is going to be called inside a (collect words) anyway for dictionary purposes
 	(collect words) (determiner $Obj) (into $List)
