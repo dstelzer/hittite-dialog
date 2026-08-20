@@ -837,6 +837,10 @@
 (@tēḫḫun wants cases [#adverb #accusative #dative]) %% Preverb is currently ignored but is handled as #adverb
 (translate [$ tēḫḫun $ $Acc (object $Dat) | $] into [put $Acc $Dat])
 
+(unlikely [tēḫḫun $Adv $ $Dat $]) %% Don’t treat katta as a postposition if there’s ambiguity; it’s more likely just an adverb
+	(@katta is one of $Adv)
+	(nonempty $Dat)
+
 %% TODO: consider the preverb/postposition
 
 %% We also handle tēḫḫun without dat or adv here, but only to give an error message

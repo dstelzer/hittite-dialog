@@ -950,6 +950,17 @@
 	*($Term is one of $Complex)
 	($Term = [$ $ | $]) %% Has at least two terms
 	~($Term has an object and its modifier) %% Though we do check for messed-up genitives here
+%% We also disprefer the same noun appearing in multiple cases, for the same reason
+(subtly unlikely [$ $ $ $Acc $Dat $Abl])
+	($Acc and $Dat overlap) (or)
+	($Dat and $Abl overlap) (or)
+	($Abl and $Acc overlap)
+
+%% Short-circuit some common cases
+~([] and $ overlap)
+~($ and [] overlap)
+($X and $Y overlap) %% Do lists X and Y share any common elements?
+	(split $X by $Y into $ and $) %% Useful builtin for speed
 
 ($Term has an object and its modifier) %% See try-complex for why we care about this
 	*($Obj is one of $Term)
