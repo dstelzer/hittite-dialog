@@ -1,5 +1,4 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
-new error message when noun X and noun Y appear in a command together, X has Y as a modifier, and Y is not in the genitive case (for people misusing the genitive)
 tablet 3 or Tablet 3? pick one!
 content warnings
