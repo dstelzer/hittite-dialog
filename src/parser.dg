@@ -644,6 +644,8 @@
 	there should be an ablative noun
 (show parser error 24 for action $)
 	there should not be an ablative noun
+(show parser error 15 for action $)
+	when one noun modifies another noun, the modifier needs to be in the genitive case
 (show parser error 31 for action $)
 	the clitic (span @hittite) { =wa\(r\) } marks a quotation \( which this sentence should not be \)
 (show parser error 32 for action $)
@@ -947,6 +949,14 @@
 (subtly unlikely [$ $ $ | $Complex]) %% raw verb advs don’t count
 	*($Term is one of $Complex)
 	($Term = [$ $ | $]) %% Has at least two terms
+	~($Term has an object and its modifier) %% Though we do check for messed-up genitives here
+
+($Term has an object and its modifier) %% See try-complex for why we care about this
+	*($Obj is one of $Term)
+	($Obj has modifier $Mod)
+	(object $Mod)
+	~(adjective $Mod)
+	($Mod is one of $Term)
 
 (unlikely [$ $ $ | $Complex]) %% De-prioritize compass directions
 	*($Term is one of $Complex)
@@ -1131,6 +1141,42 @@
 
 %% (try-complex $) will take an action with multiple nouns in a certain case and turn it into several individual actions with a single noun in that case
 %% This actually works with any number of nouns in any number of cases; the parser just limits it to a single multiple object per action to avoid combinatorial headaches (PUT ALL ON ALL is unlikely to do anything good)
+
+%% We also catch a certain parser error at this stage! If a noun should be in the genitive, but isn’t (it was being used as an adjective), this is where it will show up.
+(try-complex [$Raw $ $ $Acc $Dat $Abl])
+	(append $Acc $Dat $AccDat)
+	(append $AccDat $Abl $AccDatAbl)
+	*($Obj is one of $AccDatAbl)
+	($Obj has modifier $Mod)
+	(object $Mod)
+	~(adjective $Mod)
+	
+	(if) ($Obj is one of $Acc) (then)
+		($ObjCase = #accusative)
+	(elseif) ($Obj is one of $Dat) (then)
+		($ObjCase = #dative)
+	(else)
+		($ObjCase = #ablative)
+	(endif)
+	(if) ($Mod is one of $Acc) (then)
+		($ModCase = #accusative)
+	(elseif) ($Mod is one of $Dat) (then)
+		($ModCase = #dative)
+	(else)
+		($ModCase = #ablative)
+	(endif)
+	
+	(div @error) {
+		This sentence, (print quoted hittite $Raw) , is likely a scribal error.
+		When one noun modifies another, the modifier should always be in the genitive case, not the (name $ModCase) :
+		“(no space) (span @hittite) {
+			(#genitive $Mod) ($ObjCase $Obj modifierless)
+		} (no space)” .
+		(if) ($ModCase = $ObjCase) (then)
+			\( Unlike adjectives, modifier nouns don’t take on the case of what they’re modifying. \)
+		(endif)
+	}
+
 (try-complex [$Raw $Verb $Advs | $Nouns])
 	(exhaust) {
 		*(expand groupings from $Nouns into $NounCombo)
