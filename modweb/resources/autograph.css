@@ -34,9 +34,12 @@ body.night #aadefaults2 {
 	scrollbar-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0);
 }
 
+#aabody3 {
+	overflow: hidden; /* prevent spurious scrolling on mobile */
+}
+
 #aacontainer {
 	--col-width: min(93ch, calc(100vw - 12em));
-	width: var(--col-width);
 	height: 100%;
 	margin-left: auto;
 	margin-right: max(0px, calc(50% - (var(--col-width) / 2)));
@@ -53,7 +56,7 @@ body.night #aacontainer {
 	border-right: 2px solid var(--night-fg);
 }
 
-@media (max-width: 50em) {
+@media (max-width: 48em) {
 	#aacontainer {
 		--col-width: 80vw;
 	}
@@ -64,7 +67,7 @@ body.night #aacontainer {
 	padding-right: 11em;
 }
 
-@media (max-width: 50em) {
+@media (max-width: 48em) {
 	#maincolumn {
 		display: block;
 		padding-left: 3vw;
@@ -74,16 +77,18 @@ body.night #aacontainer {
 }
 
 #rightcolumn {
+	--colleft: 79%;
 	position: absolute;
-	right: -5.5em;
 	top: 0px;
-	width: 15em;
+	left: var(--colleft);
+	padding-right: 1em;
+	width: calc(100vw - var(--colleft));
+	overflow: auto;
 }
 
-@media (max-width: 50em) {
+@media (max-width: 48em) {
 	#rightcolumn {
-		width: 41vw;
-		right: -6vw;
+        --colleft: 62%;
 	}
 }
 
@@ -96,7 +101,7 @@ body.night #aacontainer {
 	margin-left: -11em;
 }
 
-@media (max-width: 50em) {
+@media (max-width: 48em) {
 	#aamain {
 		padding-left: 0px;
 		margin-left: 0px;
@@ -234,7 +239,7 @@ div.output:has(+ div.aa-disambig) p::after {
 
 body.night div.output:has(+ div.aa-disambig) p::after { filter: invert(1); }
 
-@media (max-width: 50em) {
+@media (max-width: 48em) {
 	div.aa-error {
 		position: relative;
 		display: block;
@@ -269,11 +274,15 @@ body.night div.output:has(+ div.aa-disambig) p::after { filter: invert(1); }
 /* Panels */
 
 .panel {
+	display: block;
 	border: 0px;
 	background: #F8EE99;
 	background: linear-gradient(180deg,rgba(250, 242, 170, 1) 0%, rgba(250, 239, 152, 1) 30px, rgba(255, 244, 143, 1) 30px, rgba(255, 244, 143, 1) 100%);
 	transform-style: preserve-3d;
+	width: 15em;
 }
+
+@media (max-width: 48em) { .panel { width: 40vw; } }
 
 body.night .panel {
 	background: var(--night-page);
@@ -299,8 +308,10 @@ body.night .panel {
 	background: #94E1F2;
 	background: linear-gradient(90deg, rgba(168, 230, 247, 1) 0%, rgba(169, 224, 235, 1) 40px, rgba(148, 225, 252, 1) 40px, rgba(148, 225, 252, 1) 100%);
     width: fit-content;
-    min-width: 100%;
+    min-width: 15em;
 }
+
+@media (max-width: 48em) { #compass { min-width: 40vw; } }
 
 body.night #compass {
 	background: var(--night-page);
@@ -311,9 +322,11 @@ body.night #compass {
 #verbs {
 	background: #C0DF1F;
 	background: linear-gradient(90deg, rgba(200, 230, 50, 1) 0%, rgba(194, 222, 58, 1) 40px, rgba(191, 225, 29, 1) 40px, rgba(191, 225, 29, 1) 100%);
-    width: fit-content;
-    min-width: 100%;
+    width: 15em;
+    min-width: min-content;
 }
+
+@media (max-width: 48em) { #verbs { min-width: 40vw; } }
 
 body.night #verbs {
 	background: var(--night-page);
@@ -764,7 +777,7 @@ body.night .aamenuoption input {
 	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
-@media (max-width: 50em) {
+@media (max-width: 48em) {
 	#aaaboutouter {
 		left: 2em;
 	}
@@ -907,7 +920,7 @@ body.night #aaaboutclose {
 	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
-@media (max-width: 50em) {
+@media (max-width: 48em) {
 	#aascriptouter {
 		margin-left: -1.5vw;
 		width: 41vw;
