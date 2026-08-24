@@ -1,0 +1,124 @@
+/* Georgia lacks a custom ḫ character, so prefer a (metrically compatible) webfont with better Unicode support. */
+@font-face {
+	font-family: Gelasio;
+	src: url("Gelasio-Regular.woff2");
+	font-style: normal;
+}
+
+@font-face {
+	font-family: Gelasio;
+	src: url("Gelasio-Italic.woff2");
+	font-style: italic;
+}
+
+body {
+	padding: 2em;
+	font-family: Gelasio, Georgia, serif;
+}
+
+.parent {
+	cursor: pointer;
+}
+
+.outer {
+	display: inline-block;
+	width: 100%;
+	vertical-align: middle;
+	background-color: transparent;
+}
+
+.outer:hover .clue {
+	visibility: visible;
+	background-color: #f5f4e8;
+	color: #433;
+}
+
+.outer:hover .clue a {
+	color: #33A;
+}
+
+.clue {
+	display: inline-block;
+	padding: 0.5em;
+	margin: 0em;
+	width: 100%;
+	background-color: #f5f4e8;
+	color: #f5f4e8;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.clue a {
+	color: #f5f4e8;
+}
+
+.clue2 {
+	display: inline-block;
+	padding: 0.5em;
+	margin: 0em;
+	width: 100%;
+	background-color: #f5f4e8;
+	color: black;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.clue::selection {
+	background-color: #f8f29b;
+	color: #6d6817;
+}
+
+li:has(> ol) h2::before {
+	content: "🗁 ";
+}
+
+li:has(> ol[style*="display: none"]) h2::before {
+	content: "🗀 ";
+}
+
+li {
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+	max-width: 50ch;
+}
+
+ol {
+	list-style-type: none;
+	padding: 0;
+}
+
+ol ol {
+	list-style-type: none;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: #f1efd9;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: 0.25em;
+	margin-top: 0.5em;
+}
+
+ol ol li {
+	max-width: 100%;
+}
+
+ol ol ol {
+	list-style-type: upper-alpha;
+	padding-left: 1.5em;
+	border: none;
+}
+
+h2 {
+	font-size: 1.2em;
+}
+
+h3 {
+	display: block;
+	font-family: sans-serif;
+	font-weight: bold;
+	margin-bottom: 0.75em;
+}
+
+li:has(h3) {
+	margin-top: 1em;
+}

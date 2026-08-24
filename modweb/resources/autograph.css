@@ -1,5 +1,18 @@
 /* Globals */
 
+/* Windows Georgia lacks a custom ḫ character, so prefer a (metrically compatible) webfont with better Unicode support. */
+@font-face {
+	font-family: Gelasio;
+	src: url("Gelasio-Regular.woff2");
+	font-style: normal;
+}
+
+@font-face {
+	font-family: Gelasio;
+	src: url("Gelasio-Italic.woff2");
+	font-style: italic;
+}
+
 @font-face {
 	font-family: Caveat;
 	src: url("Caveat-Bold.woff");
@@ -28,6 +41,7 @@ body.night {
 #aadefaults2 {
 	scrollbar-color: rgba(0, 0, 0, 0.05) rgba(0, 0, 0, 0);
 	background-color: rgba(0, 0, 0, 0);
+	--font-body: Gelasio, Georgia, serif;
 }
 
 body.night #aadefaults2 {
