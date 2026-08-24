@@ -1,9 +1,9 @@
 FILES = src/actions.dg src/interface.dg src/automap.dg src/draclib.dg src/substances.dg src/parser.dg src/worldmodel.dg
-OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources -vv -H 2000 -A 750
+OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources -vv -H 2000 -A 1000
 # ^ for determiners, ⸗ for proper clitics, = for ASCII clitics; the rest are default
 OPTIONS_DBG = --word-seps='^=.,;"()*'
 # Debugger can't handle non-ASCII word separators yet
-VERSION = 3
+VERSION = 4
 
 debug1: $(FILES) src/act1.dg platform/debug.dg
 	dgdebug $(OPTIONS_DBG) platform/debug.dg src/act1.dg $(FILES)

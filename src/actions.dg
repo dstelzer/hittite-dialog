@@ -1,5 +1,5 @@
 (extension version)
-	Hittite action processing version .
+	Hittite action processing version 260823.
 
 (action logging) (fail)
 
@@ -49,7 +49,7 @@
 	(span @metaverb) (link) /about ,
 	(span @metaverb) (link resource @hints) /hint , %% No need for an extra click
 	(span @metaverb) (link) /credits
-	, (span @metaverb) (link) /memory %% Comment this out when finalized
+%%	, (span @metaverb) (link) /memory %% Comment this out when finalized
 %% TODO: do we need to stop this bar from flashing?
 
 (style class @p-meta)
@@ -501,6 +501,15 @@
 (translate [$ pāun $ $ $Dat | $] into [travel $Dat])
 	~{ (adjacent $Dat) (or) (direction $Dat) }
 
+(action [go/travel | $] should not have reflexives)
+(refuse [$Action $]) %% Some players used =za too often; this should discourage that without outright making it an error
+	(current player $Player)
+	($Player is one of $Action)
+	(action $Action should not have reflexives)
+	(div @error) {
+		The use of (span @hittite) { =za } in this sentence is unexpected. It probably just indicates that the narrator considered the action personally meaningful, rather than doing something to himself.
+	}
+
 %% Disprefer travelling
 %% Argument is a complex action: [raw verb [adv] [acc] [dat] [abl]]
 (unlikely [$ pāun $ $ $Dat $])
@@ -603,6 +612,8 @@
 (verb @cross/@šarraḫḫun means @šarraḫḫun)
 (@šarraḫḫun wants cases [#accusative])
 (translate [$ šarraḫḫun $ $Acc | $] into [cross $Acc])
+
+(action [cross | $] should not have reflexives)
 
 (prevent [[cross $Door] $])
 	~(door $Door)
@@ -722,6 +733,8 @@
 (translate [$ dāḫḫun $ $Acc $ []] into [take $Acc])
 (translate [$ dāḫḫun $ $Acc $ $Abl] into [take $Acc from $Abl])
 
+(action [take | $] should not have reflexives)
+
 (unlikely [$ $ $ $Accs $ $Abls]) %% Note: input is complex action, not action! [[raw] verb [advs] [accs] [dats] [abls]]
 	*($Acc is one of $Accs)
 	*($Abl is one of $Abls)
@@ -823,6 +836,10 @@
 %% (verb $ means $) already done above
 (@tēḫḫun wants cases [#adverb #accusative #dative]) %% Preverb is currently ignored but is handled as #adverb
 (translate [$ tēḫḫun $ $Acc (object $Dat) | $] into [put $Acc $Dat])
+
+(unlikely [tēḫḫun $Adv $ $Dat $]) %% Don’t treat katta as a postposition if there’s ambiguity; it’s more likely just an adverb
+	(@katta is one of $Adv)
+	(nonempty $Dat)
 
 %% TODO: consider the preverb/postposition
 
@@ -1244,7 +1261,7 @@
 (@genzuwanun wants cases [#accusative])
 (translate [$ genzuwanun $ $Acc | $] into [pet $Acc])
 
-(prevent [[pet (animate $Obj)] $Details])
+(prevent [[pet $Obj] $Details])
 	~(pettable $Obj) %% Only set on the dog in act 2
 	(describe negative action [[pet $Obj] $Details])
 

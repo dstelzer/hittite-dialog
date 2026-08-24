@@ -1,5 +1,5 @@
 (extension version)
-	Hittite parser version .
+	Hittite parser version 260823.
 
 (parser logging) (fail)
 
@@ -176,7 +176,17 @@
 
 %% We can’t report errors from within (parse $ into noun list $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
 (find first broken noun from [] and report it)
-	(div @realerror) { ERROR: failed to find any broken nouns! }
+	%% The main way this happens is someone lists the same noun twice in a row with a conjunction in between, like “X-ACC and X-ACC”
+	%% Since that’s actually possible, though, we need a reasonable (if bland) default error message instead of just crashing out
+	The nouns in this line are unusual, and its meaning is unclear.
+	%% (div @realerror) { ERROR: failed to find any broken nouns! }
+(find first broken noun from [u3/ù | $Tail] and report it) %% Don’t get hung up on conjunctions
+	(if) (empty $Tail) (then)
+		The trailing (span @akk) U₃ in this line is unusual. Normally, (span @akk) U₃ appears between nouns, not on its own.
+		(stop)
+	(else)
+		(find first broken noun from $Tail and report it)
+	(endif)
 (find first broken noun from [$First | $] and report it)
 	(verb $First means $)
 	This sentence’s structure is unclear: (span @hittite) $First is a verb, and the verb should always be the last word in a Hittite sentence.
@@ -644,6 +654,8 @@
 	there should be an ablative noun
 (show parser error 24 for action $)
 	there should not be an ablative noun
+(show parser error 15 for action $)
+	when one noun modifies another noun, the modifier needs to be in the genitive case
 (show parser error 31 for action $)
 	the clitic (span @hittite) { =wa\(r\) } marks a quotation \( which this sentence should not be \)
 (show parser error 32 for action $)
@@ -757,15 +769,16 @@
 (parse metacommand [\/again/\/g])
 	(div @realerror) { No previous command to repeat! }
 
-(parse metacommand [\/credits])
+(parse metacommand [\/credit/\/credits])
 	(div @meta) {
 		(div @engtitle) (overall story title)
 		(span @bold) { Daniel Stelzer } (no space) : Backend programming and implementation—the parser and the gameplay. (line)
 		(span @bold) { Daniel Gaskell } (no space) : Frontend interface and design—the look and feel of the tablet. (line)
 		(span @bold) { Tim Leonard } (no space) : Hittite translations and editing—the words you’re reading. (line)
 		Cuneiform rendering done via Ishamai, by Daniel Stelzer. (line)
+		Built with (compiler version). (line)
 		Running on the Å-machine web interpreter, by Linus Åkesson and the Dialog Project Team. (par)
-		Tested by Melisande, Mike Russo, rh, and YOUR NAME HERE! (par)
+		With thanks to Melisande, Mike Russo, rh, and Ada Stelzer for testing and reporting issues! (par)
 		Depicted on the cover is the “Yozgat Amulet” in the Louvre Museum, AO 9647. Photograph © 2012 Musée du Louvre, Dist. GrandPalaisRmn / Raphaël Chipault.
 	}
 
@@ -946,6 +959,25 @@
 (subtly unlikely [$ $ $ | $Complex]) %% raw verb advs don’t count
 	*($Term is one of $Complex)
 	($Term = [$ $ | $]) %% Has at least two terms
+	~($Term has an object and its modifier) %% Though we do check for messed-up genitives here
+%% We also disprefer the same noun appearing in multiple cases, for the same reason
+(subtly unlikely [$ $ $ $Acc $Dat $Abl])
+	($Acc and $Dat overlap) (or)
+	($Dat and $Abl overlap) (or)
+	($Abl and $Acc overlap)
+
+%% Short-circuit some common cases
+~([] and $ overlap)
+~($ and [] overlap)
+($X and $Y overlap) %% Do lists X and Y share any common elements?
+	(split $X by $Y into $ and $) %% Useful builtin for speed
+
+($Term has an object and its modifier) %% See try-complex for why we care about this
+	*($Obj is one of $Term)
+	($Obj has modifier $Mod)
+	(object $Mod)
+	~(adjective $Mod)
+	($Mod is one of $Term)
 
 (unlikely [$ $ $ | $Complex]) %% De-prioritize compass directions
 	*($Term is one of $Complex)
@@ -1130,6 +1162,44 @@
 
 %% (try-complex $) will take an action with multiple nouns in a certain case and turn it into several individual actions with a single noun in that case
 %% This actually works with any number of nouns in any number of cases; the parser just limits it to a single multiple object per action to avoid combinatorial headaches (PUT ALL ON ALL is unlikely to do anything good)
+
+%% We also catch a certain parser error at this stage! If a noun should be in the genitive, but isn’t (it was being used as an adjective), this is where it will show up.
+(try-complex [$Raw $ $ $Acc $Dat $Abl])
+	(append $Acc $Dat $AccDat)
+	(append $AccDat $Abl $AccDatAbl)
+	*($Obj is one of $AccDatAbl)
+	($Obj has modifier $Mod)
+	(object $Mod)
+	~(adjective $Mod)
+	($Mod is one of $AccDatAbl)
+	
+	(if) ($Obj is one of $Acc) (then)
+		($ObjCase = #accusative)
+	(elseif) ($Obj is one of $Dat) (then)
+		($ObjCase = #dative)
+	(else)
+		($ObjCase = #ablative)
+	(endif)
+	(if) ($Mod is one of $Acc) (then)
+		($ModCase = #accusative)
+	(elseif) ($Mod is one of $Dat) (then)
+		($ModCase = #dative)
+	(else)
+		($ModCase = #ablative)
+	(endif)
+	
+	(div @error) {
+		This sentence, (print quoted hittite $Raw) , is likely a scribal error.
+		When one noun modifies another, the modifier should always be in the genitive case, not the (name $ModCase) :
+		“(no space) (span @hittite) {
+			(#genitive $Mod) ($ObjCase $Obj modifierless)
+		} (no space)” .
+		(if) ($ModCase = $ObjCase) (then)
+			\( Unlike adjectives, modifier nouns don’t take on the case of what they’re modifying. \)
+		(endif)
+	}
+	(stop)
+
 (try-complex [$Raw $Verb $Advs | $Nouns])
 	(exhaust) {
 		*(expand groupings from $Nouns into $NounCombo)
@@ -1164,11 +1234,10 @@
 	(span @akk) { U₃ } %% Using the “Akkadian ampersand” instead of the clitic =ya because the clitic does messy things with the last consonant of the word
 	(now) (heterograms used) %% Give a tutorial the first time this happens
 
-(complicated list of [$A $B $C $D | $Rest] in $Case) %% When enough things are in the same room description, we have to do this in a more complicated way that’s easier to read
-	($Case $A) (space 4) (and)
-	($Case $B) (space 4) (and)
-	($Case $C) (line) (space 4) (and)
-	(complicated list of [$D | $Rest] in $Case)
+(complicated list of [$A $B $C | $Rest] in $Case) %% When enough things are in the same room description, we have to do this in a more complicated way that’s easier to read
+	($Case $A) (space 4) (and) %% Currently dropping down to two columns...
+	($Case $B) (line) (space 4) (and)
+	(complicated list of [$C | $Rest] in $Case)
 (complicated list of [$Single] in $Case) %% Fall back in the base case
 	($Case $Single)
 (complicated list of [$Head | $ShortList] in $Case)
@@ -1202,6 +1271,7 @@
 	(if) ($Obj has modifier $Mod) ($ModEnabled = 1) (then)
 		(if) (adjective $Mod) (then) %% Note: This does NOT currently consider gender! Adjective objects are expected to have the same inherent gender as the noun. See substances.dg for how this is handled.
 			(name $Mod in $Case)
+			(now) (adjectives used) %% Can be checked in tutorials
 		(elseif) (object $Mod) ~(logogram $Mod) (then)
 			(#genitive $Mod)
 		(elseif) (word $Mod) (then)
@@ -1226,6 +1296,7 @@
 	(endif)
 
 (interface (determiner comes after $<Obj)) %% Not relevant in all acts
+(interface (adjectives used)) %% Likewise
 
 ($Obj has determiner) %% Not super efficient, but (determiner $) is going to be called inside a (collect words) anyway for dictionary purposes
 	(collect words) (determiner $Obj) (into $List)
