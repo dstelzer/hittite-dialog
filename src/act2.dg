@@ -131,6 +131,11 @@
 	}
 	(now) (taught phonetic complements)
 
+(prevent [[put $Obj #builddoor/#washdoor] $Details])
+	~($Obj = #bolt)
+	Nu (#accusative $Obj) (#dative #builddoor modifierless) natta taruḫḫun tēḫḫun.
+	(div @error) { Apart from placing a bar across it, it is unclear how the door would hold or contain anything. }
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Washhouse and baker (east)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -313,6 +318,8 @@
 
 (* is filled with #fire)
 (#fire is #in *)
+(instead of [[put $Obj #fire] $Details]) %% PUT LAMP IN FIRE etc
+	(try [[put $Obj *] $Details])
 
 (prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet, it should have a clear failure message on this tablet
 	(describe failed action [[put #bolt *] $Details])

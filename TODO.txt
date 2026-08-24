@@ -1,10 +1,7 @@
 update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
-tablet 3 or Tablet 3? pick one!
-content warnings
-2: prevent putting non-bar things on doors
-2: cannot put things in "fire" (pahhueni)
 aux heap gets exhausted too easily on both 2 and 3 :(
 	on 3, examine an individual tablet (not all of them)
 		increased to 1000 words, hopefully that's enough
 tabular display of objects gets messed up easily, it's too wide
+	reduced to 2 objects per line now

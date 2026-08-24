@@ -1,5 +1,5 @@
 (extension version)
-	Hittite parser version 260820.
+	Hittite parser version 260823.
 
 (parser logging) (fail)
 
@@ -1234,11 +1234,10 @@
 	(span @akk) { U₃ } %% Using the “Akkadian ampersand” instead of the clitic =ya because the clitic does messy things with the last consonant of the word
 	(now) (heterograms used) %% Give a tutorial the first time this happens
 
-(complicated list of [$A $B $C $D | $Rest] in $Case) %% When enough things are in the same room description, we have to do this in a more complicated way that’s easier to read
-	($Case $A) (space 4) (and)
-	($Case $B) (space 4) (and)
-	($Case $C) (line) (space 4) (and)
-	(complicated list of [$D | $Rest] in $Case)
+(complicated list of [$A $B $C | $Rest] in $Case) %% When enough things are in the same room description, we have to do this in a more complicated way that’s easier to read
+	($Case $A) (space 4) (and) %% Currently dropping down to two columns...
+	($Case $B) (line) (space 4) (and)
+	(complicated list of [$C | $Rest] in $Case)
 (complicated list of [$Single] in $Case) %% Fall back in the base case
 	($Case $Single)
 (complicated list of [$Head | $ShortList] in $Case)
