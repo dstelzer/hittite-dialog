@@ -78,7 +78,7 @@ ifcomp.zip: web hints.html
 	mkdir ifcomp
 	cp -rL web ifcomp/
 	cp index.html ifcomp/
-	cp hints.html ifcomp/
+	cp hints.txt ifcomp/
 	cp README.ifcomp ifcomp/
 	( cd ifcomp && zip -r ../ifcomp.zip . )
 	cp ifcomp.zip ifcomp_$(VERSION).zip
