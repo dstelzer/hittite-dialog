@@ -131,7 +131,7 @@
 	}
 	(now) (taught phonetic complements)
 
-(prevent [[put $Obj #builddoor/#washdoor] $Details])
+(prevent [[put $Obj #builddoor/#washdoor] $])
 	~($Obj = #bolt)
 	Nu (#accusative $Obj) (#dative #builddoor modifierless) natta taruḫḫun tēḫḫun.
 	(div @error) { Apart from placing a bar across it, it is unclear how the door would hold or contain anything. }
