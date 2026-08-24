@@ -119,3 +119,6 @@ regress: regress1 regress2 regress3
 PWD := $(shell pwd)
 hints.html: hints.clu
 	( cd ~/Projects/Invisiclues && python3 maker.py $(PWD)/hints )
+	sed -i 's|<head>|<head><link rel="stylesheet" type="text/css" href="hints.css" /><meta name="viewport" content="width=device-width, initial-scale=1">|g' hints.html
+	sed -i 's|<style>|<!-- <style>|g' hints.html
+	sed -i 's|</style>|</style> -->|g' hints.html
