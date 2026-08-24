@@ -1,9 +1,31 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>Ḫattušumna Laḫḫa</title>
 		<link rel="stylesheet" type="text/css" href="resources/homepage.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script>
+			<!-- Bludgeon the scrollwheel into behaving correctly in Firefox -->
+			(function() {
+				var page1 = document.getElementById("wheel1");
+				document.addEventListener("wheel", function(e) {
+					var rect1 = wheel1.getBoundingClientRect();
+					var rect2 = wheel2.getBoundingClientRect();
+					if (document.getElementById("select-right").checked) {
+						if (e.clientX >= rect1.left && e.clientX <= rect1.right &&
+							e.clientY >= rect1.top  && e.clientY <= rect1.bottom) {
+							wheel1.scrollTop += e.deltaY;
+							e.preventDefault();
+						} else if (e.clientX >= rect2.left && e.clientX <= rect2.right &&
+							e.clientY >= rect2.top  && e.clientY <= rect2.bottom) {
+							wheel2.scrollTop += e.deltaY;
+							e.preventDefault();
+						}
+					}
+				}, { passive: false });
+			})();
+		</script>
 	</head>
 	<body>
 		<div id="scroll-clip">
@@ -69,11 +91,11 @@
 						</div>
 					</div>
 					<div class="page book-right">
-						<div class="page-content">
+						<div class="page-content" id="wheel1">
 							<div class="header header-right"><i>Introduction |</i> 2</div>
 							<h2>In other words...</h2>
 							<p>This is a game (actually a series of three short games) presented entirely in the ancient Hittite language. It’s meant for absolute beginners—no knowledge of Hittite is needed!</p>
-							<p>Start with <a href="tablet1.html">tablet 1</a>, which will introduce the basic grammar and vocabulary. After that, you can play either <a href="tablet2.html">tablet 2</a> (which covers logograms and more noun cases, with classic text adventure puzzles) or <a href="tablet3.html">tablet 3</a> (which covers quotations and subordinate clauses, with logical deduction puzzles).</p>
+							<p>Start with <a href="tablet1.html">Tablet 1</a>, which will introduce the basic grammar and vocabulary. After that, you can play either <a href="tablet2.html">Tablet 2</a> (which covers logograms and more noun cases, with classic text adventure puzzles) or <a href="tablet3.html">Tablet 3</a> (which covers quotations and subordinate clauses, with logical deduction puzzles).</p>
 							<p>Have fun! When you're done, check out the <a href="javascript:document.getElementById('postscript').classList.add('open')">postscript</a>.</p>
 							<div id="sticky">
 								<div id="sticky-title">Tip!</div>
@@ -83,6 +105,7 @@
 									<li>Switch the output to actual cuneiform to practice reading the signs yourself. (You should still type your input in bound transcription, though—typing cuneiform is currently not an easy feat.)</li>
 								</ul>
 							</div>
+							<p><b>Content warnings:</b> Brief (and non-English) depictions of death and arson, with a typically Bronze Age disregard for human life. While the protagonist is never required to murder someone directly, their actions do result in death and destruction.</p>
 						</div>
 					</div>
 					<div class="flip">
@@ -96,7 +119,7 @@
 							<p class="author">Daniel E. Gaskell</p>
 						</label>
 						<label class="face back book-left" for="select-left">
-							<div class="page-content">
+							<div class="page-content" id="wheel2">
 								<div class="header header-left">1<i> | Introduction</i></div>
 								<h1>Introduction</h1>
 								<p><span class="dropcap">Ḫ</span><b>attušumna Laḫḫa</b> (“Hittite Adventure”) is the provisional name given to a series of recently-discovered tablets in New Hittite script. The text describes an unidentified hero’s attempt to infiltrate an enemy city and recover a stolen god; while the historical context is unknown, the focus on rival kings kidnapping each others’ gods suggests a pre-Empire origin.</p>
