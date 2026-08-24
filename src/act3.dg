@@ -89,6 +89,12 @@
 
 (* is #in #backroom)
 
+%% Normally dead bodies don’t stick around as objects, so we have to do some special action handling to deal with this case
+(prevent [[$Verb | $Objects] $Details])
+	($Verb is one of [slay wash kiss dance bow question])
+	(* is one of $Objects)
+	(describe negative action [[$Verb | $Objects] $Details]) %% I just didn’t do that
+
 #dead
 (adjective *)
 (name * in #nominative) akkanza
@@ -384,7 +390,11 @@
 	%% Here we go!
 	Nu=kan (#nominative $Assassin) (#accusative #king) kuenta. %% X slew the king.
 	(select avenger $Avenger who is not $Assassin)
-	N=an=kan (#nominative $Avenger) kuenta. %% Y slew him/her.
+	(if) (guilty $Avenger) (then)
+		N=an=kan (#nominative #gectin) kuenta. %% Avoid edge case
+	(else)
+		N=an=kan (#nominative $Avenger) kuenta. %% Y slew him/her.
+	(endif)
 	
 	(par) (hr)
 	Nu zuppari dāḫḫun. %% I took a torch.
