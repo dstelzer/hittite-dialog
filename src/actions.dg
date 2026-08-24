@@ -1,5 +1,5 @@
 (extension version)
-	Hittite action processing version 260817.
+	Hittite action processing version 260820.
 
 (action logging) (fail)
 
@@ -49,7 +49,7 @@
 	(span @metaverb) (link) /about ,
 	(span @metaverb) (link) /hint ,
 	(span @metaverb) (link) /credits
-	, (span @metaverb) (link) /memory %% Comment this out when finalized
+%%	, (span @metaverb) (link) /memory %% Comment this out when finalized
 %% TODO: do we need to stop this bar from flashing?
 
 (style class @p-meta)

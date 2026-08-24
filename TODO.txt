@@ -2,3 +2,13 @@ update cuneiform lessons to new version of Ishamai
 update make deploy to use a recursive upload
 tablet 3 or Tablet 3? pick one!
 content warnings
+2: prevent putting non-bar things on doors
+(stop) after error message for bad genitive
+2: cannot put things in "fire" (pahhueni)
+handle U3 properly in broken noun lists (ACC U3 NOM currently reports an error on U3 not on NOM)
+aux heap gets exhausted too easily on both 2 and 3 :(
+	on 3, examine an individual tablet (not all of them)
+		increased to 1000 words, hopefully that's enough
+tabular display of objects gets messed up easily, it's too wide
+oracle's name has no dictionary definition
+3: make sure whoever kills the assassin in the finale is not also a conspirator
