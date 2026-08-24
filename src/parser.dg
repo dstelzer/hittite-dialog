@@ -176,7 +176,17 @@
 
 %% We can’t report errors from within (parse $ into noun list $) because the (collect $) block will exhaust the entire search tree, which includes the reporting. So we have a separate error-reporting predicate with the same logic that prints an error on the first failure, and uses only a single query.
 (find first broken noun from [] and report it)
-	(div @realerror) { ERROR: failed to find any broken nouns! }
+	%% The main way this happens is someone lists the same noun twice in a row with a conjunction in between, like “X-ACC and X-ACC”
+	%% Since that’s actually possible, though, we need a reasonable (if bland) default error message instead of just crashing out
+	The nouns in this line are unusual, and its meaning is unclear.
+	%% (div @realerror) { ERROR: failed to find any broken nouns! }
+(find first broken noun from [u3/ù | $Tail] and report it) %% Don’t get hung up on conjunctions
+	(if) (empty $Tail) (then)
+		The trailing (span @akk) U₃ in this line is unusual. Normally, (span @akk) U₃ appears between nouns, not on its own.
+		(stop)
+	(else)
+		(find first broken noun from $Tail and report it)
+	(endif)
 (find first broken noun from [$First | $] and report it)
 	(verb $First means $)
 	This sentence’s structure is unclear: (span @hittite) $First is a verb, and the verb should always be the last word in a Hittite sentence.
@@ -1188,6 +1198,7 @@
 			\( Unlike adjectives, modifier nouns don’t take on the case of what they’re modifying. \)
 		(endif)
 	}
+	(stop)
 
 (try-complex [$Raw $Verb $Advs | $Nouns])
 	(exhaust) {
