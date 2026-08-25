@@ -1,9 +1,9 @@
 FILES = src/actions.dg src/interface.dg src/automap.dg src/draclib.dg src/substances.dg src/parser.dg src/worldmodel.dg
-OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources -vv -H 2000 -A 750
+OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources -vv -H 2000 -A 1000
 # ^ for determiners, ⸗ for proper clitics, = for ASCII clitics; the rest are default
 OPTIONS_DBG = --word-seps='^=.,;"()*'
 # Debugger can't handle non-ASCII word separators yet
-VERSION = 3
+VERSION = 4
 
 debug1: $(FILES) src/act1.dg platform/debug.dg
 	dgdebug $(OPTIONS_DBG) platform/debug.dg src/act1.dg $(FILES)
@@ -78,7 +78,7 @@ ifcomp.zip: web hints.html
 	mkdir ifcomp
 	cp -rL web ifcomp/
 	cp index.html ifcomp/
-	cp hints.html ifcomp/
+	cp hints.txt ifcomp/
 	cp README.ifcomp ifcomp/
 	( cd ifcomp && zip -r ../ifcomp.zip . )
 	cp ifcomp.zip ifcomp_$(VERSION).zip
@@ -119,3 +119,6 @@ regress: regress1 regress2 regress3
 PWD := $(shell pwd)
 hints.html: hints.clu
 	( cd ~/Projects/Invisiclues && python3 maker.py $(PWD)/hints )
+	sed -i 's|<head>|<head><link rel="stylesheet" type="text/css" href="hints.css" /><meta name="viewport" content="width=device-width, initial-scale=1">|g' hints.html
+	sed -i 's|<style>|<!-- <style>|g' hints.html
+	sed -i 's|</style>|</style> -->|g' hints.html

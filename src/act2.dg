@@ -17,7 +17,7 @@
 (* is #in #courtyard)
 
 (intro)
-	Nu=za=kan (#dative #courtyard) anda ešun. %% “I was in the courtyard.”
+%%	Nu=za=kan (#dative #courtyard) anda ešun. %% “I was in the courtyard.”
 	Nu (#nominative #dog) (#dative #building) pait. %% “A dog went into the building.”
 	Nu (#nominative #baker) (#ablative #building) uet. %% “The baker came out of the building.”
 	Nu (#nominative #baker) (#dative #washhouse) pait. %% “The baker went into the washhouse.”
@@ -130,6 +130,11 @@
 		The Hittites used logograms extensively, because a single sign could be much shorter than the half dozen or so needed to spell out a word. Sometimes, though, they would write the Hittite ending onto the logogram for clarity: (span @hittite) GIR₂ means “knife” in general, but (span @hittite) GIR₂-an is specifically the (span @italic) {nominative or accusative} form of “knife”, (span @hittite) GIR₂-aš the genitive, (span @hittite) GIR₂-az the ablative, and so on.
 	}
 	(now) (taught phonetic complements)
+
+(prevent [[put $Obj #builddoor/#washdoor] $])
+	~($Obj = #bolt)
+	Nu (#accusative $Obj) (#dative #builddoor modifierless) natta taruḫḫun tēḫḫun.
+	(div @error) { Apart from placing a bar across it, it is unclear how the door would hold or contain anything. }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Washhouse and baker (east)
@@ -313,6 +318,8 @@
 
 (* is filled with #fire)
 (#fire is #in *)
+(instead of [[put $Obj #fire] $Details]) %% PUT LAMP IN FIRE etc
+	(try [[put $Obj *] $Details])
 
 (prevent [[put #bolt *] $Details]) %% Since this was the solution on the last tablet, it should have a clear failure message on this tablet
 	(describe failed action [[put #bolt *] $Details])

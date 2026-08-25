@@ -15,7 +15,7 @@ function show_dictionary_entry(node) {
 	// Don't worry about casing distinctions
 	word = word.toLowerCase();
 	// And now break it at clitic and determiner boundaries
-	word = word.replace(/=/, " =").replace(/\^/, " ");
+	word = word.replace(/=/g, " =").replace(/\^/g, " ");
 	
 	if(word == currently_shown_dictionary_entry) return; // See above
 	currently_shown_dictionary_entry = word;

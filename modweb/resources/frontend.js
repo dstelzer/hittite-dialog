@@ -27,7 +27,8 @@
 var b64_enc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 var b64_dec = [];
 
-var wants_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // https://stackoverflow.com/a/57795495/3233017
+//var wants_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // https://stackoverflow.com/a/57795495/3233017
+var wants_dark_mode = false; // Light mode just looks so much prettier for this game!
 
 // These are turned into labelled checkboxes in the #aacheckboxes div
 var toggles = [
