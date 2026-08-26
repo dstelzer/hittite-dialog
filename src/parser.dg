@@ -779,8 +779,10 @@
 		Built with (compiler version). (line)
 		Running on the Å-machine web interpreter, by Linus Åkesson and the Dialog Project Team. (par)
 		With thanks to Melisande, Mike Russo, rh, and Ada Stelzer for testing and reporting issues! (par)
-		Depicted on the cover is the “Yozgat Amulet” in the Louvre Museum, AO 9647. Photograph © 2012 Musée du Louvre, Dist. GrandPalaisRmn / Raphaël Chipault.
+		Depicted on the cover is the “Yozgat Amulet” in the Louvre Museum, AO 9647 \( (link resource @amuletlink) {https://collections.louvre.fr/en/ark:/53355/cl010123028} \). Photograph © 2012 Musée du Louvre, Dist. GrandPalaisRmn / Raphaël Chipault.
 	}
+
+(define resource @amuletlink) https://collections.louvre.fr/en/ark:/53355/cl010123028
 
 (parse metacommand [\/help/\/about])
 	(div @meta) {
