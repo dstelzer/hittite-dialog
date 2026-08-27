@@ -1091,23 +1091,23 @@
 %% WAIT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(verb @ḫuškanun/@wait means @ḫuškanun)
-(@ḫuškanun wants cases [])
-(translate [$ ḫuškanun | $] into [wait])
+(verb @ḫuškenun/@wait means @ḫuškenun)
+(@ḫuškenun wants cases [])
+(translate [$ ḫuškenun | $] into [wait])
 
 (perform [[wait] $])
 	%% Do nothing
 
 (wait) %% For use in the number routines above
-	(par) (try [[wait] [[ḫuškanun] ḫuškanun [] [] [] []]])
+	(par) (try [[wait] [[ḫuškenun] ḫuškenun [] [] [] []]])
 
 #v-wait
 (verb *)
-(name *) ḫuškanun
+(name *) ḫuškenun
 
 (unlock wait on the compass rose)
 	(verb * unlocked)
-	~(in debugger) %% Looks bad in the compass rose
+	~(in debugger) %% Looks bad in the debugger compass rose
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CHOP
@@ -1355,7 +1355,7 @@
 %% TODO - bring?
 
 (third person verb @ēšta/@ešer) %% Act 1
-(third person verb @aušta/@pait/@dāš/@uet/@warpta/@dankuešta/@ḫarkta) %% Act 2
+(third person verb @aušta/@pait/@dāš/@uet/@warpta/@dankuešta/@ḫarkta/@ḫušket) %% Act 2
 (third person verb @kuwašzi/@tarkuzzi/@kanināit) %% Signals
 (third person verb @tēt/@kupta/@papriszi/@kuenzi/@parkuzzi) %% Act 3 machinery
 (third person verb @aki/@kunanzi/@punušta/@memiškanzi/@kuenta) %% Act 3

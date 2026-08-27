@@ -593,13 +593,11 @@
 (room *)
 (dogs allowed in *)
 (determiner *) NA₄
-(dict * in $) NA4
 (neuter *)
+(logogram *)
 (* uses preverb #at)
-(name * in #nominative/#genitive/#bare) ḫararazi %% Mill(stone)
-(name * in #genitive) ḫararaziyaš
-(name * in #dative) ḫararaziya
-(name * in #ablative) ḫararaziyaz
+(name *) ARA₅
+(dict *) NA4 ARA5
 
 (from * go #south to #building)
 (from * go #north to #dog-center)
