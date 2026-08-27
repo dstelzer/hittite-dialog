@@ -75,15 +75,15 @@ function insert_dictionary_word(node) {
 // Call this from the console after a run to make sure the dictionary is complete
 function check_dictionary_completeness() {
 	var i = 0;
-	$(".word").each(node => {
-		let word = node.dataset.word;
+	$(".word").each((index, elem) => {
+		let word = elem.dataset.word;
 		
 		// Remove stray punctuation from the beginning and end
 		word = word.replace(/[\.\?!,]+$/, "").replace(/^[\.\?!,]+/, "");
 		// Don't worry about casing distinctions
 		word = word.toLowerCase();
 		// And now break it at clitic and determiner boundaries
-		word = word.replace(/=/, " =").replace(/\^/, " ");
+		word = word.replace(/=/g, " =").replace(/\^/g, " ");
 		let pieces = word.match(/\S+/g);
 		
 		let clarify = pieces.length > 1 ? ` (from ${word})` : ""; // If a word is broken into multiple pieces, include the original in the error message

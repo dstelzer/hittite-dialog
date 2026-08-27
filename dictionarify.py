@@ -78,7 +78,7 @@ def parse_paradigm(s, name):
 	elif s == 'AKK':
 		return 'The uppercase italics indicate that this is an Akkadian word, not a Hittite one. Hittite scribes would have pronounced it as the Hittite equivalent.'
 	elif s == 'LOGO':
-		parens = '(or sequence of signs, rather) ' if '.' in name else ''
+		parens = ' (or sequence of signs, rather) ' if '.' in name else ''
 		return f'This cuneiform sign{parens} is a “logogram”, standing for an entire Hittite word, like how “7” stands for “seven”. Often the actual pronunciation of the Hittite word is unknown.' + tablify([
 			'<abbr title="Nominative: subject of a verb">Nom</abbr>',
 				name,

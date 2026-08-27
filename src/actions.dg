@@ -1,5 +1,5 @@
 (extension version)
-	Hittite action processing version 260824.
+	Hittite action processing version 260827.
 
 (action logging) (fail)
 
@@ -1325,7 +1325,16 @@
 	(div @error) {
 		The text must be corrupt at this point, as the hero must survive to continue the story. Ignoring the last few lines, we continue on...
 	}
+	(if) (started this tick at $Old) ~(current room $Old) (then)
+		(enter $Old) %% Rewind to the old location if we actually moved
+	(endif)
 	(stop)
+
+%% This is where we try to mitigate those consequences: if the player moved, and then died AFTER MOVING, we undo that movement here (but any map regions that were revealed remain revealed)
+(global variable (started this tick at $))
+(late on every tick) %% We really set it at the *end* of the turn, not the start
+	(current room $Room)
+	(now) (started this tick at $Room)
 
 (verb @punuššun/@question means @punuššun)
 (@punuššun wants cases [#accusative #dative]) %% Dative is irrelevant but allowed
