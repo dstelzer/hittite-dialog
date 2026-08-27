@@ -60,7 +60,7 @@ function insert_dictionary_word(node) {
 	}
 	
 	// Remove stray punctuation from the beginning and end
-	word = word.replace(/[\.\?!,]+$/, "").replace(/^[\.\?!,]+/, "");
+	word = word.replace(/[\.\?!,:]+$/, "").replace(/^[\.\?!,]+/, "");
 	// Don't worry about casing distinctions
 	word = word.toLowerCase();
 	
@@ -79,7 +79,7 @@ function check_dictionary_completeness() {
 		let word = elem.dataset.word;
 		
 		// Remove stray punctuation from the beginning and end
-		word = word.replace(/[\.\?!,]+$/, "").replace(/^[\.\?!,]+/, "");
+		word = word.replace(/[\.\?!,:]+$/, "").replace(/^[\.\?!,]+/, "");
 		// Don't worry about casing distinctions
 		word = word.toLowerCase();
 		// And now break it at clitic and determiner boundaries

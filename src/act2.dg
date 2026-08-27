@@ -306,6 +306,17 @@
 (from * go #west to #guardwalk1)
 (from * go #down to #dm-grain)
 
+(on every tick in *)
+	~(warned about overfull inventory)
+	(accumulate 1)
+		*($ has parent #me)
+	(into $Total)
+	($Total > 2)
+	(div @tutorial) {
+		You’ve accumulated quite an inventory at this point! If it becomes difficult to keep track of, you may want to leave some of it in a less-busy room, like the building to the east—the kitchen has all sorts of other things going on, so its description can become quite long.
+	}
+	(now) (warned about overfull inventory)
+
 #oven
 (holder *)
 (neuter *)
@@ -953,7 +964,7 @@
 		($Obj is filled with #fire)
 	}
 	(par)
-	Nu pedan dankuešta. %% The room became dark.
+	Nu pēdan dankuešta. %% The room became dark.
 	Nu apēz paršun. %% I fled from that place.
 	(enter #kitchen)
 	(now) (map update needed)

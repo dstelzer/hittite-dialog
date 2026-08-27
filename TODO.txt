@@ -5,4 +5,4 @@ aux heap gets exhausted too easily on both 2 and 3 :(
 		increased to 1000 words, hopefully that's enough
 tabular display of objects gets messed up easily, it's too wide
 	reduced to 2 objects per line now
-should guard look around or ḫušket (wait)?
+This sentence, [ga . kin . ag gir₂-az ḫuškenun], is difficult to interpret, for multiple reasons. There should not be an accusative noun and there should not be an ablative noun.
