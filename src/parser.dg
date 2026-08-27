@@ -602,7 +602,12 @@
 	(div @realerror) { ERROR: there’s an error, but no error code was returned! }
 (show parser errors [$Single] for action [$Raw | $Action])
 	This sentence, (print quoted hittite $Raw), is difficult to interpret.
-	(uppercase) (show parser error $Single for action [$Raw | $Action]).
+	(if) ($Single < 30) (then)
+		With this verb,
+	(else)
+		(uppercase)
+	(endif)
+	(show parser error $Single for action [$Raw | $Action]).
 	%% We also have a special check here for the ablative
 	(if) ($Single = 14) (then)
 		(special ablative warning)
@@ -635,8 +640,13 @@
 	This sentence, (print quoted hittite $Raw), is likely a scribal error. The verb $Verb expects a noun in the (name $MissingCase), not the (name $ExcessCase): (span @hittite) ($MissingCase $ExcessNoun) rather than (span @hittite) ($ExcessCase $ExcessNoun) .
 	
 (show parser errors $List for action [$Raw | $Action])
-	This sentence, $Raw, is difficult to interpret, for multiple reasons.
-	(uppercase) (listing $List {(show parser error $_ for action [$Raw | $Action])}).
+	This sentence, (print quoted hittite $Raw), is difficult to interpret, for multiple reasons.
+	(if) *($Err is one of $List) ($Err < 30) (then)
+		With this verb,
+	(else)
+		(uppercase)
+	(endif)
+	(listing $List {(show parser error $_ for action [$Raw | $Action])}).
 
 (show parser error 11 for action $) %% Not currently raised
 	there should be an adverb or sentence particle
@@ -673,6 +683,7 @@
 	(else)
 		ERROR: What cases??
 	(endif)
+	, which makes the sentence overly complicated
 (show parser error $Err for action $)
 	ERROR: Error code $Err not recognized!
 
