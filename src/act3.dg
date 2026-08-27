@@ -292,8 +292,8 @@
 (* is #in #temple)
 (hidden *)
 (dict * in $Case) %% Accept all the names
-	(male name $ in $Case)
-	(female name $ in $Case)
+	*(male name $ in $Case)
+	*(female name $ in $Case)
 (refuse [$Action $])
 	(* is one of $Action)
 	(div @error) {
