@@ -240,6 +240,7 @@
 (suspect *)
 (number 2 means *)
 (logogram *)
+(dict *) LU2
 (name *) LU₂.(no space) (span @akk) mešedi
 (* has modifier $X) ($X = {GAL})
 
@@ -249,6 +250,7 @@
 (logogram *)
 (name *) GEŠTIN
 (determiner *) LU₂.MEŠ
+(dict *) LU2
 (* has modifier $X) ($X = {GAL})
 
 #tuhkanti
@@ -405,7 +407,7 @@
 	Nu=kan (#nominative $Assassin) (#accusative #king) kuenta. %% X slew the king.
 	(select avenger $Avenger who is not $Assassin)
 	(if) (guilty $Avenger) (then)
-		N=an=kan (#nominative #gectin) kuenta. %% Avoid edge case
+		N=an=kan LU₂.(no space) (span @akk) mešedi kuenta. %% Avoid edge case - just a normal bodyguard did it
 	(else)
 		N=an=kan (#nominative $Avenger) kuenta. %% Y slew him/her.
 	(endif)

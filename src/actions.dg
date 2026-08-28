@@ -507,7 +507,7 @@
 	($Player is one of $Action)
 	(action $Action should not have reflexives)
 	(div @error) {
-		The use of (span @hittite) { =za } in this sentence is unexpected. It probably just indicates that the narrator considered the action personally meaningful, rather than doing something to himself.
+		The meaning of (span @hittite) { =za } is not always clear. In this sentence, it probably just indicates a close relationship between the narrator and the action, rather than the narrator doing something to himself.
 	}
 
 %% Disprefer travelling
@@ -806,6 +806,7 @@
 (verb @put/@tēḫḫun/@teḫḫun means @tēḫḫun)
 (@tēḫḫun wants cases [#accusative #adverb])
 (translate [$ tēḫḫun $Advs $Acc | $] into [drop $Acc]) (@katta is one of $Advs)
+(action [drop | $] should not have reflexives)
 
 (prevent [[drop $Obj] $Details])
 	(current player $Player)
@@ -836,6 +837,7 @@
 %% (verb $ means $) already done above
 (@tēḫḫun wants cases [#adverb #accusative #dative]) %% Preverb is currently ignored but is handled as #adverb
 (translate [$ tēḫḫun $ $Acc (object $Dat) | $] into [put $Acc $Dat])
+(action [put | $] should not have reflexives)
 
 (unlikely [tēḫḫun $Adv $ $Dat $]) %% Don’t treat katta as a postposition if there’s ambiguity; it’s more likely just an adverb
 	(@katta is one of $Adv)
@@ -1051,6 +1053,7 @@
 (verb @waššiyanun/@wear means @waššiyanun)
 (@waššiyanun wants cases [#accusative])
 (translate [$ waššiyanun $ $Acc | $] into [wear $Acc])
+(action [wear | $] should not have reflexives)
 
 (interface (clothing $))
 (prevent [[wear ~(clothing $Obj)] $Details])
@@ -1361,7 +1364,13 @@
 (@paršun wants cases [#dative])
 (translate [$ paršun $ $ $Dat | $] into [go $Dat])
 
-%% TODO - bring?
+(verb @arnunun/@bring means @arnunun)
+(@arnunun wants cases [#dative #accusative])
+(@arnunun wants cases [#adverb #accusative])
+(translate [$ arnunun (nonempty $Adv) $Acc | $] into [bring $Acc $Adv])
+(translate [$ arnunun [] $Acc $Dat | $] into [bring $Acc to $Dat])
+(refuse [[bring | $] $]) %% The coward’s way out, but I’m out of time to implement this
+	(div @error) { The verb “bring” is unexpected here; it is a valid Hittite verb, but it is only found at the end of this tablet series, not in the middle. }
 
 (third person verb @ēšta/@ešer) %% Act 1
 (third person verb @aušta/@pait/@dāš/@uet/@warpta/@dankuešta/@ḫarkta/@ḫušket) %% Act 2
