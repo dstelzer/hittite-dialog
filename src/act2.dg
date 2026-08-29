@@ -17,7 +17,7 @@
 (* is #in #courtyard)
 
 (intro)
-	Nu (#dative #courtyard) ešun. %% “I was in the courtyard.”
+%%	Nu=za=kan (#dative #courtyard) anda ešun. %% “I was in the courtyard.”
 	Nu (#nominative #dog) (#dative #building) pait. %% “A dog went into the building.”
 	Nu (#nominative #baker) (#ablative #building) uet. %% “The baker came out of the building.”
 	Nu (#nominative #baker) (#dative #washhouse) pait. %% “The baker went into the washhouse.”
@@ -41,7 +41,7 @@
 	(tried waiting)
 	(div @tutorial) {
 		Waiting is the sort of thing you might need to do several times in a row, so you can abbreviate it with the number 0, or click the middle of the compass rose. (par)
-		\( Cuneiform did not have a number zero, but scholars sometimes use 0 or OO to transcribe a meaningful blank spot on the tablet, like in place-value numbers or tables of data. \)
+		\( Cuneiform did not have a number zero, but scholars sometimes use 0 or OO to transcribe a meaningful blank spot on the tablet, like in place-value numbers or tables of data. Hittite didn’t have place-value numbers, but like with the numbered directions, we’re co-opting a Babylonian notation for convenience. \)
 	}
 	(now) (taught waiting)
 
@@ -305,6 +305,17 @@
 (from * go #east to #building)
 (from * go #west to #guardwalk1)
 (from * go #down to #dm-grain)
+
+(on every tick in *)
+	~(warned about overfull inventory)
+	(accumulate 1)
+		*($ has parent #me)
+	(into $Total)
+	($Total > 2)
+	(div @tutorial) {
+		You’ve accumulated quite an inventory at this point! If it becomes difficult to keep track of, you may want to leave some of it in a less-busy room, like the building to the east—the kitchen has all sorts of other things going on, so its description can become quite long.
+	}
+	(now) (warned about overfull inventory)
 
 #oven
 (holder *)
@@ -593,13 +604,11 @@
 (room *)
 (dogs allowed in *)
 (determiner *) NA₄
-(dict * in $) NA4
 (neuter *)
+(logogram *)
 (* uses preverb #at)
-(name * in #nominative/#genitive/#bare) ḫararazi %% Mill(stone)
-(name * in #genitive) ḫararaziyaš
-(name * in #dative) ḫararaziya
-(name * in #ablative) ḫararaziyaz
+(name *) ARA₅
+(dict *) NA4 ARA5
 
 (from * go #south to #building)
 (from * go #north to #dog-center)
@@ -955,7 +964,7 @@
 		($Obj is filled with #fire)
 	}
 	(par)
-	Nu pedan dankuešta. %% The room became dark.
+	Nu pēdan dankuešta. %% The room became dark.
 	Nu apēz paršun. %% I fled from that place.
 	(enter #kitchen)
 	(now) (map update needed)

@@ -3,7 +3,7 @@ OPTIONS = --word-seps='^⸗=.,;"()*' --resources=resources -vv -H 2000 -A 1000
 # ^ for determiners, ⸗ for proper clitics, = for ASCII clitics; the rest are default
 OPTIONS_DBG = --word-seps='^=.,;"()*'
 # Debugger can't handle non-ASCII word separators yet
-VERSION = 4
+VERSION = 6
 
 debug1: $(FILES) src/act1.dg platform/debug.dg
 	dgdebug $(OPTIONS_DBG) platform/debug.dg src/act1.dg $(FILES)
@@ -47,7 +47,7 @@ web: tablet1.aastory tablet2.aastory tablet3.aastory ishamai modweb dictionary.j
 	rm web/resources/*.aastory
 	rm web/resources/story.js
 	## Get rid of the files we'll be replacing
-	cp -r modweb/* web/
+	cp -rL modweb/* web/
 	## Replace the static files
 	aambundle -t web:story tablet1.aastory -o web/resources/tablet1.js
 	aambundle -t web:story tablet2.aastory -o web/resources/tablet2.js
@@ -76,9 +76,9 @@ ifcomp.zip: web hints.html
 	rm -f ifcomp.zip
 	rm -rf ifcomp
 	mkdir ifcomp
-	cp -r web ifcomp/
+	cp -rL web ifcomp/
 	cp index.html ifcomp/
-	cp hints.html ifcomp/
+	cp hints.txt ifcomp/
 	cp README.ifcomp ifcomp/
 	( cd ifcomp && zip -r ../ifcomp.zip . )
 	cp ifcomp.zip ifcomp_$(VERSION).zip
@@ -87,7 +87,7 @@ ifcomp.zip: web hints.html
 deploy: web
 	( cd web/resources && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/resources/ ./* )
 	( cd web/ishamai/fonts && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/ishamai/fonts/ ./*.woff2 )
-	( cd web/ishamai && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/ishamai/ ./*.css ./*.js )
+	( cd web/ishamai && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/ishamai/ ./*.js )
 	( cd web/aacuneiform && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/aacuneiform/ ./* )
 	( cd web && tnftp -u ftp://nr5x4soelpdf@meadstelzer.com/public_html/daniel/if/hittite/ *.html )
 
@@ -119,3 +119,6 @@ regress: regress1 regress2 regress3
 PWD := $(shell pwd)
 hints.html: hints.clu
 	( cd ~/Projects/Invisiclues && python3 maker.py $(PWD)/hints )
+	sed -i 's|<head>|<head><link rel="stylesheet" type="text/css" href="hints.css" /><meta name="viewport" content="width=device-width, initial-scale=1">|g' hints.html
+	sed -i 's|<style>|<!-- <style>|g' hints.html
+	sed -i 's|</style>|</style> -->|g' hints.html

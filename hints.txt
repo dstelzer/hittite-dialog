@@ -1,0 +1,1 @@
+For full hints, type /hints in the game. (Or, if you downloaded the game, open web/resources/hints.html .)

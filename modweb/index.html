@@ -1,22 +1,147 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>Ḫattušumna Laḫḫa</title>
+		<link rel="stylesheet" type="text/css" href="resources/homepage.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script>
+			<!-- Bludgeon the scrollwheel into behaving correctly in Firefox -->
+			(function() {
+				var page1 = document.getElementById("wheel1");
+				document.addEventListener("wheel", function(e) {
+					var rect1 = wheel1.getBoundingClientRect();
+					var rect2 = wheel2.getBoundingClientRect();
+					if (document.getElementById("select-right").checked) {
+						if (e.clientX >= rect1.left && e.clientX <= rect1.right &&
+							e.clientY >= rect1.top  && e.clientY <= rect1.bottom) {
+							wheel1.scrollTop += e.deltaY;
+							e.preventDefault();
+						} else if (e.clientX >= rect2.left && e.clientX <= rect2.right &&
+							e.clientY >= rect2.top  && e.clientY <= rect2.bottom) {
+							wheel2.scrollTop += e.deltaY;
+							e.preventDefault();
+						}
+					}
+				}, { passive: false });
+			})();
+		</script>
 	</head>
 	<body>
-		<p><b>Ḫattušumna Laḫḫa</b> (“Hittite Adventure”) is the provisional name given to a series of recently-discovered tablets in New Hittite script. The text describes an unidentified hero’s attempt to infiltrate an enemy city and recover a stolen god; while the historical context is unknown, the focus on rival kings kidnapping each others’ gods suggests a pre-Empire origin.</p>
-		<p>Three tablets have been uncovered so far:</p>
-		<ul>
-			<li>In <a href="tablet1.html">tablet 1</a>, the hero slips past the city walls under cover of night.</li>
-			<li><a href="tablet2.html">tablet 2</a> describes the hero crafting a disguise, posing as a temple baker bringing fresh loaves of bread. It ends when he finally enters the temple proper.</li>
-			<li>A significant amount of text is missing between tablets 2 and 3; from context, it seems a royal retinue arrived before the hero could make his escape.</li>
-			<li>In <a href="tablet3.html">tablet 3</a>, the hero uncovers a conspiracy to murder the enemy king, and uses that conspiracy to create a distraction, seize his god, and flee.</li>
-		</ul>
-		<b>Or, in other words...</b>
-		<p>This is a game (actually a series of three short games) presented entirely in the ancient Hittite language. It’s meant for absolute beginners—no knowledge of Hittite is needed!</p>
-		<p>Start with <a href="tablet1.html">tablet 1</a>, which will introduce the basic grammar and vocabulary. After that, you can play either <a href="tablet2.html">tablet 2</a> (which covers logograms and more noun cases, with classic text adventure puzzles) or <a href="tablet3.html">tablet 3</a> (which covers quotations and subordinate clauses, with logical deduction puzzles).</p>
-		<p>If you’re completely new to Hittite, the default settings are a good starting point. Playing a game in a foreign language is hard enough already; there’s no need to make it any harder! But the options menu in the top right corner offers some ways to adjust the experience, if desired. You can turn off “double-click to insert”, for example, requiring you to type the Hittite words instead of just clicking them; this makes the game harder, but is better for actually learning the Hittite language. And advanced learners can switch the output from bound transcription to actual cuneiform, to practice reading the signs themselves. (Either way, though, you should type your input in bound transcription—typing cuneiform is currently not an easy feat.)</p>
-		<p>Have fun! When you’re done, check out the <a href="postscript.html">postscript</a>.</p>
-		<p><b>Content warning:</b> while the text in the game is dry and sparse (and not in English), it does display a Bronze Age sensibility in its general disregard for human life. The player is never required to murder someone directly, but quite a few people do die (and a building does burn) because of the protagonist’s actions.</p>
+		<div id="scroll-clip">
+			<div id="map-small" class="popup-element" onClick="document.getElementById('map-large').classList.add('open')"></div>
+			<div id="map-large" class="popup">
+				<button class="popup-close" onClick="document.getElementById('map-large').classList.remove('open')">&times;</button>
+			</div>
+			
+			<div id="postscript" class="popup">
+				<button class="popup-close" onClick="document.getElementById('postscript').classList.remove('open')">&times;</button>
+				<div id="postscript-inner">
+					<p>Congratulations on finishing the game!</p>
+					<p>Have you learned the Hittite names for the compass directions? (Try looking at a nearby room.) These were only discovered in 2023! (Kreitzscheck, “The Hittite words for North, East, South, and West”)</p>
+					<p>There are two ways to deal with the baker in tablet 2, one violent, one non-violent. Both of them involve the door bolt from tablet 1.</p>
+					<p>The puzzle on tablet 3 is randomly generated every time you restart the game, with over ten thousand possibilities.</p>
+					<p>Hittite has a very simple noun gender system: all nouns are either “common” or “neuter”. This game doesn't put much focus on it, but the nouns that look the same in the nominative and accusative are neuter, and the ones that don't are common. (Neuter nouns in Hittite actually don't have a nominative or accusative at all, just a merged case called the “absolutive”.)</p>
+				</div>
+			</div>
+			
+			<div id="book">
+				<div id="mug"></div>
+				<div id="steam">
+				  <span class="steam0 steamfilled"></span>
+				  <span class="steam1"></span>
+				  <span class="steam2 steamsquare"></span>
+				  <span class="steam3 steamfilled"></span>
+				  <span class="steam4"></span>
+				  <span class="steam5 steamsquare"></span>
+				  <span class="steam6 steamfilled"></span>
+				  <span class="steam7"></span>
+				  <span class="steam8 steamsquare"></span>
+				  <span class="steam9"></span>
+				</div>
+				
+				<a id="tablet" href="https://en.wikipedia.org/wiki/Hittite_language"></a>
+				
+				<div id="book-back-left"></div>
+				<div id="book-back-right"></div>
+				<svg viewBox="-10 -10 310 210">
+					<defs>
+						<filter id="polygon-blur" x="-50%" y="-50%" width="200%" height="200%" preserveAspectRatio="none">
+							<feGaussianBlur stdDeviation="2" />
+						</filter>
+					</defs>
+					<polygon
+						points="4,0 260,0 285,15 285,200 150,200 4,190"
+						fill="black"
+						fill-opacity="0.25"
+						filter="url(#polygon-blur)"
+					/>
+				</svg>
+				<input type="radio" name="flip" id="select-left">
+				<input type="radio" name="flip" id="select-right" checked>
+				<div id="book-content">
+					<div class="page book-left">
+						<div id="book-copyright">
+							<p>ḪATTUŠUMNA LAḪḪA: HITTITE ADVENTURE</p>
+							<p>Copyright &copy; 2026 by Daniel M. Stelzer, Tim Leonard, and Daniel E. Gaskell</p>
+							<p>Some rights reserved. Text and code are written by hand and released under the <a href="https://creativecommons.org/licenses/by/4.0/deed.en">CC BY 4.0</a> and <a href="https://opensource.org/license/mit">MIT</a> licenses.</p>
+							<p>First edition: September 2026</p>
+							<p>Lead Implementor: Daniel M. Stelzer. Lead Translator: Tim Leonard. Art/Web Design: Daniel E. Gaskell. Dialog compiler and Å-machine originally by Linus Åkesson. Ishamai and Cartography Mono by Daniel M. Stelzer.</p>
+							<p>Images: Hittite pendant (AO 9647) and tablet (AO 7728) &copy; Musée du Louvre / GrandPalaisRmn. Map by Ennomus, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>.</p>
+						</div>
+					</div>
+					<div class="page book-right">
+						<div class="page-content" id="wheel1">
+							<div class="header header-right"><i>Introduction |</i> 2</div>
+							<h2>In other words...</h2>
+							<p>This is a game (actually a series of three short games) presented entirely in the ancient Hittite language. It’s meant for absolute beginners—no knowledge of Hittite is needed!</p>
+							<p>Start with <a href="tablet1.html">Tablet 1</a>, which will introduce the basic grammar and vocabulary. After that, you can play either <a href="tablet2.html">Tablet 2</a> (which covers logograms and more noun cases, with classic text adventure puzzles) or <a href="tablet3.html">Tablet 3</a> (which covers quotations and subordinate clauses, with logical deduction puzzles).</p>
+							<p>Have fun! When you're done, check out the <a href="javascript:document.getElementById('postscript').classList.add('open')">postscript</a>.</p>
+							<div id="sticky">
+								<div id="sticky-title">Tip!</div>
+								<p>If you’re new to Hittite, the default settings are a good starting point—no need to make it harder! But the options menu in the top right (≡) offers some adjustments for advanced learners:</p>
+								<ul>
+									<li>Turn off “double-click to insert” to force yourself to type Hittite commands (harder, but helps you actually learn the language).</li>
+									<li>Switch the output to actual cuneiform to practice reading the signs yourself. (You should still type your input in bound transcription, though—typing cuneiform is currently not an easy feat.)</li>
+								</ul>
+							</div>
+							<p><b>Content warnings:</b> Brief (and non-English) depictions of death and arson, with a typically Bronze Age disregard for human life. While the protagonist is never required to murder someone directly, their actions do result in death and destruction.</p>
+						</div>
+					</div>
+					<div class="flip">
+						<label class="face book-right" for="select-right">
+							<h1>ḪATTUŠUMNA LAḪḪA</h1>
+							<p class="cuneiform">𒄩𒀜𒌅𒋗𒌝𒈾<br>𒆷𒄴𒄩</p>
+							<p class="subtitle">An Annotated Edition</p>
+							<p class="subtitle2">by</p>
+							<p class="author">Daniel M. Stelzer</p>
+							<p class="author">Tim Leonard</p>
+							<p class="author">Daniel E. Gaskell</p>
+						</label>
+						<label class="face back book-left" for="select-left">
+							<div class="page-content" id="wheel2">
+								<div class="header header-left">1<i> | Introduction</i></div>
+								<h1>Introduction</h1>
+								<p><span class="dropcap">Ḫ</span><b>attušumna Laḫḫa</b> (“Hittite Adventure”) is the provisional name given to a series of recently-discovered tablets in New Hittite script. The text describes an unidentified hero’s attempt to infiltrate an enemy city and recover a stolen god; while the historical context is unknown, the focus on rival kings kidnapping each others’ gods suggests a pre-Empire origin.</p>
+								<p>Three tablets have been uncovered so far:</p>
+								<ul>
+									<li>In <a href="tablet1.html">tablet 1</a>, the hero slips past the city walls under cover of night.</li>
+									<li>In <a href="tablet2.html">tablet 2</a>, the hero crafts a disguise, posing as a temple baker bringing fresh loaves of bread. It ends when he finally enters the temple proper.</li>
+								</ul>
+								<p>(A significant amount of text is missing between tablets 2 and 3; from context, it seems a royal retinue arrived before the hero could make his escape.)</p>
+								<ul>
+									<li>In <a href="tablet3.html">tablet 3</a>, the hero uncovers a conspiracy to murder the enemy king, and uses that conspiracy to create a distraction, seize his god, and flee.</li>
+								</ul>
+							</div>
+						</label>
+					</div>
+				</div>
+				<div id="book-right-margin">
+				</div>
+				<a id="tablet1" class="panel" href="tablet1.html">Tablet 1</a>
+				<a id="tablet2" class="panel" href="tablet2.html">Tablet 2</a>
+				<a id="tablet3" class="panel" href="tablet3.html">Tablet 3</a>
+			</div>
+		</div>
 	</body>
 </html>

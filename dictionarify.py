@@ -70,16 +70,16 @@ def tablify(l): # [A B C D E F] -> HTML table with A B // C D // E F
 
 def parse_paradigm(s, name):
 	if s == 'CLIT':
-		return "In transcription, the = symbol separates \"clitics\": words that have their own meaning but can't stand on their own. It's like how the English word <i>cat's</i> is clearly made up of <i>cat</i> and <i>'s</i>, but while <i>cat</i> can exist as a word on its own, <i>'s</i> can't. In Hittite, we would write that as cat=s."
+		return "In transcription, the = symbol separates “clitics”: words that have their own meaning but can't stand on their own. It’s like how the English word <i>cat’s</i> is clearly made up of <i>cat</i> and <i>’s</i>, but while <i>cat</i> can exist as a word on its own, <i>’s</i> can't. In Hittite, we would write that as cat=s."
 	elif s == 'DTM':
-		return 'This cuneiform sign can be used as a "determiner": not pronounced, but marking what sort of thing the next word is.'
+		return 'This cuneiform sign can be used as a “determiner”: not pronounced, but marking what sort of thing the next word is.'
 	elif s == 'DTM2':
-		return 'This cuneiform sign can be used as a "determiner": not pronounced, but marking what sort of thing the <i>previous</i> word is. (Unlike most determiners, this one comes after the word, not before.)'
+		return 'This cuneiform sign can be used as a “determiner”: not pronounced, but marking what sort of thing the <i>previous</i> word is. (Unlike most determiners, this one comes after the word, not before.)'
 	elif s == 'AKK':
 		return 'The uppercase italics indicate that this is an Akkadian word, not a Hittite one. Hittite scribes would have pronounced it as the Hittite equivalent.'
 	elif s == 'LOGO':
-		parens = '(or sequence of signs, rather) ' if '.' in name else ''
-		return f'This cuneiform sign{parens} is a "logogram", standing for an entire Hittite word, like how "7" stands for "seven". Often the actual pronunciation of the Hittite word is unknown.' + tablify([
+		parens = ' (or sequence of signs, rather) ' if '.' in name else ''
+		return f'This cuneiform sign{parens} is a “logogram”, standing for an entire Hittite word, like how “7” stands for “seven”. Often the actual pronunciation of the Hittite word is unknown.' + tablify([
 			'<abbr title="Nominative: subject of a verb">Nom</abbr>',
 				name,
 			'<abbr title="Genitive: owner of another noun">Gen</abbr>',

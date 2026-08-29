@@ -137,6 +137,20 @@
 (determiner (tablet $)) KAM
 (determiner comes after *(tablet $))
 
+%% Because both DUB and KAM can match any tablet, disambiguation falls apart on a sentence like DUB 1 KAM ōḫḫun
+%% This needs to be fixed properly at some point, but it’s the day before the deadline, so it’s time for awful hacks instead
+
+([DUB (number $) KAM] is unsplittable)
+([DUB (number $) ^ KAM] is unsplittable)
+([DUB (number $)] is unsplittable)
+([(number $) KAM] is unsplittable)
+([(number $) & KAM] is unsplittable)
+
+(parse ($Phrase is unsplittable) into noun list [$Single])
+	(parse $Phrase into single noun $Single)
+	(just) %% No ambiguity allowed for an unsplittable phrase!
+	%% This would be a nice feature to add to the parser itself at a later date
+
 #tablet1
 (name *) DUB 1
 (tablet *)
@@ -226,6 +240,7 @@
 (suspect *)
 (number 2 means *)
 (logogram *)
+(dict *) LU2
 (name *) LU₂.(no space) (span @akk) mešedi
 (* has modifier $X) ($X = {GAL})
 
@@ -235,6 +250,7 @@
 (logogram *)
 (name *) GEŠTIN
 (determiner *) LU₂.MEŠ
+(dict *) LU2
 (* has modifier $X) ($X = {GAL})
 
 #tuhkanti
@@ -278,8 +294,8 @@
 (* is #in #temple)
 (hidden *)
 (dict * in $Case) %% Accept all the names
-	(male name $ in $Case)
-	(female name $ in $Case)
+	*(male name $ in $Case)
+	*(female name $ in $Case)
 (refuse [$Action $])
 	(* is one of $Action)
 	(div @error) {
@@ -391,7 +407,7 @@
 	Nu=kan (#nominative $Assassin) (#accusative #king) kuenta. %% X slew the king.
 	(select avenger $Avenger who is not $Assassin)
 	(if) (guilty $Avenger) (then)
-		N=an=kan (#nominative #gectin) kuenta. %% Avoid edge case
+		N=an=kan LU₂.(no space) (span @akk) mešedi kuenta. %% Avoid edge case - just a normal bodyguard did it
 	(else)
 		N=an=kan (#nominative $Avenger) kuenta. %% Y slew him/her.
 	(endif)

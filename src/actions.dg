@@ -1,5 +1,5 @@
 (extension version)
-	Hittite action processing version 260823.
+	Hittite action processing version 260828.
 
 (action logging) (fail)
 
@@ -47,7 +47,7 @@
 	(span @metaverb) (link) /restore ,
 	(span @metaverb) (link) /again ,
 	(span @metaverb) (link) /about ,
-	(span @metaverb) (link) /hint ,
+	(span @metaverb) (link resource @hints) /hint , %% No need for an extra click
 	(span @metaverb) (link) /credits
 %%	, (span @metaverb) (link) /memory %% Comment this out when finalized
 %% TODO: do we need to stop this bar from flashing?
@@ -507,7 +507,7 @@
 	($Player is one of $Action)
 	(action $Action should not have reflexives)
 	(div @error) {
-		The use of (span @hittite) { =za } in this sentence is unexpected. It probably just indicates that the narrator considered the action personally meaningful, rather than doing something to himself.
+		The meaning of (span @hittite) { =za } is not always clear. In this sentence, it probably just indicates a close relationship between the narrator and the action, rather than the narrator doing something to himself.
 	}
 
 %% Disprefer travelling
@@ -806,6 +806,7 @@
 (verb @put/@tēḫḫun/@teḫḫun means @tēḫḫun)
 (@tēḫḫun wants cases [#accusative #adverb])
 (translate [$ tēḫḫun $Advs $Acc | $] into [drop $Acc]) (@katta is one of $Advs)
+(action [drop | $] should not have reflexives)
 
 (prevent [[drop $Obj] $Details])
 	(current player $Player)
@@ -836,6 +837,7 @@
 %% (verb $ means $) already done above
 (@tēḫḫun wants cases [#adverb #accusative #dative]) %% Preverb is currently ignored but is handled as #adverb
 (translate [$ tēḫḫun $ $Acc (object $Dat) | $] into [put $Acc $Dat])
+(action [put | $] should not have reflexives)
 
 (unlikely [tēḫḫun $Adv $ $Dat $]) %% Don’t treat katta as a postposition if there’s ambiguity; it’s more likely just an adverb
 	(@katta is one of $Adv)
@@ -1051,6 +1053,7 @@
 (verb @waššiyanun/@wear means @waššiyanun)
 (@waššiyanun wants cases [#accusative])
 (translate [$ waššiyanun $ $Acc | $] into [wear $Acc])
+(action [wear | $] should not have reflexives)
 
 (interface (clothing $))
 (prevent [[wear ~(clothing $Obj)] $Details])
@@ -1091,23 +1094,23 @@
 %% WAIT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(verb @ḫuškanun/@wait means @ḫuškanun)
-(@ḫuškanun wants cases [])
-(translate [$ ḫuškanun | $] into [wait])
+(verb @ḫuškenun/@wait means @ḫuškenun)
+(@ḫuškenun wants cases [])
+(translate [$ ḫuškenun | $] into [wait])
 
 (perform [[wait] $])
 	%% Do nothing
 
 (wait) %% For use in the number routines above
-	(par) (try [[wait] [[ḫuškanun] ḫuškanun [] [] [] []]])
+	(par) (try [[wait] [[ḫuškenun] ḫuškenun [] [] [] []]])
 
 #v-wait
 (verb *)
-(name *) ḫuškanun
+(name *) ḫuškenun
 
 (unlock wait on the compass rose)
 	(verb * unlocked)
-	~(in debugger) %% Looks bad in the compass rose
+	~(in debugger) %% Looks bad in the debugger compass rose
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CHOP
@@ -1325,7 +1328,16 @@
 	(div @error) {
 		The text must be corrupt at this point, as the hero must survive to continue the story. Ignoring the last few lines, we continue on...
 	}
+	(if) (started this tick at $Old) ~(current room $Old) (then)
+		(enter $Old) %% Rewind to the old location if we actually moved
+	(endif)
 	(stop)
+
+%% This is where we try to mitigate those consequences: if the player moved, and then died AFTER MOVING, we undo that movement here (but any map regions that were revealed remain revealed)
+(global variable (started this tick at $))
+(late on every tick) %% We really set it at the *end* of the turn, not the start
+	(current room $Room)
+	(now) (started this tick at $Room)
 
 (verb @punuššun/@question means @punuššun)
 (@punuššun wants cases [#accusative #dative]) %% Dative is irrelevant but allowed
@@ -1352,10 +1364,16 @@
 (@paršun wants cases [#dative])
 (translate [$ paršun $ $ $Dat | $] into [go $Dat])
 
-%% TODO - bring?
+(verb @arnunun/@bring means @arnunun)
+(@arnunun wants cases [#dative #accusative])
+(@arnunun wants cases [#adverb #accusative])
+(translate [$ arnunun (nonempty $Adv) $Acc | $] into [bring $Acc $Adv])
+(translate [$ arnunun [] $Acc $Dat | $] into [bring $Acc to $Dat])
+(refuse [[bring | $] $]) %% The coward’s way out, but I’m out of time to implement this
+	(div @error) { The verb “bring” is unexpected here; it is a valid Hittite verb, but it is only found at the end of this tablet series, not in the middle. }
 
 (third person verb @ēšta/@ešer) %% Act 1
-(third person verb @aušta/@pait/@dāš/@uet/@warpta/@dankuešta/@ḫarkta) %% Act 2
+(third person verb @aušta/@pait/@dāš/@uet/@warpta/@dankuešta/@ḫarkta/@ḫušket) %% Act 2
 (third person verb @kuwašzi/@tarkuzzi/@kanināit) %% Signals
 (third person verb @tēt/@kupta/@papriszi/@kuenzi/@parkuzzi) %% Act 3 machinery
 (third person verb @aki/@kunanzi/@punušta/@memiškanzi/@kuenta) %% Act 3

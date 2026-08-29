@@ -28,7 +28,7 @@ var b64_enc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=
 var b64_dec = [];
 
 //var wants_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // https://stackoverflow.com/a/57795495/3233017
-var wants_dark_mode = false; // Dark mode is not implemented yet TODO
+var wants_dark_mode = false; // Light mode just looks so much prettier for this game!
 
 // These are turned into labelled checkboxes in the #aacheckboxes div
 var toggles = [
@@ -540,14 +540,18 @@ window.run_game = function(story64, options) {
 				}
 				
 				// Rev./Obv. logic
-				var beforeContent = "1." + Math.floor(this.fragment_number / 2) + " " + ((this.fragment_number % 2 === 0) ? "Obv." : "Rev.");
+				function beforeContent(fragment_count) {
+					return 'counter(tablet-number) "' + "." + Math.floor(fragment_count / 2) + " " + ((fragment_count % 2 === 0) ? 'Obv."' : 'Rev."');
+				}
 				
 				// output-first logic
 				if(this.divs.length == 1 && this.style_data[this.divs[0]].name == "aa-status" && !this.in_status) {
 					// aa-status case: always start of fragment
-					this.current.className += " output output-first";
-					this.current.style.setProperty("--rev-obv", '"' + beforeContent + '"');
-					this.fragment_number++;
+					if(!this.current.classList.contains("output-first")) {
+						this.current.className += " output output-first";
+						this.fragment_number++;
+						this.current.style.setProperty("--rev-obv", beforeContent(this.fragment_number));
+					}
 					this.in_seq = true;
 					this.needs_output = false;
 					this.current.appendChild(p);
@@ -559,10 +563,10 @@ window.run_game = function(story64, options) {
 						if(this.last_output && this.last_output.classList.contains("output-break-start")) {
 							wrapper.className = "output output-break-end";
 						} else {
+							this.fragment_number++;
 							wrapper.className = "output output-first";
+							wrapper.style.setProperty("--rev-obv", beforeContent(this.fragment_number));
 						}
-						wrapper.style.setProperty("--rev-obv", '"' + beforeContent + '"');
-						this.fragment_number++;
 						this.in_seq = true;
 					} else {
 						wrapper.className = "output";
@@ -1081,10 +1085,10 @@ window.run_game = function(story64, options) {
 		adjust_size: function() {
 			var aamain, newheight;
 
-			newheight = $(window).innerHeight() - $("#aaouterstatus").outerHeight() - 40;
+			newheight = $(window).innerHeight() - $("#aaouterstatus").outerHeight() - 30;
 			if(io.viewing_script) {
 				aamain = $("#aascriptinner");
-				newheight -= $("#aascriptclose").outerHeight();
+				newheight -= $("#aascriptclose").outerHeight() + 30;
 			} else {
 				aamain = $("#aamain");
 			}
@@ -1422,9 +1426,9 @@ window.run_game = function(story64, options) {
 
 	function update_globalstyle() {
 		if(document.getElementById("aacb-dark").checked) {
-	//		$("body").addClass("night"); // TODO
+			$("body").addClass("night");
 		} else {
-	//		$("body").removeClass("night");
+			$("body").removeClass("night");
 		}
 		if(document.getElementById("aacb-large").checked) {
 			$("body").addClass("enlarge");
@@ -1671,3 +1675,17 @@ window.run_game = function(story64, options) {
 };
 
 })();
+
+// enable double-tap to double-click words on mobile
+$(function() {
+	let then = 0;
+	$(document).on('touchend', '.word', function(event) {
+		const now = new Date().getTime();
+		const tapLen = now - then;
+		if(tapLen > 0 && tapLen < 500) {
+			$(this).trigger('dblclick');
+			event.preventDefault();
+		}
+		then = now;
+	});
+});
