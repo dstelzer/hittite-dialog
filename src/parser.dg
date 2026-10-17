@@ -1,5 +1,5 @@
 (extension version)
-	Hittite parser version 260827.
+	Hittite parser version 261017.
 
 (parser logging) (fail)
 
@@ -241,6 +241,7 @@
 %% Now how do we recognize a single noun?
 ~(parse [] into single noun $)
 
+%% See † above
 ~(parse $Words into single noun $)
 	($Words breaks a compound)
 
