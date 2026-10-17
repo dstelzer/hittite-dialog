@@ -1095,6 +1095,20 @@
 	dankui %% “Dark”
 (medium short name (storage $Obj)) (#dative $Obj)
 
+%% Short-circuit some of the parsing for these long logographic room names, to avoid heap overflows
+(parse [ša | $Words] into noun list [[#dative $Room]])
+	(split last element from $Words into @antaki and $Middle)
+	(collect $Option)
+		(determine object $Option)
+			*(storage $Option)
+		(from words)
+			*(logo contents $Option)
+			*(dict $Option in #bare)
+		(matching all of $Middle)
+	(into $List)
+	($List = [$Room]) %% Only short-circuit when there’s exactly one matching option (the most common case)
+	(just) %% And if it succeeded, then don’t do any more parsing for this phrase
+
 %% In case someone tries to grab random logograms
 (prevent [[take (storage $) | $] $])
 	Nu kuitki natta dāḫḫun. %% I did not take anything.
