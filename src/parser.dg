@@ -1,5 +1,5 @@
 (extension version)
-	Hittite parser version 260827.
+	Hittite parser version 261017.
 
 (parser logging) (fail)
 
@@ -20,7 +20,12 @@
 	(apply optional replacements to $One into $Output) %% Try to fix invalid words if possible; does nothing to already-valid words
 	(parser log { Output: $Output } )
 
-%% This step is done a bit later in the process, so that determiner and compound markers can be considered during clitic separation
+%% Previously, this predicate was used to purge ^ and . from the input
+%% The problem is that they’re always parsed as their own words, and Hittite allows multiple nouns next to each other without an explicit “and” in between
+%% So something like ZID₂.DA ‘flour’ would become three words, ZID₂ . DA, and that could potentially be parsed as “flour”, “any other compound logogram”, “flour again”
+%% These parses with spurious extra words are filtered out later in the parsing process, but that’s no help if the heap overflows from all the memory the parser is using on them!
+%% Now, we solve this problem in a more efficient way: see the rule labelled † below
+%% So this predicate is no longer used for anything
 (remove compound and determiner separators from $In into $Out)
 	(collect $Word) %% Get rid of ^ determinative markers and . logogram separators
 		*($Word is one of $In)
@@ -158,6 +163,18 @@
 %% Recursive case: more than one noun
 ~(parse [] into noun list $)
 
+%% † This is where we make sure ZID₂.DA ‘flour’ isn’t parsed as “flour”, “any other compound logogram”, “flour” due to the dot in the middle being its own word (and a word that matches every compound logogram in the game!)
+%% We do so by forbidding any parse that starts or ends with a compound boundary
+%% This means the only possible parse for ZID₂.DA is the one that takes the entire thing as a single unit
+(compound boundary @./@^)
+([(compound boundary $) | $] breaks a compound)
+($Words breaks a compound)
+	(split last element from $Words into $Last and $)
+	(compound boundary $Last)
+
+~(parse $Words into noun list $)
+	($Words breaks a compound)
+
 (parse [ù/u3/u₃/& | $Rest] into noun list $Nouns) %% Handle explicit “and”s
 	(parse $Rest into noun list $Nouns) %% =ya etc will be purged already
 
@@ -223,6 +240,10 @@
 
 %% Now how do we recognize a single noun?
 ~(parse [] into single noun $)
+
+%% See † above
+~(parse $Words into single noun $)
+	($Words breaks a compound)
 
 (parse $Words into single noun $Noun)
 	*(parser case $Case)
